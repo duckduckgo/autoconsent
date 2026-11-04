@@ -1,0 +1,19 @@
+{
+    "name": "pixartprinting",
+    "vendorUrl": "https://www.pixartprinting.it/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?pixartprinting\\.(\\w+\\.)?\\w+/"
+    },
+    "prehideSelectors": ["#footer_tc_privacy"],
+    "detectCmp": [{ "exists": "#tc-privacy-wrapper #footer_tc_privacy" }],
+    "detectPopup": [{ "visible": "#footer_tc_privacy" }],
+    "optIn": [{ "waitForThenClick": "#footer_tc_privacy_button" }],
+    "optOut": [
+        {
+            "comment": "the banner only offers accept or the privacy center (in a cross-origin iframe), so reject via the TrustCommander API",
+            "eval": "EVAL_TRUSTCOMMANDER_OPT_OUT"
+        },
+        { "waitForVisible": "#footer_tc_privacy", "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "cookieContains": "TC_PRIVACY=1%40" }]
+}
