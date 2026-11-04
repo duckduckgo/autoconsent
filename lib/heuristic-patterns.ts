@@ -169,6 +169,8 @@ export const DETECT_PATTERNS = [
     /(?:usiamo|utilizziamo).{0,20}cookie/gi,
     /sito.{0,50}(?:usa|utilizza).{0,20}cookie/gi,
     /noi e i nostri.{0,20}partner.{0,100}cookie/gi,
+    // profiling cookies need opt-in consent under Italian rules, so banners name them
+    /cookie di profilazione/gi,
     /(?:archiviare|memorizzare) e\/o accedere a informazioni su un dispositivo/gi,
 
     // Swedish (SV)

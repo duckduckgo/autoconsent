@@ -131,6 +131,7 @@ describe('checkHeuristicPatterns with Italian popups', () => {
             'Questo sito utilizza i cookie per migliorare la tua esperienza',
             'Noi e i nostri 150 partner archiviamo informazioni come i cookie',
             'Archiviare e/o accedere a informazioni su un dispositivo',
+            'PostePay S.p.A. utilizza cookie di profilazione e altri sistemi di tracciamento ad essi equiparabili',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
