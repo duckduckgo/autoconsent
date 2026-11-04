@@ -65,6 +65,12 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
     });
 
+    it('detects Polish cookie consent notices', () => {
+        const { patterns } = checkHeuristicPatterns('Jeśli wyrażasz zgodę na\u00a0używanie plików cookies, kliknij „Akceptuję”.');
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
+
     it('detects website cookie experience notices', () => {
         const { patterns, snippets } = checkHeuristicPatterns(
             'The Algonquin College website uses cookies to enhance your browsing experience.',

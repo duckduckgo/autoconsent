@@ -127,6 +127,7 @@ export const DETECT_PATTERNS = [
     /używamy plików.{0,20}cookie/gi,
     /wykorzystują .{0,100}cookie/gi,
     /za pomocą plików cookies.{0,100} my lub nasi partnerzy/gi,
+    /zgod[ęy]\sna\s(używanie|wykorzystywanie|stosowanie)\splików\scookie/gi,
     /zgodą my i nasi partnerzy możemy wykorzystywać precyzyjne dane geolokalizacyjne i identyfikację/gi,
 
     // Catalan (CA)
