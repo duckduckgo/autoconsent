@@ -50,6 +50,7 @@ export const DETECT_PATTERNS = [
     /seulement nécessaires/gi,
     /je désactive les finalités non essentielles/gi,
     /cookies essentiels uniquement/gi,
+    /cookies non[- ](?:essentiels|nécessaires)/gi,
     /nécessaires uniquement/gi,
 
     // DE

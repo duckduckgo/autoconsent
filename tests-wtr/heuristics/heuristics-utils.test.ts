@@ -73,6 +73,14 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects French non-essential cookie notices', () => {
+        const { snippets } = checkHeuristicPatterns(
+            'Ce site mesure son audience sans cookie par défaut. Les cookies non essentiels ne sont déposés qu’avec votre accord.',
+        );
+
+        expect(snippets).to.include('cookies non essentiels');
+    });
 });
 
 describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
