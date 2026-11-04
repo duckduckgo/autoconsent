@@ -73,6 +73,20 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects "by using this website" cookie policy notices', () => {
+        const { patterns } = checkHeuristicPatterns('By using this website, you agree to Files.fm terms and cookie policy.');
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
+
+    it('does not detect "by using this website" notices without cookies', () => {
+        expect(
+            checkHeuristicPatterns('By using this website, you agree to our terms of service.', [
+                /by using (?:this|our) (?:web)?site.{0,100}cookie/gi,
+            ]).patterns,
+        ).to.have.length(0);
+    });
 });
 
 describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
