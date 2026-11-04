@@ -285,6 +285,15 @@ export const snippets = {
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
     EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
+    EVAL_TRUSTCOMMANDER_DETECT: () => {
+        if (typeof window.tC?.privacy?.clickBanner !== 'function') return false;
+        // pay-or-consent walls are out of scope
+        const controls = document.querySelectorAll('#tc-privacy-wrapper button, #tc-privacy-wrapper a');
+        return ![...controls].some((el) => /pay|subscri|abonn|abbona|suscri|pagar|zahl|subskryp|płać/i.test(el.textContent));
+    },
+    EVAL_TRUSTCOMMANDER_OPT_OUT: () => tC.privacy.clickBanner('optout') || true,
+    EVAL_TRUSTCOMMANDER_OPT_IN: () => tC.privacy.clickBanner('optin') || true,
+    EVAL_TRUSTCOMMANDER_TEST: () => document.cookie.includes(`${tC.privacy.getCN()}=`) && tC.privacy.getOptinCategories().length === 0,
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
     EVAL_USERCENTRICS_API_1: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_2: () => !!UC_UI.denyAllConsents(),
