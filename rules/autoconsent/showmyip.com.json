@@ -1,0 +1,92 @@
+{
+    "name": "showmyip.com",
+    "vendorUrl": "https://www.showmyip.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?showmyip\\.com/"
+    },
+    "prehideSelectors": [".gdpr-cookie-notice", ".gdpr-cookie-notice-modal", "#cmpwrapper"],
+    "detectCmp": [
+        {
+            "exists": ".gdpr-cookie-notice"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "html.gdpr-cookie-notice-loaded .gdpr-cookie-notice"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".gdpr-cookie-notice-nav-item-accept"
+        },
+        {
+            "comment": "consentmanager is loaded later in some regions",
+            "waitForVisible": ["#cmpwrapper", "#cmpbox .cmpmore"],
+            "timeout": 5000,
+            "check": "any",
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": ["#cmpwrapper", "#cmpbox .cmpmore"],
+                "check": "any"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_CONSENTMANAGER_4"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".gdpr-cookie-notice-nav-item-settings"
+        },
+        {
+            "waitForVisible": ".gdpr-cookie-notice-modal"
+        },
+        {
+            "click": ".gdpr-cookie-notice-modal-cookie-input:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": ".gdpr-cookie-notice-modal-footer-item-save"
+        },
+        {
+            "comment": "newer versions remove the modal on save",
+            "click": ".gdpr-cookie-notice-modal-close",
+            "optional": true
+        },
+        {
+            "comment": "the library keeps showing the bar while any category is rejected",
+            "hide": ".gdpr-cookie-notice"
+        },
+        {
+            "comment": "consentmanager is loaded later in some regions",
+            "waitForVisible": ["#cmpwrapper", "#cmpbox .cmpmore"],
+            "timeout": 5000,
+            "check": "any",
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": ["#cmpwrapper", "#cmpbox .cmpmore"],
+                "check": "any"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_CONSENTMANAGER_3"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "gdprcookienotice="
+        },
+        {
+            "cookieContains": ":false"
+        }
+    ]
+}

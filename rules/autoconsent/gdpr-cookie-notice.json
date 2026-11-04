@@ -1,0 +1,53 @@
+{
+    "name": "gdpr-cookie-notice",
+    "vendorUrl": "https://github.com/passatgt/gdpr-cookie-notice",
+    "prehideSelectors": [".gdpr-cookie-notice", ".gdpr-cookie-notice-modal"],
+    "detectCmp": [
+        {
+            "exists": ".gdpr-cookie-notice"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "html.gdpr-cookie-notice-loaded .gdpr-cookie-notice"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".gdpr-cookie-notice-nav-item-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".gdpr-cookie-notice-nav-item-settings"
+        },
+        {
+            "waitForVisible": ".gdpr-cookie-notice-modal"
+        },
+        {
+            "click": ".gdpr-cookie-notice-modal-cookie-input:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": ".gdpr-cookie-notice-modal-footer-item-save"
+        },
+        {
+            "comment": "newer versions remove the modal on save",
+            "click": ".gdpr-cookie-notice-modal-close",
+            "optional": true
+        },
+        {
+            "comment": "the library keeps showing the bar while any category is rejected",
+            "hide": ".gdpr-cookie-notice"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "gdprcookienotice="
+        },
+        {
+            "cookieContains": ":false"
+        }
+    ]
+}
