@@ -1,0 +1,10 @@
+{
+    "name": "koch-cookieconsent",
+    "vendorUrl": "https://www.agenturkoch.ch/",
+    "prehideSelectors": ["#js-cookieconsent[data-cookieconsent-settings]"],
+    "detectCmp": [{ "exists": "#js-cookieconsent[data-cookieconsent-settings]" }],
+    "detectPopup": [{ "visible": "#js-cookieconsent[data-cookieconsent-settings]" }],
+    "optIn": [{ "waitForThenClick": "#js-cookieconsent [data-cookieconsent-accept-all]" }],
+    "optOut": [{ "waitForThenClick": "#js-cookieconsent [data-cookieconsent-accept-none]" }],
+    "test": [{ "visible": "#js-cookieconsent", "check": "none" }, { "cookieContains": "CookieConsent=" }]
+}
