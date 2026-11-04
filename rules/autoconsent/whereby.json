@@ -1,0 +1,34 @@
+{
+    "name": "whereby",
+    "vendorUrl": "https://whereby.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?whereby\\.com/"
+    },
+    "prehideSelectors": [
+        "[data-testid=\"cookie-banner\"]",
+        "div[style*=\"position: fixed\"]:has(> div > div > a[href=\"/user/cookie-settings\"] + button)"
+    ],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=\"cookie-banner\"] [data-testid=\"accept-cookies\"], div[style*=\"position: fixed\"]:has(> div > div > a[href=\"/user/cookie-settings\"] + button)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"cookie-banner\"], div[style*=\"position: fixed\"]:has(> div > div > a[href=\"/user/cookie-settings\"] + button)"
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": "[data-testid=\"cookie-banner\"]" },
+            "then": [{ "waitForThenClick": "[data-testid=\"cookie-banner\"] [data-testid=\"accept-cookies\"]" }],
+            "else": [{ "waitForThenClick": "div[style*=\"position: fixed\"] > div > div > a[href=\"/user/cookie-settings\"] + button" }]
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "[data-testid=\"cookie-banner\"], div[style*=\"position: fixed\"]:has(> div > div > a[href=\"/user/cookie-settings\"] + button)"
+        }
+    ]
+}
