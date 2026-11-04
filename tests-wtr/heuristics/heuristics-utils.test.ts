@@ -129,6 +129,7 @@ describe('checkHeuristicPatterns with Italian popups', () => {
             'Qualcuno ha detto… cookie? Noi e i nostri partner utilizziamo i cookie per fornirti un servizio migliore',
             'Utilizziamo cookie tecnici e di profilazione',
             'Questo sito utilizza i cookie per migliorare la tua esperienza',
+            'Il sito impiega cookie tecnici necessari. Con il Suo consenso potrà attivare cookie di profilazione e di terze parti.',
             'Noi e i nostri 150 partner archiviamo informazioni come i cookie',
             'Archiviare e/o accedere a informazioni su un dispositivo',
         ];
