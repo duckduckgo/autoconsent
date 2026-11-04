@@ -172,8 +172,9 @@ export const DETECT_PATTERNS = [
     /(?:archiviare|memorizzare) e\/o accedere a informazioni su un dispositivo/gi,
 
     // Swedish (SV)
-    // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"
-    /(?:vi|webbplatsen|webbplats|sajten|sidan)\s+använder.{0,60}(?:cookies|kakor)/gi,
+    // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor",
+    // inverted word order: "på webbplatsen använder vi kakor"
+    /(?:(?:vi|webbplatsen|webbplats|sajten|sidan)\s+använder|använder\s+vi)\s.{0,60}(?:cookies|kakor)/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"

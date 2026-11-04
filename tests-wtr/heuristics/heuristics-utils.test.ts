@@ -153,6 +153,8 @@ describe('checkHeuristicPatterns with Swedish popups', () => {
             'Viss datahantering är nödvändig för att säkerställa att vår tjänst fungerar, vilket innebär att vi använder spårningstekniker såsom cookies.',
             'Vi använder cookies för att förbättra din upplevelse',
             'Webbplatsen använder kakor',
+            'På boplats.se använder vi kakor (cookies) för att webbplatsen ska fungera på ett bra sätt för dig.',
+            'Här använder vi cookies för statistik',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -161,6 +163,7 @@ describe('checkHeuristicPatterns with Swedish popups', () => {
 
     it('does not detect unrelated Swedish text', () => {
         expect(checkHeuristicPatterns('Vi använder svenska råvaror i våra bullar').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('I våra bullar använder vi svenska råvaror').patterns).to.have.length(0);
     });
 });
 
