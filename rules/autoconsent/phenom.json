@@ -1,0 +1,15 @@
+{
+    "name": "phenom",
+    "vendorUrl": "https://www.phenom.com/",
+    "prehideSelectors": ["[data-widget=\"ph-cookie-popup-v2\"] .ph-widget-box"],
+    "detectCmp": [{ "exists": "[data-widget=\"ph-cookie-popup-v2\"] .ph-widget-box" }],
+    "detectPopup": [{ "visible": "[data-widget=\"ph-cookie-popup-v2\"] .ph-widget-box", "check": "any" }],
+    "optIn": [{ "waitForThenClick": "[data-widget=\"ph-cookie-popup-v2\"] button[click\\.delegate=\"acceptAndClose()\"]" }],
+    "optOut": [
+        {
+            "comment": "the decline button is often hidden by the site, but its handler still records the rejection",
+            "waitForThenClick": "[data-widget=\"ph-cookie-popup-v2\"] button[click\\.delegate=\"declineAndClose()\"]"
+        }
+    ],
+    "test": [{ "cookieContains": "PHPPPE_GCC=d" }]
+}
