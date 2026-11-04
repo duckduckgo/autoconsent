@@ -1,6 +1,6 @@
 {
     "name": "vortex-consent",
-    "prehideSelectors": [".consent-overlay", "div.consent[role=dialog]"],
+    "prehideSelectors": [".consent-overlay:has(+ div.consent[role=dialog])", "div.consent[role=dialog]"],
     "detectCmp": [
         {
             "exists": "div.consent[role=dialog] .consent-main-buttons .consent-decline-all"

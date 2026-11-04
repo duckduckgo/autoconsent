@@ -1,0 +1,18 @@
+{
+    "name": "bobswatches",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?bobswatches\\.com/"
+    },
+    "prehideSelectors": [".consent-overlay:has(> .consent-card[role=dialog])"],
+    "detectCmp": [{ "exists": ".consent-overlay > .consent-card[role=dialog]" }],
+    "detectPopup": [{ "visible": ".consent-overlay > .consent-card[role=dialog]" }, { "eval": "EVAL_BOBSWATCHES_READY" }],
+    "optIn": [{ "waitForThenClick": ".consent-overlay > .consent-card.consent-notice .consent-button" }],
+    "optOut": [
+        {
+            "if": { "exists": ".consent-overlay > .consent-card.consent-notice" },
+            "then": [{ "eval": "EVAL_BOBSWATCHES_DENY" }],
+            "else": [{ "waitForThenClick": ".consent-overlay > .consent-card .consent-close" }]
+        }
+    ],
+    "test": [{ "cookieContains": "bw_consent=1.d." }]
+}

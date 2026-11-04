@@ -105,6 +105,14 @@ export const snippets = {
         return true;
     },
     EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT: () => !!(window.consentManager && window.consentManager.version),
+    EVAL_BOBSWATCHES_DENY: () => {
+        if (!window.BWConsent) return false;
+        // same path as the dialog's Escape key handler
+        window.BWConsent.deny('banner_dismissed');
+        return true;
+    },
+    // Rocket Loader re-fires DOMContentLoaded, which re-opens the dialog; wait until it has finished
+    EVAL_BOBSWATCHES_READY: () => document.readyState === 'complete' && (!window.__cfQR || !!window.__cfRLUnblockHandlers),
     EVAL_BORLABS_0: () =>
         !JSON.parse(
             decodeURIComponent(
