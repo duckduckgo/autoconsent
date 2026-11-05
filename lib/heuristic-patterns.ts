@@ -276,6 +276,15 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // Norwegian (NO)
     // e.g. "vi bruker informasjonskapsler", "kan vi bruke valgfrie informasjonskapsler", "nettstedet bruker cookies"
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
+
+    // Greek (EL); accented vowels are matched with and without tonos, since all-caps Greek drops it
+    // e.g. "χρησιμοποιούμε cookies", "η ιστοσελίδα χρησιμοποιεί cookies", "χρησιμοποιεί αρχεία cookie"
+    /χρησιμοποι\S{0,6}\s(?:\S+\s){0,3}?(?:cookies?|μπισκ[οό]τα)/gi,
+    // e.g. "cookies και άλλες παρόμοιες τεχνολογίες"
+    /(?:cookies?|μπισκ[οό]τα).{0,40}παρ[οό]μοιε[σς]\s+τεχνολογ/gi,
+    /συγκατ[αά]θεσ[ηή].{0,60}(?:cookies?|μπισκ[οό]τ)/gi,
+    /αποδοχ[ηή]\s+[οό]λων/gi,
+    /απ[οό]ρριψη\s+[οό]λων/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -478,6 +487,22 @@ const REJECT_PATTERNS_NORWEGIAN = [
     /^nei(,?\s+takk)?$/is,
 ];
 
+const REJECT_PATTERNS_GREEK = [
+    // απόρριψη / απορρίπτω / απόρριψε (reject); not "απόρρητο" (privacy)
+    /(^|\s)απ[οό]ρρ[ιί](ψ|πτ)/is,
+    /^[αά]ρνηση/is,
+
+    // (accept) only necessary / mandatory / functional, e.g. "αποδοχή υποχρεωτικών", "μόνο τα απαραίτητα cookies"
+    /^(αποδοχ[ηή]\s+|αποδ[εέ]χομαι\s+|επιτρ[εέ]ψτε\s+)?(μ[οό]νο\s+)?(των\s+|τα\s+)?(απαρα[ιί]τητ\S*|υποχρεωτικ\S*|αναγκα[ιί]\S*|λειτουργικ\S*|τεχνικ\S*)(\s+(cookies?|μπισκ[οό]τα))?$/is,
+
+    // continue without accepting / consent
+    /^συν[εέ]χεια\s+χωρ[ιί][σς]\s+(αποδοχ|συγκατ[αά]θεση)/is,
+
+    // refusals: "δεν αποδέχομαι", "δε συμφωνώ", "όχι, ευχαριστώ"
+    /^δεν?\s+(αποδ[εέ]χομαι|συμφων[ωώ]|συναιν[ωώ])/is,
+    /^[οό]χι(,?\s+ευχαριστ[ωώ])?$/is,
+];
+
 const REJECT_PATTERNS_CATALAN = [
     /(^|\s)rebutj/is,
     'no accepto',
@@ -555,6 +580,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_SWEDISH,
     ...REJECT_PATTERNS_DANISH,
     ...REJECT_PATTERNS_NORWEGIAN,
+    ...REJECT_PATTERNS_GREEK,
     ...REJECT_PATTERNS_CATALAN,
     ...REJECT_PATTERNS_GALICIAN,
     ...REJECT_PATTERNS_BASQUE,
@@ -773,6 +799,9 @@ export const SETTINGS_PATTERNS = [
     // Italian (IT)
     'personalizza cookie',
 
+    // Greek (EL), e.g. "ρυθμίσεις", "πληροφορίες και ρυθμίσεις", "διαχείριση cookies", "περισσότερες επιλογές"
+    /^(πληροφορ[ιί]ε[σς]\s+και\s+)?(ρυθμ[ιί]σει[σς]|προτιμ[ηή]σει[σς]|προσαρμογ[ηή]|διαχε[ιί]ριση|επιλογ[εέ][σς]|περισσ[οό]τερε[σς]\s+επιλογ[εέ][σς])(\s+(των\s+|για\s+)?(cookies?|μπισκ[οό]των|επιλογ[ωώ]ν|προτιμ[ηή]σεων|συγκατ[αά]θεσης))?$/is,
+
     // English (EN)
     'advanced settings',
     'consent settings',
@@ -929,6 +958,9 @@ export const ACCEPT_PATTERNS = [
     // Turkish (TR)
     'kabul et',
 
+    // Greek (EL), e.g. "αποδοχή", "αποδοχή όλων", "αποδέχομαι όλα τα cookies", "να επιτρέπονται όλα", "επιτρέπεται η επιλογή"
+    /^(ναι,?\s+)?(αποδοχ[ηή]|αποδ[εέ]χομαι|αποδεχτε[ιί]τε|συμφων[ωώ]|συναιν[ωώ]|επιτρ[εέ]ψτε|(να\s+)?επιτρ[εέ]π(ονται|εται))(\s+(τα\s+|η\s+)?([οό]λ(α|ων)|επιλεγμ[εέ]ν(α|ων)|επιλογ[ηή]))?(\s+(τα\s+|των\s+)?(cookies?|μπισκ[οό]τ(α|ων)))?(\s+(και|&)\s+(κλε[ιί]σιμο|συν[εέ]χεια))?$/is,
+
     // Italian (IT)
     'accetta',
     'accetta tutti i cookie',
@@ -990,6 +1022,10 @@ export const ACKNOWLEDGE_PATTERNS = [
     'w porządku',
     /^zamknij informację o( plikach)? cookies$/,
     'zapisz i zamknij',
+
+    // Greek (EL), e.g. "εντάξει", "το κατάλαβα", "κλείσιμο", "συνέχεια", "αποθήκευση επιλογών"
+    /^(εντ[αά]ξει|(το\s+)?κατ[αά]λαβα|κλε[ιί]σιμο|συν[εέ]χεια|επιβεβα[ιί]ωση)[ !.]*$/is,
+    /^αποθ[ηή]κευση\s+(των\s+)?(επιλογ[ωώ]ν|ρυθμ[ιί]σεων|προτιμ[ηή]σεων)$/is,
 
     // Russian (RU)
     // e.g. "понятно", "всё понятно", "хорошо", "ясно"; \w does not match Cyrillic
