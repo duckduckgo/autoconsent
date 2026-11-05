@@ -1,3 +1,37 @@
+# v18.0.0 (Thu Nov 05 2026)
+
+#### Rules
+
+- Rule update: Check whether www.telekom.de still needs its autoconsent exception [#2476](https://github.com/duckduckgo/autoconsent/pull/2476) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #4508: europa.eu [#2477](https://github.com/duckduckgo/autoconsent/pull/2477) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: typo3-cookieconsent [#2469](https://github.com/duckduckgo/autoconsent/pull/2469) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: pakamera.pl [#2471](https://github.com/duckduckgo/autoconsent/pull/2471) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hurra-consent, remove auto_NL_bonprix.nl_ovi [#2459](https://github.com/duckduckgo/autoconsent/pull/2459) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: isidewith.com [#2474](https://github.com/duckduckgo/autoconsent/pull/2474) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: binogi [#2473](https://github.com/duckduckgo/autoconsent/pull/2473) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bokio [#2472](https://github.com/duckduckgo/autoconsent/pull/2472) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: purecookie-cosmetic [#2470](https://github.com/duckduckgo/autoconsent/pull/2470) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: calcolo.tools [#2468](https://github.com/duckduckgo/autoconsent/pull/2468) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: botble-cookie-consent [#2466](https://github.com/duckduckgo/autoconsent/pull/2466) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vinnies-org-au [#2465](https://github.com/duckduckgo/autoconsent/pull/2465) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hikvision.com [#2464](https://github.com/duckduckgo/autoconsent/pull/2464) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tallink [#2463](https://github.com/duckduckgo/autoconsent/pull/2463) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: random-org [#2462](https://github.com/duckduckgo/autoconsent/pull/2462) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dtu-findit [#2461](https://github.com/duckduckgo/autoconsent/pull/2461) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: landgate [#2460](https://github.com/duckduckgo/autoconsent/pull/2460) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Enhancements
+
+- Heuristic detection: fewer false positives, more languages, faster prefilter [#2103](https://github.com/duckduckgo/autoconsent/pull/2103) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v17.4.0 (Wed Nov 04 2026)
 
 #### Rules
