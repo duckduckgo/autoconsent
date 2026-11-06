@@ -14,6 +14,8 @@ export const VERWENDUNG_VON_COOKIES = /verwendung.{0,100}von.{0,100}cookies/gi;
 export const DE_COOKIE_VERB =
     /\b(?:nutzen|nutzt|verwenden|verwendet|setzen|setzt|benutzen|benutzt|speichert|platzieren)\b(?: \S+){0,4} cookies\b/gi;
 export const GEBRUIK_VAN_COOKIES = /gebruik.{0,100}van.{0,100}cookies/gi;
+export const USO_DEI_COOKIE = /\b(?:uso|utilizzo) dei cookies?\b/gi;
+export const ANVANDNING_AV_COOKIES = /\b(?:användning|användningen|användandet) av (?:\S+ )?(?:cookies|kakor)\b/gi;
 
 // TODO: check for false positive detections per pattern
 // these patterns are matched against popup-like elements or full document text to detect unknown cookie popups
@@ -23,9 +25,15 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /reject all/gi,
     /only necessary cookies/gi, // "only necessary" is probably too broad
     /(?:by continuing.{0,100}cookie)|(?:cookie.{0,100}by continuing)/gi,
+    /\bby using (?:this|our) (?:web)?site\b.{0,100}cookie/gi,
     BY_CONTINUING_PRIVACY,
     // up to two qualifiers are common: "optional", "essential", "analytics", "google analytics", "third party", ...
-    /we (?:use|serve)(?: \w+){0,2} cookies/gi,
+    // singular too, but not "cookie-free"
+    /we (?:also )?(?:use|serve)(?: \w+){0,2} cookies?\b(?!-)/gi,
+    /\bwe use (?:\S+ )?cookie files\b/gi,
+    // consent asked as a question: "can I use cookies to …?", "allow analytics cookies?"
+    /\b(?:can|may) (?:i|we) use (?:\S+ ){0,2}cookies\b/gi,
+    /\ballow (?:\S+ )?cookies\?/gi,
     /we are using cookies/gi,
     USE_OF_COOKIES,
     /website uses cookies to enhance your browsing experience/gi,
@@ -34,7 +42,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /such as cookies/gi,
     /read more about.{0,100}cookies/gi,
     /consent to.{0,100}cookies/gi,
-    /we and our partners.{0,100}cookies/gi,
+    /we and our (?:\w+ )?partners.{0,100}cookies/gi,
     /we.{0,100}store.{0,100}information.{0,100}such as.{0,100}cookies/gi,
     /store and\/or access information.{0,100}on a device/gi,
     /personalised ads and content, ad and content measurement/gi,
@@ -60,11 +68,17 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /["“]?(?:share|sell)["”]? or ["“]?(?:sell|share)["”]? (?:your )?(?:personal )?information\b/gi,
     /\bresidents have (?:certain )?rights with regard to the sale\b/gi,
     /\bwe use technologies (?:on this website )?(?:that may )?(?:to )?collect\b/gi,
+    /\bwe use third[- ]party tools to collect information\b/gi,
     // pay-or-consent walls
     /\bcontinue reading with advertising\b|\b(?:with|mit) (?:advertising|werbung) (?:and|und) tracking\b/gi,
     /\bconsent and continue\b/gi,
     // preference centres are often in the page but hidden, so popup text only
     { pattern: /\bstore or retrieve information on your browser\b|\bstockées dans votre navigateur ou récupérées\b/gi, input: 'popup' },
+    // wording that also appears in policies, footers and newsletter forms, so popup text only
+    { pattern: /\bwe have cookies\b/gi, input: 'popup' },
+    { pattern: /\b(?:revoke|withdraw) your consent at any time\b|\beinwilligung jederzeit widerrufen\b/gi, input: 'popup' },
+    { pattern: /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi, input: 'popup' },
+    { pattern: /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi, input: 'popup' },
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
@@ -101,6 +115,9 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bconsentez à l.utilisation (?:de |des )?cookies\b|\bdépôt (?:de|des) cookies\b/gi,
     /\bles cookies nous permettent\b|\bnos partenaires et nous(?:-mêmes)?\b/gi,
     /\baccepter (?:&|et) fermer\b/gi,
+    /\b(?:on utilise|nous utilisons)(?: \S+)? cookies\b/gi,
+    /\ben (?:naviguant|poursuivant)\b.{0,100}cookies/gi,
+    /(?:en continuant.{0,100}cookie)|(?:cookie.{0,100}en continuant)/gi,
 
     // DE
     /wir.{0,100}verwenden.{0,100}cookies/gi,
@@ -134,6 +151,12 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\btracking-technologien\b/gi,
     /\bakzeptier\w* (?:du |sie )?(?:die )?verwendung (?:\S+ )?cookies\b/gi,
     /\bmit werbetracking weiterlesen\b|\bweiter mit werbung\b|\bcon tracking e annunci\b/gi,
+    // footer lines such as "Diese Website verwendet Cookies. Mehr erfahren" are page text, so popup text only
+    { pattern: /(?:unsere|diese)[rs]? (?:web)?(?:seite|site).{0,100}cookies/gi, input: 'popup' },
+    /(?:durch die weitere nutzung.{0,100}cookie)|(?:cookie.{0,100}durch die weitere nutzung)/gi,
+    // "Marketing-" and "Tracking-Cookies" are left out: they are also English prose and footer links
+    /\b(?:analyse|statistik)-?cookies\b/gi,
+    /\bcookies oder (?:andere|ähnliche)/gi,
 
     // NL
     GEBRUIK_VAN_COOKIES,
@@ -145,7 +168,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /cookies weigeren/gi,
     /weiger.{0,100}(?:cookies|alles)/gi,
     /doorgaan zonder (?:te accepteren|akkoord te gaan)/gi,
-    /alleen.{0,100}(?:optionele|functionele|functioneel|noodzakelijke|essentiële).{0,100}cookies/gi,
+    /alleen.{0,100}(?:optionele|functionele|functioneel|noodzakelijke|essentiële|standaard).{0,100}cookies/gi,
     /wijs alles af/gi,
     /\b(?:op te slaan en\/of te (?:raadplegen|openen|lezen)|opslaan en\/of (?:openen|raadplegen|lezen)|slaan informatie\b.{0,60}\bop en\/of)\b/gi,
     /\bonze partners vragen om (?:jouw|uw|je) toestemming\b/gi,
@@ -154,6 +177,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\baccepteer (?:alles|alle cookies)\b/gi,
     // Dutch words only: "tracking cookies" and "marketing cookies" are also English prose and footer links
     /\b(?:analytische|functionele|essentiële|noodzakelijke) cookies\b/gi,
+    /(?:te blijven gebruiken.{0,100}cookie)|(?:cookie.{0,100}te blijven gebruiken)/gi,
+    /cookies.{0,100}beste? (?:mogelijke )?(?:ervaring|gebruikerservaring)/gi,
 
     // Spanish (ES)
     /(si|al) contin[úu]a[sr]?( navegando)?.{0,100} cookie/gi,
@@ -185,7 +210,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // examples:
     //  wykorzystuje pliki cookie (uses cookies)
     //  Wykorzystujemy informacje w plikach cookie (We use information in cookies)
-    /(używamy|stosujemy|stosuje|wykorzystujemy|wykorzyst(uje|ywane))( są)?.{0,20} plik(i|ów|ach) cookie/gi,
+    /(używamy|stosujemy|stosuje|wykorzystujemy|wykorzyst(uje|ywane))( są)?.{0,20} plik(i|ów|ach) [„"]?cookie/gi,
     /(używać|używamy).{0,80} (ciasteczek|cookie)/gi,
     /cele przetwarzania twoich danych przez zaufanych partnerów iab/gi,
     /dzięki (plikom cookie|ciasteczkom|cookie)/gi,
@@ -236,12 +261,14 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // note: \w does not match Cyrillic, so these use explicit character ranges
     /использу[а-яё]*.{0,40}(?:файл[а-яё]*[\s-]+)?(?:cookie|куки)/gi,
     /(?:cookie|куки).{0,40}использу[а-яё]*/gi,
-    /(?:использовани[а-яё]*|обработк[а-яё]*|хранени[а-яё]*).{0,20}(?:файл(?:ов|ы)[\s-]+)?(?:cookie|куки)/gi,
+    /(?:использовани[а-яё]*|обраб(?:отк|атыва)[а-яё]*|хранени[а-яё]*).{0,20}(?:файл(?:ов|ы)[\s-]+)?(?:cookie|куки)/gi,
     /технологи[а-яё]*\s+(?:cookie|куки)/gi,
     // e.g. "сайт собирает cookie", "мы применяем файлы cookie", "сохраняем куки на вашем устройстве"
     /(?:собира[а-яё]*|сбор|применя[а-яё]*|сохраня[а-яё]*|размеща[а-яё]*|устанавлива[а-яё]*).{0,30}(?:файл[а-яё]*[\s-]+)?(?:cookie|куки)/gi,
     // "файлы cookie" / "cookie-файлы" / "куки-файлы" in any phrasing
     /(?:файл[а-яё]*[\s-]+(?:cookie|куки)|(?:cookie|куки)[\s-]+файл[а-яё]*)/gi,
+    // cookies described without the word: "файлов, сохраняемых в браузере пользователя"
+    /файл[а-яё]*,?\s+(?:сохраня[а-яё]*|хран[а-яё]*)[а-яё\s]{0,30}браузер/gi,
 
     // Italian (IT)
     // e.g. "usiamo i cookie", "utilizziamo cookie tecnici", "questo sito utilizza i cookie", "noi e i nostri partner utilizziamo i cookie"
@@ -260,39 +287,53 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:insieme ai|con i) nostri (?:\d+ )?partner\b/gi,
     /\bterze parti selezionate\b/gi,
     /\b(?:archiviare|archiviamo|memorizzare|memorizziamo) e\/o (?:accedere|accediamo)\b/gi,
+    USO_DEI_COOKIE,
 
     // Swedish (SV)
     // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"
     /(?:vi|webbplatsen|webbplats|sajten|sidan)\s+använder.{0,60}(?:cookies|kakor)/gi,
+    // any subject and inverted order: "Svenska kraftnät använder kakor", "använder vi också cookies", "vill använda cookies",
+    // "vi sätter inga egna cookies"
+    /\b(?:använd(?:er|a)|sätter|nyttjar) (?:vi |sig av |oss av )?(?:\S+ ){0,3}(?:cookies|kakor)\b/gi,
+    // passive: "på webbplatsen används kakor", "kakor används för att …"
+    /\banvänds (?:\S+ ){0,2}(?:cookies|kakor)\b|\b(?:cookies|kakor)\b.{0,60}\banvänds\b/gi,
+    ANVANDNING_AV_COOKIES,
+    /\b(?:godkänn|accepter|tillåt)\S* (?:\S+ ){0,4}(?:cookies|kakor)\b|\b(?:cookies|kakor) (?:som )?du tillåter\b/gi,
+    /\b(?:endast|bara|enbart) nödvändiga (?:cookies|kakor)\b|\bavvisa alla\b/gi,
+    // TCF wording
+    /\blagra och\/eller (?:få åtkomst till|komma åt) information\b/gi,
+    /\b(?:dess|våra) partners\b.{0,100}\b(?:cookies|kakor)\b/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
-    /(?:cookie|クッキー).{0,10}を(?:使用|利用)/gi,
+    /(?:cookie|クッキー).{0,20}を(?:使用|利用)/gi,
 
     // Danish (DA)
     // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
-    /bruger cookies/gi,
+    /(?:bruger|anvender|benytter) cookies/gi,
 
     // Norwegian (NO)
     // e.g. "vi bruker informasjonskapsler", "kan vi bruke valgfrie informasjonskapsler", "nettstedet bruker cookies"
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
+    /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
-    // e.g. "reject", "reject all", "reject all cookies", "deny all", "refuse cookies", "decline",
+    // e.g. "reject", "reject all", "reject all cookies", "reject cookie", "deny all", "refuse cookies", "decline", "disallow cookies",
     // "reject non-essential cookies", "reject unnecessary cookies", "reject all but necessary", "reject all and close"
     // note that "reject and subscribe" and "reject and pay" are excluded via BUTTON_NEVER_MATCH_PATTERNS
-    /^\s*(no,?\s*)?(i\s+)?(reject|deny|refuse|decline|disable)\s*(all)?\s*(but|except)?\s*(non[- ]?essential|un(necessary|required)|optional|additional|targeting|analytics|marketing|non[- ]?necessary|extra|tracking|advertising|necessary|essential)?\s*(cookies)?\s*(and\s+close)?\s*$/is,
+    /^\s*(no,?\s*)?(i\s+)?(reject|deny|refuse|decline|disable|disallow)\s*(all)?\s*(but|except)?\s*(non[- ]?essential|un(necessary|required)|optional|additional|targeting|analytics|marketing|non[- ]?necessary|extra|tracking|advertising|necessary|essential)?\s*(cookies?)?\s*(and\s+close)?\s*$/is,
 
-    // e.g. "i do not accept", "do not accept cookies", "i do not accept the use of cookies"
-    /^\s*(no,?\s*)?(i\s+)?do\s+not\s+accept\s*(the\s+use\s+of\s+)?(any\s+)?(cookies)?\s*$/is,
+    // e.g. "i do not accept", "do not accept cookies", "i do not accept the use of cookies", "do not allow cookies", "dont allow"
+    /^\s*(no,?\s*)?(i\s+)?(do\s+not|dont)\s+(accept|allow)\s*(the\s+use\s+of\s+)?(any\s+)?(cookies)?\s*$/is,
 
     // e.g. "continue without accepting", "continue without agreeing", "continue without agreeing →"
     /^\s*(continue|proceed|continue\s+browsing)\s+without\s+(accepting|agreeing|consent|cookies|tracking)(\s*→)?\s*$/is,
 
     // essential/necessary/functional-only, e.g. "essential cookies only", "accept only essential cookies",
-    // "allow necessary cookies continue", "use essential cookies only", "functional only", "essential only cookies", "i confirm necessary"
-    /^\s*(i\s+)?(want\s+to\s+)?(only\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|i\s+confirm)\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
+    // "allow necessary cookies continue", "use essential cookies only", "functional only", "essential only cookies", "i confirm necessary",
+    // "proceed with necessary cookies only"
+    /^\s*(i\s+)?(want\s+to\s+)?(only\s+)?(use|accept|allow|keep|enable|choose|continue\s+with|proceed\s+with|i\s+confirm)\s*(only\s+)?(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
     /^\s*(i\s+)?(want\s+to\s+)?only\s+(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s*(cookies)?\s*(continue|only)?\s*$/is,
     /^\s*(strictly\s+)?(necessary|essential|essentials|functional|required|minimal)\s+((cookies\s+)?only|only\s+cookies)\s*$/is,
 
@@ -311,6 +352,9 @@ const REJECT_PATTERNS_ENGLISH = [
 
     'no',
     /^no,? thank(s| you)$/is,
+    // e.g. "no cookies", "no cookies for me, thanks", "rather not", "no, rather not"
+    /^no,?\s+cookies(\s+for\s+me)?(,?\s*thank(s| you))?$/is,
+    /^(no,?\s+)?rather not$/is,
     /^opt[ -]out$/is,
     'dont enable',
     'i do not agree',
@@ -342,6 +386,8 @@ const REJECT_PATTERNS_DUTCH = [
     'geen cookies toestaan',
     'liever geen cookies',
     'functioneel altijd actief',
+    // e.g. "ik accepteer geen cookies", "nee, ik wil geen optimale cookies"
+    /^(nee,?\s+)?(ik\s+)?(wil|accepteer|aanvaard)\s+geen\s+(\S+\s+)?cookies$/is,
 ];
 
 const REJECT_PATTERNS_FRENCH = [
@@ -463,13 +509,14 @@ const REJECT_PATTERNS_DANISH = [
     // (accept/allow) only necessary cookies
     /^(accepter\s+|tillad\s+)?(kun|udelukkende)\s+(strengt\s+)?nødvendige( cookies)?$/is,
 
-    // "nej tak" (no thanks)
+    // "nej tak" (no thanks), e.g. "du kan sige nej tak til statistik"
     /^nej(,?\s+tak)?$/is,
+    /^(du kan )?(sige )?nej,? tak til \S+$/is,
 ];
 
 const REJECT_PATTERNS_NORWEGIAN = [
-    // avvis / avslå (reject verbs)
-    /(^|\s)(avvis|avslå)/is,
+    // avvis / avslå (reject verbs), not the status "avslått" (rejected)
+    /(^|\s)(avvis|avslå)(\s|$)/is,
 
     // (accept/allow/use) only necessary cookies
     /^(godta\s+|tillat\s+|aksepter\s+|bruk\s+)?(kun|bare)\s+(strengt\s+)?nødvendige( (informasjonskapsler|cookies))?$/is,
@@ -610,7 +657,7 @@ export const SETTINGS_PATTERNS = [
     'preferences',
     /customi(s|z)e/is,
     'more options',
-    /(manage|configure) (my|your) (preferences|choices|cookies)/is,
+    /^(?!.*\b(polic(y|ies)|notice|statement|privacy page)\b).*(manage|configure) (my|your) (preferences|choices|cookies)/is,
     /(cookie )?preference center/is,
     'configure',
     'cookie manager',
@@ -620,7 +667,7 @@ export const SETTINGS_PATTERNS = [
     /privacy choices/is,
     /^(privacy|cookie|custom) settings$/is,
     /^cookies? (settings|preferences|setting)(?!.*\bdo not\b)/is,
-    /^(?!.*\bpolic(y|ies)\b).*(manage|customize|customise|opt-out|edit).*(cookies|preferences|settings|options)/is,
+    /^(?!.*\b(polic(y|ies)|notice|statement|privacy page)\b).*(manage|customize|customise|opt-out|edit).*(cookies|preferences|settings|options)/is,
     'cookie consent options',
     'privacy controls',
     // German
@@ -938,7 +985,7 @@ export const ACCEPT_PATTERNS = [
 export const ACKNOWLEDGE_PATTERNS = [
     // close / dismiss the banner/dialog/message (multilingual). The negative lookahead avoids
     // accept/save phrases (e.g. "agree and close", "akkoord en sluiten", "speichern schließen").
-    /^(?!.*\b(accept\w*|accepter|accepteer|accepteren|agree|allow|akkoord|aanvaard\w*|zustimm\w*|annehm\w*|akzeptier\w*|aceptar|acepta|permit\w*|consent\w*|einverstanden|zezw\w*|zgadzam|zgoda|guardar|opslaan|enregistrer|speicher\w*|zapisz)\b)(x\s+|nee,?\s+)?(close|dismiss|schlie(ß|ss)en|sluiten|afsluiten|fermer|cerrar|tanca|beenden|masquer|zamknij)( (this|the|ce|le|el|de|des|het|la|een)?\s*(banner|bandeau|banier|bar|dialog|dialogue|window|okno|melding|message|notification|informa\w*|notificaci\w*|cookie\w*|bannière|rgpd|gdpr|hier|des cookies|de cookies|x))*\.?\s*$/is,
+    /^(?!.*\b(accept\w*|accepter|accepteer|accepteren|agree|allow|akkoord|aanvaard\w*|zustimm\w*|annehm\w*|akzeptier\w*|aceptar|acepta|permit\w*|consent\w*|einverstanden|zezw\w*|zgadzam|zgoda|guardar|opslaan|enregistrer|speicher\w*|zapisz)\b)(x\s+|nee,?\s+)?(close|dismiss|schlie(ß|ss)en|sluiten|afsluiten|fermer|cerrar|tanca|beenden|masquer|zamknij|ukryj)( (this|the|ce|le|el|de|des|het|la|een)?\s*(banner|bandeau|banier|bar|dialog|dialogue|disclaimer|window|okno|melding|message|notification|informa\w*|notificaci\w*|cookie\w*|bannière|rgpd|gdpr|hier|des cookies|de cookies|x))*\.?\s*$/is,
 
     // "ok" / "okay" / "oké" (optionally followed by a short acknowledgement)
     /^(ok|okay|oké|okey|k)([ .!,]*)(got it|verstanden|compris|rozumiem|thanks|gracias|ik begrijp( dat| het)?|continue to website|pour moi|fermer)?[ .!]*$/is,
@@ -950,12 +997,18 @@ export const ACKNOWLEDGE_PATTERNS = [
     /^(confirm|bestätigen|bevestigen|confirmar|potwierdź)[ !.]*$/is,
 
     // neutral "continue" without accept/reject wording
-    /^(continuer|doorgaan|ga verder)$/is,
+    /^(continuer|poursuivre|doorgaan|ga verder)$/is,
+    // e.g. "continue browsing", "continue to browse the site"
+    /^continue (to )?brows(e|ing)( (the|our) (site|website))?$/is,
+    // German "hide", e.g. "ausblenden", "hinweis ausblenden", "ok. ausblenden."
+    /^(ok[ .!,]*)?(hinweis )?ausblenden[ .!]*$/is,
 
     'continue',
     'x',
     /^got it!?$/,
     'acknowledge',
+    // notice-only banner with no choice
+    'i agree, dismiss this banner',
     /^close (banner|cookie notification)$/is,
     /understood$/is,
     'confirm my choices',
@@ -993,7 +1046,7 @@ export const ACKNOWLEDGE_PATTERNS = [
 
     // Russian (RU)
     // e.g. "понятно", "всё понятно", "хорошо", "ясно"; \w does not match Cyrillic
-    /^\s*(хорошо|ясно|(вс[её]\s+)?(понятно|понял[аи]?))[!.]*\s*$/is,
+    /^\s*(ок|окей|хорошо|ясно|(вс[её]\s+)?(понятно|понял[аи]?))[!.]*\s*$/is,
     // e.g. "закрыть", "закрыть уведомление о cookie"
     /^\s*закрыть([\s-]+(это|эту|баннер|уведомлени[а-яё]*|окно|сообщени[а-яё]*|плашк[а-яё]*|информаци[а-яё]*)){0,2}([\s-]+(о|об)[\s-]+(cookie|куки[а-яё]*|файл[а-яё]*[\s-]+cookie))?\s*$/is,
     // e.g. "больше не показывать", "не показывать снова"
@@ -1001,4 +1054,9 @@ export const ACKNOWLEDGE_PATTERNS = [
     // e.g. "подтвердить", "подтверждаю выбор", "сохранить настройки", "сохранить и закрыть"
     /^\s*(подтвер(дить|ждаю|ждени[а-яё]*)|сохран(ить|яю|ение))([\s-]+(мой|мои|моё|свой|свои|своё)?[\s-]*(выбор[а-яё]*|настройк[а-яё]*|парамет[а-яё]*|предпочтени[а-яё]*|согласи[а-яё]*))?([\s-]+и[\s-]+(закрыть|продолжить))?\s*$/is,
     'продолжить',
+
+    // Japanese (JA)
+    // e.g. "閉じる" (close), "確認" / "確認しました" (confirmed), "了解" (understood), "確認して閉じる";
+    // not "同意して閉じる" (agree and close) or the verb "確認する" (confirm)
+    /^(確認|了解)(しました)?$|^((確認|了解)して)?閉じる$/,
 ];

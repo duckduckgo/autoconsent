@@ -348,6 +348,159 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+const detectsPopup = (text: string) => checkHeuristicPatterns(text, 'popup').patterns.length > 0;
+const detectsPage = (text: string) => checkHeuristicPatterns(text, 'page').patterns.length > 0;
+
+function expectDetected(texts: string[]) {
+    for (const text of texts) {
+        expect(detectsPopup(text), text).to.be.true;
+    }
+}
+
+function expectNotDetected(texts: string[]) {
+    for (const text of texts) {
+        expect(detectsPopup(text), text).to.be.false;
+    }
+}
+
+describe('checkHeuristicPatterns with more English wording', () => {
+    it('detects English cookie notices', () => {
+        expectDetected([
+            'May we also use analytics cookies to help us learn how the site is being used?',
+            'We use cookie files to provide users personalized content, additional functions, and to perform the website traffic analysis.',
+            'Please can I use cookies to see how the site is used and which of my ads work? Privacy',
+            'Welcome! We use third-party tools to collect information about you as you enjoy our site.',
+            'We and our advertising partners use cookies for ad measurement, personalised ads and analytics.',
+            'By using our site, you acknowledge that you read and understand our Cookie Policy.',
+            'By using this website you agree to our use of cookie technology.',
+            'Allow analytics cookies? They help us understand how visitors use this website. Your choice does not affect access.',
+            'Allow cookies? We use them to measure traffic.',
+            'We use a cookie to remember you are 18+ and keep your preferences on this device.',
+        ]);
+    });
+
+    it('detects popup-only wording in popups but not in page text', () => {
+        const texts = [
+            'We have cookies! Read our privacy policy',
+            'No tracking will occur without your consent. You can revoke your consent at any time.',
+            'Du kannst deine Einwilligung jederzeit widerrufen.',
+            'We use privacy-friendly analytics to see which health guides are most useful. No ads, no profiling.',
+            'We use Google Analytics to count page views and monthly active users. It sets a cookie and, when you are signed in, records your account id.',
+            'Usiamo Google Analytics per capire come viene usato il sito. Li attiviamo solo con il tuo consenso.',
+            'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.',
+        ];
+        for (const text of texts) {
+            expect(detectsPopup(text), text).to.be.true;
+            expect(detectsPage(text), text).to.be.false;
+        }
+    });
+
+    it('does not detect unrelated English text', () => {
+        expectNotDetected([
+            'We use cookiecutter templates',
+            'We use cookie-free analytics',
+            'Please allow cookies in your browser settings',
+            'We use data analytics tools in our consulting work',
+            'We use the best chocolate in our cookies',
+        ]);
+    });
+});
+
+describe('checkHeuristicPatterns with more French, German, Dutch, Polish and Russian wording', () => {
+    it('detects cookie notices', () => {
+        expectDetected([
+            "On utilise quelques cookies pour voir ce qui t'aide vraiment à réviser",
+            'Nous utilisons certains cookies pour mesurer l’audience',
+            'En naviguant sur ce site, vous acceptez les cookies pour améliorer votre expérience.',
+            "Des cookies sont utilisés à des fins de mesure, de publicité et d'optimisation. En continuant à utiliser notre site, vous acceptez notre politique de confidentialité.",
+            'Cookies werden für Messungen, Werbung und Optimierung verwendet. Durch die weitere Nutzung unserer Website stimmen Sie unserer Datenschutzrichtlinie zu.',
+            'Hierfür werden auf Ihrem Gerät Analyse-Cookies mit einer pseudonymen Kennung gespeichert.',
+            'Wir setzen Statistik-Cookies und Marketingcookies ein.',
+            'Wenn du auf „Einverstanden“ klickst, verarbeiten wir deine Daten und speichern Informationen (z. B. durch Cookies oder andere Identifikatoren) auf deinem Endgerät.',
+            'Cookies worden gebruikt voor metingen, advertenties en optimalisatie. Door onze site te blijven gebruiken, gaat u akkoord met ons privacybeleid.',
+            'Alles accepteren Keuze opslaan Alleen standaard cookies',
+            'Onze cookies geven je de best mogelijke ervaring op onze website. Accepteer ze, of lees onze cookieverklaring.',
+            'Informujemy, że niniejsza strona internetowa wykorzystuje pliki „cookies”.',
+            'Strona wykorzystuje pliki "cookies" w celach statystycznych.',
+            'Обрабатываем cookie, чтобы сделать сайт удобнее. Продолжая использовать сайт, вы соглашаетесь на их обработку.',
+            'Сайт обрабатывает пользовательские данные с использованием файлов, сохраняемых в браузере пользователя, в соответствии с Условиями.',
+        ]);
+    });
+
+    it('does not detect unrelated text', () => {
+        expectNotDetected([
+            'On utilise du beurre dans nos cookies',
+            'Analyse der Marketing-Strategie',
+            'Durch die Nutzung unserer Webseite finden Sie schnell die neuesten Tests.',
+        ]);
+    });
+});
+
+describe('checkHeuristicPatterns with more Swedish wording', () => {
+    it('detects Swedish cookie notices', () => {
+        expectDetected([
+            'Svenska kraftnät använder kakor (cookies) för att förbättra och anpassa ditt besök på vår webbplats.',
+            'Vår hemsida använder cookies och andra spårtekniker.',
+            'Vi och våra partners använder nödvändiga och valfria cookies',
+            'Dessutom använder vi också cookies för annonsanpassning',
+            'Vi på Kjell & Company önskar att ge dig en unik kundupplevelse och för att kunna göra detta använder vi cookies.',
+            'Vi sätter inga egna cookies, förutom en sessionskaka om du loggar in.',
+            'På den här webbplatsen används kakor.',
+            'Kakor används för att webbplatsen ska fungera.',
+            'Användning av valfria cookies. Cookies hjälper oss att anpassa din upplevelse.',
+            'Genom att surfa vidare godkänner du användningen av kakor',
+            'Genom att trycka "Acceptera alla" godkänner du användandet av sådana cookies.',
+            'Genom att fortsätta godkänner du att vi sparar kakor',
+            'När du accepterar cookies från våra partner kan det innebära att data överförs till länder utanför EU.',
+            'Kakor för en bättre upplevelse Med kakor (cookies) kan vi erbjuda dig säker inloggning. Godkänn nödvändiga kakor Godkänn alla kakor',
+            'Tillåt alla cookies Endast nödvändiga cookies Cookie-inställningar',
+            'Välj nedan vilka cookies du tillåter oss att använda. Acceptera alla Endast nödvändiga',
+            'Godkänn alla Avvisa alla',
+            'momondo och dess partners vill använda cookies eller liknande teknik för att lagra och/eller komma åt information på och om din enhet',
+            'Lagra och/eller få åtkomst till information på en enhet',
+        ]);
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expectNotDetected([
+            'Vi använder förnybar energi och endast nödvändiga resurser',
+            'Vi använder bara ekologiska råvaror i våra bakverk',
+            'Recept på kakor och bullar till fikat',
+            'Sök och jämför billiga flyg online. Vart vill du resa?',
+            'Välkommen till ett roligare sparande i aktier och fonder',
+        ]);
+    });
+
+    it('drops "användning av cookies" as a footer link in page text', () => {
+        const text = 'Om oss\nKontakt\nLäs mer om vår användning av cookies\nTillgänglighet\nPress';
+        expect(detectsPopup('Läs mer om vår användning av cookies.')).to.be.true;
+        expect(detectsPage(text)).to.be.false;
+    });
+});
+
+describe('checkHeuristicPatterns with more Danish, Norwegian, Italian and Japanese wording', () => {
+    it('detects cookie notices', () => {
+        expectDetected([
+            'Vi anvender cookies for at forbedre din oplevelse',
+            'Denne hjemmeside benytter cookies',
+            'Her kan du administrere dine samtykker for bruk av cookies/ informasjonskapsler på nettstedet',
+            "Informativa sull'utilizzo dei cookie",
+            '広告を配信すること等を目的に、Cookie等の「インフォマティブデータ」を利用しています。',
+        ]);
+    });
+
+    it('drops "utilizzo dei cookie" as a footer link in page text', () => {
+        expect(detectsPage("Chi siamo\nContatti\nInformativa sull'utilizzo dei cookie\nPrivacy\nNote legali")).to.be.false;
+    });
+
+    it('does not detect unrelated text', () => {
+        expectNotDetected([
+            'Du vil ansøge om at besøge, bo eller arbejde i Danmark',
+            'Il sito utilizza materiali riciclati per la costruzione',
+        ]);
+    });
+});
+
 // excluded as a popup by a whole-text context negative
 const isExcludedPopup = (text: string) => excludedBy(text, 'popup').length > 0;
 
@@ -435,6 +588,24 @@ describe('popup exclusions', () => {
                 'We and our partners use cookies and other technologies (together hereinafter: "Cookies") to store and/or access device information.\nAccept all\nReject all',
             ),
         ).to.be.false;
+    });
+
+    it('flags investor eligibility gates', () => {
+        const gate =
+            'By continuing you are confirming you have read and understood the legal information below and consent to the use of cookies on this site. ' +
+            'This website is for persons who qualify as Professional Clients or Eligible Counterparties under the FCA rules only. I agree I disagree';
+        expect(checkHeuristicPatterns(gate, 'page').patterns.length).to.be.greaterThan(0);
+        expect(isExcludedPopup(gate)).to.be.true;
+        expect(checkHeuristicPatterns(gate, 'popup').patterns).to.have.length(0);
+        expect(isExcludedPopup('This website uses cookies. It is not suitable for retail clients. I agree I disagree')).to.be.true;
+        expect(
+            isExcludedPopup(
+                'By clicking “Accept”, you confirm that you are an institutional investor in the United Kingdom. Accept I disagree',
+            ),
+        ).to.be.true;
+        expect(isExcludedPopup('By clicking “Accept”, you confirm that you are a financial intermediary. Accept I disagree')).to.be.true;
+        expect(isExcludedPopup('We use cookies to improve your experience. Our clients include institutional investors.\nAccept\nReject'))
+            .to.be.false;
     });
 
     it('flags "must be 18" and "21+ years" age gates', () => {
@@ -686,6 +857,68 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Zustimmen schliessen')).to.equal('accept');
         expect(classifyButtonTextRegex('Accepter fermer')).to.equal('accept');
         expect(classifyButtonTextRegex('Accepteren sluiten')).to.equal('accept');
+    });
+});
+
+describe('classifyButtonTextRegex with more button labels', () => {
+    it('matches reject labels', () => {
+        for (const text of [
+            'Disallow cookies',
+            'Do not allow cookies',
+            "Don't allow",
+            'Do not allow any cookies',
+            'Reject cookie',
+            'Proceed with necessary cookies only',
+            'No cookies',
+            'No cookies for me, thanks',
+            'Rather not',
+            'No, rather not',
+            'Ik accepteer geen cookies',
+            'Nee, ik wil geen optimale cookies',
+            'Ik wil geen cookies',
+            'Du kan sige nej tak til statistik',
+            'Avslå',
+            'Avvis alle cookies',
+        ]) {
+            expect(classifyButtonTextRegex(text), text).to.equal('reject');
+        }
+        for (const text of ['Ja, ik accepteer optimale cookies', 'Avslått', 'Tak']) {
+            expect(classifyButtonTextRegex(text), text).to.not.equal('reject');
+        }
+    });
+
+    it('matches acknowledge labels', () => {
+        for (const text of [
+            'Close disclaimer',
+            'Continue browsing',
+            'Continue to Browse the Site',
+            'Poursuivre',
+            'I agree, dismiss this banner',
+            'Ukryj',
+            'Ausblenden',
+            'Ok. Ausblenden.',
+            'Hinweis ausblenden',
+            'Ок',
+            'Окей',
+            '閉じる',
+            '× 閉じる',
+            '確認',
+            '確認しました',
+            '了解',
+            '確認して閉じる',
+        ]) {
+            expect(classifyButtonTextRegex(text), text).to.equal('acknowledge');
+        }
+        for (const text of ['Details ausblenden', '同意して閉じる', '確認して同意する', '確認する']) {
+            expect(classifyButtonTextRegex(text), text).to.not.equal('acknowledge');
+        }
+    });
+
+    it('does not treat policy links as settings', () => {
+        expect(classifyButtonTextRegex('Learn how to manage your preferences on our Privacy page')).to.equal('other');
+        expect(classifyButtonTextRegex('Manage your cookies in our privacy notice')).to.equal('other');
+        expect(classifyButtonTextRegex('Manage your preferences')).to.equal('settings');
+        expect(classifyButtonTextRegex('Manage cookie settings')).to.equal('settings');
     });
 });
 
