@@ -91,7 +91,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // not "je refuse d'…" in a headline
     /je refuse(?! d['’e])/gi,
     /refuser et continuer/gi,
-    /refuser les cookies/gi,
+    /(?:refuser|rejeter) les cookies/gi,
     /seulement nécessaires/gi,
     /je désactive les finalités non essentielles/gi,
     /cookies essentiels uniquement/gi,

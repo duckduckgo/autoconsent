@@ -60,7 +60,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     [" tous les cookies"],
     ["je refuse"],
     ["refuser et continuer"],
-    ["refuser les cookies"],
+    [" les cookies"],
     ["seulement nécessaires"],
     ["je désactive les finalités non essentielles"],
     ["cookies essentiels uniquement"],
