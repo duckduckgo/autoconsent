@@ -16,6 +16,7 @@ export const DE_COOKIE_VERB =
 export const GEBRUIK_VAN_COOKIES = /gebruik.{0,100}van.{0,100}cookies/gi;
 export const USO_DEI_COOKIE = /\b(?:uso|utilizzo) dei cookies?\b/gi;
 export const ANVANDNING_AV_COOKIES = /\b(?:användning|användningen|användandet) av (?:\S+ )?(?:cookies|kakor)\b/gi;
+export const DE_SITE_USES_COOKIES = /\b(?:seite|site)\b.{0,100}\b(?:nutzt|benutzt)\b.{0,100}cookies/gi;
 
 // TODO: check for false positive detections per pattern
 // these patterns are matched against popup-like elements or full document text to detect unknown cookie popups
@@ -79,6 +80,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     { pattern: /\b(?:revoke|withdraw) your consent at any time\b|\beinwilligung jederzeit widerrufen\b/gi, input: 'popup' },
     { pattern: /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi, input: 'popup' },
     { pattern: /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi, input: 'popup' },
+    /\baccept or (?:reject|decline) (?:all |optional |non-essential )?cookies\b/gi,
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
@@ -118,6 +120,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:on utilise|nous utilisons)(?: \S+)? cookies\b/gi,
     /\ben (?:naviguant|poursuivant)\b.{0,100}cookies/gi,
     /(?:en continuant.{0,100}cookie)|(?:cookie.{0,100}en continuant)/gi,
+    /\ben (?:naviguant|poursuivant|continuant)\b.{0,100}confidentialité/gi,
 
     // DE
     /wir.{0,100}verwenden.{0,100}cookies/gi,
@@ -149,13 +152,20 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bzustimmen und weiter\b|\bweiter,? ohne zu (?:akzeptieren|zustimmen)\b/gi,
     /\b(?:einwilligung|zustimmung) (?:zu|zur|in die) (?:\S+ )?cookies\b|\bcookie-(?:zustimmung|einwilligung)\b/gi,
     /\btracking-technologien\b/gi,
+    DE_SITE_USES_COOKIES,
+    // verb before the subject: "Für die Analyse nutzen wir Cookies"
+    /\b(?:verwenden|nutzen|benutzen|setzen) wir\b.{0,100}cookies/gi,
+    /\bwir\b.{0,100}\bsetzen\b.{0,100}cookies/gi,
+    /\bbenutz(?:t|en)\b.{0,100}cookies/gi,
+    /\bdurch die (?:weitere )?nutzung (?:unserer|dieser) (?:webseite|website|seite)\b.{0,100}datenschutz/gi,
     /\bakzeptier\w* (?:du |sie )?(?:die )?verwendung (?:\S+ )?cookies\b/gi,
     /\bmit werbetracking weiterlesen\b|\bweiter mit werbung\b|\bcon tracking e annunci\b/gi,
     // footer lines such as "Diese Website verwendet Cookies. Mehr erfahren" are page text, so popup text only
     { pattern: /(?:unsere|diese)[rs]? (?:web)?(?:seite|site).{0,100}cookies/gi, input: 'popup' },
     /(?:durch die weitere nutzung.{0,100}cookie)|(?:cookie.{0,100}durch die weitere nutzung)/gi,
-    // "Marketing-" and "Tracking-Cookies" are left out: they are also English prose and footer links
     /\b(?:analyse|statistik)-?cookies\b/gi,
+    // "Marketing-" and "Tracking-Cookies" are also English prose and footer links, so popup text only
+    { pattern: /\b(?:marketing|tracking)-?cookies\b/gi, input: 'popup' },
     /\bcookies oder (?:andere|ähnliche)/gi,
 
     // NL
@@ -179,6 +189,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:analytische|functionele|essentiële|noodzakelijke) cookies\b/gi,
     /(?:te blijven gebruiken.{0,100}cookie)|(?:cookie.{0,100}te blijven gebruiken)/gi,
     /cookies.{0,100}beste? (?:mogelijke )?(?:ervaring|gebruikerservaring)/gi,
+    /\b(?:we|wij) (?:gebruiken|plaatsen)\b.{0,100}cookies/gi,
+    /\bgebruiken (?:we|wij) cookies\b/gi,
+    /\bplaatsen van\b.{0,50}cookies/gi,
+    /\bte blijven gebruiken\b.{0,100}privacy/gi,
 
     // Spanish (ES)
     /(si|al) contin[úu]a[sr]?( navegando)?.{0,100} cookie/gi,
@@ -288,6 +302,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bterze parti selezionate\b/gi,
     /\b(?:archiviare|archiviamo|memorizzare|memorizziamo) e\/o (?:accedere|accediamo)\b/gi,
     USO_DEI_COOKIE,
+    // any form of "utilizzare" near "cookie" also matches footer links ("Utilizzo dei cookie"), so popup text only
+    { pattern: /\butilizz\w*\b.{0,30}cookie/gi, input: 'popup' },
+    /\b(?:questo|il nostro) sito\b.{0,100}cookie/gi,
+    /\bcookie\b.{0,30}\btecnologie (?:simili|analoghe)\b/gi,
 
     // Swedish (SV)
     // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"
@@ -299,22 +317,28 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\banvänds (?:\S+ ){0,2}(?:cookies|kakor)\b|\b(?:cookies|kakor)\b.{0,60}\banvänds\b/gi,
     ANVANDNING_AV_COOKIES,
     /\b(?:godkänn|accepter|tillåt)\S* (?:\S+ ){0,4}(?:cookies|kakor)\b|\b(?:cookies|kakor) (?:som )?du tillåter\b/gi,
-    /\b(?:endast|bara|enbart) nödvändiga (?:cookies|kakor)\b|\bavvisa alla\b/gi,
+    // a button or "… nödvändiga kakor", not "endast nödvändiga resurser"
+    /\b(?:endast|bara|enbart) nödvändiga(?: (?:cookies|kakor))?(?![ \t]*[\wåäö])/gi,
+    /\bavvisa alla\b/gi,
     // TCF wording
     /\blagra och\/eller (?:få åtkomst till|komma åt) information\b/gi,
-    /\b(?:dess|våra) partners\b.{0,100}\b(?:cookies|kakor)\b/gi,
+    /\b(?:dess|våra) partners?\b.{0,100}\b(?:cookies|kakor)\b/gi,
+    /\btekniker (?:såsom|som) (?:cookies|kakor)\b/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
     /(?:cookie|クッキー).{0,20}を(?:使用|利用)/gi,
+    // e.g. "閲覧履歴を外部サービスに送信"
+    /(?:閲覧履歴|端末情報|利用者情報).{0,30}を外部(?:サービス|事業者|に|へ)/gi,
 
     // Danish (DA)
     // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
-    /(?:bruger|anvender|benytter) cookies/gi,
+    /\b(?:bruger|anvender|benytter) cookies\b/gi,
 
     // Norwegian (NO)
     // e.g. "vi bruker informasjonskapsler", "kan vi bruke valgfrie informasjonskapsler", "nettstedet bruker cookies"
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
+    /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
 ];
 

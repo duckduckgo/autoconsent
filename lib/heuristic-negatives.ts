@@ -11,6 +11,7 @@ import {
     USO_DEI_COOKIE,
     BY_CONTINUING_PRIVACY,
     DE_COOKIE_VERB,
+    DE_SITE_USES_COOKIES,
     GEBRUIK_VAN_COOKIES,
     USE_OF_COOKIES,
     UTILISATION_DES_COOKIES,
@@ -184,5 +185,11 @@ export const DETECT_CONTEXT_NEGATIVES: ContextNegative[] = [
         appliesTo: [ACCEPTEZ_UTILISATION],
     },
     // the same sentence is also a footer line with only a "learn more" link
-    { name: 'de-cookie-verb-needs-control', unless: NOTICE_CONTROL, lines: [1, 6], input: 'page', appliesTo: [DE_COOKIE_VERB] },
+    {
+        name: 'de-cookie-verb-needs-control',
+        unless: NOTICE_CONTROL,
+        lines: [1, 6],
+        input: 'page',
+        appliesTo: [DE_COOKIE_VERB, DE_SITE_USES_COOKIES],
+    },
 ];
