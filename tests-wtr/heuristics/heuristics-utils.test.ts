@@ -526,6 +526,17 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Cookies akzeptieren')).to.equal('accept');
     });
 
+    it('matches German, Italian and Swedish "I understand" acknowledgements', () => {
+        expect(classifyButtonTextRegex('Ich verstehe')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ho capito')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Jag förstår')).to.equal('acknowledge');
+    });
+
+    it('does not treat Polish subscription links as reject', () => {
+        expect(classifyButtonTextRegex('Zarządzaj subskrypcjami lub z nich zrezygnuj')).to.equal('other');
+        expect(classifyButtonTextRegex('Rezygnuję')).to.equal('reject');
+    });
+
     it('returns other for empty string', () => {
         expect(classifyButtonTextRegex('')).to.equal('other');
     });
