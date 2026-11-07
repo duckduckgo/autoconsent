@@ -170,8 +170,18 @@ describe('checkHeuristicPatterns with Swedish popups', () => {
         }
     });
 
+    it('detects Swedish "read about cookies" links in popups only', () => {
+        // honmedia.se
+        const text =
+            'Cookies och statistik\nHON använder anonymiserad, cookie-fri besöksstatistik.\nTillåt statistik\nEndast nödvändiga\nLäs om cookies';
+        expect(checkHeuristicPatterns(text, 'popup').patterns.length).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns('Läs mer om hur vi använder kakor', 'popup').patterns.length).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns('Om oss\nKontakt\nLäs om cookies', 'page').patterns).to.have.length(0);
+    });
+
     it('does not detect unrelated Swedish text', () => {
         expect(checkHeuristicPatterns('Vi använder svenska råvaror i våra bullar').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Läs mer om våra recept på kakor och bullar', 'popup').patterns).to.have.length(0);
     });
 });
 

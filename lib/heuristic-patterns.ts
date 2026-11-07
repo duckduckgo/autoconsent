@@ -264,6 +264,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // Swedish (SV)
     // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"
     /(?:vi|webbplatsen|webbplats|sajten|sidan)\s+använder.{0,60}(?:cookies|kakor)/gi,
+    // e.g. "läs om cookies", "läs mer om våra kakor"; popup only, as footers link to cookie policies too
+    { pattern: /\bläs (?:mer )?om (?:våra |hur vi använder )?(?:cookies|kakor)\b/gi, input: 'popup' },
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"

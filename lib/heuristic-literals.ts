@@ -201,6 +201,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["terze parti selezionate"],
     ["archiviare","archiviamo","memorizzare","memorizziamo"],
     ["använder"],
+    ["cookies","kakor"],
     ["cookie","クッキー"],
     ["bruger cookies"],
     ["informasjonskapsler","cookies"],
