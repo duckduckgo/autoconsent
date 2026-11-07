@@ -243,6 +243,13 @@ describe('checkHeuristicPatterns with inputs and context negatives', () => {
         expect(checkHeuristicPatterns('Auf dieser Seite werden Cookies verwendet.', 'popup').patterns.length).to.be.greaterThan(0);
     });
 
+    it('detects analytics-only consent popups that do not mention cookies', () => {
+        const popup = 'Optional Google Analytics\nAllow Google Analytics to measure visits, or decline it.\nDecline\nAllow analytics';
+        expect(checkHeuristicPatterns(popup, 'popup').patterns.length).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns(popup, 'page').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Connect Google Analytics to see your traffic.\nConnect', 'popup').patterns).to.have.length(0);
+    });
+
     it('hasHeuristicPatterns agrees with checkHeuristicPatterns on inputs and negatives', () => {
         const texts = ['We accept all major credit cards.', 'Cookies help us.\nAccept all\nReject all', 'Contact\nUse of cookies\nImprint'];
         for (const text of texts) {

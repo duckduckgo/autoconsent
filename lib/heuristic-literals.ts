@@ -41,6 +41,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["continue reading with advertising"," tracking"],
     ["consent and continue"],
     ["store or retrieve information on your browser","stockées dans votre navigateur ou récupérées"],
+    ["analytics"],
     ["utilisons"],
     ["cookies"],
     ["consentement"],

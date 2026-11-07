@@ -65,6 +65,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bconsent and continue\b/gi,
     // preference centres are often in the page but hidden, so popup text only
     { pattern: /\bstore or retrieve information on your browser\b|\bstockées dans votre navigateur ou récupérées\b/gi, input: 'popup' },
+    // analytics-only consent notices that never mention cookies, e.g. "Allow Google Analytics ... or decline it"
+    { pattern: /\b(?:allow|decline|reject) (?:google )?analytics\b/gi, input: 'popup' },
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
