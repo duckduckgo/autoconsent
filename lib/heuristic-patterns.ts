@@ -16,6 +16,7 @@ export const DE_COOKIE_VERB =
 export const GEBRUIK_VAN_COOKIES = /gebruik.{0,100}van.{0,100}cookies/gi;
 export const USO_DEI_COOKIE = /\b(?:uso|utilizzo) dei cookies?\b/gi;
 export const ANVANDNING_AV_COOKIES = /\b(?:användning|användningen|användandet) av (?:\S+ )?(?:cookies|kakor)\b/gi;
+export const DE_THIS_SITE_COOKIES = /\b(?:unsere|diese)[rs]? (?:web)?(?:seite|site)\b.{0,100}cookies/gi;
 export const DE_SITE_USES_COOKIES = /\b(?:seite|site)\b.{0,100}\b(?:nutzt|benutzt)\b.{0,100}cookies/gi;
 
 // TODO: check for false positive detections per pattern
@@ -75,11 +76,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bconsent and continue\b/gi,
     // preference centres are often in the page but hidden, so popup text only
     { pattern: /\bstore or retrieve information on your browser\b|\bstockées dans votre navigateur ou récupérées\b/gi, input: 'popup' },
-    // wording that also appears in policies, footers and newsletter forms, so popup text only
-    { pattern: /\bwe have cookies\b/gi, input: 'popup' },
-    { pattern: /\b(?:revoke|withdraw) your consent at any time\b|\beinwilligung jederzeit widerrufen\b/gi, input: 'popup' },
-    { pattern: /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi, input: 'popup' },
-    { pattern: /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi, input: 'popup' },
+    /\bwe have cookies\b/gi,
+    /\b(?:revoke|withdraw) your consent at any time\b|\beinwilligung jederzeit widerrufen\b/gi,
+    /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi,
+    /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi,
     /\baccept or (?:reject|decline) (?:all |optional |non-essential )?cookies\b/gi,
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
@@ -160,12 +160,11 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bdurch die (?:weitere )?nutzung (?:unserer|dieser) (?:webseite|website|seite)\b.{0,100}datenschutz/gi,
     /\bakzeptier\w* (?:du |sie )?(?:die )?verwendung (?:\S+ )?cookies\b/gi,
     /\bmit werbetracking weiterlesen\b|\bweiter mit werbung\b|\bcon tracking e annunci\b/gi,
-    // footer lines such as "Diese Website verwendet Cookies. Mehr erfahren" are page text, so popup text only
-    { pattern: /(?:unsere|diese)[rs]? (?:web)?(?:seite|site).{0,100}cookies/gi, input: 'popup' },
+    // in page text, a footer line such as "Diese Website verwendet Cookies. Mehr erfahren" needs a consent control nearby (see heuristic-negatives.ts)
+    DE_THIS_SITE_COOKIES,
     /(?:durch die weitere nutzung.{0,100}cookie)|(?:cookie.{0,100}durch die weitere nutzung)/gi,
     /\b(?:analyse|statistik)-?cookies\b/gi,
-    // "Marketing-" and "Tracking-Cookies" are also English prose and footer links, so popup text only
-    { pattern: /\b(?:marketing|tracking)-?cookies\b/gi, input: 'popup' },
+    /\b(?:marketing|tracking)-?cookies\b/gi,
     /\bcookies oder (?:andere|ähnliche)/gi,
 
     // NL
@@ -302,8 +301,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bterze parti selezionate\b/gi,
     /\b(?:archiviare|archiviamo|memorizzare|memorizziamo) e\/o (?:accedere|accediamo)\b/gi,
     USO_DEI_COOKIE,
-    // any form of "utilizzare" near "cookie" also matches footer links ("Utilizzo dei cookie"), so popup text only
-    { pattern: /\butilizz\w*\b.{0,30}cookie/gi, input: 'popup' },
+    /\butilizz\w*\b.{0,30}cookie/gi,
     /\b(?:questo|il nostro) sito\b.{0,100}cookie/gi,
     /\bcookie\b.{0,30}\btecnologie (?:simili|analoghe)\b/gi,
 

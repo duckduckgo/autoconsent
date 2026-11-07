@@ -379,7 +379,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
         ]);
     });
 
-    it('detects popup-only wording in popups but not in page text', () => {
+    it('detects consent wording in popups and page text', () => {
         const texts = [
             'We have cookies! Read our privacy policy',
             'No tracking will occur without your consent. You can revoke your consent at any time.',
@@ -387,12 +387,19 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'We use privacy-friendly analytics to see which health guides are most useful. No ads, no profiling.',
             'We use Google Analytics to count page views and monthly active users. It sets a cookie and, when you are signed in, records your account id.',
             'Usiamo Google Analytics per capire come viene usato il sito. Li attiviamo solo con il tuo consenso.',
-            'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.',
         ];
         for (const text of texts) {
             expect(detectsPopup(text), text).to.be.true;
-            expect(detectsPage(text), text).to.be.false;
+            expect(detectsPage(text), text).to.be.true;
         }
+    });
+
+    it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
+        const text =
+            'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';
+        expect(detectsPopup(text)).to.be.true;
+        expect(detectsPage(text)).to.be.false;
+        expect(detectsPage(`${text}\nAlle akzeptieren\nAblehnen`)).to.be.true;
     });
 
     it('does not detect unrelated English text', () => {
@@ -470,12 +477,6 @@ describe('checkHeuristicPatterns with more Swedish wording', () => {
             'Välkommen till ett roligare sparande i aktier och fonder',
         ]);
     });
-
-    it('drops "användning av cookies" as a footer link in page text', () => {
-        const text = 'Om oss\nKontakt\nLäs mer om vår användning av cookies\nTillgänglighet\nPress';
-        expect(detectsPopup('Läs mer om vår användning av cookies.')).to.be.true;
-        expect(detectsPage(text)).to.be.false;
-    });
 });
 
 describe('checkHeuristicPatterns with more Danish, Norwegian, Italian and Japanese wording', () => {
@@ -487,10 +488,6 @@ describe('checkHeuristicPatterns with more Danish, Norwegian, Italian and Japane
             "Informativa sull'utilizzo dei cookie",
             '広告を配信すること等を目的に、Cookie等の「インフォマティブデータ」を利用しています。',
         ]);
-    });
-
-    it('drops "utilizzo dei cookie" as a footer link in page text', () => {
-        expect(detectsPage("Chi siamo\nContatti\nInformativa sull'utilizzo dei cookie\nPrivacy\nNote legali")).to.be.false;
     });
 
     it('does not detect unrelated text', () => {

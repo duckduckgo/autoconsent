@@ -7,11 +7,10 @@ import {
     HeuristicInput,
     ACCEPTEZ_UTILISATION,
     ACCEPT_ALL,
-    ANVANDNING_AV_COOKIES,
-    USO_DEI_COOKIE,
     BY_CONTINUING_PRIVACY,
     DE_COOKIE_VERB,
     DE_SITE_USES_COOKIES,
+    DE_THIS_SITE_COOKIES,
     GEBRUIK_VAN_COOKIES,
     USE_OF_COOKIES,
     UTILISATION_DES_COOKIES,
@@ -161,14 +160,7 @@ export const DETECT_CONTEXT_NEGATIVES: ContextNegative[] = [
         unless: NOTICE_CONTROL,
         lines: [0, 2],
         input: 'page',
-        appliesTo: [
-            USE_OF_COOKIES,
-            VERWENDUNG_VON_COOKIES,
-            UTILISATION_DES_COOKIES,
-            GEBRUIK_VAN_COOKIES,
-            USO_DEI_COOKIE,
-            ANVANDNING_AV_COOKIES,
-        ],
+        appliesTo: [USE_OF_COOKIES, VERWENDUNG_VON_COOKIES, UTILISATION_DES_COOKIES, GEBRUIK_VAN_COOKIES],
     },
     // "accept all" in prose; case-sensitive since button labels run together in innerText
     {
@@ -190,6 +182,6 @@ export const DETECT_CONTEXT_NEGATIVES: ContextNegative[] = [
         unless: NOTICE_CONTROL,
         lines: [1, 6],
         input: 'page',
-        appliesTo: [DE_COOKIE_VERB, DE_SITE_USES_COOKIES],
+        appliesTo: [DE_COOKIE_VERB, DE_THIS_SITE_COOKIES, DE_SITE_USES_COOKIES],
     },
 ];
