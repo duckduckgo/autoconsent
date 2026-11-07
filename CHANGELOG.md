@@ -1,3 +1,26 @@
+# v18.1.0 (Sat Nov 07 2026)
+
+#### Rules
+
+- Rule update: CPM crawl #830: reverb.com [#2483](https://github.com/duckduckgo/autoconsent/pull/2483) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #1383: lenovo.com [#2480](https://github.com/duckduckgo/autoconsent/pull/2480) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #2621: zoho.com [#2479](https://github.com/duckduckgo/autoconsent/pull/2479) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #951: capcut.com [#2478](https://github.com/duckduckgo/autoconsent/pull/2478) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie Popup on www2.hm.com [#2481](https://github.com/duckduckgo/autoconsent/pull/2481) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #1806: meta.com [#2482](https://github.com/duckduckgo/autoconsent/pull/2482) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on tax.service.gov.uk [#2484](https://github.com/duckduckgo/autoconsent/pull/2484) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### CI / Release Automation
+
+- Pin Node in ddg-release app jobs instead of node-version: current [#2485](https://github.com/duckduckgo/autoconsent/pull/2485) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v18.0.0 (Thu Nov 05 2026)
 
 #### Rules
