@@ -198,6 +198,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["rifiuta e abbonati"],
     ["consenso "],
     [" nostri "],
+    [" google analytics"],
     ["terze parti selezionate"],
     ["archiviare","archiviamo","memorizzare","memorizziamo"],
     ["använder"],

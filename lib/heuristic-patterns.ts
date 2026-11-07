@@ -258,6 +258,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\brifiuta e abbonati\b/gi,
     /\bconsenso (?:all.(?:uso|utilizzo) (?:dei |di )?)?cookies?\b/gi,
     /\b(?:insieme ai|con i) nostri (?:\d+ )?partner\b/gi,
+    // privacy policies also name analytics tools, so popup text only
+    { pattern: /\b(?:usiamo|utilizziamo) google analytics\b/gi, input: 'popup' },
     /\bterze parti selezionate\b/gi,
     /\b(?:archiviare|archiviamo|memorizzare|memorizziamo) e\/o (?:accedere|accediamo)\b/gi,
 

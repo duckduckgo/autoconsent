@@ -155,6 +155,13 @@ describe('checkHeuristicPatterns with Italian popups', () => {
             ).patterns,
         ).to.have.length(0);
     });
+
+    it('detects Italian analytics notices in popups only', () => {
+        const text = 'Usiamo Google Analytics solo per contare le visite. Parte solo se accetti.';
+        expect(checkHeuristicPatterns(text, 'popup').patterns).to.have.length(1);
+        expect(checkHeuristicPatterns(text, 'page').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Usiamo Google Maps per mostrare la sede', 'popup').patterns).to.have.length(0);
+    });
 });
 
 describe('checkHeuristicPatterns with Swedish popups', () => {
