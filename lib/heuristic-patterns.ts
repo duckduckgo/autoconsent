@@ -264,6 +264,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // Swedish (SV)
     // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"
     /(?:vi|webbplatsen|webbplats|sajten|sidan)\s+använder.{0,60}(?:cookies|kakor)/gi,
+    // e.g. "de kakor vi använder har till syfte att ...", "cookies som webbplatsen använder"
+    /(?:cookies|kakor)\s+(?:som\s+)?(?:vi|webbplatsen|webbplats|sajten|sidan)\s+använder/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
