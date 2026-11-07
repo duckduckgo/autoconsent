@@ -6,29 +6,33 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id])"
+            "exists": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/policies/cookies/\"]) div[aria-hidden=\"true\"] + div[role=\"button\"][tabindex=\"0\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id])"
+            "visible": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/policies/cookies/\"]) div[aria-hidden=\"true\"] + div[role=\"button\"][tabindex=\"0\"]"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id])"
+            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/policies/cookies/\"]) div[role=\"button\"][tabindex=\"0\"]:has(+ div[aria-hidden=\"true\"])",
+            "retry": 3,
+            "retryInterval": 500
         },
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id])",
+            "waitForVisible": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/policies/cookies/\"])",
             "check": "none"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id])"
+            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/policies/cookies/\"]) div[aria-hidden=\"true\"] + div[role=\"button\"][tabindex=\"0\"]",
+            "retry": 3,
+            "retryInterval": 500
         },
         {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id])",
+            "waitForVisible": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/policies/cookies/\"])",
             "check": "none"
         }
     ]
