@@ -1,0 +1,37 @@
+{
+    "name": "apollohospitals",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?apollohospitals\\.com/"
+    },
+    "prehideSelectors": ["#popup:has(#consentCheckbox)"],
+    "detectCmp": [
+        {
+            "exists": "#popup #consentCheckbox"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#popup.show #closePopup"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#popup #closePopup"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#popup #consentCheckbox:checked",
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#popup #closePopup"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#popup.show",
+            "check": "none"
+        }
+    ]
+}
