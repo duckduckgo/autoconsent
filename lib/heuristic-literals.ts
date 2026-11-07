@@ -161,6 +161,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["wykorzystują "],
     ["za pomocą plików cookies"],
     ["zgodą my i nasi partnerzy możemy wykorzystywać precyzyjne dane geolokalizacyjne i identyfikację"],
+    ["ciasteczka "],
     ["cookies pròpies i de tercers"],
     ["utilitzem galetes"],
     ["únicament utilitza galetes pròpies amb finalitat tècnica"],

@@ -348,6 +348,23 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Polish popups', () => {
+    it('detects Polish cookie notices', () => {
+        const texts = [
+            'Ciasteczka pokazują mi, co naprawdę pomaga Ci w nauce niemieckiego — i co mam robić lepiej.',
+            'Ciasteczka pomagają nam ulepszać stronę.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text, 'popup').patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect "ciasteczka" in page text or unrelated Polish text', () => {
+        expect(checkHeuristicPatterns('Ciasteczka pomagają poprawić humor po obiedzie.', 'page').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Upiecz ciasteczka z czekoladą', 'popup').patterns).to.have.length(0);
+    });
+});
+
 // excluded as a popup by a whole-text context negative
 const isExcludedPopup = (text: string) => excludedBy(text, 'popup').length > 0;
 
