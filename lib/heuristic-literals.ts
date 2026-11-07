@@ -203,5 +203,6 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["använder"],
     ["cookie","クッキー"],
     ["bruger cookies"],
+    ["anvender","benytter"],
     ["informasjonskapsler","cookies"],
 ];
