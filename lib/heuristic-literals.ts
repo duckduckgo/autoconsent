@@ -141,6 +141,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["instalamos","empleamos"],
     ["cookies","necesitamos usar cookies"],
     [" cookie"],
+    [" technologi"],
     ["używać","używamy"],
     ["cele przetwarzania twoich danych przez zaufanych partnerów iab"],
     ["dzięki "],

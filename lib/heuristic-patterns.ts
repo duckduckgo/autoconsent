@@ -186,6 +186,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     //  wykorzystuje pliki cookie (uses cookies)
     //  Wykorzystujemy informacje w plikach cookie (We use information in cookies)
     /(używamy|stosujemy|stosuje|wykorzystujemy|wykorzyst(uje|ywane))( są)?.{0,20} plik(i|ów|ach) cookie/gi,
+    // e.g. "wykorzystuje technologię cookies" (uses cookie technology)
+    /(używa|używamy|stosuje|stosujemy|wykorzystuje|wykorzystujemy) technologi[eęi] cookie/gi,
     /(używać|używamy).{0,80} (ciasteczek|cookie)/gi,
     /cele przetwarzania twoich danych przez zaufanych partnerów iab/gi,
     /dzięki (plikom cookie|ciasteczkom|cookie)/gi,
