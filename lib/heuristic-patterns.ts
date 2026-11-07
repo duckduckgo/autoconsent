@@ -201,7 +201,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /strona.{0,50} używa (ciasteczek|cookie)/gi,
     /ta strona korzysta z ciasteczek/gi,
     /uzyskujemy dostęp i przechowujemy informacje na urządzeniu/gi,
-    /używa plik[ió]w? cookie/gi,
+    // e.g. "używa niezbędnych plików cookies" (uses necessary cookies)
+    /używa (?:\S+ ){0,2}plik[ió]w? cookie/gi,
     /używamy plików.{0,20}cookie/gi,
     /wykorzystują .{0,100}cookie/gi,
     /za pomocą plików cookies.{0,100} my lub nasi partnerzy/gi,

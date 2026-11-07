@@ -331,6 +331,24 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Polish popups', () => {
+    it('detects Polish cookie notices', () => {
+        const texts = [
+            'Ten serwis używa niezbędnych plików cookies, które pomagają zapewnić jego prawidłowe i bezpieczne działanie.',
+            'Strona używa plików cookie w celach statystycznych.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Polish text', () => {
+        expect(
+            checkHeuristicPatterns('Ten serwis używa nowego systemu do publikacji plików z wynikami egzaminów.').patterns,
+        ).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Norwegian popups', () => {
     it('detects Norwegian cookie notices', () => {
         const texts = [

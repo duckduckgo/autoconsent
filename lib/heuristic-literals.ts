@@ -156,7 +156,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     [" używa "],
     ["ta strona korzysta z ciasteczek"],
     ["uzyskujemy dostęp i przechowujemy informacje na urządzeniu"],
-    ["używa plik"],
+    [" cookie"],
     ["używamy plików"],
     ["wykorzystują "],
     ["za pomocą plików cookies"],
