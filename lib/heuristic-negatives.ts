@@ -9,6 +9,8 @@ import {
     ACCEPT_ALL,
     BY_CONTINUING_PRIVACY,
     DE_COOKIE_VERB,
+    DE_SITE_USES_COOKIES,
+    DE_THIS_SITE_COOKIES,
     GEBRUIK_VAN_COOKIES,
     USE_OF_COOKIES,
     UTILISATION_DES_COOKIES,
@@ -124,6 +126,10 @@ const CONSENT_WORDS =
 const LEGAL_AGREEMENT =
     /\b(?:end[- ]user licen[cs]e agreement|licen[cs]e agreement|limitation of liability|governing law|indemnif\w*|hereunder|disclaimers? of warrant\w*|warrant(?:y|ies) of merchantability)\b/i;
 
+// investor eligibility gates on fund managers' sites: their accept/decline confirms investor status, not cookies
+const INVESTOR_GATE =
+    /\beligible\s+counterpart(?:y|ies)\b|\bnot\s+(?:suitable|intended)\s+for\s+retail\s+(?:clients|investors)\b|\bconfirm\w*\s+(?:that\s+)?(?:you\s+are|i\s+am)\s+an?\s+(?:(?:professional|institutional|qualified|accredited|sophisticated)\s+(?:investor|client)|financial\s+(?:intermediary|advis[eo]r))\b/i;
+
 // drop single matches whose context shows the text isn't a consent notice, or whole popups that aren't one
 export const DETECT_CONTEXT_NEGATIVES: ContextNegative[] = [
     // popups with their own age confirmation are age gates, even when they mention cookies; a bare accept doesn't count
@@ -131,6 +137,8 @@ export const DETECT_CONTEXT_NEGATIVES: ContextNegative[] = [
     { name: 'age-gate-popup', pattern: AGE_WORDING, unless: ageGateUnless(COOKIE_CHOICE_RE), whole: true, input: 'popup' },
     // a license or terms agreement may mention cookies, and its decline button must not be clicked as a cookie reject
     { name: 'legal-agreement', pattern: LEGAL_AGREEMENT, whole: true, input: 'popup' },
+    // an investor eligibility gate may mention cookies, and its decline button must not be clicked as a cookie reject
+    { name: 'investor-gate', pattern: INVESTOR_GATE, whole: true, input: 'popup' },
     // page text next to an age gate, unless a consent control is there too
     { name: 'age-gate', pattern: AGE_WORDING, unless: ageGateUnless(NOTICE_CONTROL), lines: [4, 5], input: 'page' },
     // terms of use need cookie or consent wording; a privacy-policy-only notice needs that or a button
@@ -169,5 +177,11 @@ export const DETECT_CONTEXT_NEGATIVES: ContextNegative[] = [
         appliesTo: [ACCEPTEZ_UTILISATION],
     },
     // the same sentence is also a footer line with only a "learn more" link
-    { name: 'de-cookie-verb-needs-control', unless: NOTICE_CONTROL, lines: [1, 6], input: 'page', appliesTo: [DE_COOKIE_VERB] },
+    {
+        name: 'de-cookie-verb-needs-control',
+        unless: NOTICE_CONTROL,
+        lines: [1, 6],
+        input: 'page',
+        appliesTo: [DE_COOKIE_VERB, DE_THIS_SITE_COOKIES, DE_SITE_USES_COOKIES],
+    },
 ];
