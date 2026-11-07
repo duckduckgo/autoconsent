@@ -1,0 +1,27 @@
+{
+    "name": "storeden",
+    "vendorUrl": "https://www.storeden.com/",
+    "comment": "Storeden fork of orestbida/cookieconsent v2; hidden when navigator.webdriver is set (hide_from_bots)",
+    "prehideSelectors": ["#scb--main"],
+    "detectCmp": [{ "exists": "#scb--main" }],
+    "detectPopup": [{ "visible": "html.show--consent #scb--main #cm, html.show--settings #scb--main #s-cnt" }],
+    "optIn": [{ "waitForThenClick": "#scb--main #s-all-bn" }],
+    "optOut": [
+        {
+            "if": { "exists": "#scb--main #c-x-bn" },
+            "then": [{ "waitForThenClick": "#scb--main #c-x-bn" }],
+            "else": [
+                {
+                    "if": { "exists": "#scb--main #s-rall-bn" },
+                    "then": [{ "waitForThenClick": "#scb--main #s-rall-bn" }],
+                    "else": [
+                        { "waitForThenClick": "#scb--main #c-s-bn" },
+                        { "click": "#scb--main #s-bl input.c-tgl:checked:not(:disabled)", "all": true, "optional": true },
+                        { "waitForThenClick": "#scb--main #s-sv-bn" }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "sbc_cookie_approval=" }]
+}
