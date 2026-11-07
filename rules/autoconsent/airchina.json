@@ -1,0 +1,63 @@
+{
+    "name": "airchina",
+    "vendorUrl": "https://www.airchina.com/",
+    "prehideSelectors": ["#cookie-notice-popin"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-notice-popin[style] #denyCookieButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-notice-popin #denyCookieButton"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#cookie-notice-popin #allCookieButton:not(.active)"
+            },
+            "then": [
+                {
+                    "click": "#cookie-notice-popin #allCookieButton"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#cookie-notice-popin #saveSelection"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ".cav2_notifications #cookie-button"
+            },
+            "then": [
+                {
+                    "click": ".cav2_notifications #cookie-button"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#cookie-notice-popin #denyCookieButton:not(.active)"
+            },
+            "then": [
+                {
+                    "click": "#cookie-notice-popin #denyCookieButton"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#cookie-notice-popin #saveSelection"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "EnableGA=false"
+        },
+        {
+            "cookieContains": "EnableFacebook=false"
+        }
+    ]
+}
