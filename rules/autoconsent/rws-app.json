@@ -1,0 +1,13 @@
+{
+    "name": "rws-app",
+    "prehideSelectors": [".rws-app > .cookie-modal"],
+    "detectCmp": [{ "exists": ".rws-app > .cookie-modal" }],
+    "detectPopup": [{ "visible": ".rws-app > .cookie-modal" }],
+    "optIn": [{ "waitForThenClick": ".rws-app > .cookie-modal .buttons button:first-child" }],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class, 'rws-app')]/div[contains(@class, 'cookie-modal')]//div[contains(@class, 'buttons')]//button[contains(normalize-space(.), 'nödvändiga')]"
+        }
+    ],
+    "test": [{ "cookieContains": "cookiesApproved=%5B%22REQUIRED%22%5D" }]
+}
