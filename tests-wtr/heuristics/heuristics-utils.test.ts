@@ -348,6 +348,19 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Polish popups', () => {
+    it('detects Polish Google Analytics consent notices in popups only', () => {
+        const text =
+            'Używamy Google Analytics, by wiedzieć, z których funkcji wyszukiwarki korzystasz. Bez zgody - tylko anonimowe statystyki bez cookies.';
+        expect(checkHeuristicPatterns(text, 'popup').patterns.length).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns(text, 'page').patterns).to.have.length(0);
+    });
+
+    it('does not detect unrelated Polish text', () => {
+        expect(checkHeuristicPatterns('Google Analytics to narzędzie do analizy ruchu na stronie', 'popup').patterns).to.have.length(0);
+    });
+});
+
 // excluded as a popup by a whole-text context negative
 const isExcludedPopup = (text: string) => excludedBy(text, 'popup').length > 0;
 

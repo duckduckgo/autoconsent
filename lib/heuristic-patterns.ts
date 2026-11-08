@@ -206,6 +206,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /wykorzystują .{0,100}cookie/gi,
     /za pomocą plików cookies.{0,100} my lub nasi partnerzy/gi,
     /zgodą my i nasi partnerzy możemy wykorzystywać precyzyjne dane geolokalizacyjne i identyfikację/gi,
+    // privacy policies also name Google Analytics, so popup text only
+    { pattern: /\b(?:używamy|stosujemy|wykorzystujemy) (?:narzędzia |usługi )?google analytics\b/gi, input: 'popup' },
 
     // Catalan (CA)
     /cookies pròpies i de tercers/gi,
