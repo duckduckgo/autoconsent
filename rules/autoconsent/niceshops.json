@@ -3,8 +3,8 @@
     "vendorUrl": "https://www.niceshops.com/",
     "prehideSelectors": ["form.tc-banner"],
     "detectCmp": [{ "exists": "form.tc-banner button[name='tracking_command'][value='deny_all']" }],
-    "detectPopup": [{ "visible": "form.tc-banner button[name='tracking_command'][value='deny_all']" }],
-    "optIn": [{ "waitForThenClick": "form.tc-banner button[name='tracking_command'][value='consent_all']" }],
-    "optOut": [{ "waitForThenClick": "form.tc-banner button[name='tracking_command'][value='deny_all']" }],
+    "detectPopup": [{ "visible": "form.tc-banner.tc-banner--active button[name='tracking_command'][value='deny_all']" }],
+    "optIn": [{ "waitForThenClick": "form.tc-banner.tc-banner--active button[name='tracking_command'][value='consent_all']" }],
+    "optOut": [{ "waitForThenClick": "form.tc-banner.tc-banner--active button[name='tracking_command'][value='deny_all']" }],
     "test": [{ "wait": 500 }, { "cookieContains": "cnstinf=marketing%3D0" }]
 }
