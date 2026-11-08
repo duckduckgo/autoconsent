@@ -1,0 +1,43 @@
+{
+    "name": "cookie-consent-by-you",
+    "prehideSelectors": ["#ccby-wrapper .cmplz-cookiebanner"],
+    "detectCmp": [{ "exists": "#ccby-wrapper .cmplz-cookiebanner" }],
+    "detectPopup": [
+        {
+            "comment": "while WP Rocket delays the plugin script, the banner only shows after a user interaction",
+            "any": [
+                { "visible": "#ccby-wrapper .cmplz-cookiebanner" },
+                { "exists": "script[type=rocketlazyloadscript][data-rocket-src*=ccby-script]" }
+            ]
+        },
+        { "comment": "the banner stays in the DOM after a choice is saved", "cookieContains": "ccby_consent=", "negated": true }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": "script[type=rocketlazyloadscript][data-rocket-src*=ccby-script]" },
+            "then": [{ "eval": "EVAL_WP_ROCKET_RUN_DELAYED_SCRIPTS" }]
+        },
+        { "waitFor": "#ccby-wrapper .cmplz-cookiebanner.show", "timeout": 10000 },
+        { "waitForThenClick": "#ccby-wrapper .cmplz-accept" }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "script[type=rocketlazyloadscript][data-rocket-src*=ccby-script]" },
+            "then": [{ "eval": "EVAL_WP_ROCKET_RUN_DELAYED_SCRIPTS" }]
+        },
+        {
+            "comment": "the plugin adds .show once its click handlers are attached",
+            "waitFor": "#ccby-wrapper .cmplz-cookiebanner.show",
+            "timeout": 10000
+        },
+        { "waitForThenClick": "#ccby-wrapper .cmplz-deny" },
+        {
+            "comment": "WP Rocket may replay the click later",
+            "waitForVisible": "#ccby-wrapper .cmplz-cookiebanner",
+            "check": "none",
+            "timeout": 3000,
+            "optional": true
+        }
+    ],
+    "test": [{ "cookieContains": "%22denied%22%3Atrue" }]
+}

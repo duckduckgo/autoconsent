@@ -298,6 +298,12 @@ export const snippets = {
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
     EVAL_WBD_LTP_CLOSE: () => document.querySelector('dialog#ltp-dialog').close() || true,
+    // WP Rocket runs delayed scripts only after a user interaction (v2 ignores the first mousemove)
+    EVAL_WP_ROCKET_RUN_DELAYED_SCRIPTS: () => {
+        window.dispatchEvent(new Event('mousemove'));
+        window.dispatchEvent(new Event('mousemove'));
+        return true;
+    },
     EVAL_ZOHO_TEST: () => localStorage.getItem('zglobal_Acookie_optOut') === '3',
 };
 
