@@ -53,6 +53,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bstoring of cookies\b|\bplaced cookies\b/gi,
     /\b(?:store|stores) and access (?:data|information) on your device\b|\baccess and store (?:data|information) on your device\b/gi,
     /\bwe use (?:\S+ ){1,4}cookies\b/gi,
+    /\bwe only use (?:\S+ ){0,3}cookies\b/gi,
     // US privacy notices: opt-out sentences, not the footer link labels
     /\byou (?:can|may) opt[- ]out of (?:the |this )?(?:sale|sharing|use|selling)\b/gi,
     /\b(?:if you wish to|to) opt[- ]out of the sale\b/gi,
@@ -311,6 +312,8 @@ const REJECT_PATTERNS_ENGLISH = [
 
     'no',
     /^no,? thank(s| you)$/is,
+    // e.g. "no cookies", "no cookies for me, thanks"
+    /^no,?\s+cookies(\s+for\s+me)?(,?\s+thank(s| you))?$/is,
     /^opt[ -]out$/is,
     'dont enable',
     'i do not agree',

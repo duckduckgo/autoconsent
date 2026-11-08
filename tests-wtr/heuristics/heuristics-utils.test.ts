@@ -100,6 +100,14 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
         }
     });
 
+    it('detects "we only use <qualifier> cookies" notices', () => {
+        const texts = ['We only use (freshly baked) cookies to improve your user experience.', 'We only use essential cookies'];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+        expect(checkHeuristicPatterns('We only use butter and flour in our homemade cookies').patterns).to.have.length(0);
+    });
+
     it('does not match when "cookies" is further away', () => {
         expect(
             checkHeuristicPatterns('We use the best chocolate in our cookies', undefined, {
