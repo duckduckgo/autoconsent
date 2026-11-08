@@ -11,6 +11,7 @@ generateCMPTests(
         'https://www.discovery.com/',
         'https://bleacherreport.com/',
         'https://bleacherreport.com/nba',
+        'https://www.adultswim.com/videos',
     ],
     {
         // shown only in some US states

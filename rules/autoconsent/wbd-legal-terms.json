@@ -1,7 +1,7 @@
 {
     "name": "wbd-legal-terms",
     "vendorUrl": "https://www.wbd.com/",
-    "comment": "Terms-and-cookies notice with only an Agree button. The <dialog> variant is modal, so hiding it with CSS leaves the page inert; close it without submitting the form instead. The MUI modal variant cannot be dismissed, so it is hidden. Sweepstakes pages only load their entry form (ngxFrame embed) after Agree, so the rule skips them to keep the popup available.",
+    "comment": "Terms-and-cookies notice with only an Agree button. The <dialog> variant is modal, so hiding it with CSS leaves the page inert; close it without submitting the form instead. When the dialog is opened non-modally, the page makes #__next inert and locks body scrolling, which the close snippet undoes. The MUI modal variant cannot be dismissed, so it is hidden. Sweepstakes pages only load their entry form (ngxFrame embed) after Agree, so the rule skips them to keep the popup available.",
     "cosmetic": true,
     "minimumRuleStepVersion": 2,
     "detectCmp": [

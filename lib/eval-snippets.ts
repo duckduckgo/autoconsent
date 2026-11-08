@@ -297,7 +297,18 @@ export const snippets = {
     EVAL_USERCENTRICS_BUTTON_0: () =>
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
-    EVAL_WBD_LTP_CLOSE: () => document.querySelector('dialog#ltp-dialog').close() || true,
+    EVAL_WBD_LTP_CLOSE: () => {
+        const dialog = document.querySelector('dialog#ltp-dialog');
+        const isModal = dialog.matches(':modal');
+        dialog.close();
+        if (!isModal) {
+            // the non-modal variant makes the page inert and locks scrolling by hand
+            const page = document.getElementById('__next');
+            if (page) page.inert = false;
+            if (document.body.style.overflow === 'hidden') document.body.style.overflow = '';
+        }
+        return true;
+    },
     EVAL_ZOHO_TEST: () => localStorage.getItem('zglobal_Acookie_optOut') === '3',
 };
 
