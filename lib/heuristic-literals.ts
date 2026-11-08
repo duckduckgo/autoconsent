@@ -147,6 +147,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     [" plików cookie"],
     ["korzystamy z technologii, takich jak pliki cookie"],
     ["korzystamy"],
+    ["korzystamy z ciasteczek"],
     ["niektóre pliki cookies"],
     ["pliki cookies i pokrewne im technologie umożliwiają poprawne działanie strony i pomagają nam dostosować ofertę do twoich potrzeb"],
     ["przechowywanie informacji na urządzeniu lub dostęp do nich"],

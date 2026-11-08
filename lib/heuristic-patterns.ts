@@ -192,6 +192,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /korzysta.{0,80} plików cookie/gi,
     /korzystamy z technologii, takich jak pliki cookie/gi,
     /korzystamy.{0,50} cookies/gi,
+    /korzystamy z ciasteczek/gi,
     /niektóre pliki cookies/gi,
     /pliki cookies i pokrewne im technologie umożliwiają poprawne działanie strony i pomagają nam dostosować ofertę do twoich potrzeb/gi,
     /przechowywanie informacji na urządzeniu lub dostęp do nich/gi,
