@@ -9,7 +9,8 @@
     "prehideSelectors": [".cc-cookies"],
     "detectCmp": [
         {
-            "exists": ".cc-cookies .cc-cookie-accept"
+            "visible": ".cc-cookies .cc-cookie-accept",
+            "check": "any"
         }
     ],
     "detectPopup": [

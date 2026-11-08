@@ -2,7 +2,7 @@ import generateCMPTests from '../playwright/runner';
 
 generateCMPTests(
     'click.io',
-    ['https://www.propertywire.com/', 'https://pedsovet.su/', 'https://golftoday.co.uk/', 'https://www.golfshake.com/'],
+    ['https://www.treccani.it/', 'https://www.dizy.com/', 'https://www.golfshake.com/', 'https://www.lasicilia.it/'],
     {
         skipRegions: ['US'],
     },
