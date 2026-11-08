@@ -1,0 +1,37 @@
+{
+    "name": "hoepli.it",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?hoepli\\.it/"
+    },
+    "prehideSelectors": [".alertcookie"],
+    "detectCmp": [
+        {
+            "exists": ".alertcookie a[href*='GestioneCookie.aspx']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".alertcookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".alertcookie a.chiudi"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "closing the banner keeps only technical cookies; the reject link navigates to the settings page",
+            "waitForThenClick": ".alertcookie a.close[href^='javascript']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "alertCookie=1"
+        },
+        {
+            "cookieContains": "chkCookieFunz",
+            "negated": true
+        }
+    ]
+}
