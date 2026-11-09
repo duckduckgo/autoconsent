@@ -6,33 +6,39 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/policies/cookies/\"]) div[aria-hidden=\"true\"] + div[role=\"button\"][tabindex=\"0\"]"
+            "exists": "[role=\"dialog\"]:has(a[href*=\"/policies/cookies/\"]) div[aria-hidden=\"true\"] + div[role=\"button\"][tabindex=\"0\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/policies/cookies/\"]) div[aria-hidden=\"true\"] + div[role=\"button\"][tabindex=\"0\"]"
+            "visible": "[role=\"dialog\"]:has(a[href*=\"/policies/cookies/\"]) div[aria-hidden=\"true\"] + div[role=\"button\"][tabindex=\"0\"]"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/policies/cookies/\"]) div[role=\"button\"][tabindex=\"0\"]:has(+ div[aria-hidden=\"true\"])",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "[role=\"dialog\"]:has(a[href*=\"/policies/cookies/\"]) div[role=\"button\"][tabindex=\"0\"]:has(+ div[aria-hidden=\"true\"])",
             "retry": 3,
             "retryInterval": 500
         },
         {
-            "waitForVisible": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/policies/cookies/\"])",
+            "waitForVisible": "[role=\"dialog\"]:has(a[href*=\"/policies/cookies/\"])",
             "check": "none"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/policies/cookies/\"]) div[aria-hidden=\"true\"] + div[role=\"button\"][tabindex=\"0\"]",
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "[role=\"dialog\"]:has(a[href*=\"/policies/cookies/\"]) div[aria-hidden=\"true\"] + div[role=\"button\"][tabindex=\"0\"]",
             "retry": 3,
             "retryInterval": 500
         },
         {
-            "waitForVisible": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/policies/cookies/\"])",
+            "waitForVisible": "[role=\"dialog\"]:has(a[href*=\"/policies/cookies/\"])",
             "check": "none"
         }
     ]
