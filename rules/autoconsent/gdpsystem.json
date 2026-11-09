@@ -1,0 +1,21 @@
+{
+    "name": "gdpsystem",
+    "vendorUrl": "https://www.gdpsystem.rzetelnagrupa.pl/",
+    "prehideSelectors": ["#__pb-cookie"],
+    "detectCmp": [{ "exists": "#__pb #__pb-cookie" }],
+    "detectPopup": [{ "visible": "#__pb-cookie.display" }],
+    "optIn": [{ "waitForThenClick": "#__pb-cookie .__pb-cookie_button_accept" }],
+    "optOut": [
+        {
+            "if": { "exists": "#__pb-cookie .__pb-cookie_button_only_necessary" },
+            "then": [{ "waitForThenClick": "#__pb-cookie .__pb-cookie_button_only_necessary" }],
+            "else": [
+                { "waitForThenClick": "#__pb-cookie .__pb-cookie_button_settings" },
+                { "waitForVisible": "#__pb-settings" },
+                { "click": "#__pb-settings input.form-check-input:checked", "all": true, "optional": true },
+                { "waitForThenClick": "#__pb-settings .__pb-cookie_button_accept" }
+            ]
+        }
+    ],
+    "test": [{ "waitForVisible": "#__pb-cookie.display", "check": "none" }]
+}
