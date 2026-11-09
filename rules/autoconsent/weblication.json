@@ -1,0 +1,38 @@
+{
+    "name": "weblication",
+    "vendorUrl": "https://www.weblication.de/",
+    "prehideSelectors": ["#cookieNotice"],
+    "detectCmp": [
+        {
+            "exists": "#cookieNotice #cookieNoticeDeclineCloser"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieNotice"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieNoticeAcceptCloser"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#cookieNotice #cookiesTracking:checked" },
+            "then": [{ "click": "#cookieNotice #cookiesTracking" }]
+        },
+        {
+            "if": { "exists": "#cookieNotice #loadExternRessources:checked" },
+            "then": [{ "click": "#cookieNotice #loadExternRessources" }]
+        },
+        {
+            "waitForThenClick": "#cookieNoticeDeclineCloser"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "allowTracking=0"
+        }
+    ]
+}
