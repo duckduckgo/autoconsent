@@ -1,0 +1,37 @@
+{
+    "name": "sda-it",
+    "vendorUrl": "https://www.sda.it/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?sda\\.it/"
+    },
+    "prehideSelectors": ["#content-alert-cookie"],
+    "detectCmp": [
+        {
+            "exists": "#content-alert-cookie #truste-consent-required2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#content-alert-cookie #truste-consent-required2"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#content-alert-cookie #truste-consent-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#content-alert-cookie #truste-consent-required2"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_pi_accept=permit 1"
+        },
+        {
+            "cookieContains": "cookie_pi_accept=permit 1,2",
+            "negated": true
+        }
+    ]
+}
