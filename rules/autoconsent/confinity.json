@@ -1,0 +1,87 @@
+{
+    "name": "confinity",
+    "vendorUrl": "https://www.confinity.com/",
+    "minimumRuleStepVersion": 2,
+    "prehideSelectors": ["[data-cfy-consent-banner]:not([data-cfy-consent-checkboxes-only])"],
+    "detectCmp": [
+        {
+            "exists": "[data-cfy-consent-banner]:not([data-cfy-consent-checkboxes-only]) [data-cfy-consent-accept-button]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-cfy-consent-banner]:not([data-cfy-consent-checkboxes-only])",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "click": "[data-cfy-consent-banner] input[type=checkbox][data-cfy-consent-category]:not(:checked):not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[data-cfy-consent-banner] [data-cfy-consent-accept-button]"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "[data-cfy-consent-banner] input[type=checkbox][data-cfy-consent-category]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "[data-cfy-consent-banner] :has(> input[type=checkbox][data-cfy-consent-category]:checked:not([disabled]))",
+            "all": true,
+            "optional": true
+        },
+        {
+            "exists": "[data-cfy-consent-banner] input[type=checkbox][data-cfy-consent-category]:checked:not([disabled])",
+            "negated": true
+        },
+        {
+            "waitForThenClick": "[data-cfy-consent-banner] [data-cfy-consent-accept-button]",
+            "retry": 5,
+            "retryInterval": 1000
+        },
+        {
+            "waitForVisible": "[data-cfy-consent-banner]:not([data-cfy-consent-checkboxes-only])",
+            "check": "none",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": "[data-cfy-consent-banner]:not([data-cfy-consent-checkboxes-only])",
+                "check": "any"
+            },
+            "then": [
+                {
+                    "click": "[data-cfy-consent-banner] [data-cfy-consent-accept-button]"
+                },
+                {
+                    "waitForVisible": "[data-cfy-consent-banner]:not([data-cfy-consent-checkboxes-only])",
+                    "check": "none",
+                    "timeout": 5000
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "body.modal-open:not(:has(.modal.show))"
+            },
+            "then": [
+                {
+                    "removeClass": "modal-open",
+                    "selector": "body",
+                    "optional": true
+                },
+                {
+                    "addStyle": "overflow: auto",
+                    "selector": "body",
+                    "optional": true
+                }
+            ]
+        }
+    ]
+}
