@@ -571,6 +571,11 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
     });
 
+    it('matches Japanese acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('閉じる')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('同意して閉じる')).not.to.equal('acknowledge');
+    });
+
     it('matches Danish reject buttons', () => {
         expect(classifyButtonTextRegex('Nej tak')).to.equal('reject');
         expect(classifyButtonTextRegex('Nej, tak')).to.equal('reject');
