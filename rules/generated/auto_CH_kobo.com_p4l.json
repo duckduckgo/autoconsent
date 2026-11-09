@@ -10,31 +10,29 @@
         "urlPattern": "^https?://(www\\.)?kobo\\.com/"
     },
     "prehideSelectors": [],
-    "detectCmp": [
-        {
-            "exists": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria491930105-\\:r29\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]"
-        }
-    ],
-    "detectPopup": [
-        {
-            "visible": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria491930105-\\:r29\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]"
-        }
-    ],
+    "detectCmp": [{ "exists": "[data-testid='privacy-banner'] [data-testid^='privacy-banner-decline-all-btn']" }],
+    "detectPopup": [{ "visible": "[data-testid='privacy-banner']" }],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria491930105-\\:r29\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]",
-            "comment": "Decline"
+            "if": { "visible": "[data-testid='privacy-banner-decline-all-btn-desktop']" },
+            "then": [
+                {
+                    "waitForThenClick": "[data-testid='privacy-banner-decline-all-btn-desktop']",
+                    "retry": 10,
+                    "retryInterval": 1000,
+                    "comment": "Decline"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "[data-testid='privacy-banner-decline-all-btn-mobile']",
+                    "retry": 10,
+                    "retryInterval": 1000,
+                    "comment": "Decline"
+                }
+            ]
         }
     ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id])[data-testid=\"privacy-banner\"] > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#react-aria491930105-\\:r29\\:[data-testid=\"privacy-banner-decline-all-btn-desktop\"]",
-            "timeout": 1000,
-            "check": "none"
-        }
-    ]
+    "test": [{ "waitForVisible": "[data-testid='privacy-banner']", "timeout": 2000, "check": "none" }]
 }

@@ -179,6 +179,11 @@ export const snippets = {
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
     EVAL_KROWN_COOKIE_BANNER_TEST: () => localStorage.getItem('krown-cookie-banner') === 'true',
+    // the decline handler listens for mouseup/touchend, which element.click() does not dispatch
+    EVAL_LETHPOLYTECH_DECLINE: () =>
+        document
+            .querySelector('.consent-banner .cookie-decline')
+            .dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window })) || true,
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]

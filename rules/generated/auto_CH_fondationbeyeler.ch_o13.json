@@ -10,31 +10,17 @@
         "urlPattern": "^https?://(www\\.)?fondationbeyeler\\.ch/"
     },
     "prehideSelectors": [],
-    "detectCmp": [
-        {
-            "exists": "body > div:not([id]) > div:nth-child(1)#ccm-widget > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
-        }
-    ],
-    "detectPopup": [
-        {
-            "visible": "body > div:not([id]) > div:nth-child(1)#ccm-widget > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
-        }
-    ],
+    "detectCmp": [{ "exists": "[role='dialog'] input[name='cookieConsent']" }],
+    "detectPopup": [{ "visible": "[role='dialog'] button[type='submit']" }, { "exists": "[role='dialog'] input[name='cookieConsent']" }],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
+            "click": "[role='dialog'] button[role='checkbox'][data-state='checked']:not([data-disabled])",
+            "all": true,
+            "optional": true,
+            "comment": "untick optional categories (Statistik is unticked by default)"
         },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#ccm-widget > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
-            "comment": "NUR NOTWENDIGE"
-        }
+        { "waitForThenClick": "[role='dialog'] button[type='submit']", "comment": "Auswahl bestätigen" }
     ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#ccm-widget > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
-            "timeout": 1000,
-            "check": "none"
-        }
-    ]
+    "test": [{ "waitForVisible": "[role='dialog'] input[name='cookieConsent']", "timeout": 2000, "check": "none" }]
 }

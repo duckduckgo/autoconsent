@@ -1,22 +1,37 @@
 {
     "name": "strato.de",
-    "prehideSelectors": [".consent__wrapper"],
+    "prehideSelectors": ["#cookie_initial_modal"],
     "runContext": {
         "urlPattern": "^https://www\\.strato\\.de/"
     },
-    "detectCmp": [{ "exists": ".consent" }],
-    "detectPopup": [{ "visible": ".consent" }],
+    "detectCmp": [{ "exists": "#cookie_initial_modal #jss_open_settings_modal" }],
+    "detectPopup": [{ "visible": "#cookie_initial_modal" }],
     "optIn": [
         {
-            "click": "button.consentAgree"
+            "waitForThenClick": "#cookie_initial_modal #jss_consent_all_initial_modal"
         }
     ],
     "optOut": [
         {
-            "click": "button.consentSettings"
+            "waitForThenClick": "#cookie_initial_modal #jss_open_settings_modal"
         },
         {
-            "waitForThenClick": "button#consentSubmit"
+            "waitForVisible": "#cookie_settings_modal"
+        },
+        {
+            "click": "#cookie_settings_modal input.check-all:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#cookie_settings_modal #jss_consent_checked"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie_initial_modal, #cookie_settings_modal",
+            "check": "none",
+            "timeout": 2000
         }
     ]
 }

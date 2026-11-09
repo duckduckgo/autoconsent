@@ -10,31 +10,16 @@
         "urlPattern": "^https?://(www\\.)?edumoov\\.com/"
     },
     "prehideSelectors": [],
-    "detectCmp": [
-        {
-            "exists": "body > div#cookie-message > a:nth-child(2):not([id])"
-        }
-    ],
-    "detectPopup": [
-        {
-            "visible": "body > div#cookie-message > a:nth-child(2):not([id])"
-        }
-    ],
+    "detectCmp": [{ "exists": "#cookie-message #close-cookie-message" }],
+    "detectPopup": [{ "visible": "#cookie-message #close-cookie-message" }],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookie-message > a:nth-child(2):not([id])",
-            "comment": "refuser ce cookie"
+            "waitForThenClick": "#cookie-message #close-cookie-message",
+            "retry": 10,
+            "retryInterval": 1000,
+            "comment": "Fermer: the 'refuser ce cookie' link only opens the legal page"
         }
     ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookie-message > a:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
-        }
-    ]
+    "test": [{ "waitForVisible": "#cookie-message", "timeout": 2000, "check": "none" }]
 }

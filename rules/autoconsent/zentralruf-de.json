@@ -3,13 +3,26 @@
     "runContext": {
         "urlPattern": "^https://(www\\.)?zentralruf\\.de"
     },
-    "prehideSelectors": ["#cookie_modal_wrapper"],
-    "detectCmp": [{ "exists": "#cookie_modal_wrapper" }],
-    "detectPopup": [{ "visible": "#cookie_modal_wrapper" }],
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#gdvdl-cookie-consent-dialog-content-button-auswahl-button" }],
+    "detectPopup": [{ "visible": "#gdvdl-cookie-consent-dialog-content-button-auswahl-button" }],
     "optIn": [
         {
-            "waitForThenClick": "#cookie_modal_wrapper #cookie_modal_button_consent_all"
+            "waitForThenClick": "#gdvdl-cookie-consent-dialog-content-button-alle-button"
         }
     ],
-    "optOut": [{ "waitForThenClick": "#cookie_modal_wrapper #cookie_modal_button_choose" }]
+    "optOut": [
+        {
+            "click": "#gdvdl-cookie-consent-dialog-tracking-cookies-checkbox-checkbox-input:checked",
+            "optional": true
+        },
+        { "waitForThenClick": "#gdvdl-cookie-consent-dialog-content-button-auswahl-button", "comment": "Auswahl speichern" }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#gdvdl-cookie-consent-dialog-content-button-auswahl-button",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
 }
