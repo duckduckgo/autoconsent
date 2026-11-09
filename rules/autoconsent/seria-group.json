@@ -1,0 +1,35 @@
+{
+    "name": "seria-group",
+    "vendorUrl": "https://www.seria-group.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?seria-group\\.com/"
+    },
+    "prehideSelectors": [".l-cookie.js-cookie"],
+    "detectCmp": [
+        {
+            "exists": ".l-cookie.js-cookie button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".l-cookie.js-cookie.is-show"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".l-cookie.js-cookie button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".l-cookie.js-cookie"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".l-cookie.js-cookie",
+            "check": "none"
+        }
+    ]
+}
