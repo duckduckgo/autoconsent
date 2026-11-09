@@ -1,25 +1,24 @@
 {
     "name": "pabcogypsum",
-    "vendorUrl": "https://unknown",
-    "prehideSelectors": [".js-cookie-notice:has(#cookie_settings-form)"],
-    "detectCmp": [
-        {
-            "exists": ".js-cookie-notice #cookie_settings-form"
-        }
-    ],
-    "detectPopup": [
-        {
-            "visible": ".js-cookie-notice #cookie_settings-form"
-        }
-    ],
+    "vendorUrl": "https://pabcogypsum.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?pabcogypsum\\.com/"
+    },
+    "prehideSelectors": [".js-data-prefs-dialog"],
+    "detectCmp": [{ "exists": ".js-data-prefs-dialog #data-prefs-form" }],
+    "detectPopup": [{ "visible": ".js-data-prefs-dialog #data-prefs-form" }],
     "optIn": [
-        {
-            "waitForThenClick": ".js-cookie-notice button[value=allow]"
-        }
+        { "click": "#data-prefs-form input.toggle:not(:checked) + label.toggle-label", "all": true, "optional": true },
+        { "waitForThenClick": "#data-prefs-form button[type=submit][value=save]" }
     ],
     "optOut": [
-        {
-            "waitForThenClick": ".js-cookie-notice button[value=disable]"
-        }
+        { "waitForVisible": "#data-prefs-form button[type=submit][value=save]" },
+        { "click": "#data-prefs-form input.toggle:checked + label.toggle-label", "all": true, "optional": true },
+        { "waitForThenClick": "#data-prefs-form button[type=submit][value=save]" }
+    ],
+    "test": [
+        { "cookieContains": "allowed_cookies_analytics=0" },
+        { "cookieContains": "allowed_cookies_functional=0" },
+        { "cookieContains": "allowed_cookies_targeting=0" }
     ]
 }
