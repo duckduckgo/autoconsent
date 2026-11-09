@@ -121,6 +121,12 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\ben (?:naviguant|poursuivant)\b.{0,100}cookies/gi,
     /(?:en continuant.{0,100}cookie)|(?:cookie.{0,100}en continuant)/gi,
     /\ben (?:naviguant|poursuivant|continuant)\b.{0,100}confidentialité/gi,
+    // notices for consent-exempt audience cookies; policy pages use the same wording, so popup text only
+    {
+        pattern:
+            /\bcookies exemptés de consentement\b|\b(?:cookies|traceurs) (?:\S+ ){0,4}peuvent être déposés sur votre (?:navigateur|terminal|appareil)\b/gi,
+        input: 'popup',
+    },
 
     // DE
     /wir.{0,100}verwenden.{0,100}cookies/gi,

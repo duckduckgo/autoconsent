@@ -84,6 +84,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["naviguant","poursuivant"],
     [],
     ["confidentialité"],
+    ["cookies exemptés de consentement","peuvent être déposés sur votre "],
     ["verwenden"],
     ["partner"],
     ["zugriff auf informationen auf"],

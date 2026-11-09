@@ -431,12 +431,15 @@ describe('checkHeuristicPatterns with more French, German, Dutch, Polish and Rus
             'Strona wykorzystuje pliki "cookies" w celach statystycznych.',
             'Обрабатываем cookie, чтобы сделать сайт удобнее. Продолжая использовать сайт, вы соглашаетесь на их обработку.',
             'Сайт обрабатывает пользовательские данные с использованием файлов, сохраняемых в браузере пользователя, в соответствии с Условиями.',
+            "Afin de pouvoir mesurer l'audience de ce site, des cookies exemptés de consentement peuvent être déposés sur votre navigateur.",
+            'Des cookies de mesure d’audience peuvent être déposés sur votre terminal.',
         ]);
     });
 
     it('does not detect unrelated text', () => {
         expectNotDetected([
             'On utilise du beurre dans nos cookies',
+            'Des cookies au chocolat peuvent être déposés sur votre table.',
             'Analyse der Marketing-Strategie',
             'Durch die Nutzung unserer Webseite finden Sie schnell die neuesten Tests.',
         ]);
