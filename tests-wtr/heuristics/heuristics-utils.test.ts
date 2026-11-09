@@ -632,6 +632,17 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Сохранить и закрыть')).to.equal('acknowledge');
     });
 
+    it('matches Japanese acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('確認')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('確認しました')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('了解しました')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('承知しました')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('わかりました')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('閉じる')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('詳細を確認')).to.equal('other');
+        expect(classifyButtonTextRegex('Cookieについての詳細を見る')).to.equal('other');
+    });
+
     it('matches Catalan acknowledge buttons', () => {
         expect(classifyButtonTextRegex('Entenc')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Ho entenc')).to.equal('acknowledge');
