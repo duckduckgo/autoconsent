@@ -1,0 +1,35 @@
+{
+    "name": "spankbang",
+    "vendorUrl": "https://spankbang.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?spankbang\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent[data-testid=cookie-consent-banner]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent[data-testid=cookie-consent-banner]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent [data-testid=accept-all-cookies]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-consent button[\\@click*=setEssentialCookie]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie-consent[data-testid=cookie-consent-banner]",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

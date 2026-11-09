@@ -1,0 +1,32 @@
+{
+    "name": "bzga-matomo",
+    "vendorUrl": "https://www.bioeg.de/",
+    "prehideSelectors": ["#ww_bzga_matomo_cookiebanner"],
+    "detectCmp": [
+        {
+            "exists": "#ww_bzga_matomo_cookiebanner .button-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#ww_bzga_matomo_cookiebanner .button-deny"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#ww_bzga_matomo_cookiebanner .button-allow"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#ww_bzga_matomo_cookiebanner .button-deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#ww_bzga_matomo_cookiebanner .button-deny",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

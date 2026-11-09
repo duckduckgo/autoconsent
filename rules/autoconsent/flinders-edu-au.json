@@ -1,0 +1,35 @@
+{
+    "name": "flinders-edu-au",
+    "vendorUrl": "https://www.flinders.edu.au/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?flinders\\.edu\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#gdpr_notification_container #gdpr_reject_button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gdpr_notification_container #gdpr_reject_button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr_notification_container #gdpr_accept_button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gdpr_notification_container #gdpr_reject_button"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#gdpr_notification_container #gdpr_reject_button",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

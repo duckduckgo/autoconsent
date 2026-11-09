@@ -173,6 +173,8 @@ export const snippets = {
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
+    // Zero while the embedding page still keeps the consent iframe collapsed.
+    EVAL_IFRAME_SHOWN: () => window.innerHeight > 0,
     EVAL_IUBENDA_0: () =>
         document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach((x) => {
             if (x.checked) x.click();
@@ -273,6 +275,21 @@ export const snippets = {
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
+    // Same handler the banner buttons call; which button refuses differs per template.
+    EVAL_TRUSTCOMMANDER_BANNER_SHOWN: () => {
+        const wrapper = document.getElementById('tc-privacy-wrapper');
+        return !!wrapper && getComputedStyle(wrapper).visibility !== 'hidden';
+    },
+    EVAL_TRUSTCOMMANDER_OPTIN: () => {
+        if (typeof window.tC?.privacy?.clickBanner !== 'function') return false;
+        window.tC.privacy.clickBanner('optin');
+        return true;
+    },
+    EVAL_TRUSTCOMMANDER_OPTOUT: () => {
+        if (typeof window.tC?.privacy?.clickBanner !== 'function') return false;
+        window.tC.privacy.clickBanner('optout');
+        return true;
+    },
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
     EVAL_USERCENTRICS_API_1: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_2: () => !!UC_UI.denyAllConsents(),

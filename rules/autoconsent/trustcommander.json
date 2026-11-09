@@ -1,0 +1,36 @@
+{
+    "name": "trustcommander",
+    "vendorUrl": "https://www.commandersact.com/en/solutions/trustcommander/",
+    "prehideSelectors": ["#tc-privacy-wrapper"],
+    "detectCmp": [
+        {
+            "exists": "#tc-privacy-wrapper > [id$=_tc_privacy]"
+        },
+        {
+            "eval": "EVAL_TRUSTCOMMANDER_BANNER_SHOWN",
+            "comment": "some sites hide the TrustCommander banner and show their own dialog instead"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#tc-privacy-wrapper > [id$=_tc_privacy]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "eval": "EVAL_TRUSTCOMMANDER_OPTIN"
+        }
+    ],
+    "optOut": [
+        {
+            "eval": "EVAL_TRUSTCOMMANDER_OPTOUT",
+            "comment": "the refuse button's position and label differ per template, so use the banner's own optout action"
+        },
+        {
+            "waitForVisible": "#tc-privacy-wrapper > [id$=_tc_privacy]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

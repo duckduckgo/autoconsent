@@ -1,0 +1,48 @@
+{
+    "name": "dropbox",
+    "vendorUrl": "https://www.dropbox.com/",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://www\\.dropbox\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#ccpa_consent_banner #decline_cookies_button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#ccpa_consent_banner #decline_cookies_button"
+        },
+        {
+            "eval": "EVAL_IFRAME_SHOWN",
+            "comment": "the banner frame first renders at zero height and is reset when the page shows it"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#ccpa_consent_banner #accept_all_cookies_button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#ccpa_consent_banner #decline_cookies_button"
+        },
+        {
+            "wait": 1000,
+            "comment": "the page can show the banner frame again right after the first click"
+        },
+        {
+            "if": {
+                "visible": "#ccpa_consent_banner #decline_cookies_button"
+            },
+            "then": [
+                {
+                    "click": "#ccpa_consent_banner #decline_cookies_button"
+                }
+            ]
+        }
+    ]
+}
