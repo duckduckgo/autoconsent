@@ -181,6 +181,7 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
             '当サイトはサービス改善のためCookieを使用しています。',
             '当ウェブサイトではクッキーを利用しています',
             'このサイトはクッキー（Cookie）を使用しています',
+            '当サービスでは、提携先等が利用者のニーズの調査・分析や広告表示の最適化を目的とし、Cookie等を使用する場合があります。',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -630,6 +631,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Сохранить настройки')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Сохранить выбор')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Сохранить и закрыть')).to.equal('acknowledge');
+    });
+
+    it('matches Japanese acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('閉じる')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('とじる')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('同意して閉じる')).not.to.equal('acknowledge');
     });
 
     it('matches Catalan acknowledge buttons', () => {
