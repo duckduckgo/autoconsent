@@ -24,12 +24,32 @@
                     ],
                     "else": [
                         {
-                            "if": { "exists": ".cc-dismiss" },
-                            "then": [{ "click": ".cc-dismiss" }],
+                            "if": { "exists": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"] input.cc-cookie-checkbox" },
+                            "then": [
+                                {
+                                    "if": {
+                                        "exists": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"] input.cc-cookie-checkbox:not([readonly]):checked"
+                                    },
+                                    "then": [
+                                        {
+                                            "click": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"] input.cc-cookie-checkbox:not([readonly]):checked",
+                                            "all": true
+                                        },
+                                        { "wait": 1000 }
+                                    ]
+                                },
+                                { "click": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"] .cc-allow" }
+                            ],
                             "else": [
-                                { "click": ".cmp-pref-link" },
-                                { "waitForThenClick": ".cmp-body [id*=rejectAll]" },
-                                { "waitForThenClick": ".cmp-body .cmp-save-btn" }
+                                {
+                                    "if": { "exists": ".cc-dismiss" },
+                                    "then": [{ "click": ".cc-dismiss" }],
+                                    "else": [
+                                        { "click": ".cmp-pref-link" },
+                                        { "waitForThenClick": ".cmp-body [id*=rejectAll]" },
+                                        { "waitForThenClick": ".cmp-body .cmp-save-btn" }
+                                    ]
+                                }
                             ]
                         }
                     ]

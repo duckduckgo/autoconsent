@@ -11,6 +11,9 @@ generateCMPTests(
         'https://www.rogercastillo.org/',
         // Securiti flavor: no reject button, opt out via the preference center
         'https://www.jbhunt.com/',
+        // Joomla GDPR plugin flavor: hidden deny button, opt out by accepting only the selected (unchecked) categories
+        'https://hpguiden.se/',
+        'https://www.wsc.ac.uk/',
     ],
     {},
 );
