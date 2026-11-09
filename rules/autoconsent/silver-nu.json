@@ -1,0 +1,31 @@
+{
+    "name": "silver.nu",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?silver\\.nu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "xpath///body/div[span/a[contains(@href, 'cookie-policy')]]/button" }],
+    "detectPopup": [{ "visible": "xpath///body/div[span/a[contains(@href, 'cookie-policy')]]/button" }],
+    "optIn": [{ "waitForThenClick": "xpath///body/div[span/a[contains(@href, 'cookie-policy')]]/button[normalize-space(.)='Acceptera']" }],
+    "optOut": [
+        { "waitForThenClick": "xpath///body/div[span/a[contains(@href, 'cookie-policy')]]/button[normalize-space(.)='Endast nödvändiga']" },
+        {
+            "comment": "the site also loads a Funding Choices notice after its own banner",
+            "waitFor": ".fc-consent-root",
+            "timeout": 5000,
+            "optional": true
+        },
+        {
+            "if": { "exists": ".fc-consent-root" },
+            "then": [
+                {
+                    "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                    "then": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }]
+                },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "cookieconsent_dismissed=dismissed" }]
+}
