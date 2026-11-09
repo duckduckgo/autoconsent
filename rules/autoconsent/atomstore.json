@@ -1,0 +1,44 @@
+{
+    "name": "atomstore",
+    "vendorUrl": "https://www.atomstore.pl/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#RodoCookiesInfoFirst", "#RodoCookiesInit"],
+    "detectCmp": [
+        {
+            "exists": "#RodoCookiesInfoFirst [data-type=\"disable-cookies-button\"], #RodoCookiesInit [data-type=\"disable-cookies-button\"], #RodoCookiesInfo [data-type=\"disable-cookies-button\"]"
+        }
+    ],
+    "detectPopup": [{ "visible": "#RodoCookiesInfoFirst.in, #RodoCookiesInit.in, #RodoCookiesInfo.in", "check": "any" }],
+    "optIn": [
+        {
+            "if": { "exists": "#RodoCookiesInfoFirst.in" },
+            "then": [{ "waitForThenClick": "#RodoCookiesInfoFirst [data-type=\"accept-cookies-button\"]" }],
+            "else": [
+                {
+                    "if": { "exists": "#RodoCookiesInit.in" },
+                    "then": [{ "waitForThenClick": "#RodoCookiesInit [data-type=\"accept-cookies-button\"]" }],
+                    "else": [{ "waitForThenClick": "#RodoCookiesInfo [data-type=\"accept-cookies-button\"]" }]
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#RodoCookiesInfoFirst.in" },
+            "then": [{ "waitForThenClick": "#RodoCookiesInfoFirst [data-type=\"disable-cookies-button\"]" }],
+            "else": [
+                {
+                    "if": { "exists": "#RodoCookiesInit.in" },
+                    "then": [{ "waitForThenClick": "#RodoCookiesInit [data-type=\"disable-cookies-button\"]" }],
+                    "else": [{ "waitForThenClick": "#RodoCookiesInfo [data-type=\"disable-cookies-button\"]" }]
+                }
+            ]
+        },
+        { "waitForVisible": "#RodoCookiesInfoFirst.in, #RodoCookiesInit.in, #RodoCookiesInfo.in", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "AtomStore[MARKETING_COOKIES_ACCEPTED]=0" }]
+}
