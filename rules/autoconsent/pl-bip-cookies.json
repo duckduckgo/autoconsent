@@ -1,0 +1,25 @@
+{
+    "name": "pl-bip-cookies",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookies:has(> button.close > span.visuallyhidden)"],
+    "detectCmp": [
+        {
+            "exists": "#cookies > button.close > span.visuallyhidden"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies > button.close"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookies"
+        }
+    ]
+}
