@@ -1,0 +1,17 @@
+{
+    "name": "archambault",
+    "vendorUrl": "https://www.archambault.ca/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?archambault\\.ca/"
+    },
+    "prehideSelectors": ["#cookie-banner-container", "#cookie-consent-detail-container"],
+    "detectCmp": [{ "exists": "#cookie-banner-container .first_preferences_btn" }],
+    "detectPopup": [{ "visible": "#cookie-banner-container" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner-container .accpt_tout_btn" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-banner-container .first_preferences_btn" },
+        { "waitForVisible": "#cookie-consent-detail-container .save_user_preferences_btn" },
+        { "click": "#cookie-consent-detail-container input[type=checkbox]:checked", "all": true, "optional": true },
+        { "click": "#cookie-consent-detail-container .save_user_preferences_btn" }
+    ]
+}
