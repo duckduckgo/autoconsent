@@ -1,0 +1,25 @@
+{
+    "name": "cookie-box-pp-accepted",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookie-box:has(#cookie_box_accept_button)"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-box #cookie_box_accept_button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-box:has(#cookie_box_accept_button)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_box_accept_button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookie-box"
+        }
+    ]
+}
