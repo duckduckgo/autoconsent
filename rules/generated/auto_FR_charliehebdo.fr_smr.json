@@ -10,31 +10,20 @@
         "urlPattern": "^https?://(www\\.)?charliehebdo\\.fr/"
     },
     "prehideSelectors": [],
-    "detectCmp": [
-        {
-            "exists": "body > div#cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#reject-cookies"
-        }
-    ],
-    "detectPopup": [
-        {
-            "visible": "body > div#cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#reject-cookies"
-        }
-    ],
-    "optIn": [],
+    "detectCmp": [{ "exists": "#cookie-banner #cookie-see-more" }],
+    "detectPopup": [{ "visible": "#cookie-banner .cookie-banner.visible #cookie-see-more" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner .accept-cookies" }],
     "optOut": [
+        { "waitForThenClick": "#cookie-banner #cookie-see-more", "comment": "AFFICHER PLUS DE CHOIX" },
         {
-            "wait": 500
+            "any": [
+                { "waitForVisible": "#cookie-choices-modal .reject-cookies", "timeout": 2000 },
+                { "click": "#cookie-banner #cookie-see-more" }
+            ],
+            "comment": "the first click can land before the handler is attached"
         },
-        {
-            "waitForThenClick": "body > div#cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#reject-cookies",
-            "comment": "REFUSER TOUS LES COOKIES"
-        }
+        { "waitForVisible": "#cookie-choices-modal .reject-cookies" },
+        { "click": "#cookie-choices-modal .reject-cookies", "comment": "REFUSER TOUS LES COOKIES" }
     ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookie-banner > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#reject-cookies",
-            "timeout": 1000,
-            "check": "none"
-        }
-    ]
+    "test": [{ "waitForVisible": "#cookie-banner .cookie-banner.visible", "timeout": 2000, "check": "none" }]
 }

@@ -10,31 +10,9 @@
         "urlPattern": "^https?://(www\\.)?effenaar\\.nl/"
     },
     "prehideSelectors": [],
-    "detectCmp": [
-        {
-            "exists": "body > div#__next > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(8):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
-        }
-    ],
-    "detectPopup": [
-        {
-            "visible": "body > div#__next > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(8):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
-        }
-    ],
-    "optIn": [],
-    "optOut": [
-        {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#__next > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(8):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Nee, bedankt"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#__next > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(8):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
-        }
-    ]
+    "detectCmp": [{ "exists": "#__next button.button-yes + button.button-no" }],
+    "detectPopup": [{ "visible": "#__next button.button-yes + button.button-no" }],
+    "optIn": [{ "waitForThenClick": "#__next button.button-yes" }],
+    "optOut": [{ "waitForThenClick": "#__next button.button-yes + button.button-no", "comment": "Nee, bedankt" }],
+    "test": [{ "waitForVisible": "#__next button.button-yes + button.button-no", "timeout": 2000, "check": "none" }]
 }

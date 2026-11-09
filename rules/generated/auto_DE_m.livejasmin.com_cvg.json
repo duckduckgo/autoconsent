@@ -7,33 +7,55 @@
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?livejasmin\\.com/"
+        "urlPattern": "^https?://(www\\.|m\\.)?livejasmin\\.com/"
     },
     "prehideSelectors": [],
-    "detectCmp": [
-        {
-            "exists": "body > div#consent_modal[data-testid=\"Over18ModalVariant1Modal\"] > div:nth-child(2):not([id])[data-testid=\"Over18ModalVariant1Content\"] > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#reject-all-cookies-btn"
-        }
-    ],
+    "detectCmp": [{ "exists": "#consent_modal .over-18__manage-cookies-link, #legalAgreementModal [data-test-id='manage-cookies']" }],
     "detectPopup": [
         {
-            "visible": "body > div#consent_modal[data-testid=\"Over18ModalVariant1Modal\"] > div:nth-child(2):not([id])[data-testid=\"Over18ModalVariant1Content\"] > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#reject-all-cookies-btn"
+            "visible": "#consent_modal .over-18__manage-cookies-link, #legalAgreementModal.open [data-test-id='manage-cookies']",
+            "check": "any"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#consent_modal[data-testid=\"Over18ModalVariant1Modal\"] > div:nth-child(2):not([id])[data-testid=\"Over18ModalVariant1Content\"] > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#reject-all-cookies-btn",
-            "comment": "Reject All"
+            "if": { "exists": "#consent_modal .over-18__manage-cookies-link" },
+            "then": [
+                {
+                    "waitForThenClick": "#consent_modal .over-18__manage-cookies-link",
+                    "retry": 10,
+                    "retryInterval": 1000,
+                    "comment": "Manage or reject Cookies"
+                },
+                { "waitForVisible": "[data-testid='PrivacyPreferenceCenterWithConsentCookieContent']" },
+                {
+                    "click": "[data-testid='PrivacyPreferenceCenterWithConsentCookieContent'] input[data-testid='PrivacyPreferenceCenterWithConsentCookieSwitch']:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "xpath/(//*[@data-testid='PrivacyPreferenceCenterWithConsentCookieContent']//button[@data-testid='ButtonStyledButton'])[last()]",
+                    "comment": "Confirm My Choices"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#legalAgreementModal [data-test-id='manage-cookies']",
+                    "retry": 10,
+                    "retryInterval": 1000,
+                    "comment": "Manage or reject Cookies"
+                },
+                { "waitForVisible": "#ManageCookies [data-test-id='confirm-my-choices']", "timeout": 10000 },
+                { "click": "#ManageCookies input[type='checkbox']:checked:not([disabled])", "all": true, "optional": true },
+                { "waitForThenClick": "#ManageCookies [data-test-id='confirm-my-choices']", "comment": "Confirm My Choices" }
+            ]
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#consent_modal[data-testid=\"Over18ModalVariant1Modal\"] > div:nth-child(2):not([id])[data-testid=\"Over18ModalVariant1Content\"] > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#reject-all-cookies-btn",
-            "timeout": 1000,
+            "waitForVisible": "[data-testid='PrivacyPreferenceCenterWithConsentCookieContent'], #legalAgreementModal.open, #ManageCookies [data-test-id='confirm-my-choices']",
+            "timeout": 2000,
             "check": "none"
         }
     ]

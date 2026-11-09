@@ -10,31 +10,24 @@
         "urlPattern": "^https?://(www\\.)?onestream\\.co\\.uk/"
     },
     "prehideSelectors": [],
-    "detectCmp": [
-        {
-            "exists": "body > aside#cookies-policy > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(1):not([id]) > button:nth-child(2):not([id])"
-        }
-    ],
-    "detectPopup": [
-        {
-            "visible": "body > aside#cookies-policy > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(1):not([id]) > button:nth-child(2):not([id])"
-        }
-    ],
-    "optIn": [],
+    "detectCmp": [{ "exists": "#cookies-policy form.cookies__customize" }],
+    "detectPopup": [{ "visible": "#cookies-policy .cookies__btn--customize" }],
+    "optIn": [{ "waitForThenClick": "#cookies-policy form[data-cookie-action='accept.all'] button" }],
     "optOut": [
+        { "waitForThenClick": "#cookies-policy .cookies__btn--customize", "comment": "Customize" },
+        { "waitForVisible": "#cookies-policy form.cookies__customize .cookiesBtn__link" },
         {
-            "wait": 500
+            "click": "#cookies-policy form.cookies__customize input[type='checkbox']:checked:not([value='essentials'])",
+            "all": true,
+            "optional": true
         },
         {
-            "waitForThenClick": "body > aside#cookies-policy > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(1):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Only essentials"
-        }
+            "waitForThenClick": "#cookies-policy form.cookies__customize .cookiesBtn__link",
+            "retry": 10,
+            "retryInterval": 1000,
+            "comment": "Save settings"
+        },
+        { "waitForVisible": "#cookies-policy", "check": "none", "timeout": 5000 }
     ],
-    "test": [
-        {
-            "waitForVisible": "body > aside#cookies-policy > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form:nth-child(1):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
-        }
-    ]
+    "test": [{ "waitForVisible": "#cookies-policy", "timeout": 2000, "check": "none" }]
 }

@@ -10,31 +10,9 @@
         "urlPattern": "^https?://(www\\.)?kathmandu\\.nl/"
     },
     "prehideSelectors": [],
-    "detectCmp": [
-        {
-            "exists": "body > div#cookiebanner > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#cookie-niet-akkoord"
-        }
-    ],
-    "detectPopup": [
-        {
-            "visible": "body > div#cookiebanner > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#cookie-niet-akkoord"
-        }
-    ],
-    "optIn": [],
-    "optOut": [
-        {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookiebanner > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#cookie-niet-akkoord",
-            "comment": "weigeren"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookiebanner > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > span:nth-child(2):not([id]) > a:nth-child(2)#cookie-niet-akkoord",
-            "timeout": 1000,
-            "check": "none"
-        }
-    ]
+    "detectCmp": [{ "exists": "#cookie_monster [onclick*='CookieMonster.denyAll']" }],
+    "detectPopup": [{ "visible": "#cookie_monster.is-show [onclick*='CookieMonster.denyAll']" }],
+    "optIn": [{ "waitForThenClick": "#cookie_monster [onclick*='CookieMonster.grantAll']" }],
+    "optOut": [{ "waitForThenClick": "#cookie_monster [onclick*='CookieMonster.denyAll']", "comment": "Weigeren" }],
+    "test": [{ "waitForVisible": "#cookie_monster.is-show", "timeout": 2000, "check": "none" }]
 }
