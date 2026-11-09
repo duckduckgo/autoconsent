@@ -3,7 +3,7 @@
     "vendorUrl": "https://www.rt.com/",
     "cosmetic": true,
     "runContext": {
-        "urlPattern": "^https://(www\\.)?rt\\.com/"
+        "urlPattern": "^https://(www\\.)?(rt\\.com|rt-english\\.com)/"
     },
     "prehideSelectors": [".cookies-banner-shown"],
     "detectCmp": [
