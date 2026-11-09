@@ -1,0 +1,44 @@
+{
+    "name": "podrozepoeuropie.pl",
+    "vendorUrl": "https://www.podrozepoeuropie.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?podrozepoeuropie\\.pl/"
+    },
+    "prehideSelectors": ["#__next > div.content-baseline.fixed"],
+    "detectCmp": [
+        {
+            "any": [{ "exists": "#__next > div.content-baseline.fixed a[href*='polityka-prywatnosci']" }, { "exists": ".fc-consent-root" }]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [{ "visible": "#__next > div.content-baseline.fixed" }, { "visible": ".fc-consent-root .fc-dialog-container" }]
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "visible": "#__next > div.content-baseline.fixed > button" },
+            "then": [{ "click": "#__next > div.content-baseline.fixed > button" }]
+        },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 2000, "optional": true },
+        {
+            "if": { "visible": ".fc-consent-root .fc-cta-consent" },
+            "then": [{ "click": ".fc-consent-root .fc-cta-consent" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": "#__next > div.content-baseline.fixed > button" },
+            "then": [{ "click": "#__next > div.content-baseline.fixed > button" }]
+        },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 2000, "optional": true },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ]
+}
