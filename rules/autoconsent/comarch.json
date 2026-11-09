@@ -1,0 +1,14 @@
+{
+    "name": "comarch",
+    "vendorUrl": "https://www.comarch.com/",
+    "cosmetic": false,
+    "prehideSelectors": ["[data-component=\"cookie-info-app\"] [data-component=\"consent-modal\"]"],
+    "detectCmp": [{ "exists": "[data-component=\"cookie-info-app\"] [data-component=\"consent-modal\"]" }],
+    "detectPopup": [{ "visible": "[data-component=\"consent-modal\"].visible .consent-modal__general-btn" }],
+    "optIn": [{ "waitForThenClick": "[data-component=\"consent-modal\"] .consent-modal__general-btn > button:nth-child(1)" }],
+    "optOut": [
+        { "waitForThenClick": "[data-component=\"consent-modal\"] .consent-modal__general-btn > button:nth-child(2)" },
+        { "waitForThenClick": "[data-component=\"consent-modal\"] .consent-modal__details-btn > button:nth-child(3)" }
+    ],
+    "test": [{ "eval": "EVAL_COMARCH_TEST" }]
+}

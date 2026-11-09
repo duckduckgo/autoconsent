@@ -118,6 +118,11 @@ export const snippets = {
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,
+    // the first approval group is the required category
+    EVAL_COMARCH_TEST: () =>
+        JSON.parse(localStorage.getItem('cookie_consent2'))
+            .approval.slice(1)
+            .every((a) => !a.value),
     // the close icon is an SVG, which has no click() method
     EVAL_COOKIE_POPUP_CLOSE: () =>
         document.querySelector('#cookie-popup #close-cookies').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
