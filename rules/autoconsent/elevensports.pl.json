@@ -1,0 +1,12 @@
+{
+    "name": "elevensports.pl",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?elevensports\\.pl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "xpath///button[normalize-space(.)='Nie, przejdź do serwisu']" }],
+    "detectPopup": [{ "visible": "xpath///button[normalize-space(.)='Nie, przejdź do serwisu']" }],
+    "optIn": [{ "waitForThenClick": "xpath///button[normalize-space(.)='Tak, przejdź do serwisu']", "retry": 10, "retryInterval": 500 }],
+    "optOut": [{ "waitForThenClick": "xpath///button[normalize-space(.)='Nie, przejdź do serwisu']", "retry": 10, "retryInterval": 500 }],
+    "test": [{ "cookieContains": "rodo-modal-displayed=1" }]
+}

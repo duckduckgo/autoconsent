@@ -512,7 +512,7 @@ const REJECT_PATTERNS_POLISH = [
 
     // refusals
     /nie (akceptuję|zgadzam|wyrażam zgody|wyrażaj zgody|zezwalaj|potwierdzam)/is,
-    /^nie(,?\s+(dziękuję|nie zgadzam.*))?$/is,
+    /^nie(,?\s+(dziękuję|nie zgadzam.*|przejdź do serwisu))?$/is,
 
     'niezbędne',
     'niezbędne pliki cookie',
@@ -895,6 +895,7 @@ export const ACCEPT_PATTERNS = [
     'tak',
     'tak, zgadzam się na wszystkie pliki cookie',
     'tak, zgadzam się',
+    'tak, przejdź do serwisu',
     'wyraź zgodę na wszystko',
     'wyrażam zgodę na wszystkie',
     'wyrażam zgodę',
