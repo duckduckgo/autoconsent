@@ -1,0 +1,12 @@
+{
+    "name": "ipkobiznes.pl",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?ipkobiznes\\.pl/"
+    },
+    "prehideSelectors": ["#layout div:has(> div > div > span > button[title='EXT_COOKIE_POLICY'])"],
+    "detectCmp": [{ "exists": "#layout div:has(> div > div > span > button[title='EXT_COOKIE_POLICY'])" }],
+    "detectPopup": [{ "visible": "#layout div:has(> div > div > span > button[title='EXT_COOKIE_POLICY'])" }],
+    "optIn": [{ "waitForThenClick": "#layout div:has(> span > button[title='EXT_COOKIE_POLICY']) + div button" }],
+    "optOut": [{ "waitForThenClick": "#layout div:has(> span > button[title='EXT_COOKIE_POLICY']) + div button" }],
+    "test": [{ "cookieContains": "pkobp-cookie-policy=true" }]
+}
