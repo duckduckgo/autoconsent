@@ -94,6 +94,7 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
             'We serve necessary cookies only',
             'We use Google Analytics cookies to understand which pages and tools are useful.',
             'We use third party cookies for advertising',
+            'Tibber uses four types of cookies as described below.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -106,6 +107,7 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
                 patterns: [/we (?:use|serve)(?: \w+){0,2} cookies/gi],
             }).patterns,
         ).to.have.length(0);
+        expect(checkHeuristicPatterns('The shop uses flour, sugar and butter in its cookies').patterns).to.have.length(0);
     });
 });
 
