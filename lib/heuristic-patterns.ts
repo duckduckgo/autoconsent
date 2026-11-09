@@ -502,8 +502,8 @@ const REJECT_PATTERNS_POLISH = [
     // odrzuć / odrzucam / odmawiam / rezygnuję / blokuj wszystkie (reject verbs)
     /odrzu(ć|cam|cenie|cać|canie|cić)|odmaw|odmowa|odmów|rezygnuj|blokuj wszystk/is,
 
-    // (accept) only necessary / required
-    /(^|\s)tylko\s+(bezwzględnie\s+)?(niezbędn\w*|wymagan\w*|konieczne)/is,
+    // (accept) only necessary / required / technical
+    /(^|\s)tylko\s+(bezwzględnie\s+)?((pliki\s+)?cookies?\s+)?(niezbędn\w*|wymagan\w*|konieczne|techniczn\w*)/is,
     /(akceptuj|akceptuję|zaakceptuj|zatwierdź|potwierdzam|zezwól)\s+(tylko\s+)?(na\s+)?(niezbędn\w*|wymagan\w*|konieczne)/is,
     /korzystaj wyłącznie z niezbędn/is,
 
