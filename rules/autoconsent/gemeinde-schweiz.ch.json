@@ -1,0 +1,42 @@
+{
+    "name": "gemeinde-schweiz.ch",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?gemeinde-schweiz\\.ch/"
+    },
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner #cookie-settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner #cookie-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-banner #cookie-settings"
+        },
+        {
+            "waitForVisible": "#cookie-modal"
+        },
+        {
+            "click": "#cookie-modal #analytics-checkbox:checked",
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#cookie-modal #save-preferences"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_GEMEINDE_SCHWEIZ_TEST"
+        }
+    ]
+}
