@@ -28,7 +28,7 @@
                     "then": [
                         { "click": "#ct-ultimate-gdpr-cookie-change-settings" },
                         {
-                            "waitForThenClick": "#ct-ultimate-gdpr-cookie-modal-slider-form input[type=radio][value=\"1\"], #ct-ultimate-gdpr-cookie-modal-slider-form input[type=radio][value=\"2\"]"
+                            "waitForThenClick": "#ct-ultimate-gdpr-cookie-modal-slider-form input[type=radio][value=\"1\"], #ct-ultimate-gdpr-cookie-modal-slider-form input[type=radio][value=\"2\"], .ct-ultimate-gdpr-cookie-modal-single input[type=radio][value=\"1\"]"
                         },
                         { "click": "#ct-ultimate-gdpr-cookie-modal-body .save" }
                     ],
