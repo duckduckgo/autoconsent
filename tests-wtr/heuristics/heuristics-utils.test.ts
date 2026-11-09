@@ -568,7 +568,11 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('同意しない')).to.equal('reject');
         expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
         expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
+        expect(classifyButtonTextRegex('必須のみ')).to.equal('reject');
+        expect(classifyButtonTextRegex('必要なCookieのみ許可')).to.equal('reject');
+        expect(classifyButtonTextRegex('必須クッキーのみの利用を承諾する')).to.equal('reject');
         expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('必須項目のみ表示')).not.to.equal('reject');
     });
 
     it('matches Danish reject buttons', () => {

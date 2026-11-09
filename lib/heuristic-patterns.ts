@@ -537,6 +537,8 @@ const REJECT_PATTERNS_INDONESIAN = ['tolak cookie'];
 const REJECT_PATTERNS_JAPANESE = [
     // e.g. "拒否", "すべて拒否", "全て拒否する", "cookieを拒否"
     /^(すべて|全て)?\s?(の)?(cookie|クッキー)?\s?(を)?拒否(する)?$/i,
+    // essential/necessary-only, e.g. "必須のみ", "必要なCookieのみ許可", "必須クッキーのみの利用を承諾する"
+    /^(必須|必要)な?\s?(cookie|クッキー)?\s?のみ((の利用)?を?(許可|使用|利用|承諾|同意)(する)?|を?受け入れる)?$/i,
     '同意しない',
     '同意しません',
 ];
