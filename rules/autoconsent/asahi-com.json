@@ -1,0 +1,62 @@
+{
+    "name": "asahi-com",
+    "vendorUrl": "https://www.asahi.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?asahi\\.com/"
+    },
+    "prehideSelectors": ["#befb-cmp-dialog"],
+    "detectCmp": [{ "exists": "#befb-cmp-dialog,.fc-consent-root,.cc-window:not(.cc-invisible)" }],
+    "detectPopup": [
+        {
+            "any": [{ "visible": "#befb-cmp-dialog" }, { "exists": ".fc-dialog-container" }, { "visible": ".cc-window:not(.cc-invisible)" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#befb-cmp-dialog" },
+            "then": [
+                { "waitForThenClick": "#befb-cmp-close" },
+                { "waitFor": ".fc-consent-root,.cc-window", "timeout": 5000, "optional": true }
+            ]
+        },
+        {
+            "if": { "exists": ".fc-consent-root" },
+            "then": [
+                { "waitFor": ".fc-dialog-container", "timeout": 5000 },
+                {
+                    "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                    "then": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }],
+                    "else": [{ "exists": ".fc-li-only-placeholder" }]
+                },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true },
+                { "waitFor": ".cc-window", "timeout": 5000, "optional": true }
+            ]
+        },
+        {
+            "if": { "exists": ".cc-window" },
+            "then": [{ "waitForThenClick": ".cc-window:not(.cc-invisible) .cc-dismiss", "timeout": 5000, "retry": 1, "optional": true }]
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": "#befb-cmp-dialog" },
+            "then": [
+                { "waitForThenClick": "#befb-cmp-close" },
+                { "waitFor": ".fc-consent-root,.cc-window", "timeout": 5000, "optional": true }
+            ]
+        },
+        {
+            "if": { "exists": ".fc-consent-root" },
+            "then": [
+                { "waitForThenClick": ".fc-cta-consent", "timeout": 5000, "optional": true },
+                { "waitFor": ".cc-window", "timeout": 5000, "optional": true }
+            ]
+        },
+        {
+            "if": { "exists": ".cc-window" },
+            "then": [{ "waitForThenClick": ".cc-window:not(.cc-invisible) .cc-dismiss", "timeout": 5000, "retry": 1, "optional": true }]
+        }
+    ],
+    "test": [{ "waitForVisible": "#befb-cmp-dialog,.fc-dialog-container,.cc-window:not(.cc-invisible)", "check": "none", "timeout": 2000 }]
+}
