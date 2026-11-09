@@ -1,10 +1,14 @@
+import { ElementSelector } from '../rules';
 import AutoConsentCMPBase from './base';
+
+const POPUP_SELECTOR = '.unic .unic-box,.unic .unic-bar,.unic .unic-modal';
+const SHADOW_HOST = '#uniccmp';
 
 export default class Uniconsent extends AutoConsentCMPBase {
     name = 'Uniconsent';
 
     get prehideSelectors(): string[] {
-        return ['.unic', '.modal:has(.unic)'];
+        return ['.unic', '.modal:has(.unic)', SHADOW_HOST];
     }
 
     get hasSelfTest(): boolean {
@@ -19,40 +23,73 @@ export default class Uniconsent extends AutoConsentCMPBase {
         return false;
     }
 
+    // Newer versions render the popup inside an open shadow root on #uniccmp
+    private sel(selector: string): ElementSelector {
+        return document.querySelector(SHADOW_HOST)?.shadowRoot ? [SHADOW_HOST, selector] : selector;
+    }
+
+    private get root(): Document | ShadowRoot {
+        return document.querySelector(SHADOW_HOST)?.shadowRoot || document;
+    }
+
     async detectCmp() {
-        return this.elementExists('.unic .unic-box,.unic .unic-bar,.unic .unic-modal');
+        return this.elementExists(this.sel(POPUP_SELECTOR));
     }
 
     async detectPopup() {
-        return this.elementVisible('.unic .unic-box,.unic .unic-bar,.unic .unic-modal', 'any');
+        return this.elementVisible(this.sel(POPUP_SELECTOR), 'any');
     }
 
     async optOut() {
-        await this.waitForElement('.unic button', 1000);
-        document.querySelectorAll<HTMLButtonElement>('.unic button').forEach((button) => {
-            const text = button.textContent || '';
-            if (text.includes('Manage Options') || text.includes('Optionen verwalten')) {
-                button.click();
-            }
-        });
+        await this.waitForElement(this.sel('.unic button'), 1000);
+        if (this.elementVisible(this.sel('.unic .unic-reject-all-button'), 'any')) {
+            return this.rejectAll();
+        }
 
-        if (await this.waitForElement('.unic input[type=checkbox]', 1000)) {
-            await this.waitForElement('.unic button', 1000);
+        if (this.elementExists(this.sel('.unic .unic-manage-options-button'))) {
+            await this.click(this.sel('.unic .unic-manage-options-button'));
+        } else {
+            this.root.querySelectorAll<HTMLButtonElement>('.unic button').forEach((button) => {
+                const text = button.textContent || '';
+                if (text.includes('Manage Options') || text.includes('Optionen verwalten')) {
+                    button.click();
+                }
+            });
+        }
 
-            document.querySelectorAll<HTMLInputElement>('.unic input[type=checkbox]').forEach((c) => {
+        if (await this.waitForElement(this.sel('.unic .unic-reject-all-button'), 1000)) {
+            return this.rejectAll();
+        }
+
+        if (await this.waitForElement(this.sel('.unic input[type=checkbox]'), 1000)) {
+            await this.waitForElement(this.sel('.unic button'), 1000);
+
+            this.root.querySelectorAll<HTMLInputElement>('.unic input[type=checkbox]').forEach((c) => {
                 if (c.checked) {
                     c.click();
                 }
             });
 
-            for (const b of <NodeListOf<HTMLButtonElement>>document.querySelectorAll('.unic button')) {
-                const text = b.textContent || '';
-                for (const pattern of ['Confirm Choices', 'Save Choices', 'Auswahl speichern']) {
-                    if (text.includes(pattern)) {
-                        b.click();
-                        await this.wait(500); // give it some time to close the popup
-                        return true;
-                    }
+            if (this.elementExists(this.sel('.unic .unic-confirm-button'))) {
+                await this.click(this.sel('.unic .unic-confirm-button'));
+                await this.wait(500); // give it some time to close the popup
+                return true;
+            }
+
+            const buttons = [...this.root.querySelectorAll<HTMLButtonElement>('.unic button')];
+            for (const pattern of [
+                'Reject All',
+                'Alle ablehnen',
+                'Confirm Choices',
+                'Save Choices',
+                'Auswahl speichern',
+                'Auswahl bestätigen',
+            ]) {
+                const b = buttons.find((button) => (button.textContent || '').includes(pattern));
+                if (b) {
+                    b.click();
+                    await this.wait(500); // give it some time to close the popup
+                    return true;
                 }
             }
         }
@@ -60,13 +97,21 @@ export default class Uniconsent extends AutoConsentCMPBase {
         return false;
     }
 
+    private async rejectAll() {
+        await this.click(this.sel('.unic .unic-reject-all-button'));
+        await this.wait(500); // give it some time to close the popup
+        return true;
+    }
+
     async optIn() {
-        return this.waitForThenClick('.unic #unic-agree');
+        if (this.elementExists(this.sel('.unic .unic-agree-all-button'))) {
+            return this.click(this.sel('.unic .unic-agree-all-button'));
+        }
+        return this.waitForThenClick(this.sel('.unic #unic-agree'));
     }
 
     async test() {
         await this.wait(1000);
-        const res = this.elementExists('.unic .unic-box,.unic .unic-bar');
-        return !res;
+        return this.elementVisible(this.sel(POPUP_SELECTOR), 'none');
     }
 }
