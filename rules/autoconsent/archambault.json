@@ -1,0 +1,25 @@
+{
+    "name": "archambault",
+    "vendorUrl": "https://www.archambault.ca/",
+    "cosmetic": false,
+    "prehideSelectors": ["#cookie-banner-container", "#cookie-consent-container"],
+    "detectCmp": [
+        { "exists": "input[type=submit][onclick*='openPreferencesOnClick']" },
+        { "exists": "#cookie-consent-detail input[type=submit][onclick*='setPreferencesOnClick']" }
+    ],
+    "detectPopup": [{ "visible": "#cookie-banner-container, #cookie-consent-container > #cookie-banner", "check": "any" }],
+    "optIn": [{ "waitForThenClick": "input[type=submit][onclick*='acceptAllOnClick']" }],
+    "optOut": [
+        { "waitForThenClick": "input[type=submit][onclick*='openPreferencesOnClick']" },
+        { "waitForVisible": "#cookie-consent-detail-container, #cookie-consent-container > #cookie-consent-detail", "check": "any" },
+        {
+            "if": { "exists": "#cookie-consent-detail input[type=checkbox]:checked" },
+            "then": [{ "click": "#cookie-consent-detail input[type=checkbox]:checked", "all": true }]
+        },
+        { "click": "#cookie-consent-detail input[type=submit][onclick*='setPreferencesOnClick']" }
+    ],
+    "test": [
+        { "waitForVisible": "#cookie-consent-detail-container, #cookie-consent-container > #cookie-consent-detail", "check": "none" },
+        { "visible": "#cookie-banner-container, #cookie-consent-container > #cookie-banner", "check": "none" }
+    ]
+}
