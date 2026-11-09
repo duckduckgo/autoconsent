@@ -66,6 +66,7 @@ Whole-text negatives with `input: 'popup'` are the popup exclusions:
 
 - **`age-gate-popup`:** age wording, unless a cookie choice or the notice's own control is present and no leave or "I am under 18" button is. A bare "Accept all" doesn't count as a cookie choice, since it can be the gate's own confirmation.
 - **`legal-agreement`:** license and terms clauses that cookie notices don't contain.
+- **`investor-gate`:** investor eligibility wording (eligible counterparties, not for retail clients, confirming investor status), whose accept or decline confirms the visitor's status, not cookies.
 
 `excludedBy(text, input)` lists the whole-text negatives that hit a text, whether or not any detect pattern matches it. It's useful for tests and for explaining a result.
 
