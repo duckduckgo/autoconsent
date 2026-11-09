@@ -29,7 +29,24 @@
             ],
             "else": [
                 {
-                    "waitForThenClick": "#_psaihm_continue_without_accepting"
+                    "if": {
+                        "visible": "#_psaihm_button_param_accept"
+                    },
+                    "then": [
+                        {
+                            "click": "#_psaihm_table_container input._psaihm_consentbox:checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": "#_psaihm_button_param_accept"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "#_psaihm_continue_without_accepting"
+                        }
+                    ]
                 }
             ]
         },
