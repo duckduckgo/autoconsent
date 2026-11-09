@@ -13,3 +13,5 @@ generateCMPTests(
 );
 
 generateCMPTests('outdooractive', ['https://www.tourenplaner-rheinland-pfalz.de/en/'], { onlyRegions: ['DE'] });
+
+generateCMPTests('outdooractive', ['https://www.maps.engadin.ch/en/'], { mobile: true });
