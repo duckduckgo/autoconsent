@@ -115,9 +115,6 @@ export const snippets = {
             ),
         ).consents.statistics,
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
-    EVAL_COINBASE_0: () =>
-        JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
-            .length <= 1,
     // the close icon is an SVG, which has no click() method
     EVAL_COOKIE_POPUP_CLOSE: () =>
         document.querySelector('#cookie-popup #close-cookies').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
@@ -128,13 +125,6 @@ export const snippets = {
         return true;
     },
     EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI,
-    EVAL_COOKIE_MANAGER_POPUP_0: () =>
-        JSON.parse(
-            document.cookie
-                .split(';')
-                .find((c) => c.trim().startsWith('CookieLevel'))
-                .split('=')[1],
-        ).social === false,
     EVAL_COOKIEALERT_0: () => document.querySelector('body').removeAttribute('style') || true,
     EVAL_COOKIEALERT_1: () => document.querySelector('body').removeAttribute('style') || true,
     EVAL_COOKIEALERT_2: () => window.CookieConsent.declined === true,
@@ -186,8 +176,6 @@ export const snippets = {
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
-    EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
-    EVAL_GDPR_LEGAL_COOKIE_TEST: () => !!window.GDPR_LC?.userConsentSetting,
     EVAL_IUBENDA_0: () =>
         document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach((x) => {
             if (x.checked) x.click();
@@ -234,7 +222,6 @@ export const snippets = {
                         .split('=')[1],
                 ),
             ).purposes.a === false),
-    EVAL_SKYSCANNER_TEST: () => document.cookie.match(/gdpr=[^;]*adverts:::false/) && !document.cookie.match(/gdpr=[^;]*init:::true/),
     EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
         document.documentElement.classList.forEach((cls) => {
             if (cls.startsWith('sd-cmp-')) document.documentElement.classList.remove(cls);
@@ -270,7 +257,6 @@ export const snippets = {
                     .split('=')[1],
             ),
         ).preference_state === 2,
-    EVAL_TAKEALOT_0: () => document.body.classList.remove('freeze') || (document.body.style = '') || true,
     EVAL_TARTEAUCITRON_0: () => tarteaucitron.userInterface.respondAll(false) || true,
     EVAL_TARTEAUCITRON_1: () => tarteaucitron.userInterface.respondAll(true) || true,
     EVAL_TARTEAUCITRON_2: () => document.cookie.match(/tarteaucitron=[^;]*/)?.[0].includes('false'),
@@ -285,8 +271,6 @@ export const snippets = {
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
-    EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
-    EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
     EVAL_USERCENTRICS_API_1: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_2: () => !!UC_UI.denyAllConsents(),
@@ -294,9 +278,6 @@ export const snippets = {
     EVAL_USERCENTRICS_API_4: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_5: () => UC_UI.areAllConsentsAccepted() === true,
     EVAL_USERCENTRICS_API_6: () => UC_UI.areAllConsentsAccepted() === false,
-    EVAL_USERCENTRICS_BUTTON_0: () =>
-        JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
-    EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
     EVAL_WBD_LTP_CLOSE: () => document.querySelector('dialog#ltp-dialog').close() || true,
     EVAL_ZOHO_TEST: () => localStorage.getItem('zglobal_Acookie_optOut') === '3',
 };
