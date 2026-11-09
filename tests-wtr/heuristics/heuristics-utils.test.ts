@@ -676,6 +676,18 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Я согласен')).to.equal('accept');
     });
 
+    it('matches Japanese accept buttons', () => {
+        expect(classifyButtonTextRegex('同意する')).to.equal('accept');
+        expect(classifyButtonTextRegex('同意します')).to.equal('accept');
+        expect(classifyButtonTextRegex('すべて許可')).to.equal('accept');
+        expect(classifyButtonTextRegex('受諾')).to.equal('accept');
+        expect(classifyButtonTextRegex('すべてのcookie利用を承諾する')).to.equal('accept');
+        expect(classifyButtonTextRegex('同意しない')).to.equal('reject');
+        expect(classifyButtonTextRegex('必須クッキーのみの利用を承諾する')).not.to.equal('accept');
+        expect(classifyButtonTextRegex('クッキーの許可設定')).not.to.equal('accept');
+        expect(classifyButtonTextRegex('許可しない')).not.to.equal('accept');
+    });
+
     it('does not treat revoke links as reject buttons', () => {
         expect(classifyButtonTextRegex('Widerrufen')).to.equal('other');
     });
