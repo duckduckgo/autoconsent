@@ -125,9 +125,6 @@ export const snippets = {
         return true;
     },
     EVAL_COOKIE_LAW_INFO_DETECT: () => !!window.CLI,
-    EVAL_COOKIEALERT_0: () => document.querySelector('body').removeAttribute('style') || true,
-    EVAL_COOKIEALERT_1: () => document.querySelector('body').removeAttribute('style') || true,
-    EVAL_COOKIEALERT_2: () => window.CookieConsent.declined === true,
     EVAL_COOKIEFIRST_0: () =>
         ((o) => o.performance === false && o.functional === false && o.advertising === false)(
             JSON.parse(
