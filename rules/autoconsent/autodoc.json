@@ -12,8 +12,5 @@
         { "eval": "EVAL_AUTODOC_REJECT" }
     ],
     "prehideSelectors": ["div[data-popup-cookies][data-terms-cookies-popup-common]"],
-    "test": [
-        { "wait": 2000, "comment": "rejecting submits a form and reloads the page" },
-        { "cookieContains": "all_marketing_cookies=denied" }
-    ]
+    "test": [{ "wait": 2000, "comment": "rejecting submits a form and reloads the page" }, { "eval": "EVAL_AUTODOC_TEST" }]
 }

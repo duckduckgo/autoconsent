@@ -107,6 +107,10 @@ export const snippets = {
         }
         return true;
     },
+    EVAL_AUTODOC_TEST: () => {
+        const cookie = document.cookie.match(/(?:^|;\s*)atct=([^;]+)/);
+        return !!cookie && JSON.parse(atob(decodeURIComponent(cookie[1]))).deniedAll === true;
+    },
     EVAL_AYLO_COOKIE_MANAGER_READY: () => !!(window.wl_cookie_consent_manager || window._Cookie_Consent_Manager_brand),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
     // the close handler listens for mouseup, which element.click() does not dispatch
