@@ -1,0 +1,18 @@
+{
+    "name": "cookiesmodal-pl",
+    "prehideSelectors": [],
+    "detectCmp": [
+        { "exists": "#cookiesModal .modal-footer #cookiesModalAcceptSelected" },
+        { "exists": "#cookiesModal input[name=\"cookies_google\"]" }
+    ],
+    "detectPopup": [{ "visible": "#cookiesModal .modal-dialog" }],
+    "optIn": [{ "waitForThenClick": "#cookiesModal #cookiesModalAcceptAll" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookiesModal input[name=\"cookies_google\"]:checked" },
+            "then": [{ "click": "#cookiesModal input[name=\"cookies_google\"]" }]
+        },
+        { "waitForThenClick": "#cookiesModal #cookiesModalAcceptSelected", "retry": 3, "retryInterval": 600 }
+    ],
+    "test": [{ "cookieContains": "cookiePolicy=sessions" }, { "cookieContains": "cookiePolicy=sessions%2Cgoogle", "negated": true }]
+}
