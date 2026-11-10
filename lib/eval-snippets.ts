@@ -234,7 +234,14 @@ export const snippets = {
                         .split('=')[1],
                 ),
             ).purposes.a === false),
-    EVAL_SKYSCANNER_TEST: () => document.cookie.match(/gdpr=[^;]*adverts:::false/) && !document.cookie.match(/gdpr=[^;]*init:::true/),
+    EVAL_SKYSCANNER_TEST: () => {
+        const value = document.cookie.match(/_ketch_consent_v1_=([^;]+)/)?.[1];
+        try {
+            return JSON.parse(atob(decodeURIComponent(value))).advertising_and_related_technologies.status === 'denied';
+        } catch (e) {
+            return false;
+        }
+    },
     EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
         document.documentElement.classList.forEach((cls) => {
             if (cls.startsWith('sd-cmp-')) document.documentElement.classList.remove(cls);
