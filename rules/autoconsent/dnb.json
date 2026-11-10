@@ -1,0 +1,30 @@
+{
+    "name": "dnb",
+    "vendorUrl": "https://www.dnb.no/",
+    "prehideSelectors": ["#eufemia-portal-root .cookie-popup"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-popup #cookie-popup-strictlyNecessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-popup #cookie-popup-strictlyNecessary"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-popup #cookie-popup-acceptAll"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-popup #cookie-popup-strictlyNecessary"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "consentData=sn"
+        }
+    ]
+}
