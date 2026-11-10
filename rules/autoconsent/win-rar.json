@@ -1,0 +1,35 @@
+{
+    "name": "win-rar",
+    "vendorUrl": "https://www.win-rar.com/",
+    "prehideSelectors": ["#contentToggle #cookiewarning"],
+    "detectCmp": [
+        {
+            "exists": "#contentToggle #ga_yesid"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#contentToggle #ga_yesid"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#ga_yesid"
+        }
+    ],
+    "optOut": [
+        {
+            "eval": "EVAL_WINRAR_OPT_OUT"
+        },
+        {
+            "waitForVisible": "#contentToggle",
+            "check": "none",
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieDisclaimer=2"
+        }
+    ]
+}
