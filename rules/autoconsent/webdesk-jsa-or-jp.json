@@ -1,0 +1,13 @@
+{
+    "name": "webdesk-jsa-or-jp",
+    "vendorUrl": "https://webdesk.jsa.or.jp/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?jsa\\.or\\.jp/"
+    },
+    "prehideSelectors": [".cookie-consent:has(> .cookie-reject)"],
+    "detectCmp": [{ "exists": ".cookie-consent > .cookie-reject" }],
+    "detectPopup": [{ "visible": ".cookie-consent.is-show > .cookie-reject" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent > .cookie-agree" }],
+    "optOut": [{ "waitForThenClick": ".cookie-consent > .cookie-reject" }],
+    "test": [{ "cookieContains": "cc_f=2" }]
+}
