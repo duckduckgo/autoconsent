@@ -1,0 +1,23 @@
+{
+    "name": "cookie-alert-pl",
+    "detectCmp": [
+        {
+            "exists": "xpath///*[contains(@class, 'cookie-alert2')][contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'rozumiem') or contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'zamknij') or normalize-space() = 'Close' or normalize-space() = 'Fermer'][not(contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'zgadzam') or contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'zgod') or contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'akcept'))]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///*[contains(@class, 'cookie-alert2')][contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'rozumiem') or contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'zamknij') or normalize-space() = 'Close' or normalize-space() = 'Fermer'][not(contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'zgadzam') or contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'zgod') or contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'akcept'))]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///*[contains(@class, 'cookie-alert2')][contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'rozumiem') or contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'zamknij') or normalize-space() = 'Close' or normalize-space() = 'Fermer'][not(contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'zgadzam') or contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'zgod') or contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'akcept'))]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///*[contains(@class, 'cookie-alert2')][contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'rozumiem') or contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'zamknij') or normalize-space() = 'Close' or normalize-space() = 'Fermer'][not(contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'zgadzam') or contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'zgod') or contains(translate(., 'ACDEGIJKMNOPRTUZ', 'acdegijkmnoprtuz'), 'akcept'))]"
+        }
+    ]
+}
