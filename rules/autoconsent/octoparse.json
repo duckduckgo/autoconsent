@@ -1,0 +1,33 @@
+{
+    "name": "octoparse",
+    "vendorUrl": "https://www.octoparse.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?octoparse\\.(com|jp|de|fr|es|ai)/"
+    },
+    "prehideSelectors": ["[class^='cookies_cookies__']"],
+    "detectCmp": [
+        {
+            "exists": "[class^='cookies_cookies__'] [class^='cookies_close__']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class^='cookies_cookies__'] [class^='cookies_close__']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[class^='cookies_cookies__'] [class^='cookies_accept__']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[class^='cookies_cookies__'] [class^='cookies_close__']"
+        },
+        {
+            "waitForVisible": "[class^='cookies_cookies__']",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
