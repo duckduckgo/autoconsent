@@ -1,25 +1,25 @@
 {
     "name": "worldbank",
     "vendorUrl": "https://www.worldbank.org/",
-    "prehideSelectors": ["#cookieconsentpopup.lp__cookie_tooltip"],
+    "prehideSelectors": ["#cookieconsentpopup.lp__cookie_tooltip", ".privacy-widget:has(> button.accept-consent)"],
     "detectCmp": [
         {
-            "exists": "#cookieconsentpopup.lp__cookie_tooltip"
+            "exists": "#cookieconsentpopup.lp__cookie_tooltip, .privacy-widget > button.accept-consent"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookieconsentpopup.lp__cookie_tooltip"
+            "visible": "#cookieconsentpopup.lp__cookie_tooltip, .privacy-widget:has(> button.accept-consent)"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#cookieconsentpopup .accept-consent"
+            "waitForThenClick": "#cookieconsentpopup .accept-consent, .privacy-widget > button.accept-consent"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "#cookieconsentpopup .accept-consent"
+            "waitForThenClick": "#cookieconsentpopup .accept-consent, .privacy-widget > button.accept-consent"
         }
     ],
     "test": [
