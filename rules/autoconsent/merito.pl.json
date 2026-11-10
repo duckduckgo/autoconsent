@@ -1,11 +1,11 @@
 {
     "name": "merito.pl",
     "vendorUrl": "https://www.merito.pl/",
-    "runContext": {
-        "urlPattern": "^https?://(\\w+\\.)?merito\\.pl/"
-    },
     "prehideSelectors": [],
     "detectCmp": [
+        {
+            "exists": "dialog.consent-dialog .consent-wrapper > .consent-buttons > .consent-button-secondary"
+        },
         {
             "exists": "dialog.consent-dialog .consent-settings .consent-category input[data-category]"
         }
