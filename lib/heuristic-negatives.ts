@@ -6,7 +6,6 @@
 import {
     HeuristicInput,
     ACCEPTEZ_UTILISATION,
-    ACCEPT_ALL,
     BY_CONTINUING_PRIVACY,
     DE_COOKIE_VERB,
     DE_SITE_USES_COOKIES,
@@ -161,14 +160,6 @@ export const DETECT_CONTEXT_NEGATIVES: ContextNegative[] = [
         lines: [0, 2],
         input: 'page',
         appliesTo: [USE_OF_COOKIES, VERWENDUNG_VON_COOKIES, UTILISATION_DES_COOKIES, GEBRUIK_VAN_COOKIES],
-    },
-    // "accept all" in prose; case-sensitive since button labels run together in innerText
-    {
-        name: 'accept-all-prose',
-        pattern: /\baccept all [a-z]|\baccept All[a-z]/,
-        unless: /accept all (?:cookies|and|&)/i,
-        window: 15,
-        appliesTo: [ACCEPT_ALL],
     },
     {
         name: 'acceptez-terms',
