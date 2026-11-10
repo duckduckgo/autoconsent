@@ -6,7 +6,6 @@ export type DetectPattern = RegExp | { pattern: RegExp; input: HeuristicInput };
 export const patternOf = (p: DetectPattern): RegExp => (p instanceof RegExp ? p : p.pattern);
 // detect patterns that context negatives refer to
 export const BY_CONTINUING_PRIVACY = /(?:by continuing.{0,100}privacy)|(?:privacy.{0,100}by continuing)/gi;
-export const ACCEPT_ALL = /accept all/gi;
 export const USE_OF_COOKIES = /use of cookies/gi;
 export const UTILISATION_DES_COOKIES = /utilisation.{0,100}des.{0,100}cookies/gi;
 export const ACCEPTEZ_UTILISATION = /acceptez.{0,100}l.{0,100}utilisation/gi;
@@ -22,12 +21,23 @@ export const DE_SITE_USES_COOKIES = /\b(?:seite|site)\b.{0,100}\b(?:nutzt|benutz
 // TODO: check for false positive detections per pattern
 // these patterns are matched against popup-like elements or full document text to detect unknown cookie popups
 export const DETECT_PATTERNS: DetectPattern[] = [
+    // no bare "accept all" / "reject all" labels in any language: page content with bulk actions has them too
     /accept cookies/gi,
-    ACCEPT_ALL,
-    /reject all/gi,
     /only necessary cookies/gi, // "only necessary" is probably too broad
     /(?:by continuing.{0,100}cookie)|(?:cookie.{0,100}by continuing)/gi,
     /\bby using (?:this|our) (?:web)?site\b.{0,100}cookie/gi,
+    // "By clicking 'Accept all', you agree to the storing of cookies …"
+    /\bby clicking\b.{0,80}?\byou (?:allow|accept|agree|consent)\w*\b.{0,100}?\b(?:cookies?|technologies)\b/gi,
+    // button labels count only with the cookie noun: bare "accept all" / "reject all" also label bulk actions in page content
+    /accept all cookies/gi,
+    /\breject non-(?:essential|necessary)\b/gi,
+    /\bwhich (?:types? of )?cookies (?:that )?you (?:accept|allow|want)\b/gi,
+    /\bstores? cookies on your (?:device|computer|browser)\b/gi,
+    /\byour consent to (?:collect|use|store|process|set)\b/gi,
+    /\byou agree to (?:our |the )?cookie use\b/gi,
+    /\bblocking some types of cookies\b/gi,
+    // consent management platform footers
+    /\bpowered by usercentrics\b|\b(?:realisiert mit|realized with) klaro\b/gi,
     BY_CONTINUING_PRIVACY,
     // up to two qualifiers are common: "optional", "essential", "analytics", "google analytics", "third party", ...
     // singular too, but not "cookie-free"
@@ -97,17 +107,20 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /stocker.{0,100}et.{0,100}ou.{0,100}accéder/gi,
     /consentement.{0,100}à.{0,100}tout.{0,100}moment/gi,
     /votre.{0,100}consentement/gi,
-    /accepter.{0,100}tout/gi,
     UTILISATION_DES_COOKIES,
     /cookies.{0,100}ou.{0,100}technologies/gi,
     ACCEPTEZ_UTILISATION,
     /continuer sans accepter/gi,
-    /tout refuser/gi,
     /(?:refuser|rejeter) tous les cookies/gi,
     // not "je refuse d'…" in a headline
     /je refuse(?! d['’e])/gi,
     /refuser et continuer/gi,
     /refuser les cookies/gi,
+    /\ben cliquant sur\b.{0,80}?\bvous (?:acceptez|consentez)\b.{0,60}?\b(?:cookies|traceurs)\b/gi,
+    /\bvous consentez\b.{0,60}\bcookies\b/gi,
+    /\baccepter ou refuser (?:\S+ ){0,3}cookies\b/gi,
+    /\bles cookies nous (?:sont|permettent|aident)\b/gi,
+    /\btraceurs (?:optionnels|publicitaires|non essentiels)\b/gi,
     /seulement nécessaires/gi,
     /je désactive les finalités non essentielles/gi,
     /cookies essentiels uniquement/gi,
@@ -135,7 +148,6 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /und.{0,100}ähnliche.{0,100}technologien/gi,
     /cookies.{0,100}wir.{0,100}verwenden/gi,
 
-    /alles?.{0,100}ablehnen/gi,
     /(?:nur|nicht).{0,100}(?:zusätzliche|essenzielle|funktionale|notwendige|erforderliche).{0,100}(?:cookies|akzeptieren|erlauben|ablehnen)/gi,
     /weiter.{0,100}(?:ohne|mit).{0,100}(?:einwilligung|zustimmung|cookies)/gi,
     /(?:cookies|einwilligung).{0,100}ablehnen/gi,
@@ -148,7 +160,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:werden|wird) (?:\S+ ){0,3}cookies (?:verwendet|eingesetzt|gesetzt|genutzt)\b/gi,
     /\bcookies? zum einsatz\b|\beinsatz von cookies\b/gi,
     /\beinverstanden\b.{0,60}\bcookies\b|\bcookies\b.{0,80}\beinverstanden\b/gi,
-    /\b(?:alle|alles) (?:cookies |optionalen \S+ )?(?:akzeptieren|zulassen|erlauben|zustimmen)\b/gi,
+    /\b(?:alle|alles) (?:cookies|optionalen \S+) (?:akzeptieren|zulassen|erlauben|zustimmen)\b/gi,
     /\bzustimmen und weiter\b|\bweiter,? ohne zu (?:akzeptieren|zustimmen)\b/gi,
     /\b(?:einwilligung|zustimmung) (?:zu|zur|in die) (?:\S+ )?cookies\b|\bcookie-(?:zustimmung|einwilligung)\b/gi,
     /\btracking-technologien\b/gi,
@@ -166,24 +178,39 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:analyse|statistik)-?cookies\b/gi,
     /\b(?:marketing|tracking)-?cookies\b/gi,
     /\bcookies oder (?:andere|ähnliche)/gi,
+    // "Wenn Sie auf „Alle akzeptieren“ klicken, stimmen Sie …", "Durch Klicken auf „Alle akzeptieren“ gestatten Sie …"
+    /\b(?:indem sie auf|wenn sie auf|durch (?:das )?klicken auf)\b.{0,80}?\b(?:stimmen sie|gestatten sie|willigen sie|erklären sie sich)\b/gi,
+    /\bbenötigen wir (?:ihre|deine) (?:einwilligung|zustimmung)\b/gi,
+    {
+        pattern:
+            /\b(?:einwilligung|zustimmung)\b.{0,60}\b(?:jederzeit|widerrufen)\b|\bmit (?:ihrer|deiner) (?:einwilligung|zustimmung)\b/gi,
+        input: 'popup',
+    },
+    /\bwelche cookies sie (?:zulassen|akzeptieren)\b/gi,
+    /\bcookies?\b.{0,60}\bauf (?:ihrem|deinem) (?:gerät|endgerät)\b/gi,
+    /\bin form von cookies\b|\bblockierung bestimmter arten von cookies\b/gi,
+    /\b(?:notwendige|essenzielle|funktionale) cookies\b/gi,
+    // innerText can put every word on its own line
+    /\bwir\s+(?:verwenden|nutzen|setzen)\s+cookies\b/gi,
+    /\bzwecken und anbietern\b/gi,
+    /\bweiter ohne akzeptanz\b/gi,
 
     // NL
     GEBRUIK_VAN_COOKIES,
     /(?:we|wij).{0,100}gebruiken.{0,100}cookies.{0,100}om/gi,
     /cookies.{0,100}en.{0,100}vergelijkbare/gi,
 
-    /(?:alles|cookies).{0,100}(?:afwijzen|weigeren|verwerpen)/gi,
+    /cookies.{0,100}(?:afwijzen|weigeren|verwerpen)/gi,
     /alleen.{0,100}noodzakelijke?\b/gi,
     /cookies weigeren/gi,
-    /weiger.{0,100}(?:cookies|alles)/gi,
+    /weiger.{0,100}cookies/gi,
     /doorgaan zonder (?:te accepteren|akkoord te gaan)/gi,
     /alleen.{0,100}(?:optionele|functionele|functioneel|noodzakelijke|essentiële|standaard).{0,100}cookies/gi,
-    /wijs alles af/gi,
     /\b(?:op te slaan en\/of te (?:raadplegen|openen|lezen)|opslaan en\/of (?:openen|raadplegen|lezen)|slaan informatie\b.{0,60}\bop en\/of)\b/gi,
     /\bonze partners vragen om (?:jouw|uw|je) toestemming\b/gi,
     /\bwij en onze (?:\d+ )?partners\b/gi,
     /\b(?:gebruiken|gebruikt|plaatsen|plaatst)\b(?: \S+){0,3} cookies\b/gi,
-    /\baccepteer (?:alles|alle cookies)\b/gi,
+    /\baccepteer alle cookies\b/gi,
     // Dutch words only: "tracking cookies" and "marketing cookies" are also English prose and footer links
     /\b(?:analytische|functionele|essentiële|noodzakelijke) cookies\b/gi,
     /(?:te blijven gebruiken.{0,100}cookie)|(?:cookie.{0,100}te blijven gebruiken)/gi,
@@ -192,6 +219,9 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bgebruiken (?:we|wij) cookies\b/gi,
     /\bplaatsen van\b.{0,50}cookies/gi,
     /\bte blijven gebruiken\b.{0,100}privacy/gi,
+    /\bdoor op\b.{0,60}?\bte klikken\b.{0,40}?\bga(?:at)? (?:u|je) akkoord\b/gi,
+    /\balle cookies accepteren\b/gi,
+    /\btoestemming voor (?:\S+ ){0,3}cookies\b/gi,
 
     // Spanish (ES)
     /(si|al) contin[úu]a[sr]?( navegando)?.{0,100} cookie/gi,
@@ -212,12 +242,17 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:almacenar|almacenamos) y\/o (?:acceder|accedemos)\b/gi,
     /\bnuestros socios solicitan su consentimiento\b/gi,
     /\b(?:tanto nosotros como|nosotros y) nuestros (?:\d+ )?socios\b/gi,
-    /\b(?:aceptar|rechazar) todas\b|\bcontinuar sin aceptar\b|\bsolo las necesarias\b/gi,
+    /\bcontinuar sin aceptar\b|\bsolo las necesarias\b/gi,
     /\bacept\w* (?:\S+ ){0,3}uso de (?:las )?cookies\b/gi,
     /\bcookies (?:técnicas|analíticas|propias|de terceros|opcionales|necesarias)\b/gi,
     /\blas cookies nos (?:ayudan|permiten)\b/gi,
     /\b(?:instalamos|empleamos)\b(?: \S+){0,4} cookies\b/gi,
     /\bacept(?:a|ar|as)? (?:el uso de |las )?(?:\S+ )?cookies\b|\bnecesitamos usar cookies\b/gi,
+    /\bal hacer clic en\b.{0,80}?\bcookies\b/gi,
+    /\b(?:aceptar|rechazar) todas las cookies\b/gi,
+    /\bestrictamente necesarias\b/gi,
+    /\balmacenar o acceder a (?:la )?información\b/gi,
+    /\btecnolog[ií]as de seguimiento\b/gi,
 
     // Polish (PL)
     // examples:
@@ -293,7 +328,6 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bcookies? (?:tecnici|di profilazione|di terze parti|analitici|statistici|di marketing)\b/gi,
     /\b(?:acconsent|accett)\w*\b.{0,40}\b(?:uso|utilizzo|installazione)\b.{0,15}\bcookies?\b/gi,
     /\b(?:continuando|proseguendo)(?: la| nella)? navigazione\b.{0,80}\b(?:accett|acconsent)\w*/gi,
-    /\b(?:accetta|accetto|accettare|rifiuta|rifiuto|rifiutare)(?: tutti| tutto)\b/gi,
     /\b(?:continua|prosegui|chiudi) senza accettare\b/gi,
     /\brifiuta e abbonati\b/gi,
     /\bconsenso (?:all.(?:uso|utilizzo) (?:dei |di )?)?cookies?\b/gi,
@@ -304,6 +338,11 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\butilizz\w*\b.{0,30}cookie/gi,
     /\b(?:questo|il nostro) sito\b.{0,100}cookie/gi,
     /\bcookie\b.{0,30}\btecnologie (?:simili|analoghe)\b/gi,
+    /\bcliccando su\b.{0,80}?\bcookie/gi,
+    /\b(?:accetta|rifiuta) tutti i cookie/gi,
+    // TCF: "noi e i nostri partner archiviamo …", "… potremmo utilizzare dati di localizzazione", not "partner commerciali"
+    /\bnoi e i nostri (?:\d+ )?partner (?:archivia\w*|memorizz\w*|potremmo|trattiamo)\b/gi,
+    /\bcookies? (?:essenziali|necessari)\b/gi,
 
     // Swedish (SV)
     // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"
@@ -317,7 +356,6 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:godkänn|accepter|tillåt)\S* (?:\S+ ){0,4}(?:cookies|kakor)\b|\b(?:cookies|kakor) (?:som )?du tillåter\b/gi,
     // a button or "… nödvändiga kakor", not "endast nödvändiga resurser"
     /\b(?:endast|bara|enbart) nödvändiga(?: (?:cookies|kakor))?(?![ \t]*[\wåäö])/gi,
-    /\bavvisa alla\b/gi,
     // TCF wording
     /\blagra och\/eller (?:få åtkomst till|komma åt) information\b/gi,
     /\b(?:dess|våra) partners?\b.{0,100}\b(?:cookies|kakor)\b/gi,
