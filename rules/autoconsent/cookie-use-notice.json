@@ -1,0 +1,12 @@
+{
+    "name": "cookie-use-notice",
+    "prehideSelectors": [".cookie-use-notice"],
+    "detectCmp": [{ "exists": ".cookie-use-notice #decline-cookie" }],
+    "detectPopup": [{ "visible": ".cookie-use-notice #decline-cookie" }],
+    "optIn": [{ "waitForThenClick": ".cookie-use-notice #accept-cookie" }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-use-notice #decline-cookie" },
+        { "waitForVisible": ".cookie-use-notice", "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "cookieContains": "-cookie=deny" }]
+}
