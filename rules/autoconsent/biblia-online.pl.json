@@ -1,0 +1,40 @@
+{
+    "name": "biblia-online.pl",
+    "_metadata": {
+        "vendorUrl": "https://biblia-online.pl/"
+    },
+    "cosmetic": true,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?biblia-online\\.pl/"
+    },
+    "prehideSelectors": [".cookies-box"],
+    "detectCmp": [
+        {
+            "exists": ".cookies-box #btn-accept-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies-box"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies-box #btn-accept-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "notice only offers an accept button",
+            "hide": ".cookies-box"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".cookies-box",
+            "check": "none"
+        }
+    ]
+}
