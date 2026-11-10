@@ -1,0 +1,81 @@
+{
+    "name": "mgprojekt",
+    "_metadata": {
+        "vendorUrl": "https://www.mgprojekt.com.pl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mgprojekt\\.com\\.pl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "comment": "the site's own cookie notice shows on load; the Quantcast CMP is only injected ~15s later, after generic detection has given up",
+            "visible": ".m-cookie-notification"
+        },
+        {
+            "comment": "skip once a TCF choice is stored, so the quantcast rule handles any later dialog",
+            "cookieContains": "euconsent-v2=",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".m-cookie-notification"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".m-cookie-notification .cookie__icon > .sf-icon"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "notice-only bar: dismiss it with the close icon",
+            "waitForThenClick": ".m-cookie-notification .cookie__icon > .sf-icon"
+        },
+        {
+            "comment": "the CMP is not shown in all regions",
+            "waitForVisible": "#qc-cmp2-ui",
+            "timeout": 30000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": "#qc-cmp2-ui"
+            },
+            "then": [
+                {
+                    "if": {
+                        "exists": "#disagree-btn"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#disagree-btn:not([disabled])",
+                            "timeout": 5000
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": ".qc-cmp2-summary-buttons button[mode=\"secondary\"]:nth-of-type(2)",
+                            "timeout": 2000
+                        }
+                    ]
+                },
+                {
+                    "waitForVisible": "#qc-cmp2-ui",
+                    "check": "none",
+                    "timeout": 2000
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".m-cookie-notification",
+            "check": "none",
+            "timeout": 1000
+        }
+    ]
+}
