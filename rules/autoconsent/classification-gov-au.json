@@ -1,0 +1,41 @@
+{
+    "name": "classification-gov-au",
+    "vendorUrl": "https://www.classification.gov.au/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?classification\\.gov\\.au/"
+    },
+    "prehideSelectors": [".c-site-notification:has(a[href*=\"#cookie\"])"],
+    "detectCmp": [
+        {
+            "exists": ".c-site-notification:has(a[href*=\"#cookie\"]) .c-site-notification__close button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".c-site-notification:has(a[href*=\"#cookie\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".c-site-notification:has(a[href*=\"#cookie\"]) .c-site-notification__close button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".c-site-notification:has(a[href*=\"#cookie\"]) .c-site-notification__close button"
+        },
+        {
+            "waitForVisible": ".c-site-notification:has(a[href*=\"#cookie\"])",
+            "check": "none",
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "Drupal.visitor.doca_site_notification_"
+        }
+    ]
+}
