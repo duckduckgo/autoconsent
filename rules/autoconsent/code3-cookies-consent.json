@@ -1,0 +1,48 @@
+{
+    "name": "code3-cookies-consent",
+    "vendorUrl": "https://code3.ca/",
+    "prehideSelectors": ["#cookiesConsentBanner"],
+    "detectCmp": [
+        {
+            "exists": "#cookiesConsentBanner"
+        },
+        {
+            "exists": "#cookiesParametersModal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiesConsentBanner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiesConsentBanner .accept-all-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#cookiesConsentBanner .refuse-all-cookies"
+            },
+            "then": [
+                {
+                    "click": "#cookiesConsentBanner .refuse-all-cookies"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#cookiesParametersModal .refuse-all-cookies"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookiesConsentDone=true"
+        },
+        {
+            "cookieContains": "%22performanceCookies%22:false"
+        }
+    ]
+}
