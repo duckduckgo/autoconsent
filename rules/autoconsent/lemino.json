@@ -1,0 +1,19 @@
+{
+    "name": "lemino",
+    "vendorUrl": "https://lemino.docomo.ne.jp/",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "comment": "Welcome dialog only offers 'agree to terms', so it is hidden together with the body scroll lock.",
+    "runContext": {
+        "urlPattern": "^https?://lemino\\.docomo\\.ne\\.jp/"
+    },
+    "prehideSelectors": [".ReactModalPortal:has([data-testid=\"jp.ne.docomo.lemino:id/welcomeAgreementTermsButton\"])"],
+    "detectCmp": [{ "exists": "[data-testid=\"jp.ne.docomo.lemino:id/welcomeAgreementTermsButton\"]" }],
+    "detectPopup": [{ "visible": "[data-testid=\"jp.ne.docomo.lemino:id/welcomeAgreementTermsButton\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-testid=\"jp.ne.docomo.lemino:id/welcomeAgreementTermsButton\"]" }],
+    "optOut": [
+        { "hide": ".ReactModalPortal:has([data-testid=\"jp.ne.docomo.lemino:id/welcomeAgreementTermsButton\"])" },
+        { "addStyle": "overflow: auto !important", "selector": "body.ReactModal__Body--open", "optional": true }
+    ],
+    "test": [{ "visible": "[data-testid=\"jp.ne.docomo.lemino:id/welcomeAgreementTermsButton\"]", "check": "none" }]
+}
