@@ -160,8 +160,9 @@ describe('checkHeuristicPatterns with Italian popups', () => {
 describe('checkHeuristicPatterns with French popups', () => {
     it('detects French cookie notices', () => {
         const texts = [
+            // change.org
             'Vos paramètres de confidentialité. Nous utilisons nos propres cookies et ceux de tiers. Accepter les cookies Rejeter les cookies non essentiels Gérer les cookies',
-            'Refuser les cookies',
+            'Nous utilisons nos propres cookies et ceux de tiers',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -169,7 +170,17 @@ describe('checkHeuristicPatterns with French popups', () => {
     });
 
     it('does not detect unrelated French text', () => {
-        expect(checkHeuristicPatterns('Rejeter les candidatures incomplètes').patterns).to.have.length(0);
+        const texts = [
+            'Rejeter les candidatures incomplètes',
+            // "refuser/rejeter les cookies" alone also appears outside consent notices, e.g. browser help
+            'Vous pouvez rejeter les cookies dans les paramètres de votre navigateur.',
+            'Vous pouvez refuser les cookies dans les paramètres de votre navigateur.',
+            // "cookies" more than two words after "nous utilisons"
+            'Nous utilisons nos propres recettes pour préparer les cookies.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
+        }
     });
 });
 

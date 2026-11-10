@@ -115,7 +115,6 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // not "je refuse d'…" in a headline
     /je refuse(?! d['’e])/gi,
     /refuser et continuer/gi,
-    /(?:refuser|rejeter) les cookies/gi,
     /\ben cliquant sur\b.{0,80}?\bvous (?:acceptez|consentez)\b.{0,60}?\b(?:cookies|traceurs)\b/gi,
     /\bvous consentez\b.{0,60}\bcookies\b/gi,
     /\baccepter ou refuser (?:\S+ ){0,3}cookies\b/gi,
@@ -130,7 +129,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bconsentez à l.utilisation (?:de |des )?cookies\b|\bdépôt (?:de|des) cookies\b/gi,
     /\bles cookies nous permettent\b|\bnos partenaires et nous(?:-mêmes)?\b/gi,
     /\baccepter (?:&|et) fermer\b/gi,
-    /\b(?:on utilise|nous utilisons)(?: \S+)? cookies\b/gi,
+    // up to two qualifiers, as in English: "nous utilisons nos propres cookies", "nous utilisons des cookies tiers"
+    /\b(?:on utilise|nous utilisons)(?: \S+){0,2} cookies\b/gi,
     /\ben (?:naviguant|poursuivant)\b.{0,100}cookies/gi,
     /(?:en continuant.{0,100}cookie)|(?:cookie.{0,100}en continuant)/gi,
     /\ben (?:naviguant|poursuivant|continuant)\b.{0,100}confidentialité/gi,
