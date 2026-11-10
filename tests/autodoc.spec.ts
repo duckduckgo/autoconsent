@@ -5,4 +5,5 @@ generateCMPTests('autodoc', [
     'https://www.autodoc.de/',
     'https://www.autodoc.es/',
     'https://www.autodoc.pl/',
+    'https://www.bildeleshop.dk/',
 ]);

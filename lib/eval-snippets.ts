@@ -95,6 +95,18 @@ export const snippets = {
     // declarative rules
     EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
+    // on mobile the handler listens for a jQuery "tap" event, which element.click() does not trigger
+    EVAL_AUTODOC_REJECT: () => {
+        const button = document.querySelector(
+            'div[data-popup-cookies][data-terms-cookies-popup-common] button[data-cookies="disallow_all_cookies"]',
+        );
+        if (window.jQuery && window.evClick) {
+            window.jQuery(button).trigger(window.evClick());
+        } else {
+            button.click();
+        }
+        return true;
+    },
     EVAL_AYLO_COOKIE_MANAGER_READY: () => !!(window.wl_cookie_consent_manager || window._Cookie_Consent_Manager_brand),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
     // the close handler listens for mouseup, which element.click() does not dispatch

@@ -8,7 +8,8 @@
         { "waitForThenClick": "div[data-popup-cookies][data-terms-cookies-popup-common] button[data-cookies=\"allow_all_cookies\"]" }
     ],
     "optOut": [
-        { "waitForThenClick": "div[data-popup-cookies][data-terms-cookies-popup-common] button[data-cookies=\"disallow_all_cookies\"]" }
+        { "waitForVisible": "div[data-popup-cookies][data-terms-cookies-popup-common] button[data-cookies=\"disallow_all_cookies\"]" },
+        { "eval": "EVAL_AUTODOC_REJECT" }
     ],
     "prehideSelectors": ["div[data-popup-cookies][data-terms-cookies-popup-common]"],
     "test": [
