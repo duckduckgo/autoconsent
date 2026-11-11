@@ -1,16 +1,17 @@
 {
-    "name": "auto_DE_m.livejasmin.com_cvg",
-    "cosmetic": false,
-    "_metadata": {
-        "vendorUrl": "https://m.livejasmin.com/"
-    },
+    "name": "livejasmin",
+    "vendorUrl": "https://m.livejasmin.com/",
     "runContext": {
         "main": true,
         "frame": false,
         "urlPattern": "^https?://(www\\.|m\\.)?livejasmin\\.com/"
     },
     "prehideSelectors": [],
-    "detectCmp": [{ "exists": "#consent_modal .over-18__manage-cookies-link, #legalAgreementModal [data-test-id='manage-cookies']" }],
+    "detectCmp": [
+        {
+            "exists": "#consent_modal .over-18__manage-cookies-link, #legalAgreementModal [data-test-id='manage-cookies']"
+        }
+    ],
     "detectPopup": [
         {
             "visible": "#consent_modal .over-18__manage-cookies-link, #legalAgreementModal.open [data-test-id='manage-cookies']",
@@ -20,7 +21,9 @@
     "optIn": [],
     "optOut": [
         {
-            "if": { "exists": "#consent_modal .over-18__manage-cookies-link" },
+            "if": {
+                "exists": "#consent_modal .over-18__manage-cookies-link"
+            },
             "then": [
                 {
                     "waitForThenClick": "#consent_modal .over-18__manage-cookies-link",
@@ -28,7 +31,9 @@
                     "retryInterval": 1000,
                     "comment": "Manage or reject Cookies"
                 },
-                { "waitForVisible": "[data-testid='PrivacyPreferenceCenterWithConsentCookieContent']" },
+                {
+                    "waitForVisible": "[data-testid='PrivacyPreferenceCenterWithConsentCookieContent']"
+                },
                 {
                     "click": "[data-testid='PrivacyPreferenceCenterWithConsentCookieContent'] input[data-testid='PrivacyPreferenceCenterWithConsentCookieSwitch']:checked",
                     "all": true,
@@ -46,9 +51,19 @@
                     "retryInterval": 1000,
                     "comment": "Manage or reject Cookies"
                 },
-                { "waitForVisible": "#ManageCookies [data-test-id='confirm-my-choices']", "timeout": 10000 },
-                { "click": "#ManageCookies input[type='checkbox']:checked:not([disabled])", "all": true, "optional": true },
-                { "waitForThenClick": "#ManageCookies [data-test-id='confirm-my-choices']", "comment": "Confirm My Choices" }
+                {
+                    "waitForVisible": "#ManageCookies [data-test-id='confirm-my-choices']",
+                    "timeout": 10000
+                },
+                {
+                    "click": "#ManageCookies input[type='checkbox']:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#ManageCookies [data-test-id='confirm-my-choices']",
+                    "comment": "Confirm My Choices"
+                }
             ]
         }
     ],
