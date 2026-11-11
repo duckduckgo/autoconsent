@@ -1,0 +1,33 @@
+{
+    "name": "kixell",
+    "vendorUrl": "https://kixelltag.com/",
+    "prehideSelectors": ["#kixell_st .kstoverlay", "#kixell_st .kstp"],
+    "detectCmp": [
+        {
+            "exists": "#kixell_st .kstp .stno"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#kixell_st .kstp .stno"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#kixell_st .kstp .stpfooter .stacceptall"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#kixell_st .kstp .stno",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#kixell_st .kstp",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}
