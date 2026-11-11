@@ -1,0 +1,17 @@
+{
+    "name": "cc-consent-holder",
+    "vendorUrl": "https://www.skapamer.se/",
+    "prehideSelectors": [".ccConsentHolder"],
+    "detectCmp": [{ "exists": ".ccConsentHolder .ccConsent" }],
+    "detectPopup": [{ "visible": ".ccConsentHolder .ccConsent" }],
+    "optIn": [{ "waitForThenClick": ".ccConsent .cookieButton.all" }],
+    "optOut": [
+        {
+            "if": { "visible": ".ccConsent .cookieTextHolderExtended .cookieSettings" },
+            "then": [{ "click": ".ccConsent .cookieTextHolderExtended .cookieSettings" }],
+            "else": [{ "waitForThenClick": ".ccConsent .cookieTextHolder .cookieSettings" }]
+        },
+        { "waitForThenClick": ".ccConsent .cookie_settings_row .cookieButton:not(.all)" }
+    ],
+    "test": [{ "wait": 1000 }, { "cookieContains": "%22allow_rm%22%3A%22disable%22" }]
+}
