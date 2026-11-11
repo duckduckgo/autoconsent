@@ -1,0 +1,36 @@
+{
+    "name": "blastingnews",
+    "vendorUrl": "https://www.blastingnews.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?blastingnews\\.com/"
+    },
+    "prehideSelectors": ["#cookie-content.box-cookie-wrapper"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-content.box-cookie-wrapper #btn-cookie-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-content.box-cookie-wrapper #btn-cookie-reject-all"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-content #btn-cookie-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-content #btn-cookie-reject-all"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "_bn_mfc=-1"
+        }
+    ]
+}
