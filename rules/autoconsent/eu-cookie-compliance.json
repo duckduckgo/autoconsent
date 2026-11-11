@@ -1,15 +1,19 @@
 {
     "name": "eu-cookie-compliance-banner",
-    "detectCmp": [{ "exists": "body.eu-cookie-compliance-popup-open" }],
-    "detectPopup": [{ "exists": "body.eu-cookie-compliance-popup-open" }],
+    "detectCmp": [{ "exists": "body.eu-cookie-compliance-popup-open, #sliding-popup .decline-button" }],
+    "detectPopup": [
+        {
+            "any": [{ "exists": "body.eu-cookie-compliance-popup-open" }, { "visible": "#sliding-popup .decline-button", "check": "any" }]
+        }
+    ],
     "optIn": [
         {
-            "click": ".eu-cookie-compliance-banner .agree-button, .eu-cookie-compliance-banner .accept-all"
+            "click": ".eu-cookie-compliance-banner .agree-button, .eu-cookie-compliance-banner .accept-all, #sliding-popup .agree-button"
         }
     ],
     "optOut": [
         {
-            "click": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary, .eu-cookie-compliance-save-preferences-button"
+            "click": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary, .eu-cookie-compliance-save-preferences-button, #sliding-popup .decline-button"
         }
     ],
     "test": [
