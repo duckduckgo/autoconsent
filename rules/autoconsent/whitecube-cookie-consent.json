@@ -1,0 +1,67 @@
+{
+    "name": "whitecube-cookie-consent",
+    "vendorUrl": "https://github.com/whitecube/laravel-cookie-consent",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookies-policy form[data-cookie-action='accept.all']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies-policy form[data-cookie-action='accept.all'] button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies-policy form[data-cookie-action='accept.all'] button"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#cookies-policy form[data-cookie-action='accept.essentials'] button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookies-policy form[data-cookie-action='accept.essentials'] button",
+                    "retry": 5,
+                    "retryInterval": 1000,
+                    "comment": "Only essentials"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookies-policy .cookies__btn--customize",
+                    "comment": "Customize"
+                },
+                {
+                    "waitForVisible": "#cookies-policy form.cookies__customize .cookiesBtn__link"
+                },
+                {
+                    "click": "#cookies-policy form.cookies__customize input[type='checkbox']:checked:not([value='essentials'])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#cookies-policy form.cookies__customize .cookiesBtn__link",
+                    "retry": 10,
+                    "retryInterval": 1000,
+                    "comment": "Save settings"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "#cookies-policy form[data-cookie-action='accept.all'] button",
+            "check": "none",
+            "timeout": 5000
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookies-policy form[data-cookie-action='accept.all'] button",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}
