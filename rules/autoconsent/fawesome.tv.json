@@ -1,0 +1,35 @@
+{
+    "name": "fawesome.tv",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?fawesome\\.tv/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#gdpr_cookie_info_bar-wr .gdpr-close-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gdpr_cookie_info_bar-wr:not(.d-none) .gdpr-close-button",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr_cookie_info_bar-wr .gdpr-infobar-allow-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gdpr_cookie_info_bar-wr .gdpr-close-button",
+            "comment": "the close button hides the banner without consenting; Manage leaves the page"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#gdpr_cookie_info_bar-wr .gdpr-close-button",
+            "check": "none"
+        }
+    ]
+}
