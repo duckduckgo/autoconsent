@@ -7,7 +7,7 @@
         {
             "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
             "then": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }],
-            "else": [{ "exists": ".fc-li-only-placeholder" }]
+            "else": [{ "exists": ".fc-li-only-placeholder,.fc-soft-cmp-placeholder" }]
         },
         { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
         { "click": ".fc-confirm-choices", "optional": true }
