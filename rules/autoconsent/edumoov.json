@@ -1,17 +1,22 @@
 {
-    "name": "auto_FR_edumoov.com_sij",
-    "cosmetic": false,
-    "_metadata": {
-        "vendorUrl": "http://www.edumoov.com/"
-    },
+    "name": "edumoov",
+    "vendorUrl": "https://www.edumoov.com/",
     "runContext": {
         "main": true,
         "frame": false,
         "urlPattern": "^https?://(www\\.)?edumoov\\.com/"
     },
     "prehideSelectors": [],
-    "detectCmp": [{ "exists": "#cookie-message #close-cookie-message" }],
-    "detectPopup": [{ "visible": "#cookie-message #close-cookie-message" }],
+    "detectCmp": [
+        {
+            "exists": "#cookie-message #close-cookie-message"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-message #close-cookie-message"
+        }
+    ],
     "optIn": [],
     "optOut": [
         {
@@ -21,5 +26,11 @@
             "comment": "Fermer: the 'refuser ce cookie' link only opens the legal page"
         }
     ],
-    "test": [{ "waitForVisible": "#cookie-message", "timeout": 2000, "check": "none" }]
+    "test": [
+        {
+            "waitForVisible": "#cookie-message",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
 }
