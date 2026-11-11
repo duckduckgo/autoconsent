@@ -1,0 +1,29 @@
+{
+    "name": "carlsberg-group",
+    "prehideSelectors": ["#cbgccp-cookies-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cbgccp-cookies-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cbgccp-cookies-banner #cbg_ccp_cookie_refuse_optional_btn"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cbgccp-cookies-banner #cbg_ccp_cookie_allow_all_btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cbgccp-cookies-banner #cbg_ccp_cookie_refuse_optional_btn"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cbg_ccp=necessary"
+        }
+    ]
+}
