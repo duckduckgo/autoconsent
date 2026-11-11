@@ -1,0 +1,46 @@
+{
+    "name": "silicloud",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(silicloud\\.com|sicloud\\.hk)/"
+    },
+    "prehideSelectors": [".cookieBox"],
+    "detectCmp": [
+        {
+            "exists": ".cookieBox .btnBox .el-button--primary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookieBox .btnBox"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookieBox .btnBox .el-button--primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": ".cookieBox .btnBox"
+        },
+        {
+            "click": ".cookieBox .el-switch.is-checked:not(.is-disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForVisible": ".cookieBox .el-switch.is-checked:not(.is-disabled)",
+            "check": "none",
+            "timeout": 1000,
+            "optional": true
+        },
+        {
+            "click": ".cookieBox .btnBox .el-button--primary"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_SILICLOUD_TEST"
+        }
+    ]
+}

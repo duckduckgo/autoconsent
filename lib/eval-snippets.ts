@@ -234,6 +234,7 @@ export const snippets = {
                         .split('=')[1],
                 ),
             ).purposes.a === false),
+    EVAL_SILICLOUD_TEST: () => localStorage.getItem('cookieSelect2') === '1' && localStorage.getItem('cookieSelect3') === '1',
     EVAL_SKYSCANNER_TEST: () => document.cookie.match(/gdpr=[^;]*adverts:::false/) && !document.cookie.match(/gdpr=[^;]*init:::true/),
     EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
         document.documentElement.classList.forEach((cls) => {
