@@ -6,20 +6,7 @@ import Evidon from './evidon';
 import Onetrust from './onetrust';
 import Klaro from './klaro';
 import Uniconsent from './uniconsent';
-import Conversant from './conversant';
 import Tiktok from './tiktok';
 import Admiral from './admiral';
 
-export const dynamicCMPs = [
-    TrustArcTop,
-    CookieBot,
-    SourcePointFrame,
-    ConsentManager,
-    Evidon,
-    Onetrust,
-    Klaro,
-    Uniconsent,
-    Conversant,
-    Tiktok,
-    Admiral,
-];
+export const dynamicCMPs = [TrustArcTop, CookieBot, SourcePointFrame, ConsentManager, Evidon, Onetrust, Klaro, Uniconsent, Tiktok, Admiral];
