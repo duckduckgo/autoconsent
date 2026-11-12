@@ -1,0 +1,36 @@
+{
+    "name": "cookie-consent-by-you",
+    "prehideSelectors": ["#ccby-wrapper .cmplz-cookiebanner"],
+    "detectCmp": [{ "exists": "#ccby-wrapper .cmplz-cookiebanner" }],
+    "detectPopup": [
+        {
+            "comment": "the banner is server-rendered even after a choice and only hidden once the plugin script runs",
+            "cookieContains": "ccby_consent=",
+            "negated": true
+        },
+        { "visible": "#ccby-wrapper .cmplz-cookiebanner" }
+    ],
+    "optIn": [
+        { "eval": "EVAL_CCBY_LOAD_DEFERRED_SCRIPTS" },
+        { "waitFor": "#ccby-wrapper .cmplz-cookiebanner.show", "timeout": 5000 },
+        { "waitForThenClick": "#ccby-wrapper .cmplz-accept" },
+        { "waitForVisible": "#ccby-wrapper .cmplz-cookiebanner", "check": "none", "timeout": 3000, "optional": true }
+    ],
+    "optOut": [
+        { "eval": "EVAL_CCBY_LOAD_DEFERRED_SCRIPTS" },
+        {
+            "comment": "the plugin script adds .show once its button handlers are attached",
+            "waitFor": "#ccby-wrapper .cmplz-cookiebanner.show",
+            "timeout": 5000
+        },
+        { "waitForThenClick": "#ccby-wrapper .cmplz-deny" },
+        {
+            "comment": "the banner is hidden only after the choice is saved, which some lazy loaders delay by replaying the click",
+            "waitForVisible": "#ccby-wrapper .cmplz-cookiebanner",
+            "check": "none",
+            "timeout": 3000,
+            "optional": true
+        }
+    ],
+    "test": [{ "cookieContains": "ccby_consent=" }, { "cookieContains": "%22denied%22%3Atrue" }]
+}
