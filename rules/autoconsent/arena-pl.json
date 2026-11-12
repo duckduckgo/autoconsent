@@ -1,0 +1,16 @@
+{
+    "name": "arena.pl",
+    "vendorUrl": "https://arena.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?arena\\.pl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".c-mp > .c-mp-n" }],
+    "detectPopup": [{ "visible": ".c-mp > .c-mp-n" }],
+    "optIn": [{ "waitForThenClick": ".c-mp > .c-mp-n .cn-ok > .cn-btn-primary" }],
+    "optOut": [
+        { "waitForThenClick": ".c-mp > .c-mp-n .cn-buttons > .cm-btn-secondary" },
+        { "waitForThenClick": ".c-mp .cm-klaro .cm-footer-buttons .cn-buttons > .cm-btn-secondary:first-child" }
+    ],
+    "test": [{ "cookieContains": "%22google-ads%22%3Afalse" }]
+}
