@@ -1,0 +1,47 @@
+{
+    "name": "cookie-button-basic",
+    "prehideSelectors": [".cookie-container:has(#cookie-button-basic)"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-container #cookie-button-basic"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-container.visible #cookie-button-basic"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ".cookie-container #cookie-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cookie-container #cookie-button"
+                }
+            ],
+            "else": [
+                {
+                    "click": ".cookie-container #statistical-cookies-switch:not(:checked)",
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ".cookie-container #cookie-button-selected"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-container #cookie-button-basic"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookie-container.visible #cookie-button-basic",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
