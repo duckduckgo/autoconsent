@@ -1,0 +1,22 @@
+{
+    "name": "skisport",
+    "vendorUrl": "https://www.skisport.dk/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#cookieBannerModal #cookie_consent_manage_accept_modal" }],
+    "detectPopup": [{ "visible": "#cookieBannerModal.is-open .cc-dialog" }],
+    "optIn": [{ "waitForThenClick": "#cookie_consent_manage_accept_modal" }],
+    "optOut": [
+        { "waitForThenClick": "#cookieBannerModal [data-cc-open=cookieConsentModal]" },
+        { "waitForVisible": "#cookieConsentModal.is-shown .cc-dialog" },
+        { "click": "#cookieConsentModal input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+        {
+            "waitForThenClick": "#cookieConsentModal #cookie_consent_manager_confirm_top, #cookieConsentModal #cookie_consent_manager_confirm"
+        }
+    ],
+    "test": [
+        { "cookieContains": "consent_set=true" },
+        { "cookieContains": "consent_marketing=false" },
+        { "cookieContains": "consent_analytics=false" }
+    ]
+}
