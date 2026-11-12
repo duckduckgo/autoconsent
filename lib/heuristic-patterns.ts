@@ -499,7 +499,7 @@ const REJECT_PATTERNS_ITALIAN = [
     /^\s*(accetta|accettare|usa|installa|consenti|chiudi e prosegui( solo con)?)?\s*(solo|soltanto|unicamente)?\s*(i\s+|gli\s+)?(cookies?\s+)?(strettamente\s+)?(necessari|necessary|essenziali|tecnici|di navigazione)\s*(necessari|tecnici|essenziali)?\s*$/is,
 
     // continue without accepting
-    /continua(re)? senza accettare/is,
+    /(continua(re)?|prosegui(re)?) senza accettare/is,
 
     'non accetto',
 ];
