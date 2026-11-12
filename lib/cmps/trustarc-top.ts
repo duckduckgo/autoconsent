@@ -9,7 +9,10 @@ const shortcutOptIn = '#truste-consent-button';
 const popupContent = '#truste-consent-content';
 const bannerOverlay = '#trustarc-banner-overlay';
 const bannerContainer = '#truste-consent-track';
-const prefCenterDeclineAll = ['.truste_popframe.trustarc_newcm_container', 'button[data-button-key="decline_all"]'];
+const prefCenterDeclineAll = [
+    '.truste_popframe.trustarc_newcm_container',
+    'button[data-button-key="decline_all"], .trustarc-declineall-btn',
+];
 
 export default class TrustArcTop extends AutoConsentCMPBase {
     name = 'TrustArc-top';
@@ -61,8 +64,14 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
     async optOut() {
         if (this.elementExists(shortcutOptOut)) {
-            this.click(shortcutOptOut);
-            return true;
+            const shortcutVisible = this.elementVisible(shortcutOptOut, 'any');
+            await this.click(shortcutOptOut);
+            // a hidden reject button is not always wired up; when it is, the banner is dismissed synchronously
+            if (shortcutVisible || !this.elementExists(`${bannerContainer}.ta-show`)) {
+                return true;
+            }
+            // the shortcut did nothing, so only a preference center click below counts as done
+            this._shortcutButton = null;
         }
 
         // hide elements permanently, so user doesn't see the popup
