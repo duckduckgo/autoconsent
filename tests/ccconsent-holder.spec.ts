@@ -5,4 +5,7 @@ generateCMPTests('ccconsent-holder', [
     'https://www.skapamer.se/',
     'https://www.hjemfint.no/',
     'https://www.prisklok.no/',
+    'https://www.skapemer.no/',
+    'https://www.ellahobby.de/',
+    'https://freddyhaus.de/',
 ]);

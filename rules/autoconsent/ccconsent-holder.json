@@ -3,7 +3,7 @@
     "prehideSelectors": [".ccConsentHolder"],
     "detectCmp": [
         {
-            "exists": ".ccConsentHolder .ccConsent .cookieTextHolderExtended"
+            "exists": ".ccConsentHolder .ccConsent .cookieSettings"
         }
     ],
     "detectPopup": [
@@ -13,12 +13,24 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": ".ccConsent .cookieTextHolderExtended .cookieButton.all"
+            "waitForThenClick": ".ccConsent .cookieButton.all"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ".ccConsent .cookieTextHolderExtended .cookieSettings"
+            "if": {
+                "visible": ".ccConsent .cookieTextHolderExtended .cookieSettings"
+            },
+            "then": [
+                {
+                    "click": ".ccConsent .cookieTextHolderExtended .cookieSettings"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".ccConsent .cookieTextHolder .cookieSettings"
+                }
+            ]
         },
         {
             "waitForVisible": ".ccConsent .cookie_settings_row .cookieButton:not(.all)"
