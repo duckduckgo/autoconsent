@@ -1,0 +1,13 @@
+{
+    "name": "cloudcms-cookie-alert",
+    "prehideSelectors": ["#cookieAlert.cookie-alert-overlay"],
+    "detectCmp": [{ "exists": "#cookieAlert.cookie-alert-overlay #saveCookieSettings" }],
+    "detectPopup": [{ "visible": "#cookieAlert.cookie-alert-overlay.show" }],
+    "optIn": [{ "waitForThenClick": "#cookieAlert #cookieAccept" }],
+    "optOut": [
+        { "waitForThenClick": "#cookieAlert #changeCookieSettings" },
+        { "click": "#cookieAlert .cookie-category-switcher:checked:not([data-category=\"necessary\"])", "all": true, "optional": true },
+        { "waitForThenClick": "#cookieAlert #saveCookieSettings" }
+    ],
+    "test": [{ "cookieContains": "%22marketing%22:false" }]
+}
