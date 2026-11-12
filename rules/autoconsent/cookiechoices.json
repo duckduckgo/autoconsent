@@ -1,0 +1,21 @@
+{
+    "name": "cookiechoices",
+    "vendorUrl": "https://github.com/google/cookiechoices",
+    "prehideSelectors": ["#cookieChoiceInfo:not(.cookie-choices-info)"],
+    "detectCmp": [{ "exists": "#cookieChoiceInfo:not(.cookie-choices-info) #cookieChoiceDismiss" }],
+    "detectPopup": [{ "visible": "#cookieChoiceInfo" }],
+    "optIn": [{ "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDismiss" }],
+    "optOut": [
+        { "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDismiss" },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 4000, "optional": true },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "displayCookieConsent=" }]
+}
