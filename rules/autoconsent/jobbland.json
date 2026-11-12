@@ -1,0 +1,17 @@
+{
+    "name": "jobbland",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(jobbland|jobbsafari)\\.se/"
+    },
+    "prehideSelectors": [".MuiDialog-root:has([role=dialog] form a[href*='/compliance'])"],
+    "detectCmp": [{ "exists": ".MuiDialog-root [role=dialog] form a[href*='/compliance']" }],
+    "detectPopup": [{ "visible": ".MuiDialog-root [role=dialog] form a[href*='/compliance']" }],
+    "optIn": [{ "waitForThenClick": ".MuiDialog-root [role=dialog] form:has(a[href*='/compliance']) button[type=submit]" }],
+    "optOut": [
+        { "waitForThenClick": ".MuiDialog-root [role=dialog] form:has(a[href*='/compliance']) button[type=button]" },
+        { "waitFor": ".MuiDialog-root [role=dialog] form input[id^='cookie-consent-']" },
+        { "click": ".MuiDialog-root [role=dialog] form input[id^='cookie-consent-']:checked", "all": true, "optional": true },
+        { "waitForThenClick": ".MuiDialog-root [role=dialog] form:has(input[id^='cookie-consent-']) button[type=submit]" }
+    ],
+    "test": [{ "waitForVisible": ".MuiDialog-root [role=dialog] form a[href*='/compliance']", "check": "none", "timeout": 2000 }]
+}
