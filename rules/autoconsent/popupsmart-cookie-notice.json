@@ -1,0 +1,27 @@
+{
+    "name": "popupsmart-cookie-notice",
+    "vendorUrl": "https://popupsmart.com/cookie-consent",
+    "comment": "notice with a single configurable button that can be labelled as accept, so it is hidden instead of clicked",
+    "cosmetic": true,
+    "prehideSelectors": ["#spopupCont"],
+    "detectCmp": [
+        {
+            "exists": "#spopupCont #poper #cookie-btn.spopupbtnok"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#spopupCont #poper"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#spopupCont #cookie-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#spopupCont"
+        }
+    ]
+}

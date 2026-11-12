@@ -1,0 +1,17 @@
+{
+    "name": "danskebank",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["[data-module=cookie-consent-banner]"],
+    "detectCmp": [{ "exists": "[data-module=cookie-consent-banner] #button-accept-necessary[data-consent-set]" }],
+    "detectPopup": [{ "visible": "[data-module=cookie-consent-banner] .cookie-consent-banner" }],
+    "optIn": [{ "waitForThenClick": "[data-module=cookie-consent-banner] #button-accept-all" }],
+    "optOut": [
+        { "waitForThenClick": "[data-module=cookie-consent-banner] #button-accept-necessary" },
+        { "waitForVisible": "[data-module=cookie-consent-banner] .cookie-consent-banner", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "dbconsent=0.1." }]
+}

@@ -1,0 +1,45 @@
+{
+    "name": "tutosurexcel",
+    "vendorUrl": "https://tutosurexcel.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?tutosurexcel\\.com/"
+    },
+    "prehideSelectors": ["#tse-consent"],
+    "detectCmp": [
+        {
+            "exists": "#tse-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#tse-consent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#tse-consent .tse-ok"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#tse-consent .tse-more"
+        },
+        {
+            "waitForVisible": "#tse-consent .tse-opts .tse-no"
+        },
+        {
+            "click": "#tse-consent .tse-t-ga:checked",
+            "optional": true
+        },
+        {
+            "click": "#tse-consent .tse-no"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#tse-consent",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

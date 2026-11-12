@@ -1,0 +1,16 @@
+{
+    "name": "umcg",
+    "vendorUrl": "https://www.umcg.nl/",
+    "prehideSelectors": [".cookie-notice-advanced"],
+    "detectCmp": [{ "exists": ".cookie-notice-advanced .cookie-bar #cookie-save" }],
+    "detectPopup": [{ "visible": ".cookie-notice-advanced .cookie-bar" }],
+    "optIn": [{ "waitForThenClick": ".cookie-notice-advanced #cookie-accept-all" }],
+    "optOut": [
+        {
+            "click": ".cookie-notice-advanced input:is(#social-cookies, #advertisement-cookies):checked",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": ".cookie-notice-advanced #cookie-save" }
+    ]
+}

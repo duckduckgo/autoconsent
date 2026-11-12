@@ -1,0 +1,16 @@
+{
+    "name": "usherbrooke",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?usherbrooke\\.ca/" },
+    "prehideSelectors": ["#modal-consent-banner"],
+    "detectCmp": [{ "exists": "#modal-consent-banner #btn-edit-cookie-consent" }],
+    "detectPopup": [{ "visible": "#cookie-consent-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookie-consent-banner #btn-accept-all" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-consent-banner #btn-edit-cookie-consent" },
+        { "waitForVisible": "#cookie-consent-dialog #btn-accept-some" },
+        { "if": { "exists": "#consent-analytics:checked" }, "then": [{ "click": "#consent-analytics" }] },
+        { "if": { "exists": "#consent-ad:checked" }, "then": [{ "click": "#consent-ad" }] },
+        { "waitForThenClick": "#cookie-consent-dialog #btn-accept-some", "retry": 3, "retryInterval": 600 },
+        { "waitForVisible": "#cookie-consent-dialog", "check": "none" }
+    ]
+}

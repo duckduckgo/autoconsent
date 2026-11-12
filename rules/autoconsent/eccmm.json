@@ -1,0 +1,30 @@
+{
+    "name": "eccmm",
+    "detectCmp": [
+        {
+            "exists": ["#eccm-shadow-host", ".eccmm"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#eccm-shadow-host", ".eccmm-dialog.eccmm-visible"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#eccm-shadow-host", ".eccmm-dialog .eccmm-allow-all-btn--footer"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#eccm-shadow-host", ".eccmm-dialog .eccmm-deny-all-btn--footer"]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["#eccm-shadow-host", ".eccmm-dialog"],
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

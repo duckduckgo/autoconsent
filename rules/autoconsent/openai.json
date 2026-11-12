@@ -1,6 +1,6 @@
 {
     "name": "openai",
-    "vendorUrl": "https://platform.openai.com/",
+    "vendorUrl": "https://openai.com/",
     "cosmetic": false,
     "runContext": {
         "urlPattern": "^https://([a-z0-9-]+\\.)?openai\\.com/"
@@ -18,12 +18,12 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": "xpath///button[contains(., 'Accept all')]"
+            "waitForThenClick": "[aria-labelledby=cookieConsentTitle] button[aria-haspopup=dialog] ~ button:last-child"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "xpath///button[contains(., 'Reject non-essential')]"
+            "waitForThenClick": "[aria-labelledby=cookieConsentTitle] button[aria-haspopup=dialog] + button"
         }
     ],
     "test": [{ "wait": 500 }, { "cookieContains": "consent=rejected" }]

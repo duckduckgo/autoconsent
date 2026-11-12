@@ -1,0 +1,16 @@
+{
+    "name": "praktikertjanst",
+    "vendorUrl": "https://www.praktikertjanst.se/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?praktikertjanst\\.se/"
+    },
+    "prehideSelectors": ["#tc-banner"],
+    "detectCmp": [{ "exists": "#tc-consent #tc-banner" }],
+    "detectPopup": [{ "visible": "#tc-banner .tc-accept-btn" }],
+    "optIn": [{ "waitForThenClick": "#tc-banner .tc-accept-all-btn" }],
+    "optOut": [
+        { "click": ".tc-checkbox:checked:not([disabled])", "all": true, "optional": true },
+        { "waitForThenClick": "#tc-banner .tc-accept-btn" }
+    ],
+    "test": [{ "cookieContains": "UserConsentedToTastyCookies=[\"nodvandiga\"]" }]
+}

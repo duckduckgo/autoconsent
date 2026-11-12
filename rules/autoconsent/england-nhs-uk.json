@@ -1,0 +1,18 @@
+{
+    "name": "england.nhs.uk",
+    "runContext": { "urlPattern": "^https?://(www\\.)?england\\.nhs\\.uk/" },
+    "prehideSelectors": [".cookie-banner-container"],
+    "detectCmp": [{ "exists": ".cookie-banner-container button.preferences" }],
+    "detectPopup": [{ "visible": ".cookie-banner-container" }],
+    "optIn": [{ "waitForThenClick": ".cookie-banner-container button.ok" }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-banner-container button.preferences" },
+        { "waitForVisible": "#ccc-module" },
+        {
+            "if": { "exists": "#ccc-optional-categories .checkbox-toggle-input:checked" },
+            "then": [{ "click": "#ccc-optional-categories .checkbox-toggle-input:checked", "all": true }]
+        },
+        { "waitForThenClick": "#ccc-close" }
+    ],
+    "test": [{ "cookieContains": "\"analytics\":\"revoked\"" }]
+}

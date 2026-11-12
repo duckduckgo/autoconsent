@@ -1,0 +1,16 @@
+{
+    "name": "kwik-fit",
+    "vendorUrl": "https://www.kwik-fit.com/",
+    "cosmetic": false,
+    "prehideSelectors": [".cookie-settings-message", ".cookie-settings-background"],
+    "detectCmp": [{ "exists": ".cookie-settings-message #frmCookiesBanner" }],
+    "detectPopup": [{ "visible": ".cookie-settings-message .cookie-settings-message-close-link" }],
+    "optIn": [{ "waitForThenClick": ".cookie-settings-message .cookie-settings-message-close-link" }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-settings-message .cookie-settings-manage" },
+        { "waitForVisible": "#frmCookiesBanner" },
+        { "click": "#frmCookiesBanner input[type=checkbox]:checked", "all": true, "optional": true },
+        { "waitForThenClick": ".cookie-settings-message .cookie-settings-message-save-link" },
+        { "waitForVisible": ".cookie-settings-message", "check": "none" }
+    ]
+}

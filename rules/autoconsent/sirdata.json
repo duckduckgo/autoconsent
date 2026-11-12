@@ -9,12 +9,13 @@
     ],
     "detectPopup": [
         {
-            "visible": "#sd-cmp"
+            "visible": "#sd-cmp [role='dialog']",
+            "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#sd-cmp .sd-cmp-3cRQ2"
+            "waitForThenClick": "#sd-cmp [data-sd-override='choiceButtons']"
         }
     ],
     "optOut": [
@@ -57,7 +58,11 @@
                     ],
                     "else": [
                         {
-                            "waitForThenClick": "#sd-cmp [role='button'][title='Close']"
+                            "waitForVisible": "#sd-cmp [role='button'][title='Close']",
+                            "check": "any"
+                        },
+                        {
+                            "click": "#sd-cmp [role='button'][title='Close']"
                         }
                     ]
                 }

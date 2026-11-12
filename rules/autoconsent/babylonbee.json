@@ -1,0 +1,36 @@
+{
+    "name": "babylonbee",
+    "vendorUrl": "https://babylonbee.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?babylonbee\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".cookie-notice-layout .cookie-notice-dismiss"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-notice-layout .cookie-notice-dismiss"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-notice-layout .cookie-notice-dismiss",
+            "retry": 3
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-notice-layout .cookie-notice-dismiss",
+            "retry": 3
+        }
+    ],
+    "test": [
+        {
+            "visible": ".cookie-notice-layout .cookie-notice-dismiss",
+            "check": "none"
+        }
+    ]
+}

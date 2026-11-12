@@ -4,7 +4,8 @@ generateCMPTests(
     'Evidon',
     [
         'https://www.crunchyroll.com/',
-        'https://www.kia.com/us/en', // "I agree" button is actually a decline button
+        'https://www.computershare.com/',
+        'https://www.motorola.com/', // barrier layout in the EU and UK
     ],
     {
         testOptIn: false,

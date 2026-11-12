@@ -1,0 +1,83 @@
+{
+    "name": "shopgold",
+    "prehideSelectors": ["#InfoCookieTlo", "#CookieOknoUstawien"],
+    "detectCmp": [
+        {
+            "exists": "#InfoCookie.DolnaInformacjaCookie, #InfoCookieIntegracje.DolnaInformacjaCookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                {
+                    "visible": "#InfoCookieIntegracje"
+                },
+                {
+                    "visible": "xpath///div[@id='InfoCookie']//span[@id='InfoAkcept'][contains(., 'Nie pokazuj')]"
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "visible": "#InfoCookieIntegracje"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#InfoAkceptIntegracje"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#InfoAkcept"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#InfoCookieIntegracje"
+            },
+            "then": [
+                {
+                    "if": {
+                        "exists": "#InfoTylkoNiezbedneIntegracje"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#InfoTylkoNiezbedneIntegracje"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": "#InfoUstawieniaIntegracje"
+                        },
+                        {
+                            "waitForVisible": "#CookieOknoUstawien"
+                        },
+                        {
+                            "click": "#CookieOknoUstawien input[type=checkbox]:checked:not(:disabled)",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "click": "#CookieOknoUstawien .GotoweCookieOkno span"
+                        }
+                    ]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "xpath///div[@id='InfoCookie']//span[@id='InfoAkcept'][contains(., 'Nie pokazuj')]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "akceptCookie=tak"
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "name": "onlineradiobox",
+    "vendorUrl": "https://onlineradiobox.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?onlineradiobox\\.com/"
+    },
+    "prehideSelectors": ["#alert_cookies"],
+    "detectCmp": [
+        {
+            "exists": "#alert_cookies #alert_cookies_close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#alert_cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#alert_cookies_close"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#alert_cookies"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#alert_cookies",
+            "check": "none"
+        }
+    ]
+}

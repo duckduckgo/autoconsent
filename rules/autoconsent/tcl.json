@@ -1,0 +1,50 @@
+{
+    "name": "tcl.com",
+    "vendorUrl": "https://www.tcl.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?tcl\\.com/"
+    },
+    "prehideSelectors": [".cookie-bar .cookie-box"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-bar .cookie-box .cookie-bar-buttons"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-bar .cookie-box .cookie-bar-buttons"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-bar .cookie-box :is(.accept-all, .cookie-accept)",
+            "retry": 5
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".cookie-bar .cookie-box .refuse-all"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cookie-bar .cookie-box .refuse-all",
+                    "retry": 5
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cookie-bar .cookie-box .cookie-bar-close",
+                    "retry": 5
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookie-bar .cookie-box .cookie-bar-buttons",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

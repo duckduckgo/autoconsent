@@ -1,0 +1,34 @@
+{
+    "name": "rijksoverheid-notification-bar",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#notification-bar:has(> #close-notification[aria-label=\"Sluit de cookiebanner\"])"],
+    "detectCmp": [
+        {
+            "exists": "#notification-bar > #close-notification[aria-label=\"Sluit de cookiebanner\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#notification-bar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#notification-bar > #close-notification"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#notification-bar > #close-notification"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_notification_shown=true"
+        }
+    ]
+}

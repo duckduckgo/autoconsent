@@ -1,0 +1,14 @@
+{
+    "name": "cookiepermission-cp-overlay",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#cp-overlay"],
+    "detectCmp": [{ "exists": "#cp-overlay #cp-no a" }],
+    "detectPopup": [{ "visible": "#cp-overlay" }],
+    "optIn": [{ "waitForThenClick": "#cp-overlay #cp-yes a" }],
+    "optOut": [{ "waitForThenClick": "#cp-overlay #cp-no a" }, { "waitForVisible": "#cp-overlay", "check": "none" }],
+    "test": [{ "cookieContains": "cookiepermission=no" }]
+}

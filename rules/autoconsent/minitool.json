@@ -1,0 +1,31 @@
+{
+    "name": "minitool",
+    "cosmetic": true,
+    "prehideSelectors": [".bottom-cookie-wrap:has(.js-bottom-cookie-close)"],
+    "detectCmp": [
+        {
+            "exists": ".bottom-cookie-wrap .js-bottom-cookie-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".bottom-cookie-wrap:has(.js-bottom-cookie-close)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".bottom-cookie-wrap .js-bottom-cookie-close"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".bottom-cookie-wrap:has(.js-bottom-cookie-close)"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".bottom-cookie-wrap:has(.js-bottom-cookie-close)",
+            "check": "none"
+        }
+    ]
+}

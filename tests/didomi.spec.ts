@@ -27,6 +27,14 @@ generateCMPTests('didomi', ['https://newrepublic.com/article/162247/andreas-malm
     onlyRegions: ['US'],
 });
 
+// Publisher wrapper (#acceptationCMPWall) that only unlocks the page on Didomi UI click events,
+// so the rule rejects via the preferences screen instead of the JS API.
+generateCMPTests('didomi', ['https://en.as.com/', 'https://cadenaser.com/'], {
+    testOptIn: true,
+    testSelfTest: true,
+    onlyRegions: ['US'],
+});
+
 // "Consent or pay" notices where the disagree button is a paid or subscription option: the rule must leave them to the user.
 generateCMPTests('didomi', ['https://www.elconfidencial.com/', 'https://www.20minutes.fr/', 'https://www.publico.es/'], {
     expectPopupOpen: false,

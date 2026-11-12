@@ -1,0 +1,65 @@
+{
+    "name": "in2cookiemodal",
+    "vendorUrl": "https://www.in2code.de/",
+    "prehideSelectors": ["[data-in2-modal-root-node]"],
+    "detectCmp": [
+        {
+            "exists": "[data-in2-modal-root-node]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-in2-modal-root-node]"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "visible": "[data-in2-modal-root-node] .in2-modal-more-accept-button"
+            },
+            "then": [
+                {
+                    "click": "[data-in2-modal-root-node] .in2-modal-more-accept-button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "[data-in2-modal-root-node] [data-in2-modal-accept-button]"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "[data-in2-modal-root-node] .in2-modal-deny-button"
+            },
+            "then": [
+                {
+                    "click": "[data-in2-modal-root-node] .in2-modal-deny-button"
+                }
+            ],
+            "else": [
+                {
+                    "click": "[data-in2-modal-root-node] .in2-modal-checkbox__input:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "[data-in2-modal-root-node] [data-in2-modal-save-button]"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "[data-in2-modal-root-node]",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "in2cookiemodal-selection=[%22essential%22]"
+        }
+    ]
+}

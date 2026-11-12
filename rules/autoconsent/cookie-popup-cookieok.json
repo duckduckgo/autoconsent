@@ -1,0 +1,25 @@
+{
+    "name": "cookie-popup-cookieok",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookie-popup:has([onclick*=\"cookieOk()\"]):not(:has([onclick*=\"cookieNo()\"]))"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-popup:not(:has([onclick*=\"cookieNo()\"])) [onclick*=\"cookieOk()\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-popup"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-popup [onclick*=\"cookieOk()\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookie-popup"
+        }
+    ]
+}

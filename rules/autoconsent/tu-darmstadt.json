@@ -1,0 +1,63 @@
+{
+    "name": "tu-darmstadt",
+    "_metadata": {
+        "vendorUrl": "https://www.tu-darmstadt.de/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)*tu-darmstadt\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookie-modal-window button[name=save-cookies]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-modal-window.show button[name=save-cookies]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-modal-window.show button[name=accept-cookies]",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cookie-modal-window #check-usability:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookie-modal-window #check-usability"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#cookie-modal-window #check-statistics:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookie-modal-window #check-statistics"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#cookie-modal-window.show button[name=save-cookies]",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-consent=essential"
+        },
+        {
+            "cookieContains": "statistics",
+            "negated": true
+        }
+    ]
+}

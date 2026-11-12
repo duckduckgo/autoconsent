@@ -1,0 +1,39 @@
+{
+    "name": "maree-info",
+    "vendorUrl": "https://maree.info/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?maree\\.info/"
+    },
+    "prehideSelectors": ["#Modal:has(.DlgCGU)"],
+    "detectCmp": [
+        {
+            "exists": ".DlgCGU .DlgCGUBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".DlgCGU .DlgCGUBtn"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".DlgCGU .DlgCGUBtn button.Green"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".DlgCGU .DlgCGUBtn button.Red"
+        },
+        {
+            "waitForVisible": ".DlgCGU .DlgCGUBtn",
+            "check": "none",
+            "timeout": 3000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "UserAgreement=0"
+        }
+    ]
+}

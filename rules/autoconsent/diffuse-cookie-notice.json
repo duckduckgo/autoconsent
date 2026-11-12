@@ -1,0 +1,21 @@
+{
+    "name": "diffuse-cookie-notice",
+    "_metadata": { "vendorUrl": "https://diffuse.tools/cookie-notice" },
+    "prehideSelectors": ["#diffuse-cookie-notice"],
+    "detectCmp": [{ "exists": "#diffuse-cookie-notice .dcn-bar" }],
+    "detectPopup": [{ "visible": "#diffuse-cookie-notice .dcn-bar" }],
+    "optIn": [{ "waitForThenClick": "#diffuse-cookie-notice .dcn-bar .diffuseCookieAcceptAll" }],
+    "optOut": [
+        {
+            "if": { "exists": "#diffuse-cookie-notice .dcn-bar .diffuseCookieDenyAll" },
+            "then": [{ "click": "#diffuse-cookie-notice .dcn-bar .diffuseCookieDenyAll" }],
+            "else": [
+                { "click": "#diffuse-cookie-notice .dcn-bar .diffuseCookieSettings" },
+                { "waitForVisible": "#diffuse-cookie-notice .dcn-modal" },
+                { "click": "#diffuse-cookie-notice .dcn-modal .dcn-cbl-on:not(.dcn-cbl-locked)", "all": true, "optional": true },
+                { "waitForThenClick": "#diffuse-cookie-notice .dcn-modal .diffuseCookieAcceptSelection" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "%3Atrue", "negated": true }]
+}

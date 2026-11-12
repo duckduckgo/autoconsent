@@ -1,0 +1,40 @@
+{
+    "name": "giustizia-it",
+    "vendorUrl": "https://www.giustizia.it/",
+    "prehideSelectors": ["#cookie-container .navbar-cookies"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-container #accetta-cookie .cookie-container-setting"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-container"
+        }
+    ],
+    "optIn": [
+        {
+            "click": "#accetta-cookie input[type=checkbox]:not(:checked):not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#accetta-cookie .accept"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#accetta-cookie input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#accetta-cookie .accept"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "acconsenti-cookie=1"
+        }
+    ]
+}

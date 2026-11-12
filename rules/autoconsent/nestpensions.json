@@ -1,0 +1,14 @@
+{
+    "name": "nestpensions",
+    "vendorUrl": "https://www.nestpensions.org.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?nestpensions\\.org\\.uk/"
+    },
+    "prehideSelectors": [".cookie-policy-wrapper .cookie-policy-content"],
+    "detectCmp": [{ "exists": ".cookie-policy-wrapper #declineCookies" }],
+    "detectPopup": [{ "visible": ".cookie-policy-wrapper .cookie-policy-content" }],
+    "optIn": [{ "waitForThenClick": ".cookie-policy-wrapper #acceptCookies" }],
+    "optOut": [{ "waitForThenClick": ".cookie-policy-wrapper #declineCookies" }],
+    "test": [{ "cookieContains": "cookies_policy=analyticsCookies%3Doff%26functionalityCookies%3Doff" }]
+}

@@ -1,0 +1,17 @@
+{
+    "name": "praca-pl",
+    "vendorUrl": "https://www.praca.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?praca\\.pl/"
+    },
+    "prehideSelectors": ["#cookiesPopup"],
+    "detectCmp": [{ "exists": "#cookiesPopup button.MuiButton-outlined" }],
+    "detectPopup": [{ "visible": "#cookiesPopup button.MuiButton-outlined" }],
+    "optIn": [{ "waitForThenClick": "#cookiesPopup button.MuiButton-contained" }],
+    "optOut": [
+        { "waitForThenClick": "#cookiesPopup button.MuiButton-outlined" },
+        { "waitForVisible": "#cookiesPopup .MuiSwitch-root" },
+        { "click": "#cookiesPopup button.MuiButton-outlined" }
+    ],
+    "test": [{ "waitForVisible": "#cookiesPopup button", "check": "none" }]
+}

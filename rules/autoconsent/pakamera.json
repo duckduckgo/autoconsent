@@ -1,0 +1,19 @@
+{
+    "name": "pakamera.pl",
+    "vendorUrl": "https://www.github.com/orestbida/cookieconsent",
+    "comment": "customized CookieConsent v3 with a renamed root container",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?pakamera\\.pl/"
+    },
+    "prehideSelectors": ["#ccpm"],
+    "detectCmp": [{ "exists": "#ccpm" }],
+    "detectPopup": [{ "visible": "html.show--consent #ccpm .cm__btn[data-role=all]" }],
+    "optIn": [{ "waitForThenClick": "#ccpm .cm__btn[data-role=all]" }],
+    "optOut": [
+        { "waitForThenClick": "#ccpm .cm__btn[data-role=show]" },
+        { "waitForVisible": "#ccpm .pm__btn[data-role=save]" },
+        { "click": "#ccpm .pm input.section__toggle:checked:not(:disabled)", "all": true, "optional": true },
+        { "click": "#ccpm .pm__btn[data-role=save]" }
+    ],
+    "test": [{ "waitForVisible": "html.show--consent #ccpm .cm__btn[data-role=all]", "check": "none" }]
+}

@@ -1,0 +1,10 @@
+{
+    "name": "impress-co-jp",
+    "vendorUrl": "https://www.impress.co.jp/",
+    "prehideSelectors": ["#ipc_cookie_confirmation"],
+    "detectCmp": [{ "exists": "#ipc_cookie_confirmation .cookie_confirmed_and_close" }],
+    "detectPopup": [{ "visible": "#ipc_cookie_confirmation .cookie_confirmed_and_close" }],
+    "optIn": [{ "waitForThenClick": "#ipc_cookie_confirmation .cookie_confirmed_and_close" }],
+    "optOut": [{ "waitForThenClick": "#ipc_cookie_confirmation .cookie_confirmed_and_close" }],
+    "test": [{ "cookieContains": "ipc_cookie=confirmed" }]
+}

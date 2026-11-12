@@ -1,0 +1,33 @@
+{
+    "name": "breuninger",
+    "vendorUrl": "https://www.breuninger.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?breuninger\\.com/"
+    },
+    "prehideSelectors": [".keks-privacy-layer"],
+    "detectCmp": [
+        {
+            "exists": ".keks-privacy-layer #cube-cmp-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".keks-privacy-layer[open]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".keks-privacy-layer .keks-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".keks-privacy-layer #cube-cmp-reject-all"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "acceptedCategories%22%3A%5B%22REQRD%22%5D"
+        }
+    ]
+}

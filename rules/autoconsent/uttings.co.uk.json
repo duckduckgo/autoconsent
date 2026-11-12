@@ -1,0 +1,22 @@
+{
+    "name": "uttings.co.uk",
+    "vendorUrl": "https://www.uttings.co.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?uttings\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#cookie-notice", "#cookie-blur"],
+    "detectCmp": [{ "exists": "#cookie-notice #cookie_notice_manage" }],
+    "detectPopup": [{ "visible": "#cookie-notice #cookie_notice_manage" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notice #cookie_notice_accept" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-notice #cookie_notice_manage" },
+        { "waitForVisible": ["#colorbox iframe.cboxIframe", "#cookie_notice_save"], "timeout": 10000 },
+        {
+            "click": ["#colorbox iframe.cboxIframe", ".cookie-field input[type=checkbox]:checked:not(:disabled)"],
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": ["#colorbox iframe.cboxIframe", "#cookie_notice_save"], "timeout": 10000, "retry": 5, "retryInterval": 1000 }
+    ],
+    "test": [{ "cookieContains": "COOKIES_ADVERTISING=0" }]
+}

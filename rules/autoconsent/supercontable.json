@@ -1,0 +1,19 @@
+{
+    "name": "supercontable",
+    "vendorUrl": "https://www.supercontable.com/",
+    "prehideSelectors": ["#consCookie.popup-overlay"],
+    "detectCmp": [{ "exists": "#consCookie.popup-overlay .cajaSetting" }],
+    "detectPopup": [{ "visible": "#consCookie.popup-overlay .contenedorCookies" }],
+    "optIn": [{ "waitForThenClick": "#consCookie a.submit" }],
+    "optOut": [
+        { "waitForThenClick": "#consCookie a.setting:not(.preferencias)" },
+        { "waitForVisible": "#consCookie a.setting.preferencias" },
+        {
+            "if": { "exists": "#consCookie .cajaSetting input[type=checkbox]:checked:not(:disabled)" },
+            "then": [{ "click": "#consCookie .cajaSetting input[type=checkbox]:checked:not(:disabled)", "all": true }]
+        },
+        { "click": "#consCookie a.setting.preferencias" },
+        { "waitForVisible": "#consCookie.popup-overlay", "check": "none" }
+    ],
+    "test": [{ "wait": 500 }, { "any": [{ "cookieContains": "CONS=100" }, { "cookieContains": "CONS=000" }] }]
+}

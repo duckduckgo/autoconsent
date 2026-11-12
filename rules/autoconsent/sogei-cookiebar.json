@@ -1,0 +1,47 @@
+{
+    "name": "sogei-cookiebar",
+    "cosmetic": false,
+    "prehideSelectors": ["#cookiebar-tra"],
+    "detectCmp": [
+        {
+            "exists": "#cookiebar-tra #cb-RejectAll, #cookiebar #cb-RejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiebar-tra #cb-RejectAll, #cookiebar #cb-RejectAll"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#cb-AcceptAll"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cb-AcceptAll"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#cs input[type=checkbox]:not(:checked):not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#cb-AcceptSelected"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cb-RejectAll"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieConsent="
+        }
+    ]
+}

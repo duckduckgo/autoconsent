@@ -1,0 +1,13 @@
+{
+    "name": "uhcprovider",
+    "vendorUrl": "https://www.uhcprovider.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?uhc(provider|dental)\\.com/"
+    },
+    "prehideSelectors": [".toasterAlert .toaster"],
+    "detectCmp": [{ "exists": ".toasterAlert .toaster-content a[href*='/npp/OSPP-']" }],
+    "detectPopup": [{ "visible": ".toasterAlert .toaster" }],
+    "optIn": [{ "waitForThenClick": ".toasterAlert .toaster-close" }],
+    "optOut": [{ "waitForThenClick": ".toasterAlert .toaster-close" }],
+    "test": [{ "waitForVisible": ".toasterAlert .toaster", "check": "none", "timeout": 2000 }]
+}

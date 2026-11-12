@@ -1,0 +1,17 @@
+{
+    "name": "fn-se",
+    "vendorUrl": "https://fn.se/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?fn\\.se/"
+    },
+    "prehideSelectors": ["#cookie"],
+    "detectCmp": [{ "exists": "#cookie #cookies-marketing" }],
+    "detectPopup": [{ "visible": "#cookie .accept-all" }],
+    "optIn": [{ "waitForThenClick": "#cookie .accept-all" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie a.settings" },
+        { "waitForVisible": "#cookie .cookie-settings button.close" },
+        { "click": "#cookie .cookie-settings button.close" }
+    ],
+    "test": [{ "cookieContains": "allow_necessary=true" }]
+}

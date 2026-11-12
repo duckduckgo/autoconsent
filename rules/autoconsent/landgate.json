@@ -1,0 +1,10 @@
+{
+    "name": "landgate",
+    "vendorUrl": "https://www.landgate.wa.gov.au/",
+    "prehideSelectors": [".privacy-notification[data-cookie-name]"],
+    "detectCmp": [{ "exists": ".privacy-notification[data-cookie-name] #js-privacy-notification-ok" }],
+    "detectPopup": [{ "visible": ".privacy-notification[data-cookie-name]" }],
+    "optIn": [{ "waitForThenClick": "#js-privacy-notification-ok" }],
+    "optOut": [{ "waitForThenClick": "#js-privacy-notification-ok" }],
+    "test": [{ "waitForVisible": ".privacy-notification[data-cookie-name]", "check": "none", "timeout": 1000 }]
+}

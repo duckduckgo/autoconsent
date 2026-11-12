@@ -1,0 +1,27 @@
+{
+    "name": "sitepark-sitekit",
+    "vendorUrl": "https://www.sitepark.com/",
+    "prehideSelectors": [".SP-CookieUsageNotification"],
+    "detectCmp": [{ "exists": ".SP-CookieUsageNotification" }],
+    "detectPopup": [{ "visible": ".SP-CookieUsageNotification" }],
+    "optIn": [
+        { "waitFor": ".SP-CookieUsageNotification[data-sp-cookie-usage-notification-bootstrapped]", "timeout": 5000, "optional": true },
+        { "waitForThenClick": ".SP-CookieUsageNotification__ok", "retry": 5, "retryInterval": 500 }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "xpath///button[contains(@class,'SP-CookieUsageNotification__ok')][normalize-space(.)='OK' or normalize-space(.)='Ok' or normalize-space(.)='Okay']"
+            },
+            "then": [
+                {
+                    "waitFor": ".SP-CookieUsageNotification[data-sp-cookie-usage-notification-bootstrapped]",
+                    "timeout": 5000,
+                    "optional": true
+                },
+                { "waitForThenClick": ".SP-CookieUsageNotification__ok", "retry": 5, "retryInterval": 500 }
+            ],
+            "else": [{ "hide": ".SP-CookieUsageNotification" }]
+        }
+    ]
+}

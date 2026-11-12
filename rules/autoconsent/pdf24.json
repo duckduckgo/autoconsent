@@ -1,0 +1,48 @@
+{
+    "name": "pdf24",
+    "vendorUrl": "https://www.pdf24.org/",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://consent\\.pdf24\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#consentManagerButtons .entryPage .settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consentManagerEntryPage"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consentManagerButtons .entryPage .acceptAll"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#consentManagerButtons .entryPage .declineAll"
+            },
+            "then": [
+                {
+                    "click": "#consentManagerButtons .entryPage .declineAll"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#consentManagerButtons .entryPage .settings"
+                },
+                {
+                    "waitForVisible": "#consentManagerSettingsPage"
+                },
+                {
+                    "waitForThenClick": "#consentManagerButtons .otherPages .declineAll"
+                }
+            ]
+        }
+    ]
+}

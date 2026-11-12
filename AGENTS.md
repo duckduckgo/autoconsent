@@ -77,7 +77,7 @@ Site-specific rules are rules scoped to specific sites with a `urlPattern`. Rule
 
 ### JSON Rules vs Code-based rules
 
-JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/` (auto-generated). Each file defines one CMP rule following the `AutoConsentCMPRule` type in `lib/rules.ts`. **Add new JSON rules only to `rules/autoconsent/`.** Do not add new files to `rules/generated/`: only the crawler creates them. You may remove a generated rule, for example when it is stale.
+JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/` (auto-generated). Each file defines one CMP rule following the `AutoConsentCMPRule` type in `lib/rules.ts`. **Add new JSON rules only to `rules/autoconsent/`.** Do not add new files to `rules/generated/`: only the crawler creates them. You may remove a generated rule, for example when it is stale. Before removing any rule, test every site in its spec with the rule removed, in the core regions and every region the spec runs in, and confirm that another rule or the heuristic handles each one, or that the site no longer shows the popup.
 
 ```json
 {
@@ -138,6 +138,8 @@ shadow root or same-origin iframe.
 - After updating an existing generic rule, do a heavy testing run: all known sites (specs + data/coverage.json + publicwww) across the expanded set. Inspect both API results AND screenshots.
 - **When adding or fixing a rule for a site, remove stale site-specific rules covering the same site.** If a site-specific rule is obsolete in all regions (the site switched CMP), remove it rather than leaving it alongside the new or updated rule.
 - **Heuristic pattern changes must keep the labelled button benchmark green.** `lib/heuristic-patterns.ts` is the source of truth for heuristic patterns; downstream projects (e.g. tracker-radar-collector) should import them rather than keep copies. `tests-wtr/heuristics/button-classification-accuracy.test.ts` checks `classifyButtonTextRegex` against `data/labelled-button-texts.csv` (no false positives, >90% weighted accuracy per label). Use `npm run benchmark-buttons` to see what a change gains or loses, and the `optimize-button-patterns` skill to tune patterns against it. New labelled rows come from the tracker-radar-collector post-processing scripts (`collect-popup-button-texts.js`, `label-button-texts.js`). Fix a mislabelled row in the CSV rather than bending patterns to fit it.
+- **Heuristic detection is described in [docs/heuristic-detection.md](docs/heuristic-detection.md)**: detect patterns (`lib/heuristic-patterns.ts`), context negatives and popup exclusions (`lib/heuristic-negatives.ts`), and the matching engine (`lib/heuristic-detect.ts`).
+- **After changing `DETECT_PATTERNS`, run `npm run build-heuristic-literals` and commit `lib/heuristic-literals.ts`.** It holds the detection prefilter's literals; a unit test fails while it is stale. See [docs/heuristic-prefilter.md](docs/heuristic-prefilter.md).
 - if a popup does not provide an opt-out button, `optOut` _may_ click "dismiss"/"acknowledge" instead. Check with the existing heuristic patterns in /lib/heuristic-patterns.ts for reference. Do **not** click a TIER2 (single Accept) button — see General Guidelines.
 - do not keep outdated selectors in changed rules, unless they are actually used in some conditions
 

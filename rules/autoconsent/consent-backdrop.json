@@ -1,0 +1,34 @@
+{
+    "name": "consent-backdrop",
+    "prehideSelectors": [".consent-backdrop > .consent[role=dialog][aria-labelledby=consent-title]"],
+    "detectCmp": [
+        {
+            "exists": ".consent-backdrop > .consent[role=dialog][aria-labelledby=consent-title] .consent__actions .consent__action--secondary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".consent-backdrop > .consent[role=dialog][aria-labelledby=consent-title]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".consent-backdrop .consent__actions .consent__action--primary"
+        }
+    ],
+    "optOut": [
+        {
+            "click": ".consent-backdrop .consent__groups input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".consent-backdrop .consent__actions .consent__action--secondary"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "consent_"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "name": "bakeca",
+    "vendorUrl": "https://www.bakecaincontrii.com/",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?bakecaincontrii\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".ui-alert.bottom-fixed a[data-href*='cookie-policy']" }],
+    "detectPopup": [{ "visible": ".ui-alert.bottom-fixed" }],
+    "optIn": [{ "waitForThenClick": ".ui-alert.bottom-fixed .text-center button" }],
+    "optOut": [{ "waitForThenClick": ".ui-alert.bottom-fixed button.close" }],
+    "test": [{ "waitForVisible": ".ui-alert.bottom-fixed", "check": "none", "timeout": 2000 }]
+}

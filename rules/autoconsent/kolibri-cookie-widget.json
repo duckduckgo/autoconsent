@@ -1,0 +1,12 @@
+{
+    "name": "kolibri-cookie-widget",
+    "prehideSelectors": ["body.kolibri [data-testid=\"cookie-widget\"]"],
+    "detectCmp": [{ "exists": "body.kolibri [data-testid=\"cookie-widget\"]" }],
+    "detectPopup": [{ "visible": "body.kolibri [data-testid=\"cookie-widget\"]" }],
+    "optIn": [{ "waitForThenClick": "body.kolibri [data-testid=\"cookie-widget\"] button.k-button--primary" }],
+    "optOut": [
+        { "waitForThenClick": "body.kolibri [data-testid=\"cookie-widget\"] button.k-button--primary + button.k-button--tertiary" },
+        { "waitForVisible": "body.kolibri [data-testid=\"cookie-widget\"]", "check": "none", "timeout": 5000 }
+    ],
+    "test": [{ "cookieContains": "%22advertising%22%3Afalse%2C%22hasConsented%22%3Atrue" }]
+}

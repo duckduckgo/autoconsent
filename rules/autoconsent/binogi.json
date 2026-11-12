@@ -1,0 +1,32 @@
+{
+    "name": "binogi",
+    "vendorUrl": "https://www.binogi.se/",
+    "prehideSelectors": ["#binogi_cookie_notice"],
+    "detectCmp": [
+        {
+            "exists": "#binogi_cookie_notice #cnreject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#binogi_cookie_notice"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#binogi_cookie_notice #cnaccept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#binogi_cookie_notice #cnreject",
+            "retry": 3
+        }
+    ],
+    "test": [
+        {
+            "visible": "#binogi_cookie_notice",
+            "check": "none"
+        }
+    ]
+}

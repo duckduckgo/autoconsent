@@ -1,0 +1,63 @@
+{
+    "name": "amasty-gdpr",
+    "vendorUrl": "https://amasty.com/gdpr-for-magento-2.html",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".amgdprcookie-bar-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".amgdprcookie-bar-container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".amgdprcookie-bar-container [data-amgdprcookie-js=\"accept\"]:not([disabled])",
+            "timeout": 10000
+        }
+    ],
+    "optOut": [
+        {
+            "waitFor": ".amgdprcookie-bar-container [data-amgdprcookie-js=\"accept\"]:not([disabled])",
+            "timeout": 10000
+        },
+        {
+            "if": {
+                "visible": ".amgdprcookie-bar-container [data-amgdprcookie-js=\"decline\"]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".amgdprcookie-bar-container [data-amgdprcookie-js=\"decline\"]:not([disabled])"
+                }
+            ],
+            "else": [
+                {
+                    "click": ".amgdprcookie-bar-container [data-amgdprcookie-js=\"settings\"], .amgdprcookie-bar-container [data-amgdprcookie-js=\"custom_settings\"]"
+                },
+                {
+                    "waitForVisible": ".amgdprcookie-settings-form"
+                },
+                {
+                    "click": ".amgdprcookie-settings-form input.amgdprcookie-input:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ".amgdprcookie-settings-form .amgdprcookie-done",
+                    "retry": 3,
+                    "retryInterval": 500
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".amgdprcookie-bar-container",
+            "check": "none",
+            "timeout": 5000
+        }
+    ]
+}

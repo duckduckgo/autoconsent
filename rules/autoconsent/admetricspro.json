@@ -1,0 +1,53 @@
+{
+    "name": "admetricspro",
+    "vendorUrl": "https://admetricspro.com/",
+    "cosmetic": false,
+    "prehideSelectors": ["#__cmp_overlay", "#__cmp_body"],
+    "detectCmp": [
+        {
+            "exists": "#__cmp_body .cmpButtonLink"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#__cmp_body .cmpLayer"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#__cmp_body .cmpLayer .acceptLink"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#__cmp_body .cmpLayer .vue-js-switch"
+            },
+            "then": [
+                {
+                    "click": "#__cmp_body .vue-js-switch.toggled .v-switch-input",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#__cmp_body .manageLink:not(.buttonDisabled)"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#__cmp_body .manageLink"
+                },
+                {
+                    "waitForThenClick": "#__cmp_body .rejectLink"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#__cmp_body .cmpLayer",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}

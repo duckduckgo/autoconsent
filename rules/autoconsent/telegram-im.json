@@ -1,0 +1,36 @@
+{
+    "name": "telegram-im",
+    "vendorUrl": "https://telegram.im/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?(telegram\\.im|telegramcn\\.org\\.cn|telegramim\\.ru)/"
+    },
+    "prehideSelectors": ["#myModal.showmodal"],
+    "detectCmp": [
+        {
+            "exists": "#myModal.showmodal .showmodal-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#myModal.showmodal"
+        }
+    ],
+    "optIn": [
+        {
+            "comment": "the OK button sits inside a privacy policy link, clicking the backdrop stores consent without opening a new tab",
+            "waitForThenClick": "#myModal.showmodal"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "notice-only banner: acknowledge via the backdrop, the OK button would also open the privacy policy in a new tab",
+            "waitForThenClick": "#myModal.showmodal"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#myModal.showmodal",
+            "check": "none"
+        }
+    ]
+}

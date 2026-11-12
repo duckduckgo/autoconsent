@@ -1,0 +1,35 @@
+{
+    "name": "optum",
+    "vendorUrl": "https://www.optum.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?optum\\.com/"
+    },
+    "prehideSelectors": [".o5-dynamic-alerts__container:has(a[href*=\"privacy-policy\"])"],
+    "detectCmp": [
+        {
+            "exists": ".o5-dynamic-alerts__container:has(a[href*=\"privacy-policy\"]) .o5-dynamic-alerts__close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".o5-dynamic-alerts__container:has(a[href*=\"privacy-policy\"]) .o5-dynamic-alerts__close"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".o5-dynamic-alerts__container:has(a[href*=\"privacy-policy\"]) .o5-dynamic-alerts__close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".o5-dynamic-alerts__container:has(a[href*=\"privacy-policy\"]) .o5-dynamic-alerts__close"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".o5-dynamic-alerts__container:has(a[href*=\"privacy-policy\"])",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

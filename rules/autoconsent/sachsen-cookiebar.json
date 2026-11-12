@@ -1,0 +1,31 @@
+{
+    "name": "sachsen-cookiebar",
+    "vendorUrl": "https://www.design.sachsen.de/",
+    "prehideSelectors": ["#xcm-bar.xcm-bar"],
+    "detectCmp": [
+        {
+            "exists": "#xcm-bar.xcm-bar #xcm-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#xcm-bar.xcm-bar:not(.xcm-bar-hide)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#xcm-bar #xcm-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "notice-only banner: the only button acknowledges it",
+            "waitForThenClick": "#xcm-bar #xcm-btn"
+        }
+    ],
+    "test": [
+        {
+            "exists": "#xcm-bar.xcm-bar-hide"
+        }
+    ]
+}

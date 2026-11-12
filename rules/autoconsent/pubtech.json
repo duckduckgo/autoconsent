@@ -30,7 +30,19 @@
     ],
     "optOut": [
         {
-            "click": "#pubtech-cmp #pt-close"
+            "if": {
+                "exists": "#pubtech-cmp #pt-close"
+            },
+            "then": [
+                {
+                    "click": "#pubtech-cmp #pt-close"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#pubtech-cmp a[href*=\"pubtech_action_reject_all\"]"
+                }
+            ]
         }
     ],
     "test": [

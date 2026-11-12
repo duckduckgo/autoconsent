@@ -1,0 +1,24 @@
+{
+    "name": "arena.ai",
+    "vendorUrl": "https://arena.ai/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?arena\\.ai/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "xpath///div[@role='dialog'][.//h2[normalize-space(.)='This website uses cookies']]" }],
+    "detectPopup": [{ "visible": "xpath///div[@role='dialog'][.//h2[normalize-space(.)='This website uses cookies']]" }],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog'][.//h2[normalize-space(.)='This website uses cookies']]//button[normalize-space(.)='Accept Cookies']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog'][.//h2[normalize-space(.)='This website uses cookies']]//button[normalize-space(.)='Manage Cookies']"
+        },
+        { "waitForVisible": "[role='dialog'] button[role='switch']#advertising" },
+        { "click": "[role='dialog'] button[role='switch'][aria-checked='true']", "all": true, "optional": true },
+        { "waitForThenClick": "xpath///div[@role='dialog'][.//button[@role='switch']]//button[normalize-space(.)='Save Preferences']" }
+    ],
+    "test": [{ "cookieContains": "\"advertising\":false" }]
+}

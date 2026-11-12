@@ -1,0 +1,45 @@
+{
+    "name": "olvg",
+    "vendorUrl": "https://www.olvg.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?olvg\\.nl/"
+    },
+    "prehideSelectors": ["#gdpr-selection-screen"],
+    "detectCmp": [
+        {
+            "exists": "#gdpr-selection-screen #gdpr-permissionlevel-1"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gdpr-selection-screen #gdpr-screen-content"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr-selection-screen #gdpr-permissionlevel-3"
+        },
+        {
+            "waitForThenClick": "#gdpr-selection-screen .button-container button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gdpr-selection-screen #gdpr-permissionlevel-1"
+        },
+        {
+            "waitForThenClick": "#gdpr-selection-screen .button-container button"
+        },
+        {
+            "waitForVisible": "#gdpr-selection-screen",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "MascGdrpPermission=1"
+        }
+    ]
+}

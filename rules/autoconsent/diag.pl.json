@@ -1,0 +1,35 @@
+{
+    "name": "diag.pl",
+    "vendorUrl": "https://diag.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?diag\\.pl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".MuiDialog-root [role=dialog] button[aria-label^=\"Odrzuć wszystkie i zamknij popup\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".MuiDialog-root [role=dialog] button[aria-label^=\"Odrzuć wszystkie i zamknij popup\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".MuiDialog-root [role=dialog] button[aria-label^=\"Zaakceptuj i zamknij popup\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".MuiDialog-root [role=dialog] button[aria-label^=\"Odrzuć wszystkie i zamknij popup\"]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".MuiDialog-root [role=dialog] button[aria-label^=\"Odrzuć wszystkie i zamknij popup\"]",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+{
+    "name": "xenforo-cookie-consent",
+    "vendorUrl": "https://xenforo.com/",
+    "prehideSelectors": [".notice--cookieAdvanced"],
+    "detectCmp": [
+        {
+            "exists": ".js-notice.notice--cookieAdvanced #cookieConsentConfig"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-notice.notice--cookieAdvanced"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".notice--cookieAdvanced a[href*=\"accept=1\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".notice--cookieAdvanced a[href*=\"reject=1\"]"
+            },
+            "then": [
+                {
+                    "click": ".notice--cookieAdvanced a[href*=\"reject=1\"]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".notice--cookieAdvanced [data-xf-click=\"toggle\"][data-target=\"#cookieConsentConfig\"]:not(.is-active)",
+                    "timeout": 2000,
+                    "retry": 10,
+                    "retryInterval": 500
+                },
+                {
+                    "waitForVisible": "#cookieConsentConfig button[type=\"submit\"]",
+                    "timeout": 2000
+                },
+                {
+                    "click": "#cookieConsentConfig input[name^=\"consent[\"]:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "#cookieConsentConfig button[type=\"submit\"]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".notice--cookieAdvanced",
+            "timeout": 2000,
+            "check": "none"
+        },
+        {
+            "cookieContains": "_consent=%5B%5D"
+        }
+    ]
+}

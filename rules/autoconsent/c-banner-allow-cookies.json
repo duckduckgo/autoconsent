@@ -1,0 +1,17 @@
+{
+    "name": "c-banner-allow-cookies",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#cookieBanner.c-banner"],
+    "detectCmp": [{ "exists": "#cookieBanner.c-banner button[data-allow-cookies=false]" }],
+    "detectPopup": [{ "visible": "#cookieBanner.c-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookieBanner.c-banner button[data-allow-cookies=true]" }],
+    "optOut": [
+        { "waitForThenClick": "#cookieBanner.c-banner button[data-allow-cookies=false]" },
+        { "waitForVisible": "#cookieBanner.c-banner", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "cookies_allow=false" }]
+}

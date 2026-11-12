@@ -1,0 +1,30 @@
+{
+    "name": "cookieinfo-zamknij",
+    "vendorUrl": "https://unknown",
+    "prehideSelectors": [".JSWrapper:has(#cookieInfoZamknij)"],
+    "detectCmp": [
+        {
+            "exists": "#cookieInfoZamknij"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieInfoZamknij"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieInfoZamknij"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieInfoZamknij"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "js_on=1"
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "name": "etracker",
+    "vendorUrl": "https://www.etracker.com/",
+    "prehideSelectors": ["#et-consent-overlay", "#et-consent-overlay-bg"],
+    "detectCmp": [
+        {
+            "exists": "#et-consent-overlay button[data-editor=buttonDeny]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#et-consent-overlay button[data-editor=buttonDeny]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#et-consent-overlay button[data-editor=buttonAccept]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#et-consent-overlay button[data-editor=buttonDeny]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#et-consent-overlay",
+            "timeout": 3000,
+            "check": "none"
+        },
+        {
+            "cookieContains": "et_allow_cookies=0"
+        }
+    ]
+}

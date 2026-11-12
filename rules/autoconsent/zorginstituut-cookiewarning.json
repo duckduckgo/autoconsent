@@ -1,0 +1,33 @@
+{
+    "name": "zorginstituut-cookiewarning",
+    "vendorUrl": "https://www.zorginstituutnederland.nl/",
+    "cosmetic": false,
+    "prehideSelectors": [".cookiewarning:has(> button.cookiewarning_yes.close-button)"],
+    "detectCmp": [
+        {
+            "exists": ".cookiewarning > button.cookiewarning_yes.close-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookiewarning > button.cookiewarning_yes.close-button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookiewarning > button.cookiewarning_yes.close-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookiewarning > button.cookiewarning_yes.close-button"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookiewarning",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

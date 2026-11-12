@@ -1,0 +1,45 @@
+{
+    "name": "mrchadd",
+    "vendorUrl": "https://www.mrchadd.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?mrchadd\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".v-cookie-bar"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".v-cookie-bar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".v-cookie-bar__initial-state .c-button.--primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".v-cookie-bar__initial-state .c-button.--secondary"
+        },
+        {
+            "waitForVisible": ".v-cookie-bar__settings"
+        },
+        {
+            "click": ".v-cookie-bar__settings input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".v-cookie-bar__settings .u-text-center .c-button"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".v-cookie-bar",
+            "check": "none"
+        }
+    ]
+}

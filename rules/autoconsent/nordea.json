@@ -1,0 +1,21 @@
+{
+    "name": "nordea",
+    "vendorUrl": "https://www.nordea.com/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?nordea\\.(se|fi|no|dk)/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#CookieReportsPanel #CookieReportsBanner .wscrOk2" }],
+    "detectPopup": [{ "visible": "#CookieReportsBanner" }],
+    "optIn": [{ "waitForThenClick": "#CookieReportsBanner .wscrOk" }],
+    "optOut": [
+        {
+            "comment": "the settings drawer opens by default and .wscrOk2 saves the current toggle state",
+            "click": "#CookieReportsBanner .wscrSwitch input[type=checkbox]:checked:not([disabled]) + label",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "#CookieReportsBanner .wscrOk2" }
+    ],
+    "test": [{ "cookieContains": "wscrCookieConsentShared=1=true&2=false&3=false&4=false&5=false" }]
+}

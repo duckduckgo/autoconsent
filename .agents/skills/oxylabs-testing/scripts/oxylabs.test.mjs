@@ -15,10 +15,13 @@ describe('oxylabs config', () => {
     });
 
     it('builds the endpoint with raw credentials and query params', () => {
-        assert.equal(buildOxylabsEndpoint('de', { device: 'mobile' }, env), 'wss://user:p+ss@hb.oxylabs.io/?p_cc=DE&p_device=mobile');
         assert.equal(
-            buildOxylabsEndpoint('us', { solveCaptcha: true }, { ...env, OXYLABS_HOST: 'proxy.example' }),
-            'wss://user:p+ss@proxy.example/?p_cc=US&solve_captcha=true',
+            buildOxylabsEndpoint('de', { device: 'mobile' }, env),
+            'wss://user:p+ss@hb.oxylabs.io/?p_cc=DE&p_device=mobile&solve_captcha=true',
+        );
+        assert.equal(
+            buildOxylabsEndpoint('us', { solveCaptcha: false }, { ...env, OXYLABS_HOST: 'proxy.example' }),
+            'wss://user:p+ss@proxy.example/?p_cc=US',
         );
     });
 

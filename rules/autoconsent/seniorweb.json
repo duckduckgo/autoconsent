@@ -1,0 +1,42 @@
+{
+    "name": "seniorweb",
+    "vendorUrl": "https://www.seniorweb.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?seniorweb\\.nl/"
+    },
+    "prehideSelectors": ["#cookie-info"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-info"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-info"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-info .button-row button.save-button:not(.btn-cta)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-info .button-row button.btn-secondary"
+        },
+        {
+            "waitForVisible": "#cookie-info #no-ad-cookies"
+        },
+        {
+            "click": "#cookie-info #no-ad-cookies"
+        },
+        {
+            "waitForThenClick": "#cookie-info form button.save-button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": ".sw-cookie=1"
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "name": "racv",
+    "vendorUrl": "https://www.racv.com.au/",
+    "comment": "Notice-only banner with a single Accept button; a site variant adds a body.gdpr-active backdrop and scroll lock.",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 3,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?racv\\.com\\.au/"
+    },
+    "prehideSelectors": [".gdpr[data-gdprservice]"],
+    "detectCmp": [{ "exists": ".gdpr[data-gdprservice]:not(.hide)" }],
+    "detectPopup": [{ "visible": ".gdpr[data-gdprservice]:not(.hide)" }],
+    "optIn": [{ "waitForThenClick": ".gdpr[data-gdprservice] .gdpr--button button" }],
+    "optOut": [
+        { "hide": ".gdpr[data-gdprservice]" },
+        {
+            "stylesheet": "body.gdpr-active { overflow: auto !important; } body.gdpr-active::before { display: none !important; }",
+            "stylesheetId": "racv-gdpr-backdrop"
+        }
+    ]
+}

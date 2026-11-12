@@ -1,0 +1,47 @@
+{
+    "name": "jollyroom",
+    "vendorUrl": "https://www.jollyroom.se/",
+    "prehideSelectors": [".js-cookie-consent:has(.cookie-consent__settings-save)"],
+    "detectCmp": [
+        {
+            "exists": ".js-cookie-consent .cookie-consent__settings-save"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-cookie-consent.cookie-consent--open .cookie-consent__button--secondary"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-cookie-consent .cookie-consent__button--submit"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".js-cookie-consent .cookie-consent__button--secondary"
+        },
+        {
+            "if": {
+                "exists": ".js-cookie-consent .cookie-consent__option-checkbox:checked"
+            },
+            "then": [
+                {
+                    "click": ".js-cookie-consent .cookie-consent__option-checkbox:checked",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".js-cookie-consent .cookie-consent__settings-save",
+            "retry": 5,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "visible": ".js-cookie-consent.cookie-consent--open",
+            "check": "none"
+        }
+    ]
+}

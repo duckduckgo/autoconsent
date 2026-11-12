@@ -1,0 +1,18 @@
+{
+    "name": "x28-privacy-settings",
+    "vendorUrl": "https://www.x28.ch/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#modal-privacy-settings button[data-grant=\"selected\"]" }],
+    "detectPopup": [{ "visible": "#modal-privacy-settings button[data-grant=\"selected\"]" }],
+    "optIn": [{ "waitForThenClick": "#modal-privacy-settings button[data-grant=\"all\"]" }],
+    "optOut": [
+        {
+            "click": "#modal-privacy-settings input[name=\"analytics\"]:checked, #modal-privacy-settings input[name=\"ad\"]:checked",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "#modal-privacy-settings button[data-grant=\"selected\"]", "retry": 3, "retryInterval": 1000 }
+    ],
+    "test": [{ "cookieContains": "ad_storage=denied:analytics_storage=denied" }]
+}

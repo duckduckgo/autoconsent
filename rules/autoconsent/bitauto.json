@@ -1,0 +1,57 @@
+{
+    "name": "bitauto",
+    "vendorUrl": "https://www.bitauto.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?bitauto\\.com/"
+    },
+    "prehideSelectors": [".authorize"],
+    "detectCmp": [
+        {
+            "exists": ".authorize .lnk-disagree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".authorize .lnk-disagree"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".authorize .lnk-agree"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".authorize .lnk-disagree"
+        },
+        {
+            "waitForVisible": ".fc-consent-root .fc-dialog-container",
+            "timeout": 4000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": ".fc-consent-root .fc-dialog-container"
+            },
+            "then": [
+                {
+                    "click": ".fc-cta-do-not-consent,.fc-cta-manage-options"
+                },
+                {
+                    "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".fc-confirm-choices",
+                    "optional": true
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "save_open_time=ok"
+        }
+    ]
+}

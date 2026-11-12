@@ -1,0 +1,23 @@
+{
+    "name": "canva",
+    "vendorUrl": "https://www.canva.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?canva\\.com/"
+    },
+    "prehideSelectors": ["[role=\"dialog\"][aria-modal=\"false\"]:has(a[data-anchor-id=\"cookie-policy\"])"],
+    "detectCmp": [{ "exists": "[role=\"dialog\"][aria-modal=\"false\"]:has(a[data-anchor-id=\"cookie-policy\"])" }],
+    "detectPopup": [{ "visible": "[role=\"dialog\"][aria-modal=\"false\"]:has(a[data-anchor-id=\"cookie-policy\"])" }],
+    "optIn": [
+        { "waitForThenClick": "[role=\"dialog\"][aria-modal=\"false\"]:has(a[data-anchor-id=\"cookie-policy\"]) button:first-child" }
+    ],
+    "optOut": [
+        { "waitForThenClick": "[role=\"dialog\"][aria-modal=\"false\"]:has(a[data-anchor-id=\"cookie-policy\"]) button:last-child" },
+        {
+            "waitForThenClick": "div:has(> h3):has(> p a[data-anchor-id=\"cookie-policy\"]) + div > button:last-child"
+        },
+        {
+            "waitForThenClick": "div:has(> h3):has(> p a[data-anchor-id=\"cookie-policy\"]) ~ div:last-child > button:only-child"
+        }
+    ],
+    "test": [{ "wait": 1000 }, { "cookieContains": "CTC=" }]
+}

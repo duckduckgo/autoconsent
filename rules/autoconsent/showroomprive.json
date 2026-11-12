@@ -1,0 +1,12 @@
+{
+    "name": "showroomprive",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)*(showroomprive\\.\\w+|saldiprivati\\.com)/"
+    },
+    "prehideSelectors": ["#popinCookies .panelSimple", "#cookieWrapper #popinCookies"],
+    "detectCmp": [{ "exists": "#popinCookies #disagree_button, #cookieWrapper #popinCookies > [onclick*='refuse_all']" }],
+    "detectPopup": [{ "visible": "#popinCookies.fadeInDown #disagree_button, #cookieWrapper #popinCookies > [onclick*='refuse_all']" }],
+    "optIn": [{ "waitForThenClick": "#popinCookies #agree_button, #cookieWrapper #popinCookies > [onclick*='agree()']" }],
+    "optOut": [{ "waitForThenClick": "#popinCookies #disagree_button, #cookieWrapper #popinCookies > [onclick*='refuse_all']" }],
+    "test": [{ "cookieContains": "rgpd_cookies=1,0,0" }]
+}

@@ -1,0 +1,37 @@
+{
+    "name": "sankei-digital",
+    "_metadata": {
+        "vendorUrl": "https://www.sankei-digital.co.jp/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#consent-wrapper"],
+    "detectCmp": [
+        {
+            "exists": "#consent-wrapper > .button-container > button.close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent-wrapper > .button-container > button.close"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consent-wrapper > .button-container > button.close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#consent-wrapper > .button-container > button.close"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_consent_status="
+        }
+    ]
+}

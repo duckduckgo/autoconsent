@@ -1,0 +1,23 @@
+{
+    "name": "zoho",
+    "vendorUrl": "https://www.zoho.com/",
+    "cosmetic": false,
+    "prehideSelectors": [".zbottom-cp-container"],
+    "detectCmp": [{ "exists": ".zbottom-cp-container .zbc-cta-accept" }],
+    "detectPopup": [{ "visible": ".zbottom-cp-container" }],
+    "optIn": [{ "waitForThenClick": ".zbottom-cp-container .zbc-cta-accept button" }],
+    "optOut": [
+        {
+            "if": { "visible": ".zbottom-cp-container .zbc-cta-ignore button" },
+            "then": [{ "click": ".zbottom-cp-container .zbc-cta-ignore button" }],
+            "else": [
+                { "click": ".zbottom-cp-container .zbc-manage-cta" },
+                { "waitForVisible": ".zbc-main .zbc-cta-se" },
+                { "click": ".zbc-main .ctog-container.ctog-active:not(.ctog-no)", "all": true, "optional": true },
+                { "click": ".zbc-main .zbc-cta-se" }
+            ]
+        },
+        { "waitForVisible": ".zbottom-cp-container", "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "eval": "EVAL_ZOHO_TEST" }]
+}

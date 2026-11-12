@@ -1,0 +1,35 @@
+{
+    "name": "dack365",
+    "vendorUrl": "https://www.dack365.se/",
+    "prehideSelectors": [".cookie-consent-banner:has(#FormCookieConsentAll)"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent-banner #FormCookieConsentAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent-banner .btn-cookie-consent-settings"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-consent-banner .btn-cookie-consent-allow-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-consent-banner .btn-cookie-consent-settings"
+        },
+        {
+            "waitForThenClick": ".modal-cookie-consent .btn-cookie-consent-modal-disallow-all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookie-consent-banner",
+            "check": "none",
+            "timeout": 5000
+        }
+    ]
+}

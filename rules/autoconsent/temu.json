@@ -7,34 +7,30 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "div > div > div > div > span[href*=\"/cookie-and-similar-technologies-policy.html\"]"
+            "exists": "div:has([href=\"cookiePrivacyLink\"]) + div:has(> [role=button][aria-label])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "div > div > div > div > span[href*=\"/cookie-and-similar-technologies-policy.html\"]"
+            "visible": "div:has([href=\"cookiePrivacyLink\"]) + div:has(> [role=button][aria-label])"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "div > div > div:has(> div > span[href*=\"/cookie-and-similar-technologies-policy.html\"]) > [role=button]:nth-child(3)"
+            "waitForThenClick": "div:has([href=\"cookiePrivacyLink\"]) + div:has(> [role=button][aria-label]) > [role=button][aria-label]:not(:nth-child(2))"
         }
     ],
     "optOut": [
         {
-            "if": {
-                "exists": "xpath///span[contains(., 'Alle afwijzen') or contains(., 'Reject all') or contains(., 'Tümünü reddet') or contains(., 'Odrzuć wszystko')]"
-            },
-            "then": [
-                {
-                    "waitForThenClick": "xpath///span[contains(., 'Alle afwijzen') or contains(., 'Reject all') or contains(., 'Tümünü reddet') or contains(., 'Odrzuć wszystko')]"
-                }
-            ],
-            "else": [
-                {
-                    "waitForThenClick": "div > div > div:has(> div > span[href*=\"/cookie-and-similar-technologies-policy.html\"]) > [role=button]:nth-child(2)"
-                }
-            ]
+            "waitForThenClick": "div:has([href=\"cookiePrivacyLink\"]) + div:has(> [role=button][aria-label]) > [role=button][aria-label]:nth-child(2)"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "privacy_setting_detail=%7B%22adsChoice%22%3A%220"
         }
     ]
 }

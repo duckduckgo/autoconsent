@@ -1,0 +1,10 @@
+{
+    "name": "com-consent-layer",
+    "vendorUrl": "https://www.comdirect.de/",
+    "prehideSelectors": ["com-consent-layer"],
+    "detectCmp": [{ "exists": ["com-consent-layer", "dialog"] }],
+    "detectPopup": [{ "visible": ["com-consent-layer", "dialog[open]"] }],
+    "optIn": [{ "waitForThenClick": ["com-consent-layer", "#cmpAcceptAll"] }],
+    "optOut": [{ "waitForThenClick": ["com-consent-layer", "#cmpDenyAll"] }],
+    "test": [{ "waitForVisible": ["com-consent-layer", "dialog[open]"], "timeout": 1000, "check": "none" }]
+}

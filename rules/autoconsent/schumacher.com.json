@@ -1,0 +1,53 @@
+{
+    "name": "schumacher.com",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?schumacher\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "xpath///div[contains(@class, 'MuiBackdrop-root')][.//h1[contains(., 'Your Privacy Matters to Us')]]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[contains(@class, 'MuiBackdrop-root')][.//h1[contains(., 'Your Privacy Matters to Us')]]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class, 'MuiBackdrop-root')][.//h1[contains(., 'Your Privacy Matters to Us')]]//button[normalize-space(.)='Accept All']"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "xpath///div[contains(@class, 'MuiBackdrop-root')][.//h1[contains(., 'Your Privacy Matters to Us')]]//button[normalize-space(.)='Reject Optional']"
+            },
+            "then": [
+                {
+                    "click": "xpath///div[contains(@class, 'MuiBackdrop-root')][.//h1[contains(., 'Your Privacy Matters to Us')]]//button[normalize-space(.)='Reject Optional']"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "xpath///div[contains(@class, 'MuiBackdrop-root')][.//h1[contains(., 'Your Privacy Matters to Us')]]//button[contains(normalize-space(.), 'MANAGE PREFERENCES')]"
+                },
+                {
+                    "waitForThenClick": "xpath///div[contains(@class, 'MuiBackdrop-root')][.//h1[contains(., 'Manage Preferences')]]//button[normalize-space(.)='Save Preferences']"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"functional\":false"
+        },
+        {
+            "cookieContains": "\"performance\":false"
+        },
+        {
+            "cookieContains": "\"personalization\":false"
+        }
+    ]
+}

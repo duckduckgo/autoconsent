@@ -1,0 +1,33 @@
+{
+    "name": "cookie-info-banner",
+    "prehideSelectors": ["section.cookie-info"],
+    "detectCmp": [
+        {
+            "exists": "section.cookie-info .js-cookie-info__decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section.cookie-info.is-visible:not(.is-hidden)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "section.cookie-info .js-cookie-info__accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "section.cookie-info .js-cookie-info__decline"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "accepted-cookies=functional"
+        },
+        {
+            "cookieContains": "accepted-cookies=functional%2C",
+            "negated": true
+        }
+    ]
+}

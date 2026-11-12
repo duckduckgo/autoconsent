@@ -1,0 +1,19 @@
+{
+    "name": "iworks-footer-notice",
+    "vendorUrl": "https://github.com/iworks/iworks-footer-notice",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?prorankingi\\.pl/"
+    },
+    "prehideSelectors": ["#iworks_cookie_notice"],
+    "detectCmp": [{ "exists": "#iworks_cookie_notice" }],
+    "detectPopup": [{ "visible": "#iworks_cookie_notice" }, { "cookieContains": "iWorks_Footer_Notice_close=hide", "negated": true }],
+    "optIn": [
+        { "waitFor": "body.loaded", "timeout": 15000, "optional": true },
+        { "waitForThenClick": "#iworks-footer-notice-button-close", "retry": 3, "retryInterval": 1000 }
+    ],
+    "optOut": [
+        { "waitFor": "body.loaded", "timeout": 15000, "optional": true },
+        { "waitForThenClick": "#iworks-footer-notice-button-close", "retry": 3, "retryInterval": 1000 }
+    ],
+    "test": [{ "cookieContains": "iWorks_Footer_Notice_close=hide" }]
+}

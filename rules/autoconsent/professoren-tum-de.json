@@ -1,0 +1,13 @@
+{
+    "name": "professoren-tum-de",
+    "vendorUrl": "https://www.professoren.tum.de/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?professoren\\.tum\\.de/"
+    },
+    "prehideSelectors": [".cc-window[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": ".cc-window.cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cookieconsent__dismiss" }],
+    "detectPopup": [{ "visible": ".cc-window.cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cookieconsent__dismiss" }],
+    "optIn": [{ "waitForThenClick": ".cc-window[aria-describedby=\"cookieconsent:desc\"] .cookieconsent__dismiss" }],
+    "optOut": [{ "waitForThenClick": ".cc-window[aria-describedby=\"cookieconsent:desc\"] .cookieconsent__dismiss" }],
+    "test": [{ "cookieContains": "cookieconsent_status=dismiss" }]
+}

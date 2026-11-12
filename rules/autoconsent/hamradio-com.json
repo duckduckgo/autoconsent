@@ -1,0 +1,13 @@
+{
+    "name": "hamradio.com",
+    "vendorUrl": "https://www.hamradio.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?hamradio\\.com/"
+    },
+    "prehideSelectors": [".cookie-banner"],
+    "detectCmp": [{ "exists": ".cookie-banner .closeme" }],
+    "detectPopup": [{ "visible": ".cookie-banner" }],
+    "optIn": [{ "waitForThenClick": ".cookie-banner .closeme" }],
+    "optOut": [{ "hide": ".cookie-banner" }]
+}

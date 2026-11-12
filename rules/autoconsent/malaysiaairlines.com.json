@@ -1,0 +1,42 @@
+{
+    "name": "malaysiaairlines.com",
+    "_metadata": {
+        "vendorUrl": "https://www.malaysiaairlines.com/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?malaysiaairlines\\.com/"
+    },
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".cookies-notification-wrapper .cookie-accept-all-cta"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies-notification-wrapper .cookie-accept-all-cta"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies-notification-wrapper .cookie-accept-all-cta button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookies-notification-wrapper .customise-cookies-cta button"
+        },
+        {
+            "waitForVisible": ".cookies-notification-wrapper .cookie-details-section"
+        },
+        {
+            "click": ".cookies-notification-wrapper .cookie-details-section input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".cookies-notification-wrapper .cookies-notification-bottom div:not(.hideCookiesPreferenceBtn) > button"
+        }
+    ]
+}

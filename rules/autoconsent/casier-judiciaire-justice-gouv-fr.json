@@ -1,0 +1,40 @@
+{
+    "name": "casier-judiciaire-justice-gouv-fr",
+    "vendorUrl": "https://casier-judiciaire.justice.gouv.fr/",
+    "runContext": {
+        "urlPattern": "^https?://casier-judiciaire\\.justice\\.gouv\\.fr/"
+    },
+    "prehideSelectors": ["#cookie_banner #myModal"],
+    "detectCmp": [
+        {
+            "exists": "#cookie_banner #myModal #popupCross"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_banner #myModal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#myModal #popupCross"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#myModal #popupCross"
+        },
+        {
+            "waitForVisible": "#cookie_banner #myModal",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookie_banner #myModal",
+            "check": "none"
+        }
+    ]
+}

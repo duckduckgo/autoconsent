@@ -1,0 +1,46 @@
+{
+    "name": "westminster.ac.uk",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?westminster\\.ac\\.uk/"
+    },
+    "prehideSelectors": [".gdpr-popup"],
+    "detectCmp": [
+        {
+            "exists": ".gdpr-popup #gdpr-popup__show-preferences"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".gdpr-popup.gdpr-popup--show"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".gdpr-popup__entry button[data-gdpr=button][value=accept]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gdpr-popup__show-preferences"
+        },
+        {
+            "waitForVisible": "#gdpr-popup__preferences button[data-gdpr=button][value=save]"
+        },
+        {
+            "click": "#gdpr-popup__preferences button[data-gdpr=switch][aria-checked=true]",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#gdpr-popup__preferences button[data-gdpr=button][value=save]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22interactedWith%22:true"
+        },
+        {
+            "cookieContains": "%22marketing%22:%22revoked%22"
+        }
+    ]
+}
