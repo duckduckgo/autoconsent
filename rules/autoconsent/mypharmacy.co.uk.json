@@ -1,0 +1,35 @@
+{
+    "name": "mypharmacy.co.uk",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?mypharmacy\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "xpath///div[@role='dialog'][.//h2[normalize-space()='Cookie Settings']]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[@role='dialog'][.//h2[normalize-space()='Cookie Settings']]//button[normalize-space()='Allow All']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog'][.//h2[normalize-space()='Cookie Settings']]//button[normalize-space()='Allow All']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog'][.//h2[normalize-space()='Cookie Settings']]//button[normalize-space()='Customise']"
+        },
+        {
+            "waitForThenClick": "xpath///div[@role='dialog'][.//h2[normalize-space()='Cookie Settings']]//button[normalize-space()='Necessary Only']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_consent=essential"
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "name": "greengo",
+    "vendorUrl": "https://www.greengo.voyage/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?greengo\\.voyage/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "dialog#consent-modal button.btn-invisible"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog#consent-modal button.btn-invisible"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "dialog#consent-modal button.btn-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "dialog#consent-modal button.btn-invisible",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "dialog#consent-modal",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

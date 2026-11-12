@@ -1,0 +1,62 @@
+{
+    "name": "statamic-peak",
+    "vendorUrl": "https://peak.1902.studio/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[x-data='consentBanner'] button[\\@click*='consentBanner.acceptAll']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[x-data='consentBanner']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[x-data='consentBanner'] button[\\@click*='consentBanner.acceptAll']"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "[x-data='consentBanner'] button[\\@click*='consentBanner.rejectAll']"
+            },
+            "then": [
+                {
+                    "if": {
+                        "visible": "[x-data='consentBanner'] button[\\@click*='expanded = true']"
+                    },
+                    "then": [
+                        {
+                            "click": "[x-data='consentBanner'] button[\\@click*='expanded = true']",
+                            "comment": "Manage preferences"
+                        }
+                    ]
+                },
+                {
+                    "waitForThenClick": "[x-data='consentBanner'] button[\\@click*='consentBanner.rejectAll']",
+                    "comment": "Reject all"
+                }
+            ],
+            "else": [
+                {
+                    "click": "[x-data='consentBanner'] input[type='checkbox'][x-model]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "[x-data='consentBanner'] button[\\@click*='consentBanner.saveConsent']",
+                    "comment": "Accept selected"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "[x-data='consentBanner']",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "name": "yandex",
+    "vendorUrl": "https://yandex.com/legal/cookies_policy/",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)*(yandex\\.[a-z.]+|ya\\.ru|kinopoisk\\.ru)/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr-popup-v3-button-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gdpr-popup-v3-button-mandatory"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#gdpr-popup-v3-button-mandatory",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

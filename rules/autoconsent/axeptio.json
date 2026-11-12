@@ -38,22 +38,42 @@
                 {
                     "waitForVisible": [
                         ".axeptio_mount .needsclick",
-                        "button#axeptio_btn_dismiss,button.ax-discardButton,button#axeptio_btn_close"
+                        "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button,button#axeptio_btn_close"
                     ]
                 },
                 { "wait": 300 },
                 {
-                    "if": { "exists": [".axeptio_mount .needsclick", "button#axeptio_btn_dismiss,button.ax-discardButton"] },
-                    "then": [{ "click": [".axeptio_mount .needsclick", "button#axeptio_btn_dismiss,button.ax-discardButton"] }],
+                    "if": {
+                        "exists": [
+                            ".axeptio_mount .needsclick",
+                            "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button"
+                        ]
+                    },
+                    "then": [
+                        {
+                            "click": [
+                                ".axeptio_mount .needsclick",
+                                "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button"
+                            ]
+                        }
+                    ],
                     "else": [{ "click": [".axeptio_mount .needsclick", "button#axeptio_btn_close"] }]
                 }
             ],
             "else": [
-                { "waitForVisible": "button#axeptio_btn_dismiss,button.ax-discardButton,button#axeptio_btn_close" },
+                {
+                    "waitForVisible": "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button,button#axeptio_btn_close"
+                },
                 { "wait": 300 },
                 {
-                    "if": { "exists": "button#axeptio_btn_dismiss,button.ax-discardButton" },
-                    "then": [{ "click": "button#axeptio_btn_dismiss,button.ax-discardButton" }],
+                    "if": {
+                        "exists": "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button"
+                    },
+                    "then": [
+                        {
+                            "click": "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button"
+                        }
+                    ],
                     "else": [{ "click": "button#axeptio_btn_close" }]
                 }
             ]
