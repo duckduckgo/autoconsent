@@ -1,0 +1,45 @@
+{
+    "name": "mediately",
+    "vendorUrl": "https://mediately.co/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?mediately\\.co/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#__next > div:has(> div > div > div > b):has(> div > div > div > button)" }],
+    "detectPopup": [{ "visible": "#__next > div:has(> div > div > div > b):has(> div > div > div > button)" }],
+    "optIn": [{ "waitForThenClick": "#__next > div:has(> div > div > div > b) > div > div > div > button" }],
+    "optOut": [
+        {
+            "comment": "country pages also load CookieYes, which this rule takes precedence over",
+            "if": { "exists": "script#cookieyes" },
+            "then": [
+                { "waitFor": ".cky-consent-container", "timeout": 3000, "optional": true },
+                {
+                    "if": { "visible": ".cky-consent-container [data-cky-tag=reject-button]" },
+                    "then": [{ "waitForThenClick": ".cky-consent-container [data-cky-tag=reject-button]" }],
+                    "else": [
+                        {
+                            "if": { "visible": ".cky-consent-container [data-cky-tag=settings-button]" },
+                            "then": [
+                                { "click": ".cky-consent-container [data-cky-tag=settings-button]" },
+                                {
+                                    "waitFor": ".cky-modal-open input[type=checkbox],.cky-consent-bar-expand input[type=checkbox],.cky-modal-open [data-cky-tag=detail-save-button],.cky-consent-bar-expand [data-cky-tag=detail-save-button]"
+                                },
+                                {
+                                    "click": ".cky-modal-open input[type=checkbox]:checked,.cky-consent-bar-expand input[type=checkbox]:checked",
+                                    "all": true,
+                                    "optional": true
+                                },
+                                {
+                                    "waitForThenClick": ".cky-modal [data-cky-tag=detail-save-button],.cky-consent-bar-expand [data-cky-tag=detail-save-button]"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        { "hide": "#__next > div:has(> div > div > div > b):has(> div > div > div > button)" }
+    ]
+}
