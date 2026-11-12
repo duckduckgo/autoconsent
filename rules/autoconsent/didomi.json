@@ -1,5 +1,6 @@
 {
     "name": "didomi",
+    "comment": "Bail on 'consent or pay' notices, where the disagree button costs money or leads to a subscription offer, and leave the choice to the user.",
     "prehideSelectors": [
         "#didomi-popup,.didomi-popup-container,.didomi-popup-notice,.didomi-consent-popup-preferences,#didomi-notice,.didomi-popup-backdrop,.didomi-screen-medium"
     ],
@@ -8,6 +9,10 @@
         {
             "visible": "#didomi-popup, #didomi-notice, .didomi-popup-notice, .didomi-notice-banner, #didomi-host:not([aria-hidden=\"true\"]):not(:empty)",
             "check": "any"
+        },
+        {
+            "exists": "xpath///button[@id='didomi-notice-disagree-button'][contains(., '€') or contains(., '£') or contains(., '$') or contains(., 'uscri') or contains(., 'ubscri') or contains(., 'bonn') or contains(., 'bbon')]",
+            "negated": true
         }
     ],
     "optIn": [{ "waitForThenClick": "#didomi-notice-agree-button" }],
