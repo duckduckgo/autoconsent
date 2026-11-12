@@ -1,0 +1,15 @@
+{
+    "name": "eu-cookie-compliance-legacy",
+    "vendorUrl": "https://www.drupal.org/project/eu_cookie_compliance",
+    "cosmetic": true,
+    "prehideSelectors": [],
+    "detectCmp": [
+        { "exists": "#sliding-popup .popup-content.info:not(.eu-cookie-compliance-content) #popup-buttons .agree-button" },
+        { "exists": "#sliding-popup .decline-button", "negated": true },
+        { "exists": "body.eu-cookie-compliance-popup-open", "negated": true }
+    ],
+    "detectPopup": [{ "visible": "#sliding-popup .popup-content.info" }],
+    "optIn": [{ "waitForThenClick": "#sliding-popup .agree-button" }],
+    "optOut": [{ "hide": "#sliding-popup" }],
+    "test": [{ "visible": "#sliding-popup", "check": "none" }]
+}
