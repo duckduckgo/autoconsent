@@ -1,0 +1,35 @@
+{
+    "name": "toyota-used-cars",
+    "vendorUrl": "https://pewneauto.pl/",
+    "prehideSelectors": ["#cookieModal:has([save-cookie=\"all\"])"],
+    "detectCmp": [{ "exists": "#cookieModal [save-cookie=\"all\"]" }],
+    "detectPopup": [
+        {
+            "comment": "the reject path continues on the cookie policy page, where the modal is closed",
+            "if": { "exists": "form#settings [save-cookie=\"form\"]" },
+            "then": [{ "cookieContains": "agree=true", "negated": true }],
+            "else": [{ "visible": "#cookieModal [save-cookie=\"all\"]" }]
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": "form#settings [save-cookie=\"form\"]" },
+            "then": [
+                { "click": "form#settings input[type=checkbox][name]:not(:checked)", "all": true, "optional": true },
+                { "waitForThenClick": "form#settings [save-cookie=\"form\"]" }
+            ],
+            "else": [{ "waitForThenClick": "#cookieModal [save-cookie=\"all\"]" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "form#settings [save-cookie=\"form\"]" },
+            "then": [
+                { "click": "form#settings input[type=checkbox][name]:checked", "all": true, "optional": true },
+                { "waitForThenClick": "form#settings [save-cookie=\"form\"]" }
+            ],
+            "else": [{ "waitForThenClick": "#cookieModal a[href$=\"#settings\"]" }]
+        }
+    ],
+    "test": [{ "wait": 500 }, { "cookieContains": "{\"name\":\"targetCookie\",\"value\":false}" }]
+}
