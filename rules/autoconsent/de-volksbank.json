@@ -1,14 +1,31 @@
 {
     "name": "de-volksbank",
     "prehideSelectors": [],
-    "detectCmp": [{ "exists": "#cookieconsent.cookie-overlay .cookie-buttons #cookie-deny" }],
-    "detectPopup": [
+    "detectCmp": [
         {
-            "comment": "the closed banner stays in the DOM with visibility: hidden, which the visible check ignores",
-            "exists": "#cookieconsent.cookie-overlay[style*=\"visibility: visible\"] #cookie-deny"
+            "exists": "#cookieconsent.cookie-overlay .cookie-buttons #cookie-deny, ap-cookie-consent [data-bb=\"decline\"] button"
         }
     ],
-    "optIn": [{ "waitForThenClick": "#cookieconsent.cookie-overlay #cookie-accept" }],
-    "optOut": [{ "waitForThenClick": "#cookieconsent.cookie-overlay #cookie-deny" }],
+    "detectPopup": [
+        {
+            "any": [
+                {
+                    "comment": "the closed banner stays in the DOM with visibility: hidden, which the visible check ignores",
+                    "exists": "#cookieconsent.cookie-overlay[style*=\"visibility: visible\"] #cookie-deny"
+                },
+                { "visible": "ap-cookie-consent [data-bb=\"decline\"] button" }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieconsent.cookie-overlay #cookie-accept, ap-cookie-consent [data-bb=\"accept\"] button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieconsent.cookie-overlay #cookie-deny, ap-cookie-consent [data-bb=\"decline\"] button"
+        }
+    ],
     "test": [{ "cookieContains": "CLC_GDPR=AB%3A" }]
 }
