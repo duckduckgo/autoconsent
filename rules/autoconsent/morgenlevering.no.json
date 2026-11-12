@@ -1,0 +1,46 @@
+{
+    "name": "morgenlevering.no",
+    "vendorUrl": "https://morgenlevering.no/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?morgenlevering\\.no/"
+    },
+    "prehideSelectors": [".cookie-consent__container"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent__container .cookie-consent__button-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent__container .cookie-consent__button-container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-consent__container .cookie-consent__button-container .button--primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-consent__container .cookie-consent__button-container .button--ghost"
+        },
+        {
+            "waitForVisible": ".cookie-consent__container .cookie-consent__consent-switch",
+            "timeout": 2000
+        },
+        {
+            "click": ".cookie-consent__cookie-information:not(:last-child) .cookie-consent__consent-switch input:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".cookie-consent__scroll-on-mobile ~ .cookie-consent__button-container .button--ghost"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_cookieConsent=none"
+        }
+    ]
+}
