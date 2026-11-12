@@ -1,0 +1,17 @@
+{
+    "name": "skovborghogh-cookies",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [".cookiePopup:has(#cookies .cookieWrapper)"],
+    "detectCmp": [{ "exists": ".cookiePopup #cookies .cookie-actions .cookie-btn.deny" }],
+    "detectPopup": [{ "visible": ".cookiePopup #cookies .cookieWrapper" }],
+    "optIn": [{ "waitForThenClick": ".cookiePopup #cookies .cookie-btn.accept span" }],
+    "optOut": [
+        { "waitForThenClick": ".cookiePopup #cookies .cookie-btn.deny span" },
+        { "waitForVisible": ".cookiePopup", "check": "none", "timeout": 3000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "%22marketingOnOff%22%3Afalse" }]
+}
