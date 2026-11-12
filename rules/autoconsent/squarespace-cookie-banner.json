@@ -3,12 +3,12 @@
     "prehideSelectors": [".cookie-banner-mount-point"],
     "detectCmp": [
         {
-            "exists": ".cookie-banner-mount-point section[aria-label='Cookie banner'] :is(button.decline, button.manage)"
+            "exists": ".cookie-banner-mount-point section.gdpr-cookie-banner :is(button.decline, button.manage)"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
+            "visible": ".cookie-banner-mount-point section.gdpr-cookie-banner"
         }
     ],
     "optIn": [
@@ -46,7 +46,7 @@
     ],
     "test": [
         {
-            "waitForVisible": ".cookie-banner-mount-point section[aria-label='Cookie banner']",
+            "waitForVisible": ".cookie-banner-mount-point section.gdpr-cookie-banner",
             "timeout": 1000,
             "check": "none"
         }
