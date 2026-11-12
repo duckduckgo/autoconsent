@@ -260,6 +260,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     //  Wykorzystujemy informacje w plikach cookie (We use information in cookies)
     /(używamy|stosujemy|stosuje|wykorzystujemy|wykorzyst(uje|ywane))( są)?.{0,20} plik(i|ów|ach) [„"]?cookie/gi,
     /(używać|używamy).{0,80} (ciasteczek|cookie)/gi,
+    // e.g. "Ta strona wykorzystuje ciasteczka (cookie)"
+    /(stosuje|stosujemy|wykorzystuje|wykorzystujemy) ciasteczka/gi,
     /cele przetwarzania twoich danych przez zaufanych partnerów iab/gi,
     /dzięki (plikom cookie|ciasteczkom|cookie)/gi,
     /korzysta.{0,80} plików cookie/gi,

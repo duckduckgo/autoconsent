@@ -457,6 +457,7 @@ describe('checkHeuristicPatterns with more French, German, Dutch, Polish and Rus
             'Onze cookies geven je de best mogelijke ervaring op onze website. Accepteer ze, of lees onze cookieverklaring.',
             'Informujemy, że niniejsza strona internetowa wykorzystuje pliki „cookies”.',
             'Strona wykorzystuje pliki "cookies" w celach statystycznych.',
+            'Ta strona wykorzystuje ciasteczka (cookie)',
             'Обрабатываем cookie, чтобы сделать сайт удобнее. Продолжая использовать сайт, вы соглашаетесь на их обработку.',
             'Сайт обрабатывает пользовательские данные с использованием файлов, сохраняемых в браузере пользователя, в соответствии с Условиями.',
         ]);
@@ -467,6 +468,7 @@ describe('checkHeuristicPatterns with more French, German, Dutch, Polish and Rus
             'On utilise du beurre dans nos cookies',
             'Analyse der Marketing-Strategie',
             'Durch die Nutzung unserer Webseite finden Sie schnell die neuesten Tests.',
+            'Piekarnia wypieka ciasteczka codziennie',
         ]);
     });
 });

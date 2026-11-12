@@ -197,6 +197,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["as de seguimiento"],
     ["cookie"],
     ["używać","używamy"],
+    [" ciasteczka"],
     ["cele przetwarzania twoich danych przez zaufanych partnerów iab"],
     ["dzięki "],
     [" plików cookie"],
