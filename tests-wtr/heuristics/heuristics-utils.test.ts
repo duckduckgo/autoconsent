@@ -872,6 +872,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Сохранить и закрыть')).to.equal('acknowledge');
     });
 
+    it('matches Swedish acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('Jag förstår')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ok, jag förstår')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Förstått!')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Jag förstår och godkänner')).to.equal('other');
+    });
+
     it('matches Catalan acknowledge buttons', () => {
         expect(classifyButtonTextRegex('Entenc')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Ho entenc')).to.equal('acknowledge');
