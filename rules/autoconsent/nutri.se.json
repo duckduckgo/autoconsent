@@ -1,0 +1,40 @@
+{
+    "name": "nutri.se",
+    "vendorUrl": "https://nutri.se/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?nutri\\.se/"
+    },
+    "prehideSelectors": [".nutri-consent-dialog"],
+    "detectCmp": [
+        {
+            "exists": "xpath///div[contains(@class, 'nutri-consent-dialog') and not(ancestor::*[@id='nutri-consent-shell'])]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[contains(@class, 'nutri-consent-dialog') and not(ancestor::*[@id='nutri-consent-shell'])]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class, 'nutri-consent-dialog') and not(ancestor::*[@id='nutri-consent-shell'])]/div/button[last()]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class, 'nutri-consent-dialog') and not(ancestor::*[@id='nutri-consent-shell'])]/div/button[1]"
+        },
+        {
+            "waitForThenClick": "xpath///div[@role='dialog' and .//button[@role='switch']]/div[last()]/div/button[1]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "nutri_consent_v1="
+        },
+        {
+            "cookieContains": "%22marketing%22%3Afalse"
+        }
+    ]
+}
