@@ -1,0 +1,41 @@
+{
+    "name": "hacon-next-gen",
+    "vendorUrl": "https://www.hacon.de/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ["next-gen-map-based-route", "next-gen-cookie-dialog"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["next-gen-map-based-route", "next-gen-cookie-dialog next-gen-page.cookie-dialog"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["next-gen-map-based-route", "next-gen-cookie-dialog next-gen-page-footer button[variant=primary]"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["next-gen-map-based-route", "next-gen-cookie-dialog input[type=checkbox]:checked"]
+            },
+            "then": [
+                {
+                    "click": ["next-gen-map-based-route", "next-gen-cookie-dialog input[type=checkbox]:checked"],
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ["next-gen-map-based-route", "next-gen-cookie-dialog next-gen-page-footer button[variant=secondary]"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "allow_marketing=deny"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "name": "bgk.pl",
+    "vendorUrl": "https://www.bgk.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?bgk\\.pl/"
+    },
+    "prehideSelectors": [".cc-window[aria-describedby=\"cookieheading\"]"],
+    "detectCmp": [{ "exists": ".cc-window .dp--cookie-check" }],
+    "detectPopup": [{ "visible": ".cc-window:not(.cc-invisible) .cc-compliance" }],
+    "optIn": [{ "waitForThenClick": ".cc-window .cc-dismiss" }],
+    "optOut": [
+        { "waitForThenClick": ".cc-window .cc-settings", "retry": 3 },
+        { "waitForVisible": ".cc-window .dp--cookie-check" },
+        { "click": ".cc-window .dp--check-box:checked:not(:disabled)", "all": true, "optional": true },
+        { "waitForThenClick": ".cc-window .cc-allow" }
+    ],
+    "test": [{ "cookieContains": "\"dp--cookie-marketing\":false" }]
+}

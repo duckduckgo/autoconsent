@@ -5,7 +5,7 @@
     "prehideSelectors": [".mw-cookiewarning-container"],
     "detectCmp": [
         {
-            "exists": ".mw-cookiewarning-container"
+            "visible": ".mw-cookiewarning-container"
         }
     ],
     "detectPopup": [

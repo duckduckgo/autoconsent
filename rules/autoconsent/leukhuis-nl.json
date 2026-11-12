@@ -1,0 +1,35 @@
+{
+    "name": "leukhuis-nl",
+    "vendorUrl": "https://leukhuis.nl/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?leukhuis\\.nl/"
+    },
+    "prehideSelectors": ["#cookieNotice"],
+    "detectCmp": [
+        {
+            "exists": "#cookieNotice > a.btncookieNoticesettings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieNotice"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieNotice > a.btncookieNotice:not(.btncookieNoticesettings)"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookieNotice"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookieNotice",
+            "check": "none"
+        }
+    ]
+}

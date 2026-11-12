@@ -1,0 +1,33 @@
+{
+    "name": "hkdir",
+    "vendorUrl": "https://hkdir.no/",
+    "prehideSelectors": [".hkd-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ".hkd-cookie-banner .hkd-cookie-banner-button-group"
+        },
+        {
+            "exists": "next-route-announcer"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".hkd-cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".hkd-cookie-banner-button-group > button:nth-of-type(1)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".hkd-cookie-banner-button-group > button:nth-of-type(2)"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-consent=essential"
+        }
+    ]
+}

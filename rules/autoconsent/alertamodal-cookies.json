@@ -1,0 +1,29 @@
+{
+    "name": "alertamodal-cookies",
+    "prehideSelectors": [".alertaModal .msg.cookies"],
+    "detectCmp": [
+        {
+            "exists": ".alertaModal .msg.cookies #rechazaCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".alertaModal .msg.cookies #rechazaCookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".alertaModal .msg.cookies #aceptaCookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".alertaModal .msg.cookies #rechazaCookies"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "aceptaCookies=false"
+        }
+    ]
+}

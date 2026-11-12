@@ -1,0 +1,22 @@
+{
+    "name": "edebe",
+    "vendorUrl": "https://plus.edebe.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://plus\\.edebe\\.com/"
+    },
+    "prehideSelectors": ["#cookieBanner"],
+    "detectCmp": [{ "exists": "#cookieBanner button[data-fragment=button]" }],
+    "detectPopup": [{ "visible": "#cookieBanner button[data-fragment=button]" }],
+    "optIn": [{ "waitForThenClick": "#cookieBanner button[data-fragment=button]:first-of-type" }],
+    "optOut": [
+        { "waitForThenClick": "#cookieBanner button[data-fragment=button]:last-of-type" },
+        { "waitForVisible": "[role=dialog][data-smtype=Dialog_alert] button[data-fragment=button]" },
+        {
+            "if": { "exists": "[role=dialog][data-smtype=Dialog_alert] [data-fragment=switch] input:not([disabled])[value=true]" },
+            "then": [{ "click": "[role=dialog][data-smtype=Dialog_alert] [data-fragment=switch] input:not([disabled])[value=true]" }]
+        },
+        { "waitForThenClick": "[role=dialog][data-smtype=Dialog_alert] button[data-fragment=button]:last-of-type" }
+    ],
+    "test": [{ "cookieContains": "cookies_analytics=false" }]
+}

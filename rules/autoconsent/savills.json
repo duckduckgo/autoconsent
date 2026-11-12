@@ -1,0 +1,44 @@
+{
+    "name": "savills",
+    "vendorUrl": "https://www.savills.com/",
+    "prehideSelectors": [".sv-cookie-management__banner"],
+    "detectCmp": [
+        {
+            "exists": ".sv-cookie-management__banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".sv-cookie-management__banner.sv--visible"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".sv-cookie-management__banner .sv-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".sv-cookie-management__banner .sv-manage-cookies"
+        },
+        {
+            "waitForVisible": ".sv-cookie-management__modal--visible"
+        },
+        {
+            "if": { "exists": "#functional-cookies:checked" },
+            "then": [{ "click": "label[for='functional-cookies']" }]
+        },
+        {
+            "if": { "exists": "#tracking-cookies:checked" },
+            "then": [{ "click": "label[for='tracking-cookies']" }]
+        },
+        {
+            "click": ".sv-cookie-management__modal--visible .sv-save-close"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"tracking\":false"
+        }
+    ]
+}

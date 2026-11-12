@@ -1,0 +1,102 @@
+{
+    "name": "piwik-pro",
+    "vendorUrl": "https://piwik.pro/consent-manager/",
+    "prehideSelectors": ["#PiwikPROConsentForm-container", ".PiwikPROConsentForm-overlay", "#ppms_cm_popup_overlay"],
+    "detectCmp": [
+        {
+            "exists": "#PiwikPROConsentForm-container, #ppms_cm_popup_overlay #ppms_cm_reject-all, #ppms_cm_popup_overlay #ppms_cm_disagree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#PiwikPROConsentForm-container, #ppms_cm_popup_wrapper",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#PiwikPROConsentForm-agree-to-all, #PiwikPROConsentForm-agree, #ppms_cm_agree-to-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#ppms_cm_reject-all, #ppms_cm_disagree"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#ppms_cm_reject-all, #ppms_cm_disagree"
+                },
+                {
+                    "comment": "some sites show a confirmation note after saving",
+                    "waitForThenClick": "#ppms_consent_form_success_note_button",
+                    "timeout": 1000,
+                    "optional": true
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "visible": "#PiwikPROConsentForm-reject-all"
+                    },
+                    "then": [
+                        {
+                            "click": "#PiwikPROConsentForm-reject-all"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "#PiwikPROConsentForm-toggle-details"
+                        },
+                        {
+                            "waitForVisible": "#PiwikPROConsentForm-consents",
+                            "timeout": 2000
+                        },
+                        {
+                            "if": {
+                                "visible": "#PiwikPROConsentForm-reject-all"
+                            },
+                            "then": [
+                                {
+                                    "click": "#PiwikPROConsentForm-reject-all"
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "comment": "untick any pre-selected optional purposes",
+                                    "click": "button.PiwikPROConsentForm-consent-checkbox[aria-checked=true]:not([aria-required=true]), input.PiwikPROConsentForm-consent-checkbox:checked:not(:disabled)",
+                                    "all": true,
+                                    "optional": true
+                                },
+                                {
+                                    "if": {
+                                        "visible": "#PiwikPROConsentForm-save"
+                                    },
+                                    "then": [
+                                        {
+                                            "click": "#PiwikPROConsentForm-save"
+                                        }
+                                    ],
+                                    "else": [
+                                        {
+                                            "comment": "the details toggle turns into the save button once expanded",
+                                            "click": "#PiwikPROConsentForm-toggle-details"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ppms_privacy_"
+        },
+        {
+            "cookieContains": "%22status%22:0"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "name": "vergelijkgroep",
+    "_metadata": {
+        "vendorUrl": "https://vergelijkgroep.nl/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#cookie_consent:has(#cookie_consent_details)"],
+    "detectCmp": [
+        {
+            "exists": "#cookie_consent #cookie_consent_details :is(#functional-cookie-accept, .functional-button)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_consent #cookie_consent_summary"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_consent_summary :is(#default-accept-button, #cookie-accept-button)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie_consent_details :is(#functional-cookie-accept, .functional-button)"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieconsent_status=accept_functional"
+        }
+    ]
+}

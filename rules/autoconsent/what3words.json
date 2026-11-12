@@ -1,0 +1,53 @@
+{
+    "name": "what3words",
+    "vendorUrl": "https://what3words.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?what3words\\.com/"
+    },
+    "detectCmp": [
+        {
+            "exists": "[role=dialog] [data-testid=view-preferences], .CookieNotice-Dialog [data-testid=Preferences]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=dialog] [data-testid=view-preferences], .CookieNotice-Dialog [data-testid=Preferences]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[role=dialog] [data-testid=accept-all], .CookieNotice-Dialog [data-testid=AcceptAll]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "[role=dialog] [data-testid=view-preferences]" },
+            "then": [
+                { "click": "[role=dialog] [data-testid=view-preferences]" },
+                { "waitForThenClick": "[role=dialog] [data-testid=save-preferences]" }
+            ],
+            "else": [
+                { "click": ".CookieNotice-Dialog [data-testid=Preferences]" },
+                { "waitForThenClick": ".CookieNotice-Dialog [data-testid=UpdateAndClose]" }
+            ]
+        },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 4000, "optional": true },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                { "cookieContains": "%22analytics%22%3Afalse%2C%22marketing%22%3Afalse" },
+                { "cookieContains": "%22analytics%22:false%2C%22marketing%22:false" }
+            ]
+        }
+    ]
+}

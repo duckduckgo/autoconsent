@@ -2,32 +2,32 @@
     "name": "svt.se",
     "vendorUrl": "https://www.svt.se/",
     "runContext": {
-        "urlPattern": "^https://www\\.svt\\.se/"
+        "urlPattern": "^https://(\\w+\\.)?svt\\.se/"
     },
-    "prehideSelectors": ["[class*=CookieConsent__root___]"],
+    "prehideSelectors": [".CookieConsent__root"],
     "detectCmp": [
         {
-            "exists": "[class*=CookieConsent__root___]"
+            "exists": ".CookieConsent__root"
         }
     ],
     "detectPopup": [
         {
-            "visible": "[class*=CookieConsent__modal___]"
+            "visible": ".CookieConsent__root .CookieConsent__modal"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "[class*=CookieConsent__modal___] > div > button[class*=primary]"
+            "waitForThenClick": ".CookieConsent__root button[data-consent-action=accept-all], #CookieConsent_accept_all"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "[class*=CookieConsent__modal___] > div > button[class*=secondary]:nth-child(2)"
+            "waitForThenClick": ".CookieConsent__root button[data-consent-action=reject-all], #CookieConsent_reject_all"
         }
     ],
     "test": [
         {
-            "cookieContains": "cookie-consent-1={\"optedIn\":true,\"functionality\":false,\"statistics\":false}"
+            "cookieContains": "\"improved_experience\":false,\"partners\":false"
         }
     ]
 }

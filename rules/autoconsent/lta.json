@@ -1,0 +1,22 @@
+{
+    "name": "lta",
+    "_metadata": {
+        "vendorUrl": "https://www.lta.org.uk/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#lta-cookies-banner"],
+    "detectCmp": [{ "exists": "#lta-cookies-banner" }],
+    "detectPopup": [{ "visible": "#lta-cookies-banner" }],
+    "optIn": [{ "waitForThenClick": "#lta-cookies-button" }],
+    "optOut": [
+        { "waitForThenClick": "#js-lta-cookie-modal-trigger" },
+        { "waitForVisible": "#lta-cookies-modal" },
+        { "click": "#lta-cookies-form input[type=radio][id^=decline-]", "all": true, "optional": true },
+        { "click": "#js-lta-cookie-modal-set" }
+    ],
+    "test": [{ "cookieContains": "%22perf%22:false" }]
+}

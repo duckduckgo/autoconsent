@@ -1,0 +1,16 @@
+{
+    "name": "bmedonline.es",
+    "vendorUrl": "https://www.bmedonline.es/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?bmedonline\\.es/"
+    },
+    "prehideSelectors": ["#CybotCookiebotDialog"],
+    "detectCmp": [{ "exists": "#CybotCookiebotDialog #CybotCookiebotDialogBodyButtonDecline" }],
+    "detectPopup": [{ "visible": "#CybotCookiebotDialog" }],
+    "optIn": [{ "waitForThenClick": "#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll" }],
+    "optOut": [{ "waitForThenClick": "#CybotCookiebotDialogBodyButtonDecline" }],
+    "test": [{ "wait": 500 }, { "cookieContains": "marketing:false" }]
+}

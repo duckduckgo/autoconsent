@@ -1,0 +1,33 @@
+{
+    "name": "seg-social",
+    "vendorUrl": "https://www.seg-social.es/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)*seg-social\\.(gob\\.)?es/"
+    },
+    "prehideSelectors": ["#cookieContainer #cookies"],
+    "detectCmp": [
+        {
+            "exists": "#cookieContainer #cookies .cookies_inner button[onclick*='Rechazar']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieContainer #cookies .cookies_inner button[onclick*='Rechazar']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieContainer #cookies .cookies_inner button[onclick*='Aceptar']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieContainer #cookies .cookies_inner button[onclick*='Rechazar']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%7E%7Cparcial"
+        }
+    ]
+}

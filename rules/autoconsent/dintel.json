@@ -1,0 +1,13 @@
+{
+    "name": "dintel",
+    "vendorUrl": "https://estaticos.redsara.es/dintel/",
+    "prehideSelectors": ["dnt-cookies"],
+    "detectCmp": [{ "exists": ["dnt-cookies", ".dnt-cookies__footer"] }],
+    "detectPopup": [{ "visible": ["dnt-cookies", ".dnt-cookies--is-open"] }],
+    "optIn": [{ "waitForThenClick": ["dnt-cookies", ".dnt-cookies__footer dnt-button[type^=primary]"] }],
+    "optOut": [
+        { "waitForThenClick": ["dnt-cookies", ".dnt-cookies__footer dnt-button[type^=secondary]"] },
+        { "waitForVisible": ["dnt-cookies", ".dnt-cookies--is-open"], "check": "none", "timeout": 2000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "CONSENT=OFF" }]
+}

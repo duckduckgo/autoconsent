@@ -1,0 +1,19 @@
+{
+    "name": "libris.nl",
+    "vendorUrl": "https://libris.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?libris\\.nl/"
+    },
+    "prehideSelectors": ["#cookie-consent-popup"],
+    "detectCmp": [{ "exists": "#cookie-consent-popup #cookie-consent-accept-selected" }],
+    "detectPopup": [{ "visible": "#cookie-consent-popup #cookie-consent-accept-selected" }],
+    "optIn": [{ "waitForThenClick": "#cookie-consent-popup #cookie-consent-accept-all" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookie-consent-popup input[type=checkbox]:checked:not(:disabled)" },
+            "then": [{ "click": "#cookie-consent-popup input[type=checkbox]:checked:not(:disabled)", "all": true }]
+        },
+        { "waitForThenClick": "#cookie-consent-popup #cookie-consent-accept-selected" }
+    ],
+    "test": [{ "cookieContains": "analytics_cookies=false!personalizationAndMarketing_cookies=false" }]
+}

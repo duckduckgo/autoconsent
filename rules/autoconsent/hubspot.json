@@ -3,5 +3,11 @@
     "detectCmp": [{ "exists": "#hs-eu-cookie-confirmation" }],
     "detectPopup": [{ "visible": "#hs-eu-cookie-confirmation" }],
     "optIn": [{ "click": "#hs-eu-confirmation-button" }],
-    "optOut": [{ "click": "#hs-eu-decline-button" }]
+    "optOut": [
+        {
+            "if": { "exists": "#hs-eu-decline-button" },
+            "then": [{ "click": "#hs-eu-decline-button" }],
+            "else": [{ "visible": "#hs-eu-close-button" }, { "click": "#hs-eu-close-button" }]
+        }
+    ]
 }

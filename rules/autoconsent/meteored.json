@@ -1,0 +1,40 @@
+{
+    "name": "meteored",
+    "vendorUrl": "https://www.meteored.com/",
+    "prehideSelectors": [".cmp_gdpr .fondo-cmp"],
+    "detectCmp": [
+        {
+            "exists": ".cmp_gdpr #btn-gdpr-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cmp_gdpr #btn-gdpr-accept"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cmp_gdpr #btn-gdpr-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cmp_gdpr #btn-gdpr-configure"
+        },
+        {
+            "waitForThenClick": ".cmp_gdpr .bt-final.footer button.bt-izq-m",
+            "retry": 5,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cmp_gdpr .fondo-cmp",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "cookieContains": "cmp-cl=AA"
+        }
+    ]
+}

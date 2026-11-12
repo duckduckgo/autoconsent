@@ -1,0 +1,22 @@
+{
+    "name": "unicity",
+    "vendorUrl": "https://www.unicitysolutions.co.uk/",
+    "prehideSelectors": ["#cookieControlWrapper"],
+    "detectCmp": [{ "exists": "#cookieControlWrapper #cookieControlBannerManage" }],
+    "detectPopup": [{ "visible": "#cookieControlWrapper #cookieControlBanner" }],
+    "optIn": [{ "waitForThenClick": "#cookieControlBannerContent a[onclick*=unicityCookiesAcceptAll]" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookieControlBannerContent a[onclick*=unicityCookiesRejectAll]" },
+            "then": [{ "click": "#cookieControlBannerContent a[onclick*=unicityCookiesRejectAll]" }],
+            "else": [
+                { "click": "#cookieControlBannerContent a[onclick*=unicityCookiesManage]" },
+                { "waitForVisible": "#cookieControlBannerManage" },
+                { "click": "#cookieControlBannerManage input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+                { "click": "#cookieControlBannerManage a[onclick*=unicityCookiesSave]" }
+            ]
+        },
+        { "waitForVisible": "#cookieControlWrapper", "check": "none", "timeout": 2000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "uni_cookies=0,0,0,0" }]
+}

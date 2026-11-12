@@ -1,0 +1,52 @@
+{
+    "name": "warszawa19115.pl",
+    "vendorUrl": "https://warszawa19115.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?warszawa19115\\.pl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".MuiDialog-root [role=dialog] img[src*=\"portalCKM-cookie-dialog\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".MuiDialog-root [role=dialog] img[src*=\"portalCKM-cookie-dialog\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".MuiDialog-root [role=dialog] button.MuiButton-contained"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".MuiDialog-root [role=dialog] button.MuiButton-outlined"
+        },
+        {
+            "waitForVisible": ".MuiDialog-root [role=dialog] .MuiFormGroup-root button.MuiButton-outlined"
+        },
+        {
+            "if": {
+                "exists": ".MuiDialog-root [role=dialog] .MuiFormGroup-root input[type=checkbox]:checked:not(:disabled)"
+            },
+            "then": [
+                {
+                    "click": ".MuiDialog-root [role=dialog] .MuiFormGroup-root input[type=checkbox]:checked:not(:disabled)",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "click": ".MuiDialog-root [role=dialog] .MuiFormGroup-root button.MuiButton-outlined"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".MuiDialog-root [role=dialog]",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}

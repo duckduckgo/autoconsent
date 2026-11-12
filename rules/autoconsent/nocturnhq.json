@@ -1,0 +1,35 @@
+{
+    "name": "nocturnhq",
+    "vendorUrl": "https://nocturnhq.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?nocturnhq\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "div.fixed.opacity-100 button[aria-label='Toggle Essential cookies']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.fixed.opacity-100:has(button[aria-label='Toggle Essential cookies']) button[aria-label='Close']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.fixed.opacity-100:has(button[aria-label='Toggle Essential cookies']) button[type='button'].bg-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div.fixed.opacity-100:has(button[aria-label='Toggle Essential cookies']) button[aria-label='Close']"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "div.fixed.opacity-100 button[aria-label='Toggle Essential cookies']",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

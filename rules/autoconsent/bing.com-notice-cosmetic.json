@@ -1,0 +1,28 @@
+{
+    "name": "bing.com-notice-cosmetic",
+    "vendorUrl": "https://www.bing.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?bing\\.com/"
+    },
+    "minimumRuleStepVersion": 2,
+    "prehideSelectors": ["#thp_notf_div:has(a.hpn_top_link[href*=\"linkid=521839\"], a.hpn_top_link[href*=\"bGlua2lkPTUyMTgzOQ\"])"],
+    "detectCmp": [{ "exists": "#thp_notf_div:has(a.hpn_top_link[href*=\"linkid=521839\"], a.hpn_top_link[href*=\"bGlua2lkPTUyMTgzOQ\"])" }],
+    "detectPopup": [
+        { "visible": "#thp_notf_div:has(a.hpn_top_link[href*=\"linkid=521839\"], a.hpn_top_link[href*=\"bGlua2lkPTUyMTgzOQ\"])" }
+    ],
+    "optIn": [
+        { "hide": "#thp_notf_div:has(a.hpn_top_link[href*=\"linkid=521839\"], a.hpn_top_link[href*=\"bGlua2lkPTUyMTgzOQ\"])" },
+        { "addStyle": "top: 0 !important", "selector": "header#hdr", "optional": true }
+    ],
+    "optOut": [
+        { "hide": "#thp_notf_div:has(a.hpn_top_link[href*=\"linkid=521839\"], a.hpn_top_link[href*=\"bGlua2lkPTUyMTgzOQ\"])" },
+        { "addStyle": "top: 0 !important", "selector": "header#hdr", "optional": true }
+    ],
+    "test": [
+        {
+            "visible": "#thp_notf_div:has(a.hpn_top_link[href*=\"linkid=521839\"], a.hpn_top_link[href*=\"bGlua2lkPTUyMTgzOQ\"])",
+            "check": "none"
+        }
+    ]
+}

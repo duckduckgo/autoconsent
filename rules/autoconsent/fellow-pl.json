@@ -1,0 +1,16 @@
+{
+    "name": "fellow.pl",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(fellow|fll)\\.pl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "a[href='/?cookie=1'] > img[title*='cookies']" }],
+    "detectPopup": [{ "visible": "a[href='/?cookie=1'] > img[title*='cookies']" }],
+    "optIn": [{ "waitForThenClick": "a[href='/?cookie=1']" }],
+    "optOut": [
+        {
+            "waitForThenClick": "a[href='/?cookie=1']",
+            "comment": "notice only; the close link acknowledges it"
+        }
+    ]
+}

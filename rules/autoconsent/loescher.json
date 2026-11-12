@@ -1,0 +1,44 @@
+{
+    "name": "loescher",
+    "vendorUrl": "https://www.loescher.it/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?loescher\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookieChoice"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieChoice"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieChoice a[onclick*=cookie_accetto]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieChoice a[href='#modalCookieChoice']"
+        },
+        {
+            "waitForVisible": "#modalCookieChoice"
+        },
+        {
+            "click": "#modalCookieChoice input[type=checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#modalCookieChoice button[onclick*=cookie_statistici]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "loeschertechcookieadv=1"
+        }
+    ]
+}

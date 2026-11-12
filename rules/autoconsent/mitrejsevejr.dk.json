@@ -1,0 +1,13 @@
+{
+    "name": "mitrejsevejr.dk",
+    "vendorUrl": "https://www.mitrejsevejr.dk/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?mitrejsevejr\\.dk/"
+    },
+    "prehideSelectors": ["#cookie-overlay"],
+    "detectCmp": [{ "exists": "#cookie-bar #cookieButtonSome" }],
+    "detectPopup": [{ "visible": "#cookie-bar" }],
+    "optIn": [{ "waitForThenClick": "#cookie-bar #cookie-bar-button" }],
+    "optOut": [{ "waitForThenClick": "#cookie-bar #cookieButtonSome" }],
+    "test": [{ "cookieContains": "mrvdk_cookies_ads=false" }]
+}

@@ -1,0 +1,16 @@
+{
+    "name": "newsbreak",
+    "vendorUrl": "https://www.newsbreak.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?newsbreak\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "button[aria-label='Close cookie banner']" }],
+    "detectPopup": [{ "visible": "button[aria-label='Close cookie banner']" }],
+    "optIn": [{ "waitForThenClick": "button[aria-label='Close cookie banner']" }],
+    "optOut": [{ "waitForThenClick": "button[aria-label='Close cookie banner']", "comment": "notice only offers a close (X) button" }],
+    "test": [{ "waitForVisible": "button[aria-label='Close cookie banner']", "check": "none", "timeout": 2000 }]
+}

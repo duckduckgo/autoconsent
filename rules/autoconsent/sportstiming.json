@@ -1,0 +1,37 @@
+{
+    "name": "sportstiming",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?sportstiming\\.(dk|se|no|de)/"
+    },
+    "prehideSelectors": [".bootbox.modal:has(#btnCookiesAcceptSelected)"],
+    "detectCmp": [
+        {
+            "exists": "#btnCookiesAcceptSelected"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#btnCookiesAcceptSelected"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#btnCookiesAcceptAll"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#chkCookiesStatistics:checked, #chkCookiesSettings:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#btnCookiesAcceptSelected"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies_allowed=required"
+        }
+    ]
+}

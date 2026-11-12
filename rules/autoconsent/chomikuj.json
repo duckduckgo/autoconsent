@@ -1,0 +1,13 @@
+{
+    "name": "chomikuj",
+    "vendorUrl": "https://chomikuj.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?chomikuj\\.pl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".cookiesInfo .closeCookiesInfo" }],
+    "detectPopup": [{ "visible": ".cookiesInfo .closeCookiesInfo" }],
+    "optIn": [{ "waitForThenClick": ".cookiesInfo .closeCookiesInfo" }],
+    "optOut": [{ "waitForThenClick": ".cookiesInfo .closeCookiesInfo" }],
+    "test": [{ "waitForVisible": ".cookiesInfo", "check": "none", "timeout": 2000 }]
+}

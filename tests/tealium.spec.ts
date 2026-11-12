@@ -11,4 +11,13 @@ generateCMPTests('Tealium', [
     'https://www.nito.no/',
     'https://www.about.hsbc.pl/pl-pl/hsbc-service-delivery',
     'https://www.hsbc.com/',
+    'https://www.telekom.de/',
+    'https://www.telekom.com/',
+    'https://www.t-systems.com/',
+    'https://www.mainova.de/',
 ]);
+
+// preferences prompt variant; the popup shows inconsistently to US visitors
+generateCMPTests('Tealium', ['https://www.keurig.ca/'], {
+    skipRegions: ['US'],
+});

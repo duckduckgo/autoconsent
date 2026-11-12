@@ -1,0 +1,13 @@
+{
+    "name": "pensionsmyndigheten",
+    "vendorUrl": "https://www.pensionsmyndigheten.se/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?pensionsmyndigheten\\.se/"
+    },
+    "prehideSelectors": ["[data-ui-test=pm-cookie-banner]"],
+    "detectCmp": [{ "exists": "[data-ui-test=pm-cookie-banner]" }],
+    "detectPopup": [{ "visible": "[data-ui-test=pm-cookie-banner]" }],
+    "optIn": [{ "waitForThenClick": "[data-ui-test=pm-cookie-banner-consent-button]" }],
+    "optOut": [{ "waitForThenClick": "[data-ui-test=pm-cookie-banner-decline-button]" }],
+    "test": [{ "cookieContains": "pm_cookie_consent_level=1" }]
+}

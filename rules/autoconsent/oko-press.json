@@ -1,0 +1,23 @@
+{
+    "name": "oko-press",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?oko\\.press/"
+    },
+    "prehideSelectors": ["aside:has(#featureSwitch_necessary)"],
+    "detectCmp": [{ "exists": "#featureSwitch_necessary" }],
+    "detectPopup": [{ "visible": "aside:has(#featureSwitch_necessary)" }],
+    "optIn": [{ "waitForThenClick": "xpath///aside[.//*[@id='featureSwitch_necessary']]//button[contains(., 'Akceptuję wszystkie')]" }],
+    "optOut": [
+        { "waitForThenClick": "xpath///aside[.//*[@id='featureSwitch_necessary']]//button[contains(., 'Dostosuj')]" },
+        { "waitForVisible": "#featureSwitch_marketing" },
+        {
+            "if": { "exists": "#featureSwitch_marketing[data-state='checked']" },
+            "then": [{ "click": "#featureSwitch_marketing" }]
+        },
+        { "waitForThenClick": "xpath///aside[.//*[@id='featureSwitch_necessary']]//button[contains(., 'Potwierdź wybór')]" }
+    ],
+    "test": [
+        { "waitForVisible": "aside:has(#featureSwitch_necessary)", "check": "none", "timeout": 2000 },
+        { "cookieContains": "privacy2=necessary" }
+    ]
+}

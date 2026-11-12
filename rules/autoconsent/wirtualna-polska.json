@@ -1,0 +1,41 @@
+{
+    "name": "wirtualna-polska",
+    "prehideSelectors": ["div[role=dialog][aria-modal=true][aria-label*='WP']"],
+    "detectCmp": [
+        {
+            "exists": [
+                "div[role=dialog][aria-modal=true][aria-label*='WP']",
+                "xpath/.//button[normalize-space(.)='Ustawienia zaawansowane' or normalize-space(.)='Advanced settings' or normalize-space(.)='Erweiterte einstellungen' or normalize-space(.)='Pokročilá nastavení' or normalize-space(.)='Rozšírené nastavenia' or normalize-space(.)='Išplėstiniai nustatymai']"
+            ]
+        }
+    ],
+    "detectPopup": [{ "visible": "div[role=dialog][aria-modal=true][aria-label*='WP']" }],
+    "optIn": [
+        {
+            "waitForThenClick": [
+                "div[role=dialog][aria-modal=true][aria-label*='WP']",
+                "xpath/.//button[starts-with(normalize-space(.), 'Akceptuję') or starts-with(normalize-space(.), 'I accept') or starts-with(normalize-space(.), 'Akzeptieren') or starts-with(normalize-space(.), 'Přijímám') or starts-with(normalize-space(.), 'Súhlasím') or starts-with(normalize-space(.), 'Sutinku')]"
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [
+                "div[role=dialog][aria-modal=true][aria-label*='WP']",
+                "xpath/.//button[normalize-space(.)='Ustawienia zaawansowane' or normalize-space(.)='Advanced settings' or normalize-space(.)='Erweiterte einstellungen' or normalize-space(.)='Pokročilá nastavení' or normalize-space(.)='Rozšírené nastavenia' or normalize-space(.)='Išplėstiniai nustatymai']"
+            ]
+        },
+        {
+            "waitForThenClick": [
+                "div[role=dialog][aria-modal=true][aria-label*='WP']",
+                "xpath/.//button[normalize-space(.)='Zapisz' or normalize-space(.)='Save' or normalize-space(.)='Speichern' or normalize-space(.)='Uložit' or normalize-space(.)='Uložiť' or normalize-space(.)='Išsaugoti']"
+            ]
+        },
+        {
+            "waitForVisible": "div[role=dialog][aria-modal=true][aria-label*='WP']",
+            "check": "none",
+            "timeout": 5000,
+            "optional": true
+        }
+    ]
+}

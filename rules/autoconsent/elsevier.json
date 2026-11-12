@@ -7,12 +7,12 @@
     "prehideSelectors": ["[data-testid=\"cookie-banner\"]"],
     "detectCmp": [
         {
-            "exists": "[data-testid=\"cookie-banner\"] [data-testid=\"cookie-settings-button\"]"
+            "exists": "[data-testid=\"accept-all-cookies-button\"] ~ [data-testid=\"cookie-settings-button\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "[data-testid=\"cookie-banner\"] [data-testid=\"cookie-settings-button\"]"
+            "visible": "[data-testid=\"accept-all-cookies-button\"] ~ [data-testid=\"cookie-settings-button\"]"
         }
     ],
     "optIn": [
@@ -56,7 +56,7 @@
             ]
         },
         {
-            "waitForVisible": "[data-testid=\"cookie-banner\"]",
+            "waitForVisible": "[data-testid=\"accept-all-cookies-button\"]",
             "check": "none",
             "timeout": 10000
         }

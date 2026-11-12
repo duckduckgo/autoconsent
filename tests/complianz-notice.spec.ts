@@ -6,4 +6,6 @@ generateCMPTests('Complianz notice', [
     // banner with a blocking screen overlay
     'https://harleypsychologygroup.com/tests/depression-children/',
     'https://infobunny.com/',
+    // separate desktop and mobile dismiss buttons, one of them hidden
+    'https://jpn.pioneer/',
 ]);

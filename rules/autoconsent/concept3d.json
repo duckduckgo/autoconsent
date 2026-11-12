@@ -1,0 +1,19 @@
+{
+    "name": "concept3d",
+    "vendorUrl": "https://www.concept3d.com/",
+    "prehideSelectors": [".cookie-consent-card:has([data-cy=cookie-customize])"],
+    "detectCmp": [{ "exists": ".cookie-consent-card [data-cy=cookie-customize]" }],
+    "detectPopup": [{ "visible": ".cookie-consent-card [data-cy=cookie-customize]" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent-card [data-cy=cookie-accept-all]" }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-consent-card [data-cy=cookie-customize]" },
+        { "waitForVisible": "#cookie-preferences-dialog [data-cy=cookie-save-preferences]" },
+        {
+            "click": "#cookie-preferences-dialog button[role=switch][aria-checked=true]:not([aria-disabled=true])",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "#cookie-preferences-dialog [data-cy=cookie-save-preferences]" }
+    ],
+    "test": [{ "cookieContains": "_cookieConsent=%7B%22analytics%22%3Afalse%2C%22marketing%22%3Afalse" }]
+}

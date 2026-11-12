@@ -1,0 +1,46 @@
+{
+    "name": "teacherspensions.co.uk",
+    "vendorUrl": "https://www.teacherspensions.co.uk/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?teacherspensions\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#cookieChoiceInfo"],
+    "detectCmp": [
+        {
+            "exists": "#cookieChoiceInfo #cookieChoiceLearnMore"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieChoiceInfo"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDismiss"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieChoiceInfo #cookieChoiceLearnMore"
+        },
+        {
+            "waitForVisible": "[id$='_ManageCookiesContent'] input[name$='BtnConfirmChoices']"
+        },
+        {
+            "click": "[id$='_ManageCookiesContent'] input[type=checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "[id$='_ManageCookiesContent'] input[name$='BtnConfirmChoices']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "analyticsCookieConsent=n"
+        }
+    ]
+}

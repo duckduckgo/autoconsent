@@ -1,0 +1,15 @@
+{
+    "name": "escorteintime",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?escorteintime\\.com/"
+    },
+    "prehideSelectors": ["[data-cy=\"cookies-dialog\"]"],
+    "detectCmp": [{ "exists": "[data-cy=\"cookies-dialog\"]" }],
+    "detectPopup": [{ "visible": "[data-cy=\"cookies-dialog\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-cy=\"cookies-dialog\"] [data-cy=\"accept-cookies-button\"]" }],
+    "optOut": [
+        { "waitForThenClick": "[data-cy=\"cookies-dialog\"] [data-cy=\"personalize-cookies-button\"]" },
+        { "waitForThenClick": "#personalize-menu [data-cy=\"accept-essentials-button\"]" }
+    ],
+    "test": [{ "waitForVisible": "[data-cy=\"cookies-dialog\"]", "check": "none", "timeout": 2000 }]
+}

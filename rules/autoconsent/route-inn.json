@@ -1,0 +1,13 @@
+{
+    "name": "route-inn",
+    "vendorUrl": "https://www.route-inn.co.jp/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(route-inn|ark-hotel)\\.co\\.jp/"
+    },
+    "prehideSelectors": [".cookie-consent"],
+    "detectCmp": [{ "exists": ".cookie-consent .cookie-close" }],
+    "detectPopup": [{ "visible": ".cookie-consent.is-show .cookie-close" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent .cookie-agree" }],
+    "optOut": [{ "waitForThenClick": ".cookie-consent .cookie-close" }],
+    "test": [{ "cookieContains": "cookie=true" }]
+}

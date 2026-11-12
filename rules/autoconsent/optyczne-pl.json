@@ -1,0 +1,28 @@
+{
+    "name": "optyczne-pl",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?optyczne\\.pl/"
+    },
+    "prehideSelectors": ["#id01.w3-modal"],
+    "detectCmp": [
+        {
+            "exists": "#id01.w3-modal button[onclick*=\"setCookie('polityka'\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#id01.w3-modal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#id01.w3-modal button[onclick*=\"setCookie('polityka'\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#id01.w3-modal"
+        }
+    ]
+}

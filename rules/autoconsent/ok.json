@@ -3,7 +3,7 @@
     "vendorUrl": "https://ok.ru/",
     "cosmetic": false,
     "runContext": {
-        "urlPattern": "^https://ok\\.ru/"
+        "urlPattern": "^https://(\\w+\\.)?ok\\.ru/"
     },
     "prehideSelectors": [".cookies-agreement-notification,.modal-new:has([data-module=SetupCookies])"],
     "detectCmp": [
@@ -23,13 +23,9 @@
     ],
     "optOut": [
         {
-            "waitFor": ".cookies-agreement-notification .cb_setup"
-        },
-        {
-            "wait": 1000
-        },
-        {
-            "click": ".cookies-agreement-notification .cb_setup"
+            "waitForThenClick": ".cookies-agreement-notification .cb_setup",
+            "retry": 6,
+            "retryInterval": 1000
         },
         {
             "waitForVisible": "[data-module=SetupCookies]"
@@ -44,10 +40,6 @@
         },
         {
             "waitForThenClick": "[name=button_save_choice]"
-        },
-        {
-            "waitForVisible": "[data-module=SetupCookies]",
-            "check": "none"
         }
     ]
 }

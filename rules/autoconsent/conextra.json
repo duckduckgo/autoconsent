@@ -1,0 +1,18 @@
+{
+    "name": "conextra",
+    "prehideSelectors": [".cookiebanner:has(> #cookieform .chooseCookies)", ".diffusion_layer:has(#cookieform)"],
+    "detectCmp": [{ "exists": ".cookiebanner #cookieform .chooseCookies" }],
+    "detectPopup": [{ "visible": ".cookiebanner #cookieform .chooseCookies" }],
+    "optIn": [{ "waitForThenClick": ".cookiebanner [onclick^='sendForm(2']" }],
+    "optOut": [
+        {
+            "if": { "exists": ".cookiebanner [onclick^='sendForm(0']" },
+            "then": [{ "waitForThenClick": ".cookiebanner [onclick^='sendForm(0']" }],
+            "else": [
+                { "click": ".cookiebanner .chooseCookies input[type='checkbox']:checked:not([onclick])", "all": true, "optional": true },
+                { "waitForThenClick": ".cookiebanner [onclick^='sendForm(1']" }
+            ]
+        }
+    ],
+    "test": [{ "waitForVisible": ".cookiebanner #cookieform .chooseCookies", "timeout": 1000, "check": "none" }]
+}

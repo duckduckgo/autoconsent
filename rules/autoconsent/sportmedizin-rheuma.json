@@ -1,0 +1,17 @@
+{
+    "name": "sportmedizin-rheuma",
+    "vendorUrl": "https://www.sportmedizin-rheuma.de/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?sportmedizin-rheuma\\.de/"
+    },
+    "prehideSelectors": [".cc-type-info[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cc-compliance .cc-btn" }],
+    "detectPopup": [{ "visible": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cc-compliance .cc-btn" }],
+    "optIn": [{ "waitForThenClick": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cc-dismiss" }],
+    "optOut": [
+        { "hide": "[aria-describedby=\"cookieconsent:desc\"], .cc_overlay_bg" },
+        { "stylesheet": "body#home { overflow: visible !important; }" }
+    ],
+    "minimumRuleStepVersion": 3
+}

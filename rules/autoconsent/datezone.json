@@ -1,0 +1,22 @@
+{
+    "name": "datezone",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?datezone\\.com/"
+    },
+    "prehideSelectors": ["[data-rum=\"cookie-consent\"]"],
+    "detectCmp": [{ "exists": "[data-rum=\"cookie-consent\"] [data-rum=\"cookie-consent-text\"]" }],
+    "detectPopup": [{ "visible": "[data-rum=\"cookie-consent\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-rum=\"cookie-consent\"] [data-rum=\"cookie-consent-text\"] + div > button:last-of-type" }],
+    "optOut": [
+        { "waitForThenClick": "[data-rum=\"cookie-consent\"] [data-rum=\"cookie-consent-text\"] + div > button:first-of-type" },
+        { "waitFor": "[data-rum=\"cookie-consent\"] div.grid input[type=\"checkbox\"]" },
+        {
+            "click": "[data-rum=\"cookie-consent\"] div.grid:has(input[type=\"checkbox\"]:checked:not([disabled]))",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "[data-rum=\"cookie-consent\"] div.grid ~ div > button:last-of-type" },
+        { "waitForVisible": "[data-rum=\"cookie-consent\"]", "check": "none", "timeout": 3000 }
+    ],
+    "test": [{ "cookieContains": "cookie_consent=necessary" }]
+}

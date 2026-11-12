@@ -1,0 +1,28 @@
+{
+    "name": "truendo",
+    "prehideSelectors": ["#truendo_container .tru_cookie-dialog_wrapper"],
+    "detectCmp": [{ "exists": "#truendo_container .tru_cookie-dialog_wrapper" }],
+    "detectPopup": [{ "visible": "#truendo_container .tru_cookie-dialog_wrapper" }],
+    "optIn": [
+        {
+            "waitForThenClick": ".tru_cookie-dialog_wrapper [data-cy=banner-ack-btn], .tru_cookie-dialog_wrapper #tru_accept_btn, .tru_cookie-dialog_wrapper button.tru_cookie-dialog_ok:not(#tru_deselect_btn)"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".tru_cookie-dialog_accept-only" },
+            "then": [{ "click": ".tru_cookie-dialog_accept-only .tru_cookie-dialog_message a[href='']" }],
+            "else": [
+                {
+                    "click": ".tru_cookie-dialog_wrapper [data-cy=banner-options-btn], .tru_cookie-dialog_wrapper [data-cy=optionsBtn], .tru_cookie-dialog_wrapper #tru_options_btn"
+                }
+            ]
+        },
+        { "waitForVisible": "#truendo_container [data-cy=action-button-necessary]", "timeout": 2000, "optional": true },
+        {
+            "if": { "visible": "#truendo_container [data-cy=action-button-necessary]" },
+            "then": [{ "click": "#truendo_container [data-cy=action-button-necessary]" }]
+        }
+    ],
+    "test": [{ "cookieContains": "%22marketing%22%3Afalse" }]
+}

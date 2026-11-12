@@ -1,0 +1,13 @@
+{
+    "name": "smile-insurances",
+    "vendorUrl": "https://www.smile-insurances.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?smile-insurances\\.com/"
+    },
+    "prehideSelectors": [".sm-alert[data-cookie^='cookie.disclaimer']"],
+    "detectCmp": [{ "exists": ".sm-alert[data-cookie^='cookie.disclaimer']" }],
+    "detectPopup": [{ "visible": ".sm-alert.is-visible[data-cookie^='cookie.disclaimer'] .sm-alert__button" }],
+    "optIn": [{ "waitForThenClick": ".sm-alert.is-visible[data-cookie^='cookie.disclaimer'] .sm-alert__button" }],
+    "optOut": [{ "waitForThenClick": ".sm-alert.is-visible[data-cookie^='cookie.disclaimer'] .sm-alert__button" }],
+    "test": [{ "cookieContains": "disclaimer=closed" }]
+}

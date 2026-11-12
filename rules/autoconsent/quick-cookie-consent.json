@@ -1,0 +1,70 @@
+{
+    "name": "quick-cookie-consent",
+    "vendorUrl": "https://privacypolicies.com/cookie-consent/",
+    "prehideSelectors": [".cookieconsent-popup:has(.ui-icon-wrench)"],
+    "detectCmp": [
+        {
+            "exists": ".cookieconsent-popup .cookieconsent-button-wrap button:has(.ui-icon-wrench)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookieconsent-popup .cookieconsent-button-wrap button:has(.ui-icon-wrench)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookieconsent-popup .cookieconsent-button-wrap button:has(.ui-icon-close)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookieconsent-popup .cookieconsent-button-wrap button:has(.ui-icon-wrench)"
+        },
+        {
+            "waitForVisible": ".cookieconsent-edit-settings .cookieconsent-level-changer"
+        },
+        {
+            "if": {
+                "exists": ".cookieconsent-level-changer > a:nth-of-type(2).activated"
+            },
+            "then": [
+                {
+                    "click": ".cookieconsent-level-changer > a:first-of-type"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": ".cookieconsent-edit-settings .cookieconsent-dialog-close-btn"
+            },
+            "then": [
+                {
+                    "click": ".cookieconsent-edit-settings .cookieconsent-dialog-close-btn"
+                }
+            ],
+            "else": [
+                {
+                    "click": ".cookieconsent-edit-settings .cookieconsent-dialog-close"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_consent_level="
+        },
+        {
+            "cookieContains": "cookie_consent_level=tracking",
+            "negated": true
+        },
+        {
+            "cookieContains": "cookie_consent_level=targeting",
+            "negated": true
+        },
+        {
+            "cookieContains": "cookie_consent_level=functional",
+            "negated": true
+        }
+    ]
+}

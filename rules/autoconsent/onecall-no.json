@@ -1,0 +1,44 @@
+{
+    "name": "onecall-no",
+    "vendorUrl": "https://onecall.no/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?onecall\\.no/"
+    },
+    "prehideSelectors": [".modal--cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": ".modal--cookie-consent #cookies-tracking"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".modal--cookie-consent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".modal--cookie-consent button.btn-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".modal--cookie-consent #cookies-tracking:checked"
+            },
+            "then": [
+                {
+                    "click": ".modal--cookie-consent #cookies-tracking"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".modal--cookie-consent button.btn-gray"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "oc_allow_tracking=0"
+        }
+    ]
+}

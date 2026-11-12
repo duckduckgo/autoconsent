@@ -1,39 +1,46 @@
 {
     "name": "gravito",
     "vendorUrl": "https://www.gravito.net/cmp/",
-    "prehideSelectors": [".gravitoCMP-background-overlay"],
+    "prehideSelectors": ["#gravitoCMPRoot"],
     "detectCmp": [
         {
-            "exists": ".gravitoCMP-background-overlay"
+            "exists": "#gravitoCMPRoot [id^=gravito][id$=-layer1-accept-all]"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".gravitoCMP-background-overlay"
+            "visible": "#gravitoCMPRoot [id^=gravito][id$=-layer1-accept-all]"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#modalConfirmBtn.gravitoCMP-button"
+            "waitForThenClick": "#gravitoCMPRoot [id^=gravito][id$=-layer1-accept-all]"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "#modalSettingBtn.gravitoCMP-button"
+            "if": {
+                "visible": "#gravitoCMPRoot [id^=gravito][id$=-layer1-reject-all]"
+            },
+            "then": [
+                {
+                    "click": "#gravitoCMPRoot [id^=gravito][id$=-layer1-reject-all]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#gravitoCMPRoot [id^=gravito][id$=-layer1-settings]"
+                },
+                {
+                    "waitForThenClick": "#gravitoCMPRoot [id^=gravito][id$=-layer2-reject-all]"
+                }
+            ]
         },
         {
-            "waitFor": "#allRejectBtn"
-        },
-        {
-            "waitFor": ".gravitoCMP-content-section"
-        },
-        {
-            "click": ".gravitoCMP-content input[type=checkbox]:checked",
-            "all": true,
+            "waitForVisible": "#gravitoCMPRoot [id^=gravito][id$=-layer1-accept-all]",
+            "check": "none",
+            "timeout": 2000,
             "optional": true
-        },
-        {
-            "waitForThenClick": "#allRejectBtn"
         }
     ],
     "test": [

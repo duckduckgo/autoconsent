@@ -1,0 +1,16 @@
+{
+    "name": "hallmark",
+    "vendorUrl": "https://www.hallmark.nl/",
+    "prehideSelectors": ["#preferences-box"],
+    "detectCmp": [{ "exists": "#preferences-box [data-js=open-settings]" }],
+    "detectPopup": [{ "visible": "#preferences-box" }],
+    "optIn": [{ "waitForThenClick": "#preferences-box [data-js=accept-tracking]" }],
+    "optOut": [
+        { "waitForThenClick": "#preferences-box [data-js=open-settings]" },
+        { "waitForVisible": "#preferences-box [data-js=select-preferences]" },
+        { "click": "#preferences-box [data-js=preferences-form] input[value=mandatory]" },
+        { "click": "#preferences-box [data-js=select-preferences]" },
+        { "waitForVisible": "#preferences-box", "check": "none", "timeout": 3000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "consent_status={\"consent_all\":\"denied\",\"consent_personalized\":\"denied\"" }]
+}

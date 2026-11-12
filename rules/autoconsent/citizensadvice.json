@@ -1,0 +1,43 @@
+{
+    "name": "citizensadvice",
+    "vendorUrl": "https://www.citizensadvice.org.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?citizensadvice\\.org\\.uk/"
+    },
+    "prehideSelectors": [".js-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#js-cookie-banner__button-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#js-cookie-banner__button-reject"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#js-cookie-banner__button-accept"
+        },
+        {
+            "waitForThenClick": "#js-cookie-banner__button-hide",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#js-cookie-banner__button-reject"
+        },
+        {
+            "waitForThenClick": "#js-cookie-banner__button-hide",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analytics%22%3Afalse"
+        }
+    ]
+}

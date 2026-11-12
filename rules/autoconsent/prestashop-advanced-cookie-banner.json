@@ -1,0 +1,49 @@
+{
+    "name": "prestashop-advanced-cookie-banner",
+    "vendorUrl": "https://www.presta-module.com/",
+    "prehideSelectors": ["#acb-banner"],
+    "detectCmp": [
+        {
+            "exists": "#acb-banner #acb-accept-all-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#acb-banner",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#acb-banner #acb-accept-all-button"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#acb-banner #acb-deny-all-button",
+                "check": "any"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#acb-banner #acb-deny-all-button"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#acb-banner input.acbCheckbox:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#acb-banner #acb-close-button"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "PrestaShop-49722c247d445ea6ad5f50ec8153945a=0"
+        }
+    ]
+}

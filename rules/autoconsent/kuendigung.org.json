@@ -1,0 +1,14 @@
+{
+    "name": "kuendigung.org",
+    "vendorUrl": "https://www.kuendigung.org/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?kuendigung\\.org/"
+    },
+    "prehideSelectors": ["#cookie-notice-full-consent"],
+    "detectCmp": [{ "exists": "#cookie-notice-full-consent .cn-accept-all-cookies" }],
+    "detectPopup": [{ "visible": "#cookie-notice-full-consent" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notice-full-consent .cn-accept-all-cookies" }],
+    "optOut": [{ "hide": "#cookie-notice-full-consent" }],
+    "test": [{ "visible": "#cookie-notice-full-consent", "check": "none" }]
+}

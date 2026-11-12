@@ -1,0 +1,39 @@
+{
+    "name": "eventfrog",
+    "vendorUrl": "https://eventfrog.ch/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?eventfrog\\.(ch|de|at)/"
+    },
+    "prehideSelectors": ["#tf-modal-container:has(.cookie-modal__footer)"],
+    "detectCmp": [
+        {
+            "exists": "#tf-modal-container .cookie-modal__footer .js-nl-modal-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#tf-modal-container .cookie-modal__footer"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#tf-modal-container .cookie-modal__footer .js-nl-modal-confirm"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": "#tf-modal-container .cookie-modal__footer .js-nl-modal-decline"
+        },
+        {
+            "wait": 500
+        },
+        {
+            "click": "#tf-modal-container .cookie-modal__footer .js-nl-modal-decline"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "efrg_v1_tracking_full=0"
+        }
+    ]
+}

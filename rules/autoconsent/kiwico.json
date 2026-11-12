@@ -1,0 +1,48 @@
+{
+    "name": "kiwico",
+    "vendorUrl": "https://www.kiwico.com/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kiwico\\.com/"
+    },
+    "prehideSelectors": ["#ccpa-request-consent"],
+    "detectCmp": [
+        {
+            "exists": "#ccpa-request-consent .settings button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#ccpa-request-consent.ccpa-banner--visible .settings button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#ccpa-request-consent .accept button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#ccpa-request-consent .settings button"
+        },
+        {
+            "waitForThenClick": ".ReactModal__Content:has(.toggle-grid) .modal__footer button.button--vibrant--filled"
+        },
+        {
+            "waitForVisible": ".ReactModal__Content:has(.toggle-grid)",
+            "check": "none",
+            "timeout": 3000
+        },
+        {
+            "waitForThenClick": "#ccpa-request-consent button.close"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#ccpa-request-consent",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "name": "vinnova-se",
+    "vendorUrl": "https://www.vinnova.se/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?vinnova\\.se/"
+    },
+    "prehideSelectors": [".component-lightbox-gdpr"],
+    "detectCmp": [
+        {
+            "exists": ".component-lightbox-gdpr .gdpr_cookie_settings_accept_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".component-lightbox-gdpr .gdpr_cookie_settings_accept_cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".gdpr_cookie_settings_accept_cookies__button-container__button.button--solid--primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".gdpr_cookie_settings_accept_cookies__button-container__button.button--solid--secondary"
+        },
+        {
+            "waitForVisible": ".gdpr_cookie_settings_cookie_settings"
+        },
+        {
+            "comment": "levels are cumulative: switching off the lowest level switches off all higher ones",
+            "if": {
+                "exists": ".gdpr_cookie_settings_cookie_settings .component-toggle-button[toggle_selected=True]"
+            },
+            "then": [
+                {
+                    "click": ".gdpr_cookie_settings_cookie_settings .component-toggle-button[toggle_selected=True]"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".gdpr_cookie_settings_cookie_settings__main-section__button-container__button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_vinnova_gdpr=0"
+        }
+    ]
+}

@@ -45,6 +45,14 @@
                     "optional": true
                 },
                 {
+                    "click": [
+                        "#polaris-css-lockdown-container",
+                        ".polaris-preferences-widget input[type=checkbox]:checked:not([disabled])"
+                    ],
+                    "all": true,
+                    "optional": true
+                },
+                {
                     "click": ["#polaris-css-lockdown-container", ".polaris-preferences-widget__save_button"]
                 }
             ]

@@ -1,0 +1,29 @@
+{
+    "name": "soteshop",
+    "vendorUrl": "https://www.soteshop.com/",
+    "prehideSelectors": ["#cookies_message", "#cookies-message-modal"],
+    "detectCmp": [{ "exists": "#cookies-close-deny, #cookies_frame > #cookies_close" }],
+    "detectPopup": [{ "visible": "#cookies-close-deny, #cookies_frame > #cookies_close", "check": "any" }],
+    "optIn": [
+        {
+            "if": { "exists": "#cookies-close-accept" },
+            "then": [{ "waitForThenClick": "#cookies-close-accept" }],
+            "else": [{ "click": "#cookies_frame > #cookies_close" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#cookies-close-deny" },
+            "then": [{ "waitForThenClick": "#cookies-close-deny" }],
+            "else": [{ "click": "#cookies_frame > #cookies_close" }]
+        },
+        { "waitForVisible": "#cookies-close-deny, #cookies_frame > #cookies_close", "check": "none" }
+    ],
+    "test": [
+        {
+            "if": { "exists": "#cookies-close-deny" },
+            "then": [{ "cookieContains": "cookies_message_bar_hidden=true" }, { "cookieContains": "cookies_google_targeting=false" }],
+            "else": [{ "cookieContains": "cookies_message_hidden=true" }]
+        }
+    ]
+}

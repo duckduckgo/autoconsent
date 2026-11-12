@@ -1,0 +1,35 @@
+{
+    "name": "iisvaldagno",
+    "vendorUrl": "https://www.iisvaldagno.it/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?iisvaldagno\\.it/"
+    },
+    "prehideSelectors": ["#notifica-cookies"],
+    "detectCmp": [
+        {
+            "exists": "#notifica-cookies .btn-chiudi"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#notifica-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#notifica-cookies .btn-chiudi"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#notifica-cookies"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#notifica-cookies",
+            "check": "none"
+        }
+    ]
+}

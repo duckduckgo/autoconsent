@@ -1,0 +1,30 @@
+{
+    "name": "legally-ok",
+    "vendorUrl": "https://www.legally-ok.com/",
+    "prehideSelectors": ["#jmdCookieConsentWrapper"],
+    "detectCmp": [
+        {
+            "exists": ["#jmdCookieConsentWrapper", "#cookieConsent"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#jmdCookieConsentWrapper", "#cookieConsent"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#jmdCookieConsentWrapper", "#cookieConsent .js-accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#jmdCookieConsentWrapper", "#cookieConsent .js-select-none"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"analytics\":false,\"marketing\":false"
+        }
+    ]
+}

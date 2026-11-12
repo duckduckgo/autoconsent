@@ -1,42 +1,44 @@
 {
     "name": "depop",
     "vendorUrl": "https://www.depop.com/",
-    "cosmetic": false,
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "comment": "Transcend airgap ignores untrusted clicks, so the banner is hidden together with the site's own backdrop and body scroll lock.",
     "runContext": {
         "urlPattern": "^https://(www\\.)?depop\\.com/"
     },
-    "prehideSelectors": ["[data-testid=cookieBanner]"],
+    "prehideSelectors": ["#transcend-consent-manager", "#cookies-modal"],
     "detectCmp": [
         {
-            "exists": "[data-testid=cookieBanner] button"
+            "exists": "#transcend-consent-manager"
         }
     ],
     "detectPopup": [
         {
-            "visible": "[data-testid=cookieBanner] button"
+            "visible": ["#transcend-consent-manager", "#consentManagerMainDialog"]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "[data-testid=cookieBanner__acceptAllButton]"
+            "waitForThenClick": ["#transcend-consent-manager", "#consentManagerMainDialog .accept-or-reject-all-button-row button"]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "[data-testid=cookieBanner__manageCookiesButton]"
+            "hide": "#transcend-consent-manager"
         },
         {
-            "click": "[data-testid=cookieModal] input[type=radio][value=false]:not(:checked):not(:disabled)",
-            "all": true,
+            "hide": "#cookies-modal"
+        },
+        {
+            "waitFor": "#cookies-modal",
+            "timeout": 3000,
             "optional": true
         },
         {
-            "waitForThenClick": "[data-testid=cookieModal__acceptButton]"
-        }
-    ],
-    "test": [
-        {
-            "cookieContains": "gdpr__"
+            "addStyle": "overflow: auto !important",
+            "selector": "body",
+            "optional": true
         }
     ]
 }

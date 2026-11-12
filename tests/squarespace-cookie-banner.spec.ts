@@ -9,6 +9,7 @@ generateCMPTests(
         'https://www.thecorneroffice.uk/',
         'https://www.theawkwardyeti.com/',
         'https://www.radiotopia.fm/',
+        'https://meebook.com/',
     ],
     {
         skipRegions: ['US'],

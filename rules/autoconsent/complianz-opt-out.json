@@ -49,10 +49,15 @@
                             "click": ".cmp-pref-link"
                         },
                         {
-                            "waitForThenClick": ".cmp-body [id*=rejectAll]"
+                            "waitForVisible": ".cmp-body .cmp-save-btn"
                         },
                         {
-                            "waitForThenClick": ".cmp-body .cmp-save-btn"
+                            "comment": "absent when the only category is the read-only essential one",
+                            "click": ".cmp-body [id*=rejectAll]",
+                            "optional": true
+                        },
+                        {
+                            "click": ".cmp-body .cmp-save-btn"
                         }
                     ]
                 }

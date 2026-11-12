@@ -1,0 +1,40 @@
+{
+    "name": "jobindex",
+    "prehideSelectors": ["#jix-cookie-consent-modal"],
+    "detectCmp": [
+        {
+            "exists": "#jix-cookie-consent-modal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#jix-cookie-consent-modal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#jix-cookie-consent-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#jix-cookie-consent-modal input.jix-cookie-consent-selection:checked:not(:disabled)"
+            },
+            "then": [
+                {
+                    "click": "#jix-cookie-consent-modal input.jix-cookie-consent-selection:checked:not(:disabled)",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#jix-cookie-consent-accept-selected"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22marketing%22%3Afalse"
+        }
+    ]
+}

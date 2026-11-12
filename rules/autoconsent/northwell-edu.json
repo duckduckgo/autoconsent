@@ -1,0 +1,29 @@
+{
+    "name": "northwell.edu",
+    "vendorUrl": "https://www.northwell.edu/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?northwell\\.edu/"
+    },
+    "prehideSelectors": ["nwhlit-gdpr-banner"],
+    "detectCmp": [
+        {
+            "exists": ["nwhlit-gdpr-banner", ".nwhlit-gdpr-banner"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["nwhlit-gdpr-banner", ".nwhlit-gdpr-banner"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "nwhlit-gdpr-banner .nwh_footer_banner--button button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "nwhlit-gdpr-banner"
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "name": "mos-cudzoziemcy-gov-pl",
+    "vendorUrl": "https://mos.cudzoziemcy.gov.pl/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://mos\\.cudzoziemcy\\.gov\\.pl/"
+    },
+    "prehideSelectors": [".cookies:has(> #agreeButton)"],
+    "detectCmp": [
+        {
+            "exists": ".cookies > #agreeButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies > #agreeButton"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies > #agreeButton"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookies:has(> #agreeButton)"
+        }
+    ]
+}

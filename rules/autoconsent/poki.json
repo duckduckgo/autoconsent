@@ -1,0 +1,37 @@
+{
+    "name": "poki",
+    "_metadata": {
+        "vendorUrl": "https://poki.com/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?poki\\.com/"
+    },
+    "prehideSelectors": ["#notification-stack > div:has(> header > [style*='ui-icons-lock.svg'] ~ button)"],
+    "detectCmp": [
+        {
+            "exists": "#notification-stack header:has([style*='ui-icons-lock.svg']) button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#notification-stack header:has([style*='ui-icons-lock.svg']) button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#notification-stack header:has([style*='ui-icons-lock.svg']) button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#notification-stack header:has([style*='ui-icons-lock.svg']) button"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#notification-stack header:has([style*='ui-icons-lock.svg'])",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

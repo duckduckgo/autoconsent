@@ -1,0 +1,31 @@
+{
+    "name": "wimc-gtm-consent",
+    "prehideSelectors": ["[data-gtm-consent-modal]"],
+    "detectCmp": [{ "exists": "[data-gtm-consent-modal]" }],
+    "detectPopup": [{ "visible": "[data-gtm-consent-modal].gtm-consent__modal--show" }],
+    "optIn": [
+        {
+            "if": { "exists": "[data-gtm-consent-modal] [data-gtm-consent-close]" },
+            "then": [{ "waitForThenClick": "[data-gtm-consent-modal] [data-gtm-consent-close]" }],
+            "else": [{ "waitForThenClick": "[data-gtm-consent-modal] [data-gtm-consent-submit]" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "[data-gtm-consent-modal] [data-gtm-consent-close]" },
+            "then": [{ "waitForThenClick": "[data-gtm-consent-modal] [data-gtm-consent-close]" }],
+            "else": [
+                { "waitForThenClick": "[data-gtm-consent-modal] [data-gtm-consent-toggle]" },
+                { "waitForVisible": "[data-gtm-consent-modal] [data-gtm-consent-details-section]", "timeout": 2000 },
+                {
+                    "click": "[data-gtm-consent-modal] [data-gtm-consent-types-form] input[type=checkbox]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": "[data-gtm-consent-modal] [data-gtm-consent-submit]" }
+            ]
+        },
+        { "waitForVisible": "[data-gtm-consent-modal].gtm-consent__modal--show", "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "cookieContains": "\"analytics_storage\":false" }, { "cookieContains": "\"ad_storage\":false" }]
+}

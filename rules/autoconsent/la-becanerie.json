@@ -1,0 +1,13 @@
+{
+    "name": "la-becanerie",
+    "vendorUrl": "https://www.la-becanerie.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?la-becanerie\\.com/"
+    },
+    "prehideSelectors": [".cookieconsent .cc_banner-wrapper"],
+    "detectCmp": [{ "exists": ".cookieconsent .cc_banner-wrapper [onclick*='refuseAllCookiesPreferences']" }],
+    "detectPopup": [{ "visible": ".cookieconsent .cc_banner" }],
+    "optIn": [{ "waitForThenClick": ".cc_banner [onclick*='acceptAllCookiesPreferences']" }],
+    "optOut": [{ "waitForThenClick": ".cc_banner [onclick*='refuseAllCookiesPreferences']" }],
+    "test": [{ "cookieContains": "_cprefs=%7B%22stats%22%3A1%2C%22fct%22%3A1%2C%22mkt%22%3A1%7D" }]
+}

@@ -1,0 +1,24 @@
+{
+    "name": "erdee-media",
+    "prehideSelectors": ["#emgCookieConsentOverlay"],
+    "detectCmp": [
+        {
+            "exists": "#emgCookieConsentOverlay"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#emgCookieConsentInitialPopup"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#emgCookieConsentInitialPopup button.all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#emgCookieConsentInitialPopup button.minimal"
+        }
+    ]
+}

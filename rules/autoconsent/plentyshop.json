@@ -1,0 +1,27 @@
+{
+    "name": "plentyshop",
+    "vendorUrl": "https://www.plentymarkets.com/",
+    "prehideSelectors": ["[data-cookie-bar]"],
+    "detectCmp": [{ "exists": "[data-cookie-bar] [data-cb=\"acceptAll\"]" }],
+    "detectPopup": [
+        {
+            "visible": "[data-cookie-bar] [data-cb=\"declineAll\"],[data-cookie-bar] [data-cb=\"saveNecessary\"]",
+            "check": "any"
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "[data-cookie-bar] [data-cb=\"acceptAll\"]" }],
+    "optOut": [
+        {
+            "if": { "exists": "[data-cookie-bar] [data-cb=\"declineAll\"]" },
+            "then": [{ "waitForThenClick": "[data-cookie-bar] [data-cb=\"declineAll\"]" }],
+            "else": [{ "waitForThenClick": "[data-cookie-bar] [data-cb=\"saveNecessary\"]" }]
+        }
+    ],
+    "test": [
+        {
+            "visible": "[data-cookie-bar] [data-cb=\"declineAll\"],[data-cookie-bar] [data-cb=\"saveNecessary\"]",
+            "check": "none"
+        },
+        { "cookieContains": "plenty-shop-cookie=" }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "name": "florisvanbommel",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?florisvanbommel\\.com/"
+    },
+    "prehideSelectors": [".popup-container:has(.cookie-links #js-cookie-reject)"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-links #js-cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-links #js-cookie-reject"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-links #js-cookie-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-links #js-cookie-reject"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"marketing\":false"
+        }
+    ]
+}

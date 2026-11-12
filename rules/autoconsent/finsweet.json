@@ -5,18 +5,23 @@
     "prehideSelectors": ["[fs-consent-element=banner]"],
     "detectCmp": [
         {
-            "exists": "[fs-consent-element=banner]"
+            "any": [{ "exists": "[fs-consent-element=banner]" }, { "exists": ["[fs-consent-element=root]", "[fs-consent-element=banner]"] }]
         }
     ],
     "detectPopup": [
         {
-            "visible": "[fs-consent-element=banner] [fs-consent-element=allow]"
+            "any": [
+                { "visible": "[fs-consent-element=banner] [fs-consent-element=allow]" },
+                { "visible": ["[fs-consent-element=root]", "[fs-consent-element=banner] [fs-consent-element=allow]"] }
+            ]
         }
     ],
     "optIn": [
         { "wait": 500 },
         {
-            "waitForThenClick": "[fs-consent-element=banner] [fs-consent-element=allow]"
+            "if": { "exists": "[fs-consent-element=banner] [fs-consent-element=allow]" },
+            "then": [{ "waitForThenClick": "[fs-consent-element=banner] [fs-consent-element=allow]" }],
+            "else": [{ "waitForThenClick": ["[fs-consent-element=root]", "[fs-consent-element=banner] [fs-consent-element=allow]"] }]
         }
     ],
     "optOut": [
@@ -24,7 +29,13 @@
         {
             "if": { "exists": "[fs-consent-element=banner] [fs-consent-element=deny]" },
             "then": [{ "click": "[fs-consent-element=banner] [fs-consent-element=deny]" }],
-            "else": [{ "hide": "[fs-consent-element=banner]" }]
+            "else": [
+                {
+                    "if": { "exists": ["[fs-consent-element=root]", "[fs-consent-element=banner] [fs-consent-element=deny]"] },
+                    "then": [{ "click": ["[fs-consent-element=root]", "[fs-consent-element=banner] [fs-consent-element=deny]"] }],
+                    "else": [{ "hide": "[fs-consent-element=banner], [fs-consent-element=root]" }]
+                }
+            ]
         }
     ]
 }

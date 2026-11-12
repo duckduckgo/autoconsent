@@ -1,0 +1,28 @@
+{
+    "name": "avada-privacy-bar-cosmetic",
+    "vendorUrl": "https://avada.com/",
+    "cosmetic": true,
+    "prehideSelectors": [".fusion-privacy-bar"],
+    "detectCmp": [
+        {
+            "exists": ".fusion-privacy-bar .fusion-privacy-bar-acceptance"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".fusion-privacy-bar",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "click": ".fusion-privacy-bar .fusion-privacy-bar-acceptance",
+            "all": true
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".fusion-privacy-bar"
+        }
+    ]
+}

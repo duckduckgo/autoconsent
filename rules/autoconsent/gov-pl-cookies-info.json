@@ -1,0 +1,28 @@
+{
+    "name": "gov-pl-cookies-info",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)*gov\\.pl/"
+    },
+    "prehideSelectors": ["#cookies-info"],
+    "detectCmp": [
+        {
+            "exists": "#cookies-info > .main-container > button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies-info.active"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies-info > .main-container > button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookies-info"
+        }
+    ]
+}

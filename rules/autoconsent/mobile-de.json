@@ -1,0 +1,13 @@
+{
+    "name": "mobile.de",
+    "vendorUrl": "https://www.mobile.de/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?mobile\\.de/"
+    },
+    "prehideSelectors": ["#mde-consent-modal-container"],
+    "detectCmp": [{ "exists": "#mde-consent-modal-container" }],
+    "detectPopup": [{ "visible": "#mde-consent-modal-dialog" }],
+    "optIn": [{ "waitForThenClick": "#mde-consent-modal-dialog .mde-consent-accept-btn" }],
+    "optOut": [{ "waitForThenClick": "#mde-consent-modal-dialog .mde-consent-decline-btn", "retry": 3, "retryInterval": 500 }],
+    "test": [{ "wait": 500 }, { "cookieContains": "mdeConsentData=" }]
+}

@@ -1,0 +1,18 @@
+{
+    "name": "istore.co.za",
+    "vendorUrl": "https://www.istore.co.za/",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?istore(preowned)?\\.co\\.za/"
+    },
+    "prehideSelectors": ["#notice-cookie-block"],
+    "detectCmp": [{ "exists": "#notice-cookie-block" }],
+    "detectPopup": [{ "visible": "#notice-cookie-block" }],
+    "optIn": [{ "waitForThenClick": "#btn-cookie-allow" }],
+    "optOut": [
+        { "hide": "#notice-cookie-block" },
+        { "hide": ".header-slideout-overlay-cookie", "optional": true },
+        { "removeClass": "no-scroll", "selector": "body", "optional": true }
+    ]
+}

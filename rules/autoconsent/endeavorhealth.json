@@ -1,0 +1,31 @@
+{
+    "name": "endeavorhealth",
+    "vendorUrl": "https://www.endeavorhealth.org/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?endeavorhealth\\.org/"
+    },
+    "prehideSelectors": ["#block-eh-default-cookiebannerfixedblock"],
+    "detectCmp": [{ "exists": "#block-eh-default-cookiebannerfixedblock .js-cookie-alert" }],
+    "detectPopup": [{ "visible": "#block-eh-default-cookiebannerfixedblock .js-cookie-alert" }],
+    "optIn": [
+        {
+            "waitForThenClick": "#block-eh-default-cookiebannerfixedblock .js-cookie-alert .alert-close",
+            "retry": 2,
+            "retryInterval": 1000
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#block-eh-default-cookiebannerfixedblock .js-cookie-alert .alert-close",
+            "retry": 2,
+            "retryInterval": 1000
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#block-eh-default-cookiebannerfixedblock .js-cookie-alert",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

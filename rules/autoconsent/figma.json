@@ -1,0 +1,37 @@
+{
+    "name": "figma",
+    "runContext": {
+        "main": true,
+        "frame": true,
+        "urlPattern": "^https://([a-z0-9-]+\\.)*figma\\.com/"
+    },
+    "prehideSelectors": ["#app > div[role=alertdialog]", "#react-root div[role=alertdialog]"],
+    "detectCmp": [
+        {
+            "exists": "#app > div[role=alertdialog] button .btn-text, #react-root div[role=alertdialog] button .btn-text"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#app > div[role=alertdialog], #react-root div[role=alertdialog]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[role=alertdialog] button:has(.btn-text):has(+ button .btn-text)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div[role=alertdialog] button:has(.btn-text) + button:has(.btn-text), div[role=alertdialog] > button:has(.btn-text)"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "pref=%7B%22t%22%3A%22"
+        },
+        {
+            "cookieContains": "%22m%22%3Afalse%7D"
+        }
+    ]
+}

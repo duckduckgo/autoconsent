@@ -14,12 +14,12 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": ["#wpconsent-container", "#wpconsent-accept-all"]
+            "waitForThenClick": ["#wpconsent-container", "#wpconsent-banner-holder .wpconsent-accept-all"]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ["#wpconsent-container", "#wpconsent-cancel-all"]
+            "waitForThenClick": ["#wpconsent-container", "#wpconsent-banner-holder .wpconsent-cancel-all"]
         }
     ],
     "test": [

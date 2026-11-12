@@ -1,0 +1,53 @@
+{
+    "name": "eagerly-tools-cookie",
+    "vendorUrl": "https://eagerly.nl/",
+    "prehideSelectors": ["#eagerly-tools-cookie", "#eagerly-tools-cookie-overlay"],
+    "detectCmp": [
+        {
+            "exists": "#eagerly-tools-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#eagerly-tools-cookie.active .cookie-fb-content"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#eagerly-tools-cookie .js-btn-accept-all"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#eagerly-tools-cookie .js-btn-accept-all"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#eagerly-tools-cookie .cookie-fb-scroller input[type=checkbox]:not(:checked):not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#eagerly-tools-cookie .cookie-fb-bottom .btn-ok"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#eagerly-tools-cookie .cookie-fb-scroller input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#eagerly-tools-cookie .cookie-fb-bottom :is(.js-btn-ok, .btn-ok)"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#eagerly-tools-cookie.active .cookie-fb-content",
+            "check": "none"
+        }
+    ]
+}

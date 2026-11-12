@@ -1,3 +1,1181 @@
+# v18.3.0 (Wed Nov 11 2026)
+
+#### Rules
+
+- Replace French 'refuser/rejeter les cookies' heuristic detect pattern [#2596](https://github.com/duckduckgo/autoconsent/pull/2596) ([@muodov](https://github.com/muodov))
+- Rule update: CPM crawl #4278: change.org [#2594](https://github.com/duckduckgo/autoconsent/pull/2594) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: intermedia-cms-fsi [#2592](https://github.com/duckduckgo/autoconsent/pull/2592) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: shopgold [#2591](https://github.com/duckduckgo/autoconsent/pull/2591) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bt-com-au [#2590](https://github.com/duckduckgo/autoconsent/pull/2590) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: saos-org-pl [#2589](https://github.com/duckduckgo/autoconsent/pull/2589) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: e-file [#2588](https://github.com/duckduckgo/autoconsent/pull/2588) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cstudios [#2587](https://github.com/duckduckgo/autoconsent/pull/2587) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: amasty-gdpr-hyva [#2586](https://github.com/duckduckgo/autoconsent/pull/2586) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: biblia-online.pl [#2585](https://github.com/duckduckgo/autoconsent/pull/2585) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: icom-co-jp [#2584](https://github.com/duckduckgo/autoconsent/pull/2584) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: alertnotification-alert-bar [#2583](https://github.com/duckduckgo/autoconsent/pull/2583) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: adeac-jp [#2582](https://github.com/duckduckgo/autoconsent/pull/2582) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookiesbanner-preference [#2581](https://github.com/duckduckgo/autoconsent/pull/2581) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: creditunionsa [#2580](https://github.com/duckduckgo/autoconsent/pull/2580) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: octoparse [#2579](https://github.com/duckduckgo/autoconsent/pull/2579) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mos-cudzoziemcy-gov-pl [#2578](https://github.com/duckduckgo/autoconsent/pull/2578) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: code3-cookies-consent [#2577](https://github.com/duckduckgo/autoconsent/pull/2577) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: wuerth [#2575](https://github.com/duckduckgo/autoconsent/pull/2575) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: calclife.net [#2574](https://github.com/duckduckgo/autoconsent/pull/2574) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fellow.pl [#2573](https://github.com/duckduckgo/autoconsent/pull/2573) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookiesmodal-pl [#2572](https://github.com/duckduckgo/autoconsent/pull/2572) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ynjn [#2571](https://github.com/duckduckgo/autoconsent/pull/2571) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: shueisha-hpplus [#2570](https://github.com/duckduckgo/autoconsent/pull/2570) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tullys-jp [#2569](https://github.com/duckduckgo/autoconsent/pull/2569) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-use-notice [#2568](https://github.com/duckduckgo/autoconsent/pull/2568) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dlibra [#2567](https://github.com/duckduckgo/autoconsent/pull/2567) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookieinfo-zamknij [#2566](https://github.com/duckduckgo/autoconsent/pull/2566) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: casino-guru [#2565](https://github.com/duckduckgo/autoconsent/pull/2565) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: datezone [#2564](https://github.com/duckduckgo/autoconsent/pull/2564) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bitauto [#2563](https://github.com/duckduckgo/autoconsent/pull/2563) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: menti.com [#2562](https://github.com/duckduckgo/autoconsent/pull/2562) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lieder.net [#2561](https://github.com/duckduckgo/autoconsent/pull/2561) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dandomain [#2560](https://github.com/duckduckgo/autoconsent/pull/2560) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: agenziaentrate-geoportale [#2559](https://github.com/duckduckgo/autoconsent/pull/2559) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: worldbank [#2558](https://github.com/duckduckgo/autoconsent/pull/2558) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: betheme [#2557](https://github.com/duckduckgo/autoconsent/pull/2557) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: adaptivemedia [#2556](https://github.com/duckduckgo/autoconsent/pull/2556) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dnb [#2555](https://github.com/duckduckgo/autoconsent/pull/2555) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fn-se [#2554](https://github.com/duckduckgo/autoconsent/pull/2554) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: oresundstag [#2553](https://github.com/duckduckgo/autoconsent/pull/2553) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Complianz opt-out [#2552](https://github.com/duckduckgo/autoconsent/pull/2552) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: teeshoppen [#2551](https://github.com/duckduckgo/autoconsent/pull/2551) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #887: renaud-bray.com [#2549](https://github.com/duckduckgo/autoconsent/pull/2549) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: erli-pl [#2547](https://github.com/duckduckgo/autoconsent/pull/2547) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: synergy-net-au [#2546](https://github.com/duckduckgo/autoconsent/pull/2546) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Bug Fixes
+
+- Heuristics: drop bare accept-all / reject-all detect patterns [#2593](https://github.com/duckduckgo/autoconsent/pull/2593) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v18.2.0 (Tue Nov 10 2026)
+
+#### Rules
+
+- Rule update: CPM feedback: facebook.com [#2548](https://github.com/duckduckgo/autoconsent/pull/2548) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Heuristics: more detect wording in 10 languages, more button labels, investor-gate negative [#2490](https://github.com/duckduckgo/autoconsent/pull/2490) ([@muodov](https://github.com/muodov))
+- Rule update: pfron-gov-pl [#2542](https://github.com/duckduckgo/autoconsent/pull/2542) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gdpsystem [#2541](https://github.com/duckduckgo/autoconsent/pull/2541) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bgk.pl [#2540](https://github.com/duckduckgo/autoconsent/pull/2540) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: brandsforstudents.ch [#2539](https://github.com/duckduckgo/autoconsent/pull/2539) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: weblication [#2538](https://github.com/duckduckgo/autoconsent/pull/2538) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sda-it [#2537](https://github.com/duckduckgo/autoconsent/pull/2537) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-agree-banner [#2536](https://github.com/duckduckgo/autoconsent/pull/2536) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: jquery-cookiepolicy [#2535](https://github.com/duckduckgo/autoconsent/pull/2535) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pl-bip-cookies [#2534](https://github.com/duckduckgo/autoconsent/pull/2534) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: okayama-kanko-jp [#2533](https://github.com/duckduckgo/autoconsent/pull/2533) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: seria-group [#2532](https://github.com/duckduckgo/autoconsent/pull/2532) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: san-tatsu.jp [#2531](https://github.com/duckduckgo/autoconsent/pull/2531) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookieinfo [#2530](https://github.com/duckduckgo/autoconsent/pull/2530) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: no-transit-consent [#2529](https://github.com/duckduckgo/autoconsent/pull/2529) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: loescher [#2528](https://github.com/duckduckgo/autoconsent/pull/2528) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: brainshare [#2527](https://github.com/duckduckgo/autoconsent/pull/2527) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: imyfone [#2526](https://github.com/duckduckgo/autoconsent/pull/2526) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: surfshark [#2525](https://github.com/duckduckgo/autoconsent/pull/2525) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ometv.pl [#2524](https://github.com/duckduckgo/autoconsent/pull/2524) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nnk-theme-cookie-bar [#2523](https://github.com/duckduckgo/autoconsent/pull/2523) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: interface-medien-gebaeck [#2522](https://github.com/duckduckgo/autoconsent/pull/2522) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: blogger-cookie-notice [#2521](https://github.com/duckduckgo/autoconsent/pull/2521) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-box-notice [#2520](https://github.com/duckduckgo/autoconsent/pull/2520) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: x28-privacy-settings [#2519](https://github.com/duckduckgo/autoconsent/pull/2519) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ipkobiznes.pl [#2518](https://github.com/duckduckgo/autoconsent/pull/2518) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: oko-press [#2517](https://github.com/duckduckgo/autoconsent/pull/2517) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: monex-co-jp [#2516](https://github.com/duckduckgo/autoconsent/pull/2516) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gdpr-jp-notice [#2515](https://github.com/duckduckgo/autoconsent/pull/2515) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: help-ch [#2514](https://github.com/duckduckgo/autoconsent/pull/2514) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: qudosbank-com-au [#2513](https://github.com/duckduckgo/autoconsent/pull/2513) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: c-cookie-message [#2512](https://github.com/duckduckgo/autoconsent/pull/2512) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: silver.nu [#2511](https://github.com/duckduckgo/autoconsent/pull/2511) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tuki-cookieterms [#2510](https://github.com/duckduckgo/autoconsent/pull/2510) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: b1ng-cc [#2509](https://github.com/duckduckgo/autoconsent/pull/2509) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stellantis-psa [#2508](https://github.com/duckduckgo/autoconsent/pull/2508) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: roblox-creator-hub [#2507](https://github.com/duckduckgo/autoconsent/pull/2507) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tcl.com [#2506](https://github.com/duckduckgo/autoconsent/pull/2506) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: acconsento [#2505](https://github.com/duckduckgo/autoconsent/pull/2505) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookies-and-content-security-policy [#2504](https://github.com/duckduckgo/autoconsent/pull/2504) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nperf [#2503](https://github.com/duckduckgo/autoconsent/pull/2503) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: prestashop-advanced-cookie-banner [#2502](https://github.com/duckduckgo/autoconsent/pull/2502) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: shoper [#2501](https://github.com/duckduckgo/autoconsent/pull/2501) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: invision-guest-terms [#2500](https://github.com/duckduckgo/autoconsent/pull/2500) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rws-app [#2499](https://github.com/duckduckgo/autoconsent/pull/2499) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: soleil-sitevision-cookie-message [#2498](https://github.com/duckduckgo/autoconsent/pull/2498) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: askas [#2497](https://github.com/duckduckgo/autoconsent/pull/2497) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: atomstore [#2496](https://github.com/duckduckgo/autoconsent/pull/2496) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: meowdb.com [#2495](https://github.com/duckduckgo/autoconsent/pull/2495) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dfactory-cookie-notice [#2494](https://github.com/duckduckgo/autoconsent/pull/2494) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: weblegal [#2493](https://github.com/duckduckgo/autoconsent/pull/2493) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #902: pagesjaunes.fr [#2489](https://github.com/duckduckgo/autoconsent/pull/2489) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl cluster #30: as.com (didomi|inert, 18 sites) [#2488](https://github.com/duckduckgo/autoconsent/pull/2488) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_ios (euw) CPM magic report: www.flightradar24.com [#2487](https://github.com/duckduckgo/autoconsent/pull/2487) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on aa.com (custom tealium) [#2486](https://github.com/duckduckgo/autoconsent/pull/2486) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v18.1.0 (Sat Nov 07 2026)
+
+#### Rules
+
+- Rule update: CPM crawl #830: reverb.com [#2483](https://github.com/duckduckgo/autoconsent/pull/2483) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #1383: lenovo.com [#2480](https://github.com/duckduckgo/autoconsent/pull/2480) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #2621: zoho.com [#2479](https://github.com/duckduckgo/autoconsent/pull/2479) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #951: capcut.com [#2478](https://github.com/duckduckgo/autoconsent/pull/2478) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie Popup on www2.hm.com [#2481](https://github.com/duckduckgo/autoconsent/pull/2481) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #1806: meta.com [#2482](https://github.com/duckduckgo/autoconsent/pull/2482) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on tax.service.gov.uk [#2484](https://github.com/duckduckgo/autoconsent/pull/2484) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### CI / Release Automation
+
+- Pin Node in ddg-release app jobs instead of node-version: current [#2485](https://github.com/duckduckgo/autoconsent/pull/2485) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v18.0.0 (Thu Nov 05 2026)
+
+#### Rules
+
+- Rule update: Check whether www.telekom.de still needs its autoconsent exception [#2476](https://github.com/duckduckgo/autoconsent/pull/2476) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #4508: europa.eu [#2477](https://github.com/duckduckgo/autoconsent/pull/2477) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: typo3-cookieconsent [#2469](https://github.com/duckduckgo/autoconsent/pull/2469) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: pakamera.pl [#2471](https://github.com/duckduckgo/autoconsent/pull/2471) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hurra-consent, remove auto_NL_bonprix.nl_ovi [#2459](https://github.com/duckduckgo/autoconsent/pull/2459) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: isidewith.com [#2474](https://github.com/duckduckgo/autoconsent/pull/2474) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: binogi [#2473](https://github.com/duckduckgo/autoconsent/pull/2473) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bokio [#2472](https://github.com/duckduckgo/autoconsent/pull/2472) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: purecookie-cosmetic [#2470](https://github.com/duckduckgo/autoconsent/pull/2470) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: calcolo.tools [#2468](https://github.com/duckduckgo/autoconsent/pull/2468) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: botble-cookie-consent [#2466](https://github.com/duckduckgo/autoconsent/pull/2466) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vinnies-org-au [#2465](https://github.com/duckduckgo/autoconsent/pull/2465) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hikvision.com [#2464](https://github.com/duckduckgo/autoconsent/pull/2464) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tallink [#2463](https://github.com/duckduckgo/autoconsent/pull/2463) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: random-org [#2462](https://github.com/duckduckgo/autoconsent/pull/2462) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dtu-findit [#2461](https://github.com/duckduckgo/autoconsent/pull/2461) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: landgate [#2460](https://github.com/duckduckgo/autoconsent/pull/2460) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Enhancements
+
+- Heuristic detection: fewer false positives, more languages, faster prefilter [#2103](https://github.com/duckduckgo/autoconsent/pull/2103) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v17.4.0 (Wed Nov 04 2026)
+
+#### Rules
+
+- Rule update: vrg-bottom-cookies [#2421](https://github.com/duckduckgo/autoconsent/pull/2421) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: CPM crawl #1300: wiki.gg [#2455](https://github.com/duckduckgo/autoconsent/pull/2455) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Ea.com Cookie pop up not managed. [#2458](https://github.com/duckduckgo/autoconsent/pull/2458) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #403: bing.com [#2457](https://github.com/duckduckgo/autoconsent/pull/2457) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kaggle [#2417](https://github.com/duckduckgo/autoconsent/pull/2417) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: supercontable [#2418](https://github.com/duckduckgo/autoconsent/pull/2418) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: eduardolosilla.es [#2419](https://github.com/duckduckgo/autoconsent/pull/2419) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: autohero [#2420](https://github.com/duckduckgo/autoconsent/pull/2420) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tusclasesparticulares.com [#2422](https://github.com/duckduckgo/autoconsent/pull/2422) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: uregina [#2423](https://github.com/duckduckgo/autoconsent/pull/2423) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mites.gob.es [#2424](https://github.com/duckduckgo/autoconsent/pull/2424) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: casasrurales [#2425](https://github.com/duckduckgo/autoconsent/pull/2425) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: jobtoday [#2427](https://github.com/duckduckgo/autoconsent/pull/2427) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: altamar-cookieconsent [#2428](https://github.com/duckduckgo/autoconsent/pull/2428) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ihavecookies [#2429](https://github.com/duckduckgo/autoconsent/pull/2429) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: udg.edu [#2430](https://github.com/duckduckgo/autoconsent/pull/2430) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: alertamodal-cookies [#2431](https://github.com/duckduckgo/autoconsent/pull/2431) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: crtm [#2432](https://github.com/duckduckgo/autoconsent/pull/2432) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: react-cookie-consent-cosmetic [#2434](https://github.com/duckduckgo/autoconsent/pull/2434) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-accordion-settings [#2435](https://github.com/duckduckgo/autoconsent/pull/2435) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cnmc.gob.es [#2436](https://github.com/duckduckgo/autoconsent/pull/2436) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: adblockplus [#2438](https://github.com/duckduckgo/autoconsent/pull/2438) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: generalitat-catalunya [#2440](https://github.com/duckduckgo/autoconsent/pull/2440) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: imarina [#2437](https://github.com/duckduckgo/autoconsent/pull/2437) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookies-tip-v1 [#2439](https://github.com/duckduckgo/autoconsent/pull/2439) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: educastur-alojaweb [#2441](https://github.com/duckduckgo/autoconsent/pull/2441) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gameforge [#2442](https://github.com/duckduckgo/autoconsent/pull/2442) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cdu-edu-au [#2446](https://github.com/duckduckgo/autoconsent/pull/2446) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: consent-backdrop [#2443](https://github.com/duckduckgo/autoconsent/pull/2443) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: uned-barbastro [#2444](https://github.com/duckduckgo/autoconsent/pull/2444) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gamefound-com [#2445](https://github.com/duckduckgo/autoconsent/pull/2445) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mblock [#2447](https://github.com/duckduckgo/autoconsent/pull/2447) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ccoo [#2448](https://github.com/duckduckgo/autoconsent/pull/2448) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: comparandonos [#2451](https://github.com/duckduckgo/autoconsent/pull/2451) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: edebe [#2449](https://github.com/duckduckgo/autoconsent/pull/2449) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookiesplus, remove auto_FR_ludum.fr_gl5 [#2450](https://github.com/duckduckgo/autoconsent/pull/2450) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mirasvit-gdpr, remove auto_CA_promessedefleurs.com_noy, remove auto_FR_meillandrichardier.com_c2f [#2452](https://github.com/duckduckgo/autoconsent/pull/2452) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bsgdprcookies [#2453](https://github.com/duckduckgo/autoconsent/pull/2453) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: flatsome-cookies [#2454](https://github.com/duckduckgo/autoconsent/pull/2454) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Dependencies
+
+- Bump the dev-dependencies group with 4 updates [#2416](https://github.com/duckduckgo/autoconsent/pull/2416) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v17.3.0 (Tue Nov 03 2026)
+
+#### Rules
+
+- Rule update: plex.tv [#2342](https://github.com/duckduckgo/autoconsent/pull/2342) ([@muodov](https://github.com/muodov))
+- Rule update: cookie-consent-root [#2322](https://github.com/duckduckgo/autoconsent/pull/2322) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: restaurants.nl [#2317](https://github.com/duckduckgo/autoconsent/pull/2317) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bmedonline.es [#2413](https://github.com/duckduckgo/autoconsent/pull/2413) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-bar-eu [#2412](https://github.com/duckduckgo/autoconsent/pull/2412) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hallmark [#2411](https://github.com/duckduckgo/autoconsent/pull/2411) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: aliasdmc [#2410](https://github.com/duckduckgo/autoconsent/pull/2410) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: doc-du-juriste [#2409](https://github.com/duckduckgo/autoconsent/pull/2409) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: orejime [#2408](https://github.com/duckduckgo/autoconsent/pull/2408) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: enzuzo [#2407](https://github.com/duckduckgo/autoconsent/pull/2407) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: zorgenzekerheid.nl [#2406](https://github.com/duckduckgo/autoconsent/pull/2406) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: leetchi [#2405](https://github.com/duckduckgo/autoconsent/pull/2405) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: swis-avg [#2403](https://github.com/duckduckgo/autoconsent/pull/2403) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: eplaque [#2402](https://github.com/duckduckgo/autoconsent/pull/2402) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: reviq [#2401](https://github.com/duckduckgo/autoconsent/pull/2401) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: reuma.nl [#2400](https://github.com/duckduckgo/autoconsent/pull/2400) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gleeden [#2399](https://github.com/duckduckgo/autoconsent/pull/2399) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: le-livre.fr [#2398](https://github.com/duckduckgo/autoconsent/pull/2398) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bahn-de [#2397](https://github.com/duckduckgo/autoconsent/pull/2397) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: axeptio-tcf [#2396](https://github.com/duckduckgo/autoconsent/pull/2396) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: maree-info [#2395](https://github.com/duckduckgo/autoconsent/pull/2395) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sandstudio-cookie-tip [#2393](https://github.com/duckduckgo/autoconsent/pull/2393) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: showroomprive [#2392](https://github.com/duckduckgo/autoconsent/pull/2392) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: termsfeed3 [#2391](https://github.com/duckduckgo/autoconsent/pull/2391) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: holidu [#2390](https://github.com/duckduckgo/autoconsent/pull/2390) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: tutosurexcel [#2389](https://github.com/duckduckgo/autoconsent/pull/2389) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bo3.gg [#2388](https://github.com/duckduckgo/autoconsent/pull/2388) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: WPConsent [#2387](https://github.com/duckduckgo/autoconsent/pull/2387) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: zoomalia [#2386](https://github.com/duckduckgo/autoconsent/pull/2386) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Complianz notice [#2385](https://github.com/duckduckgo/autoconsent/pull/2385) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: meduza [#2384](https://github.com/duckduckgo/autoconsent/pull/2384) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: wbd-legal-terms [#2383](https://github.com/duckduckgo/autoconsent/pull/2383) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: eagerly-tools-cookie [#2381](https://github.com/duckduckgo/autoconsent/pull/2381) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vszutphen.nl [#2380](https://github.com/duckduckgo/autoconsent/pull/2380) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lezenvoordelijst.nl [#2379](https://github.com/duckduckgo/autoconsent/pull/2379) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: npo-ccm [#2378](https://github.com/duckduckgo/autoconsent/pull/2378) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: moneybird [#2375](https://github.com/duckduckgo/autoconsent/pull/2375) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mrchadd [#2374](https://github.com/duckduckgo/autoconsent/pull/2374) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookiecode [#2373](https://github.com/duckduckgo/autoconsent/pull/2373) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ggzstandaarden.nl [#2371](https://github.com/duckduckgo/autoconsent/pull/2371) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: noord-holland.nl [#2370](https://github.com/duckduckgo/autoconsent/pull/2370) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: diffuse-cookie-notice [#2369](https://github.com/duckduckgo/autoconsent/pull/2369) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: florisvanbommel [#2367](https://github.com/duckduckgo/autoconsent/pull/2367) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: c15t [#2366](https://github.com/duckduckgo/autoconsent/pull/2366) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: dijklander [#2365](https://github.com/duckduckgo/autoconsent/pull/2365) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: heerlijkehuisjes [#2364](https://github.com/duckduckgo/autoconsent/pull/2364) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lastdodo [#2363](https://github.com/duckduckgo/autoconsent/pull/2363) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gsmpunt.nl [#2362](https://github.com/duckduckgo/autoconsent/pull/2362) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: omroepflevoland [#2361](https://github.com/duckduckgo/autoconsent/pull/2361) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: codalt-cookie-consent [#2360](https://github.com/duckduckgo/autoconsent/pull/2360) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: 2gis [#2359](https://github.com/duckduckgo/autoconsent/pull/2359) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sg-cookies [#2358](https://github.com/duckduckgo/autoconsent/pull/2358) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: stuvia [#2356](https://github.com/duckduckgo/autoconsent/pull/2356) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: laravel-eu-cookie-consent [#2355](https://github.com/duckduckgo/autoconsent/pull/2355) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vogue.nl [#2354](https://github.com/duckduckgo/autoconsent/pull/2354) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kunstmaan-cookie-bar [#2353](https://github.com/duckduckgo/autoconsent/pull/2353) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: grrr-cookie-consent [#2352](https://github.com/duckduckgo/autoconsent/pull/2352) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: avg-cookiebanner [#2351](https://github.com/duckduckgo/autoconsent/pull/2351) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: vendic-cookiebar [#2350](https://github.com/duckduckgo/autoconsent/pull/2350) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vantilburgonline [#2349](https://github.com/duckduckgo/autoconsent/pull/2349) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: astro-cookie-notice-fzbxxtek [#2348](https://github.com/duckduckgo/autoconsent/pull/2348) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: albelli-photobox [#2347](https://github.com/duckduckgo/autoconsent/pull/2347) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: studioibizz-cookieconsent [#2346](https://github.com/duckduckgo/autoconsent/pull/2346) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: laravel-cc-banner [#2345](https://github.com/duckduckgo/autoconsent/pull/2345) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: schuurman-schoenen [#2343](https://github.com/duckduckgo/autoconsent/pull/2343) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: properstar [#2341](https://github.com/duckduckgo/autoconsent/pull/2341) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: avacy [#2340](https://github.com/duckduckgo/autoconsent/pull/2340) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fabrique-cookie-message [#2339](https://github.com/duckduckgo/autoconsent/pull/2339) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vue-cookie-law [#2338](https://github.com/duckduckgo/autoconsent/pull/2338) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: autoscout24 [#2337](https://github.com/duckduckgo/autoconsent/pull/2337) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: localbiz-cookie-notice [#2336](https://github.com/duckduckgo/autoconsent/pull/2336) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: easy-cookie-info [#2335](https://github.com/duckduckgo/autoconsent/pull/2335) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: shopify-dux, remove auto_GB_shopify.com_0 [#2334](https://github.com/duckduckgo/autoconsent/pull/2334) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mediawiki-cookieconsent [#2333](https://github.com/duckduckgo/autoconsent/pull/2333) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sachsen-cookiebar [#2332](https://github.com/duckduckgo/autoconsent/pull/2332) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ub-hu-berlin [#2331](https://github.com/duckduckgo/autoconsent/pull/2331) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: newyorker-de [#2330](https://github.com/duckduckgo/autoconsent/pull/2330) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: websale [#2329](https://github.com/duckduckgo/autoconsent/pull/2329) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: termsfeed [#2328](https://github.com/duckduckgo/autoconsent/pull/2328) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rwth-moodle [#2327](https://github.com/duckduckgo/autoconsent/pull/2327) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bayern-stmas [#2326](https://github.com/duckduckgo/autoconsent/pull/2326) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: professoren-tum-de [#2325](https://github.com/duckduckgo/autoconsent/pull/2325) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cwarn [#2324](https://github.com/duckduckgo/autoconsent/pull/2324) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: autokostencheck.de [#2323](https://github.com/duckduckgo/autoconsent/pull/2323) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: unitedconsumers.com [#2321](https://github.com/duckduckgo/autoconsent/pull/2321) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: comundus-cookie-banner [#2320](https://github.com/duckduckgo/autoconsent/pull/2320) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nocturnhq [#2319](https://github.com/duckduckgo/autoconsent/pull/2319) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: travix, remove auto_NL_cheaptickets.nl_cwt [#2318](https://github.com/duckduckgo/autoconsent/pull/2318) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tu-darmstadt [#2316](https://github.com/duckduckgo/autoconsent/pull/2316) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: r42-st-popup [#2315](https://github.com/duckduckgo/autoconsent/pull/2315) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### CI / Release Automation
+
+- Record each task's release task when the release completes it [#1844](https://github.com/duckduckgo/autoconsent/pull/1844) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v17.2.0 (Sat Oct 31 2026)
+
+#### Rules
+
+- Rule update: unicity [#2314](https://github.com/duckduckgo/autoconsent/pull/2314) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pcspecialist [#2313](https://github.com/duckduckgo/autoconsent/pull/2313) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: scotland-police-uk [#2312](https://github.com/duckduckgo/autoconsent/pull/2312) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: plumrocket-cookie-consent, remove auto_GB_partscentre.co.uk_s70 [#2311](https://github.com/duckduckgo/autoconsent/pull/2311) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: yourspares [#2310](https://github.com/duckduckgo/autoconsent/pull/2310) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: react-cookie-consent, remove auto_NO_pcsx2.net_grl [#2309](https://github.com/duckduckgo/autoconsent/pull/2309) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: justwatch.com [#2308](https://github.com/duckduckgo/autoconsent/pull/2308) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: westminster.ac.uk [#2307](https://github.com/duckduckgo/autoconsent/pull/2307) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pandectes [#2306](https://github.com/duckduckgo/autoconsent/pull/2306) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dola [#2305](https://github.com/duckduckgo/autoconsent/pull/2305) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: futoncompany [#2304](https://github.com/duckduckgo/autoconsent/pull/2304) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nuxt-cookie-manager [#2302](https://github.com/duckduckgo/autoconsent/pull/2302) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dolphinfitness [#2301](https://github.com/duckduckgo/autoconsent/pull/2301) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rittal [#2300](https://github.com/duckduckgo/autoconsent/pull/2300) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: islington-council [#2299](https://github.com/duckduckgo/autoconsent/pull/2299) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: shoezone [#2298](https://github.com/duckduckgo/autoconsent/pull/2298) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tradecalculator.co.uk [#2297](https://github.com/duckduckgo/autoconsent/pull/2297) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: in2cookiemodal [#2296](https://github.com/duckduckgo/autoconsent/pull/2296) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: doktorabc [#2295](https://github.com/duckduckgo/autoconsent/pull/2295) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sitepark-sitekit [#2294](https://github.com/duckduckgo/autoconsent/pull/2294) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ncsoft-cookie-toast [#2293](https://github.com/duckduckgo/autoconsent/pull/2293) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: foto-erhardt [#2292](https://github.com/duckduckgo/autoconsent/pull/2292) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: econda-pp2 [#2291](https://github.com/duckduckgo/autoconsent/pull/2291) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: autoscout24 [#2290](https://github.com/duckduckgo/autoconsent/pull/2290) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: om [#2289](https://github.com/duckduckgo/autoconsent/pull/2289) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tplink [#2288](https://github.com/duckduckgo/autoconsent/pull/2288) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pcloud [#2286](https://github.com/duckduckgo/autoconsent/pull/2286) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: jurahilfe-de [#2285](https://github.com/duckduckgo/autoconsent/pull/2285) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kuendigung.org [#2284](https://github.com/duckduckgo/autoconsent/pull/2284) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: shimano-bike [#2283](https://github.com/duckduckgo/autoconsent/pull/2283) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: moebel-de-group, remove auto_CH_moebel24.ch_fck, remove auto_DE_moebel.de_yf1 [#2282](https://github.com/duckduckgo/autoconsent/pull/2282) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-info-banner [#2281](https://github.com/duckduckgo/autoconsent/pull/2281) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bigcommerce-consent-manager [#2280](https://github.com/duckduckgo/autoconsent/pull/2280) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vgn.de [#2279](https://github.com/duckduckgo/autoconsent/pull/2279) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ekd.de [#2278](https://github.com/duckduckgo/autoconsent/pull/2278) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: etracker, remove auto_DE_nanu-nana.de_7my [#2277](https://github.com/duckduckgo/autoconsent/pull/2277) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: klimatabelle.com [#2287](https://github.com/duckduckgo/autoconsent/pull/2287) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v17.1.0 (Fri Oct 30 2026)
+
+#### Rules
+
+- Rule update: Complianz optin [#2276](https://github.com/duckduckgo/autoconsent/pull/2276) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #2198: pornhub.org [#2258](https://github.com/duckduckgo/autoconsent/pull/2258) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: endeavorhealth [#2275](https://github.com/duckduckgo/autoconsent/pull/2275) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: greatschools [#2274](https://github.com/duckduckgo/autoconsent/pull/2274) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ibkr, remove auto_US_interactivebrokers.com_0 [#2273](https://github.com/duckduckgo/autoconsent/pull/2273) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hubspot [#2272](https://github.com/duckduckgo/autoconsent/pull/2272) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hamradio.com [#2271](https://github.com/duckduckgo/autoconsent/pull/2271) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: chairish [#2270](https://github.com/duckduckgo/autoconsent/pull/2270) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: amasty-gdpr-hyva [#2269](https://github.com/duckduckgo/autoconsent/pull/2269) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: uhcprovider [#2268](https://github.com/duckduckgo/autoconsent/pull/2268) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: texas.gov [#2267](https://github.com/duckduckgo/autoconsent/pull/2267) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mainlinemenswear [#2266](https://github.com/duckduckgo/autoconsent/pull/2266) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: optum-legal-banner [#2265](https://github.com/duckduckgo/autoconsent/pull/2265) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: money.co.uk [#2264](https://github.com/duckduckgo/autoconsent/pull/2264) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Ensighten [#2263](https://github.com/duckduckgo/autoconsent/pull/2263) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bathnes-cookie-banner [#2262](https://github.com/duckduckgo/autoconsent/pull/2262) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: 1pmobile.com [#2261](https://github.com/duckduckgo/autoconsent/pull/2261) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: myjobquote [#2260](https://github.com/duckduckgo/autoconsent/pull/2260) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: trillian [#2259](https://github.com/duckduckgo/autoconsent/pull/2259) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #51: skatteetaten.no [#2257](https://github.com/duckduckgo/autoconsent/pull/2257) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: northwell.edu [#2256](https://github.com/duckduckgo/autoconsent/pull/2256) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nyu-langone [#2255](https://github.com/duckduckgo/autoconsent/pull/2255) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: babylist [#2254](https://github.com/duckduckgo/autoconsent/pull/2254) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-pref-form [#2253](https://github.com/duckduckgo/autoconsent/pull/2253) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: amazonforum [#2252](https://github.com/duckduckgo/autoconsent/pull/2252) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: planned-parenthood [#2251](https://github.com/duckduckgo/autoconsent/pull/2251) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ofsted-reports-cosmetic [#2250](https://github.com/duckduckgo/autoconsent/pull/2250) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kanopy [#2249](https://github.com/duckduckgo/autoconsent/pull/2249) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: uttings.co.uk [#2248](https://github.com/duckduckgo/autoconsent/pull/2248) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: united-online [#2247](https://github.com/duckduckgo/autoconsent/pull/2247) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: babylonbee, ring [#2246](https://github.com/duckduckgo/autoconsent/pull/2246) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: watchfinder [#2245](https://github.com/duckduckgo/autoconsent/pull/2245) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: unitedutilities [#2244](https://github.com/duckduckgo/autoconsent/pull/2244) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_android (eun) CPM magic report: benchlm.ai [#2243](https://github.com/duckduckgo/autoconsent/pull/2243) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tyreseeker [#2242](https://github.com/duckduckgo/autoconsent/pull/2242) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: jetpens [#2241](https://github.com/duckduckgo/autoconsent/pull/2241) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nts-org-uk [#2240](https://github.com/duckduckgo/autoconsent/pull/2240) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: chimnie-co-uk [#2239](https://github.com/duckduckgo/autoconsent/pull/2239) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: chemicalbook [#2238](https://github.com/duckduckgo/autoconsent/pull/2238) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: reviewsolicitors.co.uk [#2237](https://github.com/duckduckgo/autoconsent/pull/2237) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: optum [#2236](https://github.com/duckduckgo/autoconsent/pull/2236) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tiresize.com [#2235](https://github.com/duckduckgo/autoconsent/pull/2235) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fpl-com [#2234](https://github.com/duckduckgo/autoconsent/pull/2234) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fepblue.org [#2233](https://github.com/duckduckgo/autoconsent/pull/2233) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fuqer [#2232](https://github.com/duckduckgo/autoconsent/pull/2232) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sankei-digital [#2231](https://github.com/duckduckgo/autoconsent/pull/2231) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v17.0.0 (Thu Oct 29 2026)
+
+#### Rules
+
+- Rule update: radio-canada [#2205](https://github.com/duckduckgo/autoconsent/pull/2205) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: regjeringen.no [#2206](https://github.com/duckduckgo/autoconsent/pull/2206) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vortex-consent [#2207](https://github.com/duckduckgo/autoconsent/pull/2207) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: onecom-cookie-banner [#2209](https://github.com/duckduckgo/autoconsent/pull/2209) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: oslosportslager.no [#2211](https://github.com/duckduckgo/autoconsent/pull/2211) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fnsp-cookieconsent [#2212](https://github.com/duckduckgo/autoconsent/pull/2212) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: sparebank1-optin [#2213](https://github.com/duckduckgo/autoconsent/pull/2213) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mars-cookies-prompt [#2214](https://github.com/duckduckgo/autoconsent/pull/2214) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: jokul-cookie-consent [#2215](https://github.com/duckduckgo/autoconsent/pull/2215) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lego [#2216](https://github.com/duckduckgo/autoconsent/pull/2216) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: roll20 [#2217](https://github.com/duckduckgo/autoconsent/pull/2217) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fod-fujitv [#2218](https://github.com/duckduckgo/autoconsent/pull/2218) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vinnova-se [#2219](https://github.com/duckduckgo/autoconsent/pull/2219) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: epaas [#2220](https://github.com/duckduckgo/autoconsent/pull/2220) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Sirdata [#2221](https://github.com/duckduckgo/autoconsent/pull/2221) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nikkeibp [#2222](https://github.com/duckduckgo/autoconsent/pull/2222) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tri-table [#2223](https://github.com/duckduckgo/autoconsent/pull/2223) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: asrock [#2224](https://github.com/duckduckgo/autoconsent/pull/2224) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: niedziela-pl [#2225](https://github.com/duckduckgo/autoconsent/pull/2225) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-script [#2226](https://github.com/duckduckgo/autoconsent/pull/2226) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: site-notifications-cookie-usage [#2227](https://github.com/duckduckgo/autoconsent/pull/2227) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hkdir [#2228](https://github.com/duckduckgo/autoconsent/pull/2228) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: consentmo [#2229](https://github.com/duckduckgo/autoconsent/pull/2229) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: plex.tv, remove auto_CA_plex.tv_ee4, remove auto_CA_support.plex.tv_gn3 [#2230](https://github.com/duckduckgo/autoconsent/pull/2230) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Enhancements
+
+- elementAtPoint popup detection [#2008](https://github.com/duckduckgo/autoconsent/pull/2008) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.63.0 (Wed Oct 28 2026)
+
+#### Rules
+
+- Rule update: CPM crawl #3: gva.es [#2203](https://github.com/duckduckgo/autoconsent/pull/2203) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: volvocars-com [#2195](https://github.com/duckduckgo/autoconsent/pull/2195) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: AppConsent legacy [#2194](https://github.com/duckduckgo/autoconsent/pull/2194) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: romeo [#2196](https://github.com/duckduckgo/autoconsent/pull/2196) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ckies, funding-choices [#2197](https://github.com/duckduckgo/autoconsent/pull/2197) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: casier-judiciaire-justice-gouv-fr [#2198](https://github.com/duckduckgo/autoconsent/pull/2198) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: eu-cookie-law-popup [#2199](https://github.com/duckduckgo/autoconsent/pull/2199) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stockholm-stad [#2200](https://github.com/duckduckgo/autoconsent/pull/2200) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookiesinfo-closecookies [#2201](https://github.com/duckduckgo/autoconsent/pull/2201) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vue-cookie-accept-decline [#2202](https://github.com/duckduckgo/autoconsent/pull/2202) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: urvaerket [#2193](https://github.com/duckduckgo/autoconsent/pull/2193) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: polisen-se [#2180](https://github.com/duckduckgo/autoconsent/pull/2180) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: meta-cookie-dialog [#2182](https://github.com/duckduckgo/autoconsent/pull/2182) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stright [#2185](https://github.com/duckduckgo/autoconsent/pull/2185) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: poki [#2177](https://github.com/duckduckgo/autoconsent/pull/2177) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stripchat.com [#2178](https://github.com/duckduckgo/autoconsent/pull/2178) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fascicolosanitario-lombardia [#2179](https://github.com/duckduckgo/autoconsent/pull/2179) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tvp [#2181](https://github.com/duckduckgo/autoconsent/pull/2181) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: luxmed [#2183](https://github.com/duckduckgo/autoconsent/pull/2183) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kartverket [#2184](https://github.com/duckduckgo/autoconsent/pull/2184) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: civilservicejobs-service-gov-uk [#2186](https://github.com/duckduckgo/autoconsent/pull/2186) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: insided [#2187](https://github.com/duckduckgo/autoconsent/pull/2187) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hyrabostad.se [#2188](https://github.com/duckduckgo/autoconsent/pull/2188) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mittanbud [#2189](https://github.com/duckduckgo/autoconsent/pull/2189) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dack365 [#2190](https://github.com/duckduckgo/autoconsent/pull/2190) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: beetle-tracking [#2192](https://github.com/duckduckgo/autoconsent/pull/2192) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Dependencies
+
+- Bump the dev-dependencies group across 1 directory with 6 updates [#2176](https://github.com/duckduckgo/autoconsent/pull/2176) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.62.0 (Tue Oct 27 2026)
+
+#### Rules
+
+- Rule update: smartweb [#2174](https://github.com/duckduckgo/autoconsent/pull/2174) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: mercedes-benz-cmm [#2159](https://github.com/duckduckgo/autoconsent/pull/2159) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: batteriexperten.com [#2152](https://github.com/duckduckgo/autoconsent/pull/2152) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: refurbed [#2139](https://github.com/duckduckgo/autoconsent/pull/2139) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: opencmp [#2116](https://github.com/duckduckgo/autoconsent/pull/2116) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: coki61 [#2172](https://github.com/duckduckgo/autoconsent/pull/2172) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: consentmagic [#2171](https://github.com/duckduckgo/autoconsent/pull/2171) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vergelijkgroep [#2170](https://github.com/duckduckgo/autoconsent/pull/2170) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bullionbypost [#2169](https://github.com/duckduckgo/autoconsent/pull/2169) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pharmasave [#2168](https://github.com/duckduckgo/autoconsent/pull/2168) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: giustizia-it [#2167](https://github.com/duckduckgo/autoconsent/pull/2167) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: aslroma1-it [#2166](https://github.com/duckduckgo/autoconsent/pull/2166) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: idoctors.it [#2165](https://github.com/duckduckgo/autoconsent/pull/2165) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lexbase.se [#2164](https://github.com/duckduckgo/autoconsent/pull/2164) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: finsweet [#2163](https://github.com/duckduckgo/autoconsent/pull/2163) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: jollyroom [#2162](https://github.com/duckduckgo/autoconsent/pull/2162) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: adnuntius [#2161](https://github.com/duckduckgo/autoconsent/pull/2161) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: qtip-jgrowl-cookies [#2160](https://github.com/duckduckgo/autoconsent/pull/2160) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ecoprivacy [#2158](https://github.com/duckduckgo/autoconsent/pull/2158) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bold-cookie-consent [#2157](https://github.com/duckduckgo/autoconsent/pull/2157) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: widiba [#2156](https://github.com/duckduckgo/autoconsent/pull/2156) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: TrustArc-newcm [#2155](https://github.com/duckduckgo/autoconsent/pull/2155) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: umcg [#2154](https://github.com/duckduckgo/autoconsent/pull/2154) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ing-de [#2153](https://github.com/duckduckgo/autoconsent/pull/2153) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: compricer [#2151](https://github.com/duckduckgo/autoconsent/pull/2151) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: incomit [#2150](https://github.com/duckduckgo/autoconsent/pull/2150) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: buonmedico [#2149](https://github.com/duckduckgo/autoconsent/pull/2149) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nojazz [#2148](https://github.com/duckduckgo/autoconsent/pull/2148) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rinkabyror-se [#2147](https://github.com/duckduckgo/autoconsent/pull/2147) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-script [#2146](https://github.com/duckduckgo/autoconsent/pull/2146) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: praktikertjanst [#2145](https://github.com/duckduckgo/autoconsent/pull/2145) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-notice-checkboxes [#2144](https://github.com/duckduckgo/autoconsent/pull/2144) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: massaggiamilano [#2143](https://github.com/duckduckgo/autoconsent/pull/2143) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ihavecookies [#2142](https://github.com/duckduckgo/autoconsent/pull/2142) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: banknorwegian [#2141](https://github.com/duckduckgo/autoconsent/pull/2141) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: octopusenergy-it [#2137](https://github.com/duckduckgo/autoconsent/pull/2137) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: iisvaldagno [#2136](https://github.com/duckduckgo/autoconsent/pull/2136) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fondoest.it [#2135](https://github.com/duckduckgo/autoconsent/pull/2135) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: consentaur [#2134](https://github.com/duckduckgo/autoconsent/pull/2134) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: wimc-gtm-consent [#2133](https://github.com/duckduckgo/autoconsent/pull/2133) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bosch-dock-privacy-settings [#2131](https://github.com/duckduckgo/autoconsent/pull/2131) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: emr-ch [#2129](https://github.com/duckduckgo/autoconsent/pull/2129) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bancaditalia [#2128](https://github.com/duckduckgo/autoconsent/pull/2128) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: io.no [#2127](https://github.com/duckduckgo/autoconsent/pull/2127) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: evozen.fr [#2126](https://github.com/duckduckgo/autoconsent/pull/2126) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: unive.it [#2124](https://github.com/duckduckgo/autoconsent/pull/2124) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kulturit-ccm [#2122](https://github.com/duckduckgo/autoconsent/pull/2122) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fideuram [#2121](https://github.com/duckduckgo/autoconsent/pull/2121) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: krieger-consent-form [#2119](https://github.com/duckduckgo/autoconsent/pull/2119) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: klp-cookie-banner [#2118](https://github.com/duckduckgo/autoconsent/pull/2118) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sfanytime [#2117](https://github.com/duckduckgo/autoconsent/pull/2117) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gnoccaforum [#2115](https://github.com/duckduckgo/autoconsent/pull/2115) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: xlbygg.se [#2114](https://github.com/duckduckgo/autoconsent/pull/2114) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fonts.google.com [#2113](https://github.com/duckduckgo/autoconsent/pull/2113) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: concordia-ch [#2112](https://github.com/duckduckgo/autoconsent/pull/2112) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: acos-cms [#2111](https://github.com/duckduckgo/autoconsent/pull/2111) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: adstate [#2110](https://github.com/duckduckgo/autoconsent/pull/2110) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Site Breakage: golem.de (2026-10-14) [#2109](https://github.com/duckduckgo/autoconsent/pull/2109) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Dependencies
+
+- Bump Node to 24.22.1 (latest LTS) [#2175](https://github.com/duckduckgo/autoconsent/pull/2175) ([@jonathanKingston](https://github.com/jonathanKingston))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Jonathan Kingston ([@jonathanKingston](https://github.com/jonathanKingston))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.61.0 (Sat Oct 24 2026)
+
+#### Rules
+
+- Rule update: studentapan [#2107](https://github.com/duckduckgo/autoconsent/pull/2107) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: AppConsent [#2108](https://github.com/duckduckgo/autoconsent/pull/2108) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: scb.se [#2095](https://github.com/duckduckgo/autoconsent/pull/2095) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: newsbreak, remove auto_US_newsbreak.com_0 [#2096](https://github.com/duckduckgo/autoconsent/pull/2096) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fastweb-cookie-center [#2097](https://github.com/duckduckgo/autoconsent/pull/2097) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gobasic [#2098](https://github.com/duckduckgo/autoconsent/pull/2098) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: com-consent-layer [#2099](https://github.com/duckduckgo/autoconsent/pull/2099) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: airbnb, remove auto_CH_airbnb.de_83z [#2100](https://github.com/duckduckgo/autoconsent/pull/2100) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: futurabolzano.it [#2101](https://github.com/duckduckgo/autoconsent/pull/2101) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: livsmedelsverket [#2102](https://github.com/duckduckgo/autoconsent/pull/2102) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tv2reg-cookie-notice [#2104](https://github.com/duckduckgo/autoconsent/pull/2104) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nhsapp [#2105](https://github.com/duckduckgo/autoconsent/pull/2105) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sas, remove auto_AU_flysas.com_r1s [#2106](https://github.com/duckduckgo/autoconsent/pull/2106) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.60.0 (Fri Oct 23 2026)
+
+#### Rules
+
+- Rule update: CPM crawl #529: autodoc.co.uk [#1534](https://github.com/duckduckgo/autoconsent/pull/1534) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on www.lovethesales.com [#2089](https://github.com/duckduckgo/autoconsent/pull/2089) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie notice on schumacher.com [#2088](https://github.com/duckduckgo/autoconsent/pull/2088) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on www.elibrary.imf.org [#2091](https://github.com/duckduckgo/autoconsent/pull/2091) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie pop up shop.mango.com [#2092](https://github.com/duckduckgo/autoconsent/pull/2092) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #1276: parliament.uk [#2093](https://github.com/duckduckgo/autoconsent/pull/2093) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #252: malmo.se [#2086](https://github.com/duckduckgo/autoconsent/pull/2086) ([@muodov](https://github.com/muodov) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #29: svtplay.se [#2075](https://github.com/duckduckgo/autoconsent/pull/2075) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #96: obsbygg.no [#2077](https://github.com/duckduckgo/autoconsent/pull/2077) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #173: nordnet.dk [#2081](https://github.com/duckduckgo/autoconsent/pull/2081) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #29: sundhed.dk [#2074](https://github.com/duckduckgo/autoconsent/pull/2074) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl cluster #225: asnbank.nl (sel:cookie+cookieconsent|none, 3 sites) [#2079](https://github.com/duckduckgo/autoconsent/pull/2079) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #188: nederlandseloterij.nl [#2080](https://github.com/duckduckgo/autoconsent/pull/2080) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_mac_desktop (eun) CPM magic report: www.kaspersky.com [#2082](https://github.com/duckduckgo/autoconsent/pull/2082) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #137: rejestr.io [#2083](https://github.com/duckduckgo/autoconsent/pull/2083) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #261: bryk.pl [#2085](https://github.com/duckduckgo/autoconsent/pull/2085) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #246: temu.com [#2087](https://github.com/duckduckgo/autoconsent/pull/2087) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Onetrust [#2078](https://github.com/duckduckgo/autoconsent/pull/2078) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: CPM crawl cluster #22: svt.se (sel:cookieconsent|none, 10 sites) [#2073](https://github.com/duckduckgo/autoconsent/pull/2073) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dpgmedia-nl [#2042](https://github.com/duckduckgo/autoconsent/pull/2042) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: gravito [#2046](https://github.com/duckduckgo/autoconsent/pull/2046) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Add Italian heuristic detect patterns (x.com IT banner), remove stale twitter rule [#2072](https://github.com/duckduckgo/autoconsent/pull/2072) ([@muodov](https://github.com/muodov))
+- Rule update: bbc.com-orb-cosmetic, bbc.com [#2040](https://github.com/duckduckgo/autoconsent/pull/2040) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookieprompter [#2071](https://github.com/duckduckgo/autoconsent/pull/2071) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ok [#2070](https://github.com/duckduckgo/autoconsent/pull/2070) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: amazon-music [#2069](https://github.com/duckduckgo/autoconsent/pull/2069) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: arbeidsplassen-nav-no [#2068](https://github.com/duckduckgo/autoconsent/pull/2068) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bokadirekt.se [#2066](https://github.com/duckduckgo/autoconsent/pull/2066) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pe-cookies [#2065](https://github.com/duckduckgo/autoconsent/pull/2065) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: att [#2064](https://github.com/duckduckgo/autoconsent/pull/2064) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mainichi [#2063](https://github.com/duckduckgo/autoconsent/pull/2063) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pensionsmyndigheten [#2062](https://github.com/duckduckgo/autoconsent/pull/2062) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ing-de [#2061](https://github.com/duckduckgo/autoconsent/pull/2061) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: auctionet [#2059](https://github.com/duckduckgo/autoconsent/pull/2059) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: eroticiracconti-it [#2058](https://github.com/duckduckgo/autoconsent/pull/2058) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sitevision [#2057](https://github.com/duckduckgo/autoconsent/pull/2057) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: zorginstituut-cookiewarning [#2056](https://github.com/duckduckgo/autoconsent/pull/2056) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nordea [#2055](https://github.com/duckduckgo/autoconsent/pull/2055) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bouvet-cookiepanel [#2054](https://github.com/duckduckgo/autoconsent/pull/2054) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pro-euclp-cookies-box [#2053](https://github.com/duckduckgo/autoconsent/pull/2053) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lantmateriet [#2051](https://github.com/duckduckgo/autoconsent/pull/2051) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: annunci69.it [#2050](https://github.com/duckduckgo/autoconsent/pull/2050) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: jobindex [#2048](https://github.com/duckduckgo/autoconsent/pull/2048) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: intesasanpaolo [#2044](https://github.com/duckduckgo/autoconsent/pull/2044) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: skatteverket-se [#2043](https://github.com/duckduckgo/autoconsent/pull/2043) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: wirtualna-polska [#2039](https://github.com/duckduckgo/autoconsent/pull/2039) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: onlineradiobox [#2038](https://github.com/duckduckgo/autoconsent/pull/2038) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: smile-insurances [#2037](https://github.com/duckduckgo/autoconsent/pull/2037) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rambler [#2036](https://github.com/duckduckgo/autoconsent/pull/2036) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookielegit [#2035](https://github.com/duckduckgo/autoconsent/pull/2035) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ersatzteile-24 [#2034](https://github.com/duckduckgo/autoconsent/pull/2034) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: aeolservice [#2033](https://github.com/duckduckgo/autoconsent/pull/2033) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: xenforo-cookie-consent [#2032](https://github.com/duckduckgo/autoconsent/pull/2032) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hacon-next-gen [#2041](https://github.com/duckduckgo/autoconsent/pull/2041) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: consent-studio [#1999](https://github.com/duckduckgo/autoconsent/pull/1999) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: puesc-gov-pl [#2031](https://github.com/duckduckgo/autoconsent/pull/2031) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: eon.pl [#1991](https://github.com/duckduckgo/autoconsent/pull/1991) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### AI / Agent Workflow
+
+- Test a rule's spec sites before removing it [#2094](https://github.com/duckduckgo/autoconsent/pull/2094) ([@muodov](https://github.com/muodov))
+
+#### Test Infrastructure
+
+- Run CI E2E tests in an isolated world and rerun bot-walled tests on Oxylabs [#1672](https://github.com/duckduckgo/autoconsent/pull/1672) ([@muodov](https://github.com/muodov))
+
+#### Internal
+
+- Detect more types of popup [#1769](https://github.com/duckduckgo/autoconsent/pull/1769) ([@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 4
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
+# v16.59.0 (Thu Oct 22 2026)
+
+#### Rules
+
+- Rule update: swisscom-ecare [#1987](https://github.com/duckduckgo/autoconsent/pull/1987) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: warszawa19115.pl [#1998](https://github.com/duckduckgo/autoconsent/pull/1998) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookieman [#2001](https://github.com/duckduckgo/autoconsent/pull/2001) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: carpetaciudadana [#1967](https://github.com/duckduckgo/autoconsent/pull/1967) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: asahi-interactive [#1990](https://github.com/duckduckgo/autoconsent/pull/1990) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: shouldianswer [#1992](https://github.com/duckduckgo/autoconsent/pull/1992) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gays-cruising [#1993](https://github.com/duckduckgo/autoconsent/pull/1993) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gsb-cookiebanner-selection [#1994](https://github.com/duckduckgo/autoconsent/pull/1994) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: chatgpt [#1995](https://github.com/duckduckgo/autoconsent/pull/1995) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cf-gdpr-cookie-consent [#1997](https://github.com/duckduckgo/autoconsent/pull/1997) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: zurich-cookies-notification-banner [#2000](https://github.com/duckduckgo/autoconsent/pull/2000) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cksmodal [#2002](https://github.com/duckduckgo/autoconsent/pull/2002) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nowaera [#2003](https://github.com/duckduckgo/autoconsent/pull/2003) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: usherbrooke [#2004](https://github.com/duckduckgo/autoconsent/pull/2004) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: iworks-footer-notice [#2005](https://github.com/duckduckgo/autoconsent/pull/2005) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gwo [#2006](https://github.com/duckduckgo/autoconsent/pull/2006) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: thomsonlocal.com [#2007](https://github.com/duckduckgo/autoconsent/pull/2007) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: leukhuis-nl [#2010](https://github.com/duckduckgo/autoconsent/pull/2010) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: escorteintime [#2011](https://github.com/duckduckgo/autoconsent/pull/2011) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sujetdebac.fr [#2012](https://github.com/duckduckgo/autoconsent/pull/2012) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dintel [#2013](https://github.com/duckduckgo/autoconsent/pull/2013) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gov-pl-cookies-info [#2014](https://github.com/duckduckgo/autoconsent/pull/2014) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: merito.pl [#2015](https://github.com/duckduckgo/autoconsent/pull/2015) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hsbc-au [#2016](https://github.com/duckduckgo/autoconsent/pull/2016) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: route-inn [#2017](https://github.com/duckduckgo/autoconsent/pull/2017) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: danskebank [#2018](https://github.com/duckduckgo/autoconsent/pull/2018) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bwr-cookie [#2019](https://github.com/duckduckgo/autoconsent/pull/2019) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: snb.ch [#2020](https://github.com/duckduckgo/autoconsent/pull/2020) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: optyczne-pl [#2021](https://github.com/duckduckgo/autoconsent/pull/2021) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: minitool [#2022](https://github.com/duckduckgo/autoconsent/pull/2022) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: turkishairlines.com [#2023](https://github.com/duckduckgo/autoconsent/pull/2023) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rijksoverheid-notification-bar [#2024](https://github.com/duckduckgo/autoconsent/pull/2024) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: olvg [#2025](https://github.com/duckduckgo/autoconsent/pull/2025) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: capitalone-ca [#2026](https://github.com/duckduckgo/autoconsent/pull/2026) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: praca-pl [#2027](https://github.com/duckduckgo/autoconsent/pull/2027) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mq.edu.au [#2028](https://github.com/duckduckgo/autoconsent/pull/2028) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: payfip [#2029](https://github.com/duckduckgo/autoconsent/pull/2029) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: erdee-media [#2030](https://github.com/duckduckgo/autoconsent/pull/2030) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: axesor [#1989](https://github.com/duckduckgo/autoconsent/pull/1989) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: wojsko-polskie-pl [#1988](https://github.com/duckduckgo/autoconsent/pull/1988) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pdf24 [#1986](https://github.com/duckduckgo/autoconsent/pull/1986) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: shueisha-gigaviewer [#1984](https://github.com/duckduckgo/autoconsent/pull/1984) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: impress-co-jp [#1983](https://github.com/duckduckgo/autoconsent/pull/1983) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: remove-cookie-notice [#1982](https://github.com/duckduckgo/autoconsent/pull/1982) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: animatetimes [#1981](https://github.com/duckduckgo/autoconsent/pull/1981) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sedlak-gdpr-cookie [#1980](https://github.com/duckduckgo/autoconsent/pull/1980) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: libris.nl [#1979](https://github.com/duckduckgo/autoconsent/pull/1979) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: consent-studio [#1978](https://github.com/duckduckgo/autoconsent/pull/1978) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: todostuslibros [#1977](https://github.com/duckduckgo/autoconsent/pull/1977) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: eccmm [#1976](https://github.com/duckduckgo/autoconsent/pull/1976) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: xtb [#1975](https://github.com/duckduckgo/autoconsent/pull/1975) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-popup-cookieno, cookie-popup-cookieok [#1974](https://github.com/duckduckgo/autoconsent/pull/1974) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ign.es [#1973](https://github.com/duckduckgo/autoconsent/pull/1973) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mobile.de [#1972](https://github.com/duckduckgo/autoconsent/pull/1972) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: brainsum-cookieconsent [#1971](https://github.com/duckduckgo/autoconsent/pull/1971) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: blitzrechner [#1970](https://github.com/duckduckgo/autoconsent/pull/1970) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: telegram-im [#1969](https://github.com/duckduckgo/autoconsent/pull/1969) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: grupa-rmf [#1968](https://github.com/duckduckgo/autoconsent/pull/1968) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: e-grip [#1966](https://github.com/duckduckgo/autoconsent/pull/1966) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: wirtualna-polska [#1965](https://github.com/duckduckgo/autoconsent/pull/1965) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: grupa-pracuj [#1964](https://github.com/duckduckgo/autoconsent/pull/1964) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: juzaphoto [#1963](https://github.com/duckduckgo/autoconsent/pull/1963) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lg-cookiecontrol [#1962](https://github.com/duckduckgo/autoconsent/pull/1962) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: miteco [#1961](https://github.com/duckduckgo/autoconsent/pull/1961) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: england.nhs.uk [#1960](https://github.com/duckduckgo/autoconsent/pull/1960) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vdg-cookies [#1958](https://github.com/duckduckgo/autoconsent/pull/1958) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: seniorweb [#1957](https://github.com/duckduckgo/autoconsent/pull/1957) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: matemaks [#1956](https://github.com/duckduckgo/autoconsent/pull/1956) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: orbys [#1954](https://github.com/duckduckgo/autoconsent/pull/1954) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pekao24 [#1953](https://github.com/duckduckgo/autoconsent/pull/1953) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lineagrafica-reject [#1952](https://github.com/duckduckgo/autoconsent/pull/1952) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: 123inkt [#1951](https://github.com/duckduckgo/autoconsent/pull/1951) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: avada-privacy-bar-cosmetic, avada-privacy-bar [#1950](https://github.com/duckduckgo/autoconsent/pull/1950) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Dependencies
+
+- Move tldts-experimental to devDependencies [#1996](https://github.com/duckduckgo/autoconsent/pull/1996) ([@claude](https://github.com/claude) [@muodov](https://github.com/muodov))
+- Bump tldts-experimental from 7.4.16 to 7.4.18 [#1931](https://github.com/duckduckgo/autoconsent/pull/1931) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the dev-dependencies group with 5 updates [#1930](https://github.com/duckduckgo/autoconsent/pull/1930) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Claude ([@claude](https://github.com/claude))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.58.0 (Wed Oct 21 2026)
+
+#### Rules
+
+- Rule update: soteshop [#1949](https://github.com/duckduckgo/autoconsent/pull/1949) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: daikin [#1948](https://github.com/duckduckgo/autoconsent/pull/1948) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tinder [#1947](https://github.com/duckduckgo/autoconsent/pull/1947) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bleau-cookiecontrol [#1946](https://github.com/duckduckgo/autoconsent/pull/1946) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sc-cookie-banner [#1945](https://github.com/duckduckgo/autoconsent/pull/1945) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mega.io [#1944](https://github.com/duckduckgo/autoconsent/pull/1944) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookieconsent2 [#1943](https://github.com/duckduckgo/autoconsent/pull/1943) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pubtech [#1942](https://github.com/duckduckgo/autoconsent/pull/1942) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bakeca [#1941](https://github.com/duckduckgo/autoconsent/pull/1941) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rabobank [#1940](https://github.com/duckduckgo/autoconsent/pull/1940) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: chomikuj [#1939](https://github.com/duckduckgo/autoconsent/pull/1939) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: librus [#1938](https://github.com/duckduckgo/autoconsent/pull/1938) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gobiernodecanarias [#1937](https://github.com/duckduckgo/autoconsent/pull/1937) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: aemet [#1936](https://github.com/duckduckgo/autoconsent/pull/1936) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: educamadrid [#1935](https://github.com/duckduckgo/autoconsent/pull/1935) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vd-ch [#1934](https://github.com/duckduckgo/autoconsent/pull/1934) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Tealium [#1933](https://github.com/duckduckgo/autoconsent/pull/1933) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Tealium [#1932](https://github.com/duckduckgo/autoconsent/pull/1932) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: costco [#1929](https://github.com/duckduckgo/autoconsent/pull/1929) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.57.0 (Tue Oct 20 2026)
+
+#### Rules
+
+- Rule update: yle-consent-sdk [#1928](https://github.com/duckduckgo/autoconsent/pull/1928) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ford-dse [#1927](https://github.com/duckduckgo/autoconsent/pull/1927) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: groupama.fr [#1926](https://github.com/duckduckgo/autoconsent/pull/1926) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stellantis-psa [#1925](https://github.com/duckduckgo/autoconsent/pull/1925) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: liferay-cookies-banner [#1924](https://github.com/duckduckgo/autoconsent/pull/1924) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: django-gdpr-cookie-consent [#1923](https://github.com/duckduckgo/autoconsent/pull/1923) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookieyes-legacy [#1922](https://github.com/duckduckgo/autoconsent/pull/1922) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bundesarchiv-cookiebanner [#1921](https://github.com/duckduckgo/autoconsent/pull/1921) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: profiler-dk [#1920](https://github.com/duckduckgo/autoconsent/pull/1920) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rcs-cpmt [#1919](https://github.com/duckduckgo/autoconsent/pull/1919) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: elektro-material-ch [#1917](https://github.com/duckduckgo/autoconsent/pull/1917) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: arto [#1916](https://github.com/duckduckgo/autoconsent/pull/1916) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: abebooks [#1915](https://github.com/duckduckgo/autoconsent/pull/1915) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fixpart [#1914](https://github.com/duckduckgo/autoconsent/pull/1914) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kolibri-cookie-widget [#1913](https://github.com/duckduckgo/autoconsent/pull/1913) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: warning-cookie-notice [#1888](https://github.com/duckduckgo/autoconsent/pull/1888) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.56.0 (Mon Oct 19 2026)
+
+#### Rules
+
+- Rule update: ilovepdf [#1849](https://github.com/duckduckgo/autoconsent/pull/1849) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: midway-usa [#1850](https://github.com/duckduckgo/autoconsent/pull/1850) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: openai [#1851](https://github.com/duckduckgo/autoconsent/pull/1851) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: canva [#1852](https://github.com/duckduckgo/autoconsent/pull/1852) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: piwik-pro [#1857](https://github.com/duckduckgo/autoconsent/pull/1857) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: automattic-cmp-optout [#1860](https://github.com/duckduckgo/autoconsent/pull/1860) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: amasty-gdpr [#1864](https://github.com/duckduckgo/autoconsent/pull/1864) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: jcookie [#1867](https://github.com/duckduckgo/autoconsent/pull/1867) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: aspnet-cookieinfo [#1868](https://github.com/duckduckgo/autoconsent/pull/1868) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: avacy [#1848](https://github.com/duckduckgo/autoconsent/pull/1848) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: first-visit-notice [#1870](https://github.com/duckduckgo/autoconsent/pull/1870) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sitevision [#1878](https://github.com/duckduckgo/autoconsent/pull/1878) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ciaopeople.it [#1900](https://github.com/duckduckgo/autoconsent/pull/1900) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: webtoffee-cookie-consent [#1906](https://github.com/duckduckgo/autoconsent/pull/1906) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: txxx-network [#1880](https://github.com/duckduckgo/autoconsent/pull/1880) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sogei-cookiebar [#1891](https://github.com/duckduckgo/autoconsent/pull/1891) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: seg-social [#1846](https://github.com/duckduckgo/autoconsent/pull/1846) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: forsakringskassan.se, sitevision-cookie-consent [#1847](https://github.com/duckduckgo/autoconsent/pull/1847) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: breuninger [#1854](https://github.com/duckduckgo/autoconsent/pull/1854) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: racv [#1855](https://github.com/duckduckgo/autoconsent/pull/1855) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sportsmans.com [#1856](https://github.com/duckduckgo/autoconsent/pull/1856) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sitevision-iw-cookie [#1858](https://github.com/duckduckgo/autoconsent/pull/1858) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: legally-ok [#1861](https://github.com/duckduckgo/autoconsent/pull/1861) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: r42-consent-iframe [#1862](https://github.com/duckduckgo/autoconsent/pull/1862) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: arena.ai [#1863](https://github.com/duckduckgo/autoconsent/pull/1863) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: latrobe.edu.au [#1865](https://github.com/duckduckgo/autoconsent/pull/1865) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: u-cookie-consent [#1866](https://github.com/duckduckgo/autoconsent/pull/1866) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: chefcookie [#1869](https://github.com/duckduckgo/autoconsent/pull/1869) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: handelsbanken [#1874](https://github.com/duckduckgo/autoconsent/pull/1874) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: popupsmart-cookie-notice [#1875](https://github.com/duckduckgo/autoconsent/pull/1875) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: privacylab-elmo [#1879](https://github.com/duckduckgo/autoconsent/pull/1879) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sl-se [#1881](https://github.com/duckduckgo/autoconsent/pull/1881) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gsb-cookie-banner [#1882](https://github.com/duckduckgo/autoconsent/pull/1882) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookiepermission-cp-overlay [#1883](https://github.com/duckduckgo/autoconsent/pull/1883) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: diag.pl [#1884](https://github.com/duckduckgo/autoconsent/pull/1884) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookieman [#1885](https://github.com/duckduckgo/autoconsent/pull/1885) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: accept-cookie-box [#1887](https://github.com/duckduckgo/autoconsent/pull/1887) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookie-bar-frame [#1889](https://github.com/duckduckgo/autoconsent/pull/1889) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lawwwing [#1892](https://github.com/duckduckgo/autoconsent/pull/1892) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: eventfrog [#1893](https://github.com/duckduckgo/autoconsent/pull/1893) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: modelsociety [#1894](https://github.com/duckduckgo/autoconsent/pull/1894) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tagconcierge [#1896](https://github.com/duckduckgo/autoconsent/pull/1896) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: radboud-cookie-overlay [#1899](https://github.com/duckduckgo/autoconsent/pull/1899) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: silktide [#1901](https://github.com/duckduckgo/autoconsent/pull/1901) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dfactory-cookie-notice [#1902](https://github.com/duckduckgo/autoconsent/pull/1902) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lab-network-consent [#1903](https://github.com/duckduckgo/autoconsent/pull/1903) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bringatrailer [#1904](https://github.com/duckduckgo/autoconsent/pull/1904) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kamsoft-cookiesmanager [#1905](https://github.com/duckduckgo/autoconsent/pull/1905) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: musti [#1907](https://github.com/duckduckgo/autoconsent/pull/1907) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: close-cookie-notice-snippet [#1908](https://github.com/duckduckgo/autoconsent/pull/1908) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: spaggiari-pvw [#1909](https://github.com/duckduckgo/autoconsent/pull/1909) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gear4music [#1911](https://github.com/duckduckgo/autoconsent/pull/1911) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.55.0 (Sat Oct 17 2026)
+
+#### Rules
+
+- Rule update: pornhub.com [#1853](https://github.com/duckduckgo/autoconsent/pull/1853) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 1
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+
+---
+
+# v16.54.0 (Fri Oct 16 2026)
+
+#### Rules
+
+- Rule update: eastlink [#1842](https://github.com/duckduckgo/autoconsent/pull/1842) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: WP Cookie Notice for GDPR [#1812](https://github.com/duckduckgo/autoconsent/pull/1812) ([@daxtheduck](https://github.com/daxtheduck))
+- admetricspro: wait for Manage Settings, add spec sites [#1843](https://github.com/duckduckgo/autoconsent/pull/1843) ([@muodov](https://github.com/muodov) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: teacherspensions.co.uk [#1841](https://github.com/duckduckgo/autoconsent/pull/1841) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: somerset-council [#1840](https://github.com/duckduckgo/autoconsent/pull/1840) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: klaxit-cookie-consent [#1839](https://github.com/duckduckgo/autoconsent/pull/1839) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: malaysiaairlines.com [#1838](https://github.com/duckduckgo/autoconsent/pull/1838) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: costco-travel [#1837](https://github.com/duckduckgo/autoconsent/pull/1837) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: meridiancu [#1836](https://github.com/duckduckgo/autoconsent/pull/1836) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tti-cookie-popup [#1835](https://github.com/duckduckgo/autoconsent/pull/1835) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: piwik-pro [#1834](https://github.com/duckduckgo/autoconsent/pull/1834) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nestpensions [#1833](https://github.com/duckduckgo/autoconsent/pull/1833) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bnes-cc [#1832](https://github.com/duckduckgo/autoconsent/pull/1832) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: c-banner-allow-cookies [#1831](https://github.com/duckduckgo/autoconsent/pull/1831) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: toyota [#1830](https://github.com/duckduckgo/autoconsent/pull/1830) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: eset [#1829](https://github.com/duckduckgo/autoconsent/pull/1829) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: savills [#1828](https://github.com/duckduckgo/autoconsent/pull/1828) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bigid [#1827](https://github.com/duckduckgo/autoconsent/pull/1827) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: occ-gdpr [#1825](https://github.com/duckduckgo/autoconsent/pull/1825) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kwik-fit [#1824](https://github.com/duckduckgo/autoconsent/pull/1824) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: thenude [#1823](https://github.com/duckduckgo/autoconsent/pull/1823) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: scottish-government-design-system [#1822](https://github.com/duckduckgo/autoconsent/pull/1822) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: smallpdf [#1821](https://github.com/duckduckgo/autoconsent/pull/1821) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stepstone-ccm [#1820](https://github.com/duckduckgo/autoconsent/pull/1820) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: what3words [#1819](https://github.com/duckduckgo/autoconsent/pull/1819) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: admetricspro [#1818](https://github.com/duckduckgo/autoconsent/pull/1818) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: u-cookie-consent [#1817](https://github.com/duckduckgo/autoconsent/pull/1817) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nhs-jobs [#1816](https://github.com/duckduckgo/autoconsent/pull/1816) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: whitepages-gpc-banner [#1815](https://github.com/duckduckgo/autoconsent/pull/1815) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tna-cookie-banner [#1814](https://github.com/duckduckgo/autoconsent/pull/1814) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gla.ac.uk [#1813](https://github.com/duckduckgo/autoconsent/pull/1813) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: figma [#1811](https://github.com/duckduckgo/autoconsent/pull/1811) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Other
+
+- Coverage data update [#1845](https://github.com/duckduckgo/autoconsent/pull/1845) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.53.0 (Thu Oct 15 2026)
+
+#### Rules
+
+- Handle WP DSGVO Tools notice popup, replace stale sandhills rule [#1810](https://github.com/duckduckgo/autoconsent/pull/1810) ([@muodov](https://github.com/muodov))
+- Rule update: service2school [#1809](https://github.com/duckduckgo/autoconsent/pull/1809) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: quick-cookie-consent [#1806](https://github.com/duckduckgo/autoconsent/pull/1806) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ccm19 [#1807](https://github.com/duckduckgo/autoconsent/pull/1807) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: istore.co.za [#1762](https://github.com/duckduckgo/autoconsent/pull/1762) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: burpee.com [#1763](https://github.com/duckduckgo/autoconsent/pull/1763) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: Ensighten [#1764](https://github.com/duckduckgo/autoconsent/pull/1764) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: cookie-script [#1765](https://github.com/duckduckgo/autoconsent/pull/1765) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: schadefonds [#1767](https://github.com/duckduckgo/autoconsent/pull/1767) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dwaalzin.nu [#1770](https://github.com/duckduckgo/autoconsent/pull/1770) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sportmedizin-rheuma [#1772](https://github.com/duckduckgo/autoconsent/pull/1772) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: europa-eu [#1774](https://github.com/duckduckgo/autoconsent/pull/1774) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: aliexpress [#1775](https://github.com/duckduckgo/autoconsent/pull/1775) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: elsevier [#1776](https://github.com/duckduckgo/autoconsent/pull/1776) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: wbd-legal-terms [#1777](https://github.com/duckduckgo/autoconsent/pull/1777) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: clasohlson.com [#1778](https://github.com/duckduckgo/autoconsent/pull/1778) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: posthog [#1779](https://github.com/duckduckgo/autoconsent/pull/1779) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: channel4.com [#1780](https://github.com/duckduckgo/autoconsent/pull/1780) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: volvocars-com [#1781](https://github.com/duckduckgo/autoconsent/pull/1781) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ubisoft.com [#1783](https://github.com/duckduckgo/autoconsent/pull/1783) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: eneba [#1784](https://github.com/duckduckgo/autoconsent/pull/1784) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: depop [#1785](https://github.com/duckduckgo/autoconsent/pull/1785) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: msg-cookie [#1787](https://github.com/duckduckgo/autoconsent/pull/1787) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: head-fi [#1788](https://github.com/duckduckgo/autoconsent/pull/1788) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: finna [#1789](https://github.com/duckduckgo/autoconsent/pull/1789) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: citizensadvice [#1790](https://github.com/duckduckgo/autoconsent/pull/1790) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: concept3d [#1791](https://github.com/duckduckgo/autoconsent/pull/1791) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: meteored [#1792](https://github.com/duckduckgo/autoconsent/pull/1792) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Complianz optin [#1794](https://github.com/duckduckgo/autoconsent/pull/1794) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: quantcast [#1795](https://github.com/duckduckgo/autoconsent/pull/1795) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: conextra [#1797](https://github.com/duckduckgo/autoconsent/pull/1797) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kiwico [#1798](https://github.com/duckduckgo/autoconsent/pull/1798) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: truendo [#1799](https://github.com/duckduckgo/autoconsent/pull/1799) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: truevault-polaris [#1800](https://github.com/duckduckgo/autoconsent/pull/1800) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mobirise-cookies-alert-cosmetic, mobirise-cookies-alert [#1801](https://github.com/duckduckgo/autoconsent/pull/1801) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: craft-cookie-consent [#1802](https://github.com/duckduckgo/autoconsent/pull/1802) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: accurx [#1803](https://github.com/duckduckgo/autoconsent/pull/1803) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: plentyshop [#1804](https://github.com/duckduckgo/autoconsent/pull/1804) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: burpee.com, cm-cookie-manager [#1771](https://github.com/duckduckgo/autoconsent/pull/1771) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tracsis-delay-repay [#1766](https://github.com/duckduckgo/autoconsent/pull/1766) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: civic-cookie-control [#1782](https://github.com/duckduckgo/autoconsent/pull/1782) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookiecuttr [#1796](https://github.com/duckduckgo/autoconsent/pull/1796) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Dependencies
+
+- Bump the dev-dependencies group with 3 updates [#1786](https://github.com/duckduckgo/autoconsent/pull/1786) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### AI / Agent Workflow
+
+- Test every supported region before relying on the heuristic [#1808](https://github.com/duckduckgo/autoconsent/pull/1808) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.52.0 (Wed Oct 14 2026)
+
+#### Rules
+
+- Rule update: quantcast [#1701](https://github.com/duckduckgo/autoconsent/pull/1701) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Tealium [#1757](https://github.com/duckduckgo/autoconsent/pull/1757) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lta [#1759](https://github.com/duckduckgo/autoconsent/pull/1759) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pigu [#1760](https://github.com/duckduckgo/autoconsent/pull/1760) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: community.screwfix.com [#1756](https://github.com/duckduckgo/autoconsent/pull/1756) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: la-becanerie [#1761](https://github.com/duckduckgo/autoconsent/pull/1761) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: mizuno.com [#1758](https://github.com/duckduckgo/autoconsent/pull/1758) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Enhancements
+
+- Rule update: quantcast + make click step with all:true async [#1627](https://github.com/duckduckgo/autoconsent/pull/1627) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+
+#### CI / Release Automation
+
+- Remove unused Dockerfile; match extension Node in release job [#1754](https://github.com/duckduckgo/autoconsent/pull/1754) ([@muodov](https://github.com/muodov))
+
+#### AI / Agent Workflow
+
+- Test every region before relying on the heuristic [#1773](https://github.com/duckduckgo/autoconsent/pull/1773) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v16.51.0 (Tue Oct 13 2026)
+
+#### Rules
+
+- Rule update: bigid [#1755](https://github.com/duckduckgo/autoconsent/pull/1755) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: aceodds.com [#1742](https://github.com/duckduckgo/autoconsent/pull/1742) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: getproven [#1753](https://github.com/duckduckgo/autoconsent/pull/1753) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: godaddy-website-builder-cosmetic, godaddy-website-builder [#1752](https://github.com/duckduckgo/autoconsent/pull/1752) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookiesjsr [#1749](https://github.com/duckduckgo/autoconsent/pull/1749) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: burpee.com [#1747](https://github.com/duckduckgo/autoconsent/pull/1747) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ing-nl [#1744](https://github.com/duckduckgo/autoconsent/pull/1744) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bynder [#1743](https://github.com/duckduckgo/autoconsent/pull/1743) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tempest-cookie-notice [#1703](https://github.com/duckduckgo/autoconsent/pull/1703) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: up-cookie-consent [#1722](https://github.com/duckduckgo/autoconsent/pull/1722) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: simpleview-cookie-banner [#1739](https://github.com/duckduckgo/autoconsent/pull/1739) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: squarespace-cookie-banner, squarespace-cookie-notice [#1718](https://github.com/duckduckgo/autoconsent/pull/1718) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: guesty [#1709](https://github.com/duckduckgo/autoconsent/pull/1709) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: store2000.fr [#1667](https://github.com/duckduckgo/autoconsent/pull/1667) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: opalcollection-com [#1741](https://github.com/duckduckgo/autoconsent/pull/1741) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: solvhealth.com [#1740](https://github.com/duckduckgo/autoconsent/pull/1740) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: endocrine.org [#1738](https://github.com/duckduckgo/autoconsent/pull/1738) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cornerstone-brands [#1737](https://github.com/duckduckgo/autoconsent/pull/1737) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: iubenda [#1735](https://github.com/duckduckgo/autoconsent/pull/1735) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tineye [#1734](https://github.com/duckduckgo/autoconsent/pull/1734) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hearst-us [#1733](https://github.com/duckduckgo/autoconsent/pull/1733) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pitt-edu [#1732](https://github.com/duckduckgo/autoconsent/pull/1732) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tplink [#1731](https://github.com/duckduckgo/autoconsent/pull/1731) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: worldbank [#1730](https://github.com/duckduckgo/autoconsent/pull/1730) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: columbia-privacy-notice [#1729](https://github.com/duckduckgo/autoconsent/pull/1729) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: uw-madison-cookieconsent [#1728](https://github.com/duckduckgo/autoconsent/pull/1728) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: orw-cookie-banner [#1727](https://github.com/duckduckgo/autoconsent/pull/1727) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: shopquarters [#1726](https://github.com/duckduckgo/autoconsent/pull/1726) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rutjes [#1725](https://github.com/duckduckgo/autoconsent/pull/1725) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: darkounity.com [#1724](https://github.com/duckduckgo/autoconsent/pull/1724) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: milestone-internet [#1721](https://github.com/duckduckgo/autoconsent/pull/1721) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: axeptio [#1720](https://github.com/duckduckgo/autoconsent/pull/1720) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: gundam-base-entry [#1719](https://github.com/duckduckgo/autoconsent/pull/1719) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: vowels [#1717](https://github.com/duckduckgo/autoconsent/pull/1717) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bdirect-booking-engine [#1716](https://github.com/duckduckgo/autoconsent/pull/1716) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: spermidinelife-us [#1715](https://github.com/duckduckgo/autoconsent/pull/1715) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: wildling-com [#1714](https://github.com/duckduckgo/autoconsent/pull/1714) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: duda-cookie-notification [#1713](https://github.com/duckduckgo/autoconsent/pull/1713) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: therealest [#1712](https://github.com/duckduckgo/autoconsent/pull/1712) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: copaamerica [#1711](https://github.com/duckduckgo/autoconsent/pull/1711) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: givedirectly [#1710](https://github.com/duckduckgo/autoconsent/pull/1710) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: paytronix [#1708](https://github.com/duckduckgo/autoconsent/pull/1708) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: indy-systems [#1707](https://github.com/duckduckgo/autoconsent/pull/1707) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: serpstat-com [#1706](https://github.com/duckduckgo/autoconsent/pull/1706) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: rakshaos [#1705](https://github.com/duckduckgo/autoconsent/pull/1705) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: makitatools [#1702](https://github.com/duckduckgo/autoconsent/pull/1702) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: osf.io [#1700](https://github.com/duckduckgo/autoconsent/pull/1700) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Complianz notice [#1698](https://github.com/duckduckgo/autoconsent/pull/1698) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tk-aerztefuehrer.de [#1697](https://github.com/duckduckgo/autoconsent/pull/1697) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: shopware [#1696](https://github.com/duckduckgo/autoconsent/pull/1696) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: avvio [#1695](https://github.com/duckduckgo/autoconsent/pull/1695) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: web-rewind.com [#1694](https://github.com/duckduckgo/autoconsent/pull/1694) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: saturdaysnyc [#1693](https://github.com/duckduckgo/autoconsent/pull/1693) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cinemaplus [#1692](https://github.com/duckduckgo/autoconsent/pull/1692) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: berelax.com [#1691](https://github.com/duckduckgo/autoconsent/pull/1691) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lucrin [#1690](https://github.com/duckduckgo/autoconsent/pull/1690) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pizzapilgrims.co.uk [#1689](https://github.com/duckduckgo/autoconsent/pull/1689) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: bluepark [#1688](https://github.com/duckduckgo/autoconsent/pull/1688) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: palace-company [#1687](https://github.com/duckduckgo/autoconsent/pull/1687) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: npo-ccm [#1685](https://github.com/duckduckgo/autoconsent/pull/1685) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: termsfeed [#1684](https://github.com/duckduckgo/autoconsent/pull/1684) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: allabout-japan [#1683](https://github.com/duckduckgo/autoconsent/pull/1683) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookieconsent2-legacy [#1681](https://github.com/duckduckgo/autoconsent/pull/1681) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: podimo [#1680](https://github.com/duckduckgo/autoconsent/pull/1680) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: trust360 [#1679](https://github.com/duckduckgo/autoconsent/pull/1679) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: fis-data-exchange [#1678](https://github.com/duckduckgo/autoconsent/pull/1678) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: EZoic [#1677](https://github.com/duckduckgo/autoconsent/pull/1677) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: abcacupuncture1 [#1676](https://github.com/duckduckgo/autoconsent/pull/1676) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: publicmobile [#1675](https://github.com/duckduckgo/autoconsent/pull/1675) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: yuntrack [#1674](https://github.com/duckduckgo/autoconsent/pull/1674) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: nhm.ac.uk [#1673](https://github.com/duckduckgo/autoconsent/pull/1673) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Enhancements
+
+- Check 'other' labels in button classification benchmark and fix false positives [#1642](https://github.com/duckduckgo/autoconsent/pull/1642) ([@sammacbeth](https://github.com/sammacbeth))
+- Export heuristic classification and DOM discovery for downstream use [#1606](https://github.com/duckduckgo/autoconsent/pull/1606) ([@claude](https://github.com/claude) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 3
+
+- Claude ([@claude](https://github.com/claude))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v16.50.0 (Sat Oct 10 2026)
 
 #### Rules

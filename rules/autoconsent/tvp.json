@@ -1,0 +1,27 @@
+{
+    "name": "tvp",
+    "_metadata": {
+        "vendorUrl": "https://polityka-prywatnosci.tvp.pl/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?tvp\\.pl/"
+    },
+    "prehideSelectors": [".tvp-cookie-overlay"],
+    "detectCmp": [{ "exists": ".tvp-cookie-overlay .tvp-covl" }],
+    "detectPopup": [{ "visible": ".tvp-cookie-overlay .tvp-covl" }],
+    "optIn": [{ "waitForThenClick": ".tvp-covl .tvp-covl__ab" }],
+    "optOut": [
+        { "waitForThenClick": ".tvp-covl .tvp-covl__sb" },
+        { "waitFor": ".tvp-covl .tvp-covl__save" },
+        {
+            "if": { "exists": ".tvp-covl input.iabd:not(:checked)" },
+            "then": [{ "click": ".tvp-covl input.iabd" }]
+        },
+        { "click": ".tvp-covl .tvp-covl__save" },
+        { "waitForVisible": ".tvp-cookie-overlay .tvp-covl", "check": "none", "timeout": 2000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "TVPtcs22=" }]
+}

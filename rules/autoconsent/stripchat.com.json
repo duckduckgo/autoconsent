@@ -2,25 +2,46 @@
     "name": "stripchat.com",
     "vendorUrl": "https://unknown",
     "cosmetic": false,
-    "prehideSelectors": [".cookies-reminder"],
+    "prehideSelectors": ["[data-testid=\"CookiesReminder\"]"],
     "detectCmp": [
         {
-            "exists": ".cookies-reminder .cookies-reminder__content"
+            "visible": "[data-testid=\"CookiesReminder\"] [data-testid=\"CookiesManage\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".cookies-reminder .cookies-reminder__content"
+            "visible": "[data-testid=\"CookiesReminder\"]"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".cookies-reminder .cookies-reminder__accept-all-button"
+            "waitForThenClick": "[data-testid=\"CookiesReminder\"] [data-testid=\"CookiesAcceptAll\"]"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ".cookies-reminder .cookies-reminder__manage-button"
+            "waitFor": "body:not(.disable-transition)",
+            "timeout": 5000,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[data-testid=\"CookiesReminder\"] [data-testid=\"CookiesManage\"]"
+        },
+        {
+            "waitForVisible": "dialog[open] .cookies-select-modal",
+            "timeout": 1500,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": "dialog[open] .cookies-select-modal",
+                "check": "none"
+            },
+            "then": [
+                {
+                    "click": "[data-testid=\"CookiesReminder\"] [data-testid=\"CookiesManage\"]"
+                }
+            ]
         },
         {
             "waitForThenClick": "dialog[open] .cookies-select-modal .cookies-select-modal__buttons .ds-btn-apply-2-ds"

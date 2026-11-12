@@ -1,0 +1,8 @@
+{
+    "name": "codalt-cookie-consent",
+    "prehideSelectors": ["app-cookie-consent[data-component=\"site-base\"]"],
+    "detectCmp": [{ "exists": "app-cookie-consent[data-component=\"site-base\"] .cookie-buttons .cookie-refuse" }],
+    "detectPopup": [{ "visible": "app-cookie-consent[data-component=\"site-base\"] .cookie-buttons" }],
+    "optIn": [{ "waitForThenClick": "app-cookie-consent[data-component=\"site-base\"] .cookie-allow" }],
+    "optOut": [{ "waitForThenClick": "app-cookie-consent[data-component=\"site-base\"] .cookie-refuse" }]
+}

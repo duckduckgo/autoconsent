@@ -1,0 +1,13 @@
+{
+    "name": "scotland-police-uk",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?scotland\\.police\\.uk/"
+    },
+    "prehideSelectors": ["#panelAsk"],
+    "detectCmp": [{ "exists": "#panelAsk #btnAcceptAllCookies" }],
+    "detectPopup": [{ "visible": "#panelAsk #btnAcceptAllCookies" }],
+    "optIn": [{ "waitForThenClick": "#panelAsk #btnAcceptAllCookies" }],
+    "optOut": [{ "hide": "#panelAsk" }],
+    "test": [{ "visible": "#panelAsk", "check": "none" }]
+}

@@ -1,0 +1,30 @@
+{
+    "name": "mobirise-cookies-alert-cosmetic",
+    "vendorUrl": "https://mobirise.com/",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookiesdirective"],
+    "detectCmp": [
+        {
+            "exists": "#cookiesdirective"
+        },
+        {
+            "exists": "#cookiesdirective #explicitreject",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiesdirective"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiesdirective #explicitsubmit, #cookiesdirective #impliedsubmit"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookiesdirective"
+        }
+    ]
+}

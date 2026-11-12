@@ -1,0 +1,12 @@
+{
+    "name": "gsb-cookiebanner-selection",
+    "prehideSelectors": ["#cookiebanner.cookiebanner__restrictive", "#c-cookiebanner.c-cookiebanner"],
+    "detectCmp": [{ "exists": ".js-banner__container .js-banner-button-confirm-selection" }],
+    "detectPopup": [{ "visible": ".js-banner__container .js-banner-button-confirm-selection" }],
+    "optIn": [{ "waitForThenClick": ".js-banner__container .js-banner-button-consent-to-all" }],
+    "optOut": [
+        { "click": ".js-banner__container input.js-banner-control__element:checked:not(:disabled)", "all": true, "optional": true },
+        { "waitForThenClick": ".js-banner__container .js-banner-button-confirm-selection" }
+    ],
+    "test": [{ "cookieContains": "gsbbanner=closed" }]
+}

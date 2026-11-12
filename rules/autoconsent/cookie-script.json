@@ -1,17 +1,59 @@
 {
     "name": "cookie-script",
     "vendorUrl": "https://cookie-script.com/",
-    "prehideSelectors": ["#cookiescript_injected"],
-    "detectCmp": [{ "exists": "#cookiescript_injected" }],
-    "detectPopup": [{ "visible": "#cookiescript_injected" }],
+    "prehideSelectors": ["#cookiescript_injected", ".cookiescript_banner_container [role=dialog]"],
+    "detectCmp": [{ "exists": "#cookiescript_injected, .cookiescript_banner_container" }],
+    "detectPopup": [{ "visible": "#cookiescript_injected, .cookiescript_banner_container [role=dialog]" }],
     "optOut": [
         {
             "if": { "exists": "#cookiescript_reject" },
             "then": [{ "wait": 100 }, { "click": "#cookiescript_reject" }],
             "else": [
-                { "click": "#cookiescript_manage" },
-                { "waitForVisible": ".cookiescript_fsd_main" },
-                { "waitForThenClick": "#cookiescript_reject" }
+                {
+                    "if": { "exists": "#cookiescript_manage" },
+                    "then": [
+                        { "click": "#cookiescript_manage" },
+                        { "waitForVisible": ".cookiescript_fsd_main, #cookiescript_save", "timeout": 3000, "optional": true },
+                        {
+                            "if": { "exists": ".cookiescript_fsd_main" },
+                            "then": [{ "waitForThenClick": "#cookiescript_reject" }],
+                            "else": [
+                                {
+                                    "if": { "visible": "#cookiescript_save" },
+                                    "then": [
+                                        {
+                                            "if": {
+                                                "exists": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled), .cookiescript_banner_container input.cokiescript_checkbox:checked:not(:disabled)"
+                                            },
+                                            "then": [
+                                                {
+                                                    "click": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled), .cookiescript_banner_container input.cokiescript_checkbox:checked:not(:disabled)",
+                                                    "all": true
+                                                }
+                                            ]
+                                        },
+                                        { "waitForThenClick": "#cookiescript_save", "retry": 6, "retryInterval": 1000 }
+                                    ],
+                                    "else": [{ "click": "#cookiescript_close, .cookiescript_close_btn" }]
+                                }
+                            ]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "if": { "exists": "#cookiescript_save" },
+                            "then": [
+                                {
+                                    "click": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled), .cookiescript_banner_container input.cokiescript_checkbox:checked:not(:disabled)",
+                                    "all": true,
+                                    "optional": true
+                                },
+                                { "click": "#cookiescript_save" }
+                            ],
+                            "else": [{ "click": "#cookiescript_close, .cookiescript_close_btn" }]
+                        }
+                    ]
+                }
             ]
         }
     ],

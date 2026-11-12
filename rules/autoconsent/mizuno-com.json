@@ -1,0 +1,13 @@
+{
+    "name": "mizuno.com",
+    "vendorUrl": "https://emea.mizuno.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?mizuno\\.com/"
+    },
+    "prehideSelectors": ["#consent-tracking"],
+    "detectCmp": [{ "exists": "#consent-tracking .btn-necessary" }],
+    "detectPopup": [{ "visible": "#consent-tracking" }],
+    "optIn": [{ "waitForThenClick": "#consent-tracking .btn-all" }],
+    "optOut": [{ "waitForThenClick": "#consent-tracking .btn-necessary" }],
+    "test": [{ "cookieContains": "\"marketingCookie\":false" }]
+}

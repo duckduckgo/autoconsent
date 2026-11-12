@@ -12,8 +12,9 @@ generateCMPTests('TrustArc-top', ['https://www.garmin.com/de-DE/'], {
     skipRegions: ['US'],
 });
 
-generateCMPTests('TrustArc-top', ['https://us.store.bambulab.com/'], {
+// in-page preference center (no "Decline" shortcut on the banner)
+generateCMPTests('TrustArc-top', ['https://www.ea.com/games/it-takes-two/it-takes-two', 'https://www.ea.com/'], {
     testOptOut: true,
-    testSelfTest: false,
-    onlyRegions: ['US'],
+    testOptIn: false,
+    onlyRegions: ['CA', 'AU', 'JP'],
 });

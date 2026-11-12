@@ -1,0 +1,25 @@
+{
+    "name": "onecom-cookie-banner",
+    "cosmetic": true,
+    "prehideSelectors": ["#oc_cb_wrapper"],
+    "detectCmp": [
+        {
+            "exists": "#oc_cb_wrapper #oc_cb_btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#oc_cb_wrapper"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#oc_cb_btn"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#oc_cb_wrapper"
+        }
+    ]
+}

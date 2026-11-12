@@ -1,0 +1,40 @@
+{
+    "name": "schuurman-schoenen",
+    "_metadata": {
+        "vendorUrl": "https://www.schuurman-schoenen.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?schuurman-(schoenen|schuhe)\\.(nl|be|de)/"
+    },
+    "prehideSelectors": [".js-cookie-modal"],
+    "detectCmp": [
+        {
+            "exists": ".js-cookie-modal [data-cookie-button-type=\"rejectCookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-cookie-modal.show-modal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-cookie-modal [data-cookie-button-type=\"useAllCookies\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".js-cookie-modal [data-cookie-button-type=\"configureCookies\"]"
+        },
+        {
+            "waitForThenClick": ".js-cookie-modal [data-cookie-button-type=\"rejectCookies\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "useMarketingCookies=false"
+        }
+    ]
+}

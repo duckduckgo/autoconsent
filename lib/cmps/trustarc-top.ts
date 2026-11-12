@@ -9,8 +9,7 @@ const shortcutOptIn = '#truste-consent-button';
 const popupContent = '#truste-consent-content';
 const bannerOverlay = '#trustarc-banner-overlay';
 const bannerContainer = '#truste-consent-track';
-// preference center opened by the settings button renders into a shadow root
-const settingsOptOut = ['.truste_popframe.trustarc_newcm_container', '.trustarc-declineall-btn, a.required'];
+const prefCenterDeclineAll = ['.truste_popframe.trustarc_newcm_container', 'button[data-button-key="decline_all"]'];
 
 export default class TrustArcTop extends AutoConsentCMPBase {
     name = 'TrustArc-top';
@@ -20,13 +19,15 @@ export default class TrustArcTop extends AutoConsentCMPBase {
         frame: false,
     };
 
-    _optOutDone: boolean;
+    _shortcutButton: HTMLElement | null;
     _optInDone: boolean;
+    _optOutDone: boolean;
 
     constructor(autoconsentInstance: AutoConsent) {
         super(autoconsentInstance);
-        this._optOutDone = false; // indicates if a "reject all" button was clicked
+        this._shortcutButton = null; // indicates if the "reject all" button is detected
         this._optInDone = false;
+        this._optOutDone = false;
     }
 
     get hasSelfTest(): boolean {
@@ -34,10 +35,10 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     }
 
     get isIntermediate(): boolean {
-        if (this._optInDone) {
+        if (this._optInDone || this._optOutDone) {
             return false;
         }
-        return !this._optOutDone;
+        return !this._shortcutButton;
     }
 
     get isCosmetic(): boolean {
@@ -45,7 +46,12 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
-        return this.elementExists(`${cookieSettingsButton},${bannerContainer}`);
+        const result = this.elementExists(`${cookieSettingsButton},${bannerContainer}`);
+        if (result) {
+            // additionally detect the opt-out button
+            this._shortcutButton = document.querySelector(shortcutOptOut);
+        }
+        return result;
     }
 
     async detectPopup() {
@@ -55,23 +61,18 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
     async optOut() {
         if (this.elementExists(shortcutOptOut)) {
-            const shortcutVisible = this.elementVisible(shortcutOptOut, 'any');
-            this._optOutDone = true;
-            await this.click(shortcutOptOut);
-            // a hidden reject button is not always wired up; when it is, the banner is dismissed synchronously
-            if (shortcutVisible || !this.elementExists(`${bannerContainer}.ta-show`)) {
-                return true;
-            }
-            this._optOutDone = false;
+            this.click(shortcutOptOut);
+            return true;
         }
 
         // hide elements permanently, so user doesn't see the popup
         hideElements(getStyleElement(), `.truste_popframe, .truste_overlay, .truste_box_overlay, ${bannerContainer}`);
         await this.click(cookieSettingsButton);
 
-        if (await this.waitForElement(settingsOptOut, 5000)) {
+        // newer versions render the preference center in a shadow root on the main page instead of an iframe
+        if (await this.waitForElement(prefCenterDeclineAll, 3000)) {
             this._optOutDone = true;
-            await this.click(settingsOptOut);
+            await this.click(prefCenterDeclineAll);
         }
 
         // schedule cleanup

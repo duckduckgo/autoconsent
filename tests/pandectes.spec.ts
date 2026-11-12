@@ -4,7 +4,13 @@ generateCMPTests('pandectes', [
     'https://hollandscountryclothing.co.uk/',
     'https://cluse.com/',
     'https://swedishstockings.com/', // full-page overlay ("blocking") banner variant
+    'https://hollandcooper.com/',
 ]);
+
+// "reject all" hidden in preferences; the site reloads after saving, so the self-test cannot run
+generateCMPTests('pandectes', ['https://snocks.com/'], {
+    testSelfTest: false,
+});
 
 // shadow DOM <pandectes-cmp> banner variant
 generateCMPTests(

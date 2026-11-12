@@ -1,0 +1,32 @@
+{
+    "name": "airbnb",
+    "vendorUrl": "https://www.airbnb.com/",
+    "runContext": { "urlPattern": "^https?://(www\\.)?airbnb\\.[a-z.]+/" },
+    "prehideSelectors": ["[data-testid=\"main-cookies-banner-container\"]"],
+    "detectCmp": [
+        { "exists": "[data-testid=\"main-cookies-banner-container\"] section > div > div:nth-child(2) > div:nth-child(2) > button" }
+    ],
+    "detectPopup": [
+        { "visible": "[data-testid=\"main-cookies-banner-container\"] section > div > div:nth-child(2) > div:nth-child(2) > button" }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=\"main-cookies-banner-container\"] section > div > div:nth-child(2) > div:nth-child(1) > button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=\"main-cookies-banner-container\"] section > div > div:nth-child(2) > div:nth-child(2) > button",
+            "retry": 5,
+            "retryInterval": 500,
+            "comment": "Only necessary; retry in case handlers are not attached yet"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "[data-testid=\"main-cookies-banner-container\"] section > div > div:nth-child(2) > div:nth-child(2) > button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

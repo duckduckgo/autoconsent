@@ -1,0 +1,30 @@
+{
+    "name": "lab-network-consent",
+    "vendorUrl": "https://labuitslag.nl/",
+    "prehideSelectors": ["#lab-consent"],
+    "detectCmp": [
+        {
+            "exists": "#lab-consent .lab-consent-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#lab-consent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#lab-consent .lab-consent-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#lab-consent .lab-consent-reject"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "lab_analytics_consent=denied"
+        }
+    ]
+}

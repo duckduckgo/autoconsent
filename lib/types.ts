@@ -81,6 +81,7 @@ export type Config = {
     };
     performanceLoggingEnabled: boolean;
     heuristicPopupSearchTimeout: number;
+    enableHeuristicHitTest: boolean; // hit-test the viewport before the DOM walk, to find popups the walk misses (e.g. not fixed, sticky or dialog-like)
     heuristicMode: HeuristicLevel; // controls the behavior of the heuristic popup detection.
 };
 
@@ -125,7 +126,21 @@ export interface PopupData {
     text: string;
     element: HTMLElement;
     buttons: ButtonData[];
-    regexClassification?: PopupClassification;
+    // from the buttons alone; whether the popup text is consent text is checked separately
+    regexClassification: PopupClassification;
+    // which search found the popup: the DOM walk, the viewport hit test, or the whole document of a frame
+    source?: 'walk' | 'hitTest' | 'frame';
+    // viewport points ([x, y] in CSS px) whose hit test reached this popup
+    hitPoints?: [number, number][];
+}
+
+/**
+ * Points to hit-test: columns are fractions of the viewport width, and rows are distances in px from both the top
+ * and the bottom edge. The middle row of the viewport is always tested.
+ */
+export interface HitTestGrid {
+    columns: number[];
+    edgeRows: number[];
 }
 
 /**

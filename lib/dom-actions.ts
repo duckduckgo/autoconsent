@@ -26,7 +26,11 @@ export class DomActions implements DomActionsProvider {
 
         if (elements.length > 0) {
             if (all) {
-                elements.forEach((e) => e.click());
+                for (const e of elements) {
+                    e.click();
+                    // Let the page handle each click first: back-to-back clicks can overwrite each other's state updates.
+                    await new Promise((resolve) => setTimeout(resolve, 0));
+                }
             } else {
                 elements[0].click();
             }

@@ -1,0 +1,35 @@
+{
+    "name": "pigu",
+    "vendorUrl": "https://pigugroup.eu/",
+    "detectCmp": [
+        {
+            "exists": "#consent_block[widget=\"CookieTracker\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent_block [widget-attachpoint=\"basicAgree\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consent_block [widget-attachpoint=\"agree\"]",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#consent_block [widget-attachpoint=\"basicAgree\"]",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#consent_block [widget-attachpoint=\"basicAgree\"]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "name": "ccm19",
+    "vendorUrl": "https://www.ccm19.de/",
+    "prehideSelectors": ["#ccm-widget.ccm-show"],
+    "detectCmp": [
+        {
+            "any": [{ "exists": "#ccm-widget" }, { "exists": "script[src*='ccm19'][src*='/app.js?apiKey=']" }],
+            "comment": "the widget is injected late, so detect the loader too"
+        }
+    ],
+    "detectPopup": [{ "visible": "#ccm-widget.ccm-show" }],
+    "optIn": [{ "waitForThenClick": "#ccm-widget .ccm--save-settings[data-full-consent='true']" }],
+    "optOut": [
+        {
+            "if": { "exists": "#ccm-widget .ccm--decline-cookies" },
+            "then": [{ "waitForThenClick": "#ccm-widget .ccm--decline-cookies" }],
+            "else": [
+                { "waitForThenClick": "#ccm-widget [data-ccm-modal='ccm-control-panel']" },
+                { "waitForThenClick": "#ccm-control-panel .ccm--save-settings:not([data-full-consent='true'])" }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#ccm-widget.ccm-show",
+            "timeout": 2000,
+            "check": "none",
+            "comment": "consent is stored in a cookie or localStorage depending on setup"
+        }
+    ]
+}
