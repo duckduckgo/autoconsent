@@ -1,0 +1,33 @@
+{
+    "name": "doc24-ch",
+    "vendorUrl": "https://www.doc24.ch/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?doc24\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".c-notice + .cursor-pointer"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".c-notice + .cursor-pointer"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".c-notice + .cursor-pointer"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".c-notice + .cursor-pointer"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "EU_COOKIES_CONSENT=true"
+        }
+    ]
+}
