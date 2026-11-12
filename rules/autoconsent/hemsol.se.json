@@ -1,0 +1,22 @@
+{
+    "name": "hemsol.se",
+    "vendorUrl": "https://hemsol.se/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?hemsol\\.se/"
+    },
+    "prehideSelectors": [".popup-background[data-popup='consent']"],
+    "detectCmp": [{ "exists": ".popup-background[data-popup='consent'] .popup-manage-consent .save-settings" }],
+    "detectPopup": [{ "visible": ".popup-background[data-popup='consent']:not(.hidden) .popup-consent" }],
+    "optIn": [{ "waitForThenClick": ".popup-background[data-popup='consent'] .popup-consent .accept-cookies" }],
+    "optOut": [
+        { "waitForThenClick": ".popup-background[data-popup='consent'] .popup-consent .manage-cookies" },
+        { "waitForVisible": ".popup-background[data-popup='consent'] .popup-manage-consent .save-settings" },
+        {
+            "click": ".popup-background[data-popup='consent'] .popup-manage-consent input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": ".popup-background[data-popup='consent'] .popup-manage-consent .save-settings" }
+    ],
+    "test": [{ "cookieContains": "hemsol-consent-marketing=false" }]
+}
