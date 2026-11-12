@@ -1115,6 +1115,10 @@ export const ACKNOWLEDGE_PATTERNS = [
     /^\s*(подтвер(дить|ждаю|ждени[а-яё]*)|сохран(ить|яю|ение))([\s-]+(мой|мои|моё|свой|свои|своё)?[\s-]*(выбор[а-яё]*|настройк[а-яё]*|парамет[а-яё]*|предпочтени[а-яё]*|согласи[а-яё]*))?([\s-]+и[\s-]+(закрыть|продолжить))?\s*$/is,
     'продолжить',
 
+    // Italian (IT)
+    // e.g. "chiudi", "chiudi i cookies", "chiudi il banner"; not "accetta e chiudi" or "chiudi e accetta"
+    /^chiudi( (il |la |i |questo |questa |l)?(banner|avviso|messaggio|informativa|finestra|barra|cookies?))?[ .!]*$/is,
+
     // Japanese (JA)
     // e.g. "閉じる" (close), "確認" / "確認しました" (confirmed), "了解" (understood), "確認して閉じる";
     // not "同意して閉じる" (agree and close) or the verb "確認する" (confirm)
