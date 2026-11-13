@@ -698,7 +698,7 @@ export const BUTTON_NEVER_MATCH_PATTERNS = [
     /sin cookies .{0,10}euro/s,
 
     // Polish (PL)
-    /subskrybuj/,
+    /subskrybuj|subskrypcj/,
 
     // Russian (RU): paywall/subscription wording, e.g. "отказаться от подписки", "оплатить"
     /подписатьс|подписк|оплатит|оплачива/is,
@@ -1051,7 +1051,7 @@ export const ACKNOWLEDGE_PATTERNS = [
     /^(ok|okay|oké|okey|k)([ .!,]*)(got it|verstanden|compris|rozumiem|thanks|gracias|ik begrijp( dat| het)?|continue to website|pour moi|fermer)?[ .!]*$/is,
 
     // "understood" / "got it" / "that's ok" (multilingual)
-    /^(i understand|understood|got it|thats (ok|fine|okay)|alright|alles klar|in ordnung|verstanden|begrepen|jai compris|je comprends|compris|ik begrijp het|ik snap het|entendido|c(e)?st ok pour moi)[ !.,]*(merci|bedankt|dismiss this banner)?[ !.]*$/is,
+    /^(i understand|understood|got it|thats (ok|fine|okay)|alright|alles klar|in ordnung|verstanden|ich verstehe|ho capito|jag förstår|begrepen|jai compris|je comprends|compris|ik begrijp het|ik snap het|entendido|c(e)?st ok pour moi)[ !.,]*(merci|bedankt|dismiss this banner)?[ !.]*$/is,
 
     // confirm
     /^(confirm|bestätigen|bevestigen|confirmar|potwierdź)[ !.]*$/is,
