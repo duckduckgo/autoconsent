@@ -144,6 +144,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     VERWENDUNG_VON_COOKIES,
     /wir.{0,100}nutzen.{0,100}cookies/gi,
     /verwendet.{0,100}cookies/gi,
+    /nutzt.{0,100}cookies/gi,
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
     /und.{0,100}ähnliche.{0,100}technologien/gi,
     /cookies.{0,100}wir.{0,100}verwenden/gi,
@@ -476,6 +477,9 @@ const REJECT_PATTERNS_GERMAN = [
     // essential/necessary/functional-only variants (accepting only necessary → reject)
     /^\s*(nur|ausschließlich|lediglich|weiter\s+mit|mit|akzeptiere?n?|unbedingt|es\s+werden\s+nur)?\s*(technisch\s+)?(notwendige?[nrs]?|essenzielle?[nrs]?|essentielle?[nrs]?|erforderliche?[nrs]?|funktionale?[nrs]?|funktionelle?[nrs]?|wesentliche?[nrs]?)\s*(cookies?|technologien|funktionscookies|dienste)?\s*(akzeptieren|erlauben|zulassen|verwenden|annehmen|setzen|speichern|zustimmen|auswählen)?\.?\s*$/is,
 
+    // continue with only necessary/functional cookies
+    /^(weiter\s+|nur\s+)?mit\s+(nur\s+|ausschließlich\s+|lediglich\s+)?(den\s+)?(technisch\s+)?(notwendigen|essenziellen|essentiellen|erforderlichen|funktionalen|funktionellen)\s+(cookies\s+)?fortfahren\.?$/is,
+
     // continue without consent
     /(^|\s)(ohne\s+(zu\s+)?(einwilligung|zustimmung|einverständnis|annahme|annehmen|akzeptanz|akzeptieren)|(weiter|fortfahren)\s+ohne)/is,
 
@@ -487,8 +491,6 @@ const REJECT_PATTERNS_GERMAN = [
     'nicht einverstanden',
     'ich lehne ab',
     'mit erforderlichen einstellungen fortfahren',
-    'mit erforderlichen cookies fortfahren',
-    'mit notwendigen fortfahren',
 ];
 
 const REJECT_PATTERNS_ITALIAN = [
