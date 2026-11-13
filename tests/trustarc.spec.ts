@@ -18,3 +18,10 @@ generateCMPTests('TrustArc-top', ['https://www.ea.com/games/it-takes-two/it-take
     testOptIn: false,
     onlyRegions: ['CA', 'AU', 'JP'],
 });
+
+// banner with a hidden, unwired "Reject All" shortcut (implied-consent regions)
+generateCMPTests('TrustArc-top', ['https://us.store.bambulab.com/'], {
+    testOptOut: true,
+    testSelfTest: false,
+    onlyRegions: ['US'],
+});
