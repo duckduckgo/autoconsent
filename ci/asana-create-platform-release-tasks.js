@@ -14,7 +14,7 @@ const match = regex.exec(RELEASE_TASK_URL);
 const releaseTaskGid = match?.groups?.task;
 
 /**
- * @typedef {{taskGid: string, taskUrl: string, displayName: string}} platformData
+ * @typedef {{taskGid: string, taskUrl: string, displayName: string, deferredProjects?: string}} platformData
  *
  * @typedef {{
  *   android: platformData,
@@ -55,6 +55,10 @@ const selectedPlatforms = {
     windows: process.env.PLATFORM_WINDOWS === 'true',
     extension: process.env.PLATFORM_EXTENSION === 'true',
 };
+
+// The Apple PR is not ready until the embedded extension release adds the zip,
+// so that workflow adds the Apple task to its projects instead.
+const deferAppleProjects = process.env.PLATFORM_APPLE_EMBEDDED === 'true';
 
 const setupAsana = () => {
     return Asana.Client.create({
@@ -123,7 +127,10 @@ async function main() {
         console.error(`updating task ${gid} with name "${newName}"`);
         await asana.tasks.updateTask(gid, { name: newName, html_notes: subtaskNotes });
 
-        if (extractedProjects) {
+        if (extractedProjects && platform === 'apple' && deferAppleProjects) {
+            console.error(`deferring projects ${extractedProjects} for task ${gid}`);
+            platforms.apple.deferredProjects = extractedProjects;
+        } else if (extractedProjects) {
             console.error(`adding projects ${extractedProjects} to task ${gid}`);
             for (const projectGidAndSection of extractedProjects.split(',')) {
                 const [projectGid, sectionGid] = projectGidAndSection.split(':');
