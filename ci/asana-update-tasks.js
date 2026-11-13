@@ -20,6 +20,19 @@ const setupAsana = () => {
     }).useAccessToken(ASANA_ACCESS_TOKEN);
 };
 
+/**
+ * @param {{taskGid: string, deferredProjects?: string}} platformObj
+ */
+const addDeferredProjects = async ({ taskGid, deferredProjects }) => {
+    if (!deferredProjects) {
+        return;
+    }
+    for (const projectGidAndSection of deferredProjects.split(',')) {
+        const [projectGid, sectionGid] = projectGidAndSection.split(':');
+        await asana.tasks.addProjectForTask(taskGid, { project: projectGid, section: sectionGid });
+    }
+};
+
 const asanaUpdateTasks = async () => {
     let asanaOutput;
     try {
@@ -46,12 +59,13 @@ const asanaUpdateTasks = async () => {
             console.error(`Skipping ${platformName} PR URL update - no PR URL`);
         }
 
-        // Notify the Apple DRIs that the Apple PR will be updated once the extension PR is merged
+        // The Apple task is added to its projects when the extension PR is merged and the embedded ZIP is added
         if (platformName === 'apple' && process.env.APPLE_EMBEDDED === 'true') {
             const extensionPrUrl = prUrls.extension;
-            let note = `This PR is in DRAFT and has the "DO NOT MERGE" label. Do not merge it yet. The embedded ZIP will be added once the extension PR is merged: ${extensionPrUrl}`;
+            let note = `This PR is in DRAFT and has the "DO NOT MERGE" label. The embedded ZIP will be added once the extension PR is merged: ${extensionPrUrl}. This task will then be added to the Apple projects.`;
             if (!extensionPrUrl) {
                 note = 'Extension PR URL is not found. CPM DRI, please check the PR, mark it as ready and remove the "DO NOT MERGE" label.';
+                await addDeferredProjects(platformObj);
             }
             await asana.stories.createStoryForTask(platformObj.taskGid, { text: note });
         }

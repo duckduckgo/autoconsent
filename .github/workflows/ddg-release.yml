@@ -103,6 +103,7 @@ jobs:
                   ASANA_ACCESS_TOKEN: ${{ secrets.ASANA_ACCESS_TOKEN }}
                   PLATFORM_ANDROID: ${{ inputs.android }}
                   PLATFORM_APPLE: ${{ inputs.apple || inputs.apple_embedded }}
+                  PLATFORM_APPLE_EMBEDDED: ${{ inputs.apple_embedded }}
                   PLATFORM_WINDOWS: ${{ inputs.windows }}
                   PLATFORM_EXTENSION: ${{ inputs.extension || inputs.apple_embedded }}
               run: |
