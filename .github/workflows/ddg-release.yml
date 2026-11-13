@@ -243,8 +243,9 @@ jobs:
                   branch: update-autoconsent
                   title: Update autoconsent to ${{ env.TAG }}
                   body: '${{ env.PR_BODY_APPLE }}'
-                  # the PR will be marked ready when the extension PR is merged
+                  # the PR will be marked ready and unlabelled when the extension PR is merged
                   draft: ${{ inputs.apple_embedded }}
+                  labels: ${{ inputs.apple_embedded && 'DO NOT MERGE' || '' }}
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
     # ------------------------------------------------------------------------------
