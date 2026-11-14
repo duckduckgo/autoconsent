@@ -1,3 +1,16 @@
+# v18.5.0 (Sat Nov 14 2026)
+
+#### CI / Release Automation
+
+- Mark Apple embedded release PR as DO NOT MERGE and delay its Asana task [#2651](https://github.com/duckduckgo/autoconsent/pull/2651) ([@claude](https://github.com/claude) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Claude ([@claude](https://github.com/claude))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v18.4.0 (Fri Nov 13 2026)
 
 #### Rules
