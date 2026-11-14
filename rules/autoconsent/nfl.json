@@ -1,0 +1,20 @@
+{
+    "name": "nfl",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(nfl|49ers|atlantafalcons|azcardinals|baltimoreravens|bengals|buccaneers|buffalobills|chargers|chicagobears|chiefs|clevelandbrowns|colts|commanders|dallascowboys|denverbroncos|detroitlions|giants|houstontexans|jaguars|miamidolphins|neworleanssaints|newyorkjets|packers|panthers|patriots|philadelphiaeagles|raiders|seahawks|steelers|tennesseetitans|therams|vikings)\\.com/"
+    },
+    "prehideSelectors": ["#onetrust-banner-sdk"],
+    "detectCmp": [{ "exists": "body[class*='nfl-is-'] #onetrust-banner-sdk" }],
+    "detectPopup": [{ "visible": "#onetrust-banner-sdk" }],
+    "optIn": [
+        { "waitForVisible": "#onetrust-accept-btn-handler", "timeout": 5000 },
+        { "eval": "EVAL_NFL_ONETRUST_ALLOW_ALL", "optional": true },
+        { "waitForVisible": "#onetrust-banner-sdk", "timeout": 5000, "check": "none" }
+    ],
+    "optOut": [
+        { "waitForVisible": "#onetrust-reject-all-handler", "timeout": 5000 },
+        { "eval": "EVAL_NFL_ONETRUST_REJECT_ALL", "optional": true },
+        { "waitForVisible": "#onetrust-banner-sdk", "timeout": 5000, "check": "none" }
+    ],
+    "test": [{ "eval": "EVAL_ONETRUST_1" }]
+}
