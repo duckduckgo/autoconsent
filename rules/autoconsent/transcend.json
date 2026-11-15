@@ -1,17 +1,23 @@
 {
     "name": "transcend",
-    "vendorUrl": "https://unknown",
+    "vendorUrl": "https://transcend.io/",
     "cosmetic": true,
-    "minimumRuleStepVersion": 2,
+    "comment": "Transcend airgap ignores untrusted clicks, so the banner is closed via the UI API once it opens (after page load). Hiding the host would also block the site's own privacy-choices links.",
     "prehideSelectors": ["#transcend-consent-manager"],
     "detectCmp": [
         {
             "exists": "#transcend-consent-manager"
+        },
+        {
+            "eval": "EVAL_TRANSCEND_SHOWN"
         }
     ],
     "detectPopup": [
         {
             "visible": "#transcend-consent-manager"
+        },
+        {
+            "eval": "EVAL_TRANSCEND_SHOWN"
         }
     ],
     "optIn": [
@@ -21,8 +27,7 @@
     ],
     "optOut": [
         {
-            "setStyle": "display: none !important; z-index: -1 !important; pointer-events: none !important;",
-            "selector": "#transcend-consent-manager"
+            "eval": "EVAL_TRANSCEND_HIDE"
         }
     ]
 }

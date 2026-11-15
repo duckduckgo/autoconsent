@@ -287,6 +287,17 @@ export const snippets = {
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
     EVAL_THEFREEDICTIONARY_0: () => cmpUi.showPurposes() || cmpUi.rejectAll() || true,
     EVAL_THEFREEDICTIONARY_1: () => cmpUi.allowAll() || true,
+    // the UI host is fixed-position and always present, so ask Transcend whether a view is open
+    EVAL_TRANSCEND_SHOWN: () => {
+        const state = window.transcend?.getViewState?.();
+        // before the UI loads, getViewState() is a stub returning a promise
+        return typeof state === 'string' && !['Hidden', 'Collapsed', 'Closed'].includes(state);
+    },
+    EVAL_TRANSCEND_HIDE: () => {
+        // hideConsentManager() returns a promise that resolves to undefined
+        window.transcend.hideConsentManager();
+        return true;
+    },
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
     EVAL_USERCENTRICS_API_1: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_2: () => !!UC_UI.denyAllConsents(),
