@@ -194,6 +194,8 @@ export const snippets = {
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
     EVAL_KROWN_COOKIE_BANNER_TEST: () => localStorage.getItem('krown-cookie-banner') === 'true',
+    // the embedded preferences page saves its toggles when it receives this message
+    EVAL_MERCADOLIBRE_SAVE: () => window.postMessage({ eventName: 'saveCookiesPreference' }, '*') || true,
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]
