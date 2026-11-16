@@ -109,6 +109,17 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with "cookies, and other technologies"', () => {
+    it('detects the serial comma before "and"', () => {
+        const text = 'If you choose to use data, cookies, and other tracking technologies, we will be able to remember your web browser.';
+        expect(checkHeuristicPatterns(text, 'popup').patterns.length).to.be.greaterThan(0);
+    });
+
+    it('does not match without "technologies"', () => {
+        expect(checkHeuristicPatterns('Bake cookies, and other treats, with our recipes.', 'popup').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [

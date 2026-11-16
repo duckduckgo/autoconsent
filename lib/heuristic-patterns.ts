@@ -50,7 +50,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     USE_OF_COOKIES,
     /website uses cookies to enhance your browsing experience/gi,
     /(?:this|our) (?:web)?site.{0,100}cookies/gi,
-    /cookies (?:and|or) .{0,100} technologies/gi,
+    /cookies,? (?:and|or) .{0,100} technologies/gi,
     /such as cookies/gi,
     /read more about.{0,100}cookies/gi,
     /consent to.{0,100}cookies/gi,
