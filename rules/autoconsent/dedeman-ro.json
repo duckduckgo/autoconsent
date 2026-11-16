@@ -1,0 +1,12 @@
+{
+    "name": "dedeman.ro",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?dedeman\\.ro/"
+    },
+    "prehideSelectors": ["#notice-cookie-block"],
+    "detectCmp": [{ "exists": "#notice-cookie-block .reject-cookies-button" }],
+    "detectPopup": [{ "visible": "#notice-cookie-block" }],
+    "optIn": [{ "waitForThenClick": "#notice-cookie-block .accept-cookies-button" }],
+    "optOut": [{ "waitForThenClick": "#notice-cookie-block .reject-cookies-button" }],
+    "test": [{ "cookieContains": "DDM2_cookie_management=%7B%22statistics%22%3A0%2C%22comfort%22%3A0" }]
+}
