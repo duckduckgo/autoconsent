@@ -1,0 +1,18 @@
+{
+    "name": "consentin",
+    "vendorUrl": "https://www.consent.in/",
+    "runContext": {
+        "urlPattern": "^https://(sandbox-)?collector\\.consent\\.in/cookie-center",
+        "main": false,
+        "frame": true
+    },
+    "prehideSelectors": [".cookie-main-modal"],
+    "detectCmp": [{ "exists": ".cookie-main-modal" }],
+    "detectPopup": [{ "visible": ".cookie-main-modal" }],
+    "optIn": [{ "waitForThenClick": ".cookie-main-modal .modal-content button.btn-primary" }],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-main-modal .modal-content button.btn-secondary:has(+ button.btn-primary), .cookie-main-modal .modal-content button.btn-primary + button.btn-secondary"
+        }
+    ]
+}
