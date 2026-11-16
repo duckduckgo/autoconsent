@@ -1,0 +1,27 @@
+{
+    "name": "huawei-cookie-notice",
+    "runContext": {
+        "urlPattern": "^https?://consumer\\.huawei\\.com/"
+    },
+    "prehideSelectors": [".huawei-bootom-cookie"],
+    "detectCmp": [
+        {
+            "exists": ".huawei-bootom-cookie .huawei-cookie-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".huawei-bootom-cookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".huawei-bootom-cookie .huawei-cookie-close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".huawei-bootom-cookie .huawei-cookie-close"
+        }
+    ]
+}
