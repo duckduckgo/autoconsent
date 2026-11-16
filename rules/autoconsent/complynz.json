@@ -1,0 +1,10 @@
+{
+    "name": "complynz",
+    "vendorUrl": "https://complynz.com/",
+    "prehideSelectors": ["#complynz-consent-banner.cz-overlay"],
+    "detectCmp": [{ "exists": "#complynz-consent-banner.cz-overlay" }],
+    "detectPopup": [{ "visible": "#complynz-consent-banner.cz-overlay" }],
+    "optIn": [{ "waitForThenClick": "#complynz-consent-banner [data-cz-action=accept]" }],
+    "optOut": [{ "waitForThenClick": "#complynz-consent-banner [data-cz-action=reject]" }],
+    "test": [{ "eval": "EVAL_COMPLYNZ_TEST" }]
+}
