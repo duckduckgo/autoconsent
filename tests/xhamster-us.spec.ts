@@ -8,6 +8,7 @@ generateCMPTests(
         'https://xhamster3.com/',
         'https://www.xhamster.com/',
         'https://www.xhamster2.com/',
+        'https://vi.xhspot.com/',
     ],
     {
         onlyRegions: ['US'],
