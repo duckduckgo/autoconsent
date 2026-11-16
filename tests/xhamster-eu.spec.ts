@@ -8,6 +8,7 @@ generateCMPTests(
         'https://xhamster3.com/',
         'https://www.xhamster.com/',
         'https://www.xhamster2.com/',
+        'https://id.xhsocial.com/',
     ],
     {
         onlyRegions: ['GB', 'DE', 'FR', 'NL', 'CH', 'NO', 'IT', 'ES', 'PL', 'SE', 'DK'],

@@ -1,12 +1,9 @@
 {
     "name": "xhamster-us",
-    "runContext": {
-        "urlPattern": "^https://(\\w+\\.)?xhamster\\d?\\.com"
-    },
     "cosmetic": true,
-    "prehideSelectors": ["[class*=cookiesAnnounce]"],
-    "detectCmp": [{ "exists": "[class*=cookiesAnnounce]" }],
-    "detectPopup": [{ "visible": "[class*=cookiesAnnounce] [class*=announceText]" }],
-    "optIn": [{ "click": "[class*=cookiesAnnounce] button[class*=closeButton]" }],
-    "optOut": [{ "hide": "[class*=cookiesAnnounce]" }]
+    "prehideSelectors": ["[data-role=\"cookies-modal\"] [class*=cookiesAnnounce]"],
+    "detectCmp": [{ "exists": "[data-role=\"cookies-modal\"] [class*=cookiesAnnounce]" }],
+    "detectPopup": [{ "visible": "[data-role=\"cookies-modal\"] [class*=cookiesAnnounce] [class*=announceText]" }],
+    "optIn": [{ "click": "[data-role=\"cookies-modal\"] [class*=cookiesAnnounce] button[class*=closeButton]" }],
+    "optOut": [{ "hide": "[data-role=\"cookies-modal\"] [class*=cookiesAnnounce]" }]
 }
