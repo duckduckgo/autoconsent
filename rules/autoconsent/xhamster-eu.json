@@ -1,7 +1,7 @@
 {
     "name": "xhamster-eu",
     "runContext": {
-        "urlPattern": "^https://(\\w+\\.)?xhamster\\d?\\.com"
+        "urlPattern": "^https://(\\w+\\.)?(xhamster\\d?|xhfanclub)\\.com/"
     },
     "prehideSelectors": ["[data-role=\"cookies-modal\"]"],
     "detectCmp": [{ "exists": "[data-role=\"cookies-modal\"] [data-opt-hydration=\"cookies-dialog-eu\"]" }],
