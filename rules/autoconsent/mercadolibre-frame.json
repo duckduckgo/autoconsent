@@ -1,0 +1,19 @@
+{
+    "name": "mercadolibre-frame",
+    "vendorUrl": "https://www.mercadolibre.com/",
+    "intermediate": true,
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://[^/]+\\.mercado(?:libre|livre|pago)\\.[a-z.]+/privacy-preferences/cookies\\?mode=embed"
+    },
+    "detectCmp": [{ "exists": ".pp-cookies-container input[role=switch]" }],
+    "detectPopup": [{ "visible": ".pp-cookies-container" }],
+    "optIn": [{ "waitFor": ".pp-cookies-container input[role=switch]:enabled" }, { "eval": "EVAL_MERCADOLIBRE_SAVE" }],
+    "optOut": [
+        { "waitFor": ".pp-cookies-container input[role=switch]:enabled", "timeout": 15000 },
+        { "click": ".pp-cookies-container input[role=switch]:checked", "all": true, "optional": true },
+        { "exists": ".pp-cookies-container input[role=switch]:checked", "negated": true },
+        { "eval": "EVAL_MERCADOLIBRE_SAVE" }
+    ]
+}
