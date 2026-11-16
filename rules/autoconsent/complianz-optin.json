@@ -1,8 +1,14 @@
 {
     "name": "Complianz optin",
     "prehideSelectors": [".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]"],
-    "detectCmp": [{ "exists": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" }],
-    "detectPopup": [{ "visible": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible)" }],
+    "detectCmp": [
+        { "exists": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]:not([aria-label=\"Clarip Cookie Consent Banner\"])" }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible):not([aria-label=\"Clarip Cookie Consent Banner\"])"
+        }
+    ],
     "optIn": [
         {
             "any": [{ "click": ".cc-accept-all" }, { "click": ".cc-allow" }, { "click": ".cc-dismiss" }]

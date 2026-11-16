@@ -115,6 +115,19 @@ export const snippets = {
             ),
         ).consents.statistics,
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
+    // saves the CMP's own "always active" (necessary only) value, as its dismiss/deny/GPC handlers do
+    EVAL_CLARIP_OPT_OUT: () => {
+        const m = window.claripCookieManager;
+        if (!m || typeof m.saveCookiePreferences !== 'function' || !m.$cookieAlwaysActiveValue) {
+            return false;
+        }
+        m.saveCookiePreferences('banner', m.$cookieAlwaysActiveValue);
+        return true;
+    },
+    EVAL_CLARIP_TEST: () => {
+        const m = window.claripCookieManager;
+        return !!m && !!m.$cookieAlwaysActiveValue && m.getCookie(m.$claripCookieName) === m.$cookieAlwaysActiveValue;
+    },
     EVAL_COINBASE_0: () =>
         JSON.parse(decodeURIComponent(document.cookie.match(/cm_(eu|default)_preferences=([0-9a-zA-Z\\{\\}\\[\\]%:]*);?/)[2])).consent
             .length <= 1,

@@ -1,0 +1,15 @@
+{
+    "name": "clarip",
+    "prehideSelectors": [".cc-window.cc-type-opt-in[aria-label=\"Clarip Cookie Consent Banner\"]"],
+    "detectCmp": [{ "exists": ".cc-window.cc-type-opt-in[aria-label=\"Clarip Cookie Consent Banner\"]" }],
+    "detectPopup": [{ "visible": ".cc-window.cc-type-opt-in[aria-label=\"Clarip Cookie Consent Banner\"]:not(.cc-invisible)" }],
+    "optIn": [{ "waitForThenClick": ".cc-window[aria-label=\"Clarip Cookie Consent Banner\"] .cc-allow" }],
+    "optOut": [
+        {
+            "if": { "visible": ".cc-window[aria-label=\"Clarip Cookie Consent Banner\"] .cc-dismiss" },
+            "then": [{ "click": ".cc-window[aria-label=\"Clarip Cookie Consent Banner\"] .cc-dismiss" }],
+            "else": [{ "eval": "EVAL_CLARIP_OPT_OUT" }, { "hide": ".cc-window[aria-label=\"Clarip Cookie Consent Banner\"]" }]
+        }
+    ],
+    "test": [{ "eval": "EVAL_CLARIP_TEST" }]
+}
