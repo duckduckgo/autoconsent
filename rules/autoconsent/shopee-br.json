@@ -1,0 +1,60 @@
+{
+    "name": "shopee-br",
+    "vendorUrl": "https://shopee.com.br/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?shopee\\.com\\.br/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#main div:has(> div > div > a[href*=\"/portal/article/\"]):has(> div > button + button), #main div:has(> div > a[href*=\"/portal/article/\"]):has(> div > div + div > button)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#main div:has(> div > div > a[href*=\"/portal/article/\"]):has(> div > button + button), #main div:has(> div > a[href*=\"/portal/article/\"]):has(> div > div + div > button)",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#main div:has(> div > div > a[href*=\"/portal/article/\"]):has(> div > button + button) > div > button:last-child, #main div:has(> div > a[href*=\"/portal/article/\"]):has(> div > div + div > button) > div > div:last-child button"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#main div:has(> div > div > a[href*=\"/portal/article/\"]):has(> div > button + button)" },
+            "then": [
+                { "waitForThenClick": "#main div:has(> div > div > a[href*=\"/portal/article/\"]) > div > button:first-child" },
+                { "waitForVisible": "aside[role=\"dialog\"] [role=\"option_with_suboption\"]" },
+                {
+                    "if": { "exists": "aside[role=\"dialog\"] label > input[type=\"checkbox\"] + div[class*=\" \"]" },
+                    "then": [{ "click": "aside[role=\"dialog\"] label" }]
+                },
+                {
+                    "waitForVisible": "aside[role=\"dialog\"] label > input[type=\"checkbox\"] + div[class*=\" \"]",
+                    "check": "none",
+                    "timeout": 2000
+                },
+                { "click": "aside[role=\"dialog\"] button + button" },
+                {
+                    "waitForVisible": "#main div:has(> div > div > a[href*=\"/portal/article/\"]) > div > button",
+                    "check": "none",
+                    "timeout": 3000
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#main div:has(> div > a[href*=\"/portal/article/\"]):has(> div > div + div > button) > div > div:first-child"
+                },
+                { "waitFor": "#main label[for]:has(+ div > input[type=\"checkbox\"])", "timeout": 5000 },
+                {
+                    "if": { "exists": "#main label[for] + div > input[type=\"checkbox\"]:checked" },
+                    "then": [{ "click": "#main label[for]:has(+ div > input[type=\"checkbox\"])" }]
+                },
+                { "waitForVisible": "#main label[for] + div > input[type=\"checkbox\"]:checked", "check": "none", "timeout": 2000 },
+                { "click": "#main div:has(> a[href*=\"/portal/article/\"]) + div > button" }
+            ]
+        }
+    ]
+}
