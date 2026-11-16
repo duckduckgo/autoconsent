@@ -306,6 +306,39 @@ describe('getPotentialPopups', () => {
             const popups = inContainer(getActionablePopups('tier2', 1000));
             expect(popups).to.have.length(0);
         });
+
+        it('keeps a consent banner inside a wrapper that another fragment expands to, when the wrapper is excluded', () => {
+            // the fixed nav link climbs to the page wrapper, whose age wording excludes it as a consent popup
+            container.innerHTML = `
+                <div id="wrapper">
+                    <nav><a id="home" href="#" style="position: fixed; top: 0;">Home</a></nav>
+                    <p>Players must be 18 years or older. Please gamble responsibly.</p>
+                    <div id="banner" style="position: fixed; bottom: 0;">
+                        <span>We use cookies to provide you with a great user experience.</span>
+                        <button>Got it</button>
+                    </div>
+                </div>
+            `;
+            const ids = inContainer(getPotentialPopups(1000)).map((p) => p.element.id);
+            expect(ids).to.include('wrapper');
+            expect(ids).to.include('banner');
+            const actionable = inContainer(getActionablePopups('tier1', 1000));
+            expect(actionable.map((p) => p.element.id)).to.deep.equal(['banner']);
+        });
+
+        it('still replaces a banner inside a wrapper that is a consent popup itself', () => {
+            container.innerHTML = `
+                <div id="wrapper">
+                    <nav><a id="home" href="#" style="position: fixed; top: 0;">Home</a></nav>
+                    <div id="banner" style="position: fixed; bottom: 0;">
+                        <span>We use cookies to provide you with a great user experience.</span>
+                        <button>Got it</button>
+                    </div>
+                </div>
+            `;
+            const ids = inContainer(getPotentialPopups(1000)).map((p) => p.element.id);
+            expect(ids).to.deep.equal(['wrapper']);
+        });
     });
     describe('banners in the normal page flow', () => {
         const IN_FLOW_BANNER = `

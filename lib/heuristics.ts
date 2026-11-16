@@ -134,8 +134,13 @@ function collectPositionedPopups(deadline: number): PopupData[] {
         root.source = 'walk';
         potentialPopups.push(root);
     }
-    // a fragment expanded to its popup root replaces any other candidates inside that root
-    return potentialPopups.filter((p) => !expanded.some((root) => root !== p.element && composedContains(root, p.element)));
+    // a fragment expanded to its popup root replaces any other candidates inside that root, unless the root is not a
+    // consent popup and the candidate is one (such as a cookie banner inside a page wrapper that the climb reached)
+    const roots = potentialPopups.filter((p) => expanded.includes(p.element));
+    return potentialPopups.filter(
+        (p) =>
+            !roots.some((root) => root !== p && composedContains(root.element, p.element) && (isConsentPopup(root) || !isConsentPopup(p))),
+    );
 }
 
 const DEFAULT_HIT_TEST_GRID: HitTestGrid = {
