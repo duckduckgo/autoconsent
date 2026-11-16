@@ -1,0 +1,22 @@
+{
+    "name": "clicks.co.za",
+    "vendorUrl": "https://clicks.co.za/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?clicks\\.co\\.za/"
+    },
+    "prehideSelectors": [".cookieNotificationContainer"],
+    "detectCmp": [{ "exists": "#cookie-banner #manage-cookies" }],
+    "detectPopup": [{ "visible": "#cookie-banner #manage-cookies" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner #accept-all" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-banner #manage-cookies" },
+        { "waitForVisible": "#cookie-modal #save-preferences" },
+        {
+            "comment": "the reject-all button toggles: it unchecks everything only while a toggle is still checked",
+            "if": { "exists": "#cookie-modal .toggle:checked" },
+            "then": [{ "click": "#cookie-modal .reject-all" }]
+        },
+        { "waitForThenClick": "#cookie-modal #save-preferences" }
+    ],
+    "test": [{ "cookieContains": "%22analytics_storage%22%3Afalse" }]
+}
