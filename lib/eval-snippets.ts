@@ -179,6 +179,11 @@ export const snippets = {
     // turn the single-button form into a decline submission, same fields as the CMP's own decline form
     EVAL_EE_CONSENT_DECLINE_0: () =>
         document.querySelectorAll('#cookieConsentFormAccept input[name^="ee:cookies_"]').forEach((i) => (i.value = 'n')) || true,
+    // Without a save-preferences button, the agree button only accepts the checked categories
+    EVAL_EU_COOKIE_COMPLIANCE_AGREE_SAVES_SELECTION: () => {
+        const settings = window.drupalSettings?.eu_cookie_compliance ?? window.Drupal?.settings?.eu_cookie_compliance;
+        return settings?.method === 'categories' && !settings.enable_save_preferences_button;
+    },
     EVAL_ETSY_0: () =>
         document.querySelectorAll('.gdpr-overlay-body input').forEach((toggle) => {
             toggle.checked = false;
