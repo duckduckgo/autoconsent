@@ -87,6 +87,7 @@ export const snippets = {
         }
         return false;
     },
+    EVAL_MERCADOLIBRE_SAVE: () => window.postMessage({ eventName: 'saveCookiesPreference' }, '*') || true,
     EVAL_ONETRUST_1: () => window.OnetrustActiveGroups.split(',').filter((s) => s.length > 0).length <= 1,
     EVAL_TRUSTARC_TOP: () => window && window.truste && window.truste.eu.bindMap.prefCookie === '0',
     EVAL_TRUSTARC_FRAME_TEST: () => window && window.QueryString && window.QueryString.preferences === '0',

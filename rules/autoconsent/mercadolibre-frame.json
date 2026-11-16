@@ -1,0 +1,48 @@
+{
+    "name": "mercadolibre-frame",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://www\\.mercado(libre|livre|pago)\\.[a-z.]+/privacy-preferences/cookies\\?mode=embed"
+    },
+    "detectCmp": [
+        {
+            "exists": ".pp-main--embed .pp-cookies-container input[role=switch]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".pp-main--embed .pp-cookies-container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitFor": ".pp-cookies-container input[role=switch]:not(:disabled)",
+            "timeout": 20000
+        },
+        {
+            "click": ".pp-cookies-container input[role=switch]:not(:checked)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "eval": "EVAL_MERCADOLIBRE_SAVE"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "switches are disabled until the page hydrates",
+            "waitFor": ".pp-cookies-container input[role=switch]:not(:disabled)",
+            "timeout": 20000
+        },
+        {
+            "click": ".pp-cookies-container input[role=switch]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "comment": "the save button lives in the cross-origin parent, which forwards this message to the frame",
+            "eval": "EVAL_MERCADOLIBRE_SAVE"
+        }
+    ]
+}
