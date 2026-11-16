@@ -101,6 +101,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["verwendung"],
     ["cookies"],
     ["verwendet"],
+    ["cookies"],
     ["auswahl"],
     ["technologien"],
     ["verwenden"],
