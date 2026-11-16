@@ -81,6 +81,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bresidents have (?:certain )?rights with regard to the sale\b/gi,
     /\bwe use technologies (?:on this website )?(?:that may )?(?:to )?collect\b/gi,
     /\bwe use third[- ]party tools to collect information\b/gi,
+    /\bwe collect (?:\S+ ){0,3}(?:through|via|using|with) (?:the use of )?cookies\b/gi,
     // pay-or-consent walls
     /\bcontinue reading with advertising\b|\b(?:with|mit) (?:advertising|werbung) (?:and|und) tracking\b/gi,
     /\bconsent and continue\b/gi,

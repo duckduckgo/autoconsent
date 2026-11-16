@@ -404,6 +404,8 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Allow analytics cookies? They help us understand how visitors use this website. Your choice does not affect access.',
             'Allow cookies? We use them to measure traffic.',
             'We use a cookie to remember you are 18+ and keep your preferences on this device.',
+            'We collect information through cookies, Essential cookies are necessary for our website to function optimally.',
+            'We collect anonymous usage data via cookies to improve the site.',
         ]);
     });
 
@@ -437,6 +439,8 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Please allow cookies in your browser settings',
             'We use data analytics tools in our consulting work',
             'We use the best chocolate in our cookies',
+            'We collect recipes for chocolate chip cookies',
+            'We collect donations through cookie sales',
         ]);
     });
 });
