@@ -8,6 +8,7 @@ generateCMPTests(
         'https://www.history.de/',
         'https://www.consentmanager.net/',
         'https://www.thermador.com/us/',
+        'https://loteriasdominicanas.com/',
     ],
     {
         skipRegions: ['US', 'GB'],
