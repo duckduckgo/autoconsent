@@ -5,13 +5,19 @@
     "detectPopup": [{ "visible": ".artdeco-global-alert[type=COOKIE_CONSENT]" }],
     "optIn": [
         { "waitForVisible": ".artdeco-global-alert[type=COOKIE_CONSENT] button[action-type=ACCEPT]" },
-        { "wait": 500 },
-        { "waitForThenClick": ".artdeco-global-alert[type=COOKIE_CONSENT] button[action-type=ACCEPT]" }
+        {
+            "waitForThenClick": ".artdeco-global-alert[type=COOKIE_CONSENT] button[action-type=ACCEPT]",
+            "retry": 3,
+            "retryInterval": 1000
+        }
     ],
     "optOut": [
         { "waitForVisible": ".artdeco-global-alert[type=COOKIE_CONSENT] button[action-type=DENY]" },
-        { "wait": 500 },
-        { "waitForThenClick": ".artdeco-global-alert[type=COOKIE_CONSENT] button[action-type=DENY]" }
+        {
+            "waitForThenClick": ".artdeco-global-alert[type=COOKIE_CONSENT] button[action-type=DENY]",
+            "retry": 3,
+            "retryInterval": 1000
+        }
     ],
     "test": [{ "waitForVisible": ".artdeco-global-alert[type=COOKIE_CONSENT]", "check": "none" }]
 }
