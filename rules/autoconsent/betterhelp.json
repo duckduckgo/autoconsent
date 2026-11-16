@@ -1,0 +1,112 @@
+{
+    "name": "betterhelp",
+    "cosmetic": false,
+    "prehideSelectors": ["#cookie-banner[data-testid=cookie-banner]", "[data-testid=dialog-container-cookie-settings-modal]"],
+    "detectCmp": [
+        {
+            "any": [
+                {
+                    "exists": "#cookie-banner[data-testid=cookie-banner] [data-testid=cookie-settings-button]"
+                },
+                {
+                    "exists": "[data-testid=dialog-container-cookie-settings-modal] [data-testid=cookie-settings-confirm]"
+                }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                {
+                    "visible": "#cookie-banner[data-testid=cookie-banner] [data-testid=cookie-settings-button]",
+                    "check": "any"
+                },
+                {
+                    "visible": "[data-testid=dialog-container-cookie-settings-modal] [data-testid=cookie-settings-confirm]",
+                    "check": "any"
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "visible": "#cookie-banner[data-testid=cookie-banner] [data-testid=cookie-agree-button]",
+                "check": "any"
+            },
+            "then": [
+                {
+                    "click": "#cookie-banner[data-testid=cookie-banner] [data-testid=cookie-agree-button]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "[data-testid=dialog-container-cookie-settings-modal] [data-testid=cookie-allow-all]"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "[data-testid=dialog-container-cookie-settings-modal] [data-testid=cookie-reject-all]",
+                "check": "any"
+            },
+            "then": [
+                {
+                    "click": "[data-testid=dialog-container-cookie-settings-modal] [data-testid=cookie-reject-all]"
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "visible": "#cookie-banner[data-testid=cookie-banner] [data-testid=cookie-settings-button]",
+                        "check": "any"
+                    },
+                    "then": [
+                        {
+                            "click": "#cookie-banner[data-testid=cookie-banner] [data-testid=cookie-settings-button]"
+                        },
+                        {
+                            "waitForVisible": "[data-testid=dialog-container-cookie-settings-modal] [data-testid=cookie-settings-confirm]",
+                            "timeout": 2000,
+                            "optional": true,
+                            "check": "any"
+                        },
+                        {
+                            "if": {
+                                "visible": "[data-testid=dialog-container-cookie-settings-modal] [data-testid=cookie-settings-confirm]",
+                                "check": "none"
+                            },
+                            "then": [
+                                {
+                                    "click": "#cookie-banner[data-testid=cookie-banner] [data-testid=cookie-settings-button]"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "waitForVisible": "[data-testid=dialog-container-cookie-settings-modal] [data-testid=cookie-settings-confirm]",
+                    "check": "any"
+                },
+                {
+                    "click": "[data-testid=dialog-container-cookie-settings-modal] input[type=checkbox]:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "[data-testid=dialog-container-cookie-settings-modal] [data-testid=cookie-settings-confirm]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "C0002%3A0"
+        },
+        {
+            "cookieContains": "C0004%3A0"
+        }
+    ]
+}
