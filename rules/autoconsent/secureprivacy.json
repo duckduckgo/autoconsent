@@ -1,0 +1,56 @@
+{
+    "name": "secureprivacy",
+    "vendorUrl": "https://secureprivacy.ai/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ["#ifrmCookieBanner", "#sp-accept"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#main-cookie-banner #ifrmCookieBanner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#ifrmCookieBanner", "#sp-accept"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ["#ifrmCookieBanner", "#sp-decline"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["#ifrmCookieBanner", "#sp-decline"],
+                    "retry": 2
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["#ifrmCookieBanner", "#sp-customize"]
+                },
+                {
+                    "waitForVisible": ["#ifrmPrivacyBanner", "button[data-sp-onclick*=\"saveSelected\"]"],
+                    "timeout": 3000
+                },
+                {
+                    "click": ["#ifrmPrivacyBanner", "input[data-tw-binding^=\"category:\"]:checked:not(:disabled)"],
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ["#ifrmPrivacyBanner", "button[data-sp-onclick*=\"saveSelected\"]"]
+                }
+            ]
+        }
+    ],
+    "test": []
+}
