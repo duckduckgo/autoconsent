@@ -185,6 +185,10 @@ export const snippets = {
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
+    // the close icon is an SVG, which has no click() method
+    EVAL_FAPHOUSE_CLOSE_NAG: () =>
+        document.querySelector('.manage-cookie-sticky-banner .icon_close').dispatchEvent(new MouseEvent('click', { bubbles: true })) ||
+        true,
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
     EVAL_GDPR_LEGAL_COOKIE_TEST: () => !!window.GDPR_LC?.userConsentSetting,

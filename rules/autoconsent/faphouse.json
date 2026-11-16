@@ -1,0 +1,18 @@
+{
+    "name": "faphouse",
+    "vendorUrl": "https://faphouse.com/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#cookie-wall #cwc-reject" }],
+    "detectPopup": [{ "visible": "#cookie-wall #cwc-reject" }],
+    "optIn": [{ "waitForThenClick": "#cookie-wall #cwc-accept" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-wall #cwc-reject" },
+        { "waitForVisible": ".manage-cookie-sticky-banner .icon_close", "timeout": 3000, "optional": true },
+        { "wait": 500, "comment": "the close icon gets its click handler shortly after the reject" },
+        { "eval": "EVAL_FAPHOUSE_CLOSE_NAG", "optional": true },
+        { "waitForVisible": ".manage-cookie-sticky-banner", "check": "none", "timeout": 1000, "optional": true },
+        { "eval": "EVAL_FAPHOUSE_CLOSE_NAG", "optional": true }
+    ],
+    "test": [{ "cookieContains": "cookie-settings={\"all\":0" }]
+}
