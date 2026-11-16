@@ -1,0 +1,54 @@
+{
+    "name": "legalblink",
+    "vendorUrl": "https://www.legalblink.it/",
+    "comment": "shadow DOM banner; older LegalBlink versions are handled by cookieconsent2-legacy",
+    "prehideSelectors": ["lb-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ["lb-cookie-banner", "#lb-root [data-slot=card-footer] button"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["lb-cookie-banner", "#lb-root > [role=dialog] [data-slot=card-footer]"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["lb-cookie-banner", "#lb-root [data-slot=card-footer] button.bg-primary"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ["lb-cookie-banner", "#lb-root [data-slot=card-footer] button.bg-reject-all"] },
+            "then": [
+                {
+                    "waitForThenClick": ["lb-cookie-banner", "#lb-root [data-slot=card-footer] button.bg-reject-all"]
+                }
+            ],
+            "else": [
+                {
+                    "comment": "no reject button: open the settings and save with optional categories off",
+                    "waitForThenClick": ["lb-cookie-banner", "#lb-root [data-slot=card-footer] button.bg-secondary"]
+                },
+                {
+                    "waitFor": ["lb-cookie-banner", "[data-slot=dialog-content] button.bg-secondary"],
+                    "timeout": 2000
+                },
+                {
+                    "click": ["lb-cookie-banner", "[data-slot=dialog-content] [role=switch][aria-checked=true]:not([aria-disabled=true])"],
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ["lb-cookie-banner", "[data-slot=dialog-content] button.bg-secondary"]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "lb_csc={\"level\":[\"necessary_cookies\"]"
+        }
+    ]
+}

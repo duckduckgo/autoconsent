@@ -9,7 +9,9 @@
     "prehideSelectors": [".cc-cookies"],
     "detectCmp": [
         {
-            "exists": ".cc-cookies .cc-cookie-accept"
+            "comment": "some sites keep a CSS-hidden cookiecuttr banner next to their actual CMP",
+            "visible": ".cc-cookies .cc-cookie-accept",
+            "check": "any"
         }
     ],
     "detectPopup": [
