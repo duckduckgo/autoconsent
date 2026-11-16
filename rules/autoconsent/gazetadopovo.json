@@ -1,0 +1,35 @@
+{
+    "name": "gazetadopovo",
+    "vendorUrl": "https://www.gazetadopovo.com.br/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?gazetadopovo\\.com\\.br/"
+    },
+    "prehideSelectors": ["#privacytools-banner-consent"],
+    "detectCmp": [{ "exists": "#privacytools-banner-consent" }],
+    "detectPopup": [{ "visible": "#privacytools-banner-consent" }],
+    "optIn": [
+        { "waitForThenClick": "#privacytools-banner-consent .cc-dismiss" },
+        { "waitFor": ".fc-consent-root .fc-dialog-container", "timeout": 5000, "optional": true },
+        { "click": ".fc-cta-consent", "optional": true }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": "#privacytools-banner-consent .cc-deny" },
+            "then": [{ "click": "#privacytools-banner-consent .cc-deny" }],
+            "else": [{ "hide": "#privacytools-banner-consent" }]
+        },
+        { "waitFor": ".fc-consent-root .fc-dialog-container", "timeout": 5000, "optional": true },
+        {
+            "if": { "exists": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                {
+                    "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                    "then": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }],
+                    "else": [{ "exists": ".fc-li-only-placeholder" }]
+                },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ]
+}
