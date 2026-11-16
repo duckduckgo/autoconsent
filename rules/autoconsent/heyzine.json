@@ -1,0 +1,35 @@
+{
+    "name": "heyzine",
+    "vendorUrl": "https://heyzine.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?heyzine\\.com/"
+    },
+    "prehideSelectors": [".cookies"],
+    "detectCmp": [
+        {
+            "exists": ".cookies .btnAcceptCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies .btnAcceptCookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookies .btnAcceptCookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookies",
+            "check": "none",
+            "timeout": 1000
+        }
+    ]
+}
