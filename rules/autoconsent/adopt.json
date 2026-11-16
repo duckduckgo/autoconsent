@@ -4,7 +4,7 @@
     "prehideSelectors": ["#cookie-banner"],
     "detectCmp": [
         {
-            "exists": "#adopt-controller-button"
+            "exists": "#adopt-controller-button, #adopt-accept-all-button"
         }
     ],
     "detectPopup": [
@@ -19,10 +19,25 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "#adopt-reject-all-button"
+            "if": {
+                "exists": "#adopt-reject-all-button"
+            },
+            "then": [
+                {
+                    "click": "#adopt-reject-all-button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookie-banner button:not([id])"
+                }
+            ]
         }
     ],
     "test": [
+        {
+            "wait": 500
+        },
         {
             "eval": "EVAL_ADOPT_TEST"
         }

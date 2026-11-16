@@ -93,7 +93,7 @@ export const snippets = {
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
 
     // declarative rules
-    EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),
+    EVAL_ADOPT_TEST: () => JSON.parse(localStorage.getItem('adoptConsentMode') || '{}').marketing === false,
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_AYLO_COOKIE_MANAGER_READY: () => !!(window.wl_cookie_consent_manager || window._Cookie_Consent_Manager_brand),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
