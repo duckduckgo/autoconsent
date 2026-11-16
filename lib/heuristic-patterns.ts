@@ -377,6 +377,12 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+
+    // Portuguese (PT, BR)
+    // e.g. "coletamos cookies para …", "podemos coletar cookies?", "este site utiliza cookies"
+    /\b(?:coletamos|recolhemos|usamos|utilizamos)\b(?: \S+){0,3} cookies\b/gi,
+    /\bpodemos (?:coletar|recolher|usar|utilizar) (?:\S+ )?cookies\b/gi,
+    /\b(?:este|nosso) (?:site|sítio)\b(?: \S+){0,2} (?:usa|utiliza|coleta)\b(?: \S+){0,2} cookies\b/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [

@@ -376,6 +376,25 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Portuguese popups', () => {
+    it('detects Portuguese cookie notices', () => {
+        const texts = [
+            'Podemos coletar cookies?',
+            'Coletamos cookies para apresentar ofertas e condições personalizadas para você.',
+            'Utilizamos cookies essenciais e de terceiros para melhorar a sua experiência.',
+            'Este site utiliza cookies para melhorar sua navegação.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Portuguese text', () => {
+        expect(checkHeuristicPatterns('Leia a nossa Política de cookies e Política de privacidade').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Coletamos seus dados de viagem para emitir a passagem').patterns).to.have.length(0);
+    });
+});
+
 const detectsPopup = (text: string) => checkHeuristicPatterns(text, 'popup').patterns.length > 0;
 const detectsPage = (text: string) => checkHeuristicPatterns(text, 'page').patterns.length > 0;
 
