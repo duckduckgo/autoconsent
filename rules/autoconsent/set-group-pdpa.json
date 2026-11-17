@@ -1,0 +1,32 @@
+{
+    "name": "set-group-pdpa",
+    "vendorUrl": "https://www.set.or.th/",
+    "cosmetic": true,
+    "prehideSelectors": [".cookies-pdpa.fixed-bottom"],
+    "detectCmp": [
+        {
+            "exists": ".cookies-pdpa.fixed-bottom .btn-submit-pdpa"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies-pdpa.fixed-bottom"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies-pdpa.fixed-bottom .btn-submit-pdpa"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookies-pdpa.fixed-bottom"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".cookies-pdpa.fixed-bottom",
+            "check": "none"
+        }
+    ]
+}
