@@ -3,6 +3,16 @@
     "prehideSelectors": ["div[aria-labelledby=pwa-consent-layer-title]", "div[class^=StyledConsentLayerWrapper-]"],
     "detectCmp": [{ "exists": "div[aria-labelledby^=pwa-consent-layer-title]" }],
     "detectPopup": [{ "exists": "div[aria-labelledby^=pwa-consent-layer-title]" }],
-    "optOut": [{ "click": "button[data-test^=pwa-consent-layer-deny-all]" }],
-    "optIn": [{ "click": "button[data-test^=pwa-consent-layer-accept-all" }]
+    "optOut": [
+        {
+            "if": { "exists": "button[data-test^=pwa-consent-layer-deny-all]" },
+            "then": [{ "click": "button[data-test^=pwa-consent-layer-deny-all]" }],
+            "else": [
+                { "click": "form[data-test=pwa-consent-layer] [role=switch][aria-checked=true]", "all": true, "optional": true },
+                { "waitForThenClick": "button[data-test^=pwa-consent-layer-save-settings]" }
+            ]
+        }
+    ],
+    "optIn": [{ "click": "button[data-test^=pwa-consent-layer-accept-all]" }],
+    "test": [{ "wait": 1000 }, { "cookieContains": "|comfort:0" }]
 }
