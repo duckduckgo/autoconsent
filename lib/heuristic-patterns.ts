@@ -377,6 +377,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+
+    // Vietnamese (VI)
+    // e.g. "chúng tôi sử dụng cookie", "trang web này sử dụng các tệp cookie"
+    /\bsử dụng (?:\S+ ){0,2}cookies?\b/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -643,6 +647,11 @@ const REJECT_PATTERNS_TURKISH = ['reddet', 'çerezleri reddet'];
 
 const REJECT_PATTERNS_INDONESIAN = ['tolak cookie'];
 
+const REJECT_PATTERNS_VIETNAMESE = [
+    // e.g. "từ chối", "từ chối tất cả", "không chấp nhận cookie"
+    /^(từ chối|không chấp nhận|không đồng ý)( tất cả)?( (các )?cookies?)?$/,
+];
+
 const REJECT_PATTERNS_JAPANESE = [
     // e.g. "拒否", "すべて拒否", "全て拒否する", "cookieを拒否"
     /^(すべて|全て)?\s?(の)?(cookie|クッキー)?\s?(を)?拒否(する)?$/i,
@@ -674,6 +683,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_TURKISH,
     ...REJECT_PATTERNS_INDONESIAN,
     ...REJECT_PATTERNS_JAPANESE,
+    ...REJECT_PATTERNS_VIETNAMESE,
 ];
 
 export const BUTTON_NEVER_MATCH_PATTERNS = [
