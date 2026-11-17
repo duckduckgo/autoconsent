@@ -1,0 +1,12 @@
+{
+    "name": "sicredi",
+    "runContext": { "main": true, "frame": true },
+    "prehideSelectors": ["#sicredi-cookies-root .banner-container"],
+    "detectCmp": [{ "exists": "#sicredi-cookies-root" }],
+    "detectPopup": [{ "visible": "#sicredi-cookies-root [data-testid=\"banner\"]" }],
+    "optIn": [{ "waitForThenClick": "#sicredi-cookies-root [data-testid=\"all-cookies-button\"]" }],
+    "optOut": [
+        { "waitForThenClick": "#sicredi-cookies-root [data-testid=\"management-cookies-button\"]" },
+        { "waitForThenClick": "#sicredi-cookies-root [data-testid=\"reject-config-button\"]" }
+    ]
+}
