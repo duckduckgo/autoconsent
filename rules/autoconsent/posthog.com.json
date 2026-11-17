@@ -1,0 +1,12 @@
+{
+    "name": "posthog.com",
+    "runContext": { "urlPattern": "^https?://(www\\.)?posthog\\.com/" },
+    "detectCmp": [{ "exists": "xpath///li[contains(@class,'ToastRoot')][contains(., 'cookie banner')]" }],
+    "detectPopup": [{ "visible": "xpath///li[contains(@class,'ToastRoot')][contains(., 'cookie banner')]" }],
+    "optIn": [{ "waitForThenClick": "xpath///li[contains(@class,'ToastRoot')][contains(., 'cookie banner')]//button" }],
+    "optOut": [
+        { "waitForThenClick": "xpath///li[contains(@class,'ToastRoot')][contains(., 'cookie banner')]//button" },
+        { "waitForVisible": "xpath///li[contains(@class,'ToastRoot')][contains(., 'cookie banner')]", "check": "none" }
+    ],
+    "test": [{ "eval": "EVAL_POSTHOG_TEST" }]
+}
