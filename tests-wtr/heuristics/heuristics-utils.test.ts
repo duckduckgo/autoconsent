@@ -376,6 +376,23 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Vietnamese popups', () => {
+    it('detects Vietnamese cookie notices', () => {
+        const texts = [
+            'Cookies được sử dụng nhằm ghi nhận các thiết lập cần thiết để website hoạt động ổn định.',
+            'Chúng tôi sử dụng cookie để cải thiện trải nghiệm của bạn.',
+            'Trang web này sử dụng các tệp cookie để phân tích lưu lượng truy cập.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Vietnamese text', () => {
+        expect(checkHeuristicPatterns('Hướng dẫn sử dụng điện thoại và chính sách bảo hành').patterns).to.have.length(0);
+    });
+});
+
 const detectsPopup = (text: string) => checkHeuristicPatterns(text, 'popup').patterns.length > 0;
 const detectsPage = (text: string) => checkHeuristicPatterns(text, 'page').patterns.length > 0;
 
@@ -842,6 +859,14 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Bare nødvendige informasjonskapsler')).to.equal('reject');
         expect(classifyButtonTextRegex('Ja')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Les mer om hvordan vi bruker informasjonskapsler')).not.to.equal('reject');
+    });
+
+    it('matches Vietnamese reject buttons', () => {
+        expect(classifyButtonTextRegex('Từ chối')).to.equal('reject');
+        expect(classifyButtonTextRegex('Từ chối tất cả')).to.equal('reject');
+        expect(classifyButtonTextRegex('Từ chối cookie')).to.equal('reject');
+        expect(classifyButtonTextRegex('Xác nhận tất cả')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Việc từ chối một số loại cookie sẽ có thể ảnh hưởng đến website')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {
