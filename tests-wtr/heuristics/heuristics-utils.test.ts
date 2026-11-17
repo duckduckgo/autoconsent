@@ -134,6 +134,24 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Greek popups', () => {
+    it('detects Greek cookie notices', () => {
+        const texts = [
+            'Το BestPrice χρησιμοποιεί Cookies για την εύρυθμη λειτουργία του.',
+            'Χρησιμοποιούμε cookies για να βελτιώσουμε την εμπειρία σας',
+            'Ο ιστότοπος χρησιμοποιεί τα δικά του cookies και cookies τρίτων',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Greek text', () => {
+        expect(checkHeuristicPatterns('Χρησιμοποιήστε μπισκότα για τη βάση της τάρτας').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Σύγκριση τιμών σε χιλιάδες online καταστήματα').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Italian popups', () => {
     it('detects Italian cookie notices', () => {
         const texts = [
@@ -820,6 +838,19 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
         expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
         expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
+    });
+
+    it('matches Greek reject buttons', () => {
+        expect(classifyButtonTextRegex('Δεν συμφωνώ')).to.equal('reject');
+        expect(classifyButtonTextRegex('Δε συμφωνώ')).to.equal('reject');
+        expect(classifyButtonTextRegex('ΔΕΝ ΣΥΜΦΩΝΩ')).to.equal('reject');
+        expect(classifyButtonTextRegex('Δεν αποδέχομαι')).to.equal('reject');
+        expect(classifyButtonTextRegex('Απόρριψη')).to.equal('reject');
+        expect(classifyButtonTextRegex('ΑΠΟΡΡΙΨΗ ΟΛΩΝ')).to.equal('reject');
+        expect(classifyButtonTextRegex('Απόρριψη όλων των cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Μόνο τα απαραίτητα')).to.equal('reject');
+        expect(classifyButtonTextRegex('Συμφωνώ')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Δεν συμφωνώ με τους όρους χρήσης')).not.to.equal('reject');
     });
 
     it('matches Danish reject buttons', () => {

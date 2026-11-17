@@ -377,6 +377,11 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+
+    // Greek (EL)
+    // e.g. "Χρησιμοποιούμε cookies", "ο ιστότοπος χρησιμοποιεί Cookies για …", "χρησιμοποιούνται τα δικά μας cookies"
+    // note: \w does not match Greek, so these use explicit character ranges
+    /χρησιμοποι[ά-ώ]*\s+(?:\S+\s+){0,3}cookies?/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -643,6 +648,15 @@ const REJECT_PATTERNS_TURKISH = ['reddet', 'çerezleri reddet'];
 
 const REJECT_PATTERNS_INDONESIAN = ['tolak cookie'];
 
+const REJECT_PATTERNS_GREEK = [
+    // e.g. "Απόρριψη", "Απόρριψη όλων", "ΑΠΟΡΡΙΨΗ ΟΛΩΝ ΤΩΝ COOKIES"
+    /^απ[οό]ρριψη(\s+([οό]λων|των|cookies))*$/,
+    // refusals: "Δεν συμφωνώ", "Δε συμφωνώ", "Δεν αποδέχομαι"
+    /^δεν?\s+(συμφων[ωώ]|αποδ[εέ]χομαι|δ[εέ]χομαι)$/,
+    'μόνο τα απαραίτητα',
+    'μόνο τα απαραίτητα cookies',
+];
+
 const REJECT_PATTERNS_JAPANESE = [
     // e.g. "拒否", "すべて拒否", "全て拒否する", "cookieを拒否"
     /^(すべて|全て)?\s?(の)?(cookie|クッキー)?\s?(を)?拒否(する)?$/i,
@@ -673,6 +687,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_RUSSIAN,
     ...REJECT_PATTERNS_TURKISH,
     ...REJECT_PATTERNS_INDONESIAN,
+    ...REJECT_PATTERNS_GREEK,
     ...REJECT_PATTERNS_JAPANESE,
 ];
 
