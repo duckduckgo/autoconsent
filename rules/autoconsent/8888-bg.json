@@ -1,0 +1,47 @@
+{
+    "name": "8888.bg",
+    "vendorUrl": "https://8888.bg/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?8888\\.bg/"
+    },
+    "prehideSelectors": ["[data-element-type=\"UIPopupCookie\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-element-type=\"UIPopupCookie\"] a[data-accept]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-element-type=\"UIPopupCookie\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForVisible": "[data-element-type=\"UIPopupCookie\"][style*=\"translate(0px, 0%)\"]",
+            "timeout": 10000
+        },
+        {
+            "waitForThenClick": "[data-element-type=\"UIPopupCookie\"][style*=\"translate(0px, 0%)\"] a[data-accept]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": "[data-element-type=\"UIPopupCookie\"][style*=\"translate(0px, 0%)\"]",
+            "timeout": 10000
+        },
+        {
+            "waitForThenClick": "[data-element-type=\"UIPopupCookie\"][style*=\"translate(0px, 0%)\"] a[data-accept]"
+        },
+        {
+            "waitForVisible": "[data-element-type=\"UIPopupCookie\"]",
+            "check": "none",
+            "timeout": 3000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "8888bgcookieAccept=true"
+        }
+    ]
+}
