@@ -261,6 +261,9 @@ export const snippets = {
         });
         return true;
     },
+    // the banner's own reject path lives on a separate settings page; this saves the same choice in place
+    EVAL_SS_LV_OPT_OUT: () => _gdpr_confirm(false) || true,
+    EVAL_SS_LV_TEST: () => /-necessary$/.test(localStorage.getItem('ss_cc')),
     EVAL_STEAMPOWERED_0: () =>
         JSON.parse(
             decodeURIComponent(

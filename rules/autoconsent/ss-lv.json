@@ -1,0 +1,13 @@
+{
+    "name": "ss-lv",
+    "vendorUrl": "https://www.ss.lv/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?ss\\.(lv|com)/"
+    },
+    "prehideSelectors": ["#cookie_confirm_dv"],
+    "detectCmp": [{ "exists": "#cookie_confirm_dv button[onclick*=\"_gdpr_confirm\"]" }],
+    "detectPopup": [{ "visible": "#cookie_confirm_dv" }],
+    "optIn": [{ "waitForThenClick": "#cookie_confirm_dv button[onclick*=\"_gdpr_confirm(true)\"]" }],
+    "optOut": [{ "eval": "EVAL_SS_LV_OPT_OUT" }],
+    "test": [{ "eval": "EVAL_SS_LV_TEST" }]
+}
