@@ -78,10 +78,14 @@ const waitForJobSuccess = async (job_gid) => {
  * @returns {Promise<string>}
  */
 const processReleaseTasks = async (releaseTaskGid) => {
-    const { data: tasks } = await asana.tasks.getTasksForSection(scheduledForReleaseSectionGid, {
+    // The response is paginated (50 per page by default), so follow every
+    // page. Reading only `.data` left the rest for the next release.
+    const firstPage = await asana.tasks.getTasksForSection(scheduledForReleaseSectionGid, {
         opt_fields: 'name,permalink_url,completed',
         completed_since: 'now', // Fetch only incomplete tasks
+        limit: 100,
     });
+    const tasks = await firstPage.fetch();
 
     if (!tasks || tasks.length === 0) {
         return '';
