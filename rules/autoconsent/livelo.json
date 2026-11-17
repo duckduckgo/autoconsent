@@ -1,0 +1,44 @@
+{
+    "name": "livelo",
+    "vendorUrl": "https://www.livelo.com.br/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?livelo\\.com\\.br/"
+    },
+    "prehideSelectors": ["[data-testid=cookies-container]"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=cookie-bar] [data-testid=cookie-button-personalize]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=cookie-bar] [data-testid=cookie-button-personalize]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=cookie-bar] [data-testid=cookie-button-accept-all]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=cookie-bar] [data-testid=cookie-button-personalize]"
+        },
+        {
+            "waitForVisible": "[data-testid=cookie-modal-container] [data-testid=option-cards]"
+        },
+        {
+            "click": "[data-testid=option-cards] [data-testid=div_Switch]:has(input[data-testid^=option-card-switch]:checked)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[data-testid=Modal_ModalContent]:has([data-testid=cookie-modal-container]) [data-testid=div_Modal_Footer] button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "livelo_share_cookies={\"essentials\":true,\"performance\":false,\"publicity\":false}"
+        }
+    ]
+}
