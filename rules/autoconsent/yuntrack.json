@@ -1,0 +1,50 @@
+{
+    "name": "yuntrack",
+    "vendorUrl": "https://www.yuntrack.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.|m\\.)?yuntrack\\.com/"
+    },
+    "prehideSelectors": [".cookies-box"],
+    "detectCmp": [
+        {
+            "exists": ".cookies-box .cookies-btn-customize"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies-box"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies-box .cookies-btn-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookies-box .cookies-btn-customize"
+        },
+        {
+            "waitForVisible": ".manage-consent-preferences-dialog, .el-dialog[aria-label='Manage Consent Preferences']"
+        },
+        {
+            "if": {
+                "exists": ".manage-consent-preferences-dialog .van-checkbox__icon--checked, .el-dialog[aria-label='Manage Consent Preferences'] .el-checkbox.is-checked"
+            },
+            "then": [
+                {
+                    "click": ".manage-consent-preferences-dialog .van-checkbox__icon--checked, .el-dialog[aria-label='Manage Consent Preferences'] .el-checkbox.is-checked",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".manage-consent-preferences-dialog .van-dialog__confirm, .el-dialog[aria-label='Manage Consent Preferences'] .el-dialog__footer button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "yuntrackAccept=agree"
+        }
+    ]
+}

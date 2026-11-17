@@ -1,0 +1,38 @@
+{
+    "name": "isidewith.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?isidewith\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".overlayContent a[onclick^=\"optin\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".overlayContent a[onclick^=\"optin\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".overlayContent a[onclick^=\"optin\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".overlayBG"
+        },
+        {
+            "waitForVisible": ".overlayContent a[onclick^=\"optin\"]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "visible": ".overlayContent a[onclick^=\"optin\"]",
+            "check": "none"
+        }
+    ]
+}

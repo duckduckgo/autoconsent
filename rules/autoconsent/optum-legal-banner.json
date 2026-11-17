@@ -1,0 +1,10 @@
+{
+    "name": "optum-legal-banner",
+    "vendorUrl": "https://www.optum.com/",
+    "prehideSelectors": ["#o5-legal-banner-container"],
+    "detectCmp": [{ "exists": "#o5-legal-banner-container .o5-legal-banner-container__close" }],
+    "detectPopup": [{ "visible": "#o5-legal-banner-container" }],
+    "optIn": [{ "waitForThenClick": "#o5-legal-banner-container .o5-legal-banner-container__close" }],
+    "optOut": [{ "waitForThenClick": "#o5-legal-banner-container .o5-legal-banner-container__close" }],
+    "test": [{ "waitForVisible": "#o5-legal-banner-container", "check": "none", "timeout": 2000 }]
+}

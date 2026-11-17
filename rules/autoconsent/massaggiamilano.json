@@ -1,0 +1,15 @@
+{
+    "name": "massaggiamilano",
+    "_metadata": {
+        "vendorUrl": "https://www.massaggiamilano.it/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?massagg(iamilano|iemozionali)\\.it/"
+    },
+    "prehideSelectors": [".navbar-privacy"],
+    "detectCmp": [{ "exists": "nav.navbar-privacy .privacy-continue" }],
+    "detectPopup": [{ "visible": "nav.navbar-privacy .privacy-continue" }],
+    "optIn": [{ "waitForThenClick": "nav.navbar-privacy .privacy-continue" }, { "waitForThenClick": "#generic-modal .privacy-accept" }],
+    "optOut": [{ "waitForThenClick": "nav.navbar-privacy .privacy-continue" }, { "waitForThenClick": "#generic-modal .privacy-accept" }],
+    "test": [{ "waitForVisible": "nav.navbar-privacy", "check": "none", "timeout": 5000 }]
+}

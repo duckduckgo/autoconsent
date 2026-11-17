@@ -1,0 +1,54 @@
+{
+    "name": "wbd-consent-modal",
+    "vendorUrl": "https://www.wbd.com/",
+    "comment": "Warner Bros. Discovery TCF consent modal. Buttons carry no stable attributes, so they are matched by position: Accept, Essential only (some locales), Manage. The single-button US 'Legal Terms' notice shares the modal and is not matched.",
+    "detectCmp": [
+        {
+            "exists": "#modal-test-id-consent-modal .consent-description-container"
+        },
+        {
+            "exists": "#modal-test-id-consent-modal .modal-buttons button:nth-of-type(2)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#modal-test-id-consent-modal .modal-buttons"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#modal-test-id-consent-modal .modal-buttons button:nth-of-type(1)"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#modal-test-id-consent-modal .modal-buttons button:nth-of-type(3)"
+            },
+            "then": [
+                {
+                    "click": "#modal-test-id-consent-modal .modal-buttons button:nth-of-type(2)"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#modal-test-id-consent-modal .modal-buttons button:nth-of-type(2)"
+                },
+                {
+                    "waitForThenClick": "#modal-test-id-consent-modal .consent-description-container button:nth-of-type(2)"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "#modal-test-id-consent-modal",
+            "check": "none",
+            "timeout": 5000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "anonymousConsentElections="
+        }
+    ]
+}

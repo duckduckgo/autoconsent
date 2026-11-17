@@ -1,0 +1,33 @@
+{
+    "name": "interface-medien-gebaeck",
+    "vendorUrl": "https://www.interface-medien.de/",
+    "prehideSelectors": [".gebaeck-notice"],
+    "detectCmp": [{ "exists": ".gebaeck-notice .gebaeck-notice__buttons" }],
+    "detectPopup": [{ "visible": ".gebaeck-notice .gebaeck-notice__buttons" }],
+    "optIn": [
+        {
+            "waitForThenClick": ".gebaeck-notice button.btn--gebaeck-notice-all, .gebaeck-notice button.btn--privacy-notice-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".gebaeck-notice button.btn--privacy-notice-only-necessary" },
+            "then": [{ "click": ".gebaeck-notice button.btn--privacy-notice-only-necessary" }],
+            "else": [
+                {
+                    "click": ".gebaeck-notice button.btn--gebaeck-notice-config, .gebaeck-notice button.btn--privacy-notice-config"
+                },
+                { "waitForVisible": ".gebaeck-notice-popup", "timeout": 3000 },
+                {
+                    "click": ".gebaeck-notice-popup input[type=checkbox]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".gebaeck-notice-popup button.btn--gebaeck-notice, .gebaeck-notice-popup button.btn--privacy-notice"
+                }
+            ]
+        }
+    ],
+    "test": [{ "waitForVisible": ".gebaeck-notice", "timeout": 2000, "check": "none" }, { "cookieContains": "privacy=" }]
+}

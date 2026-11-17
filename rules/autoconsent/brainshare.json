@@ -1,0 +1,12 @@
+{
+    "name": "brainshare",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?brainshare\\.pl/"
+    },
+    "prehideSelectors": ["div.cookiePolicy"],
+    "detectCmp": [{ "exists": "div.cookiePolicy > span[href='#']" }],
+    "detectPopup": [{ "visible": "div.cookiePolicy" }],
+    "optIn": [{ "waitForThenClick": "div.cookiePolicy > span[href='#']" }],
+    "optOut": [{ "waitForThenClick": "div.cookiePolicy > span[href='#']" }],
+    "test": [{ "cookieContains": "cookiePol=1" }]
+}

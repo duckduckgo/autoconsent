@@ -9,3 +9,8 @@ generateCMPTests('iubenda', ['https://www.yogurtland.com/', 'https://www.greenpl
     skipRegions: ['AU'],
     testSelfTest: false,
 });
+
+// "Do Not Sell" CCPA notice in California, GDPR banner in Europe
+generateCMPTests('iubenda', ['https://newatlas.com/', 'https://plan.io/'], {
+    skipRegions: ['US', 'AU'],
+});

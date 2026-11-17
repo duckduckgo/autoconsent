@@ -1,0 +1,13 @@
+{
+    "name": "fora.se",
+    "vendorUrl": "https://www.fora.se/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?fora\\.se/"
+    },
+    "prehideSelectors": [".message--cookie"],
+    "detectCmp": [{ "exists": ".message--cookie .message__close" }],
+    "detectPopup": [{ "visible": ".message--cookie:not(.message--closed)" }],
+    "optIn": [{ "waitForThenClick": ".message--cookie .message__close" }],
+    "optOut": [{ "waitForThenClick": ".message--cookie .message__close" }],
+    "test": [{ "cookieContains": "accepted_cookies=true" }]
+}

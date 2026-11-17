@@ -1,0 +1,14 @@
+{
+    "name": "qudosbank-com-au",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?qudosbank\\.com\\.au/"
+    },
+    "prehideSelectors": ["#popup.cookie-popup"],
+    "detectCmp": [{ "exists": "#popup.cookie-popup #close-popup" }],
+    "detectPopup": [{ "visible": "#popup.cookie-popup" }],
+    "optIn": [{ "waitForThenClick": "#popup.cookie-popup #close-popup" }],
+    "optOut": [
+        { "waitForThenClick": "#popup.cookie-popup #close-popup" },
+        { "waitForVisible": "#popup.cookie-popup", "check": "none", "timeout": 2000 }
+    ]
+}

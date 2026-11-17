@@ -1,0 +1,53 @@
+{
+    "name": "gwo",
+    "vendorUrl": "https://gwo.pl/",
+    "prehideSelectors": ["div[class^='overlay-cookie-uuid-']"],
+    "detectCmp": [
+        {
+            "exists": "div[class^='overlay-cookie-uuid-']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[class^='overlay-cookie-uuid-'] [class^='button-container-cookie-uuid-']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[class^='overlay-cookie-uuid-'] button[class*='btn-dark-cookie-uuid-']"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "div[class^='overlay-cookie-uuid-'] [class^='accordion-container-cookie-uuid-']"
+            },
+            "then": [],
+            "else": [
+                {
+                    "waitForThenClick": "div[class^='overlay-cookie-uuid-'] button[class*='btn-default-cookie-uuid-']"
+                }
+            ]
+        },
+        {
+            "waitFor": "div[class^='overlay-cookie-uuid-'] input[class^='cookie-uuid-'][id$='-legitimate-interest']"
+        },
+        {
+            "click": "div[class^='overlay-cookie-uuid-'] input[class^='cookie-uuid-'][type='checkbox']:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": ".cookies-bar__close-button",
+            "optional": true
+        },
+        {
+            "click": "div[class^='overlay-cookie-uuid-'] button[class*='btn-default-cookie-uuid-']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22advertising%22:0"
+        }
+    ]
+}

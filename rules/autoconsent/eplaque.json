@@ -1,0 +1,12 @@
+{
+    "name": "eplaque",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?eplaque\\.fr/"
+    },
+    "prehideSelectors": ["#rgpd"],
+    "detectCmp": [{ "exists": "#rgpd #rgpd_refus" }],
+    "detectPopup": [{ "visible": "#rgpd" }],
+    "optIn": [{ "waitForThenClick": "#rgpd_valider" }],
+    "optOut": [{ "waitForThenClick": "#rgpd_refus" }],
+    "test": [{ "cookieContains": "_ecdg=assistance_O#audience_N#targeting_N" }]
+}

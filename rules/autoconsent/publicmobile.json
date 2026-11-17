@@ -1,0 +1,16 @@
+{
+    "name": "publicmobile",
+    "runContext": { "urlPattern": "^https?://(www\\.)?publicmobile\\.ca/" },
+    "prehideSelectors": ["[data-testid=\"cookie-consent-sticky-footer\"]"],
+    "detectCmp": [{ "exists": "[data-testid=\"cookie-consent-sticky-footer\"]" }],
+    "detectPopup": [{ "visible": "[data-testid=\"cookie-consent-sticky-footer\"][aria-hidden=\"false\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-testid=\"cookie-consent-sticky-footer\"] button[aria-label]:nth-child(2)" }],
+    "optOut": [
+        { "waitForThenClick": "[data-testid=\"cookie-consent-sticky-footer\"] button[aria-label]:first-child" },
+        { "waitForVisible": "[data-testid=\"_cookie_modal_test\"]" },
+        { "click": "[data-testid=\"_cookie_modal_test\"] label:has(input[type=\"checkbox\"]:checked)", "all": true, "optional": true },
+        { "waitForThenClick": "[data-testid=\"_cookie_modal_test\"] button[aria-label=\"button-pmui\"]" },
+        { "waitForVisible": "[data-testid=\"cookie-consent-sticky-footer\"][aria-hidden=\"false\"]", "check": "none", "timeout": 3000 }
+    ],
+    "test": [{ "cookieContains": "\"analytics_storage\":\"denied\"" }]
+}

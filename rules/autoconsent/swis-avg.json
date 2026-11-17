@@ -1,0 +1,24 @@
+{
+    "name": "swis-avg",
+    "vendorUrl": "https://www.swis.nl/",
+    "prehideSelectors": ["#cookie-bar.cookie-bar"],
+    "detectCmp": [{ "exists": "#cookie-bar #cookie-settings__save-settings, #cookie-bar #cookie-bar__settings-open" }],
+    "detectPopup": [{ "visible": "#cookie-bar:not(.cookie-bar--hidden)" }],
+    "optIn": [{ "waitForThenClick": "#cookie-bar__settings-accept" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookie-bar__settings-open" },
+            "then": [{ "click": "#cookie-bar__settings-open" }, { "waitForVisible": "#cookie-settings #cookie-settings__save-settings" }]
+        },
+        {
+            "if": { "exists": "input[name='swis-avg-allow-stats']:checked" },
+            "then": [{ "click": "input[name='swis-avg-allow-stats']:checked" }]
+        },
+        {
+            "if": { "exists": "input[name='swis-avg-allow-tracking']:checked" },
+            "then": [{ "click": "input[name='swis-avg-allow-tracking']:checked" }]
+        },
+        { "waitForThenClick": "#cookie-settings__save-settings" }
+    ],
+    "test": [{ "cookieContains": "SWIS_AVG_ALLOW_STATS=false" }, { "cookieContains": "SWIS_AVG_ALLOW_TRACKING=false" }]
+}

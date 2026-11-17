@@ -1,0 +1,46 @@
+{
+    "name": "kartverket",
+    "vendorUrl": "https://eiendomsregisteret.kartverket.no/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?kartverket\\.no/"
+    },
+    "prehideSelectors": ["#root > .chakra-stack:has(> div > p > a[href=\"/cookies\"])"],
+    "detectCmp": [
+        {
+            "exists": "button[aria-label^=\"Tilpass informasjonskap\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "button[aria-label^=\"Tilpass informasjonskap\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "button[aria-label^=\"Tilpass informasjonskap\"] + button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "button[aria-label^=\"Tilpass informasjonskap\"]"
+        },
+        {
+            "waitForVisible": "xpath///button[contains(., \"Lagre val\")]"
+        },
+        {
+            "click": ".kvib-switch__root[data-state=\"checked\"]",
+            "optional": true
+        },
+        {
+            "click": "xpath///button[contains(., \"Lagre val\")]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "xpath///button[contains(., \"Lagre val\")]",
+            "check": "none",
+            "timeout": 1000
+        }
+    ]
+}

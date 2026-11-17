@@ -72,14 +72,14 @@ function byOccurence(a: ButtonTextRow, b: ButtonTextRow): number {
 }
 
 /**
- * Per-label stats, in BENCHMARK_LABELS order. Rows labelled 'other' are excluded, matching the original collector benchmark.
+ * Per-label stats, in VALID_LABELS order ('other' last).
+ * False positives are counted against every row, so an 'other' row predicted as a button type counts against that type.
  */
 export function buildLabelBenchmarks(results: ClassifiedButtonTextRow[]): LabelBenchmark[] {
-    const benchmarkResults = results.filter((r) => r.label !== 'other');
-    return BENCHMARK_LABELS.map((label) => {
-        const support = benchmarkResults.filter((r) => r.label === label);
+    return VALID_LABELS.map((label) => {
+        const support = results.filter((r) => r.label === label);
         const correct = support.filter((r) => r.predicted === label);
-        const falsePositives = benchmarkResults.filter((r) => r.predicted === label && r.label !== label);
+        const falsePositives = results.filter((r) => r.predicted === label && r.label !== label);
         return {
             label,
             rowSupport: support.length,

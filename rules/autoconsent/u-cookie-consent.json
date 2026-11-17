@@ -1,0 +1,15 @@
+{
+    "name": "u-cookie-consent",
+    "prehideSelectors": [".u-cookie-frame, .modal:has([data-attr='btn-reject-cookies'])"],
+    "detectCmp": [{ "exists": ".u-cookie-frame [data-attr='btn-reject-cookies'], .modal [data-attr='btn-reject-cookies']" }],
+    "detectPopup": [{ "visible": ".u-cookie-frame [data-attr='btn-reject-cookies'], .modal [data-attr='btn-reject-cookies']" }],
+    "optIn": [{ "waitForThenClick": ".u-cookie-frame [data-attr='btn-accept-cookies'], .modal [data-attr='btn-accept-cookies']" }],
+    "optOut": [{ "waitForThenClick": ".u-cookie-frame [data-attr='btn-reject-cookies'], .modal [data-attr='btn-reject-cookies']" }],
+    "test": [
+        {
+            "waitForVisible": ".u-cookie-frame [data-attr='btn-reject-cookies'], .modal [data-attr='btn-reject-cookies']",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

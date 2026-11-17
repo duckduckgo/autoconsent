@@ -1,0 +1,35 @@
+{
+    "name": "sian-it",
+    "vendorUrl": "https://www.sian.it/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?sian\\.it/"
+    },
+    "prehideSelectors": ["section.cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "section.cookie-banner .cookie-content > .btn-toolbar"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section.cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "section.cookie-banner .cookie-content > .btn-toolbar .btn-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "section.cookie-banner"
+        }
+    ],
+    "test": [
+        {
+            "visible": "section.cookie-banner",
+            "check": "none"
+        }
+    ]
+}

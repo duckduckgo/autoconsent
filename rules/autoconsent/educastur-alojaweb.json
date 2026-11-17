@@ -1,0 +1,13 @@
+{
+    "name": "educastur-alojaweb",
+    "vendorUrl": "https://alojaweb.educastur.es/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://alojaweb\\.educastur\\.es/"
+    },
+    "prehideSelectors": ["#educacentrosPrivacyPolicyLayer"],
+    "detectCmp": [{ "exists": "#educacentrosPrivacyPolicyLayer" }],
+    "detectPopup": [{ "visible": "#educacentrosPrivacyPolicyLayer" }],
+    "optIn": [{ "waitForThenClick": "#educacentrosPrivacyPolicyCloseButton" }],
+    "optOut": [{ "hide": "#educacentrosPrivacyPolicyLayer" }]
+}

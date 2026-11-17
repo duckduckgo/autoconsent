@@ -1,10 +1,7 @@
 {
     "name": "interia",
-    "runContext": {
-        "urlPattern": "^https://(www\\.)?interia\\.pl/"
-    },
     "prehideSelectors": ["form.rodo-popup"],
-    "detectCmp": [{ "exists": "form.rodo-popup" }],
+    "detectCmp": [{ "exists": "form.rodo-popup button.rodo-popup-main-settings" }],
     "detectPopup": [{ "visible": "form.rodo-popup" }],
     "optIn": [{ "waitForThenClick": "form.rodo-popup button.rodo-popup-main-agree" }],
     "optOut": [

@@ -1,0 +1,25 @@
+{
+    "name": "imyfone",
+    "cosmetic": true,
+    "prehideSelectors": [".base-footer > .cookie-policy"],
+    "detectCmp": [
+        {
+            "exists": ".base-footer > .cookie-policy .btn-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".base-footer > .cookie-policy"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".base-footer > .cookie-policy .btn-cookie"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".base-footer > .cookie-policy"
+        }
+    ]
+}

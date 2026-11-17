@@ -33,9 +33,8 @@
                     "then": [{ "waitForThenClick": "#pandectes-banner .cc-deny" }],
                     "else": [
                         { "waitForThenClick": "#pandectes-banner .cc-settings" },
-                        { "waitForVisible": ".pd-cp-ui-rejectAll" },
-                        { "click": ".pd-cp-ui-rejectAll" },
                         { "waitForVisible": ".pd-cp-ui-save" },
+                        { "click": ".pd-cp-ui-rejectAll" },
                         { "click": ".pd-cp-ui-save" }
                     ]
                 },

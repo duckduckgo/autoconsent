@@ -1,0 +1,9 @@
+{
+    "name": "cookiesinfo-closecookies",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#cookiesInfo #closeCookies" }],
+    "detectPopup": [{ "visible": "#cookiesInfo #closeCookies" }],
+    "optIn": [{ "waitForThenClick": "#cookiesInfo #closeCookies" }],
+    "optOut": [{ "waitForThenClick": "#cookiesInfo #closeCookies" }],
+    "test": [{ "waitForVisible": "#cookiesInfo", "check": "none", "timeout": 2000 }]
+}

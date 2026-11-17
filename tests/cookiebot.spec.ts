@@ -29,6 +29,7 @@ generateCMPTests(
         'https://www.dezeen.com/',
         'https://www.l3harris.com/',
         'https://www.gog.com/',
+        'https://www.timeshighereducation.com/',
     ],
     {},
 );

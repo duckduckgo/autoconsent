@@ -1,3 +1,3 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('bahn-de', ['https://www.bahn.de/']);
+generateCMPTests('bahn-de', ['https://www.bahn.de/', 'https://int.bahn.de/']);

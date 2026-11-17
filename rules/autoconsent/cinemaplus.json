@@ -1,0 +1,9 @@
+{
+    "name": "cinemaplus",
+    "prehideSelectors": ["section[role=\"alert\"]:has(button[aria-label=\"close cookie message\"])"],
+    "detectCmp": [{ "exists": "section[role=\"alert\"] button[aria-label=\"close cookie message\"]" }],
+    "detectPopup": [{ "visible": "section[role=\"alert\"] button[aria-label=\"close cookie message\"]" }],
+    "optIn": [{ "waitForThenClick": "section[role=\"alert\"] button.btn-primary" }],
+    "optOut": [{ "waitForThenClick": "section[role=\"alert\"] button[aria-label=\"close cookie message\"]" }],
+    "test": [{ "visible": "section[role=\"alert\"] button[aria-label=\"close cookie message\"]", "check": "none" }]
+}

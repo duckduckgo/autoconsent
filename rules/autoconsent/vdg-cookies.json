@@ -1,0 +1,36 @@
+{
+    "name": "vdg-cookies",
+    "prehideSelectors": ["#cookie-banner[data-once~='vdg-cookies-block']"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner[data-once~='vdg-cookies-block']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner[data-once~='vdg-cookies-block']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner__accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-banner__config"
+        },
+        {
+            "waitForThenClick": "#cookie-banner__reject"
+        },
+        {
+            "waitForVisible": "#cookie-banner[data-once~='vdg-cookies-block']",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analytics%22:false"
+        }
+    ]
+}

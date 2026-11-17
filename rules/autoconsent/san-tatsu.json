@@ -1,0 +1,32 @@
+{
+    "name": "san-tatsu.jp",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?san-tatsu\\.jp/"
+    },
+    "prehideSelectors": [".cookie:has(.js-cookie-close)"],
+    "detectCmp": [
+        {
+            "exists": "html.show-cookie .cookie .js-cookie-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "html.show-cookie .cookie .js-cookie-close"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "html.show-cookie .cookie .js-cookie-close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "html.show-cookie .cookie .js-cookie-close"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieAgree=1"
+        }
+    ]
+}

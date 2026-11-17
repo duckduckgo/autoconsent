@@ -1,0 +1,11 @@
+{
+    "name": "nhs-jobs",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?jobs\\.nhs\\.uk/"
+    },
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [{ "exists": "#cookie-banner #reject-cookies" }],
+    "detectPopup": [{ "visible": "#cookie-banner #reject-cookies" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner #accept-cookies" }],
+    "optOut": [{ "waitForThenClick": "#cookie-banner #reject-cookies" }]
+}

@@ -1,0 +1,30 @@
+{
+    "name": "consentaur",
+    "vendorUrl": "https://consentaur.com/",
+    "prehideSelectors": ["#consentaur-banner"],
+    "detectCmp": [
+        {
+            "exists": "#consentaur-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consentaur-banner .consentaur-btn-reject"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consentaur-banner .consentaur-btn-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#consentaur-banner .consentaur-btn-reject"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22marketing%22%3Afalse"
+        }
+    ]
+}

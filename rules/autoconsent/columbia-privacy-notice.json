@@ -1,0 +1,32 @@
+{
+    "name": "columbia-privacy-notice",
+    "vendorUrl": "https://cuit.columbia.edu/content/columbia-university-website-cookie-notice",
+    "cosmetic": true,
+    "prehideSelectors": ["#cu-privacy-notice"],
+    "detectCmp": [
+        {
+            "exists": "#cu-privacy-notice .cu-privacy-notice-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cu-privacy-notice"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cu-privacy-notice .cu-privacy-notice-close"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cu-privacy-notice"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cu-privacy-notice",
+            "check": "none"
+        }
+    ]
+}

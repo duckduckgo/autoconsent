@@ -1,0 +1,9 @@
+{
+    "name": "c-cookie-message",
+    "cosmetic": true,
+    "prehideSelectors": ["div.c-cookie-message.fixed"],
+    "detectCmp": [{ "exists": "div.c-cookie-message.fixed > div > button" }],
+    "detectPopup": [{ "visible": "div.c-cookie-message.fixed > div > button" }],
+    "optIn": [{ "waitForThenClick": "div.c-cookie-message.fixed > div > button" }],
+    "optOut": [{ "hide": "div.c-cookie-message.fixed" }]
+}

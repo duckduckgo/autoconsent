@@ -1,0 +1,69 @@
+{
+    "name": "npo-ccm",
+    "vendorUrl": "https://www.npo.nl/",
+    "prehideSelectors": ["ccm-notification"],
+    "detectCmp": [
+        {
+            "any": [
+                { "exists": ["ccm-notification", "#ccm_notification .ccm_btn--save"] },
+                { "exists": ["ccm-notification", "#ccm_notification #ccm_close"] }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["ccm-notification", "#ccm_notification"]
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ["ccm-notification", "#ccm_notification .ccm_btn--accept-all"]
+            },
+            "then": [
+                {
+                    "click": ["ccm-notification", "#ccm_notification .ccm_btn--accept-all"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["ccm-notification", "#ccm_notification #ccm_close"]
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["ccm-notification", "#ccm_notification .ccm_btn--deny-all"]
+            },
+            "then": [
+                {
+                    "click": ["ccm-notification", "#ccm_notification .ccm_btn--deny-all"]
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": ["ccm-notification", "#ccm_notification .ccm_btn--save"]
+                    },
+                    "then": [
+                        {
+                            "click": ["ccm-notification", "#ccm_notification input[type='radio'][value='false']"],
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": ["ccm-notification", "#ccm_notification .ccm_btn--save:not(.ccm_btn_disabled)"]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": ["ccm-notification", "#ccm_notification #ccm_close"]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

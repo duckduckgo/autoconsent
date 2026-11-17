@@ -1,0 +1,28 @@
+{
+    "name": "dfactory-cookie-notice",
+    "vendorUrl": "https://wordpress.org/plugins/cookie-notice/",
+    "prehideSelectors": ["#cookie-notice"],
+    "detectCmp": [{ "exists": "#cookie-notice :is(#cn-refuse-cookie, #cn-close-notice)" }],
+    "detectPopup": [{ "visible": "#cookie-notice.cookie-notice-visible #cn-notice-buttons" }],
+    "optIn": [
+        { "waitForThenClick": "#cookie-notice #cn-accept-cookie" },
+        { "waitForVisible": "#cookie-notice .cookie-notice-container", "check": "none", "timeout": 1000, "optional": true },
+        {
+            "if": { "visible": "#cookie-notice .cookie-notice-container" },
+            "then": [{ "hide": "#cookie-notice .cookie-notice-container" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#cookie-notice #cn-refuse-cookie" },
+            "then": [{ "waitForThenClick": "#cookie-notice #cn-refuse-cookie" }],
+            "else": [{ "waitForThenClick": "#cookie-notice #cn-close-notice" }]
+        },
+        { "waitForVisible": "#cookie-notice .cookie-notice-container", "check": "none", "timeout": 1000, "optional": true },
+        {
+            "if": { "visible": "#cookie-notice .cookie-notice-container" },
+            "then": [{ "hide": "#cookie-notice .cookie-notice-container" }]
+        }
+    ],
+    "test": [{ "cookieContains": "cookie_notice_accepted=false" }]
+}

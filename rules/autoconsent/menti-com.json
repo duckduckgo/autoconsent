@@ -1,0 +1,37 @@
+{
+    "name": "menti.com",
+    "vendorUrl": "https://www.menti.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?menti\\.com/"
+    },
+    "prehideSelectors": ["div.z-notification:has(a[href*='mentimeter.com/cookie-policy'])"],
+    "detectCmp": [
+        {
+            "exists": "div.z-notification a[href*='mentimeter.com/cookie-policy']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.z-notification a[href*='mentimeter.com/cookie-policy']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.z-notification:has(a[href*='mentimeter.com/cookie-policy']) > button",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div.z-notification:has(a[href*='mentimeter.com/cookie-policy']) > button",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "has_approved_cookie_policy"
+        }
+    ]
+}

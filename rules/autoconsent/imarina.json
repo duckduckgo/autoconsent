@@ -1,0 +1,25 @@
+{
+    "name": "imarina",
+    "cosmetic": true,
+    "prehideSelectors": ["body.page-ipublic #div-cookies"],
+    "detectCmp": [
+        {
+            "exists": "body.page-ipublic #div-cookies button[onclick=\"acceptCookies()\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body.page-ipublic #div-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "body.page-ipublic #div-cookies button[onclick=\"acceptCookies()\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "body.page-ipublic #div-cookies"
+        }
+    ]
+}

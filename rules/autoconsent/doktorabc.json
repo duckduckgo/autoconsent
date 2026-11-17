@@ -1,0 +1,44 @@
+{
+    "name": "doktorabc",
+    "vendorUrl": "https://www.doktorabc.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?doktorabc\\.com/"
+    },
+    "prehideSelectors": ["#cookiebanner.cookieAcceptBar"],
+    "detectCmp": [
+        {
+            "exists": "#cookiebanner.cookieAcceptBar #cookiebot-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiebanner.cookieAcceptBar #cookiebot-container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiebot-container #btn_accept_cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiebot-container div.manage-preferences"
+        },
+        {
+            "waitForVisible": "#cookiePreferencesModal-card"
+        },
+        {
+            "click": "#cookiePreferencesModal-card input[type=checkbox][data-type]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#cookiePreferencesModal-card #cookieModalButton"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "marketing%3Afalse"
+        }
+    ]
+}

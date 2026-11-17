@@ -1,0 +1,35 @@
+{
+    "name": "lawwwing",
+    "vendorUrl": "https://lawwwing.com/",
+    "prehideSelectors": ["#lw-widget-root #lw-banner"],
+    "detectCmp": [
+        {
+            "exists": "#lw-widget-root #lw-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#lw-widget-root #lw-banner.lw-banner-visible"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#lw-banner.lw-banner-visible .lw-consent-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#lw-banner.lw-banner-visible .lw-consent-reject"
+        },
+        {
+            "waitForVisible": "#lw-banner.lw-banner-visible",
+            "check": "none",
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"marketing\":{\"wanted\":false}"
+        }
+    ]
+}

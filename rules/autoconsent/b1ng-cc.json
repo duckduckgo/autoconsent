@@ -1,0 +1,23 @@
+{
+    "name": "b1ng-cc",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?(giorni-festivi\\.it|feiertag\\.co|dia-festivo\\.es)/"
+    },
+    "prehideSelectors": ["#b1ng-cc"],
+    "detectCmp": [{ "exists": "#b1ng-cc .b1ng-cc-no" }],
+    "detectPopup": [{ "visible": "#b1ng-cc .b1ng-cc-no" }],
+    "optIn": [{ "waitForThenClick": "#b1ng-cc .b1ng-cc-yes" }],
+    "optOut": [
+        { "waitForThenClick": "#b1ng-cc .b1ng-cc-no" },
+        { "waitFor": ".fc-cta-do-not-consent,.fc-cta-manage-options,.fc-li-only-placeholder", "timeout": 5000, "optional": true },
+        {
+            "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options,.fc-li-only-placeholder" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options", "optional": true },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "b1ng_consent=n" }]
+}

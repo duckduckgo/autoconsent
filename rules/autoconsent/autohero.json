@@ -1,0 +1,49 @@
+{
+    "name": "autohero",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?autohero\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "button[data-qa-selector=\"cookie-consent-configure\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "button[data-qa-selector=\"cookie-consent-configure\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "button[data-qa-selector=\"cookie-consent-accept-all\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "button[data-qa-selector=\"cookie-consent-configure\"]"
+        },
+        {
+            "waitForVisible": "label[data-qa-selector=\"input-box\"][data-qa-selector-value=\"MARKETING\"]"
+        },
+        {
+            "if": {
+                "exists": "label[data-qa-selector=\"input-box\"][data-qa-value=\"true\"]:not(.input-box__disabled) input"
+            },
+            "then": [
+                {
+                    "click": "label[data-qa-selector=\"input-box\"][data-qa-value=\"true\"]:not(.input-box__disabled) input",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "button[data-qa-selector=\"cookie-consent-configure\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "consent=0"
+        }
+    ]
+}

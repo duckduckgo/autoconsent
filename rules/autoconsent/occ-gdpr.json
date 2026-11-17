@@ -1,0 +1,17 @@
+{
+    "name": "occ-gdpr",
+    "prehideSelectors": [".js-occ-gdrp-modal"],
+    "detectCmp": [{ "exists": ".js-occ-gdrp-modal .js-occ-gdrp-modal__btn-modal-gdpr-settings" }],
+    "detectPopup": [{ "visible": ".js-occ-gdrp-modal.is-visible .js-occ-gdrp-modal__btn-modal-gdpr-settings" }],
+    "optIn": [{ "waitForThenClick": ".js-occ-gdrp-modal .js-occ-gdrp-modal__btn-modal-gdpr" }],
+    "optOut": [
+        { "waitForThenClick": ".js-occ-gdrp-modal .js-occ-gdrp-modal__btn-modal-gdpr-settings:not(.settings-active)" },
+        { "waitForVisible": ".js-occ-gdrp-modal .js-occ-gdrp-modal__btn-modal-gdpr-settings.settings-active" },
+        {
+            "if": { "exists": ".js-occ-gdrp-modal .js-cookie-category:checked" },
+            "then": [{ "click": ".js-occ-gdrp-modal .js-cookie-category:checked", "all": true }]
+        },
+        { "click": ".js-occ-gdrp-modal .js-occ-gdrp-modal__btn-modal-gdpr-settings.settings-active" }
+    ],
+    "test": [{ "cookieContains": "occ_gdpr_settings" }]
+}

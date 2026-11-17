@@ -1,0 +1,44 @@
+{
+    "name": "nowaera",
+    "prehideSelectors": [".js-ne-piwik-cookies", ".js-ne-piwik-cookies-overlay"],
+    "detectCmp": [
+        {
+            "exists": ".js-ne-piwik-cookies .ne-piwik-cookies__btn-manage"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-ne-piwik-cookies .ne-piwik-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".ne-piwik-cookies__btn-save-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".ne-piwik-cookies__btn-manage"
+        },
+        {
+            "waitForVisible": ".ne-piwik-modal__btn-check-choosen"
+        },
+        {
+            "comment": "untick any pre-selected optional purposes",
+            "click": ".ne-piwik-modal input.ne-piwik-modal__checkbox-input:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": ".ne-piwik-modal__btn-check-choosen"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ppms_privacy_"
+        },
+        {
+            "cookieContains": "%22analytics%22:{%22status%22:0"
+        }
+    ]
+}

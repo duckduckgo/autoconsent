@@ -1,0 +1,13 @@
+{
+    "name": "aceodds.com",
+    "runContext": { "urlPattern": "^https?://(www\\.)?aceodds\\.com/" },
+    "prehideSelectors": ["#cookie-consent-banner"],
+    "detectCmp": [{ "exists": "#cookie-consent-banner #cookie-consent-accept" }],
+    "detectPopup": [{ "visible": "#cookie-consent-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookie-consent-accept", "retry": 10, "retryInterval": 500 }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-consent-accept", "retry": 10, "retryInterval": 500 },
+        { "waitForVisible": "#cookie-consent-banner", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "cookie-consent=1" }]
+}

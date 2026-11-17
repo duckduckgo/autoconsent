@@ -1,0 +1,13 @@
+{
+    "name": "ofsted-reports-cosmetic",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://reports\\.ofsted\\.gov\\.uk/"
+    },
+    "prehideSelectors": [".cookie-banner:has(.cookie-banner__close)"],
+    "detectCmp": [{ "exists": ".cookie-banner .cookie-banner__close" }],
+    "detectPopup": [{ "visible": ".cookie-banner .cookie-banner__close" }],
+    "optIn": [{ "waitForThenClick": ".cookie-banner .cookie-banner__close" }],
+    "optOut": [{ "hide": ".cookie-banner:has(.cookie-banner__close)" }],
+    "test": [{ "visible": ".cookie-banner .cookie-banner__close", "check": "none" }]
+}

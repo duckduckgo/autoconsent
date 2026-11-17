@@ -4,23 +4,45 @@
         "urlPattern": "^https?://(www\\.)?lego\\.com/"
     },
     "prehideSelectors": ["[class*=\"ConsentModal_consent-modal__modal-overlay\"]"],
-    "detectCmp": [{ "exists": "[data-test=\"cookie-necessary-button\"]" }],
-    "detectPopup": [{ "visible": "[data-test=\"cookie-necessary-button\"]" }],
+    "detectCmp": [
+        {
+            "any": [{ "exists": "[data-test=\"cookie-necessary-button\"]" }, { "exists": "[data-test=\"age-gate-overlay\"]" }]
+        }
+    ],
+    "detectPopup": [
+        {
+            "comment": "the consent modal is only usable after the visitor leaves the site selector gate",
+            "any": [{ "visible": "[data-test=\"cookie-necessary-button\"]" }, { "visible": "[data-test=\"age-gate-overlay\"]" }]
+        }
+    ],
     "optOut": [
+        {
+            "comment": "without AGE_GATE the modal is briefly shown, then replaced by the site selector gate and re-rendered after it",
+            "any": [{ "cookieContains": "AGE_GATE=" }, { "waitForVisible": "[data-test=\"age-gate-overlay\"]", "timeout": 3000 }],
+            "optional": true
+        },
+        { "waitForVisible": "[data-test=\"age-gate-overlay\"]", "check": "none", "timeout": 120000 },
         { "waitForThenClick": "[data-test=\"cookie-necessary-button\"]" },
         {
-            "any": [{ "cookieContains": "AGE_GATE=" }, { "waitForVisible": "[data-test=\"age-gate-overlay\"]", "timeout": 1000 }],
+            "any": [{ "cookieContains": "AGE_GATE=" }, { "waitForVisible": "[data-test=\"age-gate-overlay\"]", "timeout": 3000 }],
             "optional": true
         },
         {
             "if": { "visible": "[data-test=\"age-gate-overlay\"]" },
             "then": [
-                { "waitForVisible": "[data-test=\"age-gate-overlay\"]", "check": "none", "timeout": 30000 },
+                { "waitForVisible": "[data-test=\"age-gate-overlay\"]", "check": "none", "timeout": 120000 },
                 { "waitForThenClick": "[data-test=\"cookie-necessary-button\"]", "timeout": 5000 }
             ],
             "optional": true
         }
     ],
-    "optIn": [{ "waitForThenClick": "[data-test=\"cookie-accept-all\"]" }],
+    "optIn": [
+        {
+            "any": [{ "cookieContains": "AGE_GATE=" }, { "waitForVisible": "[data-test=\"age-gate-overlay\"]", "timeout": 3000 }],
+            "optional": true
+        },
+        { "waitForVisible": "[data-test=\"age-gate-overlay\"]", "check": "none", "timeout": 120000 },
+        { "waitForThenClick": "[data-test=\"cookie-accept-all\"]" }
+    ],
     "test": [{ "cookieContains": "%22key%22%3A%22analytics%22%2C%22value%22%3Afalse" }]
 }

@@ -1,0 +1,36 @@
+{
+    "name": "rejestr.io",
+    "vendorUrl": "https://rejestr.io/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?rejestr\\.io/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#footer > .container > .d-flex > button.btn-outline-primary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#footer > .container > .d-flex > button.btn-outline-primary"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#footer > .container > .d-flex > button.btn-outline-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#footer > .container > .d-flex > button.btn-outline-primary"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#footer > .container > .d-flex > button.btn-outline-primary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

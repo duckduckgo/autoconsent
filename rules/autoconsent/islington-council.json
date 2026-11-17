@@ -1,0 +1,16 @@
+{
+    "name": "islington-council",
+    "prehideSelectors": [".m-cookie-banner[data-id=\"cookie-banner\"]"],
+    "detectCmp": [{ "exists": ".m-cookie-banner[data-id=\"cookie-banner\"] [data-id=\"cookie-manage\"]" }],
+    "detectPopup": [{ "visible": ".m-cookie-banner[data-id=\"cookie-banner\"]" }],
+    "optIn": [
+        { "waitFor": "#ccc-icon", "timeout": 10000 },
+        { "waitForThenClick": ".m-cookie-banner[data-id=\"cookie-banner\"] [data-id=\"cookie-accept\"]" }
+    ],
+    "optOut": [
+        { "waitFor": "#ccc-icon", "timeout": 10000 },
+        { "waitForThenClick": ".m-cookie-banner[data-id=\"cookie-banner\"] [data-id=\"cookie-manage\"]" },
+        { "waitForThenClick": "#ccc-module .ccc-reject-button" }
+    ],
+    "test": [{ "cookieContains": "\"optionalCookies\":{" }, { "cookieContains": "\"revoked\"" }]
+}

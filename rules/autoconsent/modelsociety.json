@@ -1,0 +1,26 @@
+{
+    "name": "modelsociety",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?modelsociety\\.com/"
+    },
+    "prehideSelectors": ["[role='region'][aria-label='Cookie consent']"],
+    "detectCmp": [{ "exists": "[role='region'][aria-label='Cookie consent']" }],
+    "detectPopup": [{ "visible": "[role='region'][aria-label='Cookie consent']" }],
+    "optIn": [{ "waitForThenClick": "xpath///div[@role='region'][@aria-label='Cookie consent']//button[normalize-space(.)='Accept']" }],
+    "optOut": [
+        { "waitForThenClick": "xpath///div[@role='region'][@aria-label='Cookie consent']//button[normalize-space(.)='Reject']" },
+        {
+            "comment": "a confirmation dialog opens after rejecting",
+            "waitForThenClick": "[role='dialog'][data-diagnostic-boundary='modal-shell'] button[aria-label='Close']",
+            "timeout": 3000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "[role='region'][aria-label='Cookie consent']",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

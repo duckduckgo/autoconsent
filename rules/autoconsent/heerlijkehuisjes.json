@@ -1,0 +1,18 @@
+{
+    "name": "heerlijkehuisjes",
+    "vendorUrl": "https://www.heerlijkehuisjes.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?heerlijkehuisjes\\.nl/"
+    },
+    "prehideSelectors": [".cookie-policy[role=dialog]"],
+    "detectCmp": [{ "exists": ".cookie-policy[role=dialog][aria-labelledby=cookie-policy-heading]" }],
+    "detectPopup": [{ "visible": ".cookie-policy[role=dialog][aria-labelledby=cookie-policy-heading]" }],
+    "optIn": [{ "waitForThenClick": ".cookie-policy[role=dialog] button.cta" }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-policy[role=dialog] button.clear" },
+        { "waitForVisible": ".cookie-policy[role=dialog] [data-ref=marketing]" },
+        { "click": ".cookie-policy[role=dialog] .cookie-checkmark.checkable.checked", "all": true, "optional": true },
+        { "waitForThenClick": ".cookie-policy[role=dialog] button.orange" }
+    ],
+    "test": [{ "cookieContains": "\"cookie_consent_beste_ervaring\":false" }]
+}

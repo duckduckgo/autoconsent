@@ -1,0 +1,63 @@
+{
+    "name": "e-grip",
+    "vendorUrl": "https://www.e-grip.nl/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".cookieconsent form .hidden_accept_all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookieconsent:not(.hidden) form input[type=submit]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookieconsent form input[type=submit]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cookie-consent-deny"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookie-consent-deny"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cookieconsent form button.button--textual, #cookie-consent-button"
+                },
+                {
+                    "waitFor": ".cookieconsent .hidden_accept_all[value=no]",
+                    "timeout": 2000
+                },
+                {
+                    "if": {
+                        "exists": "#cookie_category_marketing:checked"
+                    },
+                    "then": [
+                        {
+                            "click": "#cookie_category_marketing"
+                        }
+                    ]
+                },
+                {
+                    "click": ".cookieconsent form input[type=submit]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_consent="
+        },
+        {
+            "cookieContains": "cookie_category_marketing=on",
+            "negated": true
+        }
+    ]
+}

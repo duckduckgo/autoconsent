@@ -97,6 +97,13 @@ export const snippets = {
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_AYLO_COOKIE_MANAGER_READY: () => !!(window.wl_cookie_consent_manager || window._Cookie_Consent_Manager_brand),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
+    // the close handler listens for mouseup, which element.click() does not dispatch
+    EVAL_BING_NOTICE_CLOSE: () => {
+        const close = document.querySelector('#bnp_ttc_close');
+        close.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window }));
+        close.click();
+        return true;
+    },
     EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT: () => !!(window.consentManager && window.consentManager.version),
     EVAL_BORLABS_0: () =>
         !JSON.parse(
@@ -148,6 +155,27 @@ export const snippets = {
             .forEach((i) => i.getAttribute('aria-checked') === 'true' && i.click()) || true,
     EVAL_COOKIEINFORMATION_0: () => CookieInformation.declineAllCategories() || true,
     EVAL_COOKIEINFORMATION_1: () => CookieInformation.submitAllCategories() || true,
+    // banner button order and meaning are configurable per site, so set the consent levels through the public API
+    EVAL_COOKIEREPORTS_OPT_OUT: () => {
+        const cr = window._cookiereports;
+        if (typeof cr?.saveConsent !== 'function') return false;
+        cr.saveConsent({ 1: true, 2: false, 3: false, 4: false, 5: false });
+        cr.processConsent('banner', { trigger: 'ok' });
+        cr.hideBanner();
+        return true;
+    },
+    EVAL_COOKIEREPORTS_OPT_IN: () => {
+        const cr = window._cookiereports;
+        if (typeof cr?.saveConsent !== 'function') return false;
+        cr.saveConsent({ 1: true, 2: true, 3: true, 4: true, 5: true });
+        cr.processConsent('banner', { trigger: 'ok' });
+        cr.hideBanner();
+        return true;
+    },
+    EVAL_COOKIEREPORTS_TEST: () => {
+        const levels = window._cookiereports?.loadConsent?.();
+        return !!levels && Object.keys(levels).length > 0 && Object.values(levels).every((v) => !v);
+    },
     // turn the single-button form into a decline submission, same fields as the CMP's own decline form
     EVAL_EE_CONSENT_DECLINE_0: () =>
         document.querySelectorAll('#cookieConsentFormAccept input[name^="ee:cookies_"]').forEach((i) => (i.value = 'n')) || true,
@@ -252,6 +280,8 @@ export const snippets = {
     EVAL_TEALIUM_2: () => utag.gdpr.setConsentValue(true) || true,
     EVAL_TEALIUM_3: () => utag.gdpr.getConsentState() !== 1,
     EVAL_TEALIUM_DONOTSELL_CHECK: () => utag.gdpr.dns?.getDnsState() !== 1,
+    // 0 means no stored decision; otherwise the user reopened the prompt themselves
+    EVAL_TEALIUM_NO_DECISION: () => utag.gdpr.getConsentState() === 0,
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
@@ -268,6 +298,7 @@ export const snippets = {
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
     EVAL_WBD_LTP_CLOSE: () => document.querySelector('dialog#ltp-dialog').close() || true,
+    EVAL_ZOHO_TEST: () => localStorage.getItem('zglobal_Acookie_optOut') === '3',
 };
 
 export function getFunctionBody(snippetFunc: () => any) {

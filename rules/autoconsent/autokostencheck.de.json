@@ -1,0 +1,50 @@
+{
+    "name": "autokostencheck.de",
+    "_metadata": {
+        "vendorUrl": "https://www.autokostencheck.de/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?autokostencheck\\.de/"
+    },
+    "prehideSelectors": [".cookiefirst-root", "#cmpwrapper"],
+    "detectCmp": [{ "exists": "script[src*='consent.cookiefirst.com'],.cookiefirst-root,#cmpwrapper" }],
+    "detectPopup": [
+        {
+            "any": [
+                { "visible": ".cookiefirst-root button[data-cookiefirst-action=adjust]", "check": "any" },
+                { "visible": ["#cmpwrapper", "#cmpbox .cmpmore"], "check": "any" }
+            ]
+        }
+    ],
+    "optIn": [
+        { "waitForVisible": ["#cmpwrapper", "#cmpbox .cmpmore"], "timeout": 2000, "check": "any", "optional": true },
+        {
+            "if": { "visible": ["#cmpwrapper", "#cmpbox .cmpmore"], "check": "any" },
+            "then": [{ "eval": "EVAL_CONSENTMANAGER_4" }]
+        },
+        { "waitForVisible": ".cookiefirst-root button[data-cookiefirst-action=accept]", "timeout": 2000, "check": "any", "optional": true },
+        {
+            "if": { "visible": ".cookiefirst-root button[data-cookiefirst-action=accept]", "check": "any" },
+            "then": [{ "click": ".cookiefirst-root button[data-cookiefirst-action=accept]" }]
+        }
+    ],
+    "optOut": [
+        { "waitForVisible": ["#cmpwrapper", "#cmpbox .cmpmore"], "timeout": 2000, "check": "any", "optional": true },
+        {
+            "if": { "visible": ["#cmpwrapper", "#cmpbox .cmpmore"], "check": "any" },
+            "then": [{ "eval": "EVAL_CONSENTMANAGER_3" }]
+        },
+        { "waitForVisible": ".cookiefirst-root button[data-cookiefirst-action=adjust]", "timeout": 2000, "check": "any", "optional": true },
+        {
+            "if": { "visible": ".cookiefirst-root button[data-cookiefirst-action=adjust]", "check": "any" },
+            "then": [
+                { "click": ".cookiefirst-root button[data-cookiefirst-action=adjust]" },
+                { "waitForThenClick": "button[data-cookiefirst-action=reject_second]" }
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_CONSENTMANAGER_5" }, { "eval": "EVAL_COOKIEFIRST_0" }]
+}

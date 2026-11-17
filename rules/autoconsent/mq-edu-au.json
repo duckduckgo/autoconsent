@@ -1,0 +1,26 @@
+{
+    "name": "mq.edu.au",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?mq\\.edu\\.au/"
+    },
+    "prehideSelectors": ["mq-alert-cookies"],
+    "detectCmp": [{ "exists": ["mq-alert-cookies", ".alert"] }],
+    "detectPopup": [{ "visible": ["mq-alert-cookies", ".alert"], "check": "any" }],
+    "optIn": [
+        {
+            "if": { "exists": ["mq-alert-cookies[variant=tiktok]", ".alert .button.primary"] },
+            "then": [{ "waitForThenClick": ["mq-alert-cookies[variant=tiktok]", ".alert .button.primary"] }],
+            "else": [{ "waitForThenClick": ["mq-alert-cookies[variant=cookies]", ".alert .button-container button"] }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ["mq-alert-cookies[variant=tiktok]", ".alert .button.secondary"] },
+            "then": [{ "waitForThenClick": ["mq-alert-cookies[variant=tiktok]", ".alert .button.secondary"] }],
+            "else": [{ "waitForThenClick": ["mq-alert-cookies[variant=cookies]", ".alert .button-container button"] }]
+        }
+    ],
+    "test": [{ "waitForVisible": ["mq-alert-cookies", ".alert"], "check": "none", "timeout": 2000 }]
+}

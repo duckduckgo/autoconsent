@@ -1,0 +1,21 @@
+{
+    "name": "bundesarchiv-cookiebanner",
+    "prehideSelectors": [".cookiebanner--tablist", "#cookiebanner[data-cookiebanner]"],
+    "detectCmp": [{ "exists": ".cookiebanner [data-consent=\"acceptSelection\"]" }],
+    "detectPopup": [{ "visible": ".cookiebanner [data-consent=\"acceptSelection\"]" }],
+    "optIn": [
+        {
+            "if": { "exists": ".cookiebanner [data-consent=\"acceptAll\"]" },
+            "then": [{ "waitForThenClick": ".cookiebanner [data-consent=\"acceptAll\"]" }],
+            "else": [{ "waitForThenClick": ".cookiebanner [data-consent=\"acceptSelection\"]" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".cookiebanner input[type=\"checkbox\"]:checked:not(:disabled)" },
+            "then": [{ "click": ".cookiebanner input[type=\"checkbox\"]:checked:not(:disabled) + label", "all": true }]
+        },
+        { "waitForThenClick": ".cookiebanner [data-consent=\"acceptSelection\"]" }
+    ],
+    "test": [{ "waitForVisible": ".cookiebanner [data-consent=\"acceptSelection\"]", "timeout": 2000, "check": "none" }]
+}

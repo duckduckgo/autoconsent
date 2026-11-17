@@ -1,0 +1,40 @@
+{
+    "name": "hmrc-tracking-consent",
+    "prehideSelectors": [".cbanner-govuk-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ".cbanner-govuk-cookie-banner button[value=reject]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cbanner-govuk-cookie-banner button[value=reject]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cbanner-govuk-cookie-banner button[value=accept]"
+        },
+        {
+            "waitForThenClick": ".cbanner-govuk-cookie-banner button:not([value])",
+            "timeout": 3000,
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cbanner-govuk-cookie-banner button[value=reject]"
+        },
+        {
+            "comment": "a confirmation message with a hide button replaces the banner after the choice",
+            "waitForThenClick": ".cbanner-govuk-cookie-banner button:not([value])",
+            "timeout": 3000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22measurement%22:false"
+        }
+    ]
+}

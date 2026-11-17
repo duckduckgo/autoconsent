@@ -1,0 +1,12 @@
+{
+    "name": "krieger-consent-form",
+    "prehideSelectors": [".consentForm__container"],
+    "detectCmp": [{ "exists": ".consentForm__root .consentForm__acceptButton[data-accept-action=selected]" }],
+    "detectPopup": [{ "visible": ".consentForm__root" }],
+    "optIn": [{ "waitForThenClick": ".consentForm__acceptButton[data-accept-action=all] button" }],
+    "optOut": [
+        { "click": ".consentForm__optOutItem input:checked", "all": true, "optional": true },
+        { "waitForThenClick": ".consentForm__acceptButton[data-accept-action=selected] button" }
+    ],
+    "test": [{ "cookieContains": "optOutAccepted=true" }]
+}

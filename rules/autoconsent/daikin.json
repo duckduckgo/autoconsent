@@ -1,0 +1,10 @@
+{
+    "name": "daikin",
+    "vendorUrl": "https://www.daikin.eu/",
+    "prehideSelectors": [".cookie-notice.js-cookie-modal"],
+    "detectCmp": [{ "exists": ".cookie-notice.js-cookie-modal .js-accept-minimal-cookies" }],
+    "detectPopup": [{ "visible": ".cookie-notice.js-cookie-modal" }],
+    "optIn": [{ "waitForThenClick": ".cookie-notice.js-cookie-modal .js-accept-all-cookies" }],
+    "optOut": [{ "waitForThenClick": ".cookie-notice.js-cookie-modal .js-accept-minimal-cookies" }],
+    "test": [{ "cookieContains": "acceptCookiePolicy-marketing=false" }]
+}

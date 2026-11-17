@@ -1,0 +1,42 @@
+{
+    "name": "orw-cookie-banner",
+    "comment": "Shopify theme cookie drawer with only an Accept button; it blurs the page via body classes, so hide it and remove them.",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "prehideSelectors": ["#CookieBanner.cookie-banner.drawer"],
+    "detectCmp": [
+        {
+            "exists": "#CookieBanner.cookie-banner.drawer"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#CookieBanner.cookie-banner.drawer.opened"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#CookieBanner.cookie-banner .accept"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#CookieBanner.cookie-banner.drawer"
+        },
+        {
+            "removeClass": "cookie-not-accepted",
+            "selector": "body",
+            "optional": true
+        },
+        {
+            "removeClass": "drawer-opt",
+            "selector": "body",
+            "optional": true
+        },
+        {
+            "removeClass": "show-overlay",
+            "selector": "body",
+            "optional": true
+        }
+    ]
+}

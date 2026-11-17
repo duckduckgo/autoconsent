@@ -1,0 +1,47 @@
+{
+    "name": "dtu-findit",
+    "vendorUrl": "https://findit.dtu.dk/",
+    "runContext": {
+        "urlPattern": "^https?://findit\\.dtu\\.dk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".js-overlay .js-consent .js-consent-selected"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-overlay .js-consent .js-consent-selected"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-consent .js-consent-allow"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".js-consent .js-consent-option.is-selected[data-value=stat]"
+            },
+            "then": [
+                {
+                    "click": ".js-consent .js-consent-option.is-selected[data-value=stat]"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".js-consent .js-consent-selected"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cks=req"
+        },
+        {
+            "cookieContains": "stat",
+            "negated": true
+        }
+    ]
+}

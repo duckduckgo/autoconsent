@@ -1,0 +1,35 @@
+{
+    "name": "head-fi",
+    "vendorUrl": "https://www.head-fi.org/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?head-fi\\.org/"
+    },
+    "prehideSelectors": [".notices--bottom_fixer .js-notice[data-notice-id=\"1\"]"],
+    "detectCmp": [
+        {
+            "exists": ".notices--bottom_fixer .js-notice[data-notice-id=\"1\"] .js-noticeDismiss"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".notices--bottom_fixer .js-notice[data-notice-id=\"1\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".notices--bottom_fixer .js-notice[data-notice-id=\"1\"] .js-noticeDismiss"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".notices--bottom_fixer .js-notice[data-notice-id=\"1\"] .js-noticeDismiss"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".notices--bottom_fixer .js-notice[data-notice-id=\"1\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

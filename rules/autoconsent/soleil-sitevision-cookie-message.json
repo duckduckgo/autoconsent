@@ -1,0 +1,32 @@
+{
+    "name": "soleil-sitevision-cookie-message",
+    "vendorUrl": "https://soleil.se/",
+    "prehideSelectors": [".sol-cookie-message"],
+    "detectCmp": [
+        {
+            "exists": ".sol-cookie-message .sol-cookie-ok"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".sol-cookie-message .sol-cookie-ok"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".sol-cookie-message .sol-cookie-ok"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "notice-only banner: the only button acknowledges it",
+            "waitForThenClick": ".sol-cookie-message .sol-cookie-ok"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".sol-cookie-message",
+            "check": "none"
+        }
+    ]
+}

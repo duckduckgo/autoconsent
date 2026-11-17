@@ -7,7 +7,7 @@ import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP, AutoConsentHeuristicCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
 import { isTopFrame, normalizeConfig, scheduleWhenIdle } from './utils';
-import { checkHeuristicPatterns } from './heuristics';
+import { checkHeuristicPatterns } from './heuristic-classify';
 import { decodeRules } from './encoding';
 
 // Re-export types and functions for external use
@@ -350,7 +350,7 @@ export default class AutoConsent {
     detectHeuristics() {
         if (this.config.enableHeuristicDetection) {
             this.config.performanceLoggingEnabled && performance.mark('detectHeuristicsStart');
-            const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText || '');
+            const { patterns, snippets } = checkHeuristicPatterns(document.documentElement?.innerText || '', 'page');
             if (
                 patterns.length > 0 &&
                 (patterns.length !== this.state.heuristicPatterns.length || this.state.heuristicPatterns.some((p, i) => p !== patterns[i]))

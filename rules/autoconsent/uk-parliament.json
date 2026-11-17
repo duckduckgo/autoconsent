@@ -1,0 +1,19 @@
+{
+    "name": "uk-parliament",
+    "vendorUrl": "https://www.parliament.uk/",
+    "prehideSelectors": [".cookie-manager > #cookiebanner", "#p-cookie-banner"],
+    "detectCmp": [{ "exists": ".cookie-manager #cookiebanner #rejectall, #p-cookie-banner #p-cookie-banner__button--reject" }],
+    "detectPopup": [{ "visible": ".cookie-manager > #cookiebanner, #p-cookie-banner" }],
+    "optIn": [{ "waitForThenClick": ".cookie-manager #cookiebanner #allowall, #p-cookie-banner #p-cookie-banner__button--accept" }],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-manager #cookiebanner #rejectall, #p-cookie-banner #p-cookie-banner__button--reject"
+        },
+        {
+            "comment": "some sites keep the banner visible via CSS after the choice is saved",
+            "hide": "#p-cookie-banner",
+            "optional": true
+        }
+    ],
+    "test": [{ "cookieContains": "uk-parliament.cookie-policy=eyJhbmFseXRpY3MiOmZhbHNl" }]
+}

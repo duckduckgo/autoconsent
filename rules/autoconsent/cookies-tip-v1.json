@@ -1,0 +1,9 @@
+{
+    "name": "cookies-tip-v1",
+    "prehideSelectors": [".cookies-tip-v1-consent-container"],
+    "detectCmp": [{ "exists": ".cookies-tip-v1-consent-container [data-cky-tag=close-button]" }],
+    "detectPopup": [{ "visible": ".cookies-tip-v1-consent-container" }],
+    "optIn": [{ "waitForThenClick": ".cookies-tip-v1-consent-container [data-cky-tag=accept-button]" }],
+    "optOut": [{ "waitForThenClick": ".cookies-tip-v1-consent-container [data-cky-tag=close-button]" }],
+    "test": [{ "waitForVisible": ".cookies-tip-v1-consent-container", "timeout": 1000, "check": "none" }]
+}

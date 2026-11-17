@@ -1,0 +1,29 @@
+{
+    "name": "trust360",
+    "prehideSelectors": [".T360PurposeOverviewBanner"],
+    "detectCmp": [
+        {
+            "exists": ".T360PurposeOverviewBanner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".T360PurposeOverviewBanner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".T360PurposeOverviewBanner :is(.T360_Banner_Accept, .T360Banner_Accept)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".T360PurposeOverviewBanner :is(.T360_Banner_Reject, .T360Banner_Reject)"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_trust360_="
+        }
+    ]
+}

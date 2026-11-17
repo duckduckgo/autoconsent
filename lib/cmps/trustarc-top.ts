@@ -9,6 +9,7 @@ const shortcutOptIn = '#truste-consent-button';
 const popupContent = '#truste-consent-content';
 const bannerOverlay = '#trustarc-banner-overlay';
 const bannerContainer = '#truste-consent-track';
+const prefCenterDeclineAll = ['.truste_popframe.trustarc_newcm_container', 'button[data-button-key="decline_all"]'];
 
 export default class TrustArcTop extends AutoConsentCMPBase {
     name = 'TrustArc-top';
@@ -20,11 +21,13 @@ export default class TrustArcTop extends AutoConsentCMPBase {
 
     _shortcutButton: HTMLElement | null;
     _optInDone: boolean;
+    _optOutDone: boolean;
 
     constructor(autoconsentInstance: AutoConsent) {
         super(autoconsentInstance);
         this._shortcutButton = null; // indicates if the "reject all" button is detected
         this._optInDone = false;
+        this._optOutDone = false;
     }
 
     get hasSelfTest(): boolean {
@@ -32,7 +35,7 @@ export default class TrustArcTop extends AutoConsentCMPBase {
     }
 
     get isIntermediate(): boolean {
-        if (this._optInDone) {
+        if (this._optInDone || this._optOutDone) {
             return false;
         }
         return !this._shortcutButton;
@@ -65,6 +68,12 @@ export default class TrustArcTop extends AutoConsentCMPBase {
         // hide elements permanently, so user doesn't see the popup
         hideElements(getStyleElement(), `.truste_popframe, .truste_overlay, .truste_box_overlay, ${bannerContainer}`);
         await this.click(cookieSettingsButton);
+
+        // newer versions render the preference center in a shadow root on the main page instead of an iframe
+        if (await this.waitForElement(prefCenterDeclineAll, 3000)) {
+            this._optOutDone = true;
+            await this.click(prefCenterDeclineAll);
+        }
 
         // schedule cleanup
         setTimeout(() => {

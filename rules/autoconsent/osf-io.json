@@ -1,0 +1,29 @@
+{
+    "name": "osf.io",
+    "vendorUrl": "https://osf.io/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?osf\\.io/"
+    },
+    "prehideSelectors": ["osf-cookie-consent-banner"],
+    "detectCmp": [
+        {
+            "exists": "osf-cookie-consent-banner p-message"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "osf-cookie-consent-banner p-message"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "osf-cookie-consent-banner p-message button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "osf-cookie-consent-banner"
+        }
+    ]
+}

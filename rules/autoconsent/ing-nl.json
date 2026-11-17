@@ -1,0 +1,54 @@
+{
+    "name": "ing-nl",
+    "vendorUrl": "https://www.ing.nl/",
+    "runContext": {
+        "urlPattern": "^https://([a-z0-9-]+\\.)?ing\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ["ing-app-open-page", "#cookieDialog", "ing-feat-cookie-dialog-nl"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": [
+                "ing-app-open-page",
+                "#cookieDialog",
+                "ing-feat-cookie-dialog-nl",
+                "ing-feat-global-cookie-preference",
+                "cookie-preference-main",
+                "[data-testid=reject]"
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [
+                "ing-app-open-page",
+                "#cookieDialog",
+                "ing-feat-cookie-dialog-nl",
+                "ing-feat-global-cookie-preference",
+                "cookie-preference-main",
+                "[data-testid=accept]"
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [
+                "ing-app-open-page",
+                "#cookieDialog",
+                "ing-feat-cookie-dialog-nl",
+                "ing-feat-global-cookie-preference",
+                "cookie-preference-main",
+                "[data-testid=reject]"
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "COOKIE_PREF=ANL_0|PSN_0|PRTN_0"
+        }
+    ]
+}

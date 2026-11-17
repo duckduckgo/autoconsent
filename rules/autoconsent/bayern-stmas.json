@@ -1,0 +1,49 @@
+{
+    "name": "bayern-stmas",
+    "prehideSelectors": ["#cookie.modal"],
+    "detectCmp": [
+        {
+            "exists": "#cookie.modal #btn_cookie_submit"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie.modal #btn_cookie_submit"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie.modal #btn_select_all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cookie.modal #cookie_stat:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookie.modal #cookie_stat"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#cookie.modal #btn_cookie_submit",
+            "retry": 3,
+            "retryInterval": 500
+        },
+        {
+            "waitForVisible": "#cookie.modal",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie.modal",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

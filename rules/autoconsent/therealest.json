@@ -1,0 +1,42 @@
+{
+    "name": "therealest",
+    "vendorUrl": "https://therealest.com/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?therealest\\.com/"
+    },
+    "prehideSelectors": ["[role=dialog][aria-labelledby=cookie-banner-title]"],
+    "detectCmp": [
+        {
+            "exists": "[role=dialog][aria-labelledby=cookie-banner-title]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=dialog][aria-labelledby=cookie-banner-title]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog'][@aria-labelledby='cookie-banner-title']//button[normalize-space()='Accept all']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog'][@aria-labelledby='cookie-banner-title']//button[normalize-space()='Manage preferences']"
+        },
+        {
+            "waitForThenClick": "xpath///div[@role='dialog'][.//input[@id='consent-toggle-analytics']]//button[normalize-space()='Reject all']"
+        },
+        {
+            "waitFor": "#consent-toggle-analytics:not(:checked)"
+        },
+        {
+            "waitForThenClick": "xpath///div[@role='dialog'][.//input[@id='consent-toggle-analytics']]//button[normalize-space()='Save preferences']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analytics%22%3Afalse"
+        }
+    ]
+}

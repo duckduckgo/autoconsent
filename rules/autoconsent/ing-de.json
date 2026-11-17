@@ -1,0 +1,31 @@
+{
+    "name": "ing-de",
+    "vendorUrl": "https://www.ing.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://(\\w+\\.)?ing\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ["ing-cc-manager", "ing-cc-dialog-level0"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "exists": ["ing-cc-manager[is-open]", "ing-cc-dialog-level0", ".cc-l0__button__more"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["ing-cc-manager", "ing-cc-dialog-level0", ".cc-l0__button__accept"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["ing-cc-manager", "ing-cc-dialog-level0", ".cc-l0__button__more"]
+        }
+    ]
+}

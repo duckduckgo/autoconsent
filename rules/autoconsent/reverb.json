@@ -1,0 +1,24 @@
+{
+    "name": "reverb",
+    "vendorUrl": "https://reverb.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?reverb\\.com/"
+    },
+    "prehideSelectors": [".rc-notice:has(a[href$='/cookies-policy'])"],
+    "detectCmp": [{ "exists": ".rc-notice a[href$='/cookies-policy']" }],
+    "detectPopup": [{ "visible": ".rc-notice a[href$='/cookies-policy']" }],
+    "optIn": [{ "waitForThenClick": ".rc-notice:has(a[href$='/cookies-policy']) .rc-notice__actions button[data-slot=primary]" }],
+    "optOut": [
+        {
+            "if": { "exists": ".rc-notice:has(a[href$='/cookies-policy']) .rc-notice__actions button[data-slot=secondary]" },
+            "then": [{ "waitForThenClick": ".rc-notice:has(a[href$='/cookies-policy']) .rc-notice__actions button[data-slot=secondary]" }],
+            "else": [
+                { "waitForThenClick": ".rc-notice:has(a[href$='/cookies-policy']) .rc-notice__description button" },
+                { "waitFor": ".rc-modal input[name=adData]" },
+                { "click": ".rc-modal input.rc-checkbox__input:checked", "all": true, "optional": true },
+                { "waitForThenClick": ".rc-modal:has(input[name=adData]) .rc-modal__footer button[data-slot=primary]" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "third_party_ad_storage_consent%22%3Afalse" }]
+}

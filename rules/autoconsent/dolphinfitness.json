@@ -1,0 +1,17 @@
+{
+    "name": "dolphinfitness",
+    "runContext": { "urlPattern": "^https?://(www\\.)?dolphinfitness\\.co\\.uk/" },
+    "prehideSelectors": ["#ari-nw-x"],
+    "detectCmp": [{ "exists": "#ari-nw-x .ari-nw-btn" }],
+    "detectPopup": [{ "visible": "#ari-nw-x .ari-nw-btn" }],
+    "optIn": [{ "waitForThenClick": "#ari-nw-x button[data-key='consent:ok']" }],
+    "optOut": [
+        { "waitForThenClick": "#ari-nw-x button.ari-opx-btn[data-key='consent:set']" },
+        { "waitForVisible": "#ss-su #ss-ck-a0" },
+        { "click": "#ss-su #ss-ck-f0" },
+        { "click": "#ss-su #ss-ck-s0" },
+        { "click": "#ss-su #ss-ck-a0" },
+        { "waitForThenClick": "#ss-su #ss-rl-f1-btn" }
+    ],
+    "test": [{ "exists": "#ss-ck-f0.ari-h1" }, { "exists": "#ss-ck-s0.ari-h1" }, { "exists": "#ss-ck-a0.ari-h1" }]
+}

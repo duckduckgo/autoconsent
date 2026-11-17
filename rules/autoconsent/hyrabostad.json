@@ -1,0 +1,21 @@
+{
+    "name": "hyrabostad.se",
+    "vendorUrl": "https://www.hyrabostad.se/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?hyrabostad\\.se/"
+    },
+    "prehideSelectors": ["#consent-container"],
+    "detectCmp": [{ "exists": "#consent-container #consent" }],
+    "detectPopup": [{ "visible": "#consent-container #consent" }],
+    "optIn": [{ "waitForThenClick": "#consent button[onclick*='saveCookieSettings(true)']" }],
+    "optOut": [
+        { "waitForThenClick": "#consent button[data-bs-target='#cookieSettings']" },
+        { "waitForVisible": "#cookieSettings .modal-footer" },
+        {
+            "if": { "exists": "#grantAdStorageCookies:checked" },
+            "then": [{ "click": "#grantAdStorageCookies:checked" }]
+        },
+        { "waitForThenClick": "#cookieSettings button[onclick*='saveCookieSettings(false)']", "retry": 3, "retryInterval": 400 }
+    ],
+    "test": [{ "visible": "#consent-container #consent,#cookieSettings", "check": "none" }]
+}

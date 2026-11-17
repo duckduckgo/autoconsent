@@ -1,0 +1,53 @@
+{
+    "name": "up-cookie-consent",
+    "vendorUrl": "https://uphotel.agency/",
+    "prehideSelectors": [".upcc-cookie-widget"],
+    "detectCmp": [
+        {
+            "exists": ".upcc-cookie-widget"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".upcc-cookie-widget"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".upcc-cookie-widget .upcc-cookie-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".upcc-cookie-widget .upcc-cookie-reject-all"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".upcc-cookie-widget .upcc-cookie-reject-all"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".upcc-cookie-widget .js-upcc-view-upcc-cookie-options"
+                },
+                {
+                    "waitForThenClick": ".upcc-cookie-modal-container .upcc-cookie-reject-all"
+                }
+            ]
+        },
+        {
+            "waitForVisible": ".upcc-cookie-widget, .upcc-cookie-modal-container",
+            "check": "none",
+            "timeout": 10000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "up-cookie-consent=true"
+        },
+        {
+            "cookieContains": "up-cookie-consent-options=[\"strictly_necessary\"]"
+        }
+    ]
+}

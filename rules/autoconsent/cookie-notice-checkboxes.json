@@ -1,0 +1,28 @@
+{
+    "name": "cookie-notice-checkboxes",
+    "prehideSelectors": ["#cookie-notice:has(#cookie-notice-accept.cookie-notice__accept--custom)"],
+    "detectCmp": [{ "exists": "#cookie-notice #cookie-notice-accept.cookie-notice__accept--custom" }],
+    "detectPopup": [{ "visible": "#cookie-notice #cookie-notice-accept.cookie-notice__accept--custom" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notice #cookie-notice-accept-all" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookie-notice #cookie-notice-reject" },
+            "then": [{ "waitForThenClick": "#cookie-notice #cookie-notice-reject" }],
+            "else": [
+                {
+                    "if": {
+                        "exists": "#cookie-notice input[type=checkbox]:not(#cookie-checkbox-mandatory, [data-is-mandatory], :disabled):checked"
+                    },
+                    "then": [
+                        {
+                            "click": "#cookie-notice input[type=checkbox]:not(#cookie-checkbox-mandatory, [data-is-mandatory], :disabled):checked",
+                            "all": true
+                        }
+                    ]
+                },
+                { "waitForThenClick": "#cookie-notice #cookie-notice-accept" }
+            ]
+        }
+    ],
+    "test": [{ "visible": "#cookie-notice #cookie-notice-accept", "check": "none" }]
+}

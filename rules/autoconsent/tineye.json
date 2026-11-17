@@ -1,0 +1,35 @@
+{
+    "name": "tineye",
+    "vendorUrl": "https://tineye.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?tineye\\.com/"
+    },
+    "prehideSelectors": ["[data-test=\"cookie-banner\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-test=\"cookie-banner\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-test=\"cookie-banner\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-test=\"cookie-banner\"] button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "[data-test=\"cookie-banner\"]"
+        }
+    ],
+    "test": [
+        {
+            "visible": "[data-test=\"cookie-banner\"]",
+            "check": "none"
+        }
+    ]
+}

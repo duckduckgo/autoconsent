@@ -1,0 +1,16 @@
+{
+    "name": "bsgdprcookies",
+    "vendorUrl": "https://github.com/Aleksander98/bsgdprcookies",
+    "prehideSelectors": ["#bs-gdpr-cookies-modal"],
+    "detectCmp": [{ "exists": "#bs-gdpr-cookies-modal #bs-gdpr-cookies-modal-advanced-btn" }],
+    "detectPopup": [{ "visible": "#bs-gdpr-cookies-modal #bs-gdpr-cookies-modal-accept-btn" }],
+    "optIn": [{ "waitForThenClick": "#bs-gdpr-cookies-modal #bs-gdpr-cookies-modal-accept-btn" }],
+    "optOut": [
+        { "waitForThenClick": "#bs-gdpr-cookies-modal #bs-gdpr-cookies-modal-advanced-btn" },
+        { "waitForVisible": "#bs-gdpr-cookies-modal-advanced-types" },
+        { "click": "#bs-gdpr-cookies-modal-advanced-types input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+        { "click": "#bs-gdpr-cookies-modal #bs-gdpr-cookies-modal-accept-btn" },
+        { "waitForVisible": "#bs-gdpr-cookies-modal", "check": "none", "timeout": 2000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "CookieShow=true" }]
+}

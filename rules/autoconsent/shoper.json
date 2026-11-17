@@ -1,0 +1,10 @@
+{
+    "name": "shoper",
+    "vendorUrl": "https://www.shoper.pl/",
+    "prehideSelectors": [".consents-modal"],
+    "detectCmp": [{ "exists": ".consents-modal__footer consents-accept-necessary" }],
+    "detectPopup": [{ "visible": ".consents-modal__footer consents-accept-necessary" }],
+    "optIn": [{ "waitForThenClick": ".consents-modal__footer consents-accept-all" }],
+    "optOut": [{ "waitForThenClick": ".consents-modal__footer consents-accept-necessary" }],
+    "test": [{ "waitForVisible": ".consents-modal__footer consents-accept-necessary", "check": "none", "timeout": 1000 }]
+}

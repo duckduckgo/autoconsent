@@ -1,0 +1,27 @@
+{
+    "name": "bnes-cc",
+    "prehideSelectors": ["#CookieConsentContainer:has(#BtnCCPrefs) > .container"],
+    "detectCmp": [{ "exists": "#CookieConsentContainer #BtnCCPrefs" }],
+    "detectPopup": [{ "visible": "#CookieConsentContainer #BtnCCAll" }],
+    "optIn": [{ "waitForThenClick": "#CookieConsentContainer #BtnCCAll" }],
+    "optOut": [
+        {
+            "if": { "exists": "#CookieConsentContainer #BtnCCNone" },
+            "then": [{ "waitForThenClick": "#CookieConsentContainer #BtnCCNone" }],
+            "else": [
+                { "waitForThenClick": "#CookieConsentContainer #BtnCCPrefs" },
+                { "waitForVisible": "#CookieConsentPanel #BtnCCSave" },
+                {
+                    "if": { "exists": "#ConsentAnalytics:checked" },
+                    "then": [{ "click": "#ConsentAnalytics" }]
+                },
+                {
+                    "if": { "exists": "#ConsentThirdParty:checked" },
+                    "then": [{ "click": "#ConsentThirdParty" }]
+                },
+                { "click": "#CookieConsentPanel #BtnCCSave" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "-saved=true" }, { "cookieContains": "-analytics=true", "negated": true }]
+}

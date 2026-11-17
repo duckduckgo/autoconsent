@@ -1,0 +1,70 @@
+{
+    "name": "opencmp",
+    "vendorUrl": "https://opencmp.net/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": [".cmp-root-container", "#cmp_consentDialog .cmp_ui .cmp_mainButtons"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": [".cmp-root-container", "#cmp_consentDialog .cmp_ui"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [".cmp-root-container", ".cmp_ui .cmp_mainButtons .cmp-button-accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": [".cmp-root-container", ".cmp_ui .cmp_mainButtons .cmp_button:not(.cmp-button-accept-all)"]
+            },
+            "then": [
+                {
+                    "click": [".cmp-root-container", ".cmp_ui .cmp_mainButtons .cmp_button:not(.cmp-button-accept-all)"]
+                }
+            ],
+            "else": [
+                {
+                    "click": [".cmp-root-container", ".cmp_ui .cmp_mainButtons .cmp_saveLink a"]
+                },
+                {
+                    "waitFor": [".cmp-root-container", ".cmp_ui .cmp_level1Container"],
+                    "timeout": 3000
+                },
+                {
+                    "click": [".cmp-root-container", ".cmp_ui .cmp_activateAll button:nth-child(2)"],
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": [".cmp-root-container", ".cmp_ui .cmp_level1Container .cmp_levelItem:nth-child(2) > div"],
+                    "optional": true
+                },
+                {
+                    "waitFor": [".cmp-root-container", ".cmp_ui .cmp_level1Container .cmp_levelItem.cmp_active:nth-child(2)"],
+                    "timeout": 2000,
+                    "optional": true
+                },
+                {
+                    "click": [".cmp-root-container", ".cmp_ui .cmp_activateAll button:nth-child(2)"],
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": [".cmp-root-container", ".cmp_ui .cmp_mainButtons .cmp_saveLink a"]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": [".cmp-root-container", "#cmp_consentDialog .cmp_ui"],
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

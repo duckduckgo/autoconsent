@@ -1,0 +1,44 @@
+{
+    "name": "cookieconsent2-legacy",
+    "vendorUrl": "https://www.github.com/orestbida/cookieconsent",
+    "comment": "supports early v2.x of the library (cm_*/cs_* element ids) and its legalblink fork",
+    "prehideSelectors": ["#cc_div"],
+    "detectCmp": [
+        {
+            "exists": "#cc_div #cm_btns"
+        }
+    ],
+    "detectPopup": [
+        {
+            "exists": "html.show--consent #cc_div #cm, html.lb-show-cookie-consent #cc_div #cm"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cs_acceptall_btn"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "secondary button either accepts necessary cookies or opens the settings",
+            "waitForThenClick": "#cm_secondary_btn"
+        },
+        {
+            "waitFor": "html.show--settings, html.lb-show-cookie-settings",
+            "timeout": 1000,
+            "optional": true
+        },
+        {
+            "if": { "exists": "html.show--settings, html.lb-show-cookie-settings" },
+            "then": [
+                { "click": "#cs_blocks input.c_toggle:checked:not(:disabled)", "all": true, "optional": true },
+                { "waitForThenClick": "#cs_save__btn" }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [{ "cookieContains": "cc_cookie=" }, { "cookieContains": "lb_csc=" }]
+        }
+    ]
+}

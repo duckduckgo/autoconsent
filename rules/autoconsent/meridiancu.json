@@ -1,0 +1,15 @@
+{
+    "name": "meridiancu",
+    "vendorUrl": "https://www.meridiancu.ca/",
+    "prehideSelectors": ["#cookies-disclaimer-modal"],
+    "detectCmp": [{ "exists": "#cookies-disclaimer-modal #cookies-disclaimer-modal-settings" }],
+    "detectPopup": [{ "visible": "#cookies-disclaimer-modal #cookies-disclaimer-modal-accept" }],
+    "optIn": [{ "waitForThenClick": "#cookies-disclaimer-modal-accept" }],
+    "optOut": [
+        { "waitForThenClick": "#cookies-disclaimer-modal-settings" },
+        { "waitForVisible": "#cookies-settings-modal-header" },
+        { "click": "#cookies-settings-modal-statistics-switch:checked", "optional": true },
+        { "waitForThenClick": "#cookies-settings-modal-confirm" }
+    ],
+    "test": [{ "cookieContains": "\"googleAnalytics\":false" }]
+}

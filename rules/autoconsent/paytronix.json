@@ -1,0 +1,30 @@
+{
+    "name": "paytronix",
+    "vendorUrl": "https://www.paytronix.com/",
+    "prehideSelectors": ["#overlay > .gdprBackgound"],
+    "detectCmp": [
+        {
+            "exists": "#overlay > .gdprBackgound > .gdprTitle"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#overlay > .gdprBackgound"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#overlay > .gdprBackgound button[onclick]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#overlay > .gdprBackgound > span[onclick]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "pxCookie=Y"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "name": "invision-guest-terms",
+    "vendorUrl": "https://invisioncommunity.com/",
+    "cosmetic": true,
+    "prehideSelectors": ["#elGuestTerms[data-role=\"guestTermsBar\"]"],
+    "detectCmp": [
+        {
+            "exists": "xpath///div[@id='elGuestTerms'][@data-role='guestTermsBar'][.//a[@data-action='dismissTerms']][not(.//form)][count(.//a[contains(@class,'ipsButton')] | .//button) <= 1][contains(translate(., 'COKIE', 'cokie'), 'cookie')]"
+        }
+    ],
+    "detectPopup": [{ "visible": "#elGuestTerms[data-role=\"guestTermsBar\"]" }],
+    "optIn": [{ "waitForThenClick": "#elGuestTerms a[data-action=\"dismissTerms\"]" }],
+    "optOut": [{ "hide": "#elGuestTerms[data-role=\"guestTermsBar\"]" }]
+}

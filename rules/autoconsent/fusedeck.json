@@ -1,0 +1,38 @@
+{
+    "name": "fusedeck",
+    "vendorUrl": "https://fusedeck.com/",
+    "prehideSelectors": [".fd-consent-main:has(#fd-unCheckAll)"],
+    "detectCmp": [
+        {
+            "exists": ".fd-consent-main #fd-unCheckAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".fd-consent-main #fd-unCheckAll"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".fd-consent-main #fd-checkAll"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".fd-consent-main #fd-unCheckAll"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".fd-consent-main #fd-unCheckAll",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "cookieContains": "fdConsentMarketing=false"
+        },
+        {
+            "cookieContains": "fdConsentAnalytics=false"
+        }
+    ]
+}

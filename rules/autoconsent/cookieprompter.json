@@ -1,0 +1,21 @@
+{
+    "name": "cookieprompter",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#eksCookiePrompt"],
+    "detectCmp": [{ "exists": "#eksCookiePrompt" }],
+    "detectPopup": [{ "visible": "#eksCookiePrompt" }],
+    "optIn": [{ "waitForThenClick": "#eksCookiePrompt .cpAcceptBtn" }],
+    "optOut": [
+        {
+            "if": { "exists": "#eksCookiePrompt .cpDontAcceptBtn" },
+            "then": [{ "click": "#eksCookiePrompt .cpDontAcceptBtn" }],
+            "else": [{ "waitForThenClick": "#eksCookieNo" }]
+        },
+        { "waitForVisible": "#eksCookiePrompt", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "cookieOptOut=n" }]
+}

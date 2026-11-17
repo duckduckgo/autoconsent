@@ -14,12 +14,13 @@
     ],
     "detectPopup": [
         {
-            "visible": ".cc-cookies .cc-cookie-accept"
+            "visible": ".cc-cookies:not(#cookies_declinedbar) .cc-cookie-accept",
+            "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".cc-cookies .cc-cookie-accept"
+            "waitForThenClick": ".cc-cookies:not(#cookies_declinedbar) .cc-cookie-accept"
         }
     ],
     "optOut": [

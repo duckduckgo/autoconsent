@@ -1,0 +1,15 @@
+{
+    "name": "schadefonds",
+    "vendorUrl": "https://www.schadefonds.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?schadefonds\\.nl/"
+    },
+    "prehideSelectors": [".cc-window[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": ".cc-window.cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cc-dismiss" }],
+    "detectPopup": [{ "visible": ".cc-window.cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cc-dismiss" }],
+    "optIn": [{ "waitForThenClick": ".cc-window[aria-describedby=\"cookieconsent:desc\"] .cc-dismiss" }],
+    "optOut": [
+        { "waitFor": "body.cookie-overlay", "timeout": 2000, "optional": true },
+        { "waitForThenClick": ".cc-window[aria-describedby=\"cookieconsent:desc\"] .cc-dismiss" }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "name": "localbiz-cookie-notice",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookie-notice.fixed:has(#accept-cookies)"],
+    "detectCmp": [{ "exists": "#cookie-notice.fixed #accept-cookies" }],
+    "detectPopup": [{ "visible": "#cookie-notice.fixed:has(#accept-cookies)" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notice.fixed #accept-cookies" }],
+    "optOut": [{ "hide": "#cookie-notice.fixed:has(#accept-cookies)" }]
+}

@@ -1,0 +1,14 @@
+{
+    "name": "fascicolosanitario-lombardia",
+    "vendorUrl": "https://www.fascicolosanitario.regione.lombardia.it/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?fascicolosanitario\\.regione\\.lombardia\\.it/"
+    },
+    "cosmetic": false,
+    "prehideSelectors": ["#cookie-bar"],
+    "detectCmp": [{ "exists": "#cookie-bar #cookieBarClose" }],
+    "detectPopup": [{ "visible": "#cookie-bar[aria-hidden=\"false\"]" }],
+    "optIn": [{ "waitForThenClick": "#cookie-bar #cookieBarClose .cookie-bar-close" }],
+    "optOut": [{ "waitForThenClick": "#cookie-bar #cookieBarClose .cookie-bar-close" }],
+    "test": [{ "cookieContains": "FSE-COOKIEBAR=hide" }]
+}

@@ -1,6 +1,7 @@
 import { ContentScriptMessage } from './messages';
 import { AutoConsentCMPRule, ElementSelector, HideMethod, RunContext, VisibilityCheck } from './rules';
 import { CompactCMPRuleset } from './encoding';
+import type { ButtonRegexClassification, ClassifiableButton, PopupClassification } from './heuristic-classify';
 
 export type MessageSender = (message: ContentScriptMessage) => Promise<void>;
 
@@ -80,6 +81,7 @@ export type Config = {
     };
     performanceLoggingEnabled: boolean;
     heuristicPopupSearchTimeout: number;
+    enableHeuristicHitTest: boolean; // hit-test the viewport before the DOM walk, to find popups the walk misses (e.g. not fixed, sticky or dialog-like)
     heuristicMode: HeuristicLevel; // controls the behavior of the heuristic popup detection.
 };
 
@@ -114,19 +116,31 @@ export type ConsentState = {
     performance?: Record<string, number[]>;
 };
 
-export type ButtonRegexClassification = 'reject' | 'settings' | 'accept' | 'acknowledge' | 'other';
+export type { ButtonRegexClassification, PopupClassification };
 
-export interface ButtonData {
-    text: string;
+export interface ButtonData extends ClassifiableButton {
     element: HTMLElement;
-    regexClassification?: ButtonRegexClassification;
 }
 
 export interface PopupData {
     text: string;
     element: HTMLElement;
     buttons: ButtonData[];
-    regexClassification?: PopupClassification;
+    // from the buttons alone; whether the popup text is consent text is checked separately
+    regexClassification: PopupClassification;
+    // which search found the popup: the DOM walk, the viewport hit test, or the whole document of a frame
+    source?: 'walk' | 'hitTest' | 'frame';
+    // viewport points ([x, y] in CSS px) whose hit test reached this popup
+    hitPoints?: [number, number][];
+}
+
+/**
+ * Points to hit-test: columns are fractions of the viewport width, and rows are distances in px from both the top
+ * and the bottom edge. The middle row of the viewport is always tested.
+ */
+export interface HitTestGrid {
+    columns: number[];
+    edgeRows: number[];
 }
 
 /**
@@ -137,4 +151,3 @@ export interface PopupData {
  *  - tier2: Heuristic detection is enabled, and will click the accept button on a popup if it exists, and no Reject, Acknowledge, or Settings button exists.
  */
 export type HeuristicLevel = 'off' | 'reject' | 'tier1' | 'tier2';
-export type PopupClassification = 'none' | 'reject' | 'tier1' | 'tier2';

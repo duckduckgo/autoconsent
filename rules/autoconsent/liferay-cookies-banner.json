@@ -1,0 +1,34 @@
+{
+    "name": "liferay-cookies-banner",
+    "vendorUrl": "https://learn.liferay.com/w/dxp/system-administration/configuring-liferay/cookies-banner",
+    "prehideSelectors": ["#p_p_id_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_"],
+    "detectCmp": [
+        {
+            "exists": "#p_p_id_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_"
+        },
+        {
+            "exists": "script[src*=\"otSDKStub\"]",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#p_p_id_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_acceptAllButton"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#_com_liferay_cookies_banner_web_portlet_CookiesBannerPortlet_declineAllButton"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "CONSENT_TYPE_PERFORMANCE=false"
+        }
+    ]
+}

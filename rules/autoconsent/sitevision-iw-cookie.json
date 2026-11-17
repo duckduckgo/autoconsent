@@ -1,0 +1,21 @@
+{
+    "name": "sitevision-iw-cookie",
+    "vendorUrl": "https://www.sitevision.se/",
+    "comment": "No self-test: any consent choice reloads the page. Opt-out stores cookie_consent=necessary.",
+    "prehideSelectors": [".sv-iw-cookie #cookie-banner"],
+    "detectCmp": [{ "exists": ".sv-iw-cookie #cookie-banner" }],
+    "detectPopup": [{ "visible": ".sv-iw-cookie #cookie-banner" }],
+    "optIn": [{ "waitForThenClick": ".sv-iw-cookie #cookie-banner button:last-of-type" }],
+    "optOut": [
+        {
+            "if": { "exists": ".sv-iw-cookie #cookie-banner button:nth-of-type(3)" },
+            "then": [{ "click": ".sv-iw-cookie #cookie-banner button:nth-of-type(2)" }],
+            "else": [
+                { "click": ".sv-iw-cookie #cookie-banner button:first-of-type" },
+                { "waitForVisible": ".sv-iw-cookie #cookie-modal" },
+                { "click": ".sv-iw-cookie #cookie-modal input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+                { "click": ".sv-iw-cookie #cookie-modal > div > button:first-of-type" }
+            ]
+        }
+    ]
+}

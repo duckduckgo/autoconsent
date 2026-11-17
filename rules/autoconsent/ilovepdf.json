@@ -1,0 +1,33 @@
+{
+    "name": "ilovepdf",
+    "vendorUrl": "https://www.ilovepdf.com/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#toast-container.ck-tstr #ck_set"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#toast-container.ck-tstr #ck_set"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#toast-container.ck-tstr #okck"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#toast-container.ck-tstr #ck_set"
+        },
+        {
+            "waitForThenClick": "#cmp_settings .cmp__button--reject"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cmp_ck=3"
+        }
+    ]
+}

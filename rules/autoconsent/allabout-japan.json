@@ -1,0 +1,42 @@
+{
+    "name": "allabout-japan",
+    "vendorUrl": "https://allabout-japan.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?allabout-japan\\.com/"
+    },
+    "prehideSelectors": [".cookie-message"],
+    "detectCmp": [{ "exists": ".cookie-message .cookie-agree" }],
+    "detectPopup": [{ "visible": ".cookie-message .cookie-agree" }],
+    "optIn": [
+        {
+            "waitForVisible": ".fc-consent-root .fc-dialog-container",
+            "timeout": 8000,
+            "optional": true
+        },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [{ "click": ".fc-cta-consent" }]
+        },
+        { "waitForThenClick": ".cookie-message .cookie-agree" }
+    ],
+    "optOut": [
+        { "hide": ".cookie-message" },
+        {
+            "waitForVisible": ".fc-consent-root .fc-dialog-container",
+            "timeout": 8000,
+            "optional": true
+        },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                {
+                    "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked",
+                    "all": true,
+                    "optional": true
+                },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ]
+}

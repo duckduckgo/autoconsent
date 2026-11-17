@@ -1,0 +1,94 @@
+{
+    "name": "adblockplus",
+    "vendorUrl": "https://adblockplus.org/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?adblockplus\\.org/"
+    },
+    "prehideSelectors": ["#cookiebar", "form.cookieprompt"],
+    "detectCmp": [
+        {
+            "exists": "#cookiebar .cookies-settings, form.cookieprompt .cookies-settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiebar .cookies-settings, form.cookieprompt .cookies-settings",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "visible": "form.cookieprompt .cookies-submit"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "form.cookieprompt .cookies-submit"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookiebar .cookies-submit"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "form.cookieprompt .cookies-settings"
+            },
+            "then": [
+                {
+                    "comment": "mobile layout opens a full-page settings form",
+                    "waitForThenClick": "form.cookieprompt .cookies-settings"
+                },
+                {
+                    "waitForVisible": "form.cookiepage .cookies-save"
+                },
+                {
+                    "if": {
+                        "exists": "form.cookiepage input.tracking-cookies:checked"
+                    },
+                    "then": [
+                        {
+                            "click": "form.cookiepage input.tracking-cookies"
+                        }
+                    ]
+                },
+                {
+                    "click": "form.cookiepage .cookies-save"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookiebar .cookies-settings"
+                },
+                {
+                    "waitForVisible": "#cookiebar .cookies-save"
+                },
+                {
+                    "if": {
+                        "exists": "#cookiebar input.tracking-cookies:checked"
+                    },
+                    "then": [
+                        {
+                            "click": "#cookiebar input.tracking-cookies"
+                        }
+                    ]
+                },
+                {
+                    "click": "#cookiebar .cookies-save"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "eyeo-ga-opt-out=true"
+        }
+    ]
+}

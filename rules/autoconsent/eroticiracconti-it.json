@@ -1,0 +1,13 @@
+{
+    "name": "eroticiracconti-it",
+    "vendorUrl": "https://www.eroticiracconti.it/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?eroticiracconti\\.it/"
+    },
+    "prehideSelectors": [".cookies-line"],
+    "detectCmp": [{ "exists": ".cookies-line a[href=\"/cookies-policy\"]" }],
+    "detectPopup": [{ "visible": ".cookies-line.show" }],
+    "optIn": [{ "hide": ".cookies-line" }],
+    "optOut": [{ "hide": ".cookies-line" }]
+}

@@ -1,0 +1,10 @@
+{
+    "name": "bleau-cookiecontrol",
+    "vendorUrl": "https://bleau.dk/",
+    "prehideSelectors": ["#cconsent-modal"],
+    "detectCmp": [{ "exists": "#cconsent-modal .ccm__footer .consent-givenone" }],
+    "detectPopup": [{ "visible": "#cconsent-modal.ccm--visible .ccm__footer .consent-givenone" }],
+    "optIn": [{ "waitForThenClick": "#cconsent-modal .ccm__footer .consent-give" }],
+    "optOut": [{ "waitForThenClick": "#cconsent-modal .ccm__footer .consent-givenone" }],
+    "test": [{ "waitForVisible": "#cconsent-modal", "check": "none" }, { "cookieContains": "\"wanted\":false" }]
+}

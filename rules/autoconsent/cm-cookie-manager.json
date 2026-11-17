@@ -1,0 +1,20 @@
+{
+    "name": "cm-cookie-manager",
+    "prehideSelectors": ["#cm-wrapper:has(#cm-selectSpecific)", "#cookie-consent:has(#cm-selectSpecific)"],
+    "detectCmp": [{ "exists": "#cm-selectSpecific" }, { "exists": "#cm-selectAllCheckboxes" }],
+    "detectPopup": [{ "visible": "#cm-selectAllCheckboxes" }],
+    "optIn": [{ "waitForThenClick": "#cm-selectAllCheckboxes" }],
+    "optOut": [
+        {
+            "if": { "visible": "#cm-openSettings" },
+            "then": [{ "click": "#cm-openSettings" }]
+        },
+        { "waitForVisible": "#cm-selectSpecific" },
+        {
+            "if": { "exists": ".cmCat-checkboxes:checked:not(:disabled)" },
+            "then": [{ "click": ".cmCat-checkboxes:checked:not(:disabled)", "all": true }]
+        },
+        { "click": "#cm-selectSpecific" }
+    ],
+    "test": [{ "visible": "#cm-selectAllCheckboxes", "check": "none" }]
+}

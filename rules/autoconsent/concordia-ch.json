@@ -1,0 +1,13 @@
+{
+    "name": "concordia-ch",
+    "vendorUrl": "https://www.concordia.ch/",
+    "runContext": {
+        "urlPattern": "^https://(\\w+\\.)?concordia\\.(ch|li)/"
+    },
+    "prehideSelectors": [".cookieconsent[data-init=cookieConsent]"],
+    "detectCmp": [{ "exists": ".cookieconsent[data-init=cookieConsent]" }],
+    "detectPopup": [{ "visible": ".cookieconsent.cookieconsent--active" }],
+    "optIn": [{ "waitForThenClick": ".cookieconsent [data-cookieconsent=button]" }],
+    "optOut": [{ "waitForThenClick": ".cookieconsent [data-cookieconsent=button]" }],
+    "test": [{ "cookieContains": "acceptCookies=true" }]
+}

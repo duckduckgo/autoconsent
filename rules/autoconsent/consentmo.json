@@ -55,7 +55,7 @@
                         {
                             "waitForVisible": [
                                 "csm-cookie-consent",
-                                ".csm-wrapper .cc-deny, .csm-wrapper [data-csm-button-type='accept_selected']"
+                                ".csm-wrapper .cc-deny, .csm-wrapper [data-csm-button-type='accept_selected'], .csm-wrapper [data-preferences-csm-button-type='accept_selected']"
                             ]
                         },
                         {
@@ -69,7 +69,10 @@
                             ],
                             "else": [
                                 {
-                                    "click": ["csm-cookie-consent", ".csm-wrapper [data-csm-button-type='accept_selected']"]
+                                    "click": [
+                                        "csm-cookie-consent",
+                                        ".csm-wrapper [data-csm-button-type='accept_selected'], .csm-wrapper [data-preferences-csm-button-type='accept_selected']"
+                                    ]
                                 }
                             ]
                         }

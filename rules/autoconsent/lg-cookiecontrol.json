@@ -1,0 +1,16 @@
+{
+    "name": "lg-cookiecontrol",
+    "vendorUrl": "https://www.limoengroen.nl/",
+    "prehideSelectors": ["[data-cc-window] [data-cc-popup]"],
+    "detectCmp": [{ "exists": "[data-cc-window] [data-cc-popup] [data-cc-action=allow]" }],
+    "detectPopup": [{ "visible": "[data-cc-window] [data-cc-popup]" }],
+    "optIn": [{ "waitForThenClick": "[data-cc-window] [data-cc-popup] [data-cc-action=allow]" }],
+    "optOut": [
+        {
+            "if": { "exists": "[data-cc-window] [data-cc-popup] button[data-cc-action=dismiss]" },
+            "then": [{ "click": "[data-cc-window] [data-cc-popup] button[data-cc-action=dismiss]" }],
+            "else": [{ "waitForThenClick": "[data-cc-window] [data-cc-popup] [data-cc-action=close-popup]" }]
+        }
+    ],
+    "test": [{ "cookieContains": "cookieconsent_status=dismiss" }]
+}

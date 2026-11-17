@@ -1,0 +1,10 @@
+{
+    "name": "uw-madison-cookieconsent",
+    "vendorUrl": "https://cdn.wisc.cloud/cookie-consent/",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookieconsent-window[aria-describedby=\"cookieconsent-desc\"]"],
+    "detectCmp": [{ "exists": "#cookieconsent-window[aria-describedby=\"cookieconsent-desc\"] #cookieconsent-dismiss" }],
+    "detectPopup": [{ "visible": "#cookieconsent-window[aria-describedby=\"cookieconsent-desc\"]" }],
+    "optIn": [{ "waitForThenClick": "#cookieconsent-dismiss" }],
+    "optOut": [{ "hide": "#cookieconsent-window" }]
+}

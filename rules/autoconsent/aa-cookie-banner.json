@@ -1,8 +1,8 @@
 {
     "name": "aa-cookie-banner",
-    "vendorUrl": "https://www.aa.com/",
+    "vendorUrl": "https://www.envoyair.com/",
     "runContext": {
-        "urlPattern": "^https://(www\\.)?(aa|envoyair|psaairlines)\\.com/"
+        "urlPattern": "^https://(www\\.)?(envoyair|psaairlines)\\.com/"
     },
     "prehideSelectors": ["adc-cookie-banner"],
     "detectCmp": [

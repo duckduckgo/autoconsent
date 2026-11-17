@@ -1,0 +1,30 @@
+{
+    "name": "handelsbanken",
+    "vendorUrl": "https://www.handelsbanken.com/",
+    "prehideSelectors": ["shb-cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": "shb-cookie-consent [data-testid=\"CookieConsent_modal\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "shb-cookie-consent [data-testid=\"CookieConsent_modal\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "shb-cookie-consent [data-testid=\"cookie_consent_accept_all_btn\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "shb-cookie-consent [data-testid=\"cookie_consent_accept_only_necessary_btn\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "shb-cookies-consent=false"
+        }
+    ]
+}

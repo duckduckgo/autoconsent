@@ -1,0 +1,73 @@
+{
+    "name": "podimo",
+    "vendorUrl": "https://podimo.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?podimo\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=cookie-consent-bar-desktop], [data-testid=cookie-consent-bar-mobile]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=cookie-consent-bar-desktop], [data-testid=cookie-consent-bar-mobile]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "visible": "[data-testid=accept-all-cookies-button-desktop]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "[data-testid=accept-all-cookies-button-desktop]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "[data-testid=accept-all-cookies-button-mobile]"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "[data-testid=manage-cookies-button-desktop]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "[data-testid=manage-cookies-button-desktop]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "[data-testid=manage-cookies-button-mobile]"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "[data-testid=cookie-consent-modal]"
+        },
+        {
+            "click": "[data-testid=cookie-consent-modal] input[type=checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[data-testid=cookie-consent-save-button]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "pmo_c_acc=true"
+        },
+        {
+            "cookieContains": "pmo_c_mark=true",
+            "negated": true
+        }
+    ]
+}

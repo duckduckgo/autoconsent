@@ -1,0 +1,23 @@
+{
+    "name": "jurahilfe-de",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?jurahilfe\\.de/"
+    },
+    "prehideSelectors": ["div.fixed:has(#marketingCookies)"],
+    "detectCmp": [{ "exists": "#marketingCookies" }],
+    "detectPopup": [{ "visible": "#marketingCookies" }],
+    "optIn": [{ "waitForThenClick": "xpath///div[.//button[@id='marketingCookies']]//button[normalize-space()='Alle akzeptieren']" }],
+    "optOut": [
+        {
+            "click": "#statisticCookies[aria-checked=\"true\"], #marketingCookies[aria-checked=\"true\"]",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "xpath///div[.//button[@id='marketingCookies']]//button[normalize-space()='Auswahl bestätigen']" }
+    ],
+    "test": [
+        { "cookieContains": "cookieChoiceDone=true" },
+        { "cookieContains": "acceptMarketing=false" },
+        { "cookieContains": "acceptStatistic=false" }
+    ]
+}

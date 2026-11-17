@@ -4,9 +4,9 @@
         "urlPattern": "^https://www\\.midwayusa\\.com/"
     },
     "cosmetic": true,
-    "prehideSelectors": ["#cookie-container"],
-    "detectCmp": [{ "exists": ["div[aria-label=\"Cookie Policy Banner\"]"] }],
-    "detectPopup": [{ "visible": "#cookie-container" }],
-    "optIn": [{ "click": "button#cookie-btn" }],
+    "prehideSelectors": ["div[aria-label=\"Cookie Policy Banner\"]"],
+    "detectCmp": [{ "exists": "div[aria-label=\"Cookie Policy Banner\"]" }],
+    "detectPopup": [{ "visible": "div[aria-label=\"Cookie Policy Banner\"]" }],
+    "optIn": [{ "waitForThenClick": "div[aria-label=\"Cookie Policy Banner\"] #cookie-accept-btn" }],
     "optOut": [{ "hide": "div[aria-label=\"Cookie Policy Banner\"]" }]
 }

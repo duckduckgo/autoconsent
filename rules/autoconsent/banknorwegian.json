@@ -1,0 +1,19 @@
+{
+    "name": "banknorwegian",
+    "_metadata": { "vendorUrl": "https://www.banknorwegian.no/" },
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?banknorwegian\\.(no|se|dk|fi|de|es)/"
+    },
+    "prehideSelectors": [".MuiDialog-root:has([data-uit=\"accept-all\"], [data-uit=\"store-changes\"])"],
+    "detectCmp": [{ "exists": "[role=\"dialog\"] #approveAllCookies[data-uit=\"accept-all\"]" }],
+    "detectPopup": [{ "visible": "[role=\"dialog\"] [data-uit=\"show-details\"]" }],
+    "optIn": [{ "waitForThenClick": "#approveAllCookies[data-uit=\"accept-all\"]" }],
+    "optOut": [
+        { "waitForThenClick": "[role=\"dialog\"] [data-uit=\"show-details\"]" },
+        { "waitForVisible": "[role=\"dialog\"] [data-uit=\"store-changes\"]" },
+        { "click": "[role=\"dialog\"] input[role=\"switch\"]:checked", "all": true, "optional": true },
+        { "click": "[role=\"dialog\"] [data-uit=\"store-changes\"]" },
+        { "waitForVisible": "[role=\"dialog\"] [data-uit=\"store-changes\"]", "check": "none", "timeout": 3000, "optional": true }
+    ],
+    "test": [{ "visible": "[role=\"dialog\"] [data-uit=\"accept-all\"], [role=\"dialog\"] [data-uit=\"store-changes\"]", "check": "none" }]
+}

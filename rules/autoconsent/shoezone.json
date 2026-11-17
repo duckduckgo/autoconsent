@@ -1,0 +1,35 @@
+{
+    "name": "shoezone",
+    "vendorUrl": "https://www.shoezone.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?shoezone\\.com/"
+    },
+    "prehideSelectors": ["#pnlCookieAcceptance"],
+    "detectCmp": [
+        {
+            "exists": "#pnlCookieAcceptance #divCookiesManage"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#pnlCookieAcceptance"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#divCookiesAllow"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#pnlCookieAcceptance"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#pnlCookieAcceptance",
+            "check": "none"
+        }
+    ]
+}

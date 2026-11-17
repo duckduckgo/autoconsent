@@ -1,0 +1,30 @@
+{
+    "name": "yle-consent-sdk",
+    "vendorUrl": "https://yle.fi/",
+    "prehideSelectors": ["#yle-consent-sdk-container .ycd-banner"],
+    "detectCmp": [
+        {
+            "exists": "#yle-consent-sdk-container button[name=accept-necessary-consents]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#yle-consent-sdk-container .ycd-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#yle-consent-sdk-container button[name=accept-all-consents]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#yle-consent-sdk-container button[name=accept-necessary-consents]"
+        },
+        {
+            "waitForVisible": "#yle-consent-sdk-container .ycd-banner",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

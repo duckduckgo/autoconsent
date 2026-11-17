@@ -1,0 +1,86 @@
+{
+    "name": "amazonforum",
+    "vendorUrl": "https://www.amazonforum.com/",
+    "comment": "Custom Salesforce LWC banner with only Accept all / Customise; opt-out unticks the pre-checked toggles and saves (the save button is mislabelled \"Alle akzeptieren\" on the German site, but it only saves the toggle state).",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?amazonforum\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ["c-cookie-consent", ".cookiecon-footer-container-fixed button.cookie_reject_btn"] }],
+    "detectPopup": [{ "visible": ["c-cookie-consent", ".cookiecon-footer-container-fixed"] }],
+    "optIn": [{ "waitForThenClick": ["c-cookie-consent", ".cookiecon-footer-container-fixed button.cookie_accept_btn"] }],
+    "optOut": [
+        { "waitForThenClick": ["c-cookie-consent", ".cookiecon-footer-container-fixed button.cookie_reject_btn"] },
+        { "waitFor": ["c-cookie-consent", "section.azCookieCustomise li lightning-input", "lightning-primitive-input-toggle", "input"] },
+        {
+            "if": {
+                "exists": [
+                    "c-cookie-consent",
+                    "section.azCookieCustomise li:nth-child(1) lightning-input",
+                    "lightning-primitive-input-toggle",
+                    "input:checked"
+                ]
+            },
+            "then": [
+                {
+                    "click": [
+                        "c-cookie-consent",
+                        "section.azCookieCustomise li:nth-child(1) lightning-input",
+                        "lightning-primitive-input-toggle",
+                        "input:checked"
+                    ]
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": [
+                    "c-cookie-consent",
+                    "section.azCookieCustomise li:nth-child(2) lightning-input",
+                    "lightning-primitive-input-toggle",
+                    "input:checked"
+                ]
+            },
+            "then": [
+                {
+                    "click": [
+                        "c-cookie-consent",
+                        "section.azCookieCustomise li:nth-child(2) lightning-input",
+                        "lightning-primitive-input-toggle",
+                        "input:checked"
+                    ]
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": [
+                    "c-cookie-consent",
+                    "section.azCookieCustomise li:nth-child(3) lightning-input",
+                    "lightning-primitive-input-toggle",
+                    "input:checked"
+                ]
+            },
+            "then": [
+                {
+                    "click": [
+                        "c-cookie-consent",
+                        "section.azCookieCustomise li:nth-child(3) lightning-input",
+                        "lightning-primitive-input-toggle",
+                        "input:checked"
+                    ]
+                }
+            ]
+        },
+        {
+            "click": [
+                "c-cookie-consent",
+                "section.azCookieCustomise footer .cookiecon-desktop-section lightning-button.focusStyleButton",
+                "button"
+            ]
+        }
+    ],
+    "test": [{ "waitForVisible": ["c-cookie-consent", ".cookiecon-footer-container-fixed"], "timeout": 2000, "check": "none" }]
+}

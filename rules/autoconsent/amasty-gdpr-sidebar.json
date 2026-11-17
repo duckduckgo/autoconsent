@@ -1,0 +1,61 @@
+{
+    "name": "amasty-gdpr-sidebar",
+    "vendorUrl": "https://amasty.com/gdpr-for-magento-2.html",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".amgdprcookie-modal-container #amgdprcookie-form-sidebar"
+        },
+        {
+            "exists": ".amgdprcookie-bar-container",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".amgdprcookie-modal-container._show"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".amgdprcookie-modal-container._show [data-amgdprcookie-js=\"allow\"]:not([disabled])",
+            "timeout": 10000
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ".amgdprcookie-modal-container._show [data-amgdprcookie-js=\"decline\"]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".amgdprcookie-modal-container._show [data-amgdprcookie-js=\"decline\"]:not([disabled])",
+                    "timeout": 10000,
+                    "retry": 5,
+                    "retryInterval": 1000
+                }
+            ],
+            "else": [
+                {
+                    "click": ".amgdprcookie-modal-container._show input.amgdprcookie-input:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ".amgdprcookie-modal-container._show [data-amgdprcookie-js=\"accept\"]:not([disabled])",
+                    "timeout": 10000,
+                    "retry": 5,
+                    "retryInterval": 1000
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".amgdprcookie-modal-container._show",
+            "check": "none",
+            "timeout": 5000
+        }
+    ]
+}

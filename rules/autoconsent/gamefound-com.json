@@ -1,0 +1,12 @@
+{
+    "name": "gamefound-com",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?gamefound\\.com/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": [".gfu-floating-notification-box--fixed:has([data-qa^=\"cookie-policy-box\"])"],
+    "detectCmp": [{ "exists": "[data-qa^=\"cookie-policy-box\"] [data-qa=\"cookie-policy-button:AcceptAll\"]" }],
+    "detectPopup": [{ "visible": "[data-qa^=\"cookie-policy-box\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-qa=\"cookie-policy-button:AcceptAll\"]" }],
+    "optOut": [{ "hide": ".gfu-floating-notification-box--fixed:has([data-qa^=\"cookie-policy-box\"])" }]
+}

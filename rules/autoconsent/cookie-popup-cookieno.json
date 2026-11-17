@@ -1,0 +1,29 @@
+{
+    "name": "cookie-popup-cookieno",
+    "prehideSelectors": ["#cookie-popup:has([onclick*=\"cookieNo()\"])"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-popup [onclick*=\"cookieNo()\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-popup"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-popup [onclick*=\"cookieOk()\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-popup [onclick*=\"cookieNo()\"]"
+        },
+        {
+            "waitForVisible": "#cookie-popup",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}

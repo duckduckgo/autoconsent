@@ -1,0 +1,9 @@
+{
+    "name": "cz-eshop-cookies-consent",
+    "prehideSelectors": [".cookies-consent:has(.cookies-consent-accept-needed)"],
+    "detectCmp": [{ "exists": ".cookies-consent .cookies-consent-accept-needed" }],
+    "detectPopup": [{ "visible": ".cookies-consent .cookies-inner" }],
+    "optIn": [{ "waitForThenClick": ".cookies-consent .cookies-consent-accept-all" }],
+    "optOut": [{ "waitForThenClick": ".cookies-consent .cookies-consent-accept-needed", "retry": 10, "retryInterval": 500 }],
+    "test": [{ "cookieContains": "cookiesConsentAllowedServices=" }, { "cookieContains": "]},{\"type\":", "negated": true }]
+}

@@ -1,0 +1,13 @@
+{
+    "name": "purecookie-cosmetic",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookieConsentContainer"],
+    "detectCmp": [{ "exists": "#cookieConsentContainer [onclick^=\"purecookieDismiss\"], script[src*=\"purecookie\"]" }],
+    "detectPopup": [{ "visible": "#cookieConsentContainer" }],
+    "optIn": [
+        { "waitFor": "#cookieConsentContainer[style*=\"opacity: 1;\"]", "timeout": 2000, "optional": true },
+        { "waitForThenClick": "#cookieConsentContainer [onclick^=\"purecookieDismiss\"]" }
+    ],
+    "optOut": [{ "hide": "#cookieConsentContainer" }],
+    "test": [{ "visible": "#cookieConsentContainer", "check": "none" }]
+}

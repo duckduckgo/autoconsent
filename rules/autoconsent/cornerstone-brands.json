@@ -1,0 +1,51 @@
+{
+    "name": "cornerstone-brands",
+    "vendorUrl": "https://www.garnethill.com/",
+    "prehideSelectors": [".c-cookie-banner.c-custom-sheet", "[id^=\"monetate_selectorHTML\"] > .gdprCookieBanner"],
+    "detectCmp": [
+        {
+            "any": [
+                { "exists": ".c-cookie-banner.c-custom-sheet .c-cookie-banner__close-button" },
+                { "exists": "[id^=\"monetate_selectorHTML\"] > .gdprCookieBanner .gdprCookieBannerCloseBtn" }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [{ "visible": ".c-cookie-banner.c-custom-sheet" }, { "visible": "[id^=\"monetate_selectorHTML\"] > .gdprCookieBanner" }]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".c-cookie-banner.c-custom-sheet .c-cookie-banner__close-button",
+            "timeout": 5000,
+            "optional": true
+        },
+        {
+            "comment": "notice-only banner shown in GDPR regions, may be injected after the main banner",
+            "waitForThenClick": "[id^=\"monetate_selectorHTML\"] > .gdprCookieBanner .gdprCookieBannerCloseBtn",
+            "timeout": 6000,
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".c-cookie-banner.c-custom-sheet .c-cookie-banner__close-button",
+            "timeout": 5000,
+            "optional": true
+        },
+        {
+            "comment": "notice-only banner shown in GDPR regions, may be injected after the main banner",
+            "waitForThenClick": "[id^=\"monetate_selectorHTML\"] > .gdprCookieBanner .gdprCookieBannerCloseBtn",
+            "timeout": 6000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".c-cookie-banner.c-custom-sheet, [id^=\"monetate_selectorHTML\"] > .gdprCookieBanner",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

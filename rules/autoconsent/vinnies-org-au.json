@@ -1,0 +1,29 @@
+{
+    "name": "vinnies-org-au",
+    "vendorUrl": "https://www.vinnies.org.au/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?vinnies\\.org\\.au/"
+    },
+    "prehideSelectors": ["div.fixed.bottom-0:has(svg[data-icon=\"cookie-bite\"])"],
+    "detectCmp": [
+        {
+            "exists": "div.fixed.bottom-0:has(svg[data-icon=\"cookie-bite\"]) button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.fixed.bottom-0:has(svg[data-icon=\"cookie-bite\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.fixed.bottom-0:has(svg[data-icon=\"cookie-bite\"]) button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "div.fixed.bottom-0:has(svg[data-icon=\"cookie-bite\"])"
+        }
+    ]
+}

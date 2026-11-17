@@ -2,8 +2,8 @@
     "name": "Complianz notice",
     "prehideSelectors": [".cc-type-info[aria-describedby=\"cookieconsent:desc\"]"],
     "cosmetic": true,
-    "detectCmp": [{ "exists": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cc-compliance .cc-btn" }],
-    "detectPopup": [{ "visible": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cc-compliance .cc-btn" }],
+    "detectCmp": [{ "exists": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible) .cc-compliance .cc-btn" }],
+    "detectPopup": [{ "visible": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"] .cc-compliance .cc-btn", "check": "any" }],
     "optIn": [
         { "click": ".cc-accept-all", "optional": true },
         { "click": ".cc-allow", "optional": true },
@@ -13,7 +13,7 @@
         {
             "if": { "exists": ".cc-deny" },
             "then": [{ "click": ".cc-deny" }],
-            "else": [{ "hide": "[aria-describedby=\"cookieconsent:desc\"]" }]
+            "else": [{ "hide": "[aria-describedby=\"cookieconsent:desc\"]" }, { "hide": ".cc-blockingScreen", "optional": true }]
         }
     ]
 }

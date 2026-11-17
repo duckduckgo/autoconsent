@@ -1,0 +1,50 @@
+{
+    "name": "bokadirekt.se",
+    "vendorUrl": "https://www.bokadirekt.se/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?bokadirekt\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[role=dialog] [data-cy=allowCookiesButton]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=dialog] [data-cy=allowCookiesButton]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[role=dialog] [data-cy=allowCookiesButton]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[role=dialog] [data-cy=allowCookiesButton] ~ a[href=\"/articles/cookies\"]"
+        },
+        {
+            "waitForVisible": ".container > h3 ~ button"
+        },
+        {
+            "if": {
+                "exists": ".container > h3 > input[type=checkbox]:checked:not([disabled])"
+            },
+            "then": [
+                {
+                    "click": ".container > h3 > input[type=checkbox]:checked:not([disabled])",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "click": ".container > h3 ~ button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "BokadirektCookiePreferencesMP=Mandatory"
+        }
+    ]
+}

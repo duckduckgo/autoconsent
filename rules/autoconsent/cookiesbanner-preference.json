@@ -1,0 +1,14 @@
+{
+    "name": "cookiesbanner-preference",
+    "prehideSelectors": ["#cookiesBanner:has(#cookiesBannerPreference)"],
+    "detectCmp": [{ "exists": "#cookiesBanner #cookiesBannerPreference" }],
+    "detectPopup": [{ "visible": "#cookiesBanner:not(.cookiesBannerHide) #cookiesBannerBox" }],
+    "optIn": [{ "waitForThenClick": "#cookiesBannerInfos button[onclick^=\"submitCookies('all')\"]" }],
+    "optOut": [
+        { "waitForThenClick": "#cookiesBannerInfos button[onclick^='cookieSettingsShow']" },
+        { "waitForVisible": "#cookiesBannerPreference" },
+        { "click": "#cookiesBannerChoices input:checked:not(:disabled)", "all": true, "optional": true },
+        { "waitForThenClick": "#cookiesBannerPreference button[onclick^='submitCookies()']" }
+    ],
+    "test": [{ "waitFor": "#cookiesBanner.cookiesBannerHide" }, { "cookieContains": "\"tracking\":false" }]
+}

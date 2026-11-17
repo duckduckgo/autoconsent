@@ -1,0 +1,33 @@
+{
+    "name": "berelax.com",
+    "vendorUrl": "https://berelax.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?berelax\\.com/"
+    },
+    "prehideSelectors": ["section.cookie"],
+    "detectCmp": [
+        {
+            "exists": "section.cookie .cookie__container .cookie__close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section.cookie.show .cookie__container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "section.cookie.show .cookie__container > .button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "section.cookie.show .cookie__close"
+        },
+        {
+            "waitForVisible": "section.cookie.show .cookie__container",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

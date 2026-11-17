@@ -1,0 +1,13 @@
+{
+    "name": "bing.com-notice",
+    "vendorUrl": "https://www.bing.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?bing\\.com/"
+    },
+    "prehideSelectors": ["#b_notificationContainer.bnp_ttc"],
+    "detectCmp": [{ "exists": "#b_notificationContainer.bnp_ttc #bnp_ttc_close" }],
+    "detectPopup": [{ "visible": "#b_notificationContainer.bnp_ttc" }],
+    "optIn": [{ "waitForVisible": "#bnp_ttc_close" }, { "eval": "EVAL_BING_NOTICE_CLOSE" }],
+    "optOut": [{ "waitForVisible": "#bnp_ttc_close" }, { "eval": "EVAL_BING_NOTICE_CLOSE" }],
+    "test": [{ "visible": "#b_notificationContainer.bnp_ttc", "check": "none" }]
+}

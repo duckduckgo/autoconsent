@@ -1,0 +1,88 @@
+{
+    "name": "kanopy",
+    "vendorUrl": "https://www.kanopy.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?kanopy\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".content-container.gdpr-banner, .content-container.non-gdpr-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".content-container.gdpr-banner, .content-container.non-gdpr-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ".gdpr-banner .allow-all-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".gdpr-banner .allow-all-button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".non-gdpr-banner .close-button"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".gdpr-banner .customize-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".gdpr-banner .customize-button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".non-gdpr-banner .privacy-text-content button"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "[role=dialog] .confirm-choices"
+        },
+        {
+            "if": {
+                "exists": "[role=dialog] input.toggle-switch[aria-labelledby=performance]:checked"
+            },
+            "then": [
+                {
+                    "click": "[role=dialog] input.toggle-switch[aria-labelledby=performance]:checked"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "[role=dialog] input.toggle-switch[aria-labelledby=research]:checked"
+            },
+            "then": [
+                {
+                    "click": "[role=dialog] input.toggle-switch[aria-labelledby=research]:checked"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "[role=dialog] input.toggle-switch[aria-labelledby=remarketing]:checked"
+            },
+            "then": [
+                {
+                    "click": "[role=dialog] input.toggle-switch[aria-labelledby=remarketing]:checked"
+                }
+            ]
+        },
+        {
+            "click": "[role=dialog] .confirm-choices"
+        }
+    ]
+}

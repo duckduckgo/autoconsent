@@ -1,0 +1,14 @@
+{
+    "name": "scottish-government-design-system",
+    "vendorUrl": "https://designsystem.gov.scot/",
+    "prehideSelectors": ["[data-module=\"ds-cookie-notification\"]"],
+    "detectCmp": [{ "exists": "[data-module=\"ds-cookie-notification\"] .js-accept-essential-cookies" }],
+    "detectPopup": [{ "visible": "[data-module=\"ds-cookie-notification\"] .js-accept-essential-cookies" }],
+    "optIn": [{ "waitForThenClick": "[data-module=\"ds-cookie-notification\"] .js-accept-all-cookies" }],
+    "optOut": [{ "waitForThenClick": "[data-module=\"ds-cookie-notification\"] .js-accept-essential-cookies" }],
+    "test": [
+        {
+            "cookieContains": "cookiePermissions=eyJuZWNlc3NhcnkiOnRydWUsInByZWZlcmVuY2VzIjpmYWxzZSwic3RhdGlzdGljcyI6ZmFsc2UsImNhbXBhaWducyI6ZmFsc2UsIm1hcmtldGluZyI6ZmFsc2V9"
+        }
+    ]
+}

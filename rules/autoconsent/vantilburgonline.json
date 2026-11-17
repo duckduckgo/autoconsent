@@ -1,0 +1,17 @@
+{
+    "name": "vantilburgonline",
+    "vendorUrl": "https://www.vantilburgonline.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?vantilburgonline\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "div.fixed:has(#modal-title) button.btn-cta" }],
+    "detectPopup": [{ "visible": "div.fixed:has(#modal-title) button.btn-cta" }],
+    "optIn": [{ "waitForThenClick": "div.fixed:has(#modal-title) button.btn-cta" }],
+    "optOut": [
+        { "waitForThenClick": "div.fixed:has(#modal-title) p button" },
+        { "waitForThenClick": "label[for=cookies-functional]" },
+        { "waitForThenClick": "div.fixed:has(#cookies-functional:checked) button.btn-cta" }
+    ],
+    "test": [{ "cookieContains": "xsarusCookieSettings=disabled" }]
+}

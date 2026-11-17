@@ -17,6 +17,9 @@
                 },
                 {
                     "visible": [".axeptio_mount .needsclick", ".axeptio_widget"]
+                },
+                {
+                    "cookieContains": "%22$$completed%22:false"
                 }
             ]
         }
@@ -24,8 +27,8 @@
     "optIn": [
         {
             "if": { "exists": ".axeptio_mount .needsclick" },
-            "then": [{ "click": [".axeptio_mount .needsclick", "button#axeptio_btn_acceptAll"] }],
-            "else": [{ "click": "button#axeptio_btn_acceptAll" }]
+            "then": [{ "waitForThenClick": [".axeptio_mount .needsclick", "button#axeptio_btn_acceptAll"] }],
+            "else": [{ "waitForThenClick": "button#axeptio_btn_acceptAll" }]
         }
     ],
     "optOut": [

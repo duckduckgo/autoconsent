@@ -1,0 +1,18 @@
+{
+    "name": "tk-aerztefuehrer.de",
+    "_metadata": {
+        "vendorUrl": "https://www.tk-aerztefuehrer.de/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tk-aerztefuehrer\\.de/"
+    },
+    "prehideSelectors": ["#tkConsentmanager"],
+    "detectCmp": [{ "exists": "#tkConsentmanager" }],
+    "detectPopup": [{ "visible": "#tkConsentmanager" }],
+    "optIn": [{ "waitForThenClick": "#tkConsentmanager .g-consentmanager__confirm-all" }],
+    "optOut": [{ "waitForThenClick": "#tkConsentmanager .g-consentmanager__confirm-selection" }],
+    "test": [{ "cookieContains": "tkConsentWirtschaftlicherWerbeeinsatz=0" }]
+}

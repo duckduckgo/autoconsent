@@ -1,0 +1,37 @@
+{
+    "name": "multicalcolo",
+    "vendorUrl": "https://www.multicalcolo.it/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?multicalcolo\\.it/"
+    },
+    "prehideSelectors": [".js-cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": ".js-cookie-consent #customize"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-cookie-consent #customize"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-cookie-consent #accepted"
+        }
+    ],
+    "optOut": [
+        {
+            "click": ".js-cookie-consent #rejected"
+        },
+        {
+            "waitForVisible": ".js-cookie-consent",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "laravel_cookie_consent=rejected"
+        }
+    ]
+}

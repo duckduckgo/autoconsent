@@ -1,0 +1,45 @@
+{
+    "name": "webtoffee-cookie-consent",
+    "prehideSelectors": [".wcc-overlay,.wcc-consent-container"],
+    "detectCmp": [{ "exists": ".wcc-consent-container" }],
+    "detectPopup": [{ "visible": ".wcc-consent-container" }],
+    "optIn": [
+        {
+            "if": { "exists": ".wcc-consent-container [data-tag=accept-button]" },
+            "then": [{ "waitForThenClick": ".wcc-consent-container [data-tag=accept-button]" }],
+            "else": [{ "waitForThenClick": ".wcc-consent-container [data-tag=close-button]" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".wcc-consent-container [data-tag=reject-button]" },
+            "then": [{ "waitForThenClick": ".wcc-consent-container [data-tag=reject-button]" }],
+            "else": [
+                {
+                    "if": { "exists": ".wcc-consent-container [data-tag=donotsell-button]" },
+                    "then": [
+                        { "waitForThenClick": ".wcc-consent-container [data-tag=donotsell-button]" },
+                        { "waitForVisible": ".wcc-modal-open [data-tag=optout-option-toggle]" },
+                        { "click": ".wcc-modal-open [data-tag=optout-option-toggle]:not(:checked)", "optional": true },
+                        { "waitForThenClick": ".wcc-modal-open [data-tag=optout-confirm-button]" }
+                    ],
+                    "else": [
+                        { "waitForThenClick": ".wcc-consent-container [data-tag=settings-button]" },
+                        {
+                            "waitForVisible": ".wcc-modal-open [data-tag=detail-save-button],.wcc-consent-bar-expand [data-tag=detail-save-button]"
+                        },
+                        {
+                            "click": ".wcc-modal-open [data-tag=detail-category-toggle] input:checked,.wcc-consent-bar-expand [data-tag=detail-category-toggle] input:checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": ".wcc-modal-open [data-tag=detail-save-button],.wcc-consent-bar-expand [data-tag=detail-save-button]"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "action:yes" }]
+}

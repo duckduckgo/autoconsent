@@ -1,0 +1,42 @@
+{
+    "name": "chefcookie",
+    "vendorUrl": "https://github.com/vielhuber/chefcookie",
+    "prehideSelectors": [".chefcookie"],
+    "detectCmp": [
+        {
+            "exists": ".chefcookie .chefcookie__buttons"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".chefcookie .chefcookie__box"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ".chefcookie a[href=\"#chefcookie__accept_all\"]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".chefcookie a[href=\"#chefcookie__accept_all\"]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".chefcookie .chefcookie__buttons a[href=\"#chefcookie__accept\"]"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".chefcookie .chefcookie__buttons a[href=\"#chefcookie__decline\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "hide_prompt=1"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "name": "creditunionsa",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?creditunionsa\\.com\\.au/"
+    },
+    "prehideSelectors": [".cookie-banner-alerts > div:has(button[aria-label=\"Accept\"])"],
+    "detectCmp": [{ "exists": ".cookie-banner-alerts button[aria-label=\"Accept\"]" }],
+    "detectPopup": [{ "visible": ".cookie-banner-alerts > div:has(button[aria-label=\"Accept\"])" }],
+    "optIn": [{ "waitForThenClick": ".cookie-banner-alerts button[aria-label=\"Accept\"]" }],
+    "optOut": [{ "hide": ".cookie-banner-alerts > div:has(button[aria-label=\"Accept\"])" }]
+}

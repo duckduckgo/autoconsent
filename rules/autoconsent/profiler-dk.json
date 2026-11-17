@@ -1,0 +1,29 @@
+{
+    "name": "profiler-dk",
+    "vendorUrl": "https://profiler.dk/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?(profiler|debtor)\\.dk/"
+    },
+    "prehideSelectors": ["div.cookie:has(a.cookie-okay-button)"],
+    "detectCmp": [
+        {
+            "exists": "div.cookie a.cookie-okay-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.cookie:has(a.cookie-okay-button)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.cookie a.cookie-okay-button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "div.cookie:has(a.cookie-okay-button)"
+        }
+    ]
+}

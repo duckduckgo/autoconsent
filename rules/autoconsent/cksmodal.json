@@ -1,0 +1,9 @@
+{
+    "name": "cksmodal",
+    "prehideSelectors": ["#cksModal"],
+    "detectCmp": [{ "exists": "#cksModal #cks .cksButtons" }],
+    "detectPopup": [{ "visible": "#cksModal #cks" }],
+    "optIn": [{ "waitForThenClick": "#cks .cksButton[onclick*=\"setCksPrefs('1')\"]" }],
+    "optOut": [{ "waitForThenClick": "#cks .cksLink[onclick*=\"setCksPrefs('0')\"]" }, { "waitForVisible": "#cksModal", "check": "none" }],
+    "test": [{ "cookieContains": "CookiePrefs=0" }]
+}

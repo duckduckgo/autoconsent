@@ -1,0 +1,51 @@
+{
+    "name": "todostuslibros",
+    "vendorUrl": "https://www.todostuslibros.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?todostuslibros\\.com/"
+    },
+    "prehideSelectors": ["#cookie-compliant"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-compliant #saveAndAcceptCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-compliant"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-compliant #accept-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-compliant #cookies-config"
+        },
+        {
+            "waitForVisible": "#cookie-compliant #saveAndAcceptCookies"
+        },
+        {
+            "if": { "exists": "#cookie-compliant #cookie_b:checked" },
+            "then": [{ "click": "#cookie-compliant #cookie_b" }]
+        },
+        {
+            "if": { "exists": "#cookie-compliant #cookie_c:checked" },
+            "then": [{ "click": "#cookie-compliant #cookie_c" }]
+        },
+        {
+            "click": "#cookie-compliant #saveAndAcceptCookies"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ALLOW_COOKIES=a"
+        },
+        {
+            "cookieContains": "ALLOW_COOKIES=a-",
+            "negated": true
+        }
+    ]
+}

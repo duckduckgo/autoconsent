@@ -1,0 +1,47 @@
+{
+    "name": "kamsoft-cookiesmanager",
+    "prehideSelectors": [".ui-dialog[aria-describedby=\"cookies\"]"],
+    "detectCmp": [
+        {
+            "exists": "#cookies > #cookies-info #btnCookiesAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies > #cookies-info #btnCookiesAll"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies-info #btnCookiesAll"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cookies-info #btnCookiesReject"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookies-info #btnCookiesReject"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookies-info #btnCookiesOptions"
+                },
+                {
+                    "waitForVisible": "#cookies-options #btnCookiesSelected"
+                },
+                {
+                    "click": "#cookies-options input[type=\"checkbox\"]:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "#cookies-options #btnCookiesSelected"
+                }
+            ]
+        }
+    ]
+}

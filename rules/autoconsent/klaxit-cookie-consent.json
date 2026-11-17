@@ -1,0 +1,9 @@
+{
+    "name": "klaxit-cookie-consent",
+    "prehideSelectors": [".cc-container.cc-noselect"],
+    "detectCmp": [{ "exists": ".cc-container .cc-box .cc-section-landing .cc-btn-reject" }],
+    "detectPopup": [{ "visible": ".cc-container.displayed .cc-section-landing" }],
+    "optIn": [{ "waitForThenClick": ".cc-container .cc-section-landing .cc-btn-accept-all" }],
+    "optOut": [{ "waitForThenClick": ".cc-container .cc-section-landing .cc-btn-reject" }],
+    "test": [{ "cookieContains": "cookie_consent={\"status\":\"rejected\"" }]
+}

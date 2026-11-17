@@ -1,0 +1,49 @@
+{
+    "name": "ersatzteile-24",
+    "_metadata": {
+        "vendorUrl": "https://www.ersatzteile-24.com/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?ersatzteile-24\\.com/"
+    },
+    "prehideSelectors": ["[data-cookie-hint]"],
+    "detectCmp": [
+        {
+            "exists": "[data-cookie-hint] [data-cookie-hint-save-settings]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-cookie-hint] [data-cookie-first]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-cookie-first] [data-cookie-hint-accept]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-cookie-hint] [data-cookie-hint-settings]",
+            "retry": 5,
+            "retryInterval": 1000
+        },
+        {
+            "waitForVisible": "[data-cookie-settings] #cookie-setting-1"
+        },
+        {
+            "click": "[data-cookie-settings] #cookie-setting-1"
+        },
+        {
+            "click": "[data-cookie-hint] [data-cookie-hint-save-settings]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieHint=1"
+        },
+        {
+            "cookieContains": "cookieAllowed=1"
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "name": "reviewsolicitors.co.uk",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?reviewsolicitors\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#cookiePopUp", "#manageCookieSettingsPopUp"],
+    "detectCmp": [
+        {
+            "exists": "#cookiePopUp[data-control=cookies]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiePopUp"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#accept-all-cookies-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiePopUp [data-bs-target='#manageCookieSettingsPopUp']"
+        },
+        {
+            "waitForVisible": "#decline-cookies-button"
+        },
+        {
+            "wait": 500
+        },
+        {
+            "click": "#decline-cookies-button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_consents="
+        }
+    ]
+}

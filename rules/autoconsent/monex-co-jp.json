@@ -1,0 +1,34 @@
+{
+    "name": "monex-co-jp",
+    "vendorUrl": "https://www.monex.co.jp/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?monex\\.co\\.jp/"
+    },
+    "prehideSelectors": ["#cookie-confirm"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-confirm a[href*='cookieConfirmClose2']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-confirm"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-confirm .cookie-button a"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-confirm a[href*='cookieConfirmClose2']"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookie-confirm",
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "name": "ub-hu-berlin",
+    "vendorUrl": "https://www.ub.hu-berlin.de/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?ub\\.hu-berlin\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#splash .subcolumns .subcr a[href='#']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#splash .subcolumns"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#splash .subcr a[href='#']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#splash .subcr a[href='#']",
+            "comment": "notice-only banner, close is the only control"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "huubShowInfo=\"false\""
+        }
+    ]
+}

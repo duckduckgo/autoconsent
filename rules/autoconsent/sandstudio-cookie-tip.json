@@ -1,0 +1,30 @@
+{
+    "name": "sandstudio-cookie-tip",
+    "vendorUrl": "https://www.sandstudio.com/",
+    "prehideSelectors": ["#mode-cookie-tip"],
+    "detectCmp": [
+        {
+            "exists": "#mode-cookie-tip .cookie-tip-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#mode-cookie-tip"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#mode-cookie-tip .cookie-tip-close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#mode-cookie-tip .cookie-tip-close"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_tip_close=1"
+        }
+    ]
+}

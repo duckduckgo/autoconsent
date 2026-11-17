@@ -1,0 +1,14 @@
+{
+    "name": "stuvia",
+    "vendorUrl": "https://www.stuvia.com/",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?stuvia\\.com/"
+    },
+    "prehideSelectors": ["#cookiesPermission"],
+    "detectCmp": [{ "exists": "#cookiesPermission #cookiesClose" }],
+    "detectPopup": [{ "visible": "#cookiesPermission" }],
+    "optIn": [{ "waitForThenClick": "#cookiesClose" }],
+    "optOut": [{ "hide": "#cookiesPermission" }, { "addStyle": "display: none !important", "selector": "#cookiesPermission" }]
+}

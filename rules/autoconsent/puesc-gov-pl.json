@@ -1,0 +1,37 @@
+{
+    "name": "puesc-gov-pl",
+    "vendorUrl": "https://puesc.gov.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?puesc\\.gov\\.pl/"
+    },
+    "prehideSelectors": [".cookies .cookies__container"],
+    "detectCmp": [
+        {
+            "exists": ".cookies .cookies__close button.cookies__button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies .cookies__close button.cookies__button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies .cookies__close button.cookies__button",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookies .cookies__close button.cookies__button",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieAgreements=true"
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "name": "matemaks",
+    "vendorUrl": "https://www.matemaks.pl/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?matemaks\\.pl/"
+    },
+    "prehideSelectors": [".cookie_info"],
+    "detectCmp": [
+        {
+            "exists": ".cookie_info > span.cookie_ok"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie_info"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie_info > span.cookie_ok"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookie_info"
+        }
+    ]
+}

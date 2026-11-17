@@ -1,0 +1,12 @@
+{
+    "name": "solvhealth.com",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?solvhealth\\.com/"
+    },
+    "prehideSelectors": ["#cookiesModal"],
+    "detectCmp": [{ "exists": "#cookiesModal #cookiesModalCloseBtn" }],
+    "detectPopup": [{ "visible": "#cookiesModal" }],
+    "optIn": [{ "waitForThenClick": "#cookiesModalCloseBtn" }],
+    "optOut": [{ "waitForThenClick": "#cookiesModalCloseBtn" }, { "waitForVisible": "#cookiesModal", "check": "none" }],
+    "test": [{ "visible": "#cookiesModal", "check": "none" }]
+}
