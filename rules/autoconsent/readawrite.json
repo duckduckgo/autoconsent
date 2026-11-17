@@ -1,0 +1,13 @@
+{
+    "name": "readawrite",
+    "vendorUrl": "https://www.readawrite.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?readawrite\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#accept_cookie_banner .btnAcceptCookie" }],
+    "detectPopup": [{ "visible": "#accept_cookie_banner" }],
+    "optIn": [{ "waitForThenClick": "#accept_cookie_banner .btnAcceptCookie" }],
+    "optOut": [{ "click": "#accept_cookie_banner > span.cursorPointer" }],
+    "test": [{ "visible": "#accept_cookie_banner", "check": "none" }]
+}
