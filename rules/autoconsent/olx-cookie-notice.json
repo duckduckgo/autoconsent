@@ -1,0 +1,30 @@
+{
+    "name": "olx-cookie-notice",
+    "vendorUrl": "https://www.olx.ua/",
+    "prehideSelectors": ["[data-testid=\"cookies-overlay__container\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=\"cookies-overlay__container\"] [data-testid=\"dismiss-cookies-banner\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"cookies-overlay__container\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=\"cookies-overlay__container\"] [data-testid=\"dismiss-cookies-banner\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=\"cookies-overlay__container\"] [data-testid=\"dismiss-cookies-banner\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieBarSeenV2=true"
+        }
+    ]
+}
