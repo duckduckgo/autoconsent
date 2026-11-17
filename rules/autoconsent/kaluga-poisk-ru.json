@@ -1,0 +1,28 @@
+{
+    "name": "kaluga-poisk-ru",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?kaluga-poisk\\.ru/"
+    },
+    "prehideSelectors": ["#lawcookie"],
+    "detectCmp": [
+        {
+            "exists": "#lawcookie .lc-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#lawcookie.lc-show"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#lawcookie .lc-close"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#lawcookie"
+        }
+    ]
+}
