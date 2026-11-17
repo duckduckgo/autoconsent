@@ -1,0 +1,33 @@
+{
+    "name": "allwyn.cz",
+    "vendorUrl": "https://www.allwyn.cz/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?allwyn\\.cz/"
+    },
+    "prehideSelectors": [".consent-dialog-positioner"],
+    "detectCmp": [
+        {
+            "exists": "[data-test=\"consent-bar\"] [data-test=\"consent-bar-necessary\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-test=\"consent-bar\"] [data-test=\"consent-bar-necessary\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-test=\"consent-bar\"] [data-test=\"consent-bar-accept\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-test=\"consent-bar\"] [data-test=\"consent-bar-necessary\"]"
+        },
+        {
+            "waitForVisible": "[data-test=\"consent-bar\"]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
