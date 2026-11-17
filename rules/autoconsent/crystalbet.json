@@ -1,0 +1,17 @@
+{
+    "name": "crystalbet",
+    "_metadata": {
+        "vendorUrl": "https://www.crystalbet.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?crystalbet\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".popup_consent .btn_cookie" }],
+    "detectPopup": [{ "visible": ".popup_consent.popup_consent_active" }],
+    "optIn": [{ "waitForThenClick": ".popup_consent .btn_cookie" }],
+    "optOut": [{ "waitForThenClick": ".popup_consent .btn_cookie" }],
+    "test": [{ "waitForVisible": ".popup_consent.popup_consent_active", "check": "none", "timeout": 1000 }]
+}
