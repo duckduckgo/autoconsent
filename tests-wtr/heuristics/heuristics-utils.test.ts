@@ -219,6 +219,23 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Persian popups', () => {
+    it('detects Persian cookie notices', () => {
+        const texts = [
+            'خانومی برای بهبود تجربه شما از کوکی‌ها استفاده می‌کند.',
+            'ما از کوکی ها استفاده می‌کنیم',
+            'این وب‌سایت از کوکی و فناوری‌های مشابه استفاده می‌کند',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Persian text', () => {
+        expect(checkHeuristicPatterns('برای تهیه کوکی شکلاتی از کره و شکر استفاده کنید').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with inputs and context negatives', () => {
     it('runs patterns scoped to an input on that input only', () => {
         const patterns = [{ pattern: /accept all/gi, input: 'popup' as const }];
@@ -820,6 +837,16 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
         expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
         expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
+    });
+
+    it('matches Persian reject buttons', () => {
+        expect(classifyButtonTextRegex('رد کردن')).to.equal('reject');
+        expect(classifyButtonTextRegex('رد کردن همه')).to.equal('reject');
+        expect(classifyButtonTextRegex('رد همه کوکی‌ها')).to.equal('reject');
+        expect(classifyButtonTextRegex('عدم پذیرش')).to.equal('reject');
+        expect(classifyButtonTextRegex('نمی‌پذیرم')).to.equal('reject');
+        expect(classifyButtonTextRegex('تایید')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('پذیرفتن همه')).not.to.equal('reject');
     });
 
     it('matches Danish reject buttons', () => {

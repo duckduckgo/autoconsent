@@ -372,6 +372,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
     /\b(?:bruger|anvender|benytter) cookies\b/gi,
 
+    // Persian (FA)
+    // e.g. "از کوکی‌ها استفاده می‌کند", "از کوکی ها و فناوری‌های مشابه استفاده می‌کنیم"
+    /از (?:\S+ )?کوکی(?:[\u200c ]?ها)? (?:\S+ ){0,3}?استفاده/gi,
+
     // Norwegian (NO)
     // e.g. "vi bruker informasjonskapsler", "kan vi bruke valgfrie informasjonskapsler", "nettstedet bruker cookies"
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
@@ -643,6 +647,11 @@ const REJECT_PATTERNS_TURKISH = ['reddet', 'çerezleri reddet'];
 
 const REJECT_PATTERNS_INDONESIAN = ['tolak cookie'];
 
+const REJECT_PATTERNS_PERSIAN = [
+    // e.g. "رد کردن", "رد کردن همه", "رد همه کوکی‌ها", "عدم پذیرش", "نمی‌پذیرم"
+    /^(?:رد(?: کردن)?(?: همه)?(?: (?:ی )?کوکی(?:[\u200c ]?ها)?)?|عدم پذیرش(?: همه)?|نمی[\u200c ]?پذیرم)$/,
+];
+
 const REJECT_PATTERNS_JAPANESE = [
     // e.g. "拒否", "すべて拒否", "全て拒否する", "cookieを拒否"
     /^(すべて|全て)?\s?(の)?(cookie|クッキー)?\s?(を)?拒否(する)?$/i,
@@ -674,6 +683,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_TURKISH,
     ...REJECT_PATTERNS_INDONESIAN,
     ...REJECT_PATTERNS_JAPANESE,
+    ...REJECT_PATTERNS_PERSIAN,
 ];
 
 export const BUTTON_NEVER_MATCH_PATTERNS = [
