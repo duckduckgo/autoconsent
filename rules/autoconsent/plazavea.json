@@ -1,0 +1,16 @@
+{
+    "name": "plazavea",
+    "vendorUrl": "https://www.plazavea.com.pe/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?plazavea\\.com\\.pe/"
+    },
+    "prehideSelectors": ["#cookies-consent"],
+    "detectCmp": [{ "exists": "#cookies-consent .cookies-consent-banner" }],
+    "detectPopup": [{ "visible": "#cookies-consent .cookies-consent-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookies-consent .cookies-consent-banner__button" }],
+    "optOut": [
+        { "waitForThenClick": "#cookies-consent .cookies-consent-banner__link[onclick*=openConfiguration]" },
+        { "waitForThenClick": "#cookies-consent .cookies-consent-configuration__reject" }
+    ],
+    "test": [{ "waitForVisible": "#cookies-consent", "check": "none", "timeout": 1000 }]
+}
