@@ -279,4 +279,6 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["informasjonskapsler","cookies"],
     ["vi benytter"],
     ["bruk av "],
+    ["sử dụng "],
+    ["trải nghiệm","trải nghiệm"],
 ];

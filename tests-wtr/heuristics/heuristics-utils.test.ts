@@ -219,6 +219,24 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Vietnamese popups', () => {
+    it('detects Vietnamese cookie notices', () => {
+        const texts = [
+            'Chúng tôi sử dụng cookie để cải thiện trải nghiệm của bạn. Tìm hiểu về Chính sách Cookie tại đây',
+            'Trang web này sử dụng các tệp cookie',
+            'Cải thiện trải nghiệm với cookie. Xem Chính sách Cookie',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Vietnamese text', () => {
+        expect(checkHeuristicPatterns('Chúng tôi sử dụng nguyên liệu tươi mỗi ngày').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Cải thiện trải nghiệm mua sắm của bạn').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with inputs and context negatives', () => {
     it('runs patterns scoped to an input on that input only', () => {
         const patterns = [{ pattern: /accept all/gi, input: 'popup' as const }];
@@ -820,6 +838,15 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
         expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
         expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
+    });
+
+    it('matches Vietnamese reject buttons', () => {
+        expect(classifyButtonTextRegex('Từ chối')).to.equal('reject');
+        expect(classifyButtonTextRegex('Từ chối tất cả')).to.equal('reject');
+        expect(classifyButtonTextRegex('Từ chối cookie')).to.equal('reject');
+        expect(classifyButtonTextRegex('Không đồng ý')).to.equal('reject');
+        expect(classifyButtonTextRegex('Đồng ý')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Từ chối trách nhiệm')).not.to.equal('reject');
     });
 
     it('matches Danish reject buttons', () => {
