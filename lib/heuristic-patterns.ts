@@ -377,6 +377,11 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+    // Vietnamese (VI)
+    // e.g. "Chúng tôi sử dụng cookie để cải thiện trải nghiệm", "Trang web này sử dụng cookie"
+    /\bsử dụng (?:\S+ ){0,2}cookies?\b/gi,
+    // e.g. "Cải thiện trải nghiệm với cookie" (improve your experience with cookies); popup text only
+    { pattern: /\btrải nghiệm\b.{0,40}\bcookies?\b/gi, input: 'popup' },
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -650,6 +655,11 @@ const REJECT_PATTERNS_JAPANESE = [
     '同意しません',
 ];
 
+const REJECT_PATTERNS_VIETNAMESE = [
+    // "từ chối" (reject), e.g. "từ chối tất cả", "từ chối cookie"
+    /^từ chối( tất cả)?( (các )?cookies?)?$/is,
+];
+
 /**
  * @type {Array<string|RegExp>}
  */
@@ -674,6 +684,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_TURKISH,
     ...REJECT_PATTERNS_INDONESIAN,
     ...REJECT_PATTERNS_JAPANESE,
+    ...REJECT_PATTERNS_VIETNAMESE,
 ];
 
 export const BUTTON_NEVER_MATCH_PATTERNS = [
@@ -1042,6 +1053,10 @@ export const ACCEPT_PATTERNS = [
     'accetta',
     'accetta tutti i cookie',
     'accetto tutti i cookie',
+
+    // Vietnamese (VI)
+    // e.g. "đồng ý" (agree), "chấp nhận tất cả" (accept all)
+    /^(đồng ý|chấp nhận)( tất cả)?( (các )?cookies?)?$/is,
 ];
 
 export const ACKNOWLEDGE_PATTERNS = [

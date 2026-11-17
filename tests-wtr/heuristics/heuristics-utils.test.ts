@@ -219,6 +219,29 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Vietnamese popups', () => {
+    it('detects Vietnamese cookie notices', () => {
+        const texts = [
+            'Chúng tôi sử dụng cookie để cải thiện trải nghiệm của bạn. Tìm hiểu về Chính sách Cookie tại đây',
+            'Trang web này sử dụng cookie để cung cấp cho bạn trải nghiệm duyệt web tốt hơn.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('detects short Vietnamese notices in popup text only', () => {
+        const text = 'Cải thiện trải nghiệm với cookie. Xem Chính sách Cookie';
+        expect(checkHeuristicPatterns(text, 'popup').patterns.length).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns(text, 'page').patterns).to.have.length(0);
+    });
+
+    it('does not detect unrelated Vietnamese text', () => {
+        expect(checkHeuristicPatterns('Chính sách cookie').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Hướng dẫn sử dụng sản phẩm').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with inputs and context negatives', () => {
     it('runs patterns scoped to an input on that input only', () => {
         const patterns = [{ pattern: /accept all/gi, input: 'popup' as const }];
@@ -820,6 +843,14 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
         expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
         expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
+    });
+
+    it('matches Vietnamese buttons', () => {
+        expect(classifyButtonTextRegex('Từ chối')).to.equal('reject');
+        expect(classifyButtonTextRegex('Từ chối tất cả')).to.equal('reject');
+        expect(classifyButtonTextRegex('Đồng ý')).to.equal('accept');
+        expect(classifyButtonTextRegex('Chấp nhận tất cả')).to.equal('accept');
+        expect(classifyButtonTextRegex('Chính sách Cookie')).to.equal('other');
     });
 
     it('matches Danish reject buttons', () => {
