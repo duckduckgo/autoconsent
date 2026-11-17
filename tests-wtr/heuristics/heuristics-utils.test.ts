@@ -772,6 +772,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Jag förstår')).to.equal('acknowledge');
     });
 
+    it('matches Portuguese "entendi" acknowledgements', () => {
+        expect(classifyButtonTextRegex('Entendi')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ok, entendi!')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Entendimento')).to.equal('other');
+    });
+
     it('does not treat Polish subscription links as reject', () => {
         expect(classifyButtonTextRegex('Zarządzaj subskrypcjami lub z nich zrezygnuj')).to.equal('other');
         expect(classifyButtonTextRegex('Rezygnuję')).to.equal('reject');

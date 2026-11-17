@@ -1,0 +1,13 @@
+{
+    "name": "chavesnamao.com.br",
+    "vendorUrl": "https://www.chavesnamao.com.br/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?chavesnamao\\.com\\.br/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "[data-slot=lgpd-banner] button" }],
+    "detectPopup": [{ "visible": "[data-slot=lgpd-banner] button" }],
+    "optIn": [{ "waitForThenClick": "[data-slot=lgpd-banner] button", "retry": 5, "retryInterval": 1000 }],
+    "optOut": [{ "waitForThenClick": "[data-slot=lgpd-banner] button", "retry": 5, "retryInterval": 1000 }],
+    "test": [{ "cookieContains": "LGPDconsent=" }]
+}
