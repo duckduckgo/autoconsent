@@ -1,0 +1,10 @@
+{
+    "name": "weblegal",
+    "vendorUrl": "https://weblegal.ai/",
+    "prehideSelectors": ["#wl-cc-box", "#wl-cc-backdrop"],
+    "detectCmp": [{ "exists": "#wl-cc-box #wl-cc-reject" }],
+    "detectPopup": [{ "visible": "#wl-cc-box" }, { "exists": "#wl-cc-cats:not(.wl-cc-exp)" }],
+    "optIn": [{ "waitForThenClick": "#wl-cc-box #wl-cc-accept" }],
+    "optOut": [{ "waitForThenClick": "#wl-cc-box #wl-cc-reject" }],
+    "test": [{ "cookieContains": "wl_cc_consent=%7B%22necessary%22%3Atrue%2C%22analytics%22%3Afalse%2C%22marketing%22%3Afalse" }]
+}

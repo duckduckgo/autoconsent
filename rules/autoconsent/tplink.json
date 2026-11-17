@@ -5,7 +5,7 @@
     "prehideSelectors": [".tp-dialog.cookie-dialog", ".tp-cookie-banner"],
     "detectCmp": [
         {
-            "exists": ".tp-dialog.cookie-dialog, :not(.tp-cookie-banner-tpl) > .tp-cookie-banner .show-cookie-dialog"
+            "exists": ".tp-dialog.cookie-dialog, :not(.tp-cookie-banner-tpl) > .tp-cookie-banner .show-cookie-dialog, #tp-cookie-banner > .tp-cookie-banner + .el-dialog__wrapper"
         }
     ],
     "detectPopup": [
@@ -16,6 +16,9 @@
                 },
                 {
                     "visible": ":not(.tp-cookie-banner-tpl) > .tp-cookie-banner .show-cookie-dialog"
+                },
+                {
+                    "visible": "#tp-cookie-banner > .tp-cookie-banner .tp-cookie-button-box"
                 }
             ]
         }
@@ -32,7 +35,19 @@
             ],
             "else": [
                 {
-                    "waitForThenClick": ".tp-dialog-box .tp-cookie-accept-all"
+                    "if": {
+                        "exists": "#tp-cookie-banner > .el-dialog__wrapper"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#tp-cookie-banner > .tp-cookie-banner .tp-cookie-button-box .el-button--primary"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": ".tp-dialog-box .tp-cookie-accept-all"
+                        }
+                    ]
                 }
             ]
         }
@@ -49,32 +64,57 @@
             ]
         },
         {
-            "waitForVisible": ".tp-dialog.cookie-dialog .tp-dialog-box"
-        },
-        {
             "if": {
-                "exists": ".tp-dialog-box .tp-cookie-opt-out"
+                "visible": "#tp-cookie-banner > .tp-cookie-banner .tp-cookie-button-box .el-button--default"
             },
             "then": [
                 {
-                    "waitForThenClick": ".tp-dialog-box .tp-cookie-opt-out"
+                    "click": "#tp-cookie-banner > .tp-cookie-banner .tp-cookie-button-box .el-button--default"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#tp-cookie-banner > .el-dialog__wrapper"
+            },
+            "then": [
+                {
+                    "waitForVisible": "#tp-cookie-banner > .el-dialog__wrapper .el-dialog__footer"
+                },
+                {
+                    "waitForThenClick": "#tp-cookie-banner > .el-dialog__wrapper .el-dialog__footer button.is-plain:first-child"
                 }
             ],
             "else": [
                 {
-                    "click": ".tp-dialog-box .checkbox.clickable.checked",
-                    "all": true,
-                    "optional": true
+                    "waitForVisible": ".tp-dialog.cookie-dialog .tp-dialog-box"
                 },
                 {
-                    "waitForThenClick": ".tp-dialog-box .tp-cookie-save"
+                    "if": {
+                        "exists": ".tp-dialog-box .tp-cookie-opt-out"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": ".tp-dialog-box .tp-cookie-opt-out"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": ".tp-dialog-box .checkbox.clickable.checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": ".tp-dialog-box .tp-cookie-save"
+                        }
+                    ]
                 }
             ]
         }
     ],
     "test": [
         {
-            "cookieContains": "_privacy_banner=1"
+            "cookieContains": "_privacy_base=1"
         },
         {
             "negated": true,

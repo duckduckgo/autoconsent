@@ -1,0 +1,45 @@
+{
+    "name": "acconsento",
+    "vendorUrl": "https://acconsento.click/",
+    "prehideSelectors": ["#acconsento-click .acconsento-click-overlay-dialog"],
+    "detectCmp": [
+        {
+            "exists": "#acconsento-click .acconsento-click-consent-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#acconsento-click .acconsento-click-consent-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#acconsento-click-button-accept-all [role=button]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#acconsento-click-button-necessary-only [role=button]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#acconsento-click-button-necessary-only [role=button]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#acconsento-click .acconsento-click-consent-banner .el-acconsento-dialog__headerbtn"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "acconsento-clicked=1"
+        },
+        {
+            "cookieContains": "tracking%3D0%26marketing%3D0"
+        }
+    ]
+}

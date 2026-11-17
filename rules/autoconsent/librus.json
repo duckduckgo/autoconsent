@@ -1,0 +1,21 @@
+{
+    "name": "librus",
+    "vendorUrl": "https://portal.librus.pl/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?librus\\.pl/"
+    },
+    "prehideSelectors": [".consent-categories-modal-wrapper"],
+    "detectCmp": [{ "exists": "#consent-categories-modal [data-modal-consent-open-settings]" }],
+    "detectPopup": [{ "visible": "#consent-categories-modal [data-modal-consent-open-settings]" }],
+    "optIn": [{ "waitForThenClick": "#consent-categories-description [data-modal-submit-all]" }],
+    "optOut": [
+        { "waitForThenClick": "#consent-categories-modal [data-modal-consent-open-settings]" },
+        { "waitFor": "#edit-consent-app input[name=consent-category][value=nc]:checked" },
+        {
+            "if": { "exists": "#edit-consent-app input[name=consent-category]:checked:not(:disabled)" },
+            "then": [{ "click": "#edit-consent-app input[name=consent-category]:checked:not(:disabled)", "all": true }]
+        },
+        { "waitForThenClick": "#consent-categories-settings [data-modal-submit]" }
+    ],
+    "test": [{ "waitForVisible": "#consent-categories-modal", "check": "none", "timeout": 2000 }]
+}

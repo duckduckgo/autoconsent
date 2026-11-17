@@ -1,0 +1,24 @@
+{
+    "name": "octopusenergy-it",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?octopusenergy\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "xpath///button[contains(., 'Imposta le tue preferenze')]" }],
+    "detectPopup": [{ "visible": "xpath///button[contains(., 'Imposta le tue preferenze')]" }],
+    "optIn": [{ "waitForThenClick": "xpath///button[contains(., 'Accetta tutto')]" }],
+    "optOut": [
+        { "waitForThenClick": "xpath///button[contains(., 'Imposta le tue preferenze')]" },
+        { "waitFor": "input[data-part='checkbox-input'][name='analytics']" },
+        {
+            "if": { "exists": "input[data-part='checkbox-input'][name='analytics']:checked" },
+            "then": [{ "click": "input[data-part='checkbox-input'][name='analytics']" }]
+        },
+        {
+            "if": { "exists": "input[data-part='checkbox-input'][name='marketing']:checked" },
+            "then": [{ "click": "input[data-part='checkbox-input'][name='marketing']" }]
+        },
+        { "waitForThenClick": "xpath///button[contains(., 'Salva le mie impostazioni')]" }
+    ],
+    "test": [{ "cookieContains": "cookie_consent=a%3D0%26m%3D0" }]
+}

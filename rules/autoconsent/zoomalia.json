@@ -1,0 +1,13 @@
+{
+    "name": "zoomalia",
+    "vendorUrl": "https://www.zoomalia.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?zoomalia\\.\\w+/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#rgpd-banner" }],
+    "detectPopup": [{ "visible": "#rgpd-banner" }],
+    "optIn": [{ "waitForThenClick": "#rgpd-banner .gdrp-agree-all" }],
+    "optOut": [{ "waitForThenClick": "#rgpd-banner .gdrp-required" }],
+    "test": [{ "cookieContains": "cookie_consent_ads=off" }, { "cookieContains": "cookie_consent=1" }]
+}

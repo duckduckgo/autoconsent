@@ -1,0 +1,21 @@
+{
+    "name": "cookie-bar-eu",
+    "vendorUrl": "https://cookie-bar.eu/",
+    "prehideSelectors": ["#cookie-bar", "#cookie-bar-prompt"],
+    "detectCmp": [{ "exists": "#cookie-bar > #cookie-bar-button" }, { "exists": "#cookie-bar-prompt #cookiebar-save-customized" }],
+    "detectPopup": [{ "visible": "#cookie-bar" }],
+    "optIn": [{ "waitForThenClick": "#cookie-bar > #cookie-bar-button" }],
+    "optOut": [
+        {
+            "if": { "visible": "#cookie-bar-button-customize" },
+            "then": [
+                { "click": "#cookie-bar-button-customize" },
+                { "waitForVisible": "#cookiebar-save-customized", "timeout": 2000, "optional": true }
+            ]
+        },
+        { "if": { "exists": "#cookiebar-tracking:checked" }, "then": [{ "click": "#cookiebar-tracking" }] },
+        { "if": { "exists": "#cookiebar-third-party:checked" }, "then": [{ "click": "#cookiebar-third-party" }] },
+        { "click": "#cookiebar-save-customized" }
+    ],
+    "test": [{ "cookieContains": "cookiebar=CookieCustomized" }, { "cookieContains": "cookiebar-tracking=false" }]
+}

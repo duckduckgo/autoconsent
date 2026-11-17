@@ -1,0 +1,45 @@
+{
+    "name": "cookies-and-content-security-policy",
+    "vendorUrl": "https://wordpress.org/plugins/cookies-and-content-security-policy/",
+    "prehideSelectors": [".modal-cacsp-position", ".modal-cacsp-backdrop"],
+    "detectCmp": [
+        {
+            "exists": ".modal-cacsp-position .modal-cacsp-box-info"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".modal-cacsp-box-info.modal-cacsp-box-show"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".modal-cacsp-box-info .modal-cacsp-btn-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".modal-cacsp-box-info .modal-cacsp-btn-refuse"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".modal-cacsp-box-info .modal-cacsp-btn-refuse"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".modal-cacsp-box-info .modal-cacsp-btn-settings"
+                },
+                {
+                    "waitForThenClick": ".modal-cacsp-box-settings.modal-cacsp-box-show .modal-cacsp-btn-save"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies_and_content_security_policy=[]"
+        }
+    ]
+}

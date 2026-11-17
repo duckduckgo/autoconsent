@@ -1,0 +1,33 @@
+{
+    "name": "skatteverket-se",
+    "vendorUrl": "https://www.skatteverket.se/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?skatteverket\\.se/"
+    },
+    "prehideSelectors": ["skv-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ["skv-cookie-banner", ".skv-cookie-banner-root"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["skv-cookie-banner", ".skv-cookie-banner-root"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["skv-cookie-banner", "#accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["skv-cookie-banner", "#deny-all"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "SKVCookieAllow=strictlyNecessary"
+        }
+    ]
+}

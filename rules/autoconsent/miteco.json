@@ -1,0 +1,41 @@
+{
+    "name": "miteco",
+    "vendorUrl": "https://www.miteco.gob.es/",
+    "prehideSelectors": ["#cookies.modal:has(.aceptar-cookies)", "#configuracion-cookies.modal"],
+    "detectCmp": [
+        {
+            "exists": "#cookies.modal button[data-bs-target=\"#configuracion-cookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies.modal .aceptar-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies.modal .aceptar-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookies.modal button[data-bs-target=\"#configuracion-cookies\"]"
+        },
+        {
+            "waitForVisible": "#configuracion-cookies .aceptar-cookies"
+        },
+        {
+            "if": {
+                "exists": "#configuracion-cookies input[value=analytics-cookies]:checked"
+            },
+            "then": [
+                {
+                    "click": "#configuracion-cookies input[value=analytics-cookies]"
+                }
+            ]
+        },
+        {
+            "click": "#configuracion-cookies .aceptar-cookies"
+        }
+    ]
+}

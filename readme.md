@@ -42,7 +42,7 @@ import { checkHeuristicPatterns, classifyButtonTextRegex, classifyButtons, class
 classifyButtonTextRegex('Reject all'); // 'reject'
 ```
 
-`dist/autoconsent.playwright.js` also exposes `window.autoconsentHeuristics.getPotentialPopups(timeout)` and `getButtonData(element)`, so other scripts injected into the same world can reuse autoconsent's popup and button discovery.
+`dist/autoconsent.playwright.js` also exposes `window.autoconsentHeuristics.getPotentialPopups(timeout, hitTest)` and `getButtonData(element)`, so other scripts injected into the same world can reuse autoconsent's popup and button discovery. Each potential popup is labelled with the `regexClassification` of its buttons; `getActionablePopups` keeps the consent popups among them that the heuristic mode can act on.
 
 ## Browser extension
 

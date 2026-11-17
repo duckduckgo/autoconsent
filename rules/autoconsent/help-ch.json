@@ -1,0 +1,25 @@
+{
+    "name": "help-ch",
+    "vendorUrl": "https://www.help.ch/",
+    "prehideSelectors": [".cookie-info:has(a[href*=\"close-policy.cfm\"])"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-info a[href*=\"close-policy.cfm\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-info a[href*=\"close-policy.cfm\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-info a[href*=\"close-policy.cfm\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-info a[href*=\"close-policy.cfm\"]"
+        }
+    ]
+}

@@ -1,0 +1,55 @@
+{
+    "name": "cookie-consent-root",
+    "prehideSelectors": ["[data-cookie-consent-root] [data-cookie-consent-banner]"],
+    "detectCmp": [
+        {
+            "exists": "[data-cookie-consent-root] [data-cookie-consent-banner] [data-cookie-consent-open-manage]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-cookie-consent-root] [data-cookie-consent-banner]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-cookie-consent-root] [data-cookie-consent-accept-all]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-cookie-consent-root] [data-cookie-consent-open-manage]"
+        },
+        {
+            "waitForVisible": "[data-cookie-consent-root] [data-cookie-consent-save]"
+        },
+        {
+            "if": {
+                "exists": "[data-cookie-consent-root] input[data-cookie-consent-analytics]:checked"
+            },
+            "then": [
+                {
+                    "click": "[data-cookie-consent-root] input[data-cookie-consent-analytics]"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "[data-cookie-consent-root] input[data-cookie-consent-marketing]:checked"
+            },
+            "then": [
+                {
+                    "click": "[data-cookie-consent-root] input[data-cookie-consent-marketing]"
+                }
+            ]
+        },
+        {
+            "click": "[data-cookie-consent-root] [data-cookie-consent-save]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analytics%22%3A0%2C%22marketing%22%3A0"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "name": "close-cookie-notice-snippet",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookie-notice:has(.cookie-notice-close[onclick^='closeCookieNotice'])"],
+    "detectCmp": [{ "exists": "#cookie-notice .cookie-notice-close[onclick^='closeCookieNotice']" }],
+    "detectPopup": [{ "visible": "#cookie-notice:has(.cookie-notice-close[onclick^='closeCookieNotice'])" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notice .cookie-notice-close[onclick^='closeCookieNotice']" }],
+    "optOut": [{ "hide": "#cookie-notice:has(.cookie-notice-close[onclick^='closeCookieNotice'])" }]
+}

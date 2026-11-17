@@ -17,15 +17,16 @@ export default class Evidon extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
-        return this.elementExists('#_evidon_banner');
+        return this.elementExists('#_evidon_banner, #_evidon-barrier-wrapper');
     }
 
     async detectPopup() {
-        return this.elementVisible('#_evidon_banner', 'any');
+        return this.elementVisible('#_evidon_banner, #_evidon-barrier-wrapper #_evidon-banner', 'any');
     }
 
     async optOut() {
-        if (await this.click('#_evidon-decline-button')) {
+        // some sites put a custom reject link into the banner text instead of a decline button
+        if (await this.click('#_evidon-decline-button, #_evidon-barrier-declinebutton, #_evidon_banner #RejectLink')) {
             return true;
         }
 
@@ -40,6 +41,6 @@ export default class Evidon extends AutoConsentCMPBase {
     }
 
     async optIn() {
-        return await this.click('#_evidon-accept-button');
+        return await this.click('#_evidon-accept-button, #_evidon-banner-acceptbutton');
     }
 }

@@ -1,0 +1,18 @@
+{
+    "name": "reverb-gdpr-nag",
+    "vendorUrl": "https://reverb.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?reverb\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "comment": "only once a choice is stored in the main notice, which also reloads the page",
+            "cookieContains": "privacy_settings="
+        },
+        { "exists": ".gdpr-alert .gdpr-alert__close" }
+    ],
+    "detectPopup": [{ "visible": ".gdpr-alert .gdpr-alert__overview" }],
+    "optIn": [{ "waitForThenClick": ".gdpr-alert .gdpr-alert__close", "retry": 5, "retryInterval": 500 }],
+    "optOut": [{ "waitForThenClick": ".gdpr-alert .gdpr-alert__close", "retry": 5, "retryInterval": 500 }]
+}

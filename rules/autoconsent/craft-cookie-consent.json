@@ -1,0 +1,65 @@
+{
+    "name": "craft-cookie-consent",
+    "vendorUrl": "https://plugins.craftcms.com/cookie-consent",
+    "prehideSelectors": ["#elc-cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": "#elc-cookie-consent #elc-cookie-consent-form"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#elc-cookie-consent:not(.elc-hidden) #elc-cookie-consent-form"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#elc-accept-all-link"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#elc-cookie-consent-form input[type=checkbox][name^=\"group-\"]:checked:not([disabled]):not([name$=\"-necessary\"])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": "#elc-accept-link"
+            },
+            "then": [
+                {
+                    "click": "#elc-accept-link"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#elc-detail-link"
+                },
+                {
+                    "waitForVisible": "#elc-save-link, #elc-accept-link"
+                },
+                {
+                    "if": {
+                        "visible": "#elc-save-link"
+                    },
+                    "then": [
+                        {
+                            "click": "#elc-save-link"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": "#elc-accept-link"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitFor": "#elc-cookie-consent.elc-hidden"
+        }
+    ]
+}

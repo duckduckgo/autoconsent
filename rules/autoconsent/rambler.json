@@ -1,0 +1,30 @@
+{
+    "name": "rambler",
+    "vendorUrl": "https://www.rambler.ru/",
+    "prehideSelectors": ["#cookie-policy-notification.r-sdk__policy-notification"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-policy-notification.r-sdk__policy-notification"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-policy-notification.r-sdk__policy-notification"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-policy-notification .r-sdk__button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-policy-notification .r-sdk__button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "terms-notification=true"
+        }
+    ]
+}

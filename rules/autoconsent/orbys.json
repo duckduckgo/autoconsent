@@ -1,0 +1,35 @@
+{
+    "name": "orbys",
+    "vendorUrl": "https://orbys.eu/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?orbys\\.eu/"
+    },
+    "prehideSelectors": ["#orbys-cookies"],
+    "detectCmp": [
+        {
+            "exists": "#orbys-cookies .occ-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#orbys-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#orbys-cookies .occ-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#orbys-cookies"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#orbys-cookies",
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "name": "crtm",
+    "vendorUrl": "https://crtm.es/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?crtm\\.es/"
+    },
+    "prehideSelectors": ["#cookie-banner", "#cookie-config-panel"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner #configure-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner #accept-all-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-banner #configure-cookies"
+        },
+        {
+            "waitForThenClick": "#cookie-config-panel #reject-cookies"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookiesRejected=1"
+        }
+    ]
+}

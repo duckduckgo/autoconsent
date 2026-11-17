@@ -1,18 +1,9 @@
 {
     "name": "ciaopeople.it",
-    "prehideSelectors": ["#cp-gdpr-choices"],
-    "detectCmp": [{ "exists": "#cp-gdpr-choices" }],
-    "detectPopup": [{ "visible": "#cp-gdpr-choices" }],
-    "optIn": [{ "waitForThenClick": ".gdpr-btm__right > button:nth-child(2)" }],
-    "optOut": [
-        { "waitForThenClick": ".gdpr-top-content > button" },
-        { "waitFor": ".gdpr-top-back" },
-        { "waitForThenClick": ".gdpr-btm__right > button:nth-child(1)" }
-    ],
-    "test": [
-        {
-            "visible": "#cp-gdpr-choices",
-            "check": "none"
-        }
-    ]
+    "prehideSelectors": [".gdpr-modal:has(img[src*=\".ciaopeople.it/\"])"],
+    "detectCmp": [{ "exists": ".gdpr-modal .gdpr-modal__box-top-sx img[src*=\".ciaopeople.it/\"]" }],
+    "detectPopup": [{ "visible": ".gdpr-modal .gdpr-modal__box" }],
+    "optIn": [{ "waitForThenClick": ".gdpr-modal__box-bottom-dx > button.gdpr-btn--icon" }],
+    "optOut": [{ "waitForThenClick": ".gdpr-modal__box-top-dx > button" }],
+    "test": [{ "waitForVisible": ".gdpr-modal .gdpr-modal__box", "check": "none", "timeout": 5000 }]
 }

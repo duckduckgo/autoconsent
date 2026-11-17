@@ -1,0 +1,35 @@
+{
+    "name": "dola",
+    "vendorUrl": "https://www.dola.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?dola\\.com/"
+    },
+    "prehideSelectors": ["div[class*=\"cookie-banner-\"]"],
+    "detectCmp": [
+        {
+            "exists": "div[class*=\"cookie-banner-\"] [class*=\"cookie-footer-\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[class*=\"cookie-banner-\"] [class*=\"cookie-footer-\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[class*=\"cookie-banner-\"] [data-testid=\"cookie_banner_notice\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div[class*=\"cookie-banner-\"] [class*=\"cookie-footer-\"] > button:not([data-testid=\"cookie_banner_notice\"])"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "div[class*=\"cookie-banner-\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

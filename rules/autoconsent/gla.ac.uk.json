@@ -1,0 +1,45 @@
+{
+    "name": "gla.ac.uk",
+    "vendorUrl": "https://www.gla.ac.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?gla\\.ac\\.uk/"
+    },
+    "prehideSelectors": ["#editconsent"],
+    "detectCmp": [
+        {
+            "exists": "#gu-cookie-control"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gu-cookie-control"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gu-consent-accept-recommended"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gu_analytics_switch_off"
+        },
+        {
+            "click": "#gu_ads_switch_off"
+        },
+        {
+            "click": "#gu-consent-confirm"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "gu_consent_set=true"
+        },
+        {
+            "cookieContains": "gu_analytics=false"
+        },
+        {
+            "cookieContains": "gu_remarketing=false"
+        }
+    ]
+}

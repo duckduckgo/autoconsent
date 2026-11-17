@@ -1,0 +1,13 @@
+{
+    "name": "tracsis-delay-repay",
+    "vendorUrl": "https://www.delayrepaycompensation.com/",
+    "cosmetic": false,
+    "prehideSelectors": [".my-cookie-wrapper.cc-window"],
+    "detectCmp": [{ "exists": ".my-cookie-wrapper [aria-describedby=\"cookieconsent:desc\"] .cc-reject-all" }],
+    "detectPopup": [{ "visible": ".my-cookie-wrapper [aria-describedby=\"cookieconsent:desc\"] .cc-reject-all" }],
+    "optIn": [{ "waitForThenClick": ".my-cookie-wrapper:not(.cc-invisible) [aria-describedby=\"cookieconsent:desc\"] .cc-dismiss" }],
+    "optOut": [
+        { "waitForThenClick": ".my-cookie-wrapper:not(.cc-invisible) [aria-describedby=\"cookieconsent:desc\"] .cc-reject-all", "retry": 2 }
+    ],
+    "test": [{ "cookieContains": "cookieconsent_dismissed1=reject_all" }]
+}

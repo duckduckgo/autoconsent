@@ -1,0 +1,42 @@
+{
+    "name": "vue-cookie-accept-decline",
+    "vendorUrl": "https://github.com/johndatserakis/vue-cookie-accept-decline",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [".cookie.cookie__floating", ".cookie.cookie__bar"],
+    "detectCmp": [
+        {
+            "exists": ".cookie__floating__buttons__button--accept, .cookie__bar__buttons__button--accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie.cookie__floating, .cookie.cookie__bar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie__floating__buttons__button--accept, .cookie__bar__buttons__button--accept"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".cookie__floating__buttons__button--decline, .cookie__bar__buttons__button--decline"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cookie__floating__buttons__button--decline, .cookie__bar__buttons__button--decline"
+                }
+            ],
+            "else": [
+                {
+                    "hide": ".cookie.cookie__floating, .cookie.cookie__bar"
+                }
+            ]
+        }
+    ]
+}

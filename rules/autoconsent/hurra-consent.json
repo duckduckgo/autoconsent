@@ -1,0 +1,16 @@
+{
+    "name": "hurra-consent",
+    "_metadata": { "vendorUrl": "https://www.hurra.com/" },
+    "prehideSelectors": ["#JOISH987_bar_holder"],
+    "detectCmp": [{ "exists": "#JOISH987_bar_holder #JOISH987_bar" }],
+    "detectPopup": [{ "visible": "#JOISH987_bar_holder" }],
+    "optIn": [{ "waitForThenClick": "#JOISH987_acceptAllBar_btn" }],
+    "optOut": [
+        {
+            "if": { "visible": "#JOISH987_rejectBar_btn" },
+            "then": [{ "click": "#JOISH987_rejectBar_btn" }],
+            "else": [{ "waitForThenClick": "#JOISH987_inlineRejectBar_btn" }]
+        }
+    ],
+    "test": [{ "waitForVisible": "#JOISH987_bar_holder", "timeout": 2000, "check": "none" }]
+}

@@ -1,0 +1,26 @@
+{
+    "name": "polisen-se",
+    "vendorUrl": "https://polisen.se/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#cookie-consent.c-cookie-banner"],
+    "detectCmp": [{ "exists": "#cookie-consent.c-cookie-banner .c-cookie-banner__quickform" }],
+    "detectPopup": [{ "visible": "#cookie-consent.c-cookie-banner" }],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent .c-cookie-banner__quickform input[name='Purpose.Statistics'][value='True'] ~ input[type='submit']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-consent .c-cookie-banner__quickform input[name='Purpose.Statistics'][value='False'] ~ input[type='submit']"
+        }
+    ],
+    "test": [
+        { "waitForVisible": "#cookie-consent.c-cookie-banner", "check": "none", "timeout": 3000, "optional": true },
+        { "cookieContains": "%22statistics%22%3Afalse" }
+    ]
+}

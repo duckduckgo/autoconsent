@@ -1,0 +1,53 @@
+{
+    "name": "vgn.de",
+    "vendorUrl": "https://www.vgn.de/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?vgn\\.de/"
+    },
+    "prehideSelectors": [".CookieBanner"],
+    "detectCmp": [
+        {
+            "exists": ".CookieBanner #Cookie_Selected"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".CookieBanner:not(.out) #Cookie_Selected"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".CookieBanner #Cookie_All"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".CookieBanner input[type=checkbox]:checked"
+            },
+            "then": [
+                {
+                    "click": ".CookieBanner input[type=checkbox]:checked",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".CookieBanner #Cookie_Selected"
+        },
+        {
+            "waitForVisible": ".CookieBanner:not(.out) #Cookie_Selected",
+            "check": "none",
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "CookieConsent=required"
+        },
+        {
+            "cookieContains": "CookieConsent=required,",
+            "negated": true
+        }
+    ]
+}

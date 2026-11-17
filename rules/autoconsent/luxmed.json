@@ -1,0 +1,33 @@
+{
+    "name": "luxmed",
+    "vendorUrl": "https://portalpacjenta.luxmed.pl/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?luxmed\\.pl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "app-cookie-modal .top-info-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "app-cookie-modal .top-info-cookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "app-cookie-modal .top-info-cookie .close-x"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "app-cookie-modal .top-info-cookie .close-x"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "PatientPortalCookieMonit=1"
+        }
+    ]
+}

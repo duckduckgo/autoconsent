@@ -1,0 +1,72 @@
+{
+    "name": "c15t",
+    "vendorUrl": "https://c15t.com/",
+    "cosmetic": false,
+    "prehideSelectors": [
+        "[data-testid='cookie-banner-root'][class*='c15t-'], [data-testid='consent-banner-root'][class*='c15t-'], [data-testid='cookie-banner-overlay'][class*='c15t-'], [data-testid='consent-banner-overlay'][class*='c15t-']"
+    ],
+    "detectCmp": [
+        {
+            "exists": "[data-testid='cookie-banner-root'][class*='c15t-'], [data-testid='consent-banner-root'][class*='c15t-']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid='cookie-banner-root'][class*='c15t-'], [data-testid='consent-banner-root'][class*='c15t-']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid='cookie-banner-accept-button'], [data-testid='consent-banner-accept-button']"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "[data-testid='cookie-banner-reject-button'], [data-testid='consent-banner-reject-button']"
+            },
+            "then": [
+                {
+                    "click": "[data-testid='cookie-banner-reject-button'], [data-testid='consent-banner-reject-button']"
+                }
+            ],
+            "else": [
+                {
+                    "click": "[data-testid='cookie-banner-customize-button'], [data-testid='consent-banner-customize-button']"
+                },
+                {
+                    "waitForVisible": "[data-testid='consent-widget-footer-save-button']",
+                    "timeout": 2000
+                },
+                {
+                    "click": "[data-testid^='consent-widget-switch-'] input[type='checkbox']:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "[data-testid='consent-widget-footer-save-button']"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "cookieContains": "c.necessary:1"
+                },
+                {
+                    "cookieContains": "c15t=v="
+                }
+            ]
+        },
+        {
+            "cookieContains": "c.marketing:1",
+            "negated": true
+        },
+        {
+            "cookieContains": "mk=1.",
+            "negated": true
+        }
+    ]
+}

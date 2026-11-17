@@ -8,6 +8,6 @@ generateCMPTests('tplink', [
 ]);
 
 // opting out reloads the page, which interrupts the self-test
-generateCMPTests('tplink', ['https://www.kasasmart.com/us'], {
+generateCMPTests('tplink', ['https://www.kasasmart.com/us', 'https://community.tp-link.com/'], {
     testSelfTest: false,
 });

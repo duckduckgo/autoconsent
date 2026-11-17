@@ -1,0 +1,43 @@
+{
+    "name": "bo3.gg",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?bo3\\.gg/"
+    },
+    "prehideSelectors": ["#cookies.c-modal-cookies"],
+    "detectCmp": [
+        {
+            "exists": "#cookies.c-modal-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies.c-modal-cookies .o-modal__footer"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies.c-modal-cookies .o-modal__footer .c-button:not(.c-button--secondary)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookies.c-modal-cookies .o-modal__footer .c-button--secondary"
+        },
+        {
+            "waitForVisible": "#cookies-settings.c-modal-cookies-settings .o-modal__footer"
+        },
+        {
+            "click": "#cookies-settings .o-list-bare__item:not(.disabled) .o-input-switch input:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#cookies-settings.c-modal-cookies-settings .o-modal__footer .c-button--secondary"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies_consent=strictly_necessary"
+        }
+    ]
+}

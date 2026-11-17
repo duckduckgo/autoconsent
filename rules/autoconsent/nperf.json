@@ -1,0 +1,33 @@
+{
+    "name": "nperf",
+    "vendorUrl": "https://www.nperf.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?nperf\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#consent.container-banner-cookie .consentOk"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent.container-banner-cookie .consentOk"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consent.container-banner-cookie .consentOk"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#consent.container-banner-cookie .consentOk"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "consent="
+        }
+    ]
+}

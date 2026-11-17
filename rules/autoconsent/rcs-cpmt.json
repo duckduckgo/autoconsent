@@ -1,0 +1,28 @@
+{
+    "name": "rcs-cpmt",
+    "vendorUrl": "https://www.rcsmediagroup.it/",
+    "prehideSelectors": ["#_cpmt-iframe"],
+    "detectCmp": [
+        {
+            "exists": ["#_cpmt-iframe", "#_cpmt"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#_cpmt-iframe"
+        },
+        {
+            "visible": ["#_cpmt-iframe", "#_cpmt"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#_cpmt-iframe", "#_cpmt-accept"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#_cpmt-iframe", "#_cpmt-reject"]
+        }
+    ]
+}

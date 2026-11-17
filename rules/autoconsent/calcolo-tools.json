@@ -1,0 +1,23 @@
+{
+    "name": "calcolo.tools",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?calcolo\\.tools/"
+    },
+    "prehideSelectors": ["#cc-banner"],
+    "detectCmp": [{ "visible": "#cc-banner #cc-reject" }],
+    "detectPopup": [{ "visible": "#cc-banner #cc-reject" }],
+    "optIn": [{ "waitForThenClick": "#cc-banner #cc-accept" }],
+    "optOut": [
+        { "waitForThenClick": "#cc-banner #cc-reject" },
+        { "waitFor": ".fc-cta-do-not-consent,.fc-cta-manage-options,.fc-li-only-placeholder", "timeout": 5000, "optional": true },
+        {
+            "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options,.fc-li-only-placeholder" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options", "optional": true },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "visible": "#cc-banner", "check": "none" }]
+}

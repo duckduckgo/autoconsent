@@ -6,3 +6,14 @@ generateCMPTests('stright', [
     'https://www.makita.co.jp/',
     'https://www.yamada-denki.jp/',
 ]);
+
+// settings dialog with category toggles and no reject-all button; mapfan.com is only reachable from Japan
+generateCMPTests('stright', ['https://mapfan.com/'], {
+    onlyRegions: ['JP'],
+});
+
+// no accept-all button in the first layer
+generateCMPTests('stright', ['https://www.subaru.jp/'], {
+    onlyRegions: ['JP'],
+    testOptIn: false,
+});

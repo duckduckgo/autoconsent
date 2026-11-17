@@ -3,7 +3,7 @@
     "runContext": {
         "urlPattern": "^https://(www\\.)?bbc\\.(com|co\\.uk)/"
     },
-    "prehideSelectors": ["*[aria-labelledby=\"consent-banner-title\"]", "#bbccookies-prompt"],
+    "prehideSelectors": ["*[aria-labelledby=\"consent-banner-title\"]", "#bbccookies-prompt:has(#bbccookies-reject-button)"],
     "detectCmp": [
         {
             "any": [
@@ -11,7 +11,7 @@
                     "exists": "#consent-banner-title"
                 },
                 {
-                    "exists": "#bbccookies-prompt"
+                    "exists": "#bbccookies-reject-button"
                 }
             ]
         }
@@ -23,7 +23,7 @@
                     "visible": "#consent-banner-title"
                 },
                 {
-                    "visible": "#bbccookies-prompt"
+                    "visible": "#bbccookies-reject-button"
                 }
             ]
         }
@@ -31,7 +31,7 @@
     "optIn": [
         {
             "if": {
-                "exists": "#bbccookies-prompt"
+                "exists": "#bbccookies-accept-button"
             },
             "then": [
                 {
@@ -48,7 +48,7 @@
     "optOut": [
         {
             "if": {
-                "exists": "#bbccookies-prompt"
+                "exists": "#bbccookies-reject-button"
             },
             "then": [
                 {
@@ -63,6 +63,9 @@
         }
     ],
     "test": [
+        {
+            "wait": 500
+        },
         {
             "cookieContains": "ckns_explicit=1"
         }

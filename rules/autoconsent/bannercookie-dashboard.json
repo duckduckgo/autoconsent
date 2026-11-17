@@ -1,0 +1,10 @@
+{
+    "name": "bannercookie-dashboard",
+    "vendorUrl": "https://www.arredamento.it/",
+    "prehideSelectors": [".bannerCookie:has(#decline-text)"],
+    "detectCmp": [{ "exists": ".bannerCookie #decline-text[onclick^=\"declineAllCookies\"]" }],
+    "detectPopup": [{ "visible": ".bannerCookie #decline-text[onclick^=\"declineAllCookies\"]" }],
+    "optIn": [{ "waitForThenClick": ".bannerCookie #acceptAllBtn" }],
+    "optOut": [{ "waitForThenClick": ".bannerCookie #decline-text[onclick^=\"declineAllCookies\"]" }],
+    "test": [{ "cookieContains": "||adv" }]
+}

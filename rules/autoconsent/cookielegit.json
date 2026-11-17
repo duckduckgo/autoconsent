@@ -1,0 +1,21 @@
+{
+    "name": "cookielegit",
+    "prehideSelectors": ["#cookie-legit-notice-container .cookie-legit-notice"],
+    "detectCmp": [{ "exists": "#cookie-legit-notice-container .cookie-legit-notice" }],
+    "detectPopup": [{ "visible": "#cookie-legit-notice-container.notice .cookie-legit-notice" }],
+    "optIn": [{ "waitForThenClick": "#cookie-legit-notice-container .cookie-legit-accept-btn" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookie-legit-notice-container .cookie-legit-deny-btn" },
+            "then": [{ "waitForThenClick": "#cookie-legit-notice-container .cookie-legit-deny-btn" }],
+            "else": [
+                { "waitForThenClick": "#cookie-legit-notice-container .cookie-legit-pref-btn" },
+                { "waitForVisible": "#cookie-legit-notice-container .cookie-legit-save-pref-btn" },
+                { "click": "#cookie-legit-notice-container input[name=cl_tracking]:checked", "optional": true },
+                { "click": "#cookie-legit-notice-container input[name=cl_marketing]:checked", "optional": true },
+                { "click": "#cookie-legit-notice-container .cookie-legit-save-pref-btn" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "cl_tracking=false" }, { "cookieContains": "cl_marketing=false" }]
+}

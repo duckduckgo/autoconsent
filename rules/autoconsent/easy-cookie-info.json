@@ -1,0 +1,9 @@
+{
+    "name": "easy-cookie-info",
+    "cosmetic": true,
+    "prehideSelectors": ["#easycookieinfo"],
+    "detectCmp": [{ "exists": "#easycookieinfo" }],
+    "detectPopup": [{ "visible": "#easycookieinfo" }],
+    "optIn": [{ "waitForThenClick": "#easycookieinfo .accept a" }],
+    "optOut": [{ "hide": "#easycookieinfo" }]
+}

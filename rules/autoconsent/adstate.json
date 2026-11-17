@@ -1,0 +1,32 @@
+{
+    "name": "adstate",
+    "vendorUrl": "https://adstate.com/",
+    "prehideSelectors": ["adstate-settings-component"],
+    "detectCmp": [
+        {
+            "exists": ["adstate-settings-component app-wrapper", "#cookie-pop-up-only-necessary"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["adstate-settings-component app-wrapper", "app-cookie-pop-up"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["adstate-settings-component app-wrapper", "#cookie-pop-up-accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["adstate-settings-component app-wrapper", "#cookie-pop-up-only-necessary"]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["adstate-settings-component app-wrapper", "app-cookie-pop-up"],
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

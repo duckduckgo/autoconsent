@@ -1,0 +1,33 @@
+{
+    "name": "turkishairlines.com",
+    "vendorUrl": "https://www.turkishairlines.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?turkishairlines\\.com/"
+    },
+    "prehideSelectors": ["[class*=\"cookie-warning-wrapper\"]"],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"cookie-warning-wrapper\"] #notAllowCookiesButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#notAllowCookiesButton"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#allowCookiesButton"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#notAllowCookiesButton"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "COOKIE_WARNING_REJECTED=true"
+        }
+    ]
+}

@@ -17,8 +17,8 @@ generateCMPTests(
     },
 );
 
-// US "Do Not Process My Personal Information" (USP/MSPA) dialog
-generateCMPTests('quantcast', ['https://www.motor16.com/', 'https://www.quotev.com/'], {
+// US "Do Not Process My Personal Information" (USP/MSPA) dialog; footyheadlines renders the opt-out list collapsed
+generateCMPTests('quantcast', ['https://www.motor16.com/', 'https://www.quotev.com/', 'https://www.footyheadlines.com/'], {
     testOptIn: false,
     onlyRegions: ['US'],
 });

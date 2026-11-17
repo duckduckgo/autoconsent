@@ -1,0 +1,24 @@
+{
+    "name": "mega.io",
+    "vendorUrl": "https://mega.io/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?mega\\.(io|nz)/"
+    },
+    "prehideSelectors": ["dialog.cookie-banner"],
+    "detectCmp": [{ "exists": "dialog.cookie-banner .customise-cookie" }],
+    "detectPopup": [{ "visible": "dialog.cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "dialog.cookie-banner button.accept-all" }],
+    "optOut": [
+        {
+            "if": { "visible": "dialog.cookie-banner button.reject" },
+            "then": [{ "click": "dialog.cookie-banner button.reject" }],
+            "else": [
+                { "click": "dialog.cookie-banner .customise-cookie" },
+                { "waitForVisible": "dialog.cookie-dialog button.save" },
+                { "click": "dialog.cookie-dialog .toggle-control.on:not(.disabled)", "all": true, "optional": true },
+                { "click": "dialog.cookie-dialog button.save" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "\"marketing\":false" }]
+}

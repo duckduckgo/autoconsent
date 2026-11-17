@@ -1,0 +1,20 @@
+{
+    "name": "studioibizz-cookieconsent",
+    "vendorUrl": "https://www.ibizz.nl/",
+    "prehideSelectors": [".cc-window.cc-type-opt-change[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": ".cc-window.cc-type-opt-change[aria-describedby=\"cookieconsent:desc\"]" }],
+    "detectPopup": [{ "visible": ".cc-window.cc-type-opt-change[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible)" }],
+    "optIn": [{ "waitForThenClick": ".cc-window.cc-type-opt-change .cc-allow" }],
+    "optOut": [
+        {
+            "if": { "exists": ".cc-window.cc-type-opt-change .cc-deny" },
+            "then": [{ "waitForThenClick": ".cc-window.cc-type-opt-change .cc-deny" }],
+            "else": [
+                {
+                    "comment": "only accept and a link to the preferences page; scripts stay blocked until consent is given",
+                    "hide": ".cc-window.cc-type-opt-change"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "cookieman",
+    "_metadata": { "vendorUrl": "https://extensions.typo3.org/extension/cookieman" },
+    "runContext": { "main": true, "frame": false },
+    "prehideSelectors": ["#cookieman-modal"],
+    "detectCmp": [{ "exists": "#cookieman-modal [data-cookieman-save]" }],
+    "detectPopup": [{ "visible": "#cookieman-modal [data-cookieman-save]", "check": "any" }],
+    "optIn": [{ "waitForThenClick": "#cookieman-modal [data-cookieman-accept-all]" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookieman-modal [data-cookieman-accept-none]" },
+            "then": [{ "waitForThenClick": "#cookieman-modal [data-cookieman-accept-none]", "retry": 3, "retryInterval": 500 }],
+            "else": [
+                { "waitForThenClick": "#cookieman-modal [aria-controls=\"cookieman-settings\"]" },
+                { "waitForVisible": "#cookieman-modal [data-cookieman-form]", "timeout": 2000, "optional": true },
+                {
+                    "click": "#cookieman-modal [data-cookieman-form] input[type=\"checkbox\"]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#cookieman-modal [data-cookieman-save]:not([data-cookieman-accept-all]):not([data-cookieman-accept-none])",
+                    "retry": 3,
+                    "retryInterval": 500
+                }
+            ]
+        }
+    ],
+    "test": [
+        { "cookieContains": "CookieConsent=" },
+        { "waitForVisible": "#cookieman-modal [data-cookieman-save]", "timeout": 2000, "check": "none" }
+    ]
+}

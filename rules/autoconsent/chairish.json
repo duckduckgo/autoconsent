@@ -1,0 +1,17 @@
+{
+    "name": "chairish",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?chairish\\.com/"
+    },
+    "prehideSelectors": ["#js-cookie-banner"],
+    "detectCmp": [{ "exists": "#js-cookie-banner .js-cookie-settings-btn" }],
+    "detectPopup": [{ "visible": "#js-cookie-banner .cookie-banner-content" }],
+    "optIn": [{ "waitForThenClick": "#js-cookie-banner .js-ok-btn" }],
+    "optOut": [
+        { "waitForThenClick": "#js-cookie-banner .js-cookie-settings-btn" },
+        { "waitForVisible": "#js-cookie-banner-modal .cookie-settings" },
+        { "click": "#js-cookie-banner-modal .js-cookie-setting-switch.btn-toggle-on", "all": true, "optional": true },
+        { "waitForThenClick": "#js-cookie-banner-modal .js-done-btn" }
+    ],
+    "test": [{ "cookieContains": "rac=1" }]
+}

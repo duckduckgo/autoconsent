@@ -1,0 +1,29 @@
+{
+    "name": "sc-cookie-banner",
+    "prehideSelectors": ["#scCookieBanner:has(.sc-cookie-reject)"],
+    "detectCmp": [
+        {
+            "exists": "#scCookieBanner .sc-cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#scCookieBanner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#scCookieBanner .sc-cookie-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#scCookieBanner .sc-cookie-reject"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_consent=denied"
+        }
+    ]
+}

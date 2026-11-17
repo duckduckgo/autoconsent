@@ -1,0 +1,44 @@
+{
+    "name": "e-file",
+    "vendorUrl": "https://www.e-file.pl/",
+    "prehideSelectors": ["#cookiemodal"],
+    "detectCmp": [
+        {
+            "exists": "#cookiemodal #cookie-accepted-form"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiemodal #cookie-change-desc"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiemodal #cookie-accepted-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiemodal #cookie-change-desc"
+        },
+        {
+            "waitForVisible": "#cookiemodal #cookie-accepted-form"
+        },
+        {
+            "click": "#cookiemodal .cookie-form input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#cookiemodal #cookie-accepted-form"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "analytics_storage=false"
+        },
+        {
+            "cookieContains": "ad_storage=false"
+        }
+    ]
+}

@@ -1,7 +1,7 @@
 {
     "name": "pornhub-compact-cookie-banner",
     "runContext": {
-        "urlPattern": "^https://(www\\.)?pornhub\\.com/"
+        "urlPattern": "^https://(\\w+\\.)?pornhub\\.(com|org)/"
     },
     "cosmetic": false,
     "prehideSelectors": ["#cookieBanner.cbShort"],

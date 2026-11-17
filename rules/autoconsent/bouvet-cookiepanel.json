@@ -1,0 +1,29 @@
+{
+    "name": "bouvet-cookiepanel",
+    "prehideSelectors": ["#cookie-panel-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-panel-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-panel-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-panel-banner-accept-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-panel-banner-reject-button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "no.bouvet.app.cookiepanel-cookie-control"
+        }
+    ]
+}

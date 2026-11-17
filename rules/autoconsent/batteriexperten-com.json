@@ -1,0 +1,34 @@
+{
+    "name": "batteriexperten.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(batteriexperten\\.com|teknikdelar\\.se|teknikkdeler\\.no|teknikdele\\.dk|tekniikkaosat\\.fi)/"
+    },
+    "prehideSelectors": [".cookie-alert"],
+    "detectCmp": [{ "exists": ".cookie-alert .inner-cookie-alert .consent-actions" }],
+    "detectPopup": [{ "visible": ".cookie-alert .inner-cookie-alert .consent-actions" }],
+    "optIn": [
+        {
+            "if": { "exists": ".cookie-alert-v2" },
+            "then": [{ "waitForThenClick": ".cookie-alert-v2 .consent-actions button:first-of-type" }],
+            "else": [{ "waitForThenClick": ".cookie-alert .consent-actions button:not(.btn-outline-light)" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".cookie-alert-v2" },
+            "then": [{ "waitForThenClick": ".cookie-alert-v2 .consent-actions button:nth-of-type(2)" }],
+            "else": [
+                { "waitForThenClick": ".cookie-alert .consent-actions button.btn-outline-light" },
+                { "waitForVisible": ".cookie-alert .consent-settings" },
+                {
+                    "click": ".cookie-alert .consent-settings input[type=\"checkbox\"]:not([disabled]):checked",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": ".cookie-alert .consent-settings button[type=\"submit\"]" }
+            ]
+        },
+        { "waitForVisible": ".cookie-alert .inner-cookie-alert .consent-actions", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "__consent=1" }]
+}

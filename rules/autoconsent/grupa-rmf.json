@@ -1,0 +1,21 @@
+{
+    "name": "grupa-rmf",
+    "prehideSelectors": ["#gr-consent-layer-area"],
+    "detectCmp": [{ "exists": "#gr-consent-layer" }],
+    "detectPopup": [{ "visible": "#gr-consent-layer-area" }],
+    "optIn": [{ "waitForThenClick": "#gr-btn-agree" }],
+    "optOut": [
+        { "waitForVisible": "#gr-btn-more-options" },
+        { "click": "#gr-btn-more-options" },
+        { "waitForVisible": "#gr-btn-legitimate-partners" },
+        { "click": "#gr-btn-legitimate-partners" },
+        { "waitForVisible": "#toggleLegitimateCheckbox" },
+        {
+            "if": { "exists": "#toggleLegitimateCheckbox:not(:checked)" },
+            "then": [{ "click": "#toggleLegitimateCheckbox" }]
+        },
+        { "waitForVisible": "#gr-btn-save-exit-primary" },
+        { "click": "#gr-btn-save-exit-primary" },
+        { "waitForVisible": "#gr-consent-layer-area", "check": "none" }
+    ]
+}

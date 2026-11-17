@@ -1,0 +1,66 @@
+{
+    "name": "eneba",
+    "vendorUrl": "https://www.eneba.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eneba\\.com/"
+    },
+    "prehideSelectors": ["#app > div:has(a[href*=\"business.safety.google\"])"],
+    "detectCmp": [
+        {
+            "exists": "#app > div:has(a[href*=\"business.safety.google\"]) p + div > button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#app > div:has(a[href*=\"business.safety.google\"]) p + div > button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#app > div:has(a[href*=\"business.safety.google\"]) p + div > button:first-child"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#app > div:has(a[href*=\"business.safety.google\"]) p + div > button:last-child"
+        },
+        {
+            "waitForVisible": "[role=dialog] form input#MARKETING",
+            "timeout": 2000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": "[role=dialog] form input#MARKETING",
+                "check": "none"
+            },
+            "then": [
+                {
+                    "click": "#app > div:has(a[href*=\"business.safety.google\"]) p + div > button:last-child"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "[role=dialog] form input#MARKETING"
+        },
+        {
+            "click": "[role=dialog] form input[type=checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[role=dialog] form button[type=submit]"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "cconsent=1000"
+        }
+    ]
+}

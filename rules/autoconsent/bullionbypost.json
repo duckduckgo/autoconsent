@@ -1,0 +1,113 @@
+{
+    "name": "bullionbypost",
+    "vendorUrl": "https://www.bullionbypost.com/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".cookie-banner #accept_all"
+        },
+        {
+            "exists": "#cookies_modal #third_party_cookies_toggle"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-banner #accept_all"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner #accept_all",
+            "retry": 4,
+            "retryInterval": 1000
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#third_party_cookies_toggle:checked"
+            },
+            "then": [
+                {
+                    "click": "#third_party_cookies_toggle"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#cookies_modal #save_button"
+        },
+        {
+            "if": {
+                "exists": ".cookie-banner:not(.d-none) #accept_all"
+            },
+            "then": [
+                {
+                    "wait": 1000
+                },
+                {
+                    "click": "#cookies_modal #save_button"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": ".cookie-banner:not(.d-none) #accept_all"
+            },
+            "then": [
+                {
+                    "wait": 1000
+                },
+                {
+                    "click": "#cookies_modal #save_button"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": ".cookie-banner:not(.d-none) #accept_all"
+            },
+            "then": [
+                {
+                    "wait": 1000
+                },
+                {
+                    "click": "#cookies_modal #save_button"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": ".cookie-banner:not(.d-none) #accept_all"
+            },
+            "then": [
+                {
+                    "wait": 1000
+                },
+                {
+                    "click": "#cookies_modal #save_button"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": ".cookie-banner:not(.d-none) #accept_all"
+            },
+            "then": [
+                {
+                    "wait": 1000
+                },
+                {
+                    "click": "#cookies_modal #save_button"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "third_party_cookies_accepted=False"
+        },
+        {
+            "cookieContains": "cookie_banner_hidden=True"
+        }
+    ]
+}

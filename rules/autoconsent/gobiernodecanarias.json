@@ -1,0 +1,46 @@
+{
+    "name": "gobiernodecanarias",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(gobiernodecanarias\\.org|gobcan\\.net)/"
+    },
+    "prehideSelectors": [".cookie-consent-modal.active"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent-modal #checkbox_analiticas"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent-modal.active"
+        }
+    ],
+    "optIn": [
+        {
+            "click": ".cookie-consent-modal #checkbox_analiticas:not(:checked)",
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".cookie-consent-modal .btn.accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-consent-modal button.config"
+        },
+        {
+            "waitForVisible": ".cookie-consent-modal #checkbox_analiticas"
+        },
+        {
+            "click": ".cookie-consent-modal #checkbox_analiticas:checked",
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".cookie-consent-modal .btn.accept"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies_allowed=true"
+        }
+    ]
+}

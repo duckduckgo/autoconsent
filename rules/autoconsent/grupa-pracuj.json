@@ -1,0 +1,73 @@
+{
+    "name": "grupa-pracuj",
+    "vendorUrl": "https://grupapracuj.pl/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[data-test=\"modal-cookie-bottom-bar\"], [data-test=\"section-cookieModal\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-test=\"modal-cookie-bottom-bar\"], [data-test=\"section-cookieModal\"]",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-test=\"button-submitCookie\"], [data-test=\"section-cookieModal\"] [data-test=\"button-acceptAll\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "[data-test=\"modal-cookie-bottom-bar\"]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "[data-test=\"button-customizeCookie\"]"
+                },
+                {
+                    "waitForVisible": "[data-test=\"modal-cookie-customize\"]"
+                },
+                {
+                    "click": "[data-test=\"modal-cookie-customize\"] input[role=\"switch\"]:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "[data-test=\"modal-cookie-customize\"] [data-test=\"button-submit\"], dialog:has([data-test=\"modal-cookie-customize\"]) [data-test=\"button-submit\"]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "[data-test=\"section-cookieModal\"] [data-test=\"button-customize\"]"
+                },
+                {
+                    "waitForVisible": "[data-test=\"section-customizeModal\"]"
+                },
+                {
+                    "click": "[data-test=\"section-customizeModal\"] input[data-ischecked=\"true\"]:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "[data-test=\"section-customizeModal\"] [data-test=\"button-save\"]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "cookieContains": "gpc_ad=0"
+                },
+                {
+                    "cookieContains": "cp_advertisement=0"
+                }
+            ]
+        }
+    ]
+}

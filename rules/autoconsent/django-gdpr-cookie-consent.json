@@ -1,0 +1,23 @@
+{
+    "name": "django-gdpr-cookie-consent",
+    "prehideSelectors": ["#cc_modal_dialog", "#cc_modal_window"],
+    "detectCmp": [{ "exists": "#cc_section_quick_info #cc_accept_all_cookies" }],
+    "detectPopup": [{ "visible": "#cc_section_quick_info #cc_accept_all_cookies" }],
+    "optIn": [
+        { "waitForThenClick": "#cc_accept_all_cookies" },
+        { "waitForVisible": "#cc_section_quick_info", "check": "none", "timeout": 10000 }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#cc_reject_all_cookies" },
+            "then": [{ "waitForThenClick": "#cc_reject_all_cookies" }],
+            "else": [
+                { "waitForThenClick": "#cc_manage_cookies" },
+                { "waitForThenClick": "#cc_reject_all" },
+                { "click": "#cc_save_preferences" }
+            ]
+        },
+        { "waitForVisible": "#cc_section_quick_info", "check": "none", "timeout": 10000 }
+    ],
+    "test": [{ "cookieContains": "cookie_consent=" }]
+}

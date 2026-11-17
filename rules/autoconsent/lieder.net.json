@@ -1,0 +1,13 @@
+{
+    "name": "lieder.net",
+    "vendorUrl": "https://www.lieder.net/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?lieder\\.net/"
+    },
+    "prehideSelectors": ["#cookie-notice:has(.cookie-btn[onclick])"],
+    "detectCmp": [{ "exists": "#cookie-notice .cookie-btn[onclick]" }],
+    "detectPopup": [{ "visible": "#cookie-notice[style*='visibility: visible'] .cookie-btn[onclick]" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notice .cookie-btn[onclick]" }],
+    "optOut": [{ "waitForThenClick": "#cookie-notice .cookie-btn[onclick]" }],
+    "test": [{ "cookieContains": "accepts=Y" }]
+}

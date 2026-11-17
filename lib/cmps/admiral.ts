@@ -1,4 +1,5 @@
 import AutoConsentCMPBase from './base';
+import { waitFor } from '../utils';
 
 export default class Admiral extends AutoConsentCMPBase {
     name = 'Admiral';
@@ -62,6 +63,15 @@ export default class Admiral extends AutoConsentCMPBase {
             "xpath///button[contains(., 'Afvis alle') or contains(., 'Reject all') or contains(., 'Odbaci sve') or contains(., 'Rechazar todo') or contains(., 'Atmesti visus') or contains(., 'Odmítnout vše') or contains(., 'Απόρριψη όλων') or contains(., 'Rejeitar tudo') or contains(., 'Tümünü reddet') or contains(., 'Отклонить все') or contains(., 'Noraidīt visu') or contains(., 'Avvisa alla') or contains(., 'Odrzuć wszystkie') or contains(., 'Alles afwijzen') or contains(., 'Отхвърляне на всички') or contains(., 'Rifiuta tutto') or contains(., 'Zavrni vse') or contains(., 'Az összes elutasítása') or contains(., 'Respingeți tot') or contains(., 'Alles ablehnen') or contains(., 'Tout rejeter') or contains(., 'Odmietnuť všetko') or contains(., 'Lükka kõik tagasi') or contains(., 'Hylkää kaikki')]";
 
         if (await this.waitForElement(rejectAllSelector, 500)) {
+            const rejectButton = this.elementSelector(rejectAllSelector)[0] as HTMLButtonElement;
+            if (rejectButton.disabled) {
+                // some configurations keep the buttons disabled until the card text is scrolled to the bottom
+                const cardBody = rejectButton.closest('div[class*=CardHeader]')?.parentElement?.querySelector('div[class*=CardBody]');
+                if (cardBody) {
+                    cardBody.scrollTop = cardBody.scrollHeight;
+                }
+                await waitFor(() => !rejectButton.disabled, 10, 200);
+            }
             return await this.click(rejectAllSelector);
         }
 

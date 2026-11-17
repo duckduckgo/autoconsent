@@ -1,0 +1,35 @@
+{
+    "name": "agenziaentrate-geoportale",
+    "vendorUrl": "https://geoportale.cartografia.agenziaentrate.gov.it/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://geoportale\\.cartografia\\.agenziaentrate\\.gov\\.it/"
+    },
+    "prehideSelectors": ["#cookiebar"],
+    "detectCmp": [
+        {
+            "exists": "#cookiebar .cookiebar-confirm[data-accept=cookiebar]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiebar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiebar .cookiebar-confirm[data-accept=cookiebar]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookiebar"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookiebar",
+            "check": "none"
+        }
+    ]
+}

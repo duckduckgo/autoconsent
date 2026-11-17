@@ -1,0 +1,14 @@
+{
+    "name": "whitepages-gpc-banner",
+    "prehideSelectors": ["[data-global-privacy-control-banner]"],
+    "detectCmp": [{ "exists": "[data-global-privacy-control-banner] > button" }],
+    "detectPopup": [{ "visible": "[data-global-privacy-control-banner]" }],
+    "optIn": [{ "waitForThenClick": "[data-global-privacy-control-banner] > button" }],
+    "optOut": [
+        {
+            "comment": "the site has already stored an opt-out record for the GPC signal; the banner is only a notice",
+            "waitForThenClick": "[data-global-privacy-control-banner] > button"
+        }
+    ],
+    "test": [{ "visible": "[data-global-privacy-control-banner]", "check": "none" }]
+}

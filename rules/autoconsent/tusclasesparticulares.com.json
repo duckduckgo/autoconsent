@@ -1,0 +1,14 @@
+{
+    "name": "tusclasesparticulares.com",
+    "comment": "The reject button can render before cookies.min.js attaches its click handler, so the click is retried.",
+    "runContext": { "urlPattern": "^https?://(www\\.)?tusclasesparticulares\\.com/" },
+    "prehideSelectors": ["#pp .cookiesnoticev2"],
+    "detectCmp": [{ "exists": "#pp .cookiesnoticev2" }],
+    "detectPopup": [{ "visible": "#pp .cookiesnoticev2" }],
+    "optIn": [{ "waitForThenClick": "#pp .cookiesnoticev2 .footer .aceptar-all.step1" }],
+    "optOut": [
+        { "waitForThenClick": "#pp .cookiesnoticev2 #reject_all", "retry": 5, "retryInterval": 500 },
+        { "waitForVisible": "#pp .cookiesnoticev2", "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "cookieContains": "\"analiticas\": {\"All\":false" }]
+}

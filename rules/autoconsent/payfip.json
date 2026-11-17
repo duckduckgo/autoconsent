@@ -1,0 +1,36 @@
+{
+    "name": "payfip",
+    "vendorUrl": "https://www.payfip.gouv.fr/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?payfip\\.gouv\\.fr/"
+    },
+    "prehideSelectors": ["#bandeaucookie"],
+    "detectCmp": [
+        {
+            "exists": "#bandeaucookie #cookieOk"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#bandeaucookie",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#bandeaucookie #cookieOk"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#bandeaucookie"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#bandeaucookie",
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "name": "regjeringen.no",
+    "vendorUrl": "https://www.regjeringen.no/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?regjeringen\\.no/"
+    },
+    "prehideSelectors": ["#cb_wrapper-std #overlay-std"],
+    "detectCmp": [{ "exists": "#cb_wrapper-std #cookieApiData" }],
+    "detectPopup": [{ "visible": "#cb_wrapper-std #overlay-std #userSelect" }],
+    "optIn": [{ "waitForThenClick": "#cb_wrapper-std #userSelectAll" }],
+    "optOut": [{ "waitForThenClick": "#cb_wrapper-std #userSelect" }],
+    "test": [{ "waitForVisible": "#cb_wrapper-std #overlay-std", "check": "none", "timeout": 2000 }]
+}

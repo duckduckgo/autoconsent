@@ -1,0 +1,35 @@
+{
+    "name": "futurabolzano.it",
+    "vendorUrl": "https://futurabolzano.it/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?futurabolzano\\.it/"
+    },
+    "prehideSelectors": ["#privacy_modal"],
+    "detectCmp": [
+        {
+            "exists": "#privacy_modal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#privacy_modal"
+        }
+    ],
+    "optIn": [
+        {
+            "click": "body"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#privacy_modal"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#privacy_modal",
+            "check": "none"
+        }
+    ]
+}

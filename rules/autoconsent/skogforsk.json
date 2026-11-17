@@ -1,0 +1,9 @@
+{
+    "name": "skogforsk",
+    "prehideSelectors": [".block-cookie:has(.cookiebtns #cookie-required)"],
+    "detectCmp": [{ "exists": ".block-cookie .cookiebtns #cookie-required" }],
+    "detectPopup": [{ "visible": ".block-cookie .cookiebtns #cookie-required" }],
+    "optIn": [{ "waitForThenClick": ".block-cookie .cookiebtns #cookie-accept" }],
+    "optOut": [{ "waitForThenClick": ".block-cookie .cookiebtns #cookie-required" }],
+    "test": [{ "cookieContains": "cookie-disclaimer=0" }, { "cookieContains": "cookie-disclaimer=0%2C", "negated": true }]
+}

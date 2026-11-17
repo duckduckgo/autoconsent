@@ -1,0 +1,26 @@
+{
+    "name": "jobmount",
+    "vendorUrl": "https://www.jobboardmount.com/",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookiesAlertMsg.cookies-alert"],
+    "detectCmp": [
+        {
+            "exists": "#cookiesAlertMsg.cookies-alert #cookies_alert_btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiesAlertMsg.cookies-alert"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies_alert_btn"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookiesAlertMsg.cookies-alert"
+        }
+    ]
+}

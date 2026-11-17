@@ -1,8 +1,9 @@
 {
     "name": "justwatch.com",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?justwatch\\.com/" },
     "prehideSelectors": [".consent-banner"],
-    "detectCmp": [{ "exists": ".consent-banner .consent-banner__actions" }],
-    "detectPopup": [{ "visible": ".consent-banner .consent-banner__actions" }],
+    "detectCmp": [{ "exists": ".consent-banner .consent-banner__actions button.basic-button" }],
+    "detectPopup": [{ "visible": ".consent-banner .consent-banner__actions button.basic-button" }],
     "optIn": [{ "click": ".consent-banner__actions button.basic-button.primary" }],
     "optOut": [
         { "click": ".consent-banner__actions button.basic-button.secondary" },

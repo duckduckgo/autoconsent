@@ -1,0 +1,10 @@
+{
+    "name": "shueisha-gigaviewer",
+    "vendorUrl": "https://gigaviewer.com/",
+    "prehideSelectors": [".js-top-modal-window-container"],
+    "detectCmp": [{ "exists": ".js-top-modal-window-container .modal-link[href*='shueisha.co.jp/privacy']" }],
+    "detectPopup": [{ "visible": ".js-top-modal-window-container .js-top-modal-content" }],
+    "optIn": [{ "waitForThenClick": ".js-top-modal-window-container button.close-modal.js-top-modal-close-button" }],
+    "optOut": [{ "waitForThenClick": ".js-top-modal-window-container button.close-modal.js-top-modal-close-button" }],
+    "test": [{ "waitForVisible": ".js-top-modal-window-container", "timeout": 1000, "check": "none" }]
+}

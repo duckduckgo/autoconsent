@@ -1,0 +1,34 @@
+{
+    "name": "vd-ch",
+    "vendorUrl": "https://www.vd.ch/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?vd\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".alert-cookie #dismiss-cookie-banner-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".alert-cookie #dismiss-cookie-banner-button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".alert-cookie #dismiss-cookie-banner-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".alert-cookie #dismiss-cookie-banner-button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "vd_cookie_warning=1"
+        }
+    ]
+}

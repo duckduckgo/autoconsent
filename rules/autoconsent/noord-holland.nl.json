@@ -1,0 +1,24 @@
+{
+    "name": "noord-holland.nl",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?noord-holland\\.nl/"
+    },
+    "prehideSelectors": ["#cookiebar"],
+    "detectCmp": [{ "exists": "#cookiebar #acceptallpolicies" }],
+    "detectPopup": [{ "visible": "#cookiebar" }],
+    "optIn": [{ "waitForThenClick": "#cookiebar #acceptallpolicies" }],
+    "optOut": [
+        {
+            "if": { "exists": "form input[name=cookiepolicy][value=THIRDPARTY]" },
+            "then": [
+                {
+                    "click": "form input[name=cookiepolicy]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": "form:has(input[name=cookiepolicy]) button[type=submit]" }
+            ],
+            "else": [{ "waitForThenClick": "#cookiebar a[href*='Privacy_en_cookies/Cookies']" }]
+        }
+    ]
+}

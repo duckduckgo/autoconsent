@@ -1,0 +1,33 @@
+{
+    "name": "pekao24",
+    "vendorUrl": "https://www.pekao24.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?pekao24\\.pl/"
+    },
+    "prehideSelectors": ["pekao-cookies"],
+    "detectCmp": [
+        {
+            "exists": "pekao-cookies .cookies-wrapper"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "pekao-cookies .cookies-wrapper"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "pekao-cookies .cookies-button button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "pekao-cookies .cookies-button button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "np24Cookies="
+        }
+    ]
+}

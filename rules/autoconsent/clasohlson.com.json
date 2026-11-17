@@ -1,0 +1,13 @@
+{
+    "name": "clasohlson.com",
+    "runContext": { "urlPattern": "^https?://(www\\.)?clasohlson\\.com/" },
+    "prehideSelectors": [".cookie-bar-backdrop"],
+    "detectCmp": [{ "exists": "#js-cookie-notification .js-reject-cookie" }],
+    "detectPopup": [{ "visible": "#js-cookie-notification.opened" }],
+    "optIn": [{ "waitForThenClick": "#js-cookie-notification.opened .js-cookie-notification-accept", "retry": 10, "retryInterval": 500 }],
+    "optOut": [
+        { "waitForThenClick": "#js-cookie-notification.opened .js-reject-cookie", "retry": 10, "retryInterval": 500 },
+        { "waitForVisible": "#js-cookie-notification.opened", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "cookie-notification=REJECTED" }]
+}

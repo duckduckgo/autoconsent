@@ -1,0 +1,25 @@
+{
+    "name": "site-notifications-cookie-usage",
+    "cosmetic": true,
+    "prehideSelectors": ["[data-t=\"site-notifications\"] [data-notice-key=\"cookie_usage\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-t=\"site-notifications\"] [data-notice-key=\"cookie_usage\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-t=\"site-notifications\"] [data-notice-key=\"cookie_usage\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-notice-key=\"cookie_usage\"] a[href*=\"/consent?n=cookie_usage\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "[data-t=\"site-notifications\"] [data-notice-key=\"cookie_usage\"]"
+        }
+    ]
+}

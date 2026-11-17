@@ -1,0 +1,18 @@
+{
+    "name": "xtb",
+    "vendorUrl": "https://www.xtb.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?xtb\\.com/"
+    },
+    "prehideSelectors": ["#cookieBar", "#cookiesPopup"],
+    "detectCmp": [{ "exists": "#cookieBar .js-cookies-btn" }],
+    "detectPopup": [{ "visible": "#cookieBar" }],
+    "optIn": [{ "waitForThenClick": "#cookieBar .js-cookies[data-event=cookies-accept-all]" }],
+    "optOut": [
+        { "waitForThenClick": "#cookieBar [data-event=cookies-show-settings]" },
+        { "waitForVisible": "#cookiesPopup .js-save-settings" },
+        { "click": "#cookiesPopup .js-switch.active:not(.is-required)", "all": true, "optional": true },
+        { "click": "#cookiesPopup .js-save-settings" }
+    ],
+    "test": [{ "waitForVisible": "#cookieBar", "check": "none" }, { "cookieContains": "\"ad_storage\":\"denied\"" }]
+}

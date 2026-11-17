@@ -1,0 +1,25 @@
+{
+    "name": "accept-cookie-box",
+    "cosmetic": true,
+    "prehideSelectors": ["div[id$=\"_cookie_box\"]:has(a[onclick^=\"accept_\"][onclick*=\"_cookie_box()\"])"],
+    "detectCmp": [
+        {
+            "exists": "div[id$=\"_cookie_box\"] a[onclick^=\"accept_\"][onclick*=\"_cookie_box()\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[id$=\"_cookie_box\"]:has(a[onclick^=\"accept_\"][onclick*=\"_cookie_box()\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[id$=\"_cookie_box\"] a[onclick^=\"accept_\"][onclick*=\"_cookie_box()\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "div[id$=\"_cookie_box\"]:has(a[onclick^=\"accept_\"][onclick*=\"_cookie_box()\"])"
+        }
+    ]
+}

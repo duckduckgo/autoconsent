@@ -1,0 +1,32 @@
+{
+    "name": "klp-cookie-banner",
+    "prehideSelectors": ["#xp-cookie-banner-root dialog.xp-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#xp-cookie-banner-root dialog.xp-cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#xp-cookie-banner-root dialog.xp-cookie-banner[open]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".xp-cookie-banner .xp-cookie-wrapper--buttons button:not([data-button=\"secondary_cta\"])"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".xp-cookie-banner .xp-cookie-wrapper--buttons button[data-button=\"secondary_cta\"]"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "klp-marketing-consent=false"
+        }
+    ]
+}

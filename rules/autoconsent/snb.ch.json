@@ -1,0 +1,18 @@
+{
+    "name": "snb.ch",
+    "vendorUrl": "https://www.snb.ch/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?snb\\.ch/"
+    },
+    "prehideSelectors": [".m-gdpr-banner", ".o-overlay--gdpr"],
+    "detectCmp": [{ "exists": ".m-gdpr-banner .js-m-gdpr-banner__button-manage" }],
+    "detectPopup": [{ "visible": ".m-gdpr-banner.state-m-gdpr-banner--visible" }],
+    "optIn": [{ "waitForThenClick": ".m-gdpr-banner .js-m-gdpr-banner__button-all" }],
+    "optOut": [
+        { "waitForThenClick": ".m-gdpr-banner .js-m-gdpr-banner__button-manage" },
+        { "waitForVisible": ".m-gdpr-settings .js-m-gdpr-settings__button-custom" },
+        { "click": ".m-gdpr-settings input:checked:not(:disabled)", "all": true, "optional": true },
+        { "click": ".m-gdpr-settings .js-m-gdpr-settings__button-custom" }
+    ],
+    "test": [{ "visible": ".m-gdpr-banner", "check": "none" }]
+}

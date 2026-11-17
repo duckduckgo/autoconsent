@@ -1,0 +1,11 @@
+{
+    "name": "tullys-jp",
+    "cosmetic": true,
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?tullys\\.co\\.jp/" },
+    "prehideSelectors": [".cm-Cookie.js-Cookie"],
+    "detectCmp": [{ "exists": ".cm-Cookie.js-Cookie .js-CookieBtn" }],
+    "detectPopup": [{ "visible": ".cm-Cookie.js-Cookie" }],
+    "optIn": [{ "waitForThenClick": ".cm-Cookie.js-Cookie .js-CookieBtn" }],
+    "optOut": [{ "hide": ".cm-Cookie.js-Cookie" }],
+    "test": [{ "visible": ".cm-Cookie.js-Cookie", "check": "none" }]
+}

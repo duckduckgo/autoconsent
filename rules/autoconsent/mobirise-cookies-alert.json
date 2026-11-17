@@ -1,0 +1,34 @@
+{
+    "name": "mobirise-cookies-alert",
+    "vendorUrl": "https://mobirise.com/",
+    "prehideSelectors": ["#cookiesdirective"],
+    "detectCmp": [
+        {
+            "exists": "#cookiesdirective #explicitreject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiesdirective"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiesdirective #explicitsubmit"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiesdirective #explicitreject",
+            "retry": 3,
+            "retryInterval": 1500
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookiesdirective",
+            "check": "none",
+            "timeout": 4000
+        }
+    ]
+}

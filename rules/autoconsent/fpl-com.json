@@ -1,0 +1,34 @@
+{
+    "name": "fpl-com",
+    "vendorUrl": "https://www.fpl.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?(fpl|fplhome)\\.com/"
+    },
+    "prehideSelectors": ["#nee_fpl_cookie_policy_banner"],
+    "detectCmp": [
+        {
+            "exists": "#nee_fpl_cookie_policy_banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#nee_fpl_cookie_policy_banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#fpl_cookie_policy_banner_close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#fpl_cookie_policy_banner_close"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#nee_fpl_cookie_policy_banner",
+            "check": "none"
+        }
+    ]
+}

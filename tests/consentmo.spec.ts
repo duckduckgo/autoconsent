@@ -9,6 +9,8 @@ generateCMPTests(
         'https://eu.blackdiamondequipment.com/',
         'https://www.directdoors.com/',
         'https://goorin.com/',
+        'https://nl.pit-pit.com/',
+        'https://marshallsgarden.com/',
     ],
     {
         skipRegions: ['US'],

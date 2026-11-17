@@ -1,0 +1,16 @@
+{
+    "name": "widiba",
+    "vendorUrl": "https://www.widiba.it/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?widiba\\.it/"
+    },
+    "prehideSelectors": [".wd-cookie-banner.x-cookie-open"],
+    "detectCmp": [{ "exists": ".wd-cookie-banner" }],
+    "detectPopup": [{ "visible": ".wd-cookie-banner.x-cookie-open" }],
+    "optIn": [{ "waitForThenClick": ".wd-cookie-banner.x-cookie-open .wd-cookie-banner__buttons > a.wd-button:first-child" }],
+    "optOut": [{ "waitForThenClick": ".wd-cookie-banner.x-cookie-open .wd-cookie-banner__header__close" }],
+    "test": [{ "waitForVisible": ".wd-cookie-banner.x-cookie-open", "check": "none", "timeout": 2000 }]
+}

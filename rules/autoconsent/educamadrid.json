@@ -1,0 +1,37 @@
+{
+    "name": "educamadrid",
+    "vendorUrl": "https://www.educa2.madrid.org/",
+    "prehideSelectors": ["#emCookieWrapper"],
+    "detectCmp": [
+        {
+            "exists": "#emCookieWrapper #emCookieBanner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#emCookieBanner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#emCookieBtnAccept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#emCookieBtnConfigure"
+        },
+        {
+            "waitForThenClick": "#emCookieTool #emCookieBtnRejectAll"
+        }
+    ],
+    "test": [
+        {
+            "waitFor": "#emCookieFrame",
+            "timeout": 3000
+        },
+        {
+            "cookieContains": "EducaMadrid_LSSI_Cookies=0"
+        }
+    ]
+}

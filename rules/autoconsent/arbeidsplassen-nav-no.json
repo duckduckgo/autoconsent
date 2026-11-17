@@ -1,0 +1,33 @@
+{
+    "name": "arbeidsplassen-nav-no",
+    "vendorUrl": "https://arbeidsplassen.nav.no/",
+    "runContext": {
+        "urlPattern": "^https?://arbeidsplassen\\.nav\\.no/"
+    },
+    "prehideSelectors": ["#arb-cookie-banner-section"],
+    "detectCmp": [
+        {
+            "exists": "#arb-cookie-banner-section button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#arb-cookie-banner-section"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#arb-cookie-banner-section button:last-of-type"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#arb-cookie-banner-section button:first-of-type"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analytics%22%3Afalse"
+        }
+    ]
+}

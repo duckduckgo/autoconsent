@@ -1,0 +1,25 @@
+{
+    "name": "gdpr-jp-notice",
+    "cosmetic": true,
+    "prehideSelectors": ["html[lang^=\"ja\"] #gdpr:has(> button:only-of-type)"],
+    "detectCmp": [
+        {
+            "exists": "html[lang^=\"ja\"] #gdpr > button:only-of-type"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "html[lang^=\"ja\"] #gdpr:has(> button:only-of-type)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "html[lang^=\"ja\"] #gdpr > button:only-of-type"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "html[lang^=\"ja\"] #gdpr:has(> button:only-of-type)"
+        }
+    ]
+}

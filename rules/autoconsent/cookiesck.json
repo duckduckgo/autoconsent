@@ -1,0 +1,31 @@
+{
+    "name": "cookiesck",
+    "vendorUrl": "https://www.joomlack.fr/en/joomla-extensions/cookies-ck",
+    "prehideSelectors": ["#cookiesck", "#cookiesck_overlay"],
+    "detectCmp": [
+        {
+            "exists": "#cookiesck #cookiesck_decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiesck"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiesck_accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiesck_decline"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookiesck",
+            "check": "none"
+        }
+    ]
+}

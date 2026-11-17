@@ -1,0 +1,22 @@
+{
+    "name": "texas.gov",
+    "runContext": { "urlPattern": "^https?://(www\\.)?texas\\.gov/" },
+    "prehideSelectors": ["[data-testid=\"cookies-banner\"]"],
+    "detectCmp": [{ "exists": "[data-testid=\"cookies-banner\"] .cookies-banner__close-icon-wrapper" }],
+    "detectPopup": [{ "visible": "[data-testid=\"cookies-banner\"] .cookies-banner__description", "check": "any" }],
+    "optOut": [
+        {
+            "if": { "visible": "[data-testid=\"desktop-close-button\"]" },
+            "then": [{ "click": "[data-testid=\"desktop-close-button\"]" }],
+            "else": [{ "click": "[data-testid=\"cookies-banner\"] .d-none-desktop .cookies-banner__close-icon-wrapper" }]
+        },
+        { "waitForVisible": "[data-testid=\"cookies-banner\"]", "check": "none" }
+    ],
+    "optIn": [
+        {
+            "if": { "visible": "[data-testid=\"desktop-close-button\"]" },
+            "then": [{ "click": "[data-testid=\"desktop-close-button\"]" }],
+            "else": [{ "click": "[data-testid=\"cookies-banner\"] .d-none-desktop .cookies-banner__close-icon-wrapper" }]
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "name": "juzaphoto",
+    "vendorUrl": "https://www.juzaphoto.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?juzaphoto\\.com/"
+    },
+    "prehideSelectors": [".s_box_avvisocookie"],
+    "detectCmp": [{ "exists": ".s_box_avvisocookie" }],
+    "detectPopup": [{ "visible": ".s_box_avvisocookie" }],
+    "optIn": [{ "waitForThenClick": ".s_box_avvisocookie a[onclick*=juzaphoto_accept_cookie_privacy]" }],
+    "optOut": [{ "waitForThenClick": ".s_box_avvisocookie a[onclick*=juzaphoto_refuse_all_cookies]" }],
+    "test": [{ "cookieContains": "juzaphoto_refuse_all_cookies=ok" }]
+}

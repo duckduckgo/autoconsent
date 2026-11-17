@@ -1,0 +1,35 @@
+{
+    "name": "uregina",
+    "vendorUrl": "https://www.uregina.ca/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?uregina\\.ca/"
+    },
+    "prehideSelectors": ["#acceptCookies"],
+    "detectCmp": [
+        {
+            "exists": "#acceptCookies button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#acceptCookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#acceptCookies button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#acceptCookies"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#acceptCookies",
+            "check": "none"
+        }
+    ]
+}

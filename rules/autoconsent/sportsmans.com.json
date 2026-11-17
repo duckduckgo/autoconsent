@@ -1,0 +1,10 @@
+{
+    "name": "sportsmans.com",
+    "comment": "The site banner only offers Accept All; rejecting goes through the hidden DataGrail layer behind it. DataGrail only reloads the page after the rejection in some regions, so the banner is hidden and there is no self-test. Opt-out stores dg-category-marketing:0 in datagrail_consent_preferences_s.",
+    "runContext": { "urlPattern": "^https?://(www\\.)?sportsmans\\.com/" },
+    "prehideSelectors": ["#js-cookie-notification"],
+    "detectCmp": [{ "exists": "#js-cookie-notification" }, { "exists": [".dg-consent-banner", "button.dg-button.reject_all"] }],
+    "detectPopup": [{ "visible": "#js-cookie-notification", "check": "any" }],
+    "optIn": [{ "waitForThenClick": "#js-cookie-notification #consentBtn" }],
+    "optOut": [{ "waitForThenClick": [".dg-consent-banner", "button.dg-button.reject_all"] }, { "hide": "#js-cookie-notification" }]
+}

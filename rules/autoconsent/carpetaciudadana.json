@@ -1,0 +1,51 @@
+{
+    "name": "carpetaciudadana",
+    "vendorUrl": "https://carpetaciudadana.gob.es/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?carpetaciudadana\\.gob\\.es/"
+    },
+    "prehideSelectors": [".cc-cookies .main"],
+    "detectCmp": [
+        {
+            "exists": ".cc-cookies .main .btn-cookies-config button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cc-cookies .main[style*='display: block'] .btn-cookies-config button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cc-cookies .main .btn-cookies-accept button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cc-cookies .main .btn-cookies-config button"
+        },
+        {
+            "waitForVisible": "#modalConfigCookies #acceptAdditionalCookies"
+        },
+        {
+            "if": {
+                "exists": "#modalConfigCookies #acceptAdditionalCookies:checked"
+            },
+            "then": [
+                {
+                    "click": "#modalConfigCookies #acceptAdditionalCookies"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#btnConfigCookies button",
+            "retry": 2,
+            "retryInterval": 600
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-agreed=false"
+        }
+    ]
+}

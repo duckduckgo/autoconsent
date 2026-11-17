@@ -1,0 +1,58 @@
+{
+    "name": "uned-barbastro",
+    "prehideSelectors": ["#avisoCookie.msgCookies"],
+    "detectCmp": [
+        {
+            "exists": "#avisoCookie.msgCookies"
+        },
+        {
+            "exists": ".modal #chRendimiento"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#avisoCookie.msgCookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#avisoCookie a[onclick*=\"aceptarGoogleAnalytics=true\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#avisoCookie a[data-target^=\"#\"], #avisoCookie a.modal-trigger"
+        },
+        {
+            "waitForVisible": ".modal-footer button[onclick*=\"chRendimiento\"]"
+        },
+        {
+            "if": {
+                "exists": ".modal #chRendimiento:checked"
+            },
+            "then": [
+                {
+                    "click": ".modal #chRendimiento:checked"
+                }
+            ]
+        },
+        {
+            "click": ".modal-footer button[onclick*=\"chRendimiento\"]"
+        },
+        {
+            "waitForVisible": "#avisoCookie.msgCookies",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "aceptarCookies=true"
+        },
+        {
+            "cookieContains": "aceptarGoogleAnalytics=true",
+            "negated": true
+        }
+    ]
+}

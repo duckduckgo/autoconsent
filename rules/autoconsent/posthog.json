@@ -1,0 +1,35 @@
+{
+    "name": "posthog",
+    "vendorUrl": "https://posthog.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?posthog\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "xpath///li[contains(@class, 'ToastRoot')][contains(., 'cookie banner')]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///li[contains(@class, 'ToastRoot')][contains(., 'cookie banner')]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///li[contains(@class, 'ToastRoot')][contains(., 'cookie banner')]//button[@data-radix-toast-announce-alt='Close']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///li[contains(@class, 'ToastRoot')][contains(., 'cookie banner')]//button[@data-radix-toast-announce-alt='Close']"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "xpath///li[contains(@class, 'ToastRoot')][contains(., 'cookie banner')]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

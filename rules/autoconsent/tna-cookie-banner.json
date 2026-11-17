@@ -1,0 +1,43 @@
+{
+    "name": "tna-cookie-banner",
+    "vendorUrl": "https://design-system.nationalarchives.gov.uk/",
+    "prehideSelectors": [".tna-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ".tna-cookie-banner button[value=\"reject\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".tna-cookie-banner__message--prompt button[value=\"reject\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".tna-cookie-banner__message--prompt button[value=\"accept\"]"
+        },
+        {
+            "waitForThenClick": ".tna-cookie-banner__message--accepted button[value=\"close\"]",
+            "timeout": 1000,
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".tna-cookie-banner__message--prompt button[value=\"reject\"]"
+        },
+        {
+            "waitForThenClick": ".tna-cookie-banner__message--rejected button[value=\"close\"]",
+            "timeout": 1000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_preferences_set=true"
+        },
+        {
+            "cookieContains": "%22usage%22%3Afalse"
+        }
+    ]
+}

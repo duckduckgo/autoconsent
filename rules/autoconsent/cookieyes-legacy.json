@@ -1,0 +1,24 @@
+{
+    "name": "cookieyes-legacy",
+    "vendorUrl": "https://www.cookieyes.com/",
+    "prehideSelectors": ["#cky-consent.cky-consent-bar"],
+    "detectCmp": [{ "exists": "#cky-consent.cky-consent-bar" }],
+    "detectPopup": [{ "visible": "#cky-consent.cky-consent-bar" }],
+    "optIn": [{ "waitForThenClick": "#cky-consent #cky-btn-accept" }],
+    "optOut": [
+        {
+            "if": { "visible": "#cky-consent #cky-btn-reject" },
+            "then": [{ "waitForThenClick": "#cky-consent #cky-btn-reject" }],
+            "else": [
+                { "waitForThenClick": "#cky-consent #cky-btn-settings" },
+                { "waitForVisible": "#cky-btn-custom-accept" },
+                { "click": "input[id^=cky-checkbox-category]:checked:not(:disabled)", "all": true, "optional": true },
+                { "click": "#cky-btn-custom-accept" }
+            ]
+        }
+    ],
+    "test": [
+        { "cookieContains": "cky-action=yes" },
+        { "any": [{ "cookieContains": "cky-consent=no" }, { "cookieContains": "cookieyes-analytics=no" }] }
+    ]
+}

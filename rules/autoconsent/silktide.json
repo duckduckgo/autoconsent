@@ -1,0 +1,16 @@
+{
+    "name": "silktide",
+    "vendorUrl": "https://silktide.com/consent-manager/",
+    "prehideSelectors": ["#silktide-banner", "#silktide-backdrop"],
+    "detectCmp": [{ "exists": "#silktide-banner" }],
+    "detectPopup": [{ "visible": "#silktide-banner" }],
+    "optIn": [{ "waitForThenClick": "#silktide-banner .accept-all" }],
+    "optOut": [
+        {
+            "if": { "exists": "#silktide-banner .reject-all" },
+            "then": [{ "click": "#silktide-banner .reject-all" }],
+            "else": [{ "click": "#silktide-banner .preferences" }, { "waitForThenClick": "#silktide-modal .preferences-reject-all" }]
+        }
+    ],
+    "test": [{ "waitForVisible": "#silktide-banner", "check": "none", "timeout": 2000 }]
+}

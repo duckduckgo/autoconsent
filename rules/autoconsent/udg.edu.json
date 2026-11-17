@@ -1,0 +1,47 @@
+{
+    "name": "udg.edu",
+    "vendorUrl": "https://www.udg.edu/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?udg\\.edu/"
+    },
+    "cosmetic": false,
+    "prehideSelectors": [".cookie-alert"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-alert .cookies-manager__btn-open"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-alert"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-alert .cookies-manager__btn-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-alert button.cookies-manager__btn-open"
+        },
+        {
+            "waitForVisible": ".cookies-manager__window"
+        },
+        {
+            "click": ".cookies-manager input.toggle:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".cookies-manager__btn-save",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "udgCookiesPreferences=set"
+        }
+    ]
+}

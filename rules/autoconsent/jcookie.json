@@ -1,0 +1,25 @@
+{
+    "name": "jcookie",
+    "cosmetic": true,
+    "prehideSelectors": [".js-jcookie"],
+    "detectCmp": [
+        {
+            "exists": ".js-jcookie .js-jcookie-allow"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-jcookie.active"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-jcookie .js-jcookie-allow"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".js-jcookie"
+        }
+    ]
+}

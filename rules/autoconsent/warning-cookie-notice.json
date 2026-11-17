@@ -1,0 +1,9 @@
+{
+    "name": "warning-cookie-notice",
+    "cosmetic": true,
+    "prehideSelectors": [".warning.warning--active:has(.warning__apply)"],
+    "detectCmp": [{ "exists": ".warning:has(.warning__text) .warning__apply" }],
+    "detectPopup": [{ "visible": ".warning.warning--active:has(.warning__apply)" }],
+    "optIn": [{ "waitForThenClick": ".warning.warning--active .warning__apply" }],
+    "optOut": [{ "hide": ".warning.warning--active:has(.warning__apply)" }]
+}

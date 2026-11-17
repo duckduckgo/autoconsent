@@ -11,7 +11,7 @@
             "any": [{ "visible": "#ensNotifyBanner[style*=block]" }, { "visible": "#ensModalWrapper[style*=block]" }]
         }
     ],
-    "optIn": [{ "waitForThenClick": "#ensCloseBanner,#modalAcceptButton,#ensAcceptAll,#bannerAcceptButton" }],
+    "optIn": [{ "waitForThenClick": "#ensCloseBanner,#modalAcceptButton,#ensAcceptAll,#ensAcceptAllConsent,#bannerAcceptButton" }],
     "optOut": [
         { "wait": 500 },
         {
@@ -19,12 +19,12 @@
             "then": [
                 {
                     "if": {
-                        "visible": "#ensNotifyBanner #ensRejectAll,#ensNotifyBanner #rejectAll,#ensNotifyBanner #ensRejectBanner,#ensNotifyBanner .rejectAll,#ensNotifyBanner #bannerRejectButton,#ensNotifyBanner #ensRejectAds",
+                        "visible": "#ensNotifyBanner #ensRejectAll,#ensNotifyBanner #ensRejectAllConsent,#ensNotifyBanner #rejectAll,#ensNotifyBanner #ensRejectBanner,#ensNotifyBanner .rejectAll,#ensNotifyBanner #bannerRejectButton,#ensNotifyBanner #ensRejectAds,#ensNotifyBanner #btn-accept-essential-cookies",
                         "check": "any"
                     },
                     "then": [
                         {
-                            "waitForThenClick": "#ensNotifyBanner #ensRejectAll,#ensNotifyBanner #rejectAll,#ensNotifyBanner #ensRejectBanner,#ensNotifyBanner .rejectAll,#ensNotifyBanner #bannerRejectButton,#ensNotifyBanner #ensRejectAds"
+                            "waitForThenClick": "#ensNotifyBanner #ensRejectAll,#ensNotifyBanner #ensRejectAllConsent,#ensNotifyBanner #rejectAll,#ensNotifyBanner #ensRejectBanner,#ensNotifyBanner .rejectAll,#ensNotifyBanner #bannerRejectButton,#ensNotifyBanner #ensRejectAds,#ensNotifyBanner #btn-accept-essential-cookies"
                         }
                     ],
                     "else": [

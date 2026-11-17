@@ -1,0 +1,10 @@
+{
+    "name": "sujetdebac.fr",
+    "runContext": { "urlPattern": "^https?://(www\\.)?sujetdebac\\.fr/" },
+    "prehideSelectors": ["#banniere_cookies"],
+    "detectCmp": [{ "exists": "#banniere_cookies" }],
+    "detectPopup": [{ "visible": "#banniere_cookies" }],
+    "optIn": [{ "waitForThenClick": "#banniere_cookies span[onclick]" }],
+    "optOut": [{ "waitForThenClick": "#banniere_cookies span[onclick]" }],
+    "test": [{ "visible": "#banniere_cookies", "check": "none" }]
+}

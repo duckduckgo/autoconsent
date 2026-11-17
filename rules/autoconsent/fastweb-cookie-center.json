@@ -1,0 +1,13 @@
+{
+    "name": "fastweb-cookie-center",
+    "vendorUrl": "https://www.fastweb.it/",
+    "prehideSelectors": ["iframe.ck_if"],
+    "detectCmp": [{ "exists": "iframe.ck_if[title='Cookie center']" }],
+    "detectPopup": [{ "visible": "html.ck_panel iframe.ck_if[style*='visibility: visible']" }],
+    "optIn": [{ "waitForThenClick": ["iframe.ck_if", ".info .btn_accetta"] }],
+    "optOut": [
+        { "waitForThenClick": ["iframe.ck_if", "#Main > .close img"] },
+        { "waitForVisible": "iframe.ck_if", "check": "none", "timeout": 5000 }
+    ],
+    "test": [{ "visible": "html.ck_panel iframe.ck_if", "check": "none" }]
+}

@@ -1,0 +1,31 @@
+{
+    "name": "qtip-jgrowl-cookies",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "xpath///div[@id='qtip-growl-container']/div[contains(@class,'qtip-jgrowl')][.//div[contains(@class,'qtip-title')][contains(., 'ookie')]]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[@id='qtip-growl-container']/div[contains(@class,'qtip-jgrowl')][.//div[contains(@class,'qtip-title')][contains(., 'ookie')]]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[@id='qtip-growl-container']/div[contains(@class,'qtip-jgrowl')][.//div[contains(@class,'qtip-title')][contains(., 'ookie')]]//a[contains(@class,'qtip-close')]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@id='qtip-growl-container']/div[contains(@class,'qtip-jgrowl')][.//div[contains(@class,'qtip-title')][contains(., 'ookie')]]//a[contains(@class,'qtip-close')]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "xpath///div[@id='qtip-growl-container']/div[contains(@class,'qtip-jgrowl')][.//div[contains(@class,'qtip-title')][contains(., 'ookie')]]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
