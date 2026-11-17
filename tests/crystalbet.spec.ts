@@ -1,7 +1,10 @@
 import generateCMPTests from '../playwright/runner';
 
-// the site is only reachable from Georgia
-generateCMPTests('crystalbet', ['https://m.crystalbet.com/', 'https://www.crystalbet.com/'], {
+// the full site is only served in Georgia; elsewhere a restricted-region page shows the same banner
+generateCMPTests('crystalbet', ['https://m.crystalbet.com/'], {
+    onlyRegions: ['GE', 'US', 'DE'],
+});
+generateCMPTests('crystalbet', ['https://www.crystalbet.com/'], {
     onlyRegions: ['GE'],
 });
 generateCMPTests('crystalbet', ['https://m.crystalbet.com/'], {
