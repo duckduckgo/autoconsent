@@ -1,0 +1,25 @@
+{
+    "name": "progorod",
+    "cosmetic": true,
+    "prehideSelectors": ["div[class*=\"notifycation_notifycation__\"]"],
+    "detectCmp": [
+        {
+            "exists": "div[class*=\"notifycation_notifycation__\"] button[class*=\"notifycation_notifycationBtn__\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[class*=\"notifycation_notifycation__\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[class*=\"notifycation_notifycation__\"] button[class*=\"notifycation_notifycationBtn__\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "div[class*=\"notifycation_notifycation__\"]"
+        }
+    ]
+}
