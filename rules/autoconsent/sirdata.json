@@ -15,7 +15,7 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": "#sd-cmp [data-sd-override='choiceButtons']"
+            "waitForThenClick": "#sd-cmp button:last-child > [data-sd-override='choiceButtons']"
         }
     ],
     "optOut": [
