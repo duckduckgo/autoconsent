@@ -123,6 +123,8 @@ describe('checkHeuristicPatterns with Russian popups', () => {
             'Сохраняем куки на вашем устройстве',
             'На сайте установлены cookie-файлы',
             'Оставаясь на сайте, вы соглашаетесь с политикой в отношении файлов cookie',
+            'Продолжая работу, ты принимаешь cookie и Политику',
+            'Вы принимаете куки и условия сервиса',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -131,6 +133,8 @@ describe('checkHeuristicPatterns with Russian popups', () => {
 
     it('does not detect unrelated Russian text', () => {
         expect(checkHeuristicPatterns('Дешевые авиабилеты онлайн и бронирование отелей').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Продолжая покупки, вы принимаете условия доставки').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Мы принимаем заказы на печенье и торты').patterns).to.have.length(0);
     });
 });
 
