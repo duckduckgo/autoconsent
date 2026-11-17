@@ -255,6 +255,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\balmacenar o acceder a (?:la )?información\b/gi,
     /\btecnolog[ií]as de seguimiento\b/gi,
 
+    // Portuguese (PT)
+    // e.g. "você concorda com o uso de cookies"
+    /\bconcorda\w* com (?:\S+ ){0,3}cookies\b/gi,
+
     // Polish (PL)
     // examples:
     //  wykorzystuje pliki cookie (uses cookies)
@@ -1089,6 +1093,9 @@ export const ACKNOWLEDGE_PATTERNS = [
     'seguir',
     'vale',
     '¡vamos!',
+
+    // Portuguese (PT)
+    'prosseguir',
 
     // Catalan (CA)
     /^(ho )?(entenc|entès|entesos)[ !.]*$/s,

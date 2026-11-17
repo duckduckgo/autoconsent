@@ -184,6 +184,25 @@ describe('checkHeuristicPatterns with French popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Portuguese popups', () => {
+    it('detects Portuguese cookie notices', () => {
+        const texts = [
+            'Ao acessar nosso site, você concorda com o uso de cookies para melhorar a sua experiência.',
+            'Ao clicar em Prosseguir, você concorda com a utilização de cookies.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Portuguese text', () => {
+        expect(
+            checkHeuristicPatterns('Ao enviar o formulário, você concorda com os termos de uso. Experimente nossos cookies caseiros.')
+                .patterns,
+        ).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Swedish popups', () => {
     it('detects Swedish cookie notices', () => {
         const texts = [
