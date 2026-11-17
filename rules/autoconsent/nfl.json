@@ -8,12 +8,24 @@
     "detectPopup": [{ "visible": "#onetrust-banner-sdk" }],
     "optIn": [
         { "waitForVisible": "#onetrust-accept-btn-handler", "timeout": 5000 },
-        { "eval": "EVAL_NFL_ONETRUST_ALLOW_ALL", "optional": true },
+        {
+            "any": [
+                { "eval": "EVAL_NFL_ONETRUST_ALLOW_ALL" },
+                { "waitForVisible": "#onetrust-banner-sdk", "timeout": 5000, "check": "none" },
+                { "click": "#onetrust-accept-btn-handler" }
+            ]
+        },
         { "waitForVisible": "#onetrust-banner-sdk", "timeout": 5000, "check": "none" }
     ],
     "optOut": [
         { "waitForVisible": "#onetrust-reject-all-handler", "timeout": 5000 },
-        { "eval": "EVAL_NFL_ONETRUST_REJECT_ALL", "optional": true },
+        {
+            "any": [
+                { "eval": "EVAL_NFL_ONETRUST_REJECT_ALL" },
+                { "waitForVisible": "#onetrust-banner-sdk", "timeout": 5000, "check": "none" },
+                { "click": "#onetrust-reject-all-handler" }
+            ]
+        },
         { "waitForVisible": "#onetrust-banner-sdk", "timeout": 5000, "check": "none" }
     ],
     "test": [{ "eval": "EVAL_ONETRUST_1" }]
