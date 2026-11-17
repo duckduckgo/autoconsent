@@ -18,3 +18,9 @@ generateCMPTests('TrustArc-top', ['https://www.ea.com/games/it-takes-two/it-take
     testOptIn: false,
     onlyRegions: ['CA', 'AU', 'JP'],
 });
+
+// Magento store with a hidden built-in cookie notice next to TrustArc
+generateCMPTests('TrustArc-top', ['https://shop.royalmail.com/garden-wildlife-stamp-set'], {
+    testOptOut: true,
+    testSelfTest: false,
+});
