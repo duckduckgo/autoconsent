@@ -1,0 +1,18 @@
+{
+    "name": "viabcp",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?viabcp\\.com/"
+    },
+    "prehideSelectors": [".bcp-contenedor-aviso.mostrar"],
+    "detectCmp": [{ "exists": ".bcp-politica-uso-cookie-adobe .bcp-btn-configurar" }],
+    "detectPopup": [{ "visible": ".bcp-contenedor-aviso.mostrar .bcp-btn-configurar" }],
+    "optIn": [{ "waitForThenClick": ".bcp-contenedor-aviso.mostrar .bcp-btn-aceptar" }],
+    "optOut": [
+        { "waitForThenClick": ".bcp-contenedor-aviso.mostrar .bcp-btn-configurar" },
+        { "waitForThenClick": ".bcp-configuracion-politica-cookie.mostrar .bcp-guardar-preferencia" }
+    ],
+    "test": [
+        { "cookieContains": "politica_privacidad_marketing_analitica=false" },
+        { "cookieContains": "politica_privacidad_personalizacion=false" }
+    ]
+}
