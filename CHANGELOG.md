@@ -1,3 +1,20 @@
+# v18.6.0 (Tue Nov 17 2026)
+
+#### Rules
+
+- Rule update: CPM crawl #1926: aok.de [#2648](https://github.com/duckduckgo/autoconsent/pull/2648) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+- Rule update: CPM crawl #1841: 3hentai.net [#2647](https://github.com/duckduckgo/autoconsent/pull/2647) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #1752: amazon.com [#2644](https://github.com/duckduckgo/autoconsent/pull/2644) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM feedback: jobs.military.com [#2645](https://github.com/duckduckgo/autoconsent/pull/2645) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: anthropic [#2652](https://github.com/duckduckgo/autoconsent/pull/2652) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Authors: 2
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v18.5.0 (Sat Nov 14 2026)
 
 #### CI / Release Automation
