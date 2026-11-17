@@ -1,0 +1,18 @@
+{
+    "name": "tournamentsoftware",
+    "vendorUrl": "https://www.tournamentsoftware.com/",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "form[action*='/cookiewall/Save'] .js-show-purposes" }],
+    "detectPopup": [{ "visible": "form[action*='/cookiewall/Save'] .js-show-purposes" }],
+    "optIn": [{ "waitForThenClick": "form[action*='/cookiewall/Save'] .js-accept-basic" }],
+    "optOut": [
+        { "waitForThenClick": "form[action*='/cookiewall/Save'] .js-show-purposes" },
+        { "waitForVisible": "form[action*='/cookiewall/Save'] .js-form-purposes-view .js-save" },
+        {
+            "click": "form[action*='/cookiewall/Save'] .js-form-purposes-view input[name='CookiePurposes']:not([disabled]):checked",
+            "all": true,
+            "optional": true
+        },
+        { "click": "form[action*='/cookiewall/Save'] .js-form-purposes-view .js-save" }
+    ]
+}
