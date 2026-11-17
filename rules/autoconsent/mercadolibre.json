@@ -1,0 +1,28 @@
+{
+    "name": "mercadolibre",
+    "vendorUrl": "https://www.mercadolibre.com/",
+    "prehideSelectors": [".cookie-consent-banner-opt-out"],
+    "detectCmp": [{ "exists": ".cookie-consent-banner-opt-out" }],
+    "detectPopup": [{ "visible": ".cookie-consent-banner-opt-out" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-accept", "retry": 10, "retryInterval": 500 }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-customize", "retry": 10, "retryInterval": 500 },
+        {
+            "waitForThenClick": [
+                "iframe.cookie-consent-banner-opt-out__modal-iframe",
+                "label[data-andes-state=\"checked\"] input[role=\"switch\"]"
+            ],
+            "all": true,
+            "retry": 3,
+            "retryInterval": 500
+        },
+        {
+            "waitForVisible": ["iframe.cookie-consent-banner-opt-out__modal-iframe", "label[data-andes-state=\"checked\"]"],
+            "check": "none",
+            "timeout": 2000
+        },
+        { "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-save" },
+        { "waitForVisible": ".cookie-consent-banner-opt-out__modal[open]", "check": "none", "timeout": 3000 }
+    ],
+    "test": [{ "cookieContains": "%22advertising%22%3Afalse" }]
+}
