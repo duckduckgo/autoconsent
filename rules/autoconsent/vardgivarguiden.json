@@ -1,0 +1,45 @@
+{
+    "name": "vardgivarguiden.se",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?vardgivarguiden\\.se/"
+    },
+    "prehideSelectors": ["app-cookiewindow"],
+    "detectCmp": [
+        {
+            "exists": "app-cookiewindow #accept-choice"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "app-cookiewindow #accept-choice"
+        }
+    ],
+    "optIn": [
+        {
+            "click": "app-cookiewindow input.cookie-checkbox:not(:checked):not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "app-cookiewindow #accept-choice"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": "app-cookiewindow #accept-choice"
+        },
+        {
+            "click": "app-cookiewindow input.cookie-checkbox:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "app-cookiewindow #accept-choice"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-consent=%5B%5D"
+        }
+    ]
+}

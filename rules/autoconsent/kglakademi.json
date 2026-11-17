@@ -1,0 +1,37 @@
+{
+    "name": "kglakademi.dk",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?kglakademi\\.dk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#b14cookieconsent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#b14cookieconsent-dialog"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#b14cookieconsent .b14cookieconsent__button[data-action=all]"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#b14cookieconsent .b14cookieconsent__checkbox:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#b14cookieconsent .b14cookieconsent__button[data-action=selected]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "b14cookieconsent=necessary%2C1"
+        }
+    ]
+}

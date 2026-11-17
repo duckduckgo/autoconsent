@@ -1,0 +1,30 @@
+{
+    "name": "ernesto",
+    "vendorUrl": "https://www.ernesto.it/",
+    "prehideSelectors": ["#footer-cookies"],
+    "detectCmp": [
+        {
+            "exists": "#footer-cookies [ng-click='closeCookiesAlert()']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#footer-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#footer-cookies [ng-click='acceptCookies()']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#footer-cookies [ng-click='closeCookiesAlert()']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22stats%22%3Afalse%2C%22ads%22%3Afalse"
+        }
+    ]
+}

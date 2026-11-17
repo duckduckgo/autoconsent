@@ -1,0 +1,35 @@
+{
+    "name": "historiskatlas.dk",
+    "vendorUrl": "https://historiskatlas.dk/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?historiskatlas\\.dk/"
+    },
+    "prehideSelectors": ["paper-dialog.cookie-dialog"],
+    "detectCmp": [
+        {
+            "exists": "paper-dialog.cookie-dialog"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "paper-dialog.cookie-dialog"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "paper-dialog.cookie-dialog paper-button[dialog-confirm]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "paper-dialog.cookie-dialog"
+        }
+    ],
+    "test": [
+        {
+            "visible": "paper-dialog.cookie-dialog",
+            "check": "none"
+        }
+    ]
+}

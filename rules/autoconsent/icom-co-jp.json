@@ -1,0 +1,34 @@
+{
+    "name": "icom-co-jp",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?icom\\.co\\.jp/"
+    },
+    "prehideSelectors": ["#cookie.view:has(.agree .btn)"],
+    "detectCmp": [
+        {
+            "exists": "#cookie .agree .btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie.view"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie .agree .btn"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookie"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookie",
+            "check": "none"
+        }
+    ]
+}

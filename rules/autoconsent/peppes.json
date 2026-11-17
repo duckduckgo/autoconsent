@@ -1,0 +1,38 @@
+{
+    "name": "peppes.no",
+    "vendorUrl": "https://order.peppes.no/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?peppes\\.no/"
+    },
+    "prehideSelectors": [".consent-dialog-root"],
+    "detectCmp": [
+        {
+            "exists": ".consent-dialog-root .allow-selection-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".consent-dialog-root .allow-selection-btn"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".consent-dialog-root .allow-all-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "click": ".consent-dialog-root .p-inputswitch:not(.p-disabled) input:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".consent-dialog-root .allow-selection-btn"
+        },
+        {
+            "waitForVisible": ".consent-dialog-root",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

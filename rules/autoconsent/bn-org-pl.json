@@ -1,0 +1,37 @@
+{
+    "name": "bn-org-pl",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?bn\\.org\\.pl/"
+    },
+    "prehideSelectors": ["#cookies"],
+    "detectCmp": [
+        {
+            "exists": "#cookies .alert [data-dismiss=alert]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies .alert"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies .alert [data-dismiss=alert]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookies .alert [data-dismiss=alert]"
+        },
+        {
+            "waitForVisible": "#cookies .alert",
+            "check": "none",
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies=ok"
+        }
+    ]
+}

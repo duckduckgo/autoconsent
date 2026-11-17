@@ -1,0 +1,43 @@
+{
+    "name": "calclife.net",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?calclife\\.net/"
+    },
+    "prehideSelectors": [".cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent .cookie-consent__customize"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent .cookie-consent__customize"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-consent .cookie-consent__accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-consent .cookie-consent__customize"
+        },
+        {
+            "waitForVisible": ".cookie-consent .cookie-consent__details"
+        },
+        {
+            "if": {
+                "exists": "#consent-analytics:checked"
+            },
+            "then": [
+                {
+                    "click": "#consent-analytics"
+                }
+            ]
+        },
+        {
+            "click": ".cookie-consent .cookie-consent__save"
+        }
+    ]
+}

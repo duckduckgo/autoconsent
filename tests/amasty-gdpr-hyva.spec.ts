@@ -9,6 +9,7 @@ generateCMPTests('amasty-gdpr-hyva', [
     'https://www.biocare.co.uk/',
     'https://www.wrendaledesigns.co.uk/',
     'https://www.snaintongolf.co.uk/',
+    'http://aeschbach-chaussures.ch/',
 ]);
 
 // no banner shown in the US

@@ -1,0 +1,14 @@
+{
+    "name": "kredittbanken",
+    "_metadata": { "vendorUrl": "https://kredittbanken.no/" },
+    "runContext": { "urlPattern": "^https?://(www\\.)?kredittbanken\\.no/" },
+    "prehideSelectors": ["kb-cookie-consent-dialog"],
+    "detectCmp": [{ "exists": ["kb-cookie-consent-dialog", "#decline-all"] }],
+    "detectPopup": [{ "visible": ["kb-cookie-consent-dialog", "dialog[open]"] }],
+    "optIn": [{ "waitForThenClick": ["kb-cookie-consent-dialog", "#accept-all"], "retry": 10, "retryInterval": 500 }],
+    "optOut": [{ "waitForThenClick": ["kb-cookie-consent-dialog", "#decline-all"], "retry": 10, "retryInterval": 500 }],
+    "test": [
+        { "cookieContains": "sb1-optin-v3=" },
+        { "waitForVisible": ["kb-cookie-consent-dialog", "dialog"], "check": "none", "timeout": 2000 }
+    ]
+}

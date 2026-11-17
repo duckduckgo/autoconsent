@@ -1,0 +1,56 @@
+{
+    "name": "ccconsent-holder",
+    "prehideSelectors": [".ccConsentHolder"],
+    "detectCmp": [
+        {
+            "exists": ".ccConsentHolder .ccConsent .cookieSettings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".ccConsentHolder .ccConsent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".ccConsent .cookieButton.all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ".ccConsent .cookieTextHolderExtended .cookieSettings"
+            },
+            "then": [
+                {
+                    "click": ".ccConsent .cookieTextHolderExtended .cookieSettings"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".ccConsent .cookieTextHolder .cookieSettings"
+                }
+            ]
+        },
+        {
+            "waitForVisible": ".ccConsent .cookie_settings_row .cookieButton:not(.all)"
+        },
+        {
+            "comment": "a checked switch means the category is disabled",
+            "click": ".ccConsent input.cookieswitch:not(:checked)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": ".ccConsent .cookie_settings_row .cookieButton:not(.all)"
+        }
+    ],
+    "test": [
+        {
+            "wait": 1000
+        },
+        {
+            "cookieContains": "analytics_storage%22%3A%22disable"
+        }
+    ]
+}

@@ -157,6 +157,33 @@ describe('checkHeuristicPatterns with Italian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with French popups', () => {
+    it('detects French cookie notices', () => {
+        const texts = [
+            // change.org
+            'Vos paramètres de confidentialité. Nous utilisons nos propres cookies et ceux de tiers. Accepter les cookies Rejeter les cookies non essentiels Gérer les cookies',
+            'Nous utilisons nos propres cookies et ceux de tiers',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated French text', () => {
+        const texts = [
+            'Rejeter les candidatures incomplètes',
+            // "refuser/rejeter les cookies" alone also appears outside consent notices, e.g. browser help
+            'Vous pouvez rejeter les cookies dans les paramètres de votre navigateur.',
+            'Vous pouvez refuser les cookies dans les paramètres de votre navigateur.',
+            // "cookies" more than two words after "nous utilisons"
+            'Nous utilisons nos propres recettes pour préparer les cookies.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with Swedish popups', () => {
     it('detects Swedish cookie notices', () => {
         const texts = [
@@ -223,9 +250,10 @@ describe('checkHeuristicPatterns with inputs and context negatives', () => {
         ).to.have.length(1);
     });
 
-    it('does not count "accept all" in prose', () => {
-        expect(checkHeuristicPatterns('We accept all major credit cards.', 'page').patterns).to.not.include('/accept all/gi');
-        expect(checkHeuristicPatterns('Cookies help us.\nAccept all\nReject all', 'popup').patterns).to.include('/accept all/gi');
+    it('does not count bare "accept all" / "reject all" labels, only labels with the cookie noun', () => {
+        expect(checkHeuristicPatterns('We accept all major credit cards.', 'page').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Accept all\nReject all', 'popup').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Manage settings\nACCEPT ALL COOKIES', 'popup').patterns).to.include('/accept all cookies/gi');
     });
 
     it('drops page matches next to an age gate with a leave button, not next to a consent control', () => {
@@ -462,7 +490,6 @@ describe('checkHeuristicPatterns with more Swedish wording', () => {
             'Kakor för en bättre upplevelse Med kakor (cookies) kan vi erbjuda dig säker inloggning. Godkänn nödvändiga kakor Godkänn alla kakor',
             'Tillåt alla cookies Endast nödvändiga cookies Cookie-inställningar',
             'Välj nedan vilka cookies du tillåter oss att använda. Acceptera alla Endast nödvändiga',
-            'Godkänn alla Avvisa alla',
             'momondo och dess partners vill använda cookies eller liknande teknik för att lagra och/eller komma åt information på och om din enhet',
             'Lagra och/eller få åtkomst till information på en enhet',
         ]);
@@ -737,6 +764,17 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Ohne zu akzeptieren fortfahren')).to.equal('reject');
         expect(classifyButtonTextRegex('Weiter ohne Zustimmung')).to.equal('reject');
         expect(classifyButtonTextRegex('Cookies akzeptieren')).to.equal('accept');
+    });
+
+    it('matches German, Italian and Swedish "I understand" acknowledgements', () => {
+        expect(classifyButtonTextRegex('Ich verstehe')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ho capito')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Jag förstår')).to.equal('acknowledge');
+    });
+
+    it('does not treat Polish subscription links as reject', () => {
+        expect(classifyButtonTextRegex('Zarządzaj subskrypcjami lub z nich zrezygnuj')).to.equal('other');
+        expect(classifyButtonTextRegex('Rezygnuję')).to.equal('reject');
     });
 
     it('returns other for empty string', () => {
@@ -1343,5 +1381,56 @@ describe('getButtonData', () => {
 
         expect(buttons).to.have.length(1);
         expect(buttons[0].text).to.equal('Spaced Text');
+    });
+});
+
+describe('checkHeuristicPatterns without bare accept-all / reject-all labels', () => {
+    it('does not detect bare choice labels in any language', () => {
+        expectNotDetected([
+            'Accept all\nReject all',
+            'Tout accepter\nTout refuser',
+            'Alle akzeptieren\nAlle ablehnen',
+            'Alles accepteren\nWijs alles af',
+            'Aceptar todas\nRechazar todas',
+            'Accetta tutti\nRifiuta tutti',
+            'Godkänn alla Avvisa alla',
+            // a moderation queue row with bulk actions
+            '(diff | preview) . . Main Page 10:03 . . (+42) . . 192.0.2.1 [?] (fix typo) [Approve Approve all . . Reject Reject all] [Mark as spammer]',
+        ]);
+    });
+
+    it('detects notices that explain the choice buttons', () => {
+        expectDetected([
+            'By clicking "Accept all", you agree to the storing of cookies on your device to improve your experience.',
+            'By clicking "OK" you allow cookies that help us improve the site.',
+            'Settings\nReject non-essential\nAccept all',
+            'Accept all cookies',
+            'You can choose which cookies you accept.',
+            'Example Corp stores cookies on your device to analyse traffic.',
+            'We would like your consent to collect data on how you use the site.',
+            'Powered by Usercentrics Consent Management',
+            'En cliquant sur « Tout accepter », vous acceptez le dépôt de cookies sur votre appareil.',
+            'Les cookies nous permettent de mesurer l’audience.',
+            'Nous pouvons utiliser des traceurs optionnels pour mesurer l’audience.',
+            'Wenn Sie auf „Alle akzeptieren“ klicken, stimmen Sie der Speicherung von Cookies zu.',
+            'Durch Klicken auf „Alle akzeptieren“ gestatten Sie den Einsatz folgender Dienste.',
+            'Um diese Dienste verwenden zu dürfen, benötigen wir Ihre Einwilligung.',
+            'Hier legen Sie fest, welche Cookies Sie zulassen.',
+            'Dies geschieht meist in Form von Cookies.',
+            'Realisiert mit Klaro!',
+            'Door op "Alle cookies accepteren" te klikken, gaat u akkoord met het opslaan van cookies.',
+            'Wij vragen toestemming voor het plaatsen van cookies.',
+            'Al hacer clic en "Aceptar todas las cookies", usted acepta que las cookies se guarden en su dispositivo.',
+            'Nosotros y nuestros socios deseamos almacenar o acceder a información en su dispositivo.',
+            'Cliccando su "Accetta tutti i cookie", accetti la memorizzazione dei cookie sul dispositivo.',
+            'Noi e i nostri partner archiviamo informazioni su un dispositivo.',
+        ]);
+    });
+
+    it('does not detect sign-up terms that start like a consent notice', () => {
+        expectNotDetected([
+            'En cliquant sur "Créer un compte", vous acceptez les conditions d’utilisation et la politique de confidentialité.',
+            'By clicking "Sign up", you agree to our Terms of Service.',
+        ]);
     });
 });

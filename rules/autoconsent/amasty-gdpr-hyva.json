@@ -10,7 +10,7 @@
     ],
     "detectPopup": [
         {
-            "visible": "#am-cookie-bar > :is([data-dialog-ref-name=\"am-cookie-bar\"], [x-bind^=\"overlay\"])"
+            "visible": "#am-cookie-bar > [x-bind^=\"overlay\"], #am-cookie-bar [data-dialog-ref-name=\"am-cookie-bar\"]"
         },
         {
             "exists": "#am-cookie-bar[style*=\"translateY(100%)\"]",
@@ -37,14 +37,14 @@
                     "waitForThenClick": "#am-cookie-bar [x-ref=\"am-cookie-bar\"] :is([data-dispatch-action=\"cookiebar-action-accept\"], .ambar-btn-decline)"
                 },
                 {
-                    "waitForVisible": "#am-cookie-bar > :is([data-dialog-ref-name=\"am-cookie-bar\"], [x-bind^=\"overlay\"])",
+                    "waitForVisible": "#am-cookie-bar > [x-bind^=\"overlay\"], #am-cookie-bar [data-dialog-ref-name=\"am-cookie-bar\"]",
                     "check": "none",
                     "timeout": 3000,
                     "optional": true
                 },
                 {
                     "if": {
-                        "visible": "#am-cookie-bar > :is([data-dialog-ref-name=\"am-cookie-bar\"], [x-bind^=\"overlay\"])"
+                        "visible": "#am-cookie-bar > [x-bind^=\"overlay\"], #am-cookie-bar [data-dialog-ref-name=\"am-cookie-bar\"]"
                     },
                     "then": [
                         {
@@ -95,14 +95,14 @@
                     "optional": true
                 },
                 {
-                    "waitForVisible": "#am-cookie-bar > :is([data-dialog-ref-name=\"am-cookie-bar\"], [x-bind^=\"overlay\"])",
+                    "waitForVisible": "#am-cookie-bar > [x-bind^=\"overlay\"], #am-cookie-bar [data-dialog-ref-name=\"am-cookie-bar\"]",
                     "check": "none",
                     "timeout": 1000,
                     "optional": true
                 },
                 {
                     "if": {
-                        "visible": "#am-cookie-bar > :is([data-dialog-ref-name=\"am-cookie-bar\"], [x-bind^=\"overlay\"])"
+                        "visible": "#am-cookie-bar > [x-bind^=\"overlay\"], #am-cookie-bar [data-dialog-ref-name=\"am-cookie-bar\"]"
                     },
                     "then": [
                         {
@@ -121,7 +121,7 @@
                     "exists": "#am-cookie-bar[style*=\"translateY(100%)\"]"
                 },
                 {
-                    "waitForVisible": "#am-cookie-bar > :is([data-dialog-ref-name=\"am-cookie-bar\"], [x-bind^=\"overlay\"])",
+                    "waitForVisible": "#am-cookie-bar > [x-bind^=\"overlay\"], #am-cookie-bar [data-dialog-ref-name=\"am-cookie-bar\"]",
                     "check": "none",
                     "timeout": 5000
                 }

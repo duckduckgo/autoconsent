@@ -1,0 +1,41 @@
+{
+    "name": "dandomain",
+    "vendorUrl": "https://dandomain.dk/",
+    "cosmetic": false,
+    "prehideSelectors": ["#CookiePolicy"],
+    "detectCmp": [
+        {
+            "exists": "#CookiePolicy #cookie-policy-accept-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#CookiePolicy"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#CookiePolicy .cookie-policy-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "some shops pre-check the toggles in a DOM-ready handler that may run after detection",
+            "wait": 500
+        },
+        {
+            "comment": "the save button keeps the current toggles, so uncheck them first",
+            "click": "#CookiePolicy .cookie-policy-consents-area input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#CookiePolicy #cookie-policy-accept-button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "DDCookiePolicy-consent-tracking=false"
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "name": "hmi-basen.dk",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?hmi-basen\\.dk/"
+    },
+    "prehideSelectors": ["section.cookie"],
+    "detectCmp": [
+        {
+            "exists": "section.cookie a[href*='t=cookiest&cookiev=4']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section.cookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "section.cookie a[href*='t=cookiest&cookiev=1']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "section.cookie a[href*='t=cookiest&cookiev=4']"
+        }
+    ]
+}
