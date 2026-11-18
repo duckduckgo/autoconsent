@@ -179,6 +179,12 @@ export const snippets = {
     // turn the single-button form into a decline submission, same fields as the CMP's own decline form
     EVAL_EE_CONSENT_DECLINE_0: () =>
         document.querySelectorAll('#cookieConsentFormAccept input[name^="ee:cookies_"]').forEach((i) => (i.value = 'n')) || true,
+    EVAL_EFILLI_REJECT_ALL: () => window.efilliSdk.consentManager.rejectAll() || true,
+    EVAL_EFILLI_ACCEPT_ALL: () => window.efilliSdk.consentManager.acceptAll() || true,
+    EVAL_EFILLI_TEST: () => {
+        const consent = window.efilliSdk.consentManager.getSavedConsent();
+        return !!consent && Object.entries(consent.categories).every(([category, allowed]) => category === 'essential' || !allowed);
+    },
     EVAL_ETSY_0: () =>
         document.querySelectorAll('.gdpr-overlay-body input').forEach((toggle) => {
             toggle.checked = false;
