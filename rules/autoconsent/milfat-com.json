@@ -1,0 +1,29 @@
+{
+    "name": "milfat-com",
+    "vendorUrl": "https://milfat.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?milfat\\.com/"
+    },
+    "prehideSelectors": [".js-notice.notice--cookie"],
+    "detectCmp": [
+        {
+            "exists": ".js-notice.notice--cookie .js-noticeDismiss"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-notice.notice--cookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-notice.notice--cookie .js-noticeDismiss"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".js-notice.notice--cookie"
+        }
+    ]
+}
