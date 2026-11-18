@@ -1,0 +1,36 @@
+{
+    "name": "sarmady",
+    "vendorUrl": "https://www.sarmady.net/",
+    "cosmetic": false,
+    "prehideSelectors": ["#fg-consent-banner", "#ff-consent-banner"],
+    "detectCmp": [
+        {
+            "exists": "[id$=\"-consent-banner\"] .consent-checkbox[data-key=\"ad_storage\"]"
+        },
+        {
+            "exists": "[id$=\"-consent-banner\"] #consent-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[id$=\"-consent-banner\"] #consent-reject-all"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[id$=\"-consent-banner\"] #consent-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[id$=\"-consent-banner\"] #consent-reject-all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "[id$=\"-consent-banner\"]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
