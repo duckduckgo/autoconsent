@@ -1,0 +1,11 @@
+{
+    "name": "polaris-media",
+    "vendorUrl": "https://www.polarismedia.no/",
+    "comment": "Notice-only banner without a reject button; the close control only hides it.",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "aside.gdpr-wrapper > .gdpr-content > .gdpr-text-wrapper ~ .close-x" }],
+    "detectPopup": [{ "visible": "aside.gdpr-wrapper > .gdpr-content", "check": "any" }],
+    "optIn": [{ "waitForThenClick": "aside.gdpr-wrapper > .gdpr-content > .close-x", "all": true, "retry": 3 }],
+    "optOut": [{ "waitForThenClick": "aside.gdpr-wrapper > .gdpr-content > .close-x", "all": true, "retry": 3 }],
+    "test": [{ "waitForVisible": "aside.gdpr-wrapper > .gdpr-content", "check": "none", "timeout": 1000 }]
+}
