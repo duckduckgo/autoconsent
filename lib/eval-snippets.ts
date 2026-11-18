@@ -299,6 +299,8 @@ export const snippets = {
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
     EVAL_WBD_LTP_CLOSE: () => document.querySelector('dialog#ltp-dialog').close() || true,
+    EVAL_WEBMOTORS_TEST: () =>
+        Object.values(JSON.parse(localStorage.getItem('webmotors.cookie-consent')).cookies).every((v) => v === false),
     EVAL_ZOHO_TEST: () => localStorage.getItem('zglobal_Acookie_optOut') === '3',
 };
 

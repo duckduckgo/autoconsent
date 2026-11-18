@@ -1,0 +1,50 @@
+{
+    "name": "webmotors",
+    "vendorUrl": "https://www.webmotors.com.br/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?webmotors\\.com\\.br/"
+    },
+    "prehideSelectors": ["div:has(> div > [data-qa=\"cookie-notice-save_consent\"])"],
+    "detectCmp": [
+        {
+            "exists": "[data-qa=\"cookie-notice-save_consent\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-qa=\"cookie-notice-save_consent\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-qa=\"cookie-notice-save_consent\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-qa=\"cookie-notice-desktop-call-cookie_control\"]"
+        },
+        {
+            "waitForVisible": "[data-qa=\"cookie-consent-modal\"]"
+        },
+        {
+            "click": "[data-qa=\"cookie-consent-modal\"] input[type=\"checkbox\"]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[data-qa=\"cookie-consent-save\"]"
+        },
+        {
+            "waitForVisible": "[data-qa=\"cookie-consent-modal\"]",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_WEBMOTORS_TEST"
+        }
+    ]
+}
