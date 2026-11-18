@@ -103,6 +103,26 @@ export async function testPage(page, url, regionKey, options = {}) {
 }
 
 /**
+ * Touch and a phone-sized viewport for `device: 'mobile'`. Oxylabs' mobile profile sets only the
+ * user agent, and a new page would get Playwright's 1280px desktop viewport. The user agent is left
+ * to Oxylabs so it matches the rest of its profile. The remote window keeps pages at least 500px wide.
+ * @type {import('playwright').BrowserContextOptions}
+ */
+export const OXYLABS_MOBILE_CONTEXT = { viewport: { width: 360, height: 740 }, isMobile: true, hasTouch: true };
+
+/**
+ * Context options for a page of an Oxylabs session, or null for Playwright's defaults.
+ * @param {OxylabsBrowserOptions & { emulateDevice?: string }} options
+ * @returns {import('playwright').BrowserContextOptions | null}
+ */
+export function oxylabsContextOptions(options) {
+    if (options.emulateDevice) {
+        return deviceContextOptions(options.emulateDevice);
+    }
+    return options.device === 'mobile' ? OXYLABS_MOBILE_CONTEXT : null;
+}
+
+/**
  * Run `fn` on a page of a fresh Oxylabs session for a region, then close the session. Throws if
  * the session cannot be opened.
  * @template T
@@ -114,8 +134,8 @@ export async function testPage(page, url, regionKey, options = {}) {
 export async function withOxylabsPage(regionKey, options, fn) {
     const browser = await connectOxylabs(regionKey, { device: options.device, solveCaptcha: options.solveCaptcha });
     try {
-        // A new page gets Playwright's desktop viewport whatever `device` asked Oxylabs for.
-        const context = options.emulateDevice ? await browser.newContext(deviceContextOptions(options.emulateDevice)) : null;
+        const contextOptions = oxylabsContextOptions(options);
+        const context = contextOptions ? await browser.newContext(contextOptions) : null;
         return await fn(await (context ?? browser).newPage());
     } finally {
         try {

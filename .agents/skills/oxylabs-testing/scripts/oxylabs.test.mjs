@@ -1,7 +1,14 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { buildOxylabsEndpoint, isOxylabsConfigured, oxylabsRegionParams, redactCredentials } from './oxylabs.mjs';
+import {
+    OXYLABS_MOBILE_CONTEXT,
+    buildOxylabsEndpoint,
+    isOxylabsConfigured,
+    oxylabsContextOptions,
+    oxylabsRegionParams,
+    redactCredentials,
+} from './oxylabs.mjs';
 
 const env = { OXYLABS_USER: 'user', OXYLABS_PASSWORD: 'p+ss' };
 
@@ -36,5 +43,24 @@ describe('oxylabs config', () => {
             redactCredentials('WebSocket error: wss://user:p+ss@hb.oxylabs.io/?p_cc=DE 401 Unauthorized', env),
             'WebSocket error: wss://***:***@hb.oxylabs.io/?p_cc=DE 401 Unauthorized',
         );
+    });
+});
+
+describe('oxylabs pages', () => {
+    it('opens desktop pages with Playwright defaults', () => {
+        assert.equal(oxylabsContextOptions({}), null);
+        assert.equal(oxylabsContextOptions({ device: 'desktop' }), null);
+    });
+
+    it('adds touch to the mobile profile without replacing its user agent', () => {
+        const options = oxylabsContextOptions({ device: 'mobile' });
+        assert.equal(options, OXYLABS_MOBILE_CONTEXT);
+        assert.equal(options?.hasTouch, true);
+        assert.equal(options?.isMobile, true);
+        assert.equal(options?.userAgent, undefined);
+    });
+
+    it('lets a Playwright device override the mobile profile', () => {
+        assert.match(oxylabsContextOptions({ device: 'mobile', emulateDevice: 'iPhone SE' })?.userAgent ?? '', /iPhone/);
     });
 });
