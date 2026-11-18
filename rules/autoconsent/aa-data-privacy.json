@@ -1,0 +1,55 @@
+{
+    "name": "aa-data-privacy",
+    "cosmetic": true,
+    "prehideSelectors": ["[data-aa-component=\"dataPrivacy\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-aa-component=\"dataPrivacy\"] .declaration"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent:has([data-aa-component=\"dataPrivacy\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-aa-component=\"dataPrivacy\"] [onclick=\"createCookie()\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "[data-aa-component=\"dataPrivacy\"]"
+        },
+        {
+            "waitForVisible": ".fc-consent-root .fc-dialog-container",
+            "timeout": 15000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": ".fc-consent-root .fc-dialog-container"
+            },
+            "then": [
+                {
+                    "click": ".fc-cta-do-not-consent,.fc-cta-manage-options"
+                },
+                {
+                    "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".fc-confirm-choices",
+                    "optional": true
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "visible": "[data-aa-component=\"dataPrivacy\"]",
+            "check": "none"
+        }
+    ]
+}
