@@ -368,6 +368,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // e.g. "閲覧履歴を外部サービスに送信"
     /(?:閲覧履歴|端末情報|利用者情報).{0,30}を外部(?:サービス|事業者|に|へ)/gi,
 
+    // Chinese (ZH)
+    // e.g. "本網站使用cookies", "本网站使用 Cookie", "我們使用Cookie"
+    /(?:網站|网站|本站|我們|我们).{0,20}使用\s?cookie/gi,
+
     // Danish (DA)
     // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
     /\b(?:bruger|anvender|benytter) cookies\b/gi,
@@ -1121,4 +1125,8 @@ export const ACKNOWLEDGE_PATTERNS = [
     // e.g. "閉じる" (close), "確認" / "確認しました" (confirmed), "了解" (understood), "確認して閉じる";
     // not "同意して閉じる" (agree and close) or the verb "確認する" (confirm)
     /^(確認|了解)(しました)?$|^((確認|了解)して)?閉じる$/,
+
+    // Chinese (ZH)
+    // e.g. "我知道了", "知道了", "我知道了！請關閉提示", "关闭"
+    /^我?知道了[!！]?\s?(請關閉提示|请关闭提示)?$|^(關閉|关闭)(提示)?$/,
 ];
