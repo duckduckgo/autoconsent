@@ -1,0 +1,39 @@
+{
+    "name": "itau.com.br",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?itau\\.com\\.br/"
+    },
+    "prehideSelectors": ["itau-cookie-consent-banner"],
+    "detectCmp": [
+        {
+            "exists": "itau-cookie-consent-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "cookieContains": "OptanonAlertBoxClosed",
+            "negated": true
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["itau-cookie-consent-banner", "#itau-cookie-consent-banner-accept-cookies-btn"],
+            "timeout": 10000
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["itau-cookie-consent-banner", "#itau-cookie-consent-banner-reject-cookies-btn"],
+            "timeout": 10000
+        },
+        {
+            "waitForVisible": ["itau-cookie-consent-banner", "#itau-cookie-consent-banner"],
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "OptanonAlertBoxClosed"
+        }
+    ]
+}
