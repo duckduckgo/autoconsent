@@ -1,9 +1,6 @@
 {
     "name": "yandex",
     "vendorUrl": "https://yandex.com/legal/cookies_policy/",
-    "runContext": {
-        "urlPattern": "^https?://([\\w-]+\\.)*(yandex\\.[a-z.]+|ya\\.ru|kinopoisk\\.ru)/"
-    },
     "prehideSelectors": [],
     "detectCmp": [
         {
