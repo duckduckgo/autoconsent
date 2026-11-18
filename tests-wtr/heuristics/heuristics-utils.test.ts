@@ -376,6 +376,25 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Turkish popups', () => {
+    it('detects Turkish cookie notices', () => {
+        const texts = [
+            'İnternet sitemizde çerezler vasıtasıyla kişisel verileriniz işlenmektedir.',
+            'Size daha iyi hizmet sunabilmek için çerez kullanıyoruz.',
+            'Web sitemizde çerezlerden yararlanıyoruz.',
+            'Bu sitede çerezler kullanılmaktadır.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Turkish text', () => {
+        expect(checkHeuristicPatterns('Çerez Politikası').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Çikolatalı kurabiye tarifinde tereyağı kullanıyoruz').patterns).to.have.length(0);
+    });
+});
+
 const detectsPopup = (text: string) => checkHeuristicPatterns(text, 'popup').patterns.length > 0;
 const detectsPage = (text: string) => checkHeuristicPatterns(text, 'page').patterns.length > 0;
 
@@ -842,6 +861,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Bare nødvendige informasjonskapsler')).to.equal('reject');
         expect(classifyButtonTextRegex('Ja')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Les mer om hvordan vi bruker informasjonskapsler')).not.to.equal('reject');
+    });
+
+    it('matches Turkish reject buttons', () => {
+        expect(classifyButtonTextRegex('Reddet')).to.equal('reject');
+        expect(classifyButtonTextRegex('Tümünü Reddet')).to.equal('reject');
+        expect(classifyButtonTextRegex('Tüm Çerezleri Reddet')).to.equal('reject');
+        expect(classifyButtonTextRegex('Tümünü Kabul Et')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {

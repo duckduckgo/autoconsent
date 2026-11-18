@@ -279,4 +279,5 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["informasjonskapsler","cookies"],
     ["vi benytter"],
     ["bruk av "],
+    ["kullanıyoruz","kullanmaktayız","kullanılmaktadır","yararlan","faydalan","vasıtasıyla","aracılığıyla"],
 ];
