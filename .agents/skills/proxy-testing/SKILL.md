@@ -101,6 +101,9 @@ Options (all optional):
 - `navigationTimeout` — `page.goto` timeout in ms (default `45000`).
 - `completionTimeout` — max wait for autoconsent to finish opt-out/opt-in in ms (default `45000`).
 - `detectionTimeout` — max wait for `cmpDetected` before giving up (default: `completionTimeout`).
+- `disabledCmps` — rule names autoconsent skips (default `[]`), e.g. to see whether another rule or the heuristic handles the page without a rule.
+- `heuristicMode` — heuristic level: `'off'`, `'reject'`, `'tier1'` or `'tier2'` (default `'tier2'`). `'tier1'` leaves out popups whose only button is Accept.
+- `emulateDevice` — Playwright device to emulate on Chromium, e.g. `'iPhone SE'` (viewport, user agent, touch), applied by `testUrl`. Desktop when unset.
 - `headless` — run Chromium headless (default `true`).
 - `launchOptions` — extra options merged into `chromium.launch()` (e.g. `args`); the regional `proxy` is always applied on top.
 

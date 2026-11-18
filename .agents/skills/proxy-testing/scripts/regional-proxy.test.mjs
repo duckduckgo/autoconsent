@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { buildProxyConfig } from './regional-proxy.mjs';
+import { buildProxyConfig, deviceContextOptions } from './regional-proxy.mjs';
 
 const credentials = {
     REGIONAL_PROXY_PASSWORD: 'password',
@@ -57,5 +57,23 @@ describe('regional proxy config', () => {
 
     it('rejects unsupported protocols', () => {
         assert.throws(() => buildProxyConfig('gb', { REGIONAL_PROXY_GB: 'socks4://proxy.example:1080' }), /unsupported proxy protocol/);
+    });
+});
+
+describe('device emulation', () => {
+    it('emulates nothing by default', () => {
+        assert.deepEqual(deviceContextOptions(), {});
+    });
+
+    it('keeps the device settings but not its browser', () => {
+        const options = deviceContextOptions('iPhone SE');
+        assert.equal(options.isMobile, true);
+        assert.equal(options.hasTouch, true);
+        assert.match(options.userAgent ?? '', /iPhone/);
+        assert.equal('defaultBrowserType' in options, false);
+    });
+
+    it('rejects unknown devices', () => {
+        assert.throws(() => deviceContextOptions('Nokia 3310'), /Unknown Playwright device/);
     });
 });

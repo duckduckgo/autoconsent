@@ -46,7 +46,7 @@ Use an existing page (one Oxylabs session; the callback's page is closed afterwa
 ```javascript
 import { testPage, withOxylabsPage } from './.agents/skills/oxylabs-testing/scripts/oxylabs.mjs';
 
-const result = await withOxylabsPage('de', { device: 'mobile' }, async (page) => {
+const result = await withOxylabsPage('de', { device: 'mobile', emulateDevice: 'iPhone SE' }, async (page) => {
     const result = await testPage(page, 'https://www.wohnen.de/', 'de');
     await page.screenshot({ path: 'test-results/oxylabs/after-de-mobile.png' });
     return result;
@@ -64,11 +64,12 @@ const result = await withOxylabsPage('de', { device: 'mobile' }, async (page) =>
 - `isOxylabsConfigured()` — whether `OXYLABS_USER` and `OXYLABS_PASSWORD` are set.
 - `formatResult(result)`, `CORE_REGIONS`, `EXPANDED_REGIONS`, `ALL_REGIONS` — same as `proxy-testing`.
 
-Options: everything `testPage` takes in `proxy-testing` (`action`, `screenshotsDir`, `navigationTimeout`, `completionTimeout`, `detectionTimeout`), plus:
+Options: everything `testPage` takes in `proxy-testing` (`action`, `screenshotsDir`, `navigationTimeout`, `completionTimeout`, `detectionTimeout`, `disabledCmps`, `heuristicMode`), plus:
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `device` | `'desktop'` | `'desktop' \| 'mobile'` — sets [`?p_device=`](https://developers.oxylabs.io/products/agent-browser/device-type) (viewport, touch, headers, User-Agent). Use it for mobile tests instead of Playwright device descriptors, which would contradict the Oxylabs fingerprint. |
+| `device` | `'desktop'` | `'desktop' \| 'mobile'` — sets [`?p_device=`](https://developers.oxylabs.io/products/agent-browser/device-type) (headers, User-Agent). A page opened with `browser.newPage()` still gets Playwright's 1280px desktop viewport and no touch, so for mobile tests pair it with `emulateDevice`. |
+| `emulateDevice` | none | A Playwright device to emulate, e.g. `'iPhone SE'`: `testUrl` opens the page in a context with that device's viewport, user agent and touch. |
 | `solveCaptcha` | `true` | Sends [`?solve_captcha=true`](https://developers.oxylabs.io/products/agent-browser/captcha-handling) so Oxylabs solves captchas on the page, and waits for the solver (see Gotchas). Our account has captcha solving enabled; an account without it gets HTTP 400 for every session. |
 
 Screenshots default to `test-results/oxylabs`, named `<domain>-<region>-oxylabs-final.jpg`.

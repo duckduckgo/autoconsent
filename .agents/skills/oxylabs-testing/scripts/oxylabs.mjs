@@ -36,13 +36,14 @@ import path from 'path';
 import { connectOxylabs, createCaptchaTracker, redactCredentials } from '../../../../playwright/oxylabs.mjs';
 import {
     CORE_REGIONS,
+    deviceContextOptions,
     emptyResult,
     injectAutoconsent as injectThrough,
     projectRoot,
     runTest,
 } from '../../../lib/regional-testing/harness.mjs';
 
-export { ALL_REGIONS, CORE_REGIONS, EXPANDED_REGIONS, formatResult } from '../../../lib/regional-testing/harness.mjs';
+export { ALL_REGIONS, CORE_REGIONS, EXPANDED_REGIONS, deviceContextOptions, formatResult } from '../../../lib/regional-testing/harness.mjs';
 export {
     OXYLABS_LOCAL_REGIONS,
     buildOxylabsEndpoint,
@@ -106,14 +107,16 @@ export async function testPage(page, url, regionKey, options = {}) {
  * the session cannot be opened.
  * @template T
  * @param {string} regionKey
- * @param {OxylabsBrowserOptions} options
+ * @param {OxylabsBrowserOptions & { emulateDevice?: string }} options
  * @param {(page: Page) => Promise<T>} fn
  * @returns {Promise<T>}
  */
 export async function withOxylabsPage(regionKey, options, fn) {
     const browser = await connectOxylabs(regionKey, { device: options.device, solveCaptcha: options.solveCaptcha });
     try {
-        return await fn(await browser.newPage());
+        // A new page gets Playwright's desktop viewport whatever `device` asked Oxylabs for.
+        const context = options.emulateDevice ? await browser.newContext(deviceContextOptions(options.emulateDevice)) : null;
+        return await fn(await (context ?? browser).newPage());
     } finally {
         try {
             await browser.close();

@@ -11,6 +11,7 @@
  */
 
 /** @typedef {import('../../../lib/types.js').Config} Config */
+/** @typedef {import('../../../lib/types.js').HeuristicLevel} HeuristicLevel */
 
 /**
  * @typedef {import('../../../playwright/isolated-world.mjs').MessageTransport} MessageTransport
@@ -28,6 +29,9 @@
  * @property {number} [navigationTimeout=45000]
  * @property {number} [completionTimeout=45000]
  * @property {number} [detectionTimeout] - How long to wait for `cmpDetected` before giving up. Defaults to `completionTimeout`.
+ * @property {string[]} [disabledCmps=[]] - Rule names autoconsent skips, e.g. to see what handles the page without a rule.
+ * @property {HeuristicLevel} [heuristicMode='tier2'] - Heuristic level; 'tier1' leaves out popups whose only button is Accept.
+ * @property {string} [emulateDevice] - Playwright device to emulate on Chromium, e.g. 'iPhone SE'. Desktop when unset. Applied by the providers' `testUrl` when they open the page.
  */
 
 /**
@@ -78,6 +82,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { devices } from 'playwright';
 import { injectIntoIsolatedWorld } from '../../../playwright/isolated-world.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -95,6 +100,24 @@ export const CORE_REGIONS = ['us', 'gb', 'de'];
 
 /** Expanded pass: escalation set covering all non-GDPR regimes plus GDPR representatives. */
 export const EXPANDED_REGIONS = ['us', 'gb', 'de', 'fr', 'nl', 'pl', 'au', 'ca', 'jp'];
+
+/**
+ * Browser context options that emulate a Playwright device on Chromium: viewport, user agent, touch.
+ * @param {string} [deviceName] - A key of Playwright's `devices`, e.g. 'iPhone SE'.
+ * @returns {import('playwright').BrowserContextOptions}
+ */
+export function deviceContextOptions(deviceName) {
+    if (!deviceName) {
+        return {};
+    }
+    const descriptor = devices[deviceName];
+    if (!descriptor) {
+        throw new Error(`Unknown Playwright device "${deviceName}".`);
+    }
+    // The browser is always Chromium here, whatever the device ships with.
+    const { defaultBrowserType: _browserType, ...contextOptions } = descriptor;
+    return contextOptions;
+}
 
 /**
  * Inject autoconsent into a page. Call before navigating to the target URL.
@@ -115,13 +138,13 @@ export async function injectAutoconsent(page, options, provider, extension = {})
     const config = {
         enabled: true,
         autoAction: action,
-        disabledCmps: [],
+        disabledCmps: options.disabledCmps ?? [],
         enablePrehide: true,
         detectRetries: 20,
         enableCosmeticRules: true,
         enableGeneratedRules: true,
         enableHeuristicDetection: true,
-        heuristicMode: 'tier2',
+        heuristicMode: options.heuristicMode ?? 'tier2',
         // The engine runs in the isolated world; eval snippets are forwarded to the main world.
         isMainWorld: false,
         logs: { lifecycle: true, rulesteps: true, detectionsteps: false, evals: false, errors: true, messages: false, waits: false },
