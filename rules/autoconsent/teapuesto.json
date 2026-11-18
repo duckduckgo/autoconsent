@@ -1,0 +1,40 @@
+{
+    "name": "teapuesto",
+    "vendorUrl": "https://www.teapuesto.pe/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?teapuesto\\.pe/"
+    },
+    "prehideSelectors": [".cookies-drawer-wrapper"],
+    "detectCmp": [
+        {
+            "exists": ".cookies-drawer-wrapper .btn-config"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies-drawer-wrapper .btn-config"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies-drawer-wrapper .btn-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookies-drawer-wrapper .btn-config"
+        },
+        {
+            "waitForThenClick": ".cookies-config-consent-modal .btn-reject"
+        },
+        {
+            "waitForVisible": ".cookies-drawer-wrapper",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "analytics_storage=denied"
+        }
+    ]
+}
