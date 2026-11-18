@@ -188,6 +188,7 @@ export const snippets = {
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
     EVAL_GDPR_LEGAL_COOKIE_TEST: () => !!window.GDPR_LC?.userConsentSetting,
+    EVAL_GIGW_COOKIE_TEST: () => JSON.parse(localStorage.getItem('gigw-consent'))?.prefs === false,
     EVAL_IUBENDA_0: () =>
         document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach((x) => {
             if (x.checked) x.click();

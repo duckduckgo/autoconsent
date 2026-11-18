@@ -1,0 +1,30 @@
+{
+    "name": "gigw-cookie",
+    "cosmetic": false,
+    "prehideSelectors": ["#gwCookie"],
+    "detectCmp": [
+        {
+            "exists": "#gwCookie [data-gw-cookie=\"reject\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gwCookie [data-gw-cookie=\"reject\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gwCookie [data-gw-cookie=\"accept\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gwCookie [data-gw-cookie=\"reject\"]"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_GIGW_COOKIE_TEST"
+        }
+    ]
+}
