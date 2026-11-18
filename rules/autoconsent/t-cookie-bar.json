@@ -1,0 +1,28 @@
+{
+    "name": "t-cookie-bar",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "div.t-cookie-bar" }],
+    "detectPopup": [{ "visible": "div.t-cookie-bar" }],
+    "optIn": [{ "waitForThenClick": "div.t-cookie-bar" }],
+    "optOut": [
+        { "waitForThenClick": "div.t-cookie-bar" },
+        {
+            "comment": "these sites also load a Funding Choices dialog in some regions, after their own bar",
+            "waitFor": ".fc-consent-root",
+            "timeout": 5000,
+            "optional": true
+        },
+        {
+            "if": { "exists": ".fc-consent-root" },
+            "then": [
+                {
+                    "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                    "then": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }]
+                },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "visible": "div.t-cookie-bar", "check": "none" }]
+}
