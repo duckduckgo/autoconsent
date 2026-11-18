@@ -377,6 +377,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+    // Arabic "we use cookies" / "this site uses cookies"
+    /(?:نستخدم|يستخدم (?:هذا الموقع|موقعنا)) (?:\S+ ){0,2}(?:ملفات تعريف الارتباط|الكوكيز)/g,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -650,6 +652,13 @@ const REJECT_PATTERNS_JAPANESE = [
     '同意しません',
 ];
 
+const REJECT_PATTERNS_ARABIC = [
+    // "رفض" / "رفض الكل" / "رفض جميع ملفات تعريف الارتباط" (reject (all) (cookies)); \u0651 is an optional shadda
+    /^(رفض|ارفض)( (الكل\u0651?|الجميع|جميع ملفات تعريف الارتباط|ملفات تعريف الارتباط))?$/,
+    // "الضرورية فقط" / "قبول الضرورية فقط" / "ملفات تعريف الارتباط الضرورية فقط" (necessary only)
+    /^((قبول|السماح ب) ?)?(ملفات تعريف الارتباط )?(الضرورية|الضروري) فقط$/,
+];
+
 /**
  * @type {Array<string|RegExp>}
  */
@@ -674,6 +683,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_TURKISH,
     ...REJECT_PATTERNS_INDONESIAN,
     ...REJECT_PATTERNS_JAPANESE,
+    ...REJECT_PATTERNS_ARABIC,
 ];
 
 export const BUTTON_NEVER_MATCH_PATTERNS = [

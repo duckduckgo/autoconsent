@@ -219,6 +219,24 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Arabic popups', () => {
+    it('detects Arabic cookie notices', () => {
+        const texts = [
+            'نستخدم ملفات تعريف الارتباط لتحسين تجربتك وتحليل حركة الزيارات؛ يمكنك اختيار ما تسمح به.',
+            'يستخدم هذا الموقع ملفات تعريف الارتباط لتحسين تجربتك',
+            'نحن نستخدم الكوكيز لتحسين تجربة التصفح',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Arabic text', () => {
+        expect(checkHeuristicPatterns('نستخدم أحدث التقنيات في التعليم').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('سياسة ملفات تعريف الارتباط').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with inputs and context negatives', () => {
     it('runs patterns scoped to an input on that input only', () => {
         const patterns = [{ pattern: /accept all/gi, input: 'popup' as const }];
@@ -820,6 +838,17 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
         expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
         expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
+    });
+
+    it('matches Arabic reject buttons', () => {
+        expect(classifyButtonTextRegex('رفض')).to.equal('reject');
+        expect(classifyButtonTextRegex('رفض الكلّ')).to.equal('reject');
+        expect(classifyButtonTextRegex('رفض الكل')).to.equal('reject');
+        expect(classifyButtonTextRegex('رفض جميع ملفات تعريف الارتباط')).to.equal('reject');
+        expect(classifyButtonTextRegex('الضرورية فقط')).to.equal('reject');
+        expect(classifyButtonTextRegex('قبول الضرورية فقط')).to.equal('reject');
+        expect(classifyButtonTextRegex('قبول الكل')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('تخصيص')).not.to.equal('reject');
     });
 
     it('matches Danish reject buttons', () => {
