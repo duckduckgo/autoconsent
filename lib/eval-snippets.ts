@@ -235,6 +235,13 @@ export const snippets = {
                         .split('=')[1],
                 ),
             ).purposes.a === false),
+    // false is the site's own "no personalised ads" choice; it can throw after saving it, so the rule checks the result
+    EVAL_SINEMALAR_0: () => {
+        try {
+            dismissCookieDisclaimer(false);
+        } catch {}
+        return true;
+    },
     EVAL_SKYSCANNER_TEST: () => document.cookie.match(/gdpr=[^;]*adverts:::false/) && !document.cookie.match(/gdpr=[^;]*init:::true/),
     EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
         document.documentElement.classList.forEach((cls) => {

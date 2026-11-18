@@ -1,0 +1,18 @@
+{
+    "name": "sinemalar",
+    "_metadata": {
+        "vendorUrl": "https://www.sinemalar.com/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?sinemalar\\.com/"
+    },
+    "prehideSelectors": ["#cookie-disclaimer"],
+    "detectCmp": [{ "exists": "#cookie-disclaimer" }],
+    "detectPopup": [{ "visible": "#cookie-disclaimer.active" }],
+    "optIn": [{ "waitForThenClick": "#cookie-disclaimer button[onclick*='dismissCookieDisclaimer(true)']" }],
+    "optOut": [{ "eval": "EVAL_SINEMALAR_0" }, { "waitForVisible": "#cookie-disclaimer.active", "check": "none", "timeout": 2000 }],
+    "test": [{ "cookieContains": "nonpa=1" }]
+}
