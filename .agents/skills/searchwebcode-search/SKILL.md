@@ -16,11 +16,20 @@ Search website source code via the [SearchWebCode](https://www.searchwebcode.com
 
 ## When to fall back
 
-Fall back when a PublicWWW request does not return CSV because the daily limit is used up: an HTTP error (e.g. 403 or 429), or an HTML page or text message about the limit or the plan instead of `url;rank;snippet` lines. Check the first lines of the response before reading it as results.
+Fall back when PublicWWW's daily search limit is used up. Its CSV export then answers with HTTP 200 and the body `API available for paid search results only` instead of `url;rank;snippet` lines, so check the response body before reading it as results. To confirm, check the remaining quota (this request is free):
 
-Do not fall back when PublicWWW returns an empty CSV: that is a real "no sites found" answer. Do not fall back for a missing `PUBLICWWW_KEY` either; ask the user for the key instead.
+```bash
+curl -s https://api.publicwww.com/v1/account -H "Authorization: Bearer $PUBLICWWW_KEY" | jq .quota.searches
+```
 
-If `SEARCHWEBCODE_KEY` is not set either, there is no fallback. Continue with `data/coverage.json` and the spec sites, and say in your report that source code search was unavailable.
+`remaining: 0` means the limit is used up until `resets_at` (Unix time, midnight UTC).
+
+Do not fall back when:
+
+- PublicWWW returns an empty CSV: that is a real "no sites found" answer.
+- PublicWWW answers `Wrong API key`, or `PUBLICWWW_KEY` is not set: ask the user for a working key instead.
+
+Before the first call, check that the key is set (`[ -n "$SEARCHWEBCODE_KEY" ]`). If it is not, there is no fallback. Continue with `data/coverage.json` and the spec sites, and say in your report that source code search was unavailable.
 
 Say in your report that the results came from SearchWebCode, so reviewers know they cover homepages only.
 
@@ -48,22 +57,25 @@ The JSON response has `total`, `count_kind`, `next_offset`, `charged_cents`, `ba
 
 - `exact`: the true number of matching sites.
 - `estimated`: a candidate count. Read `estimated_matches` instead.
-- `partial`: the query was too broad to scan in full. Only `verified_hits` are confirmed and `total` is a ceiling. Narrow the query (add a term or a TLD) rather than paging through it.
+- `partial`: only a ceiling. Only `verified_hits` are confirmed. `counts_only` requests usually come back `partial`, and for regex queries the ceiling can be far too high (a prefilter count). If the number matters, run a listing (one credit) and read `estimated_matches` and `verified_hits`. For a listing that is `partial`, narrow the query (add a term or a TLD) rather than paging through it.
+
+The response's `match_mode` (`token`, `substring` or `regex`) and `prefilter_note` say how the query was matched. Read them when a count looks too low or too high.
 
 Full reference: https://www.searchwebcode.com/docs
 
 ## Query Syntax
 
-Mostly the same as PublicWWW, so a PublicWWW query usually works unchanged once you drop `filetype:` and `depth:`.
+Mostly the same as PublicWWW, so a PublicWWW query usually works unchanged once you drop `filetype:` and `depth:`. The big difference is token matching.
 
-- Exact phrase: `"onetrust-banner-sdk"` (matches anywhere, as a substring)
-- Bare word: `klaro` matches **whole words only**: `tagmanager` does not match `googletagmanager`. Quote it or include punctuation (`"klaro-"`) for a substring match
+- **Identifiers match as whole tokens, even when quoted.** `"sd-cmp"` and `"onetrust-banner-sdk"` (letters, digits, `-`, `_`) match only as a whole token, in the case given: `"sd-cmp"` finds `id="sd-cmp"` but not `ads-cmp`. That is usually what you want for a CMP's class or ID. The response says `match_mode: "token"`.
+- For a substring match inside longer tokens, use a regex: `/sd-cmp/`. Expect many more, noisier matches.
+- Strings with other punctuation (`.`, `/`, `=`, spaces) match as substrings: `"cdn.cookielaw.org/scripttemplates"` (`match_mode: "substring"`)
 - Combine terms (AND): `"cookie-banner" "reject-all"` (or uppercase `AND`)
 - Either term: `"cmp-a" OR "cmp-b"` (or `|`)
 - Exclude: `"cookie-banner" -"wordpress"` (or `NOT`). A query needs at least one positive term
 - Grouping: `("a" OR "b") -"c"`
 - TLD filter: `"sd-cmp" site:de` (alias `tld:`, exclude with `-site:de`). Only TLDs, not full domains
-- Regex: `/cookie-?consent-banner/` in `q`, or `regex=true`
+- Regex: `/cookie-?consent-banner/` in `q`, or `regex=true` with a bare pattern
 - Escape inner quotes: `"data-testid=\"cookie-reject\""`. Only `\"` and `\\` are escapes
 
 `AND`, `OR` and `NOT` are operators only in uppercase.
@@ -87,7 +99,7 @@ Check if a banner ID is from a shared CMP (free count first):
 curl -sG "https://www.searchwebcode.com/api/v1/search" \
   -H "Authorization: Bearer $SEARCHWEBCODE_KEY" \
   --data-urlencode 'q="sd-cmp"' --data-urlencode 'counts_only=true' \
-  | jq '{total, count_kind, estimated_matches}'
+  | jq '{error, total, count_kind}'
 ```
 
 List the top sites with snippets, in the same `url;rank;snippet` shape as PublicWWW:
@@ -96,7 +108,7 @@ List the top sites with snippets, in the same `url;rank;snippet` shape as Public
 curl -sG "https://www.searchwebcode.com/api/v1/search" \
   -H "Authorization: Bearer $SEARCHWEBCODE_KEY" \
   --data-urlencode 'q="sd-cmp"' --data-urlencode 'limit=20' \
-  | jq -r '.results[] | [.url, .rank, .snippet.text] | join(";")'
+  | jq -r '.error // empty, (.results[]? | [.url, .rank, .snippet.text] | join(";"))'
 ```
 
 Find German sites using OneTrust:
@@ -105,7 +117,7 @@ Find German sites using OneTrust:
 curl -sG "https://www.searchwebcode.com/api/v1/search" \
   -H "Authorization: Bearer $SEARCHWEBCODE_KEY" \
   --data-urlencode 'q="onetrust-banner-sdk"' --data-urlencode 'tld=de' --data-urlencode 'limit=10' \
-  | jq -r '.results[] | [.domain, .rank] | join(";")'
+  | jq -r '.error // empty, (.results[]? | [.domain, .rank] | join(";"))'
 ```
 
 Find sites loading a CMP script from its CDN (the homepage HTML has the `<script src>` even though the JS file itself is not indexed):
@@ -114,7 +126,7 @@ Find sites loading a CMP script from its CDN (the homepage HTML has the `<script
 curl -sG "https://www.searchwebcode.com/api/v1/search" \
   -H "Authorization: Bearer $SEARCHWEBCODE_KEY" \
   --data-urlencode 'q="cdn.cookielaw.org/scripttemplates"' --data-urlencode 'limit=10' \
-  | jq -r '.results[] | [.domain, .rank] | join(";")'
+  | jq -r '.error // empty, (.results[]? | [.domain, .rank] | join(";"))'
 ```
 
-On an HTTP error, `jq` gets a non-results body. Drop the `jq` pipe and add `-w '\n%{http_code}\n'` to see the status and message.
+On an HTTP error these print the `error` message instead of results. Add `-w '\n%{http_code}\n'` without the `jq` pipe to see the status code too.

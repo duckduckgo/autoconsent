@@ -7,7 +7,7 @@ description: Search PublicWWW to find websites using specific HTML/JS/CSS snippe
 
 Search website source code via the [PublicWWW](https://publicwww.com) API. Requires `PUBLICWWW_KEY` env var.
 
-**Daily limit:** PublicWWW API searches are capped per day. If a request returns an error, or an HTML page or message about the limit instead of CSV, the limit is used up: switch to the `searchwebcode-search` skill for the rest of the task. An empty CSV is a real "no sites found" answer, not a reason to switch.
+**Daily limit:** PublicWWW API searches are capped per day. When the limit is used up, the export answers with HTTP 200 and the body `API available for paid search results only` instead of CSV, so check the body before reading it as results. Then switch to the `searchwebcode-search` skill for the rest of the task. `curl -s https://api.publicwww.com/v1/account -H "Authorization: Bearer $PUBLICWWW_KEY" | jq .quota.searches` shows the remaining quota for free. An empty CSV is a real "no sites found" answer, not a reason to switch, and `Wrong API key` means the key needs fixing.
 
 **Caveat:** PublicWWW indexes server-rendered HTML source only. CMPs injected purely via client-side JavaScript (e.g. tag managers, async script loaders) may not appear in results.
 
