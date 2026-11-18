@@ -1,0 +1,59 @@
+{
+    "name": "cookieseal",
+    "vendorUrl": "https://cookieseal.com/",
+    "prehideSelectors": ["#cookieseal-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookieseal-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieseal-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieseal-banner-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#cookieseal-banner-reject",
+                "check": "any"
+            },
+            "then": [
+                {
+                    "click": "#cookieseal-banner-reject",
+                    "all": true
+                }
+            ],
+            "else": [
+                {
+                    "click": "#cookieseal-banner-popup"
+                },
+                {
+                    "waitForVisible": "#cs-seal-popup #cm-popup-save"
+                },
+                {
+                    "click": "#cs-seal-popup input[id^='cm-switch-']:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "#cs-seal-popup #cm-popup-save"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "#cookieseal-banner",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_COOKIESEAL_TEST"
+        }
+    ]
+}

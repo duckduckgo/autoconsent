@@ -176,6 +176,15 @@ export const snippets = {
         const levels = window._cookiereports?.loadConsent?.();
         return !!levels && Object.keys(levels).length > 0 && Object.values(levels).every((v) => !v);
     },
+    EVAL_COOKIESEAL_TEST: () => {
+        // consent cookie is base64-encoded JSON, written on choice; saving from settings may leave categories empty
+        const value = document.cookie.match(/(?:^|;\s*)CookieSealConsent=([^;]+)/)?.[1];
+        if (!value) {
+            return false;
+        }
+        const categories = JSON.parse(atob(decodeURIComponent(value))).categories || {};
+        return Object.entries(categories).every(([name, v]) => name === 'NecessaryCookies' || v === '0');
+    },
     // turn the single-button form into a decline submission, same fields as the CMP's own decline form
     EVAL_EE_CONSENT_DECLINE_0: () =>
         document.querySelectorAll('#cookieConsentFormAccept input[name^="ee:cookies_"]').forEach((i) => (i.value = 'n')) || true,
