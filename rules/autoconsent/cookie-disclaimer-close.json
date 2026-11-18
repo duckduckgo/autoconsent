@@ -1,0 +1,18 @@
+{
+    "name": "cookie-disclaimer-close",
+    "prehideSelectors": [".cookie-disclaimer:has(> .cookie-close.accept-cookie)"],
+    "detectCmp": [{ "exists": ".cookie-disclaimer > .cookie-close.accept-cookie" }],
+    "detectPopup": [{ "visible": ".cookie-disclaimer > .cookie-close.accept-cookie" }],
+    "optIn": [
+        {
+            "if": { "exists": ".cookie-disclaimer .btn-success.accept-cookie" },
+            "then": [{ "waitForThenClick": ".cookie-disclaimer .btn-success.accept-cookie" }],
+            "else": [{ "waitForThenClick": ".cookie-disclaimer > .cookie-close.accept-cookie" }]
+        }
+    ],
+    "optOut": [
+        { "waitForThenClick": ".cookie-disclaimer > .cookie-close.accept-cookie" },
+        { "waitForVisible": ".cookie-disclaimer", "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "visible": ".cookie-disclaimer", "check": "none" }]
+}
