@@ -1,0 +1,15 @@
+{
+    "name": "buyee-connect",
+    "vendorUrl": "https://buyee.jp/",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://connect\\.buyee\\.jp/[^/]+/cookie_widget/"
+    },
+    "prehideSelectors": ["#cookieWrapper.bcCookiePopup"],
+    "detectCmp": [{ "exists": "#cookieWrapper.bcCookiePopup" }],
+    "detectPopup": [{ "visible": "#cookieWrapper.bcCookiePopup" }],
+    "optIn": [{ "waitForThenClick": "#cookieWrapper .bcCookieBtn--primary:nth-child(1)" }],
+    "optOut": [{ "waitForThenClick": "#cookieWrapper .bcCookieBtn--primary:nth-child(2)" }],
+    "test": [{ "waitForVisible": "#cookieWrapper", "check": "none", "timeout": 3000 }]
+}
