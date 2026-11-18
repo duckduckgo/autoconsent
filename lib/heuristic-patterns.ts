@@ -377,6 +377,13 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+
+    // Finnish (FI)
+    // e.g. "käytämme evästeitä", "sivusto käyttää evästeitä", "hyödynnämme sivustolla evästeitä", "evästeiden käytöstä"
+    /\b(?:käyt|hyödyn|hyödyntä)\S*\s(?:\S+\s){0,3}evästei\S*/gi,
+    /\bevästei\S*\s(?:\S+\s){0,2}käyt/gi,
+    // e.g. "hyväksy kaikki evästeet", "salli vain välttämättömät evästeet"
+    /\b(?:hyväksy|salli|hylkää)\S*\s(?:\S+\s){0,2}evästee[tn]/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -587,6 +594,18 @@ const REJECT_PATTERNS_NORWEGIAN = [
     /^nei(,?\s+takk)?$/is,
 ];
 
+const REJECT_PATTERNS_FINNISH = [
+    // hylkää / kieltäydy (reject verbs), e.g. "hylkää kaikki evästeet", "kieltäydy kaikista"
+    /(^|\s)(hylkää|kieltäydy)/is,
+
+    // (allow/accept/use) only necessary cookies, e.g. "salli vain välttämättömät", "käytä vain välttämättömiä evästeitä"
+    /^(salli\s+|hyväksy\s+|käytä\s+)?(vain|ainoastaan)\s+(välttämättöm\S*|pakolliset|tarpeelliset)(\s+eväste\S*)?$/is,
+
+    // "en hyväksy" (I do not accept), continue without accepting
+    /^en hyväksy/is,
+    /^jatka hyväksymättä/is,
+];
+
 const REJECT_PATTERNS_CATALAN = [
     /(^|\s)rebutj/is,
     'no accepto',
@@ -664,6 +683,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_SWEDISH,
     ...REJECT_PATTERNS_DANISH,
     ...REJECT_PATTERNS_NORWEGIAN,
+    ...REJECT_PATTERNS_FINNISH,
     ...REJECT_PATTERNS_CATALAN,
     ...REJECT_PATTERNS_GALICIAN,
     ...REJECT_PATTERNS_BASQUE,

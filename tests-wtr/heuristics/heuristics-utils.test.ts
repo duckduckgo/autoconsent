@@ -376,6 +376,26 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Finnish popups', () => {
+    it('detects Finnish cookie notices', () => {
+        const texts = [
+            'Jotta verkkopalvelumme käyttö olisi mahdollisimman sujuvaa ja helppoa, hyödynnämme sivustolla evästeitä.',
+            'Käytämme evästeitä parantaaksemme käyttökokemusta.',
+            'Tämä sivusto käyttää evästeitä.',
+            'Lue lisää evästeiden käytöstä.',
+            'Salli kaikki evästeet',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Finnish text', () => {
+        expect(checkHeuristicPatterns('Käytämme sääennusteita retken suunnitteluun ja otamme eväät mukaan').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Evästeasetukset').patterns).to.have.length(0);
+    });
+});
+
 const detectsPopup = (text: string) => checkHeuristicPatterns(text, 'popup').patterns.length > 0;
 const detectsPage = (text: string) => checkHeuristicPatterns(text, 'page').patterns.length > 0;
 
@@ -842,6 +862,19 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Bare nødvendige informasjonskapsler')).to.equal('reject');
         expect(classifyButtonTextRegex('Ja')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Les mer om hvordan vi bruker informasjonskapsler')).not.to.equal('reject');
+    });
+
+    it('matches Finnish reject buttons', () => {
+        expect(classifyButtonTextRegex('Salli vain välttämättömät')).to.equal('reject');
+        expect(classifyButtonTextRegex('Hyväksy vain välttämättömät evästeet')).to.equal('reject');
+        expect(classifyButtonTextRegex('Vain välttämättömät')).to.equal('reject');
+        expect(classifyButtonTextRegex('Käytä vain välttämättömiä evästeitä')).to.equal('reject');
+        expect(classifyButtonTextRegex('Hylkää kaikki')).to.equal('reject');
+        expect(classifyButtonTextRegex('Kieltäydy')).to.equal('reject');
+        expect(classifyButtonTextRegex('En hyväksy')).to.equal('reject');
+        expect(classifyButtonTextRegex('Salli kaikki evästeet')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Hyväksy kaikki')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Evästeasetukset')).not.to.equal('reject');
     });
 
     it('matches Russian settings buttons', () => {
