@@ -1,0 +1,10 @@
+{
+    "name": "gleam",
+    "vendorUrl": "https://gleams.dev/",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ["#gleam-modules", "[data-name=\"ConsentBanner\"]"] }],
+    "detectPopup": [{ "visible": ["#gleam-modules", "[data-name=\"ConsentBanner\"]"] }],
+    "optIn": [{ "waitForThenClick": ["#gleam-modules", "[data-name=\"ConsentActions\"] > div > button:last-child"] }],
+    "optOut": [{ "waitForThenClick": ["#gleam-modules", "[data-name=\"ConsentActions\"] > div > button:first-child"] }],
+    "test": [{ "waitForVisible": ["#gleam-modules", "[data-name=\"ConsentBanner\"]"], "timeout": 1000, "check": "none" }]
+}
