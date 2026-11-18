@@ -219,6 +219,23 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Turkish popups', () => {
+    it('detects Turkish cookie notices', () => {
+        const texts = [
+            'Çerez kullanıyoruz!',
+            'Hizmetlerin sunulması için zorunlu çerezler kullanmaktayız.',
+            'Sitemizde çerezler kullanılmaktadır.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Turkish text', () => {
+        expect(checkHeuristicPatterns('Çerez tarifi: tereyağlı kurabiye nasıl yapılır').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with inputs and context negatives', () => {
     it('runs patterns scoped to an input on that input only', () => {
         const patterns = [{ pattern: /accept all/gi, input: 'popup' as const }];
@@ -726,6 +743,10 @@ describe('cleanButtonText', () => {
         expect(cleanButtonText('Reject\n\nAll')).to.equal('reject all');
     });
 
+    it('folds the Turkish dotted capital I', () => {
+        expect(cleanButtonText('HEPSİNİ REDDET')).to.equal('hepsini reddet');
+    });
+
     it('handles empty string', () => {
         expect(cleanButtonText('')).to.equal('');
     });
@@ -734,6 +755,7 @@ describe('cleanButtonText', () => {
 describe('classifyButtonTextRegex', () => {
     it('matches reject patterns', () => {
         expect(classifyButtonTextRegex('Reject All')).to.equal('reject');
+        expect(classifyButtonTextRegex('HEPSİNİ REDDET')).to.equal('reject');
     });
 
     it('does not match never match patterns', () => {

@@ -377,6 +377,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+
+    // Turkish (TR)
+    // e.g. "çerez kullanıyoruz", "zorunlu çerezler kullanmaktayız", "çerezler kullanılmaktadır"
+    /çerez(?:ler|leri)? kullan(?:ıyoruz|maktayız|ılmaktadır)/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -639,7 +643,7 @@ const REJECT_PATTERNS_RUSSIAN = [
     /^\s*(не\s+(принима[а-яё]+|соглас[а-яё]+|разреша[а-яё]+|хочу)|нет(,?\s+спасибо)?)\s*$/is,
 ];
 
-const REJECT_PATTERNS_TURKISH = ['reddet', 'çerezleri reddet'];
+const REJECT_PATTERNS_TURKISH = ['reddet', 'çerezleri reddet', 'hepsini reddet', 'tümünü reddet'];
 
 const REJECT_PATTERNS_INDONESIAN = ['tolak cookie'];
 

@@ -74,6 +74,8 @@ function testButtonMatches(buttonText: string, matchPatterns: (string | RegExp)[
 export function cleanButtonText(buttonText: string): string {
     // lowercase
     let result = buttonText.toLowerCase();
+    // Turkish "İ" lowercases to "i" plus a combining dot above
+    result = result.replace(/i\u0307/g, 'i');
     // remove special characters
     result = result.replace(/[“”"'/#&[\]→✕×⟩❯><✗×‘’›«»]+/g, '');
     // remove emojis
