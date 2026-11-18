@@ -1090,6 +1090,9 @@ export const ACKNOWLEDGE_PATTERNS = [
     'vale',
     '¡vamos!',
 
+    // Portuguese (PT)
+    'prosseguir',
+
     // Catalan (CA)
     /^(ho )?(entenc|entès|entesos)[ !.]*$/s,
 
