@@ -1,0 +1,39 @@
+{
+    "name": "paciolan",
+    "vendorUrl": "https://www.paciolan.com/",
+    "prehideSelectors": ["#privacyBanner.ReactModal__Content"],
+    "detectCmp": [
+        {
+            "any": [
+                {
+                    "exists": "link[href*=\"paclive.com/hosts/\"]"
+                },
+                {
+                    "exists": "#privacyBanner.ReactModal__Content #privacyInfoText"
+                }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#privacyBanner.ReactModal__Content"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#privacyBanner [data-testid=\"close-modal-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#privacyBanner [data-testid=\"close-modal-button\"]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#privacyBanner.ReactModal__Content",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
