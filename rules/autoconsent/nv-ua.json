@@ -1,0 +1,42 @@
+{
+    "name": "nv.ua",
+    "vendorUrl": "https://nv.ua/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?nv\\.ua/"
+    },
+    "prehideSelectors": [".cookie-label"],
+    "detectCmp": [
+        {
+            "visible": ".cookie-label .close-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-label .close-btn"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-label .js-cookies-hide"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-label .close-btn"
+        },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 5000, "optional": true },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieApprove=true"
+        }
+    ]
+}
