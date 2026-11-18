@@ -1,0 +1,10 @@
+{
+    "name": "ancestry",
+    "vendorUrl": "https://www.ancestry.com/",
+    "prehideSelectors": ["#BannerRegion > #Banner_consent_0", "#BannerRegion > #bannerOverlay"],
+    "detectCmp": [{ "exists": "#BannerRegion > #Banner_consent_0 #rejectAllBtn" }],
+    "detectPopup": [{ "visible": "#BannerRegion > #Banner_consent_0 #rejectAllBtn" }],
+    "optIn": [{ "waitForThenClick": "#BannerRegion > #Banner_consent_0 #acceptAllBtn", "retry": 3 }],
+    "optOut": [{ "waitForThenClick": "#BannerRegion > #Banner_consent_0 #rejectAllBtn", "retry": 3 }],
+    "test": [{ "waitForVisible": "#BannerRegion > #Banner_consent_0 #rejectAllBtn", "timeout": 1000, "check": "none" }]
+}
