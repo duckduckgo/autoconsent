@@ -1,0 +1,36 @@
+{
+    "name": "mercadolibre-embed",
+    "vendorUrl": "https://www.mercadolibre.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://www\\.mercado(libre|livre|pago)\\.[a-z.]+/privacy-preferences/cookies\\?mode=embed"
+    },
+    "detectCmp": [{ "exists": ".pp-cookies-item-switch" }],
+    "detectPopup": [{ "visible": ".pp-cookies-item-switch" }],
+    "optIn": [
+        { "waitFor": ".pp-cookies-item-switch label.andes-ui-switch:not(.andes-ui-switch--disabled)", "timeout": 10000 },
+        { "eval": "EVAL_MERCADOLIBRE_EMBED_SAVE" }
+    ],
+    "optOut": [
+        { "waitFor": ".pp-cookies-item-switch label.andes-ui-switch:not(.andes-ui-switch--disabled)", "timeout": 10000 },
+        {
+            "if": { "exists": ".pp-cookies-item-switch label.andes-ui-switch:not(.andes-ui-switch--disabled):has(input:checked)" },
+            "then": [
+                {
+                    "waitForThenClick": ".pp-cookies-item-switch label.andes-ui-switch:not(.andes-ui-switch--disabled):has(input:checked)",
+                    "all": true,
+                    "retry": 3,
+                    "retryInterval": 1000
+                },
+                {
+                    "waitForVisible": ".pp-cookies-item-switch label.andes-ui-switch:not(.andes-ui-switch--disabled):has(input:checked)",
+                    "check": "none",
+                    "timeout": 2000
+                }
+            ]
+        },
+        { "eval": "EVAL_MERCADOLIBRE_EMBED_SAVE" }
+    ]
+}
