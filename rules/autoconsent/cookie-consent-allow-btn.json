@@ -1,0 +1,30 @@
+{
+    "name": "cookie-consent-allow-btn",
+    "prehideSelectors": [".cookie-consent:has(> .allow-btn.t-cookie-bar)"],
+    "detectCmp": [{ "exists": ".cookie-consent > .allow-btn.t-cookie-bar" }],
+    "detectPopup": [{ "visible": ".cookie-consent > .allow-btn.t-cookie-bar" }],
+    "optIn": [
+        { "waitForThenClick": ".cookie-consent > .allow-btn.t-cookie-bar" },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 8000, "optional": true },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [{ "click": ".fc-cta-consent" }]
+        }
+    ],
+    "optOut": [
+        { "waitForThenClick": ".cookie-consent > .allow-btn.t-cookie-bar" },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 8000, "optional": true },
+        {
+            "if": { "visible": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [
+        { "waitForVisible": ".cookie-consent > .allow-btn.t-cookie-bar", "timeout": 1000, "check": "none" },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 2000, "check": "none" }
+    ]
+}
