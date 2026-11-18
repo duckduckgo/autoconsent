@@ -1,0 +1,39 @@
+{
+    "name": "ucookie",
+    "vendorUrl": "https://ucookie.com.tr/",
+    "cosmetic": false,
+    "prehideSelectors": ["#ucookie-container"],
+    "detectCmp": [
+        {
+            "exists": "#ucookie-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#ucookie-container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#ucookie-container #ucookie-allow-all-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#ucookie-container #ucookie-decline-button",
+            "retry": 5,
+            "retryInterval": 500
+        },
+        {
+            "waitForVisible": "#ucookie-container",
+            "check": "none",
+            "timeout": 5000
+        }
+    ],
+    "test": [
+        {
+            "visible": "#ucookie-container",
+            "check": "none"
+        }
+    ]
+}

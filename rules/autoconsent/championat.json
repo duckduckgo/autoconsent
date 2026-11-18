@@ -1,0 +1,34 @@
+{
+    "name": "championat",
+    "vendorUrl": "https://www.championat.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?championat\\.com/"
+    },
+    "prehideSelectors": [".cookie-popup.js-cookie-popup"],
+    "detectCmp": [
+        {
+            "exists": ".js-cookie-popup .js-cookie-popup-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-cookie-popup"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-cookie-popup .js-cookie-popup-close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".js-cookie-popup .js-cookie-popup-close"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".js-cookie-popup",
+            "check": "none"
+        }
+    ]
+}

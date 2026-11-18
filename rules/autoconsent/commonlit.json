@@ -1,0 +1,47 @@
+{
+    "name": "commonlit",
+    "vendorUrl": "https://www.commonlit.org/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?commonlit\\.org/"
+    },
+    "prehideSelectors": ["#CookieNotification"],
+    "detectCmp": [
+        {
+            "exists": "#CookieNotification .gap-4 > :first-child"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#CookieNotification .gap-4"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#CookieNotification .gap-4 > :last-child"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#CookieNotification .gap-4 > :first-child"
+        },
+        {
+            "waitForVisible": "#CookieNotification dialog #marketing-checkbox"
+        },
+        {
+            "click": "#CookieNotification dialog input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#CookieNotification dialog footer .justify-between > :first-child"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "__cl_no_analytics=true"
+        },
+        {
+            "cookieContains": "__cl_no_marketing=true"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "name": "boxprivacy",
+    "vendorUrl": "https://unknown",
+    "prehideSelectors": ["#boxprivacy"],
+    "detectCmp": [{ "exists": "#boxprivacy .closebox" }],
+    "detectPopup": [{ "visible": "#boxprivacy" }],
+    "optIn": [{ "waitForThenClick": "#boxprivacy .closebox" }],
+    "optOut": [{ "waitForThenClick": "#boxprivacy .closebox" }],
+    "test": [{ "waitForVisible": "#boxprivacy", "check": "none", "timeout": 1000 }]
+}

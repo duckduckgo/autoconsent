@@ -1,0 +1,56 @@
+{
+    "name": "extra-com",
+    "vendorUrl": "https://www.extra.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?extra\\.com/"
+    },
+    "prehideSelectors": ["#cookieBanner.extra-cookie-banner", ".c_extra-cookie-preference-popup"],
+    "detectCmp": [
+        {
+            "exists": "#cookieBanner.extra-cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieBanner.extra-cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieBanner #js-cookie-allow"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieBanner #js-cookie-preferences"
+        },
+        {
+            "waitForVisible": ".c_extra-cookie-preference-popup #saveCookiePreference"
+        },
+        {
+            "if": {
+                "exists": ".c_extra-cookie-preference-popup .js-cookie-checkbox:checked"
+            },
+            "then": [
+                {
+                    "click": ".c_extra-cookie-preference-popup .js-cookie-checkbox:checked",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "click": ".c_extra-cookie-preference-popup #saveCookiePreference"
+        },
+        {
+            "waitForVisible": "#cookieBanner.extra-cookie-banner",
+            "check": "none",
+            "timeout": 5000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22advertising%22%3Afalse"
+        }
+    ]
+}

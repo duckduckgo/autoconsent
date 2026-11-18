@@ -1,0 +1,39 @@
+{
+    "name": "realme",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?realme\\.com/"
+    },
+    "prehideSelectors": [".r-cookie", "#cookies .cookies-pop-up"],
+    "detectCmp": [
+        {
+            "exists": "#cookies .cookies-options-btn-item[data-options], .r-cookie #btnHideCookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies .cookies-pop-up.show, .r-cookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies .cookies-pop-up.show .cookies-options-btn-item[data-options='1,2,3,4'], .r-cookie .r-btn--primary"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cookies .cookies-pop-up.show"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookies .cookies-options-btn-item[data-options='1']"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".r-cookie #btnHideCookie"
+                }
+            ]
+        }
+    ]
+}

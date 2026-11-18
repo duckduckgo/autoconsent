@@ -1,0 +1,29 @@
+{
+    "name": "pnb-bank",
+    "vendorUrl": "https://pnb.bank.in/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https://([a-z0-9-]+\\.)?(pnb\\.bank\\.in|pcppnb\\.com)/"
+    },
+    "prehideSelectors": ["#cookieConsentPanel"],
+    "detectCmp": [
+        {
+            "exists": "#cookieConsentPanel #acceptCookiesButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieConsentPanel"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieConsentPanel #acceptCookiesButton"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookieConsentPanel"
+        }
+    ]
+}

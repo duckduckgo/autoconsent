@@ -1,3 +1,26 @@
+# v18.7.0 (Wed Nov 18 2026)
+
+#### Rules
+
+- Rule update: Rule fix for Site Breakage: can't add items to shopping cart on royalmail.com [#2646](https://github.com/duckduckgo/autoconsent/pull/2646) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: ddg_android (euw) CPM magic report: www.walmart.ca [#2598](https://github.com/duckduckgo/autoconsent/pull/2598) ([@daxtheduck](https://github.com/daxtheduck))
+- Sirdata: opt in with Accept all, not the first choice button [#2643](https://github.com/duckduckgo/autoconsent/pull/2643) ([@sammacbeth](https://github.com/sammacbeth) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie popup on mediamarkt.nl [#2657](https://github.com/duckduckgo/autoconsent/pull/2657) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+- Rule update: CPM feedback: bleacherreport.com [#2658](https://github.com/duckduckgo/autoconsent/pull/2658) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+- Rule update: Cookie popup on posthog.com [#2659](https://github.com/duckduckgo/autoconsent/pull/2659) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### CI / Release Automation
+
+- Release task: read every page of scheduled tasks [#2739](https://github.com/duckduckgo/autoconsent/pull/2739) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v18.6.0 (Tue Nov 17 2026)
 
 #### Rules

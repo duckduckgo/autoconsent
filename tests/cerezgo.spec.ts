@@ -1,0 +1,10 @@
+import generateCMPTests from '../playwright/runner';
+
+generateCMPTests('cerezgo', [
+    'https://tjk.org/',
+    'https://www.dedas.com.tr/',
+    'https://www.petkim.com.tr/',
+    'https://www.sanalmagaza.com.tr/',
+    'https://www.akkok.com.tr/',
+    'https://www.egeyapi.com/',
+]);

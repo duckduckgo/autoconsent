@@ -1,0 +1,32 @@
+{
+    "name": "progorod",
+    "vendorUrl": "https://progorod43.ru/",
+    "cosmetic": true,
+    "prehideSelectors": ["[class*=\"notifycation_notifycation__\"]"],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"notifycation_notifycation__\"] button[class*=\"notifycation_notifycationBtn__\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*=\"notifycation_notifycation__\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[class*=\"notifycation_notifycation__\"] button[class*=\"notifycation_notifycationBtn__\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "[class*=\"notifycation_notifycation__\"]"
+        }
+    ],
+    "test": [
+        {
+            "visible": "[class*=\"notifycation_notifycation__\"]",
+            "check": "none"
+        }
+    ]
+}
