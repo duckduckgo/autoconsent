@@ -1,7 +1,7 @@
 {
     "name": "xhamster-us",
     "runContext": {
-        "urlPattern": "^https://(\\w+\\.)?xhamster\\d?\\.com"
+        "urlPattern": "^https://(\\w+\\.)?(xhamster\\d*\\.(com|desi)|xh(wide|open|access|vid|fanclub)\\d*\\.com)/"
     },
     "cosmetic": true,
     "prehideSelectors": ["[class*=cookiesAnnounce]"],
