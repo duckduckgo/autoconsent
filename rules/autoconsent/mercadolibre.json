@@ -8,22 +8,8 @@
     "optIn": [{ "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-accept" }],
     "optOut": [
         { "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-customize" },
-        {
-            "waitFor": [
-                ".cookie-consent-banner-opt-out__modal iframe",
-                ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled) input"
-            ],
-            "timeout": 10000
-        },
-        {
-            "click": [
-                ".cookie-consent-banner-opt-out__modal iframe",
-                ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled) input:checked"
-            ],
-            "all": true
-        },
-        { "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-save" },
-        { "waitForVisible": ".cookie-consent-banner-opt-out__modal", "check": "none", "timeout": 5000, "optional": true }
+        { "waitForVisible": ".cookie-consent-banner-opt-out__modal", "timeout": 5000 },
+        { "waitForVisible": ".cookie-consent-banner-opt-out__modal", "check": "none", "timeout": 30000 }
     ],
     "test": [{ "cookieContains": "%22advertising%22%3Afalse" }, { "cookieContains": "%22traceability%22%3Afalse" }]
 }

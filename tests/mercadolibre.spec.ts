@@ -7,6 +7,10 @@ generateCMPTests('mercadolibre', [
     'https://www.mercadolibre.com.mx/',
     'https://www.mercadolibre.com.uy/',
     'https://www.mercadolibre.com.ve/',
+    // preferences iframe is cross-origin on subdomains, handled by mercadolibre-iframe
+    'https://vendedores.mercadolibre.com.mx/',
+    'https://developers.mercadolibre.com.mx/',
+    'https://vendedores.mercadolibre.com.ar/',
 ]);
 
 // Saving preferences freezes the page main thread for 10-45s in headless Chrome, exceeding the test timeout.
