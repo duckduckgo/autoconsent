@@ -1,0 +1,32 @@
+{
+    "name": "t-cookie-bar",
+    "vendorUrl": "https://funaitools.com/",
+    "prehideSelectors": ["div:has(> div > a[aria-label='learn more about cookies']):has(> div.t-cookie-bar)"],
+    "detectCmp": [{ "exists": "div:has(> div > a[aria-label='learn more about cookies']) > div.t-cookie-bar" }],
+    "detectPopup": [{ "visible": "div:has(> div > a[aria-label='learn more about cookies']) > div.t-cookie-bar" }],
+    "optIn": [{ "waitForThenClick": "div:has(> div > a[aria-label='learn more about cookies']) > div.t-cookie-bar" }],
+    "optOut": [
+        { "waitForThenClick": "div:has(> div > a[aria-label='learn more about cookies']) > div.t-cookie-bar" },
+        {
+            "comment": "in GDPR regions the sites also load a Funding Choices dialog after this notice",
+            "waitFor": ".fc-cta-do-not-consent,.fc-cta-manage-options,.fc-li-only-placeholder",
+            "timeout": 5000,
+            "optional": true
+        },
+        {
+            "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options,.fc-li-only-placeholder" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options", "optional": true },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "div:has(> div > a[aria-label='learn more about cookies']) > div.t-cookie-bar",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
