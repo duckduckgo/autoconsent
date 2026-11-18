@@ -1,0 +1,23 @@
+{
+    "name": "stheadline",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?stheadline\\.com/"
+    },
+    "prehideSelectors": [".cookie-box:has(.coo-btn[onclick^=\"setcookies\"])"],
+    "detectCmp": [{ "exists": ".cookie-box .coo-btn[onclick^=\"setcookies\"]" }],
+    "detectPopup": [{ "visible": ".cookie-box:has(.coo-btn[onclick^=\"setcookies\"])" }],
+    "optIn": [{ "waitForThenClick": ".cookie-box .coo-btn[onclick^=\"setcookies\"]" }],
+    "optOut": [
+        { "hide": ".cookie-box:has(.coo-btn[onclick^=\"setcookies\"])" },
+        { "waitFor": ".fc-consent-root .fc-dialog-container", "timeout": 5000, "optional": true },
+        {
+            "if": { "exists": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options", "optional": true },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ]
+}
