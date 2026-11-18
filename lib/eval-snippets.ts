@@ -299,6 +299,10 @@ export const snippets = {
         JSON.parse(localStorage.getItem('usercentrics')).consents.every((c) => c.isEssential || !c.consentStatus),
     EVAL_WAITROSE_0: () => Array.from(document.querySelectorAll('label[id$=cookies-deny-label]')).forEach((e) => e.click()) || true,
     EVAL_WBD_LTP_CLOSE: () => document.querySelector('dialog#ltp-dialog').close() || true,
+    EVAL_WORLDSHOPPING_TEST: () => {
+        const groups = JSON.parse(decodeURIComponent(atob(localStorage.getItem('zigzag')))).cookieConsentConfig.groups;
+        return Object.keys(groups).every((k) => k === 'C0001' || groups[k] === false);
+    },
     EVAL_ZOHO_TEST: () => localStorage.getItem('zglobal_Acookie_optOut') === '3',
 };
 
