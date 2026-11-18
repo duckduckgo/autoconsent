@@ -1,0 +1,28 @@
+{
+    "name": "siamsport-co-th",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?siamsport\\.co\\.th/"
+    },
+    "prehideSelectors": [".cookie-bar"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-bar .accept-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-bar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-bar .accept-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookie-bar"
+        }
+    ]
+}
