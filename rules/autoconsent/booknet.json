@@ -1,0 +1,25 @@
+{
+    "name": "booknet",
+    "cosmetic": true,
+    "prehideSelectors": [".bn_cookies:has(#bn_cookies__button-accept)"],
+    "detectCmp": [
+        {
+            "exists": ".bn_cookies #bn_cookies__button-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".bn_cookies:has(#bn_cookies__button-accept)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".bn_cookies #bn_cookies__button-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".bn_cookies:has(#bn_cookies__button-accept)"
+        }
+    ]
+}
