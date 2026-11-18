@@ -1,0 +1,37 @@
+{
+    "name": "outdooractive",
+    "vendorUrl": "https://www.outdooractive.com/",
+    "prehideSelectors": [".oax_cookie_consent_modal"],
+    "detectCmp": [
+        {
+            "exists": ".oax_cookie_consent_modal .oax-cookie-consent-select-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".oax_cookie_consent_modal .oax-cookie-consent-select-necessary"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".oax_cookie_consent_modal .oax-cookie-consent-select-all",
+            "retry": 5,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".oax_cookie_consent_modal .oax-cookie-consent-select-necessary",
+            "retry": 5,
+            "retryInterval": 500,
+            "comment": "the modal fades in before its buttons work"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".oax_cookie_consent_modal .oax-cookie-consent-select-necessary",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

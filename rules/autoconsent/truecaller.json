@@ -1,0 +1,14 @@
+{
+    "name": "truecaller",
+    "vendorUrl": "https://www.truecaller.com/",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://cookies\\.truecaller\\.com/consent/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#consent #btn-accept-necessary" }],
+    "detectPopup": [{ "visible": "#consent-dialog #btn-accept-necessary" }],
+    "optIn": [{ "waitForThenClick": "#consent-dialog #btn-accept-all" }],
+    "optOut": [{ "waitForThenClick": "#consent-dialog #btn-accept-necessary" }]
+}

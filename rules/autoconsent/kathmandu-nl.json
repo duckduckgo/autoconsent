@@ -1,0 +1,38 @@
+{
+    "name": "kathmandu-nl",
+    "vendorUrl": "https://www.kathmandu.nl/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kathmandu\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookie_monster [onclick*='CookieMonster.denyAll']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_monster.is-show [onclick*='CookieMonster.denyAll']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_monster [onclick*='CookieMonster.grantAll']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie_monster [onclick*='CookieMonster.denyAll']",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie_monster.is-show",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

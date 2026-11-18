@@ -31,3 +31,6 @@ generateCMPTests(
 generateCMPTests('pandectes', ['https://asmc.de/', 'https://crossrope.com/'], {
     testOptIn: false,
 });
+
+// banner wrapper with a shop-specific id instead of #pandectes-banner
+generateCMPTests('pandectes', ['https://www.aeris.de/']);
