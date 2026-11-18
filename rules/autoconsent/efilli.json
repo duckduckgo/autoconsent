@@ -1,0 +1,11 @@
+{
+    "name": "efilli",
+    "vendorUrl": "https://efilli.com/",
+    "cosmetic": false,
+    "runContext": { "main": true, "frame": false },
+    "detectCmp": [{ "exists": "efilli-layout-dynamic" }],
+    "detectPopup": [{ "visible": ["efilli-layout-dynamic", "[efl-consent-not-saved] > *"], "check": "any" }],
+    "optIn": [{ "eval": "EVAL_EFILLI_ACCEPT_ALL" }],
+    "optOut": [{ "eval": "EVAL_EFILLI_REJECT_ALL" }],
+    "test": [{ "eval": "EVAL_EFILLI_TEST" }]
+}
