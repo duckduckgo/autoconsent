@@ -1,0 +1,9 @@
+{
+    "name": "bootstrap-cookie-alert",
+    "cosmetic": true,
+    "prehideSelectors": ["div.cookiealert:not(:has(.declinecookies))"],
+    "detectCmp": [{ "exists": "div.cookiealert:not(:has(.declinecookies))" }],
+    "detectPopup": [{ "visible": "div.cookiealert:not(:has(.declinecookies))" }],
+    "optIn": [{ "waitForThenClick": "div.cookiealert .acceptcookies, div.cookiealert [onclick*='cookieStatus']" }],
+    "optOut": [{ "hide": "div.cookiealert:not(:has(.declinecookies))" }]
+}
