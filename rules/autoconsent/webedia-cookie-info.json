@@ -1,0 +1,29 @@
+{
+    "name": "webedia-cookie-info",
+    "prehideSelectors": ["#js-cookie-info.info-cookie"],
+    "detectCmp": [
+        {
+            "exists": "#js-cookie-info.info-cookie:not(.hidden) .info-cookie-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#js-cookie-info.info-cookie:not(.hidden)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#js-cookie-info .info-cookie-close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#js-cookie-info .info-cookie-close"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ACCOK=true"
+        }
+    ]
+}
