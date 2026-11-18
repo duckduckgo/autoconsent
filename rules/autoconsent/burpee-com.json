@@ -17,8 +17,8 @@
     ],
     "optOut": [
         {
-            "if": { "exists": "#notice-cookie-block #btn-cookie-decline" },
-            "then": [{ "waitForThenClick": "#notice-cookie-block #btn-cookie-decline" }],
+            "if": { "exists": "#notice-cookie-block :is(#btn-cookie-decline, #btn-cookie-deny)" },
+            "then": [{ "waitForThenClick": "#notice-cookie-block :is(#btn-cookie-decline, #btn-cookie-deny)" }],
             "else": [
                 {
                     "if": { "exists": "#notice-cookie-block button[\\@click^='rejectAll']" },
