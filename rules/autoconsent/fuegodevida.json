@@ -1,0 +1,28 @@
+{
+    "name": "fuegodevida",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?fuegodevida\\.com/"
+    },
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner .btn-close-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner .btn-close-cookie"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookie-banner"
+        }
+    ]
+}
