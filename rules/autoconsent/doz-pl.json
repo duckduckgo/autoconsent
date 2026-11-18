@@ -1,0 +1,50 @@
+{
+    "name": "doz-pl",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?doz\\.pl/"
+    },
+    "prehideSelectors": ["cookie-wall.popup-cookies"],
+    "detectCmp": [
+        {
+            "exists": "cookie-wall.popup-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "cookie-wall.popup-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "cookie-wall.popup-cookies .cookie-step_one .grand_all_btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "cookie-wall.popup-cookies .cookie-next_btn",
+            "comment": "Ustawienia zaawansowane"
+        },
+        {
+            "waitForVisible": "cookie-wall.popup-cookies .cookie-step_two"
+        },
+        {
+            "click": "cookie-wall.popup-cookies .cookie-step_two input.cookie-consent:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "cookie-wall.popup-cookies .cookie-step_two .save_btn",
+            "comment": "Zapisz"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analytics_storage%22%3A%22denied%22"
+        },
+        {
+            "cookieContains": "%22ad_storage%22%3A%22denied%22"
+        }
+    ]
+}
