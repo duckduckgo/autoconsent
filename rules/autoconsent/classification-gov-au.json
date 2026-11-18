@@ -1,0 +1,32 @@
+{
+    "name": "classification.gov.au",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?classification\\.gov\\.au/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "xpath///div[contains(@class, 'c-site-notification ')][contains(., 'cookies')]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[contains(@class, 'c-site-notification ')][contains(., 'cookies')]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class, 'c-site-notification ')][contains(., 'cookies')]//div[contains(@class, 'c-site-notification__close')]/button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class, 'c-site-notification ')][contains(., 'cookies')]//div[contains(@class, 'c-site-notification__close')]/button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "doca_site_notification_"
+        }
+    ]
+}
