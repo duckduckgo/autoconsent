@@ -1,0 +1,33 @@
+{
+    "name": "mercadolibre-subdomain",
+    "vendorUrl": "https://www.mercadolibre.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https://(?!www\\.)[\\w-]+\\.mercado(libre|livre|pago)\\.[a-z.]+/"
+    },
+    "prehideSelectors": [".cookie-consent-banner-opt-out"],
+    "detectCmp": [{ "exists": ".cookie-consent-banner-opt-out" }],
+    "detectPopup": [{ "visible": ".cookie-consent-banner-opt-out" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-accept" }],
+    "optOut": [
+        {
+            "comment": "the banner script defines the modal element when it attaches the button handlers",
+            "waitFor": ".cookie-consent-banner-opt-out__modal:defined",
+            "timeout": 15000
+        },
+        {
+            "comment": "the banner is removed once the modal opens",
+            "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-customize",
+            "retry": 2,
+            "retryInterval": 1000
+        },
+        { "waitFor": ".cookie-consent-banner-opt-out__modal iframe" },
+        {
+            "comment": "the settings iframe is cross-origin here, mercadolibre-frame unchecks the toggles and saves from inside it",
+            "waitForVisible": ".cookie-consent-banner-opt-out__modal",
+            "check": "none",
+            "timeout": 15000
+        }
+    ],
+    "test": [{ "cookieContains": "%22advertising%22%3Afalse" }, { "cookieContains": "%22traceability%22%3Afalse" }]
+}
