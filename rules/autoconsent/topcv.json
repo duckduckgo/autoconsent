@@ -1,0 +1,19 @@
+{
+    "name": "topcv",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?topcv\\.vn/"
+    },
+    "prehideSelectors": [".banner-setting-cookie"],
+    "detectCmp": [{ "exists": ".banner-setting-cookie" }],
+    "detectPopup": [{ "visible": ".banner-setting-cookie.show" }],
+    "optIn": [{ "waitForThenClick": ".banner-setting-cookie .btn-allow-all" }],
+    "optOut": [
+        { "waitForThenClick": ".banner-setting-cookie .btn-setting" },
+        { "waitFor": ".menu-setting-cookie.show" },
+        { "click": "#performance_cookie_off" },
+        { "click": "#social_cookie_off" },
+        { "waitForThenClick": ".menu-setting-cookie.show .btn-confirm-selection", "retry": 2, "retryInterval": 1000 },
+        { "waitForVisible": ".menu-setting-cookie.show", "check": "none" }
+    ],
+    "test": [{ "visible": ".banner-setting-cookie.show", "check": "none" }]
+}
