@@ -123,6 +123,8 @@ describe('checkHeuristicPatterns with Russian popups', () => {
             'Сохраняем куки на вашем устройстве',
             'На сайте установлены cookie-файлы',
             'Оставаясь на сайте, вы соглашаетесь с политикой в отношении файлов cookie',
+            'Пользуясь сайтом, вы принимаете политику куки. Так Авито становится удобнее',
+            'Продолжая пользоваться сервисом, вы соглашаетесь на cookie',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -131,6 +133,7 @@ describe('checkHeuristicPatterns with Russian popups', () => {
 
     it('does not detect unrelated Russian text', () => {
         expect(checkHeuristicPatterns('Дешевые авиабилеты онлайн и бронирование отелей').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Пользуясь сайтом, вы можете найти квартиру за пять минут').patterns).to.have.length(0);
     });
 });
 

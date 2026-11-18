@@ -242,6 +242,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["cookie","куки"],
     [],
     ["браузер"],
+    ["сайт","сервис","ресурс"],
     ["usiamo","utilizziamo"],
     ["cookie"],
     ["noi e i nostri"],

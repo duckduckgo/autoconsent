@@ -318,6 +318,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /(?:файл[а-яё]*[\s-]+(?:cookie|куки)|(?:cookie|куки)[\s-]+файл[а-яё]*)/gi,
     // cookies described without the word: "файлов, сохраняемых в браузере пользователя"
     /файл[а-яё]*,?\s+(?:сохраня[а-яё]*|хран[а-яё]*)[а-яё\s]{0,30}браузер/gi,
+    // e.g. "пользуясь сайтом, вы принимаете политику куки", "продолжая пользоваться сайтом, вы соглашаетесь на cookie"
+    /(?:пользуясь|продолжая\s+пользоваться)\s+(?:нашим\s+|этим\s+|данным\s+)?(?:веб-?)?(?:сайт|сервис|ресурс)[а-яё]*.{0,100}(?:cookie|куки)/gi,
 
     // Italian (IT)
     // e.g. "usiamo i cookie", "utilizziamo cookie tecnici", "questo sito utilizza i cookie", "noi e i nostri partner utilizziamo i cookie"
