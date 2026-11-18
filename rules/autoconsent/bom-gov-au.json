@@ -1,0 +1,33 @@
+{
+    "name": "bom-gov-au",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?bom\\.gov\\.au/" },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=\"C75-alerts\"] .bom-form-alert:has(a[href=\"/privacy\"]) button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"C75-alerts\"] .bom-form-alert:has(a[href=\"/privacy\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=\"C75-alerts\"] .bom-form-alert:has(a[href=\"/privacy\"]) button"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "notice-only banner: the only button acknowledges it",
+            "waitForThenClick": "[data-testid=\"C75-alerts\"] .bom-form-alert:has(a[href=\"/privacy\"]) button"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "[data-testid=\"C75-alerts\"] .bom-form-alert:has(a[href=\"/privacy\"])",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
