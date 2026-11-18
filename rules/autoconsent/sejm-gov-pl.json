@@ -1,0 +1,34 @@
+{
+    "name": "sejm-gov-pl",
+    "vendorUrl": "https://www.sejm.gov.pl/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?sejm\\.gov\\.pl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".cookies a[id$=btnCookieClose]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies a[id$=btnCookieClose]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies a[id$=btnCookieClose]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookies a[id$=btnCookieClose]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookiesAck=1"
+        }
+    ]
+}
