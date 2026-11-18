@@ -1,0 +1,26 @@
+{
+    "name": "tfl.gov.uk",
+    "vendorUrl": "https://tfl.gov.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?tfl\\.gov\\.uk/"
+    },
+    "minimumRuleStepVersion": 2,
+    "prehideSelectors": ["#cb-cookieoverlay"],
+    "detectCmp": [{ "exists": "#cb-cookieoverlay, script[src*=\"consent.cookiebot.com/uc.js\"]" }],
+    "detectPopup": [{ "visible": "#cb-cookieoverlay #CybotCookiebotDialogBodyButtonDecline" }],
+    "optIn": [{ "waitForThenClick": "#cb-cookieoverlay #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll" }],
+    "optOut": [
+        { "waitForThenClick": "#cb-cookieoverlay #CybotCookiebotDialogBodyButtonDecline" },
+        {
+            "waitForVisible": "#cb-cookieoverlay",
+            "timeout": 400,
+            "optional": true,
+            "comment": "the banner slide-in animation re-shows the overlay when declined mid-animation"
+        },
+        {
+            "if": { "visible": "#cb-cookieoverlay" },
+            "then": [{ "addStyle": "display: none", "selector": "#cb-cookieoverlay" }]
+        }
+    ],
+    "test": [{ "visible": "#cb-cookieoverlay", "check": "none" }, { "cookieContains": "marketing:false" }]
+}
