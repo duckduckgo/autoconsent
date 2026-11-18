@@ -1,0 +1,86 @@
+{
+    "name": "yenibeygir",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?yenibeygir\\.com/"
+    },
+    "prehideSelectors": ["#cookieConsent"],
+    "detectCmp": [
+        {
+            "exists": "#cookieConsent button.toast-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieConsent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieConsent button.toast-close"
+        },
+        {
+            "comment": "Funding Choices dialog loads after the notice bar in GDPR regions",
+            "waitFor": ".fc-dialog-container",
+            "timeout": 5000,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": ".fc-dialog-container .fc-cta-consent"
+            },
+            "then": [
+                {
+                    "click": ".fc-cta-consent"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieConsent button.toast-close"
+        },
+        {
+            "comment": "Funding Choices dialog loads after the notice bar in GDPR regions",
+            "waitFor": ".fc-dialog-container",
+            "timeout": 5000,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": ".fc-dialog-container"
+            },
+            "then": [
+                {
+                    "if": {
+                        "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options"
+                    },
+                    "then": [
+                        {
+                            "click": ".fc-cta-do-not-consent,.fc-cta-manage-options"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "exists": ".fc-li-only-placeholder"
+                        }
+                    ]
+                },
+                {
+                    "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".fc-confirm-choices",
+                    "optional": true
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookieConsent",
+            "check": "none"
+        }
+    ]
+}
