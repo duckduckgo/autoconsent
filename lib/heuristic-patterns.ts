@@ -377,6 +377,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+
+    // Serbian, Croatian, Bosnian (SR/HR/BS)
+    // e.g. "sajt koristi cookie-je (kolačiće)", "koristimo kolačiće", "ova stranica koristi kolačiće"
+    /\bkoristi(?:mo)? (?:\S+ ){0,2}(?:kolačić|kolacic|cookie)/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -1121,4 +1125,8 @@ export const ACKNOWLEDGE_PATTERNS = [
     // e.g. "閉じる" (close), "確認" / "確認しました" (confirmed), "了解" (understood), "確認して閉じる";
     // not "同意して閉じる" (agree and close) or the verb "確認する" (confirm)
     /^(確認|了解)(しました)?$|^((確認|了解)して)?閉じる$/,
+
+    // Serbian, Croatian, Bosnian (SR/HR/BS)
+    // e.g. "u redu" (ok), "razumem" / "razumijem" (understood)
+    /^(u redu|razumem|razumijem)[ !.]*$/is,
 ];

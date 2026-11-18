@@ -376,6 +376,23 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Serbian and Croatian popups', () => {
+    it('detects Serbian and Croatian cookie notices', () => {
+        const texts = [
+            'Sajt Polovniautomobili.com koristi cookie-je (kolačiće) da bi obezbedio dobro korisničko iskustvo.',
+            'Koristimo kolačiće kako bismo vam pružili najbolje iskustvo.',
+            'Ova stranica koristi kolačiće za analitiku.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Serbian text', () => {
+        expect(checkHeuristicPatterns('Sajt koristi napredne filtere za pretragu vozila').patterns).to.have.length(0);
+    });
+});
+
 const detectsPopup = (text: string) => checkHeuristicPatterns(text, 'popup').patterns.length > 0;
 const detectsPage = (text: string) => checkHeuristicPatterns(text, 'page').patterns.length > 0;
 
@@ -986,6 +1003,9 @@ describe('classifyButtonTextRegex with more button labels', () => {
             '確認しました',
             '了解',
             '確認して閉じる',
+            'U redu',
+            'Razumem',
+            'Razumijem',
         ]) {
             expect(classifyButtonTextRegex(text), text).to.equal('acknowledge');
         }
