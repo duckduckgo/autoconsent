@@ -31,7 +31,7 @@
  * @property {number} [detectionTimeout] - How long to wait for `cmpDetected` before giving up. Defaults to `completionTimeout`.
  * @property {string[]} [disabledCmps=[]] - Rule names autoconsent skips, e.g. to see what handles the page without a rule.
  * @property {HeuristicLevel} [heuristicMode='tier2'] - Heuristic level; 'tier1' leaves out popups whose only button is Accept.
- * @property {string} [emulateDevice] - Playwright device to emulate on Chromium, e.g. 'iPhone SE'. Desktop when unset. Applied by the providers' `testUrl` when they open the page.
+ * @property {string} [emulateDevice] - Playwright device to emulate on Chromium, e.g. 'Pixel 7'. Desktop when unset. Applied by the providers' `testUrl` when they open the page.
  */
 
 /**
@@ -103,7 +103,7 @@ export const EXPANDED_REGIONS = ['us', 'gb', 'de', 'fr', 'nl', 'pl', 'au', 'ca',
 
 /**
  * Browser context options that emulate a Playwright device on Chromium: viewport, user agent, touch.
- * @param {string} [deviceName] - A key of Playwright's `devices`, e.g. 'iPhone SE'.
+ * @param {string} [deviceName] - A key of Playwright's `devices`, e.g. 'Pixel 7'.
  * @returns {import('playwright').BrowserContextOptions}
  */
 export function deviceContextOptions(deviceName) {

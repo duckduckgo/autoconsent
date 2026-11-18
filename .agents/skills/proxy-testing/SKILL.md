@@ -103,7 +103,7 @@ Options (all optional):
 - `detectionTimeout` — max wait for `cmpDetected` before giving up (default: `completionTimeout`).
 - `disabledCmps` — rule names autoconsent skips (default `[]`), e.g. to see whether another rule or the heuristic handles the page without a rule.
 - `heuristicMode` — heuristic level: `'off'`, `'reject'`, `'tier1'` or `'tier2'` (default `'tier2'`). `'tier1'` leaves out popups whose only button is Accept.
-- `emulateDevice` — Playwright device to emulate on Chromium, e.g. `'iPhone SE'` (viewport, user agent, touch), applied by `testUrl`. Desktop when unset.
+- `emulateDevice` — Playwright device to emulate on Chromium, e.g. `'Pixel 7'` (viewport, user agent, touch), applied by `testUrl`. Desktop when unset. Prefer an Android device: an emulated iPhone still exposes Chrome-only APIs such as `navigator.userAgentData`, so a site can tell it is not Safari.
 - `headless` — run Chromium headless (default `true`).
 - `launchOptions` — extra options merged into `chromium.launch()` (e.g. `args`); the regional `proxy` is always applied on top.
 
