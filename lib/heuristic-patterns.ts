@@ -377,6 +377,12 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+
+    // Croatian, Bosnian, Serbian (HR/BS/SR, Latin script)
+    // e.g. "koristimo kolačiće", "ova stranica koristi kolačiće", "upotrebljavamo analitičke kolačiće"
+    /\b(?:koristimo|koristi|upotrebljavamo|upotrebljava)\s+(?:\S+\s+){0,2}kolačić/gi,
+    // e.g. "upotrebu kolačića", "korištenje kolačića", "korišćenje kolačića"
+    /\b(?:upotreb|korišten|korišćen)\S*\s+kolačić/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -639,6 +645,14 @@ const REJECT_PATTERNS_RUSSIAN = [
     /^\s*(не\s+(принима[а-яё]+|соглас[а-яё]+|разреша[а-яё]+|хочу)|нет(,?\s+спасибо)?)\s*$/is,
 ];
 
+const REJECT_PATTERNS_CROATIAN = [
+    // odbaci / odbij / odbijam (reject verbs), e.g. "odbaci sve", "odbij sve kolačiće", "odbij neobavezne kolačiće"
+    /^(odbaci|odbij|odbijam)(\s+sve)?(\s+(neobavezne|nepotrebne|opcionalne)\s+kolačiće|\s+kolačiće)?$/is,
+
+    // (accept) only necessary, e.g. "samo nužni kolačići", "prihvati samo neophodne"
+    /^(prihvati\s+|dozvoli\s+)?samo\s+(nužn|neophodn|potrebn)[aeio](\s+kolačić\S*)?$/is,
+];
+
 const REJECT_PATTERNS_TURKISH = ['reddet', 'çerezleri reddet'];
 
 const REJECT_PATTERNS_INDONESIAN = ['tolak cookie'];
@@ -671,6 +685,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_CZECH,
     ...REJECT_PATTERNS_POLISH,
     ...REJECT_PATTERNS_RUSSIAN,
+    ...REJECT_PATTERNS_CROATIAN,
     ...REJECT_PATTERNS_TURKISH,
     ...REJECT_PATTERNS_INDONESIAN,
     ...REJECT_PATTERNS_JAPANESE,
