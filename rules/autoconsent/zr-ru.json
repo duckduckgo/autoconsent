@@ -1,0 +1,47 @@
+{
+    "name": "zr.ru",
+    "vendorUrl": "https://www.zr.ru/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?zr\\.ru/"
+    },
+    "prehideSelectors": ["[class*='CookieDisclaimerContainer']"],
+    "detectCmp": [
+        {
+            "exists": "[class*='CookieDisclaimerContainer'] [class*='CookieDisclaimerClose']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*='CookieDisclaimerContainer']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[class*='CookieDisclaimerContainer'] [class*='CookieDisclaimerClose']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[class*='CookieDisclaimerContainer'] [class*='CookieDisclaimerClose']"
+        },
+        { "waitFor": ".fc-consent-root .fc-dialog-container", "timeout": 6000, "optional": true },
+        {
+            "if": { "exists": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                {
+                    "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                    "then": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }],
+                    "else": [{ "exists": ".fc-li-only-placeholder" }]
+                },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "[class*='CookieDisclaimerContainer']",
+            "check": "none"
+        }
+    ]
+}
