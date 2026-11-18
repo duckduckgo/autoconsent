@@ -134,6 +134,24 @@ describe('checkHeuristicPatterns with Russian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Ukrainian popups', () => {
+    it('detects Ukrainian cookie notices', () => {
+        const texts = [
+            'Ми використовуємо кукі для покращення вашого досвіду користування сайтом',
+            'Цей сайт використовує файли cookie',
+            'Продовжуючи, ви погоджуєтесь на використання файлів cookie',
+            'Кукі використовуються для аналітики',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Ukrainian text', () => {
+        expect(checkHeuristicPatterns('Ми використовуємо сучасні технології для новин').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Italian popups', () => {
     it('detects Italian cookie notices', () => {
         const texts = [
