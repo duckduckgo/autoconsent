@@ -185,6 +185,23 @@ export const snippets = {
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
+    // banner buttons are site-designed markup with no stable selector, so use the public API
+    EVAL_EFILLI_OPT_OUT: () => {
+        const cm = window.efilliSdk?.consentManager;
+        if (typeof cm?.rejectAll !== 'function') return false;
+        cm.rejectAll();
+        return true;
+    },
+    EVAL_EFILLI_OPT_IN: () => {
+        const cm = window.efilliSdk?.consentManager;
+        if (typeof cm?.acceptAll !== 'function') return false;
+        cm.acceptAll();
+        return true;
+    },
+    EVAL_EFILLI_TEST: () => {
+        const categories = window.efilliSdk?.consentManager?.getSavedConsent?.()?.categories;
+        return !!categories && Object.entries(categories).every(([name, on]) => on === (name === 'essential'));
+    },
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     EVAL_GDPR_LEGAL_COOKIE_DETECT_CMP: () => !!window.GDPR_LC,
     EVAL_GDPR_LEGAL_COOKIE_TEST: () => !!window.GDPR_LC?.userConsentSetting,
