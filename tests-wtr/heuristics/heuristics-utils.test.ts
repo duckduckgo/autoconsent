@@ -772,6 +772,12 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Jag förstår')).to.equal('acknowledge');
     });
 
+    it('matches Italian "close" acknowledgements without accept wording', () => {
+        expect(classifyButtonTextRegex('Chiudi')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Rifiuta e chiudi')).to.equal('reject');
+        expect(classifyButtonTextRegex('Chiudi e accetta')).to.not.equal('acknowledge');
+    });
+
     it('does not treat Polish subscription links as reject', () => {
         expect(classifyButtonTextRegex('Zarządzaj subskrypcjami lub z nich zrezygnuj')).to.equal('other');
         expect(classifyButtonTextRegex('Rezygnuję')).to.equal('reject');
