@@ -64,7 +64,7 @@ const result = await withOxylabsPage('de', { device: 'mobile' }, async (page) =>
 - `isOxylabsConfigured()` — whether `OXYLABS_USER` and `OXYLABS_PASSWORD` are set.
 - `formatResult(result)`, `CORE_REGIONS`, `EXPANDED_REGIONS`, `ALL_REGIONS` — same as `proxy-testing`.
 
-Options: everything `testPage` takes in `proxy-testing` (`action`, `screenshotsDir`, `navigationTimeout`, `completionTimeout`, `detectionTimeout`, `disabledCmps`, `heuristicMode`), plus:
+Options: everything `testPage` takes in `proxy-testing` (`action`, `screenshotsDir`, `navigationTimeout`, `completionTimeout`, `detectionTimeout`, `disabledCmps`, `heuristicMode`, `gpc`), plus:
 
 | Option | Default | Description |
 |--------|---------|-------------|

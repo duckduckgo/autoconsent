@@ -32,6 +32,7 @@
  * @property {string[]} [disabledCmps=[]] - Rule names autoconsent skips, e.g. to see what handles the page without a rule.
  * @property {HeuristicLevel} [heuristicMode='tier2'] - Heuristic level; 'tier1' leaves out popups whose only button is Accept.
  * @property {string} [emulateDevice] - Playwright device to emulate on Chromium, e.g. 'Pixel 7'. Desktop when unset. Applied by the providers' `testUrl` when they open the page.
+ * @property {boolean} [gpc=false] - Send the Global Privacy Control signal, as a spec's `gpc` option does.
  */
 
 /**
@@ -117,6 +118,18 @@ export function deviceContextOptions(deviceName) {
     // The browser is always Chromium here, whatever the device ships with.
     const { defaultBrowserType: _browserType, ...contextOptions } = descriptor;
     return contextOptions;
+}
+
+/**
+ * Send the Global Privacy Control signal from a page, the way the spec runner does: the
+ * `Sec-GPC: 1` request header and `navigator.globalPrivacyControl`. Call before navigating.
+ * @param {Page} page
+ */
+export async function enableGpc(page) {
+    await page.setExtraHTTPHeaders({ 'Sec-GPC': '1' });
+    await page.addInitScript(() => {
+        Object.defineProperty(Navigator.prototype, 'globalPrivacyControl', { get: () => true, configurable: true });
+    });
 }
 
 /**
@@ -320,6 +333,9 @@ export async function runTest(page, url, regionKey, options, provider) {
 
     try {
         const ctx = await provider.inject(page, options);
+        if (options.gpc) {
+            await enableGpc(page);
+        }
         await page.goto(url, { waitUntil: 'commit', timeout: navTimeout });
         await provider.afterNavigation?.(page, ctx, options);
 
