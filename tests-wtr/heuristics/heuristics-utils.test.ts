@@ -376,6 +376,24 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Croatian popups', () => {
+    it('detects Croatian cookie notices', () => {
+        const texts = [
+            'Ova aplikacija koristi isključivo nužne kolačiće potrebne za njezino pravilno funkcioniranje.',
+            'Koristimo kolačiće kako bismo poboljšali vaše iskustvo.',
+            'Više informacija o upotrebi kolačića dostupno je u Politici privatnosti.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Croatian text', () => {
+        expect(checkHeuristicPatterns('Recept za čokoladne kolačiće s orasima').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Koristite e-Dnevnik za pregled ocjena').patterns).to.have.length(0);
+    });
+});
+
 const detectsPopup = (text: string) => checkHeuristicPatterns(text, 'popup').patterns.length > 0;
 const detectsPage = (text: string) => checkHeuristicPatterns(text, 'page').patterns.length > 0;
 
@@ -986,6 +1004,7 @@ describe('classifyButtonTextRegex with more button labels', () => {
             '確認しました',
             '了解',
             '確認して閉じる',
+            'U redu',
         ]) {
             expect(classifyButtonTextRegex(text), text).to.equal('acknowledge');
         }
