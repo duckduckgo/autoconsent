@@ -1,0 +1,37 @@
+{
+    "name": "kariyer.net",
+    "vendorUrl": "https://www.kariyer.net/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?kariyer\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "efilli-layout-dynamic,.fc-consent-root" }],
+    "detectPopup": [{ "visible": ["efilli-layout-dynamic", "[efl-consent-not-saved]"], "check": "any" }],
+    "optIn": [
+        { "eval": "EVAL_EFILLI_ACCEPT" },
+        {
+            "if": { "visible": ".fc-consent-root .fc-cta-consent" },
+            "then": [{ "click": ".fc-consent-root .fc-cta-consent" }]
+        }
+    ],
+    "optOut": [
+        { "eval": "EVAL_EFILLI_REJECT" },
+        { "waitForVisible": ["efilli-layout-dynamic", "[efl-consent-not-saved]"], "check": "none", "timeout": 2000 },
+        {
+            "if": { "exists": ".fc-consent-root" },
+            "then": [{ "waitFor": ".fc-consent-root .fc-dialog-container", "timeout": 2000, "optional": true }]
+        },
+        {
+            "if": { "exists": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                {
+                    "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                    "then": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }]
+                },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_EFILLI_TEST" }]
+}
