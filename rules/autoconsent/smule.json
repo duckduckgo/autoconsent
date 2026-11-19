@@ -1,0 +1,30 @@
+{
+    "name": "smule",
+    "vendorUrl": "https://www.smule.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?smule\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']][div/button[normalize-space(.)='Manage Cookies']]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']][div/button[normalize-space(.)='Manage Cookies']]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']]/div/button[normalize-space(.)='Accept Cookies']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']]/div/button[normalize-space(.)='Manage Cookies']"
+        },
+        { "waitForThenClick": "xpath///button[normalize-space(.)='Confirm My Choices']" }
+    ],
+    "test": [{ "cookieContains": "acceptedCookies%22:[]" }]
+}
