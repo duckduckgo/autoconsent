@@ -30,6 +30,11 @@
                     ],
                     "else": [
                         {
+                            "click": "#controlled_banner-cookie_consent-privacy_setting_banner .cookie_consent-privacy_setting_banner__category-item-body [role=checkbox][aria-checked=true]",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
                             "click": "#controlled_banner-cookie_consent-privacy_setting_banner [role=checkbox][aria-checked=true]",
                             "all": true,
                             "optional": true
