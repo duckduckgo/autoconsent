@@ -376,6 +376,24 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Turkish popups', () => {
+    it('detects Turkish cookie notices', () => {
+        const texts = [
+            'Bu doğrultuda, internet sitemizin çalışması ve tercihleriniz doğrultusunda çerezler kullanmaktayız.',
+            'Size daha iyi hizmet sunabilmek için çerez kullanıyoruz.',
+            'Sitemizde çerezler (cookies) kullanılmaktadır.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Turkish text', () => {
+        expect(checkHeuristicPatterns('Detaylı bilgi için Çerez Aydınlatma Metni’ni inceleyebilirsiniz.').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Kullanıcı adınızı ve şifrenizi girin').patterns).to.have.length(0);
+    });
+});
+
 const detectsPopup = (text: string) => checkHeuristicPatterns(text, 'popup').patterns.length > 0;
 const detectsPage = (text: string) => checkHeuristicPatterns(text, 'page').patterns.length > 0;
 
