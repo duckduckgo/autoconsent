@@ -1,0 +1,40 @@
+{
+    "name": "rogers-sports-media",
+    "vendorUrl": "https://www.rogerssportsandmedia.com/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".consent-cookie-box .consent-custom-btn, [class*=ConsentModal-module_consent-modal-container] [class*=ConsentModal-module_config-layout]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".consent-cookie-box .consent-custom-btn, [class*=ConsentModal-module_base-layout] li:first-child button",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".consent-cookie-box .consent-ok-btn, [class*=ConsentModal-module_base-layout] li:last-child button"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".consent-cookie-box .consent-custom-btn" },
+            "then": [
+                { "click": ".consent-cookie-box .consent-custom-btn" },
+                { "waitForThenClick": ".consent-customize-box .consent-configure-cross" }
+            ],
+            "else": [
+                { "click": "[class*=ConsentModal-module_base-layout] li:first-child button" },
+                { "waitForThenClick": "[class*=ConsentModal-module_config-layout] > ul > li:last-child > button" }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_ROGERS_SPORTS_MEDIA_TEST"
+        }
+    ]
+}

@@ -216,6 +216,10 @@ export const snippets = {
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
+    EVAL_ROGERS_SPORTS_MEDIA_TEST: () => {
+        const config = JSON.parse(localStorage.getItem('rsm_consent_config') || '{}');
+        return config.pending === false && !config.functional && !config.performance && !config.targeting;
+    },
     EVAL_SHOPIFY_TEST: () =>
         document.cookie.includes('gdpr_cookie_consent=0') ||
         (document.cookie.includes('_tracking_consent=') &&
