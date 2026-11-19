@@ -1,0 +1,41 @@
+{
+    "name": "itemsatis.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?itemsatis\\.com/"
+    },
+    "prehideSelectors": ["#cookieConsent"],
+    "detectCmp": [
+        {
+            "exists": "#cookieConsent [data-cc-save]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieConsent .cookie-consent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieConsent [data-cc-accept]"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#cookieConsent [data-cc-switch][aria-checked='true']",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#cookieConsent [data-cc-save]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "is_consent=v1"
+        },
+        {
+            "exists": "#cookieConsent [data-cc-switch][aria-checked='true']",
+            "negated": true
+        }
+    ]
+}
