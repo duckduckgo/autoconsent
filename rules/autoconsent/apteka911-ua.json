@@ -1,0 +1,29 @@
+{
+    "name": "apteka911-ua",
+    "vendorUrl": "https://apteka911.ua/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?apteka911\\.ua/"
+    },
+    "prehideSelectors": [".cookie:has(> .cookie-head > .icon-cookie)"],
+    "detectCmp": [
+        {
+            "exists": ".cookie > .cookie-head > .icon-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie:has(> .cookie-head > .icon-cookie)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie .btn-accent-alt"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookie:has(> .cookie-head > .icon-cookie)"
+        }
+    ]
+}
