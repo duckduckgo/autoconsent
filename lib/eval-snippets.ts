@@ -166,6 +166,19 @@ export const snippets = {
     // turn the single-button form into a decline submission, same fields as the CMP's own decline form
     EVAL_EE_CONSENT_DECLINE_0: () =>
         document.querySelectorAll('#cookieConsentFormAccept input[name^="ee:cookies_"]').forEach((i) => (i.value = 'n')) || true,
+    // banner buttons are layout-defined with site-specific names, so call the SDK the buttons use
+    EVAL_EFILLI_ACCEPT: () => {
+        window.efilliSdk.consentManager.acceptAll();
+        return true;
+    },
+    EVAL_EFILLI_REJECT: () => {
+        window.efilliSdk.consentManager.rejectAll();
+        return true;
+    },
+    EVAL_EFILLI_TEST: () => {
+        const categories = window.efilliSdk?.consentManager?.getSavedConsent?.()?.categories;
+        return !!categories && Object.entries(categories).every(([name, allowed]) => name === 'essential' || !allowed);
+    },
     EVAL_ETSY_0: () =>
         document.querySelectorAll('.gdpr-overlay-body input').forEach((toggle) => {
             toggle.checked = false;

@@ -1,0 +1,39 @@
+{
+    "name": "efilli",
+    "vendorUrl": "https://efilli.com/",
+    "prehideSelectors": ["efilli-layout-dynamic"],
+    "detectCmp": [
+        {
+            "exists": "efilli-layout-dynamic"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["efilli-layout-dynamic", "[data-name=\"Root\"][efl-consent-not-saved] > :not([hidden])"],
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "eval": "EVAL_EFILLI_ACCEPT"
+        },
+        {
+            "waitFor": ["efilli-layout-dynamic", "[data-name=\"Root\"][efl-consent-saved]"],
+            "timeout": 2000
+        }
+    ],
+    "optOut": [
+        {
+            "eval": "EVAL_EFILLI_REJECT"
+        },
+        {
+            "waitFor": ["efilli-layout-dynamic", "[data-name=\"Root\"][efl-consent-saved]"],
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_EFILLI_TEST"
+        }
+    ]
+}
