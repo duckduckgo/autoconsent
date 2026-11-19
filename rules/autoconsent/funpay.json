@@ -1,0 +1,56 @@
+{
+    "name": "funpay",
+    "_metadata": {
+        "vendorUrl": "https://funpay.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?funpay\\.com/"
+    },
+    "prehideSelectors": [".banner-cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": ".banner-cookie-consent .cc-options"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".banner-cookie-consent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".banner-cookie-consent .cc-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".banner-cookie-consent .cc-options"
+        },
+        {
+            "waitForVisible": ".modal-cookie-consent .cc-save"
+        },
+        {
+            "if": {
+                "exists": ".modal-cookie-consent input[name='cc-option-analytics']:checked"
+            },
+            "then": [
+                {
+                    "click": ".modal-cookie-consent input[name='cc-option-analytics']:checked"
+                }
+            ]
+        },
+        {
+            "click": ".modal-cookie-consent .cc-save"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "cookie_prefs=0"
+        }
+    ]
+}
