@@ -1,0 +1,45 @@
+{
+    "name": "betsson-fr",
+    "_metadata": {
+        "vendorUrl": "https://betsson.fr/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?betsson\\.fr/"
+    },
+    "prehideSelectors": [".q-dialog:has(.cookiePopup)"],
+    "detectCmp": [
+        {
+            "exists": ".cookiePopup .cookiePopupStepOne"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookiePopup .cookiePopupStepOne"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookiePopupStepOne button.sbButton.primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookiePopupStepOne button.sbButton.secondary"
+        },
+        {
+            "waitForVisible": ".cookiePopupStepTwo"
+        },
+        {
+            "click": ".cookiePopupStepTwo [role=\"checkbox\"][aria-checked=\"true\"]:not([aria-disabled=\"true\"])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".cookiePopupStepTwo button.sbButton.primary"
+        },
+        {
+            "waitForVisible": ".cookiePopup",
+            "check": "none"
+        }
+    ]
+}
