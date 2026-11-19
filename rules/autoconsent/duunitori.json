@@ -1,0 +1,17 @@
+{
+    "name": "duunitori.fi",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?duunitori\\.fi/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".gdpr-modal .gdpr-modal__button--confirm" }],
+    "detectPopup": [{ "visible": ".gdpr-modal" }],
+    "optIn": [{ "waitForThenClick": ".gdpr-modal .gdpr-modal__button--accept" }],
+    "optOut": [
+        { "waitForThenClick": ".gdpr-modal .js-show-other__button" },
+        { "waitForVisible": ".gdpr-modal .gdpr-modal__button--confirm" },
+        { "click": ".gdpr-modal .js-gdpr-switch[aria-checked=true]", "all": true, "optional": true },
+        { "click": ".gdpr-modal .gdpr-modal__button--confirm" }
+    ],
+    "test": [{ "cookieContains": "duunitori_gdpr_terms_accepted=true" }]
+}
