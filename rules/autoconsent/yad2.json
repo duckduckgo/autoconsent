@@ -1,0 +1,33 @@
+{
+    "name": "yad2",
+    "vendorUrl": "https://www.yad2.co.il/",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)*yad2\\.co\\.il/"
+    },
+    "prehideSelectors": [".ReactModal__Overlay[class*=\"cookie-implementation-disclaimer\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=\"cookie-consent-banner\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"cookie-consent-banner\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=\"cookie-implementation-disclaimer-submit-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=\"cookie-implementation-disclaimer-close-button\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-implementation-disclaimer-consent=1"
+        }
+    ]
+}
