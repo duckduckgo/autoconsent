@@ -1,0 +1,75 @@
+{
+    "name": "cookieofficer",
+    "_metadata": {
+        "vendorUrl": "https://cookieofficer.com/"
+    },
+    "prehideSelectors": ["[data-co-banner]"],
+    "detectCmp": [
+        {
+            "exists": "[data-co-banner]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["[data-co-banner]", ".co-btns"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["[data-co-banner]", ".co-btns button[data-co-action='accept']"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["[data-co-banner]", ".co-btns button[data-co-action='reject']"]
+            },
+            "then": [
+                {
+                    "click": ["[data-co-banner]", ".co-btns button[data-co-action='reject']"]
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": ["[data-co-banner]", ".co-switch"]
+                    },
+                    "then": [
+                        {
+                            "click": ["[data-co-banner]", ".co-btns button[data-co-action='manage']"]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": ["[data-co-banner]", ".co-btns button[data-co-action='manage']"]
+                        },
+                        {
+                            "waitFor": ["[data-co-banner]", ".co-switch"],
+                            "timeout": 2000
+                        },
+                        {
+                            "click": ["[data-co-banner]", ".co-btns button[data-co-action='manage']"]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "co_consent="
+        },
+        {
+            "cookieContains": "%22analytics%22%3Atrue",
+            "negated": true
+        },
+        {
+            "cookieContains": "%22marketing%22%3Atrue",
+            "negated": true
+        },
+        {
+            "cookieContains": "%22personalization%22%3Atrue",
+            "negated": true
+        }
+    ]
+}
