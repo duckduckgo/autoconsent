@@ -91,6 +91,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi,
     /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi,
     /\baccept or (?:reject|decline) (?:all |optional |non-essential )?cookies\b/gi,
+    // "choose between essential cookies that are required for the site to work or all cookies"
+    /\bcookies (?:that are )?(?:strictly )?(?:required|necessary|needed) for (?:the|this|our) (?:web)?site to (?:work|function)\b/gi,
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
