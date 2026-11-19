@@ -1,0 +1,28 @@
+{
+    "name": "apkpure",
+    "vendorUrl": "https://apkpure.net/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?apkpure\\.net/"
+    },
+    "prehideSelectors": [".cookies-policy-container"],
+    "detectCmp": [{ "exists": ".cookies-policy-container.show .ok-btn" }],
+    "detectPopup": [{ "visible": ".cookies-policy-container.show" }],
+    "optIn": [
+        { "waitForThenClick": ".cookies-policy-container .ok-btn" },
+        { "waitFor": ".fc-dialog-container", "timeout": 6000, "optional": true },
+        { "if": { "exists": ".fc-cta-consent" }, "then": [{ "click": ".fc-cta-consent" }] }
+    ],
+    "optOut": [
+        { "hide": ".cookies-policy-container" },
+        { "waitFor": ".fc-dialog-container", "timeout": 6000, "optional": true },
+        {
+            "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ]
+}
