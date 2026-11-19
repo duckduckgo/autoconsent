@@ -16,6 +16,7 @@ generateCMPTests(
         'https://xhvid.com/',
         'https://xhfanclub.com/',
         'https://id.xhfanclub.com/',
+        'https://hi.xhzone.live/',
     ],
     {
         onlyRegions: ['GB', 'DE', 'FR', 'NL', 'CH', 'NO', 'IT', 'ES', 'PL', 'SE', 'DK'],
