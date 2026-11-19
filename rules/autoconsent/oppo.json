@@ -1,0 +1,39 @@
+{
+    "name": "oppo",
+    "vendorUrl": "https://www.oppo.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?oppo\\.com/"
+    },
+    "prehideSelectors": [".cp-cookie-tip"],
+    "detectCmp": [
+        {
+            "exists": ".cp-cookie-tip .cookie-tip-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cp-cookie-tip"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForVisible": ".cp-cookie-tip .cookie-tip-close"
+        },
+        {
+            "eval": "EVAL_OPPO_COOKIE_TIP_CLOSE"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": ".cp-cookie-tip .cookie-tip-close"
+        },
+        {
+            "eval": "EVAL_OPPO_COOKIE_TIP_CLOSE"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookiesaccepted=true"
+        }
+    ]
+}

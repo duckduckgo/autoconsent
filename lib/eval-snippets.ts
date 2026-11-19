@@ -201,6 +201,9 @@ export const snippets = {
         }) || true,
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
     EVAL_OSANO_DETECT: () => !!window.Osano?.cm?.dialogOpen,
+    // the close icon is an SVG, which has no click() method
+    EVAL_OPPO_COOKIE_TIP_CLOSE: () =>
+        document.querySelector('.cp-cookie-tip .cookie-tip-close').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
         JSON.parse(
