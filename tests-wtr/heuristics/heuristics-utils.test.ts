@@ -430,6 +430,13 @@ describe('checkHeuristicPatterns with more English wording', () => {
         expect(detectsPage(`${text}\nAlle akzeptieren\nAblehnen`)).to.be.true;
     });
 
+    it('detects "use cookies to <purpose>" with any subject in popups only', () => {
+        const text = "Linkme and the page you're visiting use cookies to keep things working, measure visits and show relevant ads.";
+        expect(detectsPopup(text)).to.be.true;
+        expect(detectsPage(text)).to.be.false;
+        expectNotDetected(['How to use cookies to bake a cheesecake crust', 'Do not use cookies to store passwords']);
+    });
+
     it('does not detect unrelated English text', () => {
         expectNotDetected([
             'We use cookiecutter templates',

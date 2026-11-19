@@ -68,6 +68,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // "technologies like cookies", in each language
     /\btechnolog(?:ies|ien|ieën|ías|ie) (?:like|such as|wie|zoals|como(?: las)?|telles que(?: les)?|come(?: i)?) cookies?\b/gi,
     /\buses (?:\S+ ){0,2}cookies\b/gi,
+    // any subject: "X and the page you're visiting use cookies to keep things working"; articles explain cookies this way too
+    { pattern: /\buse cookies to (?:keep|measure|show|remember|improve|personali[sz]e|analy[sz]e|understand)\b/gi, input: 'popup' },
     /\b(?:like|want) to (?:use|set) (?:\S+ ){0,2}cookies\b/gi,
     /\b(?:optional|additional|non-essential) cookies\b/gi,
     /\bstoring of cookies\b|\bplaced cookies\b/gi,
