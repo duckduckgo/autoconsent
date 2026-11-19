@@ -397,6 +397,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'May we also use analytics cookies to help us learn how the site is being used?',
             'We use cookie files to provide users personalized content, additional functions, and to perform the website traffic analysis.',
             'Please can I use cookies to see how the site is used and which of my ads work? Privacy',
+            'I use cookies to keep the site free, show you ads that actually matter, and see which countries love the site most.',
             'Welcome! We use third-party tools to collect information about you as you enjoy our site.',
             'We and our advertising partners use cookies for ad measurement, personalised ads and analytics.',
             'By using our site, you acknowledge that you read and understand our Cookie Policy.',
@@ -437,6 +438,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Please allow cookies in your browser settings',
             'We use data analytics tools in our consulting work',
             'We use the best chocolate in our cookies',
+            'How do I use cookies in an Express app?',
         ]);
     });
 });

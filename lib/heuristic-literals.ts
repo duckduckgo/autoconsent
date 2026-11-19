@@ -18,6 +18,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     [" cookie"],
     ["cookie files"],
     ["cookies"],
+    ["i use cookies to"],
     ["cookies?"],
     ["we are using cookies"],
     ["use of cookies"],
