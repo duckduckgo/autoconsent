@@ -7,24 +7,61 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']][div/button[normalize-space(.)='Manage Cookies']]"
+            "any": [
+                {
+                    "exists": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']][div/button[normalize-space(.)='Manage Cookies']]"
+                },
+                { "exists": "xpath///div[span[contains(., 'By navigating the site, you consent to our use of cookies')]][button]" }
+            ]
         }
     ],
     "detectPopup": [
         {
-            "visible": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']][div/button[normalize-space(.)='Manage Cookies']]"
+            "any": [
+                {
+                    "visible": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']][div/button[normalize-space(.)='Manage Cookies']]"
+                },
+                { "visible": "xpath///div[span[contains(., 'By navigating the site, you consent to our use of cookies')]][button]" }
+            ]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']]/div/button[normalize-space(.)='Accept Cookies']"
+            "if": {
+                "exists": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']]/div/button[normalize-space(.)='Accept Cookies']"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']]/div/button[normalize-space(.)='Accept Cookies']"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "xpath///div[span[contains(., 'By navigating the site, you consent to our use of cookies')]]/button"
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']]/div/button[normalize-space(.)='Manage Cookies']"
-        },
-        { "waitForThenClick": "xpath///button[normalize-space(.)='Confirm My Choices']" }
+            "if": {
+                "exists": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']]/div/button[normalize-space(.)='Manage Cookies']"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "xpath///div[div/h3[normalize-space(.)='We Value Your Privacy']]/div/button[normalize-space(.)='Manage Cookies']"
+                },
+                { "waitForThenClick": "xpath///button[normalize-space(.)='Confirm My Choices']" }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "xpath///div[span[contains(., 'By navigating the site, you consent to our use of cookies')]]/button"
+                }
+            ]
+        }
     ],
-    "test": [{ "cookieContains": "acceptedCookies%22:[]" }]
+    "test": [
+        { "visible": "xpath///div[span[contains(., 'By navigating the site, you consent to our use of cookies')]]", "check": "none" },
+        { "any": [{ "cookieContains": "acceptedCookies%22:[]" }, { "cookieContains": "smule_cookie_banner_disabled=true" }] }
+    ]
 }
