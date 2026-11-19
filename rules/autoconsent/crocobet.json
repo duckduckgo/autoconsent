@@ -1,0 +1,35 @@
+{
+    "name": "crocobet",
+    "vendorUrl": "https://crocobet.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?crocobet\\.com/"
+    },
+    "prehideSelectors": ["crc-main-cookie-consent", "crc-m-cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": "crc-main-cookie-consent [data-cy=\"cookie\"], crc-m-cookie-consent [data-cy=\"main\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "crc-main-cookie-consent [data-cy=\"cookie\"], crc-m-cookie-consent [data-cy=\"main\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "crc-main-cookie-consent [data-cy=\"cookie-action\"] button, crc-m-cookie-consent [data-cy=\"main-button-approved\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "crc-main-cookie-consent, crc-m-cookie-consent"
+        }
+    ],
+    "test": [
+        {
+            "visible": "crc-main-cookie-consent [data-cy=\"cookie\"], crc-m-cookie-consent [data-cy=\"main\"]",
+            "check": "none"
+        }
+    ]
+}
