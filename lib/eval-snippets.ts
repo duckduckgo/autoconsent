@@ -172,6 +172,15 @@ export const snippets = {
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
+    // the notice is shown worldwide; under GDPR leave the page to the site's TCF CMP
+    EVAL_EVOLVE_COOKIE_NOTICE_DETECT: () => {
+        if (typeof window.__tcfapi !== 'function') return true;
+        let gdprApplies = true;
+        window.__tcfapi('ping', 2, (ping) => {
+            gdprApplies = ping?.gdprApplies !== false;
+        });
+        return !gdprApplies;
+    },
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     // Zero while the embedding page still keeps the consent iframe collapsed.
     EVAL_IFRAME_SHOWN: () => window.innerHeight > 0,

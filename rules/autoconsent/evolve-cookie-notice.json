@@ -1,0 +1,35 @@
+{
+    "name": "evolve-cookie-notice",
+    "vendorUrl": "https://www.mandatory.com/cookies",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookieNotice:has(a.cnaccept)"],
+    "detectCmp": [
+        {
+            "exists": "#cookieNotice a.cnaccept ~ a.cnsettings"
+        },
+        {
+            "eval": "EVAL_EVOLVE_COOKIE_NOTICE_DETECT"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieNotice"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieNotice a.cnaccept"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookieNotice"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookieNotice",
+            "check": "none"
+        }
+    ]
+}
