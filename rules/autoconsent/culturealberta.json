@@ -1,0 +1,46 @@
+{
+    "name": "culturealberta",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?culturealberta\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "xpath///div[contains(@class, 'fixed')][.//a[@href='/privacy-policy']][.//button[normalize-space(.)='Decline']]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[contains(@class, 'fixed')][.//a[@href='/privacy-policy']][.//button[normalize-space(.)='Decline']]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class, 'fixed')][.//a[@href='/privacy-policy']]//button[normalize-space(.)='Accept']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class, 'fixed')][.//a[@href='/privacy-policy']]//button[normalize-space(.)='Decline']"
+        },
+        {
+            "waitForVisible": ["#cmpwrapper", "#cmpbox"],
+            "timeout": 5000,
+            "optional": true
+        },
+        {
+            "if": { "visible": ["#cmpwrapper", "#cmpbox"] },
+            "then": [
+                { "eval": "EVAL_CONSENTMANAGER_3", "optional": true },
+                { "waitForVisible": ["#cmpwrapper", "#cmpbox"], "check": "none", "timeout": 3000 }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "xpath///div[contains(@class, 'fixed')][.//a[@href='/privacy-policy']][.//button[normalize-space(.)='Decline']]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

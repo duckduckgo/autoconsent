@@ -22,11 +22,11 @@ export default class ConsentManager extends AutoConsentCMPBase {
 
     async detectCmp() {
         this.apiAvailable = await this.mainWorldEval('EVAL_CONSENTMANAGER_1');
-        if (!this.apiAvailable) {
-            return this.elementExists('#cmpbox');
-        } else {
+        if (this.elementExists('#cmpbox')) {
             return true;
         }
+        // without #cmpbox, a CMP with an existing choice shows no popup, so leave the page to other rules
+        return this.apiAvailable && (await this.mainWorldEval('EVAL_CONSENTMANAGER_2'));
     }
 
     async detectPopup() {
