@@ -1,0 +1,36 @@
+{
+    "name": "myfooddiary",
+    "vendorUrl": "https://www.myfooddiary.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?myfooddiary\\.com/"
+    },
+    "prehideSelectors": [".cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-banner button.btn-dismiss-cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-banner button.btn-dismiss-cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner button.btn-dismiss-cookie-banner"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-banner button.btn-dismiss-cookie-banner"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookie-banner",
+            "check": "none",
+            "timeout": 1000
+        }
+    ]
+}
