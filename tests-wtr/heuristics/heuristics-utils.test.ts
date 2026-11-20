@@ -403,6 +403,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'By using this website you agree to our use of cookie technology.',
             'Allow analytics cookies? They help us understand how visitors use this website. Your choice does not affect access.',
             'Allow cookies? We use them to measure traffic.',
+            'Cookies on Example\nAllow cookies to remember your preferences and measure visits with Google Analytics? These stay off until you agree.',
             'We use a cookie to remember you are 18+ and keep your preferences on this device.',
         ]);
     });
@@ -435,6 +436,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'We use cookiecutter templates',
             'We use cookie-free analytics',
             'Please allow cookies in your browser settings',
+            'How do I allow cookies to be saved in my browser?',
             'We use data analytics tools in our consulting work',
             'We use the best chocolate in our cookies',
         ]);
