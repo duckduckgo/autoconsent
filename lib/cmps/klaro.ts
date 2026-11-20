@@ -2,7 +2,7 @@ import AutoConsentCMPBase from './base';
 
 export default class Klaro extends AutoConsentCMPBase {
     name = 'Klaro';
-    prehideSelectors = ['.klaro'];
+    prehideSelectors = ['.klaro', '#klaro-cookie-notice'];
     settingsOpen = false;
 
     get hasSelfTest(): boolean {
@@ -22,11 +22,12 @@ export default class Klaro extends AutoConsentCMPBase {
             this.settingsOpen = true;
             return true;
         }
-        return this.elementExists('.klaro > .cookie-notice');
+        // custom-styled builds keep the notice id but not the class names
+        return this.elementExists('.klaro > .cookie-notice,#klaro-cookie-notice');
     }
 
     async detectPopup() {
-        return this.elementVisible('.klaro > .cookie-notice,.klaro > .cookie-modal', 'any');
+        return this.elementVisible('.klaro > .cookie-notice,.klaro > .cookie-modal,#klaro-cookie-notice', 'any');
     }
 
     async optOut() {
