@@ -38,7 +38,7 @@
                 {
                     "waitForVisible": [
                         ".axeptio_mount .needsclick",
-                        "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button,button#axeptio_btn_close"
+                        "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button,.ax-widget-relifted ~ button,.ax-widget-relifted button[aria-label]:not([id]),button#axeptio_btn_close"
                     ]
                 },
                 { "wait": 300 },
@@ -46,14 +46,14 @@
                     "if": {
                         "exists": [
                             ".axeptio_mount .needsclick",
-                            "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button"
+                            "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button,.ax-widget-relifted ~ button,.ax-widget-relifted button[aria-label]:not([id])"
                         ]
                     },
                     "then": [
                         {
                             "click": [
                                 ".axeptio_mount .needsclick",
-                                "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button"
+                                "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button,.ax-widget-relifted ~ button,.ax-widget-relifted button[aria-label]:not([id])"
                             ]
                         }
                     ],
@@ -62,16 +62,16 @@
             ],
             "else": [
                 {
-                    "waitForVisible": "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button,button#axeptio_btn_close"
+                    "waitForVisible": "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button,.ax-widget-relifted ~ button,.ax-widget-relifted button[aria-label]:not([id]),button#axeptio_btn_close"
                 },
                 { "wait": 300 },
                 {
                     "if": {
-                        "exists": "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button"
+                        "exists": "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button,.ax-widget-relifted ~ button,.ax-widget-relifted button[aria-label]:not([id])"
                     },
                     "then": [
                         {
-                            "click": "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button"
+                            "click": "button#axeptio_btn_dismiss,button.ax-discardButton,.ax-widget-relifted [data-testid=widget-header] > button,.ax-widget-relifted ~ button,.ax-widget-relifted button[aria-label]:not([id])"
                         }
                     ],
                     "else": [{ "click": "button#axeptio_btn_close" }]
