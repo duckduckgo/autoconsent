@@ -1,0 +1,15 @@
+{
+    "name": "hubspot-cosmetic",
+    "_metadata": {
+        "vendorUrl": "https://www.hubspot.com/"
+    },
+    "cosmetic": true,
+    "detectCmp": [
+        { "exists": "#hs-eu-cookie-confirmation" },
+        { "exists": "#hs-eu-decline-button", "negated": true },
+        { "visible": "#hs-eu-close-button", "check": "none" }
+    ],
+    "detectPopup": [{ "visible": "#hs-eu-cookie-confirmation" }],
+    "optIn": [{ "click": "#hs-eu-confirmation-button" }],
+    "optOut": [{ "hide": "#hs-eu-cookie-confirmation" }]
+}
