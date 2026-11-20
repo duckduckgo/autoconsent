@@ -422,6 +422,13 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects an analytics consent question in popups only', () => {
+        const text = 'Allow optional analytics to help us improve our websites? Privacy policy';
+        expect(detectsPopup(text)).to.be.true;
+        expect(detectsPage(text)).to.be.false;
+        expect(detectsPopup('Allow analytics in your project settings to see usage.')).to.be.false;
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';

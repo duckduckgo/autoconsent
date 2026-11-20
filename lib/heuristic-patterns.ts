@@ -46,6 +46,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // consent asked as a question: "can I use cookies to …?", "allow analytics cookies?"
     /\b(?:can|may) (?:i|we) use (?:\S+ ){0,2}cookies\b/gi,
     /\ballow (?:\S+ )?cookies\?/gi,
+    // "Allow optional analytics to help us improve …?": popup text only, settings pages ask it too
+    { pattern: /\ballow (?:\S+ )?analytics\b[^.?!\n]{0,100}\?/gi, input: 'popup' },
     /we are using cookies/gi,
     USE_OF_COOKIES,
     /website uses cookies to enhance your browsing experience/gi,
