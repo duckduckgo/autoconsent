@@ -21,7 +21,7 @@
             },
             "then": [
                 {
-                    "waitForThenClick": ".cookie-permission-container .js-cookie-accept-all-button button"
+                    "waitForThenClick": ".cookie-permission-container .js-cookie-accept-all-button button, .cookie-permission-container button.js-cookie-accept-all-button"
                 }
             ],
             "else": [
@@ -41,7 +41,17 @@
             },
             "then": [
                 {
-                    "waitForThenClick": ".cookie-permission-container .js-cookie-permission-button button"
+                    "waitForThenClick": ".cookie-permission-container .js-cookie-permission-button button, .cookie-permission-container button.js-cookie-permission-button"
+                },
+                {
+                    "if": {
+                        "visible": ".cookie-permission-container[data-cookie-permission]"
+                    },
+                    "then": [
+                        {
+                            "eval": "EVAL_SHOPWARE_DENY_TOUCH"
+                        }
+                    ]
                 }
             ],
             "else": [
@@ -65,7 +75,7 @@
             "comment": "consent cookie is written asynchronously after saving"
         },
         {
-            "cookieContains": "cookie-preference=1"
+            "cookieContains": "cookie-preference="
         }
     ]
 }

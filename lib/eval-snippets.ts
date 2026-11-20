@@ -227,6 +227,11 @@ export const snippets = {
                         .split('=')[1],
                 ),
             ).purposes.a === false),
+    // on touch devices the deny handler listens for touchstart, which element.click() does not dispatch
+    EVAL_SHOPWARE_DENY_TOUCH: () =>
+        document
+            .querySelector('.cookie-permission-container .js-cookie-permission-button')
+            .dispatchEvent(new Event('touchstart', { bubbles: true, cancelable: true })) || true,
     EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
         document.documentElement.classList.forEach((cls) => {
             if (cls.startsWith('sd-cmp-')) document.documentElement.classList.remove(cls);

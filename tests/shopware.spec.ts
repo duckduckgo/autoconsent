@@ -5,4 +5,5 @@ generateCMPTests('shopware', [
     'https://stoffkontor.eu/',
     'https://www.mdf-verpackungen.de/',
     'https://www.noblewine.de/',
+    'https://mmonster.co/',
 ]);
