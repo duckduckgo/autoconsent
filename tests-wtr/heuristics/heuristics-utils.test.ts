@@ -422,6 +422,15 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects "partners may read cookies" in popup text only', () => {
+        const text =
+            'Cookie & Privacy Notice: IsDownNow uses essential local storage and performance cookies to ensure real-time outage accuracy and site stability. Third-party partners (including Google) may read cookies to measure diagnostics and serve relevant ads under our Privacy Policy.';
+        expect(detectsPopup(text)).to.be.true;
+        expect(detectsPopup('Google may set cookies to measure ad performance.')).to.be.true;
+        expect(checkHeuristicPatterns('Third-party partners may read cookies.', 'page').patterns).to.have.length(0);
+        expectNotDetected(['You may read cookie recipes here', 'Kids can bake cookies at home']);
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';

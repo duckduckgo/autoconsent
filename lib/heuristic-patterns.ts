@@ -86,6 +86,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bconsent and continue\b/gi,
     // preference centres are often in the page but hidden, so popup text only
     { pattern: /\bstore or retrieve information on your browser\b|\bstockées dans votre navigateur ou récupérées\b/gi, input: 'popup' },
+    // "third-party partners may read cookies": policy pages say it too, so popup text only
+    { pattern: /\b(?:may|can) (?:read|set|place|store) (?:\S+ )?cookies\b/gi, input: 'popup' },
     /\bwe have cookies\b/gi,
     /\b(?:revoke|withdraw) your consent at any time\b|\beinwilligung jederzeit widerrufen\b/gi,
     /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi,
