@@ -283,17 +283,20 @@ export default class AutoConsent {
             ['generic', genericRules],
             ['heuristic', heuristicRules],
         ];
-        const runDetectCmp = async (cmp: AutoCMP) => {
+        const notifyDetected = (cmp: AutoCMP) => {
+            logsConfig.lifecycle && console.log(`Found CMP: ${cmp.name} ${window.location.href}`);
+            this.sendContentMessage({
+                type: 'cmpDetected',
+                url: location.href,
+                cmp: cmp.name,
+            }); // notify the browser
+        };
+        const runDetectCmp = async (cmp: AutoCMP, found = foundCMPs, notify = true) => {
             try {
                 const result = await cmp.detectCmp();
                 if (result) {
-                    logsConfig.lifecycle && console.log(`Found CMP: ${cmp.name} ${window.location.href}`);
-                    this.sendContentMessage({
-                        type: 'cmpDetected',
-                        url: location.href,
-                        cmp: cmp.name,
-                    }); // notify the browser
-                    foundCMPs.push(cmp);
+                    notify && notifyDetected(cmp);
+                    found.push(cmp);
                 }
             } catch (e) {
                 logsConfig.errors && console.warn(`error detecting ${cmp.name}`, e);
@@ -311,7 +314,30 @@ export default class AutoConsent {
                     ruleGroup.map((r) => r.name),
                 );
             this.config.performanceLoggingEnabled && performance.mark(`findCmpStage_${stageName}`);
-            await Promise.all(ruleGroup.map(runDetectCmp));
+            if (stageName === 'heuristic') {
+                const heuristicCMPs: AutoCMP[] = [];
+                await Promise.all(ruleGroup.map((cmp) => runDetectCmp(cmp, heuristicCMPs, false)));
+                if (heuristicCMPs.length > 0) {
+                    // a CMP can render while earlier stages run: recheck the rules so they keep precedence over the heuristic
+                    logsConfig.lifecycle &&
+                        console.log(
+                            'Heuristic matched, rechecking rules',
+                            heuristicCMPs.map((r) => r.name),
+                        );
+                    for (const [, rules] of rulesPriorityStages.slice(0, -1)) {
+                        await Promise.all(rules.map((cmp) => runDetectCmp(cmp)));
+                        if (foundCMPs.length > 0) {
+                            break;
+                        }
+                    }
+                    if (foundCMPs.length === 0) {
+                        heuristicCMPs.forEach(notifyDetected);
+                        foundCMPs.push(...heuristicCMPs);
+                    }
+                }
+            } else {
+                await Promise.all(ruleGroup.map((cmp) => runDetectCmp(cmp)));
+            }
             this.config.performanceLoggingEnabled && performance.mark(`findCmpStageEnd_${stageName}`);
             this.config.performanceLoggingEnabled &&
                 performance.measure(`findCmp_${stageName}`, `findCmpStage_${stageName}`, `findCmpStageEnd_${stageName}`);

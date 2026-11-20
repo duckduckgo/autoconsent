@@ -135,7 +135,10 @@ describe('Autoconsent.findCmp', () => {
         });
     });
 
-    describe('heuristicMode = reject', () => {
+    describe('heuristicMode = reject', function () {
+        // without a main world to answer them, eval steps of the code-based rules wait for their timeout
+        this.timeout(10000);
+
         beforeEach(() => {
             autoconsent = new Autoconsent((msg) => Promise.resolve(), {
                 enabled: false,
@@ -182,6 +185,36 @@ describe('Autoconsent.findCmp', () => {
 
             expect(found).to.have.length(1);
             expect(found[0].name).to.equal('test');
+        });
+
+        it('prefers a rule whose CMP appears while the heuristic stage runs', async () => {
+            const messages: any[] = [];
+            autoconsent = new Autoconsent(
+                (msg) => {
+                    messages.push(msg);
+                    return Promise.resolve();
+                },
+                { enabled: false, autoAction: null, heuristicMode: 'reject' },
+            );
+            autoconsent.addDeclarativeCMP({
+                name: 'late',
+                detectCmp: [{ exists: '#privacy-test-page-cmp-test' }],
+                detectPopup: [],
+                optIn: [],
+                optOut: [],
+            });
+            const lateRule = autoconsent.rules.find((r) => r.name === 'late')!;
+            const detect = lateRule.detectCmp.bind(lateRule);
+            let calls = 0;
+            // the CMP is not rendered yet on the first check
+            lateRule.detectCmp = () => (calls++ === 0 ? Promise.resolve(false) : detect());
+            autoconsent.state.findCmpAttempts = 1;
+
+            const found = await autoconsent.findCmp(0);
+
+            expect(found).to.have.length(1);
+            expect(found[0].name).to.equal('late');
+            expect(messages.filter((m) => m.type === 'cmpDetected').map((m) => m.cmp)).to.deep.equal(['late']);
         });
 
         it('returns HEURISTIC-TIER1 for acknowledge-only popup when mode is Tier1', async () => {
