@@ -1,0 +1,52 @@
+{
+    "name": "evaair.com",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?evaair\\.com/"
+    },
+    "prehideSelectors": ["#cookie.modal-box"],
+    "detectCmp": [
+        {
+            "exists": "#cookie .cookie-btn .cookie-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie .cookie-btn .cookie-close"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie .cookie-btn .cookie-close",
+            "comment": "Accept All Cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie .js-cookieSetting",
+            "comment": "Change your cookie settings"
+        },
+        {
+            "waitForVisible": "#cookie .cookie-btn.cookie-btn--setting .cookie-close",
+            "timeout": 2000,
+            "comment": "Outside settings mode the close button accepts all cookies"
+        },
+        {
+            "click": "#cookie .cookie-setting input[name='cookieCheck']:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#cookie .cookie-btn.cookie-btn--setting .cookie-close",
+            "comment": "Save Changes"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_EVAcookieaccept=Y"
+        },
+        {
+            "cookieContains": "_EVAGDPRmarketing=Y",
+            "negated": true
+        }
+    ]
+}
