@@ -65,9 +65,38 @@
                             "waitForThenClick": [".dg-consent-banner", "button.dg-button.open_layer"]
                         },
                         {
-                            "waitForThenClick": [
+                            "waitFor": [
                                 ".dg-consent-banner",
-                                "button.dg-button.reject_all, button.dg-button.accept_some, button.dg-button.essential_only"
+                                "button.dg-button.reject_all, button.dg-button.accept_some, button.dg-button.essential_only, button.dg-button.custom"
+                            ]
+                        },
+                        {
+                            "if": {
+                                "exists": [
+                                    ".dg-consent-banner",
+                                    "button.dg-button.reject_all, button.dg-button.accept_some, button.dg-button.essential_only"
+                                ]
+                            },
+                            "then": [
+                                {
+                                    "click": [
+                                        ".dg-consent-banner",
+                                        "button.dg-button.reject_all, button.dg-button.accept_some, button.dg-button.essential_only"
+                                    ]
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "click": [
+                                        ".dg-consent-banner",
+                                        ".dg-main-content-policy-option-input input[type=checkbox]:checked:not([disabled])"
+                                    ],
+                                    "all": true,
+                                    "optional": true
+                                },
+                                {
+                                    "click": [".dg-consent-banner", "button.dg-button.custom"]
+                                }
                             ]
                         }
                     ]
