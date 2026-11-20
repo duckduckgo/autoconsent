@@ -1,0 +1,68 @@
+{
+    "name": "furniture.com",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?furniture\\.com/"
+    },
+    "prehideSelectors": ["#consent-banner"],
+    "detectCmp": [
+        {
+            "exists": "#consent-banner #cookie-banner-text"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent-banner #cookie-banner-text"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consent-banner button[aria-label=\"Dismiss banner\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#consent-banner #cookie-banner-text button"
+        },
+        {
+            "waitForVisible": "#do-not-sell-master"
+        },
+        {
+            "comment": "toggles save immediately, there is no save button",
+            "click": "#do-not-sell-master[aria-checked=\"true\"]",
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#cookies-tab"
+        },
+        {
+            "waitForVisible": "#cookies-panel"
+        },
+        {
+            "click": "#cookies-panel button[role=\"switch\"][aria-checked=\"true\"]",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#pixel-tab"
+        },
+        {
+            "waitForVisible": "#fdc-pixel"
+        },
+        {
+            "click": "#fdc-pixel[aria-checked=\"true\"]",
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[data-testid=\"closeQuickView\"]"
+        },
+        {
+            "comment": "the notice reappears after the preferences modal closes",
+            "waitForThenClick": "#consent-banner button[aria-label=\"Dismiss banner\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "C0004%3A0"
+        }
+    ]
+}
