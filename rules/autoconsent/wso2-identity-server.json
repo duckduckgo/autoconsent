@@ -1,0 +1,30 @@
+{
+    "name": "wso2-identity-server",
+    "vendorUrl": "https://wso2.com/identity-server/",
+    "prehideSelectors": ["#cookie-consent-banner[data-testid=cookie-consent-banner]"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent-banner [data-testid=cookie-consent-banner-confirm-button][onclick^=onCookieConsentClear]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent-banner[data-testid=cookie-consent-banner]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent-banner [data-testid=cookie-consent-banner-confirm-button]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-consent-banner [data-testid=cookie-consent-banner-confirm-button]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "accepts-cookies=true"
+        }
+    ]
+}
