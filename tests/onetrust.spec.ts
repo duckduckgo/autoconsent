@@ -59,3 +59,9 @@ generateCMPTests(
         testSelfTest: false,
     },
 );
+
+// Notice-only banner variant with an icon Close button (no `ot-close-btn-link` class).
+generateCMPTests('Onetrust', ['https://www.bestbuy.ca/en-ca'], {
+    testOptIn: false,
+    testSelfTest: false,
+});

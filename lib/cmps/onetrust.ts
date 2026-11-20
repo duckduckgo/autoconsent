@@ -63,13 +63,13 @@ export default class Onetrust extends AutoConsentCMPBase {
                 return await this.click('.onetrust-close-btn-handler');
             }
 
-            // CCPA notice-only variant: the banner has the `ot-close-btn-link` class and
-            // contains only a Close button (no Accept, Reject, or Settings). There's no
-            // real opt-out path in the DOM, so we click Close to dismiss.
+            // Notice-only variant (e.g. CCPA or implied consent): the banner contains only a
+            // Close button, either a text link (`ot-close-btn-link`) or an icon (no Accept,
+            // Reject, or Settings). There's no real opt-out path in the DOM, so we click Close to dismiss.
             // See e.g. columbia.com (US/CCPA region).
             const banner = document.getElementById('onetrust-banner-sdk');
             const isCloseOnlyNotice =
-                banner?.classList.contains('ot-close-btn-link') &&
+                !!banner?.querySelector('.onetrust-close-btn-handler') &&
                 !this.elementExists(
                     '#onetrust-accept-btn-handler,#onetrust-reject-all-handler,#onetrust-pc-btn-handler,.ot-sdk-show-settings,button.js-cookie-settings',
                 );
