@@ -4,15 +4,26 @@
     "detectCmp": [{ "exists": "#__tealiumGDPRecModal *,#__tealiumGDPRcpPrefs *,#__tealiumImplicitmodal *" }, { "eval": "EVAL_TEALIUM_0" }],
     "detectPopup": [
         { "visible": "#__tealiumGDPRecModal *,#__tealiumGDPRcpPrefs *,#__tealiumImplicitmodal *", "check": "any" },
-        { "eval": "EVAL_TEALIUM_NO_DECISION" }
+        {
+            "any": [
+                { "eval": "EVAL_TEALIUM_NO_DECISION" },
+                {
+                    "visible": "#__tealiumGDPRecModal #decline_cookies,#__tealiumGDPRecModal #gpc_button,#__tealiumGDPRcpPrefs .js-cookie-consent .js-btn-reject-all"
+                }
+            ]
+        }
     ],
     "optOut": [
         { "eval": "EVAL_TEALIUM_1" },
         { "eval": "EVAL_TEALIUM_DONOTSELL" },
         {
-            "if": { "exists": "#__tealiumGDPRecModal #rejectAll,#__tealiumGDPRcpPrefs #preferences_prompt_reject_all_submit" },
+            "if": {
+                "exists": "#__tealiumGDPRecModal #rejectAll,#__tealiumGDPRecModal #decline_cookies,#__tealiumGDPRecModal #gpc_button,#__tealiumGDPRcpPrefs #preferences_prompt_reject_all_submit,#__tealiumGDPRcpPrefs .js-cookie-consent .js-btn-reject-all"
+            },
             "then": [
-                { "waitForThenClick": "#__tealiumGDPRecModal #rejectAll,#__tealiumGDPRcpPrefs #preferences_prompt_reject_all_submit" }
+                {
+                    "waitForThenClick": "#__tealiumGDPRecModal #rejectAll,#__tealiumGDPRecModal #decline_cookies,#__tealiumGDPRecModal #gpc_button,#__tealiumGDPRcpPrefs #preferences_prompt_reject_all_submit,#__tealiumGDPRcpPrefs .js-cookie-consent .js-btn-reject-all"
+                }
             ],
             "else": [
                 { "hide": "#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#__tealiumImplicitmodal" },

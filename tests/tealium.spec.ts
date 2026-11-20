@@ -21,3 +21,14 @@ generateCMPTests('Tealium', [
 generateCMPTests('Tealium', ['https://www.keurig.ca/'], {
     skipRegions: ['US'],
 });
+
+// custom templates rendered inside the Tealium containers; utag consent state is preset before the user decides
+generateCMPTests('Tealium', ['https://www.jacquielawson.com/'], {
+    skipRegions: ['US'],
+});
+
+// dismissed banner collapses to a 0x0 fixed element, which still counts as visible for the self test
+generateCMPTests('Tealium', ['https://www.crocs.co.uk/', 'https://www.crocs.fr/'], {
+    skipRegions: ['US'],
+    testSelfTest: false,
+});
