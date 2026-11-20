@@ -2,7 +2,7 @@
     "name": "fullertonhotels.com",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "http://www.fullertonhotels.com/"
+        "vendorUrl": "https://secureprivacy.ai/"
     },
     "runContext": {
         "main": true,
@@ -16,7 +16,7 @@
     ],
     "detectPopup": [
         {
-            "visible": ["#ifrmCookieBanner", "#sp-decline"]
+            "any": [{ "visible": ["#ifrmCookieBanner", "#sp-decline"] }, { "visible": ["#ifrmCookieBanner", "#sp-customize"] }]
         }
     ],
     "optIn": [
@@ -29,8 +29,36 @@
             "wait": 500
         },
         {
-            "waitForThenClick": ["#ifrmCookieBanner", "#sp-decline"],
-            "comment": "Decline"
+            "if": { "visible": ["#ifrmCookieBanner", "#sp-decline"] },
+            "then": [
+                {
+                    "waitForThenClick": ["#ifrmCookieBanner", "#sp-decline"],
+                    "comment": "Decline"
+                }
+            ],
+            "else": [
+                {
+                    "click": ["#ifrmCookieBanner", "#sp-customize"],
+                    "comment": "Decline is hidden in some configs, use the preference center"
+                },
+                {
+                    "waitForVisible": ["#ifrmPrivacyBanner", "button[data-sp-onclick*=saveSelected]"]
+                },
+                {
+                    "if": { "visible": ["#ifrmPrivacyBanner", "button[data-sp-onclick*=declineAll]"] },
+                    "then": [{ "click": ["#ifrmPrivacyBanner", "button[data-sp-onclick*=declineAll]"] }],
+                    "else": [
+                        {
+                            "click": ["#ifrmPrivacyBanner", "input[data-tw-binding^='category:']:checked:not(:disabled)"],
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "click": ["#ifrmPrivacyBanner", "button[data-sp-onclick*=saveSelected]"]
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "test": []
