@@ -1,0 +1,15 @@
+{
+    "name": "wine-searcher",
+    "vendorUrl": "https://www.wine-searcher.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wine-searcher\\.com/"
+    },
+    "prehideSelectors": [".cookie-notice"],
+    "detectCmp": [{ "exists": ".cookie-notice .cookie-accept[data-url]" }],
+    "detectPopup": [{ "visible": ".cookie-notice .cookie-accept" }],
+    "optIn": [{ "waitForThenClick": ".cookie-notice .cookie-accept" }],
+    "optOut": [{ "eval": "EVAL_WINE_SEARCHER_OPT_OUT" }, { "hide": ".cookie-notice" }]
+}

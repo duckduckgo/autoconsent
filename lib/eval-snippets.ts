@@ -299,6 +299,18 @@ export const snippets = {
     EVAL_USERCENTRICS_API_5: () => UC_UI.areAllConsentsAccepted() === true,
     EVAL_USERCENTRICS_API_6: () => UC_UI.areAllConsentsAccepted() === false,
     EVAL_WBD_LTP_CLOSE: () => document.querySelector('dialog#ltp-dialog').close() || true,
+    // the reject option only exists as a form on a separate settings page, so submit it in the background
+    EVAL_WINE_SEARCHER_OPT_OUT: () => {
+        const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        const url = document.querySelector('.cookie-notice .cookie-accept')?.getAttribute('data-url');
+        if (!csrf || !url) return false;
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', 'X-Requested-With': 'XMLHttpRequest' },
+            body: new URLSearchParams({ 'CookieConsentModel[cookieConsent]': 'block', _csrf: csrf }),
+        }).catch(() => {});
+        return true;
+    },
     EVAL_ZOHO_TEST: () => localStorage.getItem('zglobal_Acookie_optOut') === '3',
 };
 
