@@ -87,6 +87,11 @@ export function cleanButtonText(buttonText: string): string {
     result = result.replace(/\s+/g, ' ');
     // strip whitespace around the text
     result = result.trim();
+    // collapse a label rendered twice, as in hover text-roll animations
+    const half = (result.length - 1) / 2;
+    if (half > 0 && result[half] === ' ' && result.slice(0, half) === result.slice(half + 1)) {
+        result = result.slice(0, half);
+    }
     return result;
 }
 

@@ -726,6 +726,14 @@ describe('cleanButtonText', () => {
         expect(cleanButtonText('Reject\n\nAll')).to.equal('reject all');
     });
 
+    it('collapses a label rendered twice', () => {
+        expect(cleanButtonText('Deny all\nDeny all')).to.equal('deny all');
+        expect(cleanButtonText('Accept Accept')).to.equal('accept');
+        expect(cleanButtonText('no no no')).to.equal('no no no');
+        expect(cleanButtonText('Deny all\nAllow all')).to.equal('deny all allow all');
+        expect(classifyButtonTextRegex('Deny all\nDeny all')).to.equal('reject');
+    });
+
     it('handles empty string', () => {
         expect(cleanButtonText('')).to.equal('');
     });
