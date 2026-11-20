@@ -173,6 +173,14 @@ export const snippets = {
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
+    // The banner only offers accept or a link away; set the same refusal the privacy page radios store.
+    EVAL_HANKOOK_OPT_OUT: () => {
+        if (typeof setCookie !== 'function' || !window.d_scp_cookiepopName || !window.d_scp_cookiepopMarketingName) return false;
+        setCookie(window.d_scp_cookiepopName, 'N', 1);
+        setCookie(window.d_scp_cookiepopMarketingName, 'N', 1);
+        document.querySelector('.cookie-pop')?.classList.add('hidden');
+        return true;
+    },
     // Zero while the embedding page still keeps the consent iframe collapsed.
     EVAL_IFRAME_SHOWN: () => window.innerHeight > 0,
     EVAL_IUBENDA_0: () =>

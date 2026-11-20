@@ -1,0 +1,12 @@
+{
+    "name": "hankooktire.com",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?hankooktire\\.com/"
+    },
+    "prehideSelectors": [".cookie-pop.eu-cookie-pop"],
+    "detectCmp": [{ "exists": ".cookie-pop[data-sitecd] #cookieDisagreeBtn" }],
+    "detectPopup": [{ "visible": ".cookie-pop[data-sitecd]" }],
+    "optIn": [{ "waitForThenClick": ".cookie-pop .cookie-btn.agree" }],
+    "optOut": [{ "eval": "EVAL_HANKOOK_OPT_OUT" }],
+    "test": [{ "exists": ".cookie-pop[data-sitecd].hidden" }]
+}
