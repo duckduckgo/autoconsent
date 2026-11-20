@@ -1,0 +1,10 @@
+{
+    "name": "essent-cookiewall",
+    "vendorUrl": "https://www.essent.nl/",
+    "prehideSelectors": ["wl-cookiewall .cookiewall-dialog"],
+    "detectCmp": [{ "exists": "wl-cookiewall [data-automation-id=cookiewall-reject]" }],
+    "detectPopup": [{ "visible": ["wl-cookiewall .cookiewall-dialog", "dialog[open]"] }],
+    "optIn": [{ "waitForThenClick": "wl-cookiewall [data-automation-id=cookiewall-accept]" }],
+    "optOut": [{ "waitForThenClick": "wl-cookiewall [data-automation-id=cookiewall-reject]" }],
+    "test": [{ "cookieContains": "consentLevel=1" }]
+}
