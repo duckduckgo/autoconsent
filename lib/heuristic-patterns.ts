@@ -89,6 +89,11 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bwe have cookies\b/gi,
     /\b(?:revoke|withdraw) your consent at any time\b|\beinwilligung jederzeit widerrufen\b/gi,
     /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi,
+    // notices that analytics or ads run until rejected: "analytics ... load by default", "this site loads Google Analytics"
+    {
+        pattern: /\banalytics\b.{0,100}\b(?:are on|load|loads) by default\b|\bthis (?:web)?site loads (?:\S+ ){0,2}analytics\b/gi,
+        input: 'popup',
+    },
     /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi,
     /\baccept or (?:reject|decline) (?:all |optional |non-essential )?cookies\b/gi,
 
@@ -218,6 +223,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /cookies.{0,100}beste? (?:mogelijke )?(?:ervaring|gebruikerservaring)/gi,
     /\b(?:we|wij) (?:gebruiken|plaatsen)\b.{0,100}cookies/gi,
     /\bgebruiken (?:we|wij) cookies\b/gi,
+    /\bmogen (?:we|wij) (?:\S+ ){0,2}cookies\b/gi,
     /\bplaatsen van\b.{0,50}cookies/gi,
     /\bte blijven gebruiken\b.{0,100}privacy/gi,
     /\bdoor op\b.{0,60}?\bte klikken\b.{0,40}?\bga(?:at)? (?:u|je) akkoord\b/gi,

@@ -407,6 +407,19 @@ describe('checkHeuristicPatterns with more English wording', () => {
         ]);
     });
 
+    it('detects notices that analytics or ads run until rejected, in popups only', () => {
+        const texts = [
+            'Ads, analytics cookies and session recording are on by default; untick a box and save to turn that one off for 180 days.',
+            'Google Analytics 4, Microsoft Clarity and Adsterra ads load by default on this page. Press Reject to turn all three off.',
+            'This site loads Google Analytics 4, Microsoft Clarity and Adsterra ads by default. Choose Reject to turn them off.',
+        ];
+        for (const text of texts) {
+            expect(detectsPopup(text), text).to.be.true;
+            expect(detectsPage(text), text).to.be.false;
+        }
+        expectNotDetected(['Analytics dashboards are off by default for new projects', 'This site loads fast on any device']);
+    });
+
     it('detects consent wording in popups and page text', () => {
         const texts = [
             'We have cookies! Read our privacy policy',
@@ -455,6 +468,7 @@ describe('checkHeuristicPatterns with more French, German, Dutch, Polish and Rus
             'Cookies worden gebruikt voor metingen, advertenties en optimalisatie. Door onze site te blijven gebruiken, gaat u akkoord met ons privacybeleid.',
             'Alles accepteren Keuze opslaan Alleen standaard cookies',
             'Onze cookies geven je de best mogelijke ervaring op onze website. Accepteer ze, of lees onze cookieverklaring.',
+            'Mogen we cookies gebruiken? Daarmee meten we hoe je de site gebruikt.',
             'Informujemy, że niniejsza strona internetowa wykorzystuje pliki „cookies”.',
             'Strona wykorzystuje pliki "cookies" w celach statystycznych.',
             'Обрабатываем cookie, чтобы сделать сайт удобнее. Продолжая использовать сайт, вы соглашаетесь на их обработку.',
