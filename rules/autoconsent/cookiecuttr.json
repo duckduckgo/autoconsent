@@ -9,7 +9,9 @@
     "prehideSelectors": [".cc-cookies"],
     "detectCmp": [
         {
-            "exists": ".cc-cookies .cc-cookie-accept"
+            "comment": "some sites keep a dormant hidden banner next to another CMP",
+            "visible": ".cc-cookies .cc-cookie-accept",
+            "check": "any"
         }
     ],
     "detectPopup": [

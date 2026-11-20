@@ -1,0 +1,44 @@
+{
+    "name": "legalblink",
+    "vendorUrl": "https://www.legalblink.it/",
+    "comment": "v1 shadow DOM banner; the legacy banner is handled by cookieconsent2-legacy",
+    "prehideSelectors": ["lb-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ["lb-cookie-banner", "#lb-root"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["lb-cookie-banner", "#lb-root > [role=dialog] [data-slot=card-footer]"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["lb-cookie-banner", "#lb-root > [role=dialog] [data-slot=card-footer] button.bg-primary"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["lb-cookie-banner", "#lb-root > [role=dialog] [data-slot=card-footer] button.bg-reject-all"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["lb-cookie-banner", "#lb-root > [role=dialog] [data-slot=card-footer] button.bg-reject-all"]
+                }
+            ],
+            "else": [
+                {
+                    "comment": "closing the banner stores necessary-only consent",
+                    "waitForThenClick": ["lb-cookie-banner", "#lb-root > [role=dialog] [data-slot=card-action] button[data-slot=button]"]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "lb_csc={\"level\":[\"necessary_cookies\"]"
+        }
+    ]
+}
