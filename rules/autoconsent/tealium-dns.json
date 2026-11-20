@@ -1,0 +1,19 @@
+{
+    "name": "tealium-dns",
+    "prehideSelectors": ["#__tealiumDNS_banner"],
+    "detectCmp": [{ "exists": "#__tealiumDNS_banner .privacy_prompt" }, { "eval": "EVAL_TEALIUM_0" }],
+    "detectPopup": [
+        { "visible": "#__tealiumDNS_banner .privacy_prompt" },
+        { "visible": "#__tealiumGDPRecModal *,#__tealiumGDPRcpPrefs *,#__tealiumImplicitmodal *", "check": "none" }
+    ],
+    "optOut": [
+        { "eval": "EVAL_TEALIUM_DONOTSELL" },
+        {
+            "if": { "visible": "#__tealiumDNS_banner .close_btn_thick" },
+            "then": [{ "click": "#__tealiumDNS_banner .close_btn_thick" }],
+            "else": [{ "hide": "#__tealiumDNS_banner" }]
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "#consent_doNotSell_close" }],
+    "test": [{ "eval": "EVAL_TEALIUM_DONOTSELL_CHECK" }, { "visible": "#__tealiumDNS_banner .privacy_prompt", "check": "none" }]
+}

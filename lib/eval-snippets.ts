@@ -267,10 +267,11 @@ export const snippets = {
     EVAL_TARTEAUCITRON_2: () => document.cookie.match(/tarteaucitron=[^;]*/)?.[0].includes('false'),
     EVAL_TEALIUM_0: () => typeof window.utag !== 'undefined' && typeof utag.gdpr === 'object',
     EVAL_TEALIUM_1: () => utag.gdpr.setConsentValue(false) || true,
-    EVAL_TEALIUM_DONOTSELL: () => utag.gdpr.dns?.setDnsState(false) || true,
+    // true means "do not sell"; false grants full consent
+    EVAL_TEALIUM_DONOTSELL: () => utag.gdpr.dns?.setDnsState(true) || true,
     EVAL_TEALIUM_2: () => utag.gdpr.setConsentValue(true) || true,
     EVAL_TEALIUM_3: () => utag.gdpr.getConsentState() !== 1,
-    EVAL_TEALIUM_DONOTSELL_CHECK: () => utag.gdpr.dns?.getDnsState() !== 1,
+    EVAL_TEALIUM_DONOTSELL_CHECK: () => utag.gdpr.dns?.getDnsState() !== 'false',
     // 0 means no stored decision; otherwise the user reopened the prompt themselves
     EVAL_TEALIUM_NO_DECISION: () => utag.gdpr.getConsentState() === 0,
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
