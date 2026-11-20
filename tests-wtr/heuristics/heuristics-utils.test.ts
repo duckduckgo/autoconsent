@@ -422,6 +422,23 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects "analytics with your consent" in popups only', () => {
+        const texts = [
+            'Privacy\nWe store necessary preferences. We only use Google Analytics with your consent.\nAllow analytics\nReject analytics',
+            'Nous enregistrons les préférences nécessaires. Google Analytics n’est utilisé qu’avec votre accord.',
+            'Guardamos las preferencias necesarias. Solo utilizamos Google Analytics con tu consentimiento.',
+            'Мы сохраняем необходимые настройки. Google Analytics используется только с вашего согласия.',
+        ];
+        for (const text of texts) {
+            expect(detectsPopup(text), text).to.be.true;
+            expect(detectsPage(text), text).to.be.false;
+        }
+        expectNotDetected([
+            'We only share your email with your consent.',
+            'Google Analytics certified agency. We set up reporting for your online shop.',
+        ]);
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';
