@@ -10,10 +10,16 @@
             "if": { "visible": "#cky-consent #cky-btn-reject" },
             "then": [{ "waitForThenClick": "#cky-consent #cky-btn-reject" }],
             "else": [
-                { "waitForThenClick": "#cky-consent #cky-btn-settings" },
-                { "waitForVisible": "#cky-btn-custom-accept" },
-                { "click": "input[id^=cky-checkbox-category]:checked:not(:disabled)", "all": true, "optional": true },
-                { "click": "#cky-btn-custom-accept" }
+                {
+                    "if": { "exists": "#cky-consent #cky-btn-settings" },
+                    "then": [
+                        { "waitForThenClick": "#cky-consent #cky-btn-settings" },
+                        { "waitForVisible": "#cky-btn-custom-accept" },
+                        { "click": "input[id^=cky-checkbox-category]:checked:not(:disabled)", "all": true, "optional": true },
+                        { "click": "#cky-btn-custom-accept" }
+                    ],
+                    "else": [{ "hide": "#cky-consent.cky-consent-bar" }]
+                }
             ]
         }
     ],
