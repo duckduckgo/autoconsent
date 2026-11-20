@@ -5,4 +5,7 @@ generateCMPTests('pmc-privacy-banner', [
     'https://www.eater.com/',
     'https://www.sbnation.com/',
     'https://punchdrink.com/',
+    'https://www.popsugar.com/',
+    'https://www.thedodo.com/',
+    'https://www.thrillist.com/',
 ]);
