@@ -1,3 +1,32 @@
+# v18.9.0 (Fri Nov 20 2026)
+
+#### Rules
+
+- Rule update: Rule fix for Site Breakage: makerworld.com (2025-12-20) [#2649](https://github.com/duckduckgo/autoconsent/pull/2649) ([@sammacbeth](https://github.com/sammacbeth) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: xhamster-eu, xhamster-us, remove auto_FR_xhamster.desi_pv1 [#2664](https://github.com/duckduckgo/autoconsent/pull/2664) ([@sammacbeth](https://github.com/sammacbeth) [@daxtheduck](https://github.com/daxtheduck))
+- Rule update: Cookie Information Banner, huawei-cookie-notice [#2665](https://github.com/duckduckgo/autoconsent/pull/2665) ([@daxtheduck](https://github.com/daxtheduck))
+
+#### Dependencies
+
+- Bump the dev-dependencies group across 1 directory with 11 updates [#2783](https://github.com/duckduckgo/autoconsent/pull/2783) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### CI / Release Automation
+
+- Add version: patch label to dependabot PRs [#2807](https://github.com/duckduckgo/autoconsent/pull/2807) ([@claude](https://github.com/claude) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Test Infrastructure
+
+- Harden unit test browser launch in CI [#2809](https://github.com/duckduckgo/autoconsent/pull/2809) ([@claude](https://github.com/claude) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Claude ([@claude](https://github.com/claude))
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v18.8.0 (Thu Nov 19 2026)
 
 #### Rules
