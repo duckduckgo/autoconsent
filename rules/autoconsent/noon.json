@@ -1,0 +1,41 @@
+{
+    "name": "noon",
+    "_metadata": {
+        "vendorUrl": "https://www.noon.com/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?noon\\.com/"
+    },
+    "prehideSelectors": ["[class*=\"_wrapper_\"]:has(> [class*=\"_expandedContent_\"] #essential-cookie)"],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"_wrapper_\"]:has(> [class*=\"_expandedContent_\"] #essential-cookie)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*=\"_wrapper_\"]:has(> [class*=\"_expandedContent_\"] #essential-cookie)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[class*=\"_bannerContent_\"] [class*=\"_buttonCtr_\"] button[class*=\"_primary_\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[class*=\"_bannerContent_\"] [class*=\"_buttonCtr_\"] button[class*=\"_secondary_\"]"
+        },
+        {
+            "waitForVisible": "[class*=\"_expandedContent_\"]:has(#performance-cookie)"
+        },
+        {
+            "click": "#performance-cookie:checked, #functional-cookie:checked, #advertising-cookie:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "button[class*=\"_saveButton_\"]"
+        }
+    ]
+}
