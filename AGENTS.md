@@ -152,7 +152,7 @@ shadow root or same-origin iframe.
 - **selfTests are optional.** It is okay to NOT have a self-test, or have it failing as long as the popup is handled correctly. Confirm this with screenshots.
 - Generic rules without a urlPattern MUST have at least two sites in the spec file.
 - If the popup comes in different DOM structures, cover all of them in the spec file.
-- **Keep spec URLs current.** When a site in a spec file no longer uses the rule's CMP (it switched CMPs or dropped its banner), replace it with a site that does, found in `data/coverage.json` or with the `publicwww-search` skill, and check the new site like any other. Do not just delete it: generic rules still need two sites. First check every region the spec runs in; if the popup only stopped showing in some of them, adjust `onlyRegions` or `skipRegions` instead. For a site-specific rule, the site no longer using the CMP means the rule itself may be stale (see Updating existing rules).
+- **Keep spec URLs current.** When a site in a spec file no longer uses the rule's CMP (it switched CMPs or dropped its banner), replace it with a site that does, found in `data/coverage.json` or with the `publicwww-search` skill (`searchwebcode-search` as the fallback), and check the new site like any other. Do not just delete it: generic rules still need two sites. First check every region the spec runs in; if the popup only stopped showing in some of them, adjust `onlyRegions` or `skipRegions` instead. For a site-specific rule, the site no longer using the CMP means the rule itself may be stale (see Updating existing rules).
 
 ### Breakage in cosmetic rules
 **Prefer a non-cosmetic rule.** A cosmetic (`hide`) rule is a last resort when there is no reject/dismiss path. If cosmetic is unavoidable, verify that hiding the element does not break the page and **report that evidence**. Cosmetic rule without breakage-check evidence is incomplete.
@@ -182,15 +182,17 @@ The following techniques can help identify a generic CMP:
    - Vendor names in variable/function names or `window` globals.
    - Scripts in `node_modules/`, `vendor/`, or `wp-content/plugins/` paths.
    - License comments with vendor URLs at the top of the script.
-3. **Cross-site prevalence:** Use the `publicwww-search` skill to search for distinctive
-   selectors, script URLs, or copy strings. If the same popup markup appears on many
-   sites, it's a CMP.
+3. **Cross-site prevalence:** Use the `publicwww-search` skill (or `searchwebcode-search`
+   once PublicWWW's daily limit is used up) to search for distinctive selectors, script
+   URLs, or copy strings. If the same popup markup appears on many sites, it's a CMP.
 
 ## CMP Discovery with PublicWWW
 
 Use the `/publicwww-search` skill to search website source code for CMP-specific identifiers. This helps determine if a cookie popup is from a shared third-party CMP (warranting a generic rule) or is site-specific. It also helps find additional test URLs for existing rules and region-specific test sites.
 
 Requires `PUBLICWWW_KEY` environment variable.
+
+**Fallback: SearchWebCode.** When PublicWWW has run out of its daily limit, use the `/searchwebcode-search` skill for the same searches, and keep using it for the rest of the task. Do not use it while PublicWWW still works, or when PublicWWW returns no results: an empty result is a real answer. SearchWebCode indexes only homepage HTML (no JS or CSS files), so say in your report when results came from it. Requires `SEARCHWEBCODE_KEY` environment variable. Where this guide says "publicwww" (finding sites, heavy testing runs, breakage checks), SearchWebCode results count the same when you had to fall back.
 
 ## Checking for Existing Site Exceptions in `privacy-configuration`
 

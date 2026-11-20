@@ -1,11 +1,13 @@
 ---
 name: publicwww-search
-description: Search PublicWWW to find websites using specific HTML/JS/CSS snippets. Use this skill to check if a cookie popup is from a widespread third-party CMP, to find additional test URLs for a CMP rule, or to discover how many sites use a particular consent banner pattern.
+description: Search PublicWWW to find websites using specific HTML/JS/CSS snippets. Use this skill to check if a cookie popup is from a widespread third-party CMP, to find additional test URLs for a CMP rule, or to discover how many sites use a particular consent banner pattern. If PublicWWW has run out of its daily limit, use searchwebcode-search instead.
 ---
 
 # PublicWWW Source Code Search
 
 Search website source code via the [PublicWWW](https://publicwww.com) API. Requires `PUBLICWWW_KEY` env var.
+
+**Daily limit:** PublicWWW API searches are capped per day. When the limit is used up, the export answers with HTTP 200 and the body `API available for paid search results only` instead of CSV, so check the body before reading it as results. Then switch to the `searchwebcode-search` skill for the rest of the task. `curl -s https://api.publicwww.com/v1/account -H "Authorization: Bearer $PUBLICWWW_KEY" | jq .quota.searches` shows the remaining quota for free. An empty CSV is a real "no sites found" answer, not a reason to switch, and `Wrong API key` means the key needs fixing.
 
 **Caveat:** PublicWWW indexes server-rendered HTML source only. CMPs injected purely via client-side JavaScript (e.g. tag managers, async script loaders) may not appear in results.
 
