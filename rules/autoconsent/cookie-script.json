@@ -19,22 +19,27 @@
                             "then": [{ "waitForThenClick": "#cookiescript_reject" }],
                             "else": [
                                 {
-                                    "if": { "visible": "#cookiescript_save" },
+                                    "if": {
+                                        "exists": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled), .cookiescript_banner_container input.cokiescript_checkbox:checked:not(:disabled)"
+                                    },
                                     "then": [
                                         {
-                                            "if": {
-                                                "exists": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled), .cookiescript_banner_container input.cokiescript_checkbox:checked:not(:disabled)"
-                                            },
-                                            "then": [
-                                                {
-                                                    "click": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled), .cookiescript_banner_container input.cokiescript_checkbox:checked:not(:disabled)",
-                                                    "all": true
-                                                }
-                                            ]
+                                            "click": "#cookiescript_injected input.cookiescript_checkbox_input:checked:not(:disabled), .cookiescript_banner_container input.cokiescript_checkbox:checked:not(:disabled)",
+                                            "all": true
                                         },
-                                        { "waitForThenClick": "#cookiescript_save", "retry": 6, "retryInterval": 1000 }
-                                    ],
-                                    "else": [{ "click": "#cookiescript_close, .cookiescript_close_btn" }]
+                                        { "waitForVisible": "#cookiescript_save", "timeout": 2000, "optional": true }
+                                    ]
+                                },
+                                {
+                                    "if": { "visible": "#cookiescript_save" },
+                                    "then": [{ "waitForThenClick": "#cookiescript_save", "retry": 6, "retryInterval": 1000 }],
+                                    "else": [
+                                        {
+                                            "if": { "exists": "#cookiescript_close, .cookiescript_close_btn" },
+                                            "then": [{ "click": "#cookiescript_close, .cookiescript_close_btn" }],
+                                            "else": [{ "hide": "#cookiescript_injected, .cookiescript_banner_container" }]
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -50,7 +55,13 @@
                                 },
                                 { "click": "#cookiescript_save" }
                             ],
-                            "else": [{ "click": "#cookiescript_close, .cookiescript_close_btn" }]
+                            "else": [
+                                {
+                                    "if": { "exists": "#cookiescript_close, .cookiescript_close_btn" },
+                                    "then": [{ "click": "#cookiescript_close, .cookiescript_close_btn" }],
+                                    "else": [{ "hide": "#cookiescript_injected, .cookiescript_banner_container" }]
+                                }
+                            ]
                         }
                     ]
                 }

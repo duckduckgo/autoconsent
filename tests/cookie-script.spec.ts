@@ -11,7 +11,14 @@ generateCMPTests('cookie-script', [
     'https://mitsdu.dk/',
     'https://n8n.io/',
     'https://hearthis.at/',
+    // accept-only banner: popup is hidden
+    'https://footballpredictions.com/',
 ]);
+
+// opt-out regions: categories pre-checked, "Save & Close" appears only after unchecking them
+generateCMPTests('cookie-script', ['https://airadvisor.com/'], {
+    onlyRegions: ['US'],
+});
 
 // category checkboxes in the banner, no manage button, hidden "Save & Close"; site is blocked outside Europe
 generateCMPTests('cookie-script', ['https://alledaek365.dk/'], {
