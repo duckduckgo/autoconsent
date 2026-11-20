@@ -1,0 +1,16 @@
+{
+    "name": "freak.no",
+    "vendorUrl": "https://freak.no/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?freak\\.no/"
+    },
+    "prehideSelectors": [".cc-window[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": ".cc-window[aria-describedby=\"cookieconsent:desc\"] .cc-deny" }],
+    "detectPopup": [{ "visible": ".cc-window[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible)" }],
+    "optIn": [{ "waitForThenClick": ".cc-window[aria-describedby=\"cookieconsent:desc\"] .cc-allow" }],
+    "optOut": [
+        { "waitFor": ".cc-window[aria-describedby=\"cookieconsent:desc\"] .cc-deny" },
+        { "click": ".cc-window[aria-describedby=\"cookieconsent:desc\"] .cc-deny" }
+    ],
+    "test": [{ "cookieContains": "cookieconsent_status=deny" }]
+}
