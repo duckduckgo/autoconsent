@@ -414,6 +414,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Du kannst deine Einwilligung jederzeit widerrufen.',
             'We use privacy-friendly analytics to see which health guides are most useful. No ads, no profiling.',
             'We use Google Analytics to count page views and monthly active users. It sets a cookie and, when you are signed in, records your account id.',
+            'With your permission, we also use Google Analytics to understand how the site is used.',
             'Usiamo Google Analytics per capire come viene usato il sito. Li attiviamo solo con il tuo consenso.',
         ];
         for (const text of texts) {
