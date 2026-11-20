@@ -1,0 +1,36 @@
+{
+    "name": "mitohealth",
+    "vendorUrl": "https://mitohealth.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?mitohealth\\.com/"
+    },
+    "prehideSelectors": ["dialog#privacy-choices"],
+    "detectCmp": [
+        {
+            "exists": "dialog#privacy-choices [data-privacy-summary]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog#privacy-choices[open] [data-privacy-summary]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "dialog#privacy-choices [data-privacy-accept-all]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "dialog#privacy-choices [data-privacy-open-settings]"
+        },
+        {
+            "waitForThenClick": "dialog#privacy-choices [data-privacy-reject-all]"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_MITOHEALTH_TEST"
+        }
+    ]
+}

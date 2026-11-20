@@ -195,6 +195,10 @@ export const snippets = {
             .filter((el) => el.innerText.match('Accept|Annehmen'))[0]
             .click() || true,
     EVAL_MICROSOFT_2: () => !!document.cookie.match('MSCC|GHCC'),
+    EVAL_MITOHEALTH_TEST: () => {
+        const consent = JSON.parse(localStorage.getItem('mh_privacy_consent_v1') || '{}');
+        return consent.analytics === false && consent.marketing === false;
+    },
     EVAL_MOOVE_0: () =>
         document.querySelectorAll('#moove_gdpr_cookie_modal input').forEach((i) => {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
