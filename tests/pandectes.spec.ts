@@ -34,3 +34,9 @@ generateCMPTests('pandectes', ['https://asmc.de/', 'https://crossrope.com/'], {
 
 // banner wrapper with a shop-specific id instead of #pandectes-banner
 generateCMPTests('pandectes', ['https://www.aeris.de/']);
+
+// notice-only ("info") banner: OK is the only control and records "allow", so the self-test cannot pass
+generateCMPTests('pandectes', ['https://www.fleetfeet.com/', 'https://thelipbar.com/', 'https://bolfoods.com/'], {
+    testOptIn: false,
+    testSelfTest: false,
+});

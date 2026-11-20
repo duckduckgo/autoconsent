@@ -32,10 +32,16 @@
                     "if": { "visible": ".pd-cookie-banner-window .cc-deny" },
                     "then": [{ "waitForThenClick": ".pd-cookie-banner-window .cc-deny" }],
                     "else": [
-                        { "waitForThenClick": ".pd-cookie-banner-window .cc-settings" },
-                        { "waitForVisible": ".pd-cp-ui-save" },
-                        { "click": ".pd-cp-ui-rejectAll" },
-                        { "click": ".pd-cp-ui-save" }
+                        {
+                            "if": { "exists": ".pd-cookie-banner-window.cc-type-info .cc-dismiss" },
+                            "then": [{ "waitForThenClick": ".pd-cookie-banner-window.cc-type-info .cc-dismiss" }],
+                            "else": [
+                                { "waitForThenClick": ".pd-cookie-banner-window .cc-settings" },
+                                { "waitForVisible": ".pd-cp-ui-save" },
+                                { "click": ".pd-cp-ui-rejectAll" },
+                                { "click": ".pd-cp-ui-save" }
+                            ]
+                        }
                     ]
                 },
                 { "hide": ".cc-window-wrapper:has(> .pd-cookie-banner-window)", "optional": true }
