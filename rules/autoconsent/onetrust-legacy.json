@@ -1,13 +1,12 @@
 {
-    "name": "thenude",
+    "name": "onetrust-legacy",
     "_metadata": {
-        "vendorUrl": "https://www.thenude.com/"
+        "vendorUrl": "https://www.onetrust.com/"
     },
     "cosmetic": false,
     "runContext": {
         "main": true,
-        "frame": false,
-        "urlPattern": "^https?://(www\\.)?thenude\\.com/"
+        "frame": false
     },
     "prehideSelectors": [".optanon-alert-box-wrapper"],
     "detectCmp": [
