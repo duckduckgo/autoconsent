@@ -681,6 +681,8 @@ export const BUTTON_NEVER_MATCH_PATTERNS = [
     /accept all.*reject all|reject all.*accept all/is,
     /^.{300,}$/s,
     /pay|subscribe/is,
+    // a price on the button, e.g. "rechazar por 36€ año" (cleaned of slashes)
+    /\d\s*[€£$]|[€£$]\s*\d/,
     /abonneer/is,
     /abonnier/is,
     /abonner/is,

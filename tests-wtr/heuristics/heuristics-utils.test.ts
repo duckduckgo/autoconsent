@@ -740,6 +740,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('reject and pay')).to.equal('other');
     });
 
+    it('does not match buttons with a price', () => {
+        expect(classifyButtonTextRegex('Rechazar por 36€ / año')).to.equal('other');
+        expect(classifyButtonTextRegex('Refuser les cookies et soutenir (1 €)')).to.equal('other');
+        expect(classifyButtonTextRegex('Reject for £2.99 a month')).to.equal('other');
+        expect(classifyButtonTextRegex('Rechazar todas')).to.equal('reject');
+    });
+
     it('matches "except strictly necessary" qualifier', () => {
         // OneTrust on apnews.com labels the reject button "I Reject All (except Strictly Necessary)"
         expect(classifyButtonTextRegex('I Reject All (except Strictly Necessary)')).to.equal('reject');
