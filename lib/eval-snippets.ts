@@ -93,6 +93,8 @@ export const snippets = {
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
 
     // declarative rules
+    EVAL_ACCEPTRICS_TEST: () =>
+        Object.values(JSON.parse(localStorage.getItem('__acceptrics_settings')).purposes).every((purpose) => purpose === 'rejected'),
     EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_AYLO_COOKIE_MANAGER_READY: () => !!(window.wl_cookie_consent_manager || window._Cookie_Consent_Manager_brand),
