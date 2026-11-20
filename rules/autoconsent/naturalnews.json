@@ -1,0 +1,32 @@
+{
+    "name": "naturalnews",
+    "vendorUrl": "https://naturalnews.com/",
+    "prehideSelectors": [".PrivacyNotice:has(.PrivacyAccept)"],
+    "detectCmp": [
+        {
+            "exists": ".PrivacyNotice .PrivacyContent .PrivacyAccept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".PrivacyNotice .PrivacyContent .PrivacyAccept"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".PrivacyNotice .PrivacyContent .PrivacyAccept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".PrivacyNotice .PrivacyContent .PrivacyAccept"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".PrivacyNotice .PrivacyContent .PrivacyAccept",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
