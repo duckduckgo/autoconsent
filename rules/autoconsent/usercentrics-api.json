@@ -1,10 +1,10 @@
 {
     "name": "usercentrics-api",
-    "detectCmp": [{ "exists": "#usercentrics-root,#usercentrics-cmp-ui" }],
+    "detectCmp": [
+        { "exists": "#usercentrics-root:not([style*=\"visibility: hidden\"]),#usercentrics-cmp-ui" },
+        { "eval": "EVAL_USERCENTRICS_API_0" }
+    ],
     "detectPopup": [
-        {
-            "eval": "EVAL_USERCENTRICS_API_0"
-        },
         {
             "if": {
                 "exists": "#usercentrics-cmp-ui"
