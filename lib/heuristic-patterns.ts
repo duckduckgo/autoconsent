@@ -513,6 +513,9 @@ const REJECT_PATTERNS_BRAZILIAN_PORTUGUESE = [
     // (proceed) (without accepting)
     /^\s*(continuar|prosseguir|seguir)\s*(sem\s*aceitar)\s*$/is,
 
+    // (do not sell) (my personal data), CCPA-style
+    /^\s*não\s+venda(\s+(meus|minhas)\s+(dados|informações)(\s+pessoais)?)?\s*$/is,
+
     // (deny) (everything) (optional)
     /^\s*(rejeitar|recusar|desativar|bloquear|negar|não\s*aceito|não \s*aceitar)\s*(tudo|o)?\s*(opcional|(não[-\s](essencial|funcional|obrigatório|necessário)))?\s*$/is,
 

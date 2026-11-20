@@ -19,7 +19,19 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "#adopt-reject-all-button"
+            "if": {
+                "exists": "#adopt-reject-all-button"
+            },
+            "then": [
+                {
+                    "click": "#adopt-reject-all-button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookie-banner button:not([id])"
+                }
+            ]
         }
     ],
     "test": [
