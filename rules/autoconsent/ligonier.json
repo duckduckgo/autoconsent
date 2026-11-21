@@ -1,0 +1,13 @@
+{
+    "name": "ligonier",
+    "vendorUrl": "https://learn.ligonier.org/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?ligonier\\.org/"
+    },
+    "prehideSelectors": ["div:has(> form[action$='/api/enable-cookie-consent'])"],
+    "detectCmp": [{ "exists": "form[action$='/api/enable-cookie-consent'] button[name='accept-gdpr']" }],
+    "detectPopup": [{ "visible": "form[action$='/api/enable-cookie-consent'] button[name='accept-gdpr']" }],
+    "optIn": [{ "waitForThenClick": "form[action$='/api/enable-cookie-consent'] button[name='accept-gdpr'][value='true']" }],
+    "optOut": [{ "waitForThenClick": "form[action$='/api/enable-cookie-consent'] button[name='accept-gdpr'][value='false']" }],
+    "test": [{ "cookieContains": "gdpr-consent=eyJnZHByQ29uc2VudCI6ZmFsc2" }]
+}
