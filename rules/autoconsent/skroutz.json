@@ -1,0 +1,33 @@
+{
+    "name": "skroutz",
+    "vendorUrl": "https://www.skroutz.gr/",
+    "prehideSelectors": [".js-message.skrppp"],
+    "detectCmp": [
+        {
+            "exists": ".js-message.skrppp #accept-essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-message.skrppp #accept-essential"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-message.skrppp #accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".js-message.skrppp #accept-essential"
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "policy_level=%7B%22essential%22%3A%22true%22%2C%22performance%22%3A%22false%22%2C%22preference%22%3A%22false%22%2C%22targeting%22%3A%22false%22%7D"
+        }
+    ]
+}
