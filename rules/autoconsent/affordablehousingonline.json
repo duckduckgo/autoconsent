@@ -1,0 +1,27 @@
+{
+    "name": "affordablehousingonline",
+    "vendorUrl": "https://ezoic.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?affordablehousingonline\\.com/"
+    },
+    "prehideSelectors": ["#ez-cookie-dialog-wrapper"],
+    "detectCmp": [{ "exists": "#ez-cookie-dialog-wrapper" }],
+    "detectPopup": [{ "visible": "#ez-cookie-dialog-wrapper" }],
+    "optIn": [
+        { "click": "#ez-accept-all", "optional": true },
+        { "eval": "EVAL_EZOIC_0", "optional": true }
+    ],
+    "optOut": [
+        { "wait": 500 },
+        { "click": "#ez-manage-settings" },
+        { "waitFor": "#ez-cookie-dialog input[type=checkbox]" },
+        { "click": "#ez-cookie-dialog input[type=checkbox]:checked", "all": true, "optional": true },
+        { "waitForThenClick": "#ez-save-settings" },
+        {
+            "comment": "on mobile the site renders a duplicate dialog that stays open after saving and has no working buttons",
+            "hide": "#ez-cookie-dialog-wrapper",
+            "optional": true
+        }
+    ],
+    "test": [{ "cookieContains": "ez-consent-tcf" }]
+}
