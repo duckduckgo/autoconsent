@@ -1,0 +1,21 @@
+{
+    "name": "profootballmania.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?profootballmania\\.com/"
+    },
+    "prehideSelectors": ["#pfm-consent"],
+    "detectCmp": [{ "exists": "#pfm-consent[data-pfm-consent-root]" }],
+    "detectPopup": [{ "visible": "#pfm-consent [data-pfm-consent-main-actions]" }],
+    "optIn": [{ "waitForThenClick": "#pfm-consent [data-pfm-consent-main-actions] [data-pfm-consent-accept]" }],
+    "optOut": [
+        { "waitForThenClick": "#pfm-consent [data-pfm-consent-main-actions] [data-pfm-consent-reject]" },
+        {
+            "comment": "this rule takes priority over funding-choices, so also dismiss its EU dialog",
+            "if": { "exists": ".fc-dialog-container .fc-cta-do-not-consent,.fc-dialog-container .fc-cta-manage-options" },
+            "then": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }]
+        },
+        { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+        { "click": ".fc-dialog-container .fc-confirm-choices", "optional": true }
+    ],
+    "test": [{ "cookieContains": "%22analytics%22%3Afalse" }]
+}
