@@ -1,0 +1,13 @@
+{
+    "name": "vonmaur",
+    "vendorUrl": "https://www.vonmaur.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?vonmaur\\.com/"
+    },
+    "prehideSelectors": ["#divCookieConsent"],
+    "detectCmp": [{ "exists": "#divCookieConsent #divAcceptCookies" }],
+    "detectPopup": [{ "visible": "#divCookieConsent" }],
+    "optIn": [{ "waitForThenClick": "#divCookieConsent #divAcceptCookies" }],
+    "optOut": [{ "waitForThenClick": "#divCookieConsent #divAcceptCookies" }],
+    "test": [{ "waitForVisible": "#divCookieConsent", "check": "none", "timeout": 2000 }]
+}
