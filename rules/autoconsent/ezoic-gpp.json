@@ -1,0 +1,13 @@
+{
+    "name": "ezoic-gpp",
+    "vendorUrl": "https://www.ezoic.com/",
+    "prehideSelectors": ["[data-ezoic-role='privacy-policy']"],
+    "detectCmp": [{ "exists": "[data-ezoic-role='privacy-policy'] #ez-ccpa-reject-all" }],
+    "detectPopup": [{ "visible": "[data-ezoic-role='privacy-policy'] #ez-ccpa-reject-all" }],
+    "optIn": [{ "waitForThenClick": "#ez-ccpa-accept-all" }],
+    "optOut": [
+        { "any": [{ "eval": "EVAL_EZOIC_GPP_OPTED_OUT" }, { "waitForThenClick": "#ez-ccpa-reject-all" }] },
+        { "hide": "[data-ezoic-role='privacy-policy']" }
+    ],
+    "test": [{ "eval": "EVAL_EZOIC_GPP_OPTED_OUT" }]
+}

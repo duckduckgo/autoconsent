@@ -172,6 +172,14 @@ export const snippets = {
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
+    // the GPP ping callback runs synchronously
+    EVAL_EZOIC_GPP_OPTED_OUT: () => {
+        let optedOut = false;
+        window.__gpp?.('ping', (data) => {
+            optedOut = Object.values(data?.parsedSections || {}).some((section) => section?.SaleOptOut === 1);
+        });
+        return optedOut;
+    },
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     // Zero while the embedding page still keeps the consent iframe collapsed.
     EVAL_IFRAME_SHOWN: () => window.innerHeight > 0,
