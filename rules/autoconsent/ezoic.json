@@ -12,7 +12,8 @@
         { "click": "#ez-manage-settings" },
         { "waitFor": "#ez-cookie-dialog input[type=checkbox]" },
         { "click": "#ez-cookie-dialog input[type=checkbox]:checked", "all": true, "optional": true },
-        { "waitForThenClick": "#ez-save-settings" }
+        { "waitForThenClick": "#ez-save-settings" },
+        { "hide": "#ez-cmpv2-container ~ #ez-cmpv2-container", "optional": true }
     ],
     "test": [{ "cookieContains": "ez-consent-tcf" }]
 }
