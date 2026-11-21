@@ -69,7 +69,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\btechnolog(?:ies|ien|ieën|ías|ie) (?:like|such as|wie|zoals|como(?: las)?|telles que(?: les)?|come(?: i)?) cookies?\b/gi,
     /\buses (?:\S+ ){0,2}cookies\b/gi,
     /\b(?:like|want) to (?:use|set) (?:\S+ ){0,2}cookies\b/gi,
-    /\b(?:optional|additional|non-essential) cookies\b/gi,
+    // a cookie category may sit in between: "optional marketing cookies"
+    /\b(?:optional|additional|non-essential) (?:(?:marketing|analytics|advertising|tracking|performance) )?cookies\b/gi,
     /\bstoring of cookies\b|\bplaced cookies\b/gi,
     /\b(?:store|stores) and access (?:data|information) on your device\b|\baccess and store (?:data|information) on your device\b/gi,
     /\bwe use (?:\S+ ){1,4}cookies\b/gi,

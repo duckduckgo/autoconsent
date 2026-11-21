@@ -100,6 +100,13 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
         }
     });
 
+    it('detects "optional <category> cookies" notices', () => {
+        const text =
+            '"Accept all" allows optional marketing cookies. "Essential only" turns them off; eligible public pages may still show contextual ads.';
+        expect(checkHeuristicPatterns(text, 'popup').patterns.length).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns('Add optional chocolate cookies to your order', 'popup').patterns).to.have.length(0);
+    });
+
     it('does not match when "cookies" is further away', () => {
         expect(
             checkHeuristicPatterns('We use the best chocolate in our cookies', undefined, {
