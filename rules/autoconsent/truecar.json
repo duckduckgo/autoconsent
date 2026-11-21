@@ -5,25 +5,25 @@
     "runContext": {
         "urlPattern": "^https://(www\\.)?truecar\\.com/"
     },
-    "prehideSelectors": [".fixed.bottom-0:has([data-test=cookieBannerButton])"],
+    "prehideSelectors": [".fixed.bottom-0:has(#cookie-banner-heading)"],
     "detectCmp": [
         {
-            "exists": ".fixed.bottom-0 [data-test=cookieBannerButton]"
+            "exists": ".fixed.bottom-0 [aria-labelledby=cookie-banner-heading]"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".fixed.bottom-0 [data-test=cookieBannerButton]"
+            "visible": ".fixed.bottom-0 [aria-labelledby=cookie-banner-heading]"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "[data-test=cookieBannerButton]"
+            "waitForThenClick": "[aria-labelledby=cookie-banner-heading] button"
         }
     ],
     "optOut": [
         {
-            "hide": ".fixed.bottom-0:has([data-test=cookieBannerButton])"
+            "hide": ".fixed.bottom-0:has(#cookie-banner-heading)"
         }
     ]
 }
