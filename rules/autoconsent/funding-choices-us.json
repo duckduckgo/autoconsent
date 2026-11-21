@@ -1,0 +1,15 @@
+{
+    "name": "funding-choices-us",
+    "prehideSelectors": [".fc-ccpa-root .fc-confirmation-dialog"],
+    "detectCmp": [
+        { "exists": ".fc-ccpa-root" },
+        { "exists": ["body > div[style*=\"!important\"]:empty", "#ft-reg-bubble .ft-reg-message-button"] }
+    ],
+    "detectPopup": [{ "visible": ["body > div[style*=\"!important\"]:empty", "#ft-reg-bubble .ft-reg-message-button"] }],
+    "optOut": [
+        { "click": ["body > div[style*=\"!important\"]:empty", "#ft-reg-bubble .ft-reg-message-button"] },
+        { "waitForThenClick": ".fc-ccpa-root .fc-cta-opt-out" }
+    ],
+    "optIn": [{ "click": ["body > div[style*=\"!important\"]:empty", "#ft-reg-bubble .ft-reg-bubble-close"] }],
+    "test": [{ "wait": 1000 }, { "exists": ".fc-ccpa-root", "negated": true }]
+}
