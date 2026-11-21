@@ -70,6 +70,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\buses (?:\S+ ){0,2}cookies\b/gi,
     /\b(?:like|want) to (?:use|set) (?:\S+ ){0,2}cookies\b/gi,
     /\b(?:optional|additional|non-essential) cookies\b/gi,
+    // required vs optional cookies: "Some cookies are required for the site to work. Others improve …"
+    { pattern: /\bsome cookies are (?:required|necessary|essential)\b.{0,100}\bothers\b/gi, input: 'popup' },
     /\bstoring of cookies\b|\bplaced cookies\b/gi,
     /\b(?:store|stores) and access (?:data|information) on your device\b|\baccess and store (?:data|information) on your device\b/gi,
     /\bwe use (?:\S+ ){1,4}cookies\b/gi,

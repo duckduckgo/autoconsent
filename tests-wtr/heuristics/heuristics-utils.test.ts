@@ -422,6 +422,13 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects required vs optional cookie wording in popups only', () => {
+        const text = 'Some cookies are required for the site to work correctly. Others improve the effectiveness of our online marketing.';
+        expect(detectsPopup(text)).to.be.true;
+        expect(detectsPage(text)).to.be.false;
+        expect(detectsPopup('Some cookies are required to log in. Please enable cookies in your browser.')).to.be.false;
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';
