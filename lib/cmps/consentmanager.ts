@@ -1,3 +1,4 @@
+import { waitFor } from '../utils';
 import AutoConsentCMPBase from './base';
 
 // Note: JS API is also available:
@@ -44,6 +45,7 @@ export default class ConsentManager extends AutoConsentCMPBase {
     async optOut() {
         await this.wait(500);
         if (this.apiAvailable) {
+            await this.waitForPopupUI();
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_3');
         }
 
@@ -66,8 +68,14 @@ export default class ConsentManager extends AutoConsentCMPBase {
         return true;
     }
 
+    // A choice set through the API before the UI has rendered is discarded when the UI loads
+    async waitForPopupUI() {
+        await waitFor(() => this.elementVisible('#cmpbox', 'any') || this.elementVisible(['#cmpwrapper', '#cmpbox'], 'any'), 25, 200);
+    }
+
     async optIn() {
         if (this.apiAvailable) {
+            await this.waitForPopupUI();
             return await this.mainWorldEval('EVAL_CONSENTMANAGER_4');
         }
         return await this.click('.cmpboxbtnyes');
