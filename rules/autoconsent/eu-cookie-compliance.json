@@ -1,15 +1,16 @@
 {
     "name": "eu-cookie-compliance-banner",
-    "detectCmp": [{ "exists": "body.eu-cookie-compliance-popup-open" }],
-    "detectPopup": [{ "exists": "body.eu-cookie-compliance-popup-open" }],
-    "optIn": [
+    "vendorUrl": "https://www.drupal.org/project/eu_cookie_compliance",
+    "detectCmp": [
         {
-            "click": ".eu-cookie-compliance-banner .agree-button, .eu-cookie-compliance-banner .accept-all"
+            "exists": "body.eu-cookie-compliance-popup-open #sliding-popup :is(.decline-button, .eu-cookie-compliance-reject-button, .accept-necessary, .eu-cookie-compliance-save-preferences-button)"
         }
     ],
+    "detectPopup": [{ "exists": "body.eu-cookie-compliance-popup-open" }],
+    "optIn": [{ "waitForThenClick": "#sliding-popup :is(.agree-button, .accept-all)" }],
     "optOut": [
         {
-            "click": ".eu-cookie-compliance-banner .decline-button, .eu-cookie-compliance-banner .accept-necessary, .eu-cookie-compliance-save-preferences-button"
+            "waitForThenClick": "#sliding-popup :is(.decline-button, .eu-cookie-compliance-reject-button, .accept-necessary, .eu-cookie-compliance-save-preferences-button)"
         }
     ],
     "test": [
