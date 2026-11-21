@@ -1,0 +1,31 @@
+{
+    "name": "madeiramadeira",
+    "_metadata": {
+        "vendorUrl": "https://www.madeiramadeira.com.br/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?madeiramadeira\\.com\\.br/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["div.pos_fixed:has(> button[aria-label=\"Concordar e fechar\"])"],
+    "detectCmp": [
+        {
+            "exists": "div.pos_fixed > button[aria-label=\"Concordar e fechar\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.pos_fixed > button[aria-label=\"Concordar e fechar\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.pos_fixed > button[aria-label=\"Concordar e fechar\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "div.pos_fixed:has(> button[aria-label=\"Concordar e fechar\"])"
+        }
+    ]
+}
