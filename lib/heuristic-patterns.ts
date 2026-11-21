@@ -67,7 +67,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b\d{2,4} iab[- ]partner/gi,
     // "technologies like cookies", in each language
     /\btechnolog(?:ies|ien|ieën|ías|ie) (?:like|such as|wie|zoals|como(?: las)?|telles que(?: les)?|come(?: i)?) cookies?\b/gi,
-    /\buses (?:\S+ ){0,2}cookies\b/gi,
+    /\b(?:uses|utili[sz]es) (?:\S+ ){0,2}cookies\b/gi,
     /\b(?:like|want) to (?:use|set) (?:\S+ ){0,2}cookies\b/gi,
     /\b(?:optional|additional|non-essential) cookies\b/gi,
     /\bstoring of cookies\b|\bplaced cookies\b/gi,

@@ -82,6 +82,15 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects "utilizes cookies" notices', () => {
+        const { snippets } = checkHeuristicPatterns(
+            'Airport Authority utilizes cookies saved on your devices to ensure we give you the best experience.',
+        );
+
+        expect(snippets).to.include('utilizes cookies');
+        expect(checkHeuristicPatterns('Our search utilizes filters to narrow results.').patterns).to.be.empty;
+    });
 });
 
 describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
