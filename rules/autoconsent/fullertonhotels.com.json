@@ -11,17 +11,17 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": ["#ifrmCookieBanner", "#sp-decline"]
+            "exists": ["#ifrmCookieBanner", "#sp-decline, .evSpRejectBtn"]
         }
     ],
     "detectPopup": [
         {
-            "visible": ["#ifrmCookieBanner", "#sp-decline"]
+            "visible": ["#ifrmCookieBanner", "#sp-decline, .evSpRejectBtn"]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["#ifrmCookieBanner", "#sp-accept"]
+            "waitForThenClick": ["#ifrmCookieBanner", "#sp-accept, .evSpAcceptBtn"]
         }
     ],
     "optOut": [
@@ -29,7 +29,7 @@
             "wait": 500
         },
         {
-            "waitForThenClick": ["#ifrmCookieBanner", "#sp-decline"],
+            "waitForThenClick": ["#ifrmCookieBanner", "#sp-decline, .evSpRejectBtn"],
             "comment": "Decline"
         }
     ],
