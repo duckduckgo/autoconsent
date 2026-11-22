@@ -377,6 +377,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+
+    // Turkish (TR)
+    // e.g. "çerez kullanıyoruz", "Google Analytics çerezleri kullanılmaktadır"; no \b next to "ç"
+    /çerez\S{0,8} (?:kullan|yararlan|faydalan)(?:ıyoruz|ılmaktadır|maktadır|maktayız|ılır|ır)/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -639,7 +643,12 @@ const REJECT_PATTERNS_RUSSIAN = [
     /^\s*(не\s+(принима[а-яё]+|соглас[а-яё]+|разреша[а-яё]+|хочу)|нет(,?\s+спасибо)?)\s*$/is,
 ];
 
-const REJECT_PATTERNS_TURKISH = ['reddet', 'çerezleri reddet'];
+const REJECT_PATTERNS_TURKISH = [
+    'reddet',
+    'çerezleri reddet',
+    // "yalnızca zorunlu (çerezleri kabul et)", "sadece gerekli çerezler"; lowercased "I" becomes "i", not "ı"
+    /^(?:yaln[ıi]zca|sadece) (?:zorunlu|gerekli)(?: [çc]erez\S*)?(?: kabul et| izin ver)?$/,
+];
 
 const REJECT_PATTERNS_INDONESIAN = ['tolak cookie'];
 
