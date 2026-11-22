@@ -1,0 +1,44 @@
+{
+    "name": "hyperoptic",
+    "vendorUrl": "https://www.hyperoptic.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?hyperoptic\\.com/"
+    },
+    "prehideSelectors": [".modal-overlay:has(.cookie-consent-initial)"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent-initial"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent-initial"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".modal:has(.cookie-consent-initial) .modal-btn-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".modal:has(.cookie-consent-initial) .modal-btn-secondary"
+        },
+        {
+            "waitForVisible": ".cookie-consent-preferences"
+        },
+        {
+            "click": ".cookie-consent-preferences .toggle-control:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".modal:has(.cookie-consent-preferences) .modal-btn-secondary"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ho_cookie_consent=essential"
+        }
+    ]
+}
