@@ -1,0 +1,29 @@
+{
+    "name": "pvh",
+    "prehideSelectors": [".ReactModalPortal:has([data-testid='CookieNotice-main-wrapper'])"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid='CookieNotice-main-wrapper'] [data-testid='reject-cookies-pvh-button']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid='CookieNotice-main-wrapper']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid='CookieNotice-main-wrapper'] [data-testid='accept-cookies-pvh-button']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid='CookieNotice-main-wrapper'] [data-testid='reject-cookies-pvh-button']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "PVH_COOKIES_GDPR_ANALYTICS=Reject"
+        }
+    ]
+}
