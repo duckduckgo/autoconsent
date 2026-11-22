@@ -1,0 +1,37 @@
+{
+    "name": "nationwidevehiclecontracts",
+    "vendorUrl": "https://www.nationwidevehiclecontracts.co.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?nationwidevehiclecontracts\\.co\\.uk/"
+    },
+    "prehideSelectors": [".cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent [data-cookie-allow-all]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent [data-cookie-allow-all]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-consent [data-cookie-allow-all]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-consent [data-cookie-popup]"
+        },
+        {
+            "waitForThenClick": "#modal-cookie [data-cookie-deny]",
+            "timeout": 5000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "Nvc.CookieControl=1000"
+        }
+    ]
+}
