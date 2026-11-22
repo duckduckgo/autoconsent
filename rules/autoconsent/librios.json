@@ -1,0 +1,40 @@
+{
+    "name": "librios",
+    "vendorUrl": "https://www.librios.com/",
+    "prehideSelectors": [".lib-drawer--cookiesconsent"],
+    "detectCmp": [
+        {
+            "exists": ".lib-drawer--cookiesconsent #btnCookiesConsentDisallow"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".lib-drawer--cookiesconsent.lib-drawer-openonupgrade"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForVisible": ".lib-drawer--cookiesconsent.drawer-open",
+            "timeout": 10000,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".lib-drawer--cookiesconsent #btnCookiesConsentAllow"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": ".lib-drawer--cookiesconsent.drawer-open",
+            "timeout": 10000,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".lib-drawer--cookiesconsent #btnCookiesConsentDisallow"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_LIBRIOS_TEST"
+        }
+    ]
+}

@@ -186,6 +186,7 @@ export const snippets = {
         document
             .querySelector('.consent-banner .cookie-decline')
             .dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window })) || true,
+    EVAL_LIBRIOS_TEST: () => localStorage.getItem('allow_nonessential_cookies') === 'false',
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]
