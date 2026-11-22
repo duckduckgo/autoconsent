@@ -1,0 +1,9 @@
+{
+    "name": "cookie-alert-v3",
+    "prehideSelectors": ["#cookie_alert_box", "#manage_cookie_popup"],
+    "detectCmp": [{ "exists": "#cookie_alert_box #cookie_alert_manage_btn" }, { "exists": "#cookie_alert_reject_popup_btn" }],
+    "detectPopup": [{ "visible": "#cookie_alert_box" }],
+    "optIn": [{ "waitForThenClick": "#cookie_alert_box #cookie_alert_accept_btn" }],
+    "optOut": [{ "eval": "EVAL_COOKIE_ALERT_V3_REJECT" }, { "waitForVisible": "#cookie_alert_box", "check": "none", "timeout": 2000 }],
+    "test": [{ "cookieContains": "cookies_accepted=0" }]
+}

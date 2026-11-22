@@ -115,6 +115,17 @@ export const snippets = {
             ),
         ).consents.statistics,
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
+    // the reject handler asks window.confirm() first, which would block on a native dialog
+    EVAL_COOKIE_ALERT_V3_REJECT: () => {
+        const originalConfirm = window.confirm;
+        window.confirm = () => true;
+        try {
+            document.getElementById('cookie_alert_reject_popup_btn').click();
+        } finally {
+            window.confirm = originalConfirm;
+        }
+        return true;
+    },
     // the close icon is an SVG, which has no click() method
     EVAL_COOKIE_POPUP_CLOSE: () =>
         document.querySelector('#cookie-popup #close-cookies').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
