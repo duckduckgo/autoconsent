@@ -1,0 +1,18 @@
+{
+    "name": "realfoods.co.uk",
+    "vendorUrl": "https://www.realfoods.co.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?realfoods\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#coPo"],
+    "detectCmp": [{ "exists": "#coPo #settingsButton" }],
+    "detectPopup": [{ "visible": "#coPo" }],
+    "optIn": [{ "waitForThenClick": "#coPo #acceptCookies" }],
+    "optOut": [
+        { "waitForThenClick": "#coPo #settingsButton" },
+        { "waitForVisible": "#coSe" },
+        { "click": "#coSe input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+        { "click": "#coSe #saveSettings" }
+    ],
+    "test": [{ "cookieContains": "cookieConsent=necessary" }]
+}
