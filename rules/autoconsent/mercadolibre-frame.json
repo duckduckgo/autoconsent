@@ -1,0 +1,55 @@
+{
+    "name": "mercadolibre-frame",
+    "vendorUrl": "https://www.mercadolibre.com/",
+    "cosmetic": false,
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://www\\.mercado(libre|livre|pago)\\.(com?\\.)?[a-z]{2}/privacy-preferences/cookies\\?mode=embed"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".pp-cookies-item-switch" }],
+    "detectPopup": [{ "visible": ".pp-cookies-item-switch" }],
+    "optIn": [
+        {
+            "comment": "switches are rendered disabled until the page hydrates and attaches its save listener",
+            "waitFor": ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled) input",
+            "timeout": 10000
+        },
+        {
+            "if": { "exists": ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled) input:not(:checked)" },
+            "then": [
+                {
+                    "click": ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled) input:not(:checked)",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "comment": "saving closes the modal and removes this frame, which can drop the eval response",
+            "eval": "EVAL_MERCADOLIBRE_FRAME_SAVE",
+            "optional": true
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "switches are rendered disabled until the page hydrates and attaches its save listener",
+            "waitFor": ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled) input",
+            "timeout": 10000
+        },
+        {
+            "if": { "exists": ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled) input:checked" },
+            "then": [
+                {
+                    "click": ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled) input:checked",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "comment": "saving closes the modal and removes this frame, which can drop the eval response",
+            "eval": "EVAL_MERCADOLIBRE_FRAME_SAVE",
+            "optional": true
+        }
+    ]
+}

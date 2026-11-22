@@ -186,6 +186,8 @@ export const snippets = {
         document
             .querySelector('.consent-banner .cookie-decline')
             .dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window })) || true,
+    // the embedded preferences page saves its current toggles on this message, normally sent by the parent's save button
+    EVAL_MERCADOLIBRE_FRAME_SAVE: () => window.postMessage({ eventName: 'saveCookiesPreference' }, '*') || true,
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]
