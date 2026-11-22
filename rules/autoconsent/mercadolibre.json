@@ -5,15 +5,15 @@
     "prehideSelectors": [".cookie-consent-banner-opt-out"],
     "detectCmp": [{ "exists": ".cookie-consent-banner-opt-out" }],
     "detectPopup": [{ "visible": ".cookie-consent-banner-opt-out" }],
-    "optIn": [{ "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-accept" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-accept", "retry": 20, "retryInterval": 1000 }],
     "optOut": [
-        { "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-customize" },
+        { "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-customize", "retry": 20, "retryInterval": 1000 },
         {
             "waitFor": [
                 ".cookie-consent-banner-opt-out__modal iframe",
                 ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled) input"
             ],
-            "timeout": 10000
+            "timeout": 30000
         },
         {
             "click": [
