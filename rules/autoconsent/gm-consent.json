@@ -1,0 +1,20 @@
+{
+    "name": "gm-consent",
+    "prehideSelectors": [".gmc-root"],
+    "detectCmp": [{ "exists": ".gmc-root[role=dialog] [data-gmc]" }],
+    "detectPopup": [{ "visible": ".gmc-root[role=dialog]" }],
+    "optIn": [{ "waitForThenClick": ".gmc-root [data-gmc=accept]" }],
+    "optOut": [
+        {
+            "if": { "exists": ".gmc-root [data-gmc=custom]" },
+            "then": [{ "click": ".gmc-root [data-gmc=custom]" }]
+        },
+        { "waitForVisible": ".gmc-root [data-gmc=save]" },
+        {
+            "if": { "exists": ".gmc-root [data-gmc=toggle]:checked" },
+            "then": [{ "click": ".gmc-root [data-gmc=toggle]:checked" }]
+        },
+        { "click": ".gmc-root [data-gmc=save]" }
+    ],
+    "test": [{ "cookieContains": "gm_consent=denied" }]
+}
