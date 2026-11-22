@@ -1,0 +1,24 @@
+{
+    "name": "brandfetch",
+    "vendorUrl": "https://brandfetch.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?brandfetch\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "[role='dialog'][aria-label='Cookie preferences']" }],
+    "detectPopup": [{ "visible": "[role='dialog'][aria-label='Cookie preferences']" }],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog' and @aria-label='Cookie preferences']//button[normalize-space(.)='Accept all']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog' and @aria-label='Cookie preferences']//button[normalize-space(.)='Configure']"
+        },
+        {
+            "waitForThenClick": "xpath///div[@role='dialog' and @aria-label='Cookie preferences']//button[normalize-space(.)='Reject all']"
+        }
+    ],
+    "test": [{ "cookieContains": "bf_consent=1.000." }]
+}
