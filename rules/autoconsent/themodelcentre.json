@@ -1,0 +1,43 @@
+{
+    "name": "themodelcentre.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?themodelcentre\\.com/"
+    },
+    "prehideSelectors": ["div[role=\"dialog\"][aria-label=\"Cookie notice\"]"],
+    "detectCmp": [
+        {
+            "exists": "div[role=\"dialog\"][aria-label=\"Cookie notice\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[role=\"dialog\"][aria-label=\"Cookie notice\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[role=\"dialog\"][aria-label=\"Cookie notice\"] p + div > button:first-child"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div[role=\"dialog\"][aria-label=\"Cookie notice\"] p + div > button:last-child"
+        },
+        {
+            "waitFor": "div[role=\"dialog\"][aria-label=\"Cookie notice\"] label + div > button:last-child"
+        },
+        {
+            "click": "div[role=\"dialog\"][aria-label=\"Cookie notice\"] label input[type=\"checkbox\"]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "div[role=\"dialog\"][aria-label=\"Cookie notice\"] label + div > button:last-child"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_THEMODELCENTRE_TEST"
+        }
+    ]
+}

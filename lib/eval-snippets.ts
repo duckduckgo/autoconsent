@@ -276,6 +276,7 @@ export const snippets = {
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
+    EVAL_THEMODELCENTRE_TEST: () => localStorage.getItem('cookie_consent') === 'rejected',
     // Same handler the banner buttons call; which button refuses differs per template.
     EVAL_TRUSTCOMMANDER_BANNER_SHOWN: () => {
         const wrapper = document.getElementById('tc-privacy-wrapper');
