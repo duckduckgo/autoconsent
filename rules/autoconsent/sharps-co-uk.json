@@ -1,0 +1,48 @@
+{
+    "name": "sharps.co.uk",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?sharps\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#cookies-notice-modal"],
+    "detectCmp": [
+        {
+            "exists": "#cookies-notice-modal #manage-cookies-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies-notice-modal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies-notice-modal .accept-all-cookies-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#manage-cookies-btn"
+        },
+        {
+            "waitForVisible": "#manage-cookies-form"
+        },
+        {
+            "click": "#manage-cookies-form input[type=checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#manage-cookies-form button[type=submit]"
+        },
+        {
+            "waitForVisible": "#manage-cookies-modal, #cookies-notice-modal",
+            "check": "none",
+            "timeout": 5000
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_SHARPS_CO_UK_0"
+        }
+    ]
+}
