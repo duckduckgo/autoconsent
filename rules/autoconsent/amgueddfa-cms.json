@@ -1,0 +1,46 @@
+{
+    "name": "amgueddfa-cms",
+    "prehideSelectors": ["#cookie_bar_container"],
+    "detectCmp": [
+        {
+            "exists": "#cookie_bar_container #cookie_bar_agree_button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_bar_container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_bar_agree_button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie_preferences_link"
+        },
+        {
+            "waitForVisible": "#cookie_preferences_dialogue"
+        },
+        {
+            "click": "#cookie_preferences input[name=cookie_preference]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#save_preferences_button"
+        }
+    ],
+    "test": [
+        {
+            "wait": 1000
+        },
+        {
+            "cookieContains": "cookie_preferences_analytics=false"
+        },
+        {
+            "cookieContains": "cookie_preferences_marketing=false"
+        }
+    ]
+}
