@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { enableGpc } from '../../../lib/regional-testing/harness.mjs';
+import { enableGpc, runTest } from '../../../lib/regional-testing/harness.mjs';
 import { buildProxyConfig, deviceContextOptions } from './regional-proxy.mjs';
 
 const credentials = {
@@ -96,5 +96,33 @@ describe('Global Privacy Control', () => {
         class Navigator {}
         new Function('Navigator', `(${calls.scripts[0].toString()})()`)(Navigator);
         assert.equal(/** @type {any} */ (new Navigator()).globalPrivacyControl, true);
+    });
+
+    /**
+     * The GPC headers runTest sets before navigating. The fake page fails to navigate, so the run stops there.
+     * @param {object} options
+     */
+    async function gpcHeadersFor(options) {
+        /** @type {Record<string, string>[]} */
+        const headers = [];
+        const page = /** @type {any} */ ({
+            setExtraHTTPHeaders: async (/** @type {Record<string, string>} */ value) => headers.push(value),
+            addInitScript: async () => {},
+            goto: async () => {
+                throw new Error('no network in tests');
+            },
+        });
+        const provider = /** @type {any} */ ({ name: 'fake', defaultScreenshotsDir: '.', inject: async () => ({}) });
+        const result = await runTest(page, 'https://example.com/', 'us', options, provider);
+        assert.match(result.errors.join(' '), /no network in tests/);
+        return headers;
+    }
+
+    it('is on by default', async () => {
+        assert.deepEqual(await gpcHeadersFor({}), [{ 'Sec-GPC': '1' }]);
+    });
+
+    it('is off with gpc: false', async () => {
+        assert.deepEqual(await gpcHeadersFor({ gpc: false }), []);
     });
 });
