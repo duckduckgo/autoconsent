@@ -1,0 +1,45 @@
+{
+    "name": "ukplanettools",
+    "vendorUrl": "https://www.ukplanettools.co.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?ukplanettools\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"CookieNotice_cookieModal\"] [class*=\"CookieNotice_amgdprcookie-buttons-block\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*=\"CookieNotice_cookieModal\"] [class*=\"CookieNotice_amgdprcookie-buttons-block\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[class*=\"CookieNotice_cookieModal\"] button[class*=\"CookieNotice_settings\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[class*=\"CookieNotice_cookieModal\"] button[class*=\"CookieNotice_amgdprcookie-button\"]:not([class*=\"CookieNotice_accept\"]):not([class*=\"CookieNotice_settings\"])"
+        },
+        {
+            "waitForVisible": "[class*=\"CookieNotice_cookieModal\"] [class*=\"CookieNotice_amgdprcookie-groups-container\"]",
+            "timeout": 5000
+        },
+        {
+            "click": "[class*=\"CookieNotice_cookieModal\"] [class*=\"CookieNotice_amgdprcookie-groups-container\"] input[type=\"checkbox\"]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[class*=\"CookieNotice_cookieModal\"] button[class*=\"CookieNotice_accept\"]"
+        },
+        {
+            "waitForVisible": "[class*=\"CookieNotice_cookieModal\"] [class*=\"CookieNotice_amgdprcookie-buttons-block\"]",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}
