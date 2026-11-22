@@ -1,0 +1,33 @@
+{
+    "name": "cmsbox",
+    "vendorUrl": "https://www.cmsbox.com/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cb-cookie-warning #cb-cookie-warning__button--decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cb-cookie-warning #cb-cookie-warning__button--decline"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cb-cookie-warning #cb-cookie-warning__button--accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cb-cookie-warning #cb-cookie-warning__button--decline",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cb-cookie-warning",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

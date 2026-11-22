@@ -2,10 +2,10 @@
     "name": "cookieconsent2",
     "vendorUrl": "https://www.github.com/orestbida/cookieconsent",
     "comment": "supports v2.x.x of the library",
-    "prehideSelectors": ["#cc--main"],
+    "prehideSelectors": ["#cc--main", "#cc_div:has(#s-cnt)"],
     "detectCmp": [
         {
-            "exists": "#cc--main"
+            "exists": "#cc--main, #cc_div #s-cnt"
         }
     ],
     "detectPopup": [

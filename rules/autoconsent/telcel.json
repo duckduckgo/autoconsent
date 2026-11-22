@@ -1,0 +1,29 @@
+{
+    "name": "telcel",
+    "vendorUrl": "https://www.telcel.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?telcel\\.com/"
+    },
+    "prehideSelectors": [".telcel-banner-aviso-cookies"],
+    "detectCmp": [
+        {
+            "exists": ".telcel-banner-aviso-cookies #acepto-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".telcel-banner-aviso-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".telcel-banner-aviso-cookies #acepto-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".telcel-banner-aviso-cookies"
+        }
+    ]
+}

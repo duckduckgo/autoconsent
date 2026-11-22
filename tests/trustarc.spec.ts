@@ -24,3 +24,10 @@ generateCMPTests('TrustArc-top', ['https://shop.royalmail.com/garden-wildlife-st
     testOptOut: true,
     testSelfTest: false,
 });
+
+// banner with a hidden, unwired "Reject All" shortcut (implied-consent regions)
+generateCMPTests('TrustArc-top', ['https://us.store.bambulab.com/'], {
+    testOptOut: true,
+    testSelfTest: false,
+    onlyRegions: ['US'],
+});

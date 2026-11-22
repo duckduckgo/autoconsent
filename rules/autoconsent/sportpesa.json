@@ -1,0 +1,35 @@
+{
+    "name": "sportpesa",
+    "vendorUrl": "https://sportpesa.co.tz/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?sportpesa\\.co\\.tz/"
+    },
+    "prehideSelectors": ["#cookies-law-info-bar"],
+    "detectCmp": [
+        {
+            "exists": "#cookies-law-info-bar #cookies-law-info-content button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies-law-info-bar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies-law-info-bar #cookies-law-info-content button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookies-law-info-bar"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookies-law-info-bar",
+            "check": "none"
+        }
+    ]
+}

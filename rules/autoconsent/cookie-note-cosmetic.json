@@ -1,0 +1,17 @@
+{
+    "name": "cookie-note-cosmetic",
+    "comment": "Common copy-paste notice snippet with a single accept button; variants with a reject/decline button are left to other handlers.",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookie_note"],
+    "detectCmp": [
+        { "exists": "#cookie_note :is(.cookie_accept, #cookie_accept)" },
+        {
+            "exists": "#cookie_note :is([class*=\"cookie_reject\"], [id*=\"cookie_reject\"], [class*=\"cookie_decline\"], [id*=\"cookie_decline\"], [class*=\"cookie_deny\"], [id*=\"cookie_deny\"], [class*=\"cookie_refuse\"], [id*=\"cookie_refuse\"])",
+            "negated": true
+        }
+    ],
+    "detectPopup": [{ "visible": "#cookie_note" }],
+    "optIn": [{ "waitForThenClick": "#cookie_note :is(.cookie_accept, #cookie_accept)" }],
+    "optOut": [{ "hide": "#cookie_note" }],
+    "test": [{ "visible": "#cookie_note", "check": "none" }]
+}

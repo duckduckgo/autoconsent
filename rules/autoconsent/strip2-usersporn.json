@@ -1,0 +1,28 @@
+{
+    "name": "strip2-usersporn",
+    "cosmetic": true,
+    "prehideSelectors": [
+        "#cookie_banner.cookie-banner:has(> a#cookie_banner_accept[href*=\"/accept_cookie/\"]), #page > div.busi:has(> a[href*=\"/accept_cookie/\"])"
+    ],
+    "detectCmp": [
+        {
+            "exists": "#cookie_banner.cookie-banner > a#cookie_banner_accept[href*=\"/accept_cookie/\"], #page > div.busi > a[href*=\"/accept_cookie/\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_banner.cookie-banner, #page > div.busi:has(> a[href*=\"/accept_cookie/\"])",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_banner_accept, #page > div.busi > a[href*=\"/accept_cookie/\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookie_banner.cookie-banner, #page > div.busi:has(> a[href*=\"/accept_cookie/\"])"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "name": "bayern-matomo",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)*bayern\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".modCookieBar button[onclick*='declineMatomoConsent']" }],
+    "detectPopup": [{ "visible": ".modCookieBar button[onclick*='declineMatomoConsent']" }],
+    "optIn": [],
+    "optOut": [{ "waitForThenClick": ".modCookieBar button[onclick*='declineMatomoConsent']", "comment": "Webanalyse ablehnen" }],
+    "test": [{ "waitForVisible": ".modCookieBar", "timeout": 2000, "check": "none" }]
+}

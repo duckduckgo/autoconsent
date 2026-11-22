@@ -1,6 +1,0 @@
-import generateCMPTests from '../../playwright/runner';
-generateCMPTests('auto_DE_la.spankbang.com_sva', ['https://la.spankbang.com/'], {
-    testOptIn: false,
-    testSelfTest: true,
-    onlyRegions: ['DE'],
-});

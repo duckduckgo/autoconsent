@@ -1,0 +1,9 @@
+{
+    "name": "c-cookies-submit",
+    "cosmetic": true,
+    "prehideSelectors": [".c-cookies[data-cookies]:has(button[data-cookies-submit])"],
+    "detectCmp": [{ "exists": ".c-cookies[data-cookies] button[data-cookies-submit]" }],
+    "detectPopup": [{ "visible": ".c-cookies[data-cookies]:has(button[data-cookies-submit])" }],
+    "optIn": [{ "waitForThenClick": ".c-cookies[data-cookies] button[data-cookies-submit]" }],
+    "optOut": [{ "hide": ".c-cookies[data-cookies]:has(button[data-cookies-submit])" }]
+}

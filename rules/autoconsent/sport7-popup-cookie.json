@@ -1,0 +1,9 @@
+{
+    "name": "sport7-popup-cookie",
+    "prehideSelectors": [".popup-box.popup-cookie:has(.popup-default-box [data-accept])"],
+    "detectCmp": [{ "exists": ".popup-box.popup-cookie .popup-default-box [data-accept]" }],
+    "detectPopup": [{ "visible": ".popup-box.popup-cookie" }],
+    "optIn": [{ "waitForThenClick": ".popup-box.popup-cookie .popup-default-box [data-accept]" }],
+    "optOut": [{ "waitForThenClick": ".popup-box.popup-cookie .popup-close", "retry": 5, "retryInterval": 500 }],
+    "test": [{ "waitForVisible": ".popup-box.popup-cookie", "check": "none", "timeout": 2000 }]
+}

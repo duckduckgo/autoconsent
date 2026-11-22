@@ -1,0 +1,35 @@
+{
+    "name": "sexlog",
+    "vendorUrl": "https://www.sexlog.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?sexlog\\.com/"
+    },
+    "prehideSelectors": [".lgpd-tooltip"],
+    "detectCmp": [
+        {
+            "exists": ".lgpd-tooltip .lgpd-tooltip__button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".lgpd-tooltip"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".lgpd-tooltip .lgpd-tooltip__button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".lgpd-tooltip"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".lgpd-tooltip",
+            "check": "none"
+        }
+    ]
+}

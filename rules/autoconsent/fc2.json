@@ -1,0 +1,29 @@
+{
+    "name": "fc2",
+    "vendorUrl": "https://fc2.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?fc2\\.com/"
+    },
+    "prehideSelectors": ["div:has(> div > div > button[name=\"gdpr_agree_btn\"])"],
+    "detectCmp": [
+        {
+            "exists": "button[name=\"gdpr_agree_btn\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "button[name=\"gdpr_agree_btn\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "button[name=\"gdpr_agree_btn\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "div:has(> div > div > button[name=\"gdpr_agree_btn\"])"
+        }
+    ]
+}

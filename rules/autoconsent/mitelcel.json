@@ -1,0 +1,35 @@
+{
+    "name": "mitelcel",
+    "vendorUrl": "https://mitelcel.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?mitelcel\\.com/"
+    },
+    "prehideSelectors": [".cookie-consent-banner", ".cookie-consent-banner__backdrop"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent-banner .cookie-consent-banner__btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-consent-banner .cookie-consent-banner__btn"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookie-consent-banner, .cookie-consent-banner__backdrop"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".cookie-consent-banner",
+            "check": "none"
+        }
+    ]
+}

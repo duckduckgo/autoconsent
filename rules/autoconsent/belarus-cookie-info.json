@@ -1,0 +1,13 @@
+{
+    "name": "belarus-cookie-info",
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [".cookie_info:has(#cookie_no.cookie_btn)"],
+    "detectCmp": [{ "exists": ".cookie_info #cookie_no.cookie_btn" }],
+    "detectPopup": [{ "visible": ".cookie_info #cookie_no.cookie_btn" }],
+    "optIn": [{ "waitForThenClick": ".cookie_info #cookie_yes.cookie_btn" }],
+    "optOut": [{ "waitForThenClick": ".cookie_info #cookie_no.cookie_btn" }],
+    "test": [{ "cookieContains": "no_cookie=1" }]
+}
