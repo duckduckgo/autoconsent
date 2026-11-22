@@ -1,0 +1,10 @@
+{
+    "name": "wko",
+    "vendorUrl": "https://www.wko.at/",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#cmp-root #cmp-banner-disagree-all" }],
+    "detectPopup": [{ "visible": "#cmp-root.is-visible #cmp-banner" }],
+    "optIn": [{ "wait": 500 }, { "waitForThenClick": "#cmp-banner-agree-all" }],
+    "optOut": [{ "wait": 500 }, { "waitForThenClick": "#cmp-banner-disagree-all" }],
+    "test": [{ "cookieContains": "consent=true" }]
+}

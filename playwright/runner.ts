@@ -75,6 +75,8 @@ type TestOptions = {
     expectPopupOpen: boolean;
     expectedRuns: number;
     gpc: boolean;
+    // move the mouse after load, for CMPs that only show their popup after user interaction
+    simulateUserInteraction: boolean;
 };
 // A frame's content script, reached through either the isolated-world transport or a main-world Frame.
 type ContentScriptTarget = {
@@ -93,6 +95,7 @@ const defaultOptions: TestOptions = {
     expectPopupOpen: true,
     expectedRuns: 1,
     gpc: false,
+    simulateUserInteraction: false,
 };
 
 const contentScript = fs.readFileSync(path.join(__dirname, '../dist/autoconsent.playwright.js'), 'utf8');
@@ -184,6 +187,9 @@ class TestRun {
         }
         try {
             this.response = await this.page.goto(this.url, { waitUntil: 'commit' });
+            if (this.options.simulateUserInteraction) {
+                this.simulateUserInteraction();
+            }
 
             if (!useIsolatedWorld) {
                 await this.injectContentScripts();
@@ -241,6 +247,19 @@ class TestRun {
         }
         const title = await this.page.title().catch(() => '');
         return BOT_WALL_TITLE.test(title);
+    }
+
+    // keep moving the mouse until a popup shows up, since the page may attach its listeners late
+    async simulateUserInteraction() {
+        for (let i = 0; i < 20 && !this.isMessageReceived({ type: 'popupFound' }); i++) {
+            try {
+                await this.page.waitForTimeout(1000);
+                await this.page.mouse.move(100 + i * 10, 100 + i * 10);
+            } catch {
+                // the page was closed
+                return;
+            }
+        }
     }
 
     // emulate a browser that sends the Global Privacy Control signal
