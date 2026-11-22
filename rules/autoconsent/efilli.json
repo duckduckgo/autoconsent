@@ -1,0 +1,54 @@
+{
+    "name": "efilli",
+    "vendorUrl": "https://efilli.com/",
+    "detectCmp": [
+        {
+            "exists": "efilli-layout-dynamic"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["efilli-layout-dynamic", "[efl-consent-not-saved] > [efl-consent-not-saved]"],
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "eval": "EVAL_EFILLI_OPT_IN"
+        },
+        {
+            "waitFor": ["efilli-layout-dynamic", "[efl-consent-saved]"],
+            "timeout": 2000
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ["efilli-layout-dynamic", "[efl-consent-not-saved]:is([data-name='reddet' i], [data-name='reject button' i])"],
+                "check": "any"
+            },
+            "then": [
+                {
+                    "click": ["efilli-layout-dynamic", "[efl-consent-not-saved]:is([data-name='reddet' i], [data-name='reject button' i])"]
+                }
+            ],
+            "else": [
+                {
+                    "eval": "EVAL_EFILLI_OPT_OUT"
+                }
+            ]
+        },
+        {
+            "waitFor": ["efilli-layout-dynamic", "[efl-consent-saved]"],
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "exists": [
+                "efilli-layout-dynamic",
+                "[efl-consent-saved][efl-category-functional-off][efl-category-marketing-off][efl-category-other-off]"
+            ]
+        }
+    ]
+}
