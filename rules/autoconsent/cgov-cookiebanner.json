@@ -1,0 +1,9 @@
+{
+    "name": "cgov-cookiebanner",
+    "prehideSelectors": [".cgov-cookiebanner"],
+    "detectCmp": [{ "exists": ".cgov-cookiebanner button[name=reject]" }],
+    "detectPopup": [{ "visible": ".cgov-cookiebanner" }],
+    "optIn": [{ "waitForThenClick": ".cgov-cookiebanner button[name=accept]" }],
+    "optOut": [{ "waitForThenClick": ".cgov-cookiebanner button[name=reject]" }],
+    "test": [{ "waitForVisible": ".cgov-cookiebanner", "check": "none", "timeout": 2000 }]
+}
