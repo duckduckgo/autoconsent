@@ -529,6 +529,8 @@ describe('checkHeuristicPatterns with more notice phrasings', () => {
     it('detects cookie notices in each language', () => {
         const texts = [
             'May we use cookies to see how the site is used?',
+            'May Farflung use cookies and similar tools for two things? You can change either answer in Menu.',
+            'May Farflung use cookies and similar tools to count visits and measure how well the game runs?',
             'Allow analytics cookies? They help us improve the site.',
             'We use privacy-friendly analytics to see which pages are most useful.',
             'You can revoke your consent at any time.',
@@ -554,6 +556,7 @@ describe('checkHeuristicPatterns with more notice phrasings', () => {
         for (const text of [
             'Vi använder förnybar energi och endast nödvändiga resurser',
             'We use data analytics tools in our consulting work',
+            'Bake cookies and similar treats with these kitchen tools',
             'Le ultime notizie su fisco, tasse e dichiarazione dei redditi',
         ]) {
             expect(checkHeuristicPatterns(text, 'popup').patterns, text).to.have.length(0);
