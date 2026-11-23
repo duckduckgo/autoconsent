@@ -1,0 +1,37 @@
+{
+    "name": "cardiff-university",
+    "_metadata": {
+        "vendorUrl": "https://www.cardiff.ac.uk/"
+    },
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?cardiff\\.ac\\.uk/"
+    },
+    "minimumRuleStepVersion": 2,
+    "prehideSelectors": ["#cu-cookie-alert"],
+    "detectCmp": [
+        {
+            "exists": "#cu-cookie-alert #accept-cookie-message"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cu-cookie-alert"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cu-cookie-alert #accept-cookie-message"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cu-cookie-alert"
+        },
+        {
+            "removeClass": "with-cookie-banner",
+            "selector": "body",
+            "optional": true
+        }
+    ]
+}
