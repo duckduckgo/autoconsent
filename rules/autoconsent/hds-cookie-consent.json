@@ -1,0 +1,10 @@
+{
+    "name": "hds-cookie-consent",
+    "vendorUrl": "https://hds.hel.fi/components/cookie-consent/",
+    "prehideSelectors": [".hds-cc__target"],
+    "detectCmp": [{ "exists": [".hds-cc__target", "#hds-cc.hds-cc--banner"] }],
+    "detectPopup": [{ "visible": [".hds-cc__target", "#hds-cc.hds-cc--banner"] }],
+    "optIn": [{ "waitForThenClick": [".hds-cc__target", "#hds-cc.hds-cc--banner button[data-approved=\"all\"]"] }],
+    "optOut": [{ "waitForThenClick": [".hds-cc__target", "#hds-cc.hds-cc--banner button[data-approved=\"required\"]"] }],
+    "test": [{ "visible": [".hds-cc__target", "#hds-cc.hds-cc--banner"], "check": "none" }]
+}
