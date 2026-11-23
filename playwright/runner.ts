@@ -6,6 +6,7 @@ import { ContentScriptMessage } from '../lib/messages';
 import { AutoAction, RuleBundle } from '../lib/types';
 import { filterCompactRules } from '../lib/encoding';
 import compactRules from '../rules/compact-rules.json';
+import coverage from '../data/coverage.json';
 // Full rules include optIn steps that compact rules intentionally omit.
 // We need both formats: compact for optOut tests, full for optIn tests.
 import { autoconsent as fullRules } from '../rules/rules.json';
@@ -18,6 +19,18 @@ const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
 const LOG_PAGE_LOGS = false;
 
 const testRegion = (process.env.REGION || 'NA').trim();
+
+// CI sets these to cut the number of tests per run (see Jenkinsfile).
+// SKIP_OPT_IN=1 does not define optIn tests.
+const skipOptIn = process.env.SKIP_OPT_IN === '1';
+// CI_REGIONS lists the regions the CI run covers. Each spec then runs in at most MAX_CI_REGIONS of them.
+const ciRegions = (process.env.CI_REGIONS || '')
+    .split(',')
+    .map((r) => r.trim().toUpperCase())
+    .filter(Boolean);
+const MAX_CI_REGIONS = 3;
+// Tie-breaker when coverage data does not rank the regions: the core regions first, then CI_REGIONS order.
+const CORE_REGIONS = ['US', 'GB', 'DE'];
 
 // OXYLABS=1 runs each test in a fresh Oxylabs Agent Browser session in REGION instead of a local browser.
 const useOxylabs = process.env.OXYLABS === '1';
@@ -474,6 +487,19 @@ class TestRun {
 // Runs by test id, for the afterEach hook that records Oxylabs candidates.
 const testRuns = new Map<string, TestRun>();
 
+// The CI regions a spec runs in: its onlyRegions in the spec's order, or else the regions where coverage data saw the rule on the most sites.
+function pickCIRegions(cmp: string, options: TestOptions): string[] {
+    const eligible = ciRegions.filter((r) => !options.skipRegions?.includes(r));
+    if (options.onlyRegions && options.onlyRegions.length > 0) {
+        return options.onlyRegions.filter((r) => eligible.includes(r)).slice(0, MAX_CI_REGIONS);
+    }
+    const ruleCoverage: Record<string, { sites?: number }> = (coverage as Record<string, Record<string, { sites?: number }>>)[cmp] || {};
+    const priority = (r: string) => (CORE_REGIONS.includes(r) ? CORE_REGIONS.indexOf(r) : CORE_REGIONS.length + ciRegions.indexOf(r));
+    return [...eligible]
+        .sort((a, b) => (ruleCoverage[b]?.sites || 0) - (ruleCoverage[a]?.sites || 0) || priority(a) - priority(b))
+        .slice(0, MAX_CI_REGIONS);
+}
+
 export default function generateCMPTests(cmp: string, sites: string[], overrideOptions: Partial<TestOptions> = {}) {
     test.describe(cmp, () => {
         if (recordOxylabsCandidates) {
@@ -490,6 +516,9 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
                 return;
             }
             if (finalOptions.skipRegions?.includes(testRegion)) {
+                return;
+            }
+            if (ciRegions.length > 0 && !pickCIRegions(cmp, finalOptions).includes(testRegion)) {
                 return;
             }
 
@@ -511,10 +540,11 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
                 });
             };
 
-            if (!finalOptions.testOptIn && !finalOptions.testOptOut) {
+            const testOptIn = finalOptions.testOptIn && !skipOptIn;
+            if (!testOptIn && !finalOptions.testOptOut) {
                 defineTest('noaction', null);
             }
-            if (finalOptions.testOptIn) {
+            if (testOptIn) {
                 defineTest('optIn', 'optIn');
             }
             if (finalOptions.testOptOut) {
