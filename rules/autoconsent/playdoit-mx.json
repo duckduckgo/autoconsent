@@ -1,0 +1,32 @@
+{
+    "name": "playdoit.mx",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?playdoit\\.mx/"
+    },
+    "prehideSelectors": [".notifications .notification-root:has(a[href*='aboutcookies.org'])"],
+    "detectCmp": [
+        {
+            "exists": ".notifications .notification-root:has(a[href*='aboutcookies.org'])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".notifications .notification-root:has(a[href*='aboutcookies.org'])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".notifications .notification-root:has(a[href*='aboutcookies.org']) .notification-action button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".notifications .notification-root:has(a[href*='aboutcookies.org']) .notification-action button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookiesPolicyAccepted"
+        }
+    ]
+}
