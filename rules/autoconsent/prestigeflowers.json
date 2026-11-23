@@ -1,0 +1,21 @@
+{
+    "name": "prestigeflowers",
+    "runContext": { "urlPattern": "^https?://(www\\.)?prestigeflowers\\.co\\.uk/" },
+    "prehideSelectors": ["#cookies_banner"],
+    "detectCmp": [{ "exists": "#cookies_banner #save-cookies" }],
+    "detectPopup": [{ "visible": "#cookies_banner" }],
+    "optIn": [{ "waitForThenClick": "#accept-cookies" }],
+    "optOut": [
+        {
+            "if": { "visible": "#save-cookies" },
+            "then": [],
+            "else": [{ "waitForThenClick": "#open-cookies" }, { "waitForVisible": "#save-cookies" }]
+        },
+        {
+            "if": { "exists": "#cookies_banner .cookie-check:checked:not(:disabled)" },
+            "then": [{ "click": "#cookies_banner .cookie-check:checked:not(:disabled)", "all": true }]
+        },
+        { "click": "#save-cookies" }
+    ],
+    "test": [{ "cookieContains": "marketing_cookies=0" }]
+}
