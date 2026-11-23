@@ -131,32 +131,26 @@ pipeline {
                     if (testsToRun.isEmpty()) {
                         echo "No tests to run for this change"
                     } else {
-                        def testEnvs = [
-                            "${params.TEST_RESULT_ROOT}/us.env",
-                            "${params.TEST_RESULT_ROOT}/gb.env",
-                            "${params.TEST_RESULT_ROOT}/au.env",
-                            "${params.TEST_RESULT_ROOT}/ca.env",
-                            "${params.TEST_RESULT_ROOT}/de.env",
-                            "${params.TEST_RESULT_ROOT}/fr.env",
-                            "${params.TEST_RESULT_ROOT}/nl.env",
-                            "${params.TEST_RESULT_ROOT}/ch.env",
-                            "${params.TEST_RESULT_ROOT}/no.env"
-                        ]
-                        for (testEnv in testEnvs) {
-                            withEnvFile(testEnv) {
-                                def candidatesFile = "${env.WORKSPACE}/oxylabs-candidates-${env.REGION}.txt"
-                                sh "rm -f '${candidatesFile}'"
-                                def summary
-                                withEnv(["OXYLABS_CANDIDATES=${candidatesFile}"]) {
-                                    summary = runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, testsToRun)
-                                }
-                                testsFailed += summary.failCount
-                                testsTotal += summary.totalCount
-                                // Oxylabs browsers are Chromium only
-                                if (params.BROWSER == 'chrome' && fileExists(candidatesFile)) {
-                                    def oxylabsSummary = runOxylabsTests(candidatesFile, testsToRun)
-                                    // a test that passes on Oxylabs no longer counts as failed
-                                    testsFailed -= oxylabsSummary.passCount
+                        def regions = ['us', 'gb', 'au', 'ca', 'de', 'fr', 'nl', 'ch', 'no']
+                        // Skip optIn tests, and run each spec in at most 3 of these regions, seeded by the PR number (see playwright/runner.ts)
+                        def ciEnv = ["SKIP_OPT_IN=1", "CI_REGIONS=${regions.join(',').toUpperCase()}", "CI_SEED=${env.CHANGE_ID ?: env.BUILD_NUMBER}"]
+                        withEnv(ciEnv) {
+                            for (region in regions) {
+                                withEnvFile("${params.TEST_RESULT_ROOT}/${region}.env") {
+                                    def candidatesFile = "${env.WORKSPACE}/oxylabs-candidates-${env.REGION}.txt"
+                                    sh "rm -f '${candidatesFile}'"
+                                    def summary
+                                    withEnv(["OXYLABS_CANDIDATES=${candidatesFile}"]) {
+                                        summary = runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, testsToRun)
+                                    }
+                                    testsFailed += summary.failCount
+                                    testsTotal += summary.totalCount
+                                    // Oxylabs browsers are Chromium only
+                                    if (params.BROWSER == 'chrome' && fileExists(candidatesFile)) {
+                                        def oxylabsSummary = runOxylabsTests(candidatesFile, testsToRun)
+                                        // a test that passes on Oxylabs no longer counts as failed
+                                        testsFailed -= oxylabsSummary.passCount
+                                    }
                                 }
                             }
                         }

@@ -19,6 +19,18 @@ const LOG_PAGE_LOGS = false;
 
 const testRegion = (process.env.REGION || 'NA').trim();
 
+// CI sets these to cut the number of tests per run (see Jenkinsfile).
+// SKIP_OPT_IN=1 does not define optIn tests.
+const skipOptIn = process.env.SKIP_OPT_IN === '1';
+// CI_REGIONS lists the regions the CI run covers. Each spec then runs in at most MAX_CI_REGIONS of them.
+const ciRegions = (process.env.CI_REGIONS || '')
+    .split(',')
+    .map((r) => r.trim().toUpperCase())
+    .filter(Boolean);
+const MAX_CI_REGIONS = 3;
+// CI_SEED (the PR number) picks the extra regions, so a PR always tests the same ones and different PRs spread across all regions.
+const ciSeed = process.env.CI_SEED || '';
+
 // OXYLABS=1 runs each test in a fresh Oxylabs Agent Browser session in REGION instead of a local browser.
 const useOxylabs = process.env.OXYLABS === '1';
 // Local runs list the tests that failed on a bot wall here; Oxylabs runs only define the listed tests.
@@ -474,6 +486,18 @@ class TestRun {
 // Runs by test id, for the afterEach hook that records Oxylabs candidates.
 const testRuns = new Map<string, TestRun>();
 
+// The CI regions a spec runs in: US, then the spec's onlyRegions in the order written, then regions picked with CI_SEED until there are MAX_CI_REGIONS.
+function pickCIRegions(options: TestOptions): string[] {
+    let eligible = ciRegions.filter((r) => !options.skipRegions?.includes(r));
+    if (options.onlyRegions && options.onlyRegions.length > 0) {
+        eligible = eligible.filter((r) => options.onlyRegions!.includes(r));
+    }
+    const picked = ['US', ...(options.onlyRegions || [])].filter((r, i, all) => eligible.includes(r) && all.indexOf(r) === i);
+    const seededOrder = (r: string) => crypto.createHash('md5').update(`${ciSeed}:${r}`).digest('hex');
+    const rest = eligible.filter((r) => !picked.includes(r)).sort((a, b) => seededOrder(a).localeCompare(seededOrder(b)));
+    return [...picked, ...rest].slice(0, MAX_CI_REGIONS);
+}
+
 export default function generateCMPTests(cmp: string, sites: string[], overrideOptions: Partial<TestOptions> = {}) {
     test.describe(cmp, () => {
         if (recordOxylabsCandidates) {
@@ -490,6 +514,9 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
                 return;
             }
             if (finalOptions.skipRegions?.includes(testRegion)) {
+                return;
+            }
+            if (ciRegions.length > 0 && !pickCIRegions(finalOptions).includes(testRegion)) {
                 return;
             }
 
@@ -511,10 +538,11 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
                 });
             };
 
-            if (!finalOptions.testOptIn && !finalOptions.testOptOut) {
+            const testOptIn = finalOptions.testOptIn && !skipOptIn;
+            if (!testOptIn && !finalOptions.testOptOut) {
                 defineTest('noaction', null);
             }
-            if (finalOptions.testOptIn) {
+            if (testOptIn) {
                 defineTest('optIn', 'optIn');
             }
             if (finalOptions.testOptOut) {
