@@ -1,0 +1,41 @@
+{
+    "name": "shopblocks",
+    "vendorUrl": "https://www.shopblocks.com/",
+    "prehideSelectors": [".cookie-pop-up-wrapper"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-pop-up-wrapper #let-me-choose-content #cookie-confirm-choices"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-pop-up-wrapper #cookie-pop-up-content"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-pop-up-wrapper #cookie-pop-up-content .cookie-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-pop-up-wrapper #let-me-choose"
+        },
+        {
+            "waitForVisible": "#let-me-choose-content"
+        },
+        {
+            "click": "#let-me-choose-content input.cookie-checkbox:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#let-me-choose-content #cookie-confirm-choices"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "optout="
+        }
+    ]
+}
