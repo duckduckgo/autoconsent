@@ -1,0 +1,41 @@
+{
+    "name": "crosswater.co.uk",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?crosswater\\.co\\.uk/"
+    },
+    "prehideSelectors": ["div:has(> div > #rcc-confirm-button)"],
+    "detectCmp": [
+        {
+            "exists": "xpath///div[div/button[@id='rcc-confirm-button']]//button[normalize-space()='Cookie settings']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[div/button[@id='rcc-confirm-button']]//button[normalize-space()='Cookie settings']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[div/button[@id='rcc-confirm-button']]//button[normalize-space()='Accept all']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[div/button[@id='rcc-confirm-button']]//button[normalize-space()='Cookie settings']"
+        },
+        {
+            "waitForThenClick": "xpath///div[div/button[@id='rcc-confirm-button']]//button[normalize-space()='Save preferences']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "CrosswaterCookiePreferences="
+        },
+        {
+            "cookieContains": "analytics%22:false"
+        },
+        {
+            "cookieContains": "marketing%22:false"
+        }
+    ]
+}
