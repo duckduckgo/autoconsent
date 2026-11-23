@@ -8,6 +8,7 @@ generateCMPTests(
         'https://www.cardiffbus.com/',
         'https://www.reading-buses.co.uk/',
         'https://www.mcgillsbuses.co.uk/',
+        'https://www.transdevbus.co.uk/',
     ],
     {},
 );
