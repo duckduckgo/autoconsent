@@ -1,0 +1,10 @@
+{
+    "name": "exceed-lms",
+    "vendorUrl": "https://www.intellum.com/",
+    "prehideSelectors": ["#gdpr-consent.consent"],
+    "detectCmp": [{ "exists": "#gdpr-consent.consent #gdpr-consent__button.consent__close" }],
+    "detectPopup": [{ "visible": "#gdpr-consent.consent" }],
+    "optIn": [{ "waitForThenClick": "#gdpr-consent.consent #gdpr-consent__button" }],
+    "optOut": [{ "waitForThenClick": "#gdpr-consent.consent #gdpr-consent__button" }],
+    "test": [{ "cookieContains": "exceedlms-gdpr-cookie-consent=1" }]
+}
