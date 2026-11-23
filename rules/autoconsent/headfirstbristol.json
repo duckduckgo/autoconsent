@@ -1,0 +1,12 @@
+{
+    "name": "headfirstbristol",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?headfirstbristol\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#injected_cookie_notice"],
+    "detectCmp": [{ "exists": "#injected_cookie_notice #reject_cookies" }],
+    "detectPopup": [{ "visible": "#injected_cookie_notice #cook" }],
+    "optIn": [{ "waitForThenClick": "#injected_cookie_notice #accept_cookies" }],
+    "optOut": [{ "waitForThenClick": "#injected_cookie_notice #reject_cookies" }],
+    "test": [{ "visible": "#injected_cookie_notice", "check": "none" }]
+}
