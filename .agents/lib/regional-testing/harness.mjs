@@ -12,6 +12,7 @@
 
 /** @typedef {import('../../../lib/types.js').Config} Config */
 /** @typedef {import('../../../lib/types.js').HeuristicLevel} HeuristicLevel */
+/** @typedef {import('../../../lib/types.js').RuleBundle} RuleBundle */
 
 /**
  * @typedef {import('../../../playwright/isolated-world.mjs').MessageTransport} MessageTransport
@@ -81,6 +82,7 @@
  */
 
 import fs from 'fs';
+import { createRequire } from 'module';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { devices } from 'playwright';
@@ -92,6 +94,9 @@ export const projectRoot = path.resolve(__dirname, '../../..');
 const contentScript = fs.readFileSync(path.join(projectRoot, 'dist/autoconsent.playwright.js'), 'utf8');
 const rulesJson = JSON.parse(fs.readFileSync(path.join(projectRoot, 'rules/rules.json'), 'utf-8'));
 const fullRules = rulesJson.autoconsent;
+const compactRules = JSON.parse(fs.readFileSync(path.join(projectRoot, 'rules/compact-rules.json'), 'utf-8'));
+// The built package entry, since this plain-JS harness can't import the TypeScript sources.
+const { filterCompactRules } = createRequire(import.meta.url)('../../../dist/autoconsent.cjs.js');
 
 /** All regions in the verification policy (every region with a regional proxy). */
 export const ALL_REGIONS = ['us', 'gb', 'au', 'ca', 'de', 'fr', 'nl', 'ch', 'no', 'it', 'es', 'pl', 'se', 'dk', 'jp'];
@@ -130,6 +135,22 @@ export async function enableGpc(page) {
     await page.addInitScript(() => {
         Object.defineProperty(Navigator.prototype, 'globalPrivacyControl', { get: () => true, configurable: true });
     });
+}
+
+/**
+ * The rules a frame gets in reply to its `init`. Like the browser extension, a frame gets only the compact
+ * rules that can run in it, so ad-heavy pages don't parse the whole bundle in every iframe. Opt-in gets the
+ * full rules, since compact rules have no opt-in steps.
+ * @param {'optOut'|'optIn'|null} action
+ * @param {string} url - The frame's URL.
+ * @param {boolean} mainFrame
+ * @returns {RuleBundle}
+ */
+export function rulesForFrame(action, url, mainFrame) {
+    if (action === 'optIn') {
+        return { autoconsent: fullRules };
+    }
+    return { autoconsent: [], compact: filterCompactRules(compactRules, { url, mainFrame }) };
 }
 
 /**
@@ -175,13 +196,17 @@ export async function injectAutoconsent(page, options, provider, extension = {})
     // This split mirrors the browser extension: the engine lives in an isolated world,
     // while `eval` snippets execute in the page's main world.
     /** @type {MessageHandlerFactory} */
-    const createMessageHandler = ({ sendToContentScript, evalInMainWorld }) => {
+    const createMessageHandler = ({ sendToContentScript, evalInMainWorld, isMainFrame }) => {
         return async function handleMessage(msg, frameRef) {
             received.push(msg);
             extension.onMessage?.(msg);
             switch (msg.type) {
                 case 'init':
-                    await sendToContentScript(frameRef, { type: 'initResp', config, rules: { autoconsent: fullRules } });
+                    await sendToContentScript(frameRef, {
+                        type: 'initResp',
+                        config,
+                        rules: rulesForFrame(action, msg.url ?? '', isMainFrame(frameRef)),
+                    });
                     break;
                 case 'eval': {
                     let result = false;

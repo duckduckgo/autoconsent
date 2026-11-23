@@ -25,7 +25,7 @@ Important! Autoconsent results can have false positives. When testing, always in
 ## Prerequisites
 
 ```bash
-npm run prepublish # builds dist/autoconsent.playwright.js and rules/rules.json
+npm run prepublish # builds dist/ (content script and package bundles) and rules/rules.json, rules/compact-rules.json
 ```
 
 Environment variables:
@@ -135,6 +135,7 @@ await browser.close();
 - Never embed proxy credentials in URLs, command lines, logs, traces, or source.
 - Call `injectAutoconsent(page)` before `page.goto()` so the init script is installed before page scripts run.
 - The content script runs in an isolated world (via CDP) and `eval` snippets run in the page's main world, matching the extension. Chromium only.
+- Like the extension, each frame gets only the rules that can run in it: the compact rules filtered by the frame's URL and whether it is the main frame. Opt-in gets the full `rules.json` instead, since compact rules have no opt-in steps.
 - Use a fresh browser per region to avoid leaking proxy state, cookies, cache, or DNS.
 - Some sites localize by more than IP; only add locale/geolocation settings intentionally.
 - Some sites block proxy traffic outright (captcha, 403, endless challenge page). Retest the affected regions with the `oxylabs-testing` skill, and say in the report which regions were tested through Oxylabs. If Oxylabs is blocked too or not available, retest over a direct connection and state explicitly in the report that the result is unproxied. If direct access is blocked too, ask the triager for the popup's HTML pasted from their own browser as a last resort, and note that the rule was written from pasted markup rather than a live run.

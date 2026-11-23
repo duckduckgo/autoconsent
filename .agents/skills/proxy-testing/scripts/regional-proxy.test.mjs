@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { after, describe, it } from 'node:test';
 
-import { emptyResult, enableGpc, runTest } from '../../../lib/regional-testing/harness.mjs';
+import { emptyResult, enableGpc, projectRoot, rulesForFrame, runTest } from '../../../lib/regional-testing/harness.mjs';
 import { buildProxyConfig, deviceContextOptions } from './regional-proxy.mjs';
 
 const credentials = {
@@ -127,6 +127,42 @@ describe('Global Privacy Control', () => {
 
     it('is off with gpc: false', async () => {
         assert.deepEqual(await gpcHeadersFor({ gpc: false }), []);
+    });
+});
+
+describe('rules per frame', () => {
+    /** @type {import('../../../../lib/rules.js').AutoConsentCMPRule[]} */
+    const fullRules = JSON.parse(fs.readFileSync(path.join(projectRoot, 'rules/rules.json'), 'utf-8')).autoconsent;
+    /** @param {(runContext: { main: boolean, frame: boolean, urlPattern?: string }) => boolean} test */
+    const fullRuleNames = (test) =>
+        fullRules
+            .filter((r) => test({ main: true, frame: false, ...r.runContext }))
+            .map((r) => r.name)
+            .sort();
+    /** @param {import('../../../../lib/types.js').RuleBundle} bundle */
+    const compactRuleNames = (bundle) => (bundle.compact?.r ?? []).map((r) => r[1]).sort();
+
+    it('gives a subframe only the rules that run in frames', () => {
+        const bundle = rulesForFrame('optOut', 'https://ads.example/frame', false);
+        assert.deepEqual(bundle.autoconsent, []);
+        assert.deepEqual(
+            compactRuleNames(bundle),
+            fullRuleNames((rc) => rc.frame && !rc.urlPattern),
+        );
+    });
+
+    it('gives the main frame the generic rules', () => {
+        const bundle = rulesForFrame(null, 'https://example.com/', true);
+        assert.deepEqual(
+            compactRuleNames(bundle),
+            fullRuleNames((rc) => rc.main && !rc.urlPattern),
+        );
+    });
+
+    it('gives opt-in the full rules, with their opt-in steps', () => {
+        const bundle = rulesForFrame('optIn', 'https://ads.example/frame', false);
+        assert.equal(bundle.compact, undefined);
+        assert.equal(bundle.autoconsent?.length, fullRules.length);
     });
 });
 
