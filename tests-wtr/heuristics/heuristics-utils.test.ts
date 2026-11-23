@@ -422,6 +422,15 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects minimal first-party cookie notices in popups only', () => {
+        const text =
+            'MineArchive sets one cookie of its own to count returning readers and see which pages are used. It is not used for advertising and is not shared with anyone. Details OK';
+        expect(detectsPopup(text)).to.be.true;
+        expect(detectsPage(text)).to.be.false;
+        expect(detectsPopup('This site uses a single session cookie. OK')).to.be.true;
+        expectNotDetected(['She bakes one cookie a day', 'The site uses one cookie-free analytics tool']);
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';

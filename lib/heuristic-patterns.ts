@@ -87,6 +87,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // preference centres are often in the page but hidden, so popup text only
     { pattern: /\bstore or retrieve information on your browser\b|\bstockées dans votre navigateur ou récupérées\b/gi, input: 'popup' },
     /\bwe have cookies\b/gi,
+    // minimal first-party notices: "this site sets one cookie of its own"
+    { pattern: /\b(?:sets?|uses?) (?:only |just )?(?:one|a single) (?:\w+ )?cookie\b(?!-)/gi, input: 'popup' },
     /\b(?:revoke|withdraw) your consent at any time\b|\beinwilligung jederzeit widerrufen\b/gi,
     /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi,
     /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi,
