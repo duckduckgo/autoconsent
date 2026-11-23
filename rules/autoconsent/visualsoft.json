@@ -1,0 +1,24 @@
+{
+    "name": "visualsoft",
+    "prehideSelectors": ["#cookie_alert_container"],
+    "detectCmp": [{ "exists": "#cookie_alert #cookie_alert_accept" }],
+    "detectPopup": [{ "visible": "#cookie_alert_container" }],
+    "optIn": [{ "waitFor": "html:not(.no-js)", "timeout": 10000, "optional": true }, { "waitForThenClick": "#cookie_alert_accept" }],
+    "optOut": [
+        {
+            "waitFor": "html:not(.no-js)",
+            "timeout": 10000,
+            "optional": true,
+            "comment": "button handlers need jQuery, which loads in the same bundle as Modernizr"
+        },
+        {
+            "if": { "exists": "#cookie_alert_decline" },
+            "then": [{ "waitForThenClick": "#cookie_alert_decline", "retry": 2 }],
+            "else": [{ "waitForThenClick": "#cookie_alert_manage" }, { "waitForThenClick": "#cookie_prefs_decline", "timeout": 5000 }]
+        }
+    ],
+    "test": [
+        { "waitForVisible": "#cookie_alert_container", "timeout": 2000, "check": "none" },
+        { "cookieContains": "cookie_policy=rejected" }
+    ]
+}
