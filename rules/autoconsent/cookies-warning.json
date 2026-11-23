@@ -1,0 +1,9 @@
+{
+    "name": "cookies-warning",
+    "prehideSelectors": ["#cookieswarning.cookies-warning"],
+    "detectCmp": [{ "exists": "#cookieswarning.cookies-warning #close" }],
+    "detectPopup": [{ "visible": "#cookieswarning.cookies-warning[style*=\"visible\"]" }],
+    "optIn": [{ "waitForThenClick": "#cookieswarning.cookies-warning #close" }],
+    "optOut": [{ "waitForThenClick": "#cookieswarning.cookies-warning #close" }],
+    "test": [{ "waitForVisible": "#cookieswarning.cookies-warning", "check": "none", "timeout": 1000 }]
+}
