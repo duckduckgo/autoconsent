@@ -1,0 +1,40 @@
+{
+    "name": "mccoysguide",
+    "vendorUrl": "https://www.mccoysguide.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?mccoysguide\\.com/"
+    },
+    "prehideSelectors": [".cookie-container:has(#cookieSaveBtn)"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-container #cookieSaveBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-container #cookieSaveBtn"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-container #cookieConsentBtn"
+        }
+    ],
+    "optOut": [
+        {
+            "click": ".cookie-container .cookie-option input:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".cookie-container #cookieSaveBtn"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookie-container",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
