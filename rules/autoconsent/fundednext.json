@@ -1,0 +1,16 @@
+{
+    "name": "fundednext",
+    "vendorUrl": "https://fundednext.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?fundednext\\.com/"
+    },
+    "prehideSelectors": ["aside[role='dialog'][aria-label='This website uses cookies']"],
+    "detectCmp": [{ "exists": "aside[role='dialog'][aria-label='This website uses cookies']" }],
+    "detectPopup": [{ "visible": "aside[role='dialog'][aria-label='This website uses cookies']" }],
+    "optIn": [{ "waitForThenClick": "xpath///aside[@role='dialog']//button[normalize-space()='Accept Cookies']" }],
+    "optOut": [
+        { "waitForThenClick": "xpath///aside[@role='dialog']//button[normalize-space()='Preferences']" },
+        { "waitForThenClick": "xpath///aside[@role='dialog']//button[normalize-space()='Decline All']" },
+        { "waitForVisible": "aside[role='dialog']", "check": "none", "timeout": 2000, "optional": true }
+    ]
+}
