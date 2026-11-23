@@ -1,0 +1,35 @@
+{
+    "name": "peterchristian",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?peterchristian\\.(co\\.uk|eu)/"
+    },
+    "prehideSelectors": ["[data-id=\"consent-cookies\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-id=\"consent-cookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-id=\"consent-cookies\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-id=\"consent-cookies\"] [data-id=\"consent-banner-close\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-id=\"consent-cookies\"] button:not([data-id])"
+        },
+        {
+            "waitForThenClick": "xpath///div[@role='dialog']//button[contains(., 'Essentials Only')]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analytics_storage%22:%22denied%22"
+        }
+    ]
+}
