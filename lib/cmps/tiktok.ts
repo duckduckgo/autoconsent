@@ -29,6 +29,8 @@ export default class Tiktok extends AutoConsentCMPBase {
     }
 
     async detectPopup() {
+        // the banner renders inside the shadow root several seconds after the custom element is attached
+        await this.waitForElement(['tiktok-cookie-banner', '.tiktok-cookie-banner'], 1000);
         const banner = this.getShadowRoot()?.querySelector('.tiktok-cookie-banner') as HTMLElement;
         return isElementVisible(banner);
     }
