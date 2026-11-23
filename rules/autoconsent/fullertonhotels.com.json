@@ -16,7 +16,10 @@
     ],
     "detectPopup": [
         {
-            "any": [{ "visible": ["#ifrmCookieBanner", "#sp-decline, .evSpRejectBtn"] }, { "visible": ["#ifrmCookieBanner", "#sp-customize"] }]
+            "any": [
+                { "visible": ["#ifrmCookieBanner", "#sp-decline, .evSpRejectBtn"] },
+                { "visible": ["#ifrmCookieBanner", "#sp-customize"] }
+            ]
         }
     ],
     "optIn": [
