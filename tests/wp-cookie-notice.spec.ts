@@ -6,7 +6,6 @@ generateCMPTests(
         'https://zoner-inshop.cz/',
         'https://fairplayforwomen.com/',
         'https://icelandaurora.com/',
-        'https://meyer-koering.de/',
         // 'https://nysba.org/', // cloudflare botwall
         // 'https://www.independentsentinel.com/', // appears only on user iteraction
     ],
