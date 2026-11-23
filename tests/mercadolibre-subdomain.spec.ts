@@ -10,6 +10,7 @@ generateCMPTests(
         'https://vendedores.mercadolivre.com.br/',
         'https://vendedores.mercadolibre.com.mx/',
         'https://developers.mercadolibre.com.ar/',
+        'https://developers.mercadolibre.com.mx/',
     ],
     frameRuleAlsoCompletes,
 );

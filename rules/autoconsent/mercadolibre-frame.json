@@ -5,7 +5,7 @@
     "runContext": {
         "main": false,
         "frame": true,
-        "urlPattern": "^https://www\\.mercado(libre|livre|pago)\\.[a-z.]+/privacy-preferences/cookies\\?mode=embed"
+        "urlPattern": "^https://www\\.mercado(libre|livre|pago)\\.[a-z.]+/"
     },
     "prehideSelectors": [],
     "detectCmp": [{ "exists": ".pp-cookies-item-switch .andes-ui-switch" }, { "eval": "EVAL_MERCADOLIBRE_CROSS_ORIGIN_PARENT" }],
