@@ -1,0 +1,13 @@
+{
+    "name": "krillion.to",
+    "runContext": { "urlPattern": "^https?://(www\\.)?krillion\\.to/" },
+    "prehideSelectors": [".bandeau-cookies"],
+    "detectCmp": [{ "exists": ".bandeau-cookies .bandeau-cookies-choix" }],
+    "detectPopup": [{ "visible": ".bandeau-cookies" }],
+    "optIn": [{ "waitForThenClick": ".bandeau-cookies-choix > .bandeau-cookies-bouton:last-child", "retry": 20, "retryInterval": 500 }],
+    "optOut": [
+        { "waitForThenClick": ".bandeau-cookies-choix > .bandeau-cookies-bouton:first-child", "retry": 20, "retryInterval": 500 },
+        { "waitForVisible": ".bandeau-cookies", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "krillion_cookies=v1.m0.p0" }]
+}
