@@ -1,0 +1,24 @@
+{
+    "name": "funding-choices-amp",
+    "vendorUrl": "https://developers.google.com/funding-choices",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://fundingchoicesmessages\\.google\\.com/amp/consent/message"
+    },
+    "detectCmp": [{ "exists": ".fc-consent-root" }],
+    "detectPopup": [{ "visible": ".fc-dialog-container" }],
+    "optOut": [
+        {
+            "if": { "exists": ".fc-cta-do-not-consent" },
+            "then": [{ "waitForThenClick": ".fc-cta-do-not-consent" }],
+            "else": [
+                { "waitForThenClick": ".fc-cta-manage-options" },
+                { "waitForVisible": ".fc-data-preferences-dialog .fc-confirm-choices" },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "waitForThenClick": ".fc-data-preferences-dialog .fc-confirm-choices" }
+            ]
+        }
+    ],
+    "optIn": [{ "waitForThenClick": ".fc-cta-consent" }]
+}
