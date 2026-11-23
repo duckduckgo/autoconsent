@@ -132,8 +132,8 @@ pipeline {
                         echo "No tests to run for this change"
                     } else {
                         def regions = ['us', 'gb', 'au', 'ca', 'de', 'fr', 'nl', 'ch', 'no']
-                        // Skip optIn tests, and run each spec in at most 3 of these regions (see playwright/runner.ts)
-                        def ciEnv = ["SKIP_OPT_IN=1", "CI_REGIONS=${regions.join(',').toUpperCase()}"]
+                        // Skip optIn tests, and run each spec in at most 3 of these regions, seeded by the PR number (see playwright/runner.ts)
+                        def ciEnv = ["SKIP_OPT_IN=1", "CI_REGIONS=${regions.join(',').toUpperCase()}", "CI_SEED=${env.CHANGE_ID ?: env.BUILD_NUMBER}"]
                         withEnv(ciEnv) {
                             for (region in regions) {
                                 withEnvFile("${params.TEST_RESULT_ROOT}/${region}.env") {

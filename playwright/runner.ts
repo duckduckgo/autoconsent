@@ -6,7 +6,6 @@ import { ContentScriptMessage } from '../lib/messages';
 import { AutoAction, RuleBundle } from '../lib/types';
 import { filterCompactRules } from '../lib/encoding';
 import compactRules from '../rules/compact-rules.json';
-import coverage from '../data/coverage.json';
 // Full rules include optIn steps that compact rules intentionally omit.
 // We need both formats: compact for optOut tests, full for optIn tests.
 import { autoconsent as fullRules } from '../rules/rules.json';
@@ -29,8 +28,8 @@ const ciRegions = (process.env.CI_REGIONS || '')
     .map((r) => r.trim().toUpperCase())
     .filter(Boolean);
 const MAX_CI_REGIONS = 3;
-// Tie-breaker when coverage data does not rank the regions: the core regions first, then CI_REGIONS order.
-const CORE_REGIONS = ['US', 'GB', 'DE'];
+// CI_SEED (the PR number) picks the extra regions, so a PR always tests the same ones and different PRs spread across all regions.
+const ciSeed = process.env.CI_SEED || '';
 
 // OXYLABS=1 runs each test in a fresh Oxylabs Agent Browser session in REGION instead of a local browser.
 const useOxylabs = process.env.OXYLABS === '1';
@@ -487,17 +486,16 @@ class TestRun {
 // Runs by test id, for the afterEach hook that records Oxylabs candidates.
 const testRuns = new Map<string, TestRun>();
 
-// The CI regions a spec runs in: its onlyRegions in the spec's order, or else the regions where coverage data saw the rule on the most sites.
-function pickCIRegions(cmp: string, options: TestOptions): string[] {
-    const eligible = ciRegions.filter((r) => !options.skipRegions?.includes(r));
+// The CI regions a spec runs in: US, then the spec's onlyRegions in the order written, then regions picked with CI_SEED until there are MAX_CI_REGIONS.
+function pickCIRegions(options: TestOptions): string[] {
+    let eligible = ciRegions.filter((r) => !options.skipRegions?.includes(r));
     if (options.onlyRegions && options.onlyRegions.length > 0) {
-        return options.onlyRegions.filter((r) => eligible.includes(r)).slice(0, MAX_CI_REGIONS);
+        eligible = eligible.filter((r) => options.onlyRegions!.includes(r));
     }
-    const ruleCoverage: Record<string, { sites?: number }> = (coverage as Record<string, Record<string, { sites?: number }>>)[cmp] || {};
-    const priority = (r: string) => (CORE_REGIONS.includes(r) ? CORE_REGIONS.indexOf(r) : CORE_REGIONS.length + ciRegions.indexOf(r));
-    return [...eligible]
-        .sort((a, b) => (ruleCoverage[b]?.sites || 0) - (ruleCoverage[a]?.sites || 0) || priority(a) - priority(b))
-        .slice(0, MAX_CI_REGIONS);
+    const picked = ['US', ...(options.onlyRegions || [])].filter((r, i, all) => eligible.includes(r) && all.indexOf(r) === i);
+    const seededOrder = (r: string) => crypto.createHash('md5').update(`${ciSeed}:${r}`).digest('hex');
+    const rest = eligible.filter((r) => !picked.includes(r)).sort((a, b) => seededOrder(a).localeCompare(seededOrder(b)));
+    return [...picked, ...rest].slice(0, MAX_CI_REGIONS);
 }
 
 export default function generateCMPTests(cmp: string, sites: string[], overrideOptions: Partial<TestOptions> = {}) {
@@ -518,7 +516,7 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
             if (finalOptions.skipRegions?.includes(testRegion)) {
                 return;
             }
-            if (ciRegions.length > 0 && !pickCIRegions(cmp, finalOptions).includes(testRegion)) {
+            if (ciRegions.length > 0 && !pickCIRegions(finalOptions).includes(testRegion)) {
                 return;
             }
 
