@@ -6,6 +6,9 @@
     "detectPopup": [
         { "visible": "#sp-cc-wrapper *,[data-action=sp-cc],span[data-action=\"sp-cc\"][data-sp-cc*=\"rejectAllAction\"]", "check": "any" }
     ],
-    "optIn": [{ "waitForVisible": "#sp-cc-accept" }, { "wait": 5000 }, { "click": "#sp-cc-accept" }],
-    "optOut": [{ "waitForVisible": "#sp-cc-rejectall-link" }, { "wait": 5000 }, { "click": "#sp-cc-rejectall-link" }]
+    "optIn": [{ "waitForVisible": "#sp-cc-accept" }, { "waitForThenClick": "#sp-cc-accept", "retry": 5, "retryInterval": 1000 }],
+    "optOut": [
+        { "waitForVisible": "#sp-cc-rejectall-link" },
+        { "waitForThenClick": "#sp-cc-rejectall-link", "retry": 5, "retryInterval": 1000 }
+    ]
 }

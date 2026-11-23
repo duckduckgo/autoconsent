@@ -46,9 +46,10 @@ def withEnvFile(envfile, Closure cb) {
     }
 }
 
+// Diff against the merge base, so files merged to the target branch after Jenkins built the PR merge commit do not count as modified.
 def getModifiedFiles() {
     if (env.CHANGE_ID) {
-        def changedFiles = sh(script: "git diff --name-only origin/${env.CHANGE_TARGET} HEAD", returnStdout: true).trim()
+        def changedFiles = sh(script: "git diff --name-only origin/${env.CHANGE_TARGET}...HEAD", returnStdout: true).trim()
         return changedFiles.split("\n")
     } else {
         return []
