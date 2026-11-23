@@ -1,0 +1,29 @@
+{
+    "name": "adv-gr-jp",
+    "vendorUrl": "https://www.adv.gr.jp/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?adv\\.gr\\.jp/"
+    },
+    "prehideSelectors": ["#cookie-agreement"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-agreement .agreement-button input"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-agreement"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-agreement .agreement-button input"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookie-agreement"
+        }
+    ]
+}
