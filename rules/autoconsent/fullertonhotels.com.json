@@ -11,17 +11,17 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": ["#ifrmCookieBanner", "#sp-decline"]
+            "exists": ["#ifrmCookieBanner", "#sp-decline, .evSpRejectBtn"]
         }
     ],
     "detectPopup": [
         {
-            "any": [{ "visible": ["#ifrmCookieBanner", "#sp-decline"] }, { "visible": ["#ifrmCookieBanner", "#sp-customize"] }]
+            "any": [{ "visible": ["#ifrmCookieBanner", "#sp-decline, .evSpRejectBtn"] }, { "visible": ["#ifrmCookieBanner", "#sp-customize"] }]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["#ifrmCookieBanner", "#sp-accept"]
+            "waitForThenClick": ["#ifrmCookieBanner", "#sp-accept, .evSpAcceptBtn"]
         }
     ],
     "optOut": [
@@ -29,10 +29,10 @@
             "wait": 500
         },
         {
-            "if": { "visible": ["#ifrmCookieBanner", "#sp-decline"] },
+            "if": { "visible": ["#ifrmCookieBanner", "#sp-decline, .evSpRejectBtn"] },
             "then": [
                 {
-                    "waitForThenClick": ["#ifrmCookieBanner", "#sp-decline"],
+                    "waitForThenClick": ["#ifrmCookieBanner", "#sp-decline, .evSpRejectBtn"],
                     "comment": "Decline"
                 }
             ],
