@@ -171,19 +171,17 @@ describe('final screenshot', () => {
     after(() => fs.rmSync(screenshotsDir, { recursive: true, force: true }));
 
     /**
-     * Run a test on a fake page whose first `failures` screenshots throw a Playwright-style timeout.
-     * @param {number} failures
+     * Run a test on a fake page whose screenshot succeeds, or throws a Playwright-style timeout.
+     * @param {boolean} fail
      */
-    async function runWithScreenshotFailures(failures) {
-        let calls = 0;
+    async function runWithScreenshot(fail) {
         const page = /** @type {any} */ ({
             setExtraHTTPHeaders: async () => {},
             addInitScript: async () => {},
             goto: async () => {},
             screenshot: async () => {
-                calls++;
-                if (calls <= failures) {
-                    throw new Error('page.screenshot: Timeout 20000ms exceeded.\nCall log:\n  - taking page screenshot');
+                if (fail) {
+                    throw new Error('page.screenshot: Timeout 30000ms exceeded.\nCall log:\n  - taking page screenshot');
                 }
             },
         });
@@ -193,19 +191,11 @@ describe('final screenshot', () => {
             collectResult: (/** @type {string} */ url, /** @type {string} */ region) => emptyResult(url, region, 'regional-proxy'),
         };
         const provider = /** @type {any} */ ({ name: 'regional-proxy', defaultScreenshotsDir: screenshotsDir, inject: async () => ctx });
-        const result = await runTest(page, 'https://example.com/', 'us', {}, provider);
-        return { result, calls };
+        return runTest(page, 'https://example.com/', 'us', {}, provider);
     }
 
-    it('is taken once when it succeeds', async () => {
-        const { result, calls } = await runWithScreenshotFailures(0);
-        assert.equal(calls, 1);
-        assert.deepEqual(result.screenshotPaths, [path.join(screenshotsDir, 'example.com-us-final.jpg')]);
-    });
-
-    it('is retried once after a failure', async () => {
-        const { result, calls } = await runWithScreenshotFailures(1);
-        assert.equal(calls, 2);
+    it('is recorded when it succeeds', async () => {
+        const result = await runWithScreenshot(false);
         assert.deepEqual(result.screenshotPaths, [path.join(screenshotsDir, 'example.com-us-final.jpg')]);
         assert.equal(
             result.errors.some((e) => e.startsWith('Screenshot failed')),
@@ -213,10 +203,9 @@ describe('final screenshot', () => {
         );
     });
 
-    it('reports the first line of the error when the retry fails too', async () => {
-        const { result, calls } = await runWithScreenshotFailures(2);
-        assert.equal(calls, 2);
+    it('reports the first line of the error when it fails', async () => {
+        const result = await runWithScreenshot(true);
         assert.deepEqual(result.screenshotPaths, []);
-        assert.ok(result.errors.includes('Screenshot failed: page.screenshot: Timeout 20000ms exceeded.'), result.errors.join('; '));
+        assert.ok(result.errors.includes('Screenshot failed: page.screenshot: Timeout 30000ms exceeded.'), result.errors.join('; '));
     });
 });

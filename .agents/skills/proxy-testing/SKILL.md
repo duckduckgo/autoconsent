@@ -97,7 +97,7 @@ export default defineConfig({
 Options (all optional):
 
 - `action` — `'optOut'` (default), `'optIn'`, or `null` to only detect (no opt-out/opt-in performed).
-- `screenshotsDir` — directory for the final screenshots (default: `test-results/regional-proxy`). A final screenshot is retried once; if it still fails, `screenshotPaths` stays empty and `errors` gets `Screenshot failed: <reason>`.
+- `screenshotsDir` — directory for the final screenshots (default: `test-results/regional-proxy`). If the final screenshot fails, `screenshotPaths` stays empty and `errors` gets `Screenshot failed: <reason>`.
 - `navigationTimeout` — `page.goto` timeout in ms (default `45000`).
 - `completionTimeout` — max wait for autoconsent to finish opt-out/opt-in in ms (default `45000`).
 - `detectionTimeout` — max wait for `cmpDetected` before giving up (default: `completionTimeout`).
