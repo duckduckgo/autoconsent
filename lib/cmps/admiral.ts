@@ -55,6 +55,10 @@ export default class Admiral extends AutoConsentCMPBase {
     }
 
     async detectPopup() {
+        // pay-or-consent wall: do not bypass it via the purposes settings
+        if (this.elementExists('[data-testid="rejectAndApplyOfferButton"]')) {
+            return false;
+        }
         return (await this.elementVisible(this.consentCardSelector, 'any')) || Boolean(this.getVrmNotice());
     }
 
