@@ -34,13 +34,14 @@ import path from 'path';
 import { chromium } from 'playwright';
 import {
     CORE_REGIONS,
+    deviceContextOptions,
     emptyResult,
     injectAutoconsent as injectThrough,
     projectRoot,
     runTest,
 } from '../../../lib/regional-testing/harness.mjs';
 
-export { ALL_REGIONS, CORE_REGIONS, EXPANDED_REGIONS, formatResult } from '../../../lib/regional-testing/harness.mjs';
+export { ALL_REGIONS, CORE_REGIONS, EXPANDED_REGIONS, deviceContextOptions, formatResult } from '../../../lib/regional-testing/harness.mjs';
 
 /**
  * Build the Playwright proxy object for a region.
@@ -133,7 +134,8 @@ export async function testUrl(url, regionKey, options = {}) {
     let browser = null;
     try {
         browser = await launchRegionalProxyBrowser(regionKey, options);
-        const page = await browser.newPage();
+        const context = await browser.newContext(deviceContextOptions(options.emulateDevice));
+        const page = await context.newPage();
         return await testPage(page, url, regionKey, options);
     } catch (e) {
         return emptyResult(url, regionKey, 'regional-proxy', e);

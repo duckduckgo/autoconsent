@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { buildProxyConfig } from './regional-proxy.mjs';
+import { enableGpc, runTest } from '../../../lib/regional-testing/harness.mjs';
+import { buildProxyConfig, deviceContextOptions } from './regional-proxy.mjs';
 
 const credentials = {
     REGIONAL_PROXY_PASSWORD: 'password',
@@ -57,5 +58,71 @@ describe('regional proxy config', () => {
 
     it('rejects unsupported protocols', () => {
         assert.throws(() => buildProxyConfig('gb', { REGIONAL_PROXY_GB: 'socks4://proxy.example:1080' }), /unsupported proxy protocol/);
+    });
+});
+
+describe('device emulation', () => {
+    it('emulates nothing by default', () => {
+        assert.deepEqual(deviceContextOptions(), {});
+    });
+
+    it('keeps the device settings but not its browser', () => {
+        const options = deviceContextOptions('iPhone SE');
+        assert.equal(options.isMobile, true);
+        assert.equal(options.hasTouch, true);
+        assert.match(options.userAgent ?? '', /iPhone/);
+        assert.equal('defaultBrowserType' in options, false);
+    });
+
+    it('rejects unknown devices', () => {
+        assert.throws(() => deviceContextOptions('Nokia 3310'), /Unknown Playwright device/);
+    });
+});
+
+describe('Global Privacy Control', () => {
+    it('sends the header and sets navigator.globalPrivacyControl', async () => {
+        /** @type {{ headers: Record<string, string>[], scripts: Function[] }} */
+        const calls = { headers: [], scripts: [] };
+        const page = /** @type {any} */ ({
+            setExtraHTTPHeaders: async (/** @type {Record<string, string>} */ headers) => calls.headers.push(headers),
+            addInitScript: async (/** @type {Function} */ script) => calls.scripts.push(script),
+        });
+
+        await enableGpc(page);
+
+        assert.deepEqual(calls.headers, [{ 'Sec-GPC': '1' }]);
+        assert.equal(calls.scripts.length, 1);
+        // Run the init script against a stand-in Navigator to check what it defines.
+        class Navigator {}
+        new Function('Navigator', `(${calls.scripts[0].toString()})()`)(Navigator);
+        assert.equal(/** @type {any} */ (new Navigator()).globalPrivacyControl, true);
+    });
+
+    /**
+     * The GPC headers runTest sets before navigating. The fake page fails to navigate, so the run stops there.
+     * @param {object} options
+     */
+    async function gpcHeadersFor(options) {
+        /** @type {Record<string, string>[]} */
+        const headers = [];
+        const page = /** @type {any} */ ({
+            setExtraHTTPHeaders: async (/** @type {Record<string, string>} */ value) => headers.push(value),
+            addInitScript: async () => {},
+            goto: async () => {
+                throw new Error('no network in tests');
+            },
+        });
+        const provider = /** @type {any} */ ({ name: 'fake', defaultScreenshotsDir: '.', inject: async () => ({}) });
+        const result = await runTest(page, 'https://example.com/', 'us', options, provider);
+        assert.match(result.errors.join(' '), /no network in tests/);
+        return headers;
+    }
+
+    it('is on by default', async () => {
+        assert.deepEqual(await gpcHeadersFor({}), [{ 'Sec-GPC': '1' }]);
+    });
+
+    it('is off with gpc: false', async () => {
+        assert.deepEqual(await gpcHeadersFor({ gpc: false }), []);
     });
 });
