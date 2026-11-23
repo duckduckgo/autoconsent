@@ -1,0 +1,16 @@
+{
+    "name": "wellcome.org",
+    "runContext": { "urlPattern": "^https?://(www\\.)?wellcome\\.org/" },
+    "prehideSelectors": ["section.c-cookie-message"],
+    "detectCmp": [{ "exists": "section.c-cookie-message .c-cookie-message__buttons" }],
+    "detectPopup": [{ "visible": "section.c-cookie-message" }],
+    "optIn": [
+        { "waitFor": "#ccc", "timeout": 5000, "optional": true },
+        { "waitForThenClick": "xpath///section[contains(@class, 'c-cookie-message')]//button[contains(., 'Accept all')]" }
+    ],
+    "optOut": [
+        { "waitFor": "#ccc", "timeout": 5000, "optional": true },
+        { "waitForThenClick": "xpath///section[contains(@class, 'c-cookie-message')]//button[contains(., 'Essential only')]" }
+    ],
+    "test": [{ "cookieContains": "\"analytics\":\"revoked\"" }]
+}

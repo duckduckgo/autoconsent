@@ -790,6 +790,9 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Only use essential cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('Only accept necessary cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('Essential only cookies')).to.equal('reject');
+        // screen-reader text adds "Allow ... and close cookies banner" around the visible label
+        expect(classifyButtonTextRegex('Allow Essential only and close cookies banner')).to.equal('reject');
+        expect(classifyButtonTextRegex('Accept all and close cookies banner')).to.not.equal('reject');
     });
 
     it('does not classify bare essential category labels as reject choices', () => {
