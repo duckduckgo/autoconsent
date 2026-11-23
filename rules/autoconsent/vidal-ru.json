@@ -1,0 +1,12 @@
+{
+    "name": "vidal.ru",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?vidal\\.ru/"
+    },
+    "prehideSelectors": [".cookie-notice"],
+    "detectCmp": [{ "exists": ".cookie-notice #accept-use-cookie" }],
+    "detectPopup": [{ "visible": ".cookie-notice" }],
+    "optIn": [{ "waitForThenClick": "#accept-use-cookie" }],
+    "optOut": [{ "waitForThenClick": "#accept-use-cookie" }],
+    "test": [{ "cookieContains": "ACCEPT_USE_COOKIE=1" }]
+}
