@@ -1,0 +1,37 @@
+{
+    "name": "randewoo.ru",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?randewoo\\.ru/"
+    },
+    "detectCmp": [
+        {
+            "exists": "xpath///div[contains(@class,'popmechanic-js-form')][contains(., 'cookie')]//button[@data-popmechanic-close][contains(., 'Отказаться')]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[contains(@class,'popmechanic-js-form')][contains(., 'cookie')]//button[@data-popmechanic-close][contains(., 'Отказаться')]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class,'popmechanic-js-form')][contains(., 'cookie')]//button[@data-popmechanic-close][contains(., 'Принять')]",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class,'popmechanic-js-form')][contains(., 'cookie')]//button[@data-popmechanic-close][contains(., 'Отказаться')]",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "xpath///div[contains(@class,'popmechanic-js-form')][contains(., 'cookie')]//button[@data-popmechanic-close][contains(., 'Отказаться')]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
