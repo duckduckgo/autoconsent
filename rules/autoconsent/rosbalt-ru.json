@@ -1,0 +1,35 @@
+{
+    "name": "rosbalt.ru",
+    "vendorUrl": "https://rosbalt.ru/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?rosbalt\\.ru/"
+    },
+    "prehideSelectors": ["#__next > div[class*=\"styles_container__\"]:has(a[href=\"/pages/privacy_policy\"])"],
+    "detectCmp": [
+        {
+            "exists": "#__next > div[class*=\"styles_container__\"]:has(a[href=\"/pages/privacy_policy\"])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#__next > div[class*=\"styles_container__\"]:has(a[href=\"/pages/privacy_policy\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class, 'styles_container__')]//div[normalize-space(text())='Принимаю']"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#__next > div[class*=\"styles_container__\"]:has(a[href=\"/pages/privacy_policy\"])"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#__next > div[class*=\"styles_container__\"]:has(a[href=\"/pages/privacy_policy\"])",
+            "check": "none"
+        }
+    ]
+}
