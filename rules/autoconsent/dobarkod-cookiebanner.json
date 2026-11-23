@@ -1,0 +1,10 @@
+{
+    "name": "dobarkod-cookiebanner",
+    "vendorUrl": "https://github.com/dobarkod/cookie-banner",
+    "prehideSelectors": [".cookiebanner:has(> .cookiebanner-close)"],
+    "detectCmp": [{ "exists": ".cookiebanner > .cookiebanner-close" }],
+    "detectPopup": [{ "visible": ".cookiebanner > .cookiebanner-close" }],
+    "optIn": [{ "waitForThenClick": ".cookiebanner > .cookiebanner-close" }],
+    "optOut": [{ "waitForThenClick": ".cookiebanner > .cookiebanner-close" }],
+    "test": [{ "waitForVisible": ".cookiebanner > .cookiebanner-close", "check": "none", "timeout": 1000 }]
+}
