@@ -34,3 +34,6 @@ generateCMPTests('pandectes', ['https://asmc.de/', 'https://crossrope.com/'], {
 
 // banner wrapper with a shop-specific id instead of #pandectes-banner
 generateCMPTests('pandectes', ['https://www.aeris.de/']);
+
+// shadow DOM variant that opens straight into the preferences dialog, without a notice
+generateCMPTests('pandectes', ['https://cotswoldflour.com/', 'https://bymi.de/', 'https://lovenood.com/']);
