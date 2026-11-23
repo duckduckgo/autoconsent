@@ -975,6 +975,7 @@ describe('classifyButtonTextRegex with more button labels', () => {
             'Poursuivre',
             'I agree, dismiss this banner',
             'Ukryj',
+            'Stäng',
             'Ausblenden',
             'Ok. Ausblenden.',
             'Hinweis ausblenden',
@@ -989,7 +990,14 @@ describe('classifyButtonTextRegex with more button labels', () => {
         ]) {
             expect(classifyButtonTextRegex(text), text).to.equal('acknowledge');
         }
-        for (const text of ['Details ausblenden', '同意して閉じる', '確認して同意する', '確認する']) {
+        for (const text of [
+            'Details ausblenden',
+            'Godkänn och stäng',
+            'Acceptera och stäng',
+            '同意して閉じる',
+            '確認して同意する',
+            '確認する',
+        ]) {
             expect(classifyButtonTextRegex(text), text).to.not.equal('acknowledge');
         }
     });
