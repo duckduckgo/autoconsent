@@ -12,7 +12,8 @@ Search website source code via the [SearchWebCode](https://www.searchwebcode.com
 **Caveats:**
 
 - SearchWebCode indexes the raw HTML of **one homepage per site** (131M+ sites). It does not index JS or CSS files or deeper pages, so there is no equivalent of PublicWWW's `filetype:js` or `depth:`. CMPs injected purely by client-side JavaScript will not appear.
-- Each search costs a credit (see [Cost](#cost)). Use `counts_only` when you only need the number of sites.
+- Its homepage snapshot can lack a string the live site has, even on large, well-known sites that are indexed. A site missing from the results is not evidence that it doesn't use the CMP. To check one site, fetch its homepage.
+- Each new listing query costs credit (see [Cost](#cost)). Use `counts_only` when you only need the number of sites: it is free.
 
 ## When to fall back
 
@@ -53,11 +54,19 @@ GET /api/v1/search?q=QUERY[&tld=de][&limit=100][&offset=N][&regex=true][&ignore_
 
 The JSON response has `total`, `count_kind`, `next_offset`, `charged_cents`, `balance_cents` and `results[]`. Each result has `domain`, `url`, `tld`, `rank`, `occurrences` and `snippet` (`text`, `match_start`, `match_end`). Results are sorted by popularity rank, like PublicWWW.
 
+- Each subdomain is its own site, and `www` and non-`www` can appear separately. Dedupe by registrable domain before counting sites or picking spec URLs.
+- `rank` is SearchWebCode's own scale (up to tens of millions) and can't be compared with PublicWWW's ranks. The top sites differ a lot between the two services.
+- Pages after the first come back `count_kind: partial` with no `estimated_matches`, so read counts from the first page.
+
 `count_kind` says how far to trust `total`:
 
 - `exact`: the true number of matching sites.
 - `estimated`: a candidate count. Read `estimated_matches` instead.
-- `partial`: only a ceiling. Only `verified_hits` are confirmed. `counts_only` requests usually come back `partial`, and for regex queries the ceiling can be far too high (a prefilter count). If the number matters, run a listing (one credit) and read `estimated_matches` and `verified_hits`. For a listing that is `partial`, narrow the query (add a term or a TLD) rather than paging through it.
+- `partial`: only a ceiling. Only `verified_hits` are confirmed. `counts_only` requests usually come back `partial`.
+
+For plain (non-regex) queries the free `counts_only` total is as good as a listing's `estimated_matches`: equal for token queries and within about 10% for substring ones. Don't pay for a listing just to get a count. Treat any count as an order of magnitude: it can differ from PublicWWW's count for the same query by a factor of 3 either way.
+
+Regex counts are not usable. A regex `counts_only` total is a prefilter ceiling, up to 1,000× too high, and a regex listing's `estimated_matches` is also unreliable (it can be lower than the plain query's count). Each regex page verifies only 256 candidates, so a page can return just a few hits. Page with `next_offset` (free) to collect sites, and don't quote regex counts.
 
 The response's `match_mode` (`token`, `substring` or `regex`) and `prefilter_note` say how the query was matched. Read them when a count looks too low or too high.
 
@@ -68,7 +77,8 @@ Full reference: https://www.searchwebcode.com/docs
 Mostly the same as PublicWWW, so a PublicWWW query usually works unchanged once you drop `filetype:` and `depth:`. The big difference is token matching.
 
 - **Identifiers match as whole tokens, even when quoted.** `"sd-cmp"` and `"onetrust-banner-sdk"` (letters, digits, `-`, `_`) match only as a whole token, in the case given: `"sd-cmp"` finds `id="sd-cmp"` but not `ads-cmp`. That is usually what you want for a CMP's class or ID. The response says `match_mode: "token"`.
-- For a substring match inside longer tokens, use a regex: `/sd-cmp/`. Expect many more, noisier matches.
+- This differs from PublicWWW, which treats `-` as a word separator: its `"sd-cmp"` also matches generated classes like `sd-cmp-1HEM-`, but SearchWebCode's does not, and finds several times fewer sites. When a CMP uses prefixed or generated class names, search the prefix as a regex: `/sd-cmp-/`.
+- For any other substring match inside longer tokens, use a regex too: `/sd-cmp/`. Expect noisier matches, and see the regex notes under `count_kind` above.
 - Strings with other punctuation (`.`, `/`, `=`, spaces) match as substrings: `"cdn.cookielaw.org/scripttemplates"` (`match_mode: "substring"`)
 - Combine terms (AND): `"cookie-banner" "reject-all"` (or uppercase `AND`)
 - Either term: `"cmp-a" OR "cmp-b"` (or `|`)
@@ -84,7 +94,8 @@ Full syntax: https://www.searchwebcode.com/syntax
 
 ## Cost
 
-- One search credit covers a query plus 25 more page requests for it within 24 hours, so paging through one query is cheap but each new query costs a credit.
+- A new listing query costs one credit (5¢, see `charged_cents`, balance in `balance_cents`).
+- Paging that query with `next_offset`, or re-running it with a different `limit`, within 24 hours is free (up to 25 more requests).
 - `counts_only=true` is free, but counts towards the daily request cap.
 - **402** means out of credits and **429** means a throughput or daily cap (daily caps reset at midnight UTC). Stop and tell the user. Do not retry in a loop. A 429 with `Retry-After` may be retried once after that delay.
 - 400 is an invalid query (e.g. no positive term, `regex` with `ignore_case`). It is not charged.
@@ -98,7 +109,7 @@ Check if a banner ID is from a shared CMP (free count first):
 ```bash
 curl -sG "https://www.searchwebcode.com/api/v1/search" \
   -H "Authorization: Bearer $SEARCHWEBCODE_KEY" \
-  --data-urlencode 'q="sd-cmp"' --data-urlencode 'counts_only=true' \
+  --data-urlencode 'q="didomi-host"' --data-urlencode 'counts_only=true' \
   | jq '{error, total, count_kind}'
 ```
 
@@ -107,8 +118,17 @@ List the top sites with snippets, in the same `url;rank;snippet` shape as Public
 ```bash
 curl -sG "https://www.searchwebcode.com/api/v1/search" \
   -H "Authorization: Bearer $SEARCHWEBCODE_KEY" \
-  --data-urlencode 'q="sd-cmp"' --data-urlencode 'limit=20' \
+  --data-urlencode 'q="didomi-host"' --data-urlencode 'limit=20' \
   | jq -r '.error // empty, (.results[]? | [.url, .rank, .snippet.text] | join(";"))'
+```
+
+Find sites with a generated class name (`sd-cmp-1HEM-...`), using a regex on its prefix. Collect sites from the results, not the count:
+
+```bash
+curl -sG "https://www.searchwebcode.com/api/v1/search" \
+  -H "Authorization: Bearer $SEARCHWEBCODE_KEY" \
+  --data-urlencode 'q=/sd-cmp-/' --data-urlencode 'limit=100' \
+  | jq -r '.error // empty, "next_offset: \(.next_offset)", (.results[]? | [.domain, .rank] | join(";"))'
 ```
 
 Find German sites using OneTrust:
