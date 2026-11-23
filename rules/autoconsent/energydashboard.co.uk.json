@@ -1,0 +1,19 @@
+{
+    "name": "energydashboard.co.uk",
+    "_metadata": {
+        "vendorUrl": "https://github.com/Mastermindzh/react-cookie-consent"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?energydashboard\\.co\\.uk/"
+    },
+    "prehideSelectors": ["div:has(> div > #rcc-confirm-button)"],
+    "detectCmp": [{ "exists": "div:has(> div > #rcc-confirm-button) > div > button.btn-outline" }],
+    "detectPopup": [{ "visible": "#rcc-confirm-button" }],
+    "optIn": [{ "waitForThenClick": "#rcc-confirm-button" }],
+    "optOut": [
+        { "waitForThenClick": "div:has(> div > #rcc-confirm-button) > div > button.btn-outline" },
+        { "waitForThenClick": "main .offset-sub-text > button.btn-outline" },
+        { "eval": "EVAL_POVR_GOBACK" }
+    ],
+    "test": [{ "cookieContains": "CookieConsent=false" }]
+}
