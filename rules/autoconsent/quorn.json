@@ -1,0 +1,17 @@
+{
+    "name": "quorn",
+    "vendorUrl": "https://www.quorn.co.uk/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#cookie-consent .qcmp-modal" }],
+    "detectPopup": [{ "visible": "#cookie-consent .qcmp-modal__content" }],
+    "optIn": [{ "waitForThenClick": "#cookie-consent .qcmp-actions .qcmp-button--solid" }],
+    "optOut": [
+        { "waitForThenClick": "#qcmp-options-toggle" },
+        { "waitForVisible": "#qcmp-options .qcmp-options__save button" },
+        { "click": "#qcmp-options .qcmp-toggle__button[aria-checked=\"true\"]", "all": true, "optional": true },
+        { "click": "#qcmp-options .qcmp-options__save button" },
+        { "waitForVisible": "#cookie-consent .qcmp-modal", "check": "none", "timeout": 2000, "optional": true }
+    ],
+    "test": [{ "visible": "#cookie-consent .qcmp-modal", "check": "none" }]
+}
