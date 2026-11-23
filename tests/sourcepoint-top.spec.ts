@@ -11,6 +11,7 @@ generateCMPTests(
         'https://11freunde.de/',
         'https://www.sueddeutsche.de/',
         'https://www.transfermarkt.com/',
+        'https://www.der-postillon.com/',
     ],
     {
         testOptIn: false,
