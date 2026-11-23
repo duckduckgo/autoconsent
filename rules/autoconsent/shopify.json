@@ -5,7 +5,7 @@
     "prehideSelectors": ["#shopify-pc__banner"],
     "detectCmp": [
         {
-            "exists": "#shopify-pc__banner"
+            "visible": "#shopify-pc__banner"
         }
     ],
     "detectPopup": [
