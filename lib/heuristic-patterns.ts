@@ -42,6 +42,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // up to two qualifiers are common: "optional", "essential", "analytics", "google analytics", "third party", ...
     // singular too, but not "cookie-free"
     /we (?:also )?(?:use|serve)(?: \w+){0,2} cookies?\b(?!-)/gi,
+    // "we set first-party cookies only", but not "we set no cookies"
+    /\bwe (?:only )?set (?!no |zero )(?:[\w-]+ ){0,2}cookies\b(?!-)/gi,
     /\bwe use (?:\S+ )?cookie files\b/gi,
     // consent asked as a question: "can I use cookies to …?", "allow analytics cookies?"
     /\b(?:can|may) (?:i|we) use (?:\S+ ){0,2}cookies\b/gi,

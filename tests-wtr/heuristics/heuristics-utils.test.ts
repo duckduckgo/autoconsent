@@ -94,9 +94,19 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
             'We serve necessary cookies only',
             'We use Google Analytics cookies to understand which pages and tools are useful.',
             'We use third party cookies for advertising',
+            // planindex.co.uk
+            'We set first-party cookies only: they keep you signed in and measure our own pages. No advertising, no cross-site tracking.',
+            'We only set essential cookies',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not match "we set" without cookies being set', () => {
+        const texts = ['We set no cookies on this site', 'We set the table with freshly baked cookies'];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
         }
     });
 

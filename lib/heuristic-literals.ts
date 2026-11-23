@@ -16,6 +16,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["powered by usercentrics","realisiert mit","realized with"],
     [],
     [" cookie"],
+    ["cookies"],
     ["cookie files"],
     ["cookies"],
     ["cookies?"],
