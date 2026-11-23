@@ -1,16 +1,10 @@
 import generateCMPTests from '../playwright/runner';
 
-// The settings iframe on these subdomains is cross-origin, so opt-out also completes mercadolibre-frame inside it.
-const frameRuleAlsoCompletes = { expectedRuns: 2 };
-
-generateCMPTests(
-    'mercadolibre-subdomain',
-    [
-        'https://vendedores.mercadolibre.com.ar/',
-        'https://vendedores.mercadolivre.com.br/',
-        'https://vendedores.mercadolibre.com.mx/',
-        'https://developers.mercadolibre.com.ar/',
-        'https://developers.mercadolibre.com.mx/',
-    ],
-    frameRuleAlsoCompletes,
-);
+// Opt-out also runs mercadolibre-frame inside the cross-origin settings iframe; it is intermediate, so only this rule reports done.
+generateCMPTests('mercadolibre-subdomain', [
+    'https://vendedores.mercadolibre.com.ar/',
+    'https://vendedores.mercadolivre.com.br/',
+    'https://vendedores.mercadolibre.com.mx/',
+    'https://developers.mercadolibre.com.ar/',
+    'https://developers.mercadolibre.com.mx/',
+]);
