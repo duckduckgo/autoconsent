@@ -1,0 +1,69 @@
+{
+    "name": "web-labs-cookie-consent",
+    "prehideSelectors": ["#gdpr.reveal.gdpr"],
+    "detectCmp": [
+        {
+            "exists": "#gdpr.reveal #recommendedSettingsSubmit"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gdpr.reveal #recommendedSettingsSubmit"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr.reveal #recommendedSettingsSubmit"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#gdpr #reviewCookiesTrigger"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#gdpr #reviewCookiesTrigger"
+                }
+            ]
+        },
+        {
+            "click": "#gdpr input[name='cookiesSwitches']:checked + label",
+            "all": true,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": "#gdpr #customSettingsSubmit"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#gdpr #customSettingsSubmit"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#gdpr #confirmCookiesTrigger"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "#gdpr.reveal",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "cookieContains": "CookieNotice.Analytics=0"
+                },
+                {
+                    "cookieContains": "statistics=0"
+                }
+            ]
+        }
+    ]
+}
