@@ -1,0 +1,49 @@
+{
+    "name": "sykescottages.co.uk",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?sykescottages\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "section[data-testid='cookie-consent-banner']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section[data-testid='cookie-consent-banner']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitFor": "#onetrust-banner-sdk",
+            "timeout": 10000
+        },
+        {
+            "waitForThenClick": "xpath///section[@data-testid='cookie-consent-banner']//button[contains(., 'Accept all')]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitFor": "#onetrust-banner-sdk",
+            "timeout": 10000
+        },
+        {
+            "waitForThenClick": "section[data-testid='cookie-consent-banner'] button[data-nav-close]"
+        },
+        {
+            "waitForVisible": "section[data-testid='cookie-consent-banner']",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "OptanonAlertBoxClosed"
+        }
+    ]
+}
