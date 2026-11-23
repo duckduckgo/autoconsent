@@ -422,6 +422,14 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects analytics consent prompts without the word "cookie" in popups only', () => {
+        const text =
+            'Help improve the site? Allow Google Analytics to measure page views and traffic sources. Your choice does not affect search. Allow analytics No thanks';
+        expect(detectsPopup(text)).to.be.true;
+        expect(detectsPage(text)).to.be.false;
+        expectNotDetected(['Google Analytics allows you to measure page views', 'How to set up Google Analytics to track conversions']);
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';
