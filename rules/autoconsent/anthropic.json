@@ -14,12 +14,12 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": "[data-testid='consent-banner'] button[data-testid='consent-accept']"
+            "waitForThenClick": "[data-testid='consent-banner'] button:is([data-testid='consent-accept'], [class*='_acceptButton'])"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "[data-testid='consent-banner'] button[data-testid='consent-reject']"
+            "waitForThenClick": "[data-testid='consent-banner'] button:is([data-testid='consent-reject'], [class*='_rejectButton'])"
         }
     ],
     "test": [
