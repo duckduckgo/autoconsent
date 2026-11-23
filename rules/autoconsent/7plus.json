@@ -1,0 +1,44 @@
+{
+    "name": "7plus",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?7plus\\.com\\.au/"
+    },
+    "prehideSelectors": ["#app > [class^='cookieContainer']"],
+    "detectCmp": [{ "exists": "#app > [class^='cookieContainer'] [class*='acceptAndCloseButton']" }],
+    "detectPopup": [{ "visible": "#app > [class^='cookieContainer'] [class*='acceptAndCloseButton']" }],
+    "optIn": [
+        {
+            "if": { "exists": "[class^='cookieContainer'] [class*='toggleSettingsButton']" },
+            "then": [
+                { "click": "[class^='cookieContainer'] [class*='toggleSettingsButton']" },
+                { "waitForVisible": "[class^='cookieContainer'] div[class^='settings'] button" },
+                {
+                    "click": "[class^='cookieContainer'] div[class^='settings'] button:not([class*='active']):not([disabled])",
+                    "all": true,
+                    "optional": true
+                }
+            ]
+        },
+        { "waitForThenClick": "[class^='cookieContainer'] [class*='acceptAndCloseButton']" }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "[class^='cookieContainer'] [class*='toggleSettingsButton']" },
+            "then": [
+                { "click": "[class^='cookieContainer'] [class*='toggleSettingsButton']" },
+                { "waitForVisible": "[class^='cookieContainer'] div[class^='settings'] button" },
+                {
+                    "click": "[class^='cookieContainer'] div[class^='settings'] button[class*='active']:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": "[class^='cookieContainer'] [class*='acceptAndCloseButton']" }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "[class^='cookieContainer'] [class*='closeButton'], [class^='cookieContainer'] [class*='acceptAndCloseButton']"
+                }
+            ]
+        }
+    ]
+}
