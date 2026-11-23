@@ -1,7 +1,7 @@
 {
     "name": "gov.uk",
     "detectCmp": [{ "exists": ".govuk-cookie-banner__message" }],
-    "detectPopup": [{ "exists": ".govuk-cookie-banner__message .govuk-button" }],
+    "detectPopup": [{ "visible": ".govuk-cookie-banner__message .govuk-button", "check": "any" }],
     "optIn": [{ "click": [".govuk-cookie-banner__message", "xpath///button[contains(., 'Accept')] | //a[contains(., 'Accept')]"] }],
     "optOut": [
         {
@@ -20,19 +20,31 @@
                         ".govuk-cookie-banner__message",
                         "xpath///button[contains(., 'Reject')] | //a[contains(., 'Reject')] | //input[contains(@value, 'Reject')] | //button[contains(., 'do not use analytics cookies')]"
                     ]
+                },
+                {
+                    "any": [
+                        { "visible": ".govuk-cookie-banner__message", "check": "none" },
+                        {
+                            "waitForThenClick": "xpath///*[contains(@class, 'govuk-cookie-banner__message')][not(@hidden)]//*[self::button or self::a or self::input][contains(., 'Hide') or contains(., 'Close') or contains(@value, 'Hide')]",
+                            "timeout": 2000
+                        },
+                        { "waitForVisible": ".govuk-cookie-banner__message", "check": "none", "timeout": 2000 }
+                    ]
                 }
-            ]
-        },
-        {
-            "waitForVisible": [
-                ".govuk-cookie-banner__message",
-                "xpath///button[contains(., 'Hide')] | //a[contains(., 'Hide')] | //input[contains(@value, 'Hide')]"
-            ]
-        },
-        {
-            "click": [
-                ".govuk-cookie-banner__message",
-                "xpath///button[contains(., 'Hide')] | //a[contains(., 'Hide')] | //input[contains(@value, 'Hide')]"
+            ],
+            "else": [
+                {
+                    "waitForVisible": [
+                        ".govuk-cookie-banner__message",
+                        "xpath///button[contains(., 'Hide')] | //a[contains(., 'Hide')] | //input[contains(@value, 'Hide')]"
+                    ]
+                },
+                {
+                    "click": [
+                        ".govuk-cookie-banner__message",
+                        "xpath///button[contains(., 'Hide')] | //a[contains(., 'Hide')] | //input[contains(@value, 'Hide')]"
+                    ]
+                }
             ]
         }
     ]
