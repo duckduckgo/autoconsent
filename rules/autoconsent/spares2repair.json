@@ -1,0 +1,42 @@
+{
+    "name": "spares2repair",
+    "vendorUrl": "https://spares2repair.co.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?spares(2repair|4shavers)\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#cookie-consent-root #cookie-overlay", "#cookie-consent-root #cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent-root #cookie-banner #cc-manage"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent-root #cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner .cc-accept-all-initial",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-banner #cc-manage",
+            "retry": 3,
+            "retryInterval": 500
+        },
+        {
+            "waitForThenClick": "#cookie-modal .cc-pref-footer #cc-reject-all",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_consent=1|0|0"
+        }
+    ]
+}
