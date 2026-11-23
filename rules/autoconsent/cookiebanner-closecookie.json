@@ -1,0 +1,9 @@
+{
+    "name": "cookiebanner-closecookie",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#cookieBanner a.btn-closecookie" }],
+    "detectPopup": [{ "visible": "#cookieBanner a.btn-closecookie" }],
+    "optIn": [{ "waitForThenClick": "#cookieBanner a.btn-closecookie" }],
+    "optOut": [{ "waitForThenClick": "#cookieBanner a.btn-closecookie" }],
+    "test": [{ "cookieContains": "seenCookieNotification=1" }]
+}
