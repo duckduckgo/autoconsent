@@ -315,6 +315,27 @@ export function emptyResult(url, region, provider, error) {
     };
 }
 
+/** Timeout of one final-screenshot attempt, in ms. */
+const SCREENSHOT_TIMEOUT = 20000;
+
+/**
+ * Save a JPEG screenshot of the page, retrying once. A remote browser on a busy page can take
+ * many seconds to answer the evaluations Playwright runs in every frame before capturing.
+ * @param {Page} page
+ * @param {string} filepath
+ */
+async function screenshotWithRetry(page, filepath) {
+    for (let attempt = 1; ; attempt++) {
+        try {
+            return await page.screenshot({ path: filepath, quality: 50, scale: 'css', timeout: SCREENSHOT_TIMEOUT, type: 'jpeg' });
+        } catch (e) {
+            if (attempt >= 2) {
+                throw e;
+            }
+        }
+    }
+}
+
 /**
  * Run autoconsent on a URL in an already-created page and collect a TestResult.
  * @param {Page} page
@@ -364,9 +385,11 @@ export async function runTest(page, url, regionKey, options, provider) {
             const tag = provider.screenshotTag ? `-${provider.screenshotTag}` : '';
             const filepath = path.join(screenshotsDir, `${domain}-${regionKey}${tag}-final.jpg`);
             fs.mkdirSync(screenshotsDir, { recursive: true });
-            await page.screenshot({ path: filepath, quality: 50, scale: 'css', timeout: 5000, type: 'jpeg' });
+            await screenshotWithRetry(page, filepath);
             result.screenshotPaths.push(filepath);
-        } catch {}
+        } catch (e) {
+            result.errors.push(`Screenshot failed: ${String(e instanceof Error ? e.message : e).split('\n')[0]}`);
+        }
 
         return result;
     } catch (e) {

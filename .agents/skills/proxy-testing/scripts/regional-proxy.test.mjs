@@ -1,7 +1,10 @@
 import assert from 'node:assert/strict';
-import { describe, it } from 'node:test';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { after, describe, it } from 'node:test';
 
-import { enableGpc, runTest } from '../../../lib/regional-testing/harness.mjs';
+import { emptyResult, enableGpc, runTest } from '../../../lib/regional-testing/harness.mjs';
 import { buildProxyConfig, deviceContextOptions } from './regional-proxy.mjs';
 
 const credentials = {
@@ -124,5 +127,60 @@ describe('Global Privacy Control', () => {
 
     it('is off with gpc: false', async () => {
         assert.deepEqual(await gpcHeadersFor({ gpc: false }), []);
+    });
+});
+
+describe('final screenshot', () => {
+    const screenshotsDir = fs.mkdtempSync(path.join(os.tmpdir(), 'regional-testing-'));
+    after(() => fs.rmSync(screenshotsDir, { recursive: true, force: true }));
+
+    /**
+     * Run a test on a fake page whose first `failures` screenshots throw a Playwright-style timeout.
+     * @param {number} failures
+     */
+    async function runWithScreenshotFailures(failures) {
+        let calls = 0;
+        const page = /** @type {any} */ ({
+            setExtraHTTPHeaders: async () => {},
+            addInitScript: async () => {},
+            goto: async () => {},
+            screenshot: async () => {
+                calls++;
+                if (calls <= failures) {
+                    throw new Error('page.screenshot: Timeout 20000ms exceeded.\nCall log:\n  - taking page screenshot');
+                }
+            },
+        });
+        const ctx = {
+            waitForCompletion: async () => false,
+            hasMessage: () => false,
+            collectResult: (/** @type {string} */ url, /** @type {string} */ region) => emptyResult(url, region, 'regional-proxy'),
+        };
+        const provider = /** @type {any} */ ({ name: 'regional-proxy', defaultScreenshotsDir: screenshotsDir, inject: async () => ctx });
+        const result = await runTest(page, 'https://example.com/', 'us', {}, provider);
+        return { result, calls };
+    }
+
+    it('is taken once when it succeeds', async () => {
+        const { result, calls } = await runWithScreenshotFailures(0);
+        assert.equal(calls, 1);
+        assert.deepEqual(result.screenshotPaths, [path.join(screenshotsDir, 'example.com-us-final.jpg')]);
+    });
+
+    it('is retried once after a failure', async () => {
+        const { result, calls } = await runWithScreenshotFailures(1);
+        assert.equal(calls, 2);
+        assert.deepEqual(result.screenshotPaths, [path.join(screenshotsDir, 'example.com-us-final.jpg')]);
+        assert.equal(
+            result.errors.some((e) => e.startsWith('Screenshot failed')),
+            false,
+        );
+    });
+
+    it('reports the first line of the error when the retry fails too', async () => {
+        const { result, calls } = await runWithScreenshotFailures(2);
+        assert.equal(calls, 2);
+        assert.deepEqual(result.screenshotPaths, []);
+        assert.ok(result.errors.includes('Screenshot failed: page.screenshot: Timeout 20000ms exceeded.'), result.errors.join('; '));
     });
 });
