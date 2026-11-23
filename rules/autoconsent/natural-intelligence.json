@@ -1,0 +1,21 @@
+{
+    "name": "natural-intelligence",
+    "vendorUrl": "https://www.naturalint.com/",
+    "prehideSelectors": ["#cookiesDashboard,#cookieConsent.tc-privacy-override"],
+    "detectCmp": [{ "exists": "#cookiesDashboard #preferences_consent_top_modal,#cookieConsent #cookie_top_setting_btn" }],
+    "detectPopup": [{ "visible": "#cookiesDashboard,#cookieConsent", "check": "any" }],
+    "optIn": [{ "waitForThenClick": "#cookiesDashboard #submit_consent_top_modal,#cookieConsent #cookie_top_accept_btn" }],
+    "optOut": [
+        { "waitForThenClick": "#cookiesDashboard #preferences_consent_top_modal,#cookieConsent #cookie_top_setting_btn" },
+        { "waitForVisible": "#modalWindowContainer #save_consent_main_modal" },
+        { "click": "#modalWindowContainer .toggle-custom:checked + label", "all": true, "optional": true },
+        { "waitForThenClick": "#modalWindowContainer #save_consent_main_modal" }
+    ],
+    "test": [
+        {
+            "if": { "exists": "#cookiesDashboard" },
+            "then": [{ "cookieContains": "consent:false" }],
+            "else": [{ "waitForVisible": "#cookieConsent,#modalWindowContainer", "check": "none", "timeout": 2000 }]
+        }
+    ]
+}
