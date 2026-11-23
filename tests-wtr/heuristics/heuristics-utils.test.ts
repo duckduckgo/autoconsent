@@ -415,6 +415,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'We use privacy-friendly analytics to see which health guides are most useful. No ads, no profiling.',
             'We use Google Analytics to count page views and monthly active users. It sets a cookie and, when you are signed in, records your account id.',
             'Usiamo Google Analytics per capire come viene usato il sito. Li attiviamo solo con il tuo consenso.',
+            'Essential cookies run the site. With your consent we also use Microsoft Clarity (session replays), Google Analytics and a first-party attribution cookie.',
         ];
         for (const text of texts) {
             expect(detectsPopup(text), text).to.be.true;
@@ -437,6 +438,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Please allow cookies in your browser settings',
             'We use data analytics tools in our consulting work',
             'We use the best chocolate in our cookies',
+            'With your consent we use your email address to send our weekly newsletter.',
         ]);
     });
 });
