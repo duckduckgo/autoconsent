@@ -1,0 +1,25 @@
+{
+    "name": "pieeye",
+    "vendorUrl": "https://pii.ai/",
+    "prehideSelectors": [".pieeye-consent-container"],
+    "detectCmp": [{ "exists": [".pieeye-consent-container iframe", ".allow-all-button"] }],
+    "detectPopup": [{ "visible": [".pieeye-consent-container iframe", ".allow-all-button"] }],
+    "optIn": [{ "waitForThenClick": [".pieeye-consent-container iframe", ".allow-all-button"] }],
+    "optOut": [
+        {
+            "if": { "exists": [".pieeye-consent-container iframe", ".necessary-only-button"] },
+            "then": [{ "waitForThenClick": [".pieeye-consent-container iframe", ".necessary-only-button"] }],
+            "else": [
+                { "waitForThenClick": [".pieeye-consent-container iframe", ".preferences-button"] },
+                { "waitFor": [".pieeye-consent-container iframe", "[class*='CookieDetails_BannerCheck'] input"], "timeout": 2000 },
+                {
+                    "click": [".pieeye-consent-container iframe", "[class*='CookieDetails_BannerCheck'] input:checked:not([disabled])"],
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": [".pieeye-consent-container iframe", ".allow-selection-button"] }
+            ]
+        }
+    ],
+    "test": [{ "wait": 500 }, { "cookieContains": "\"pieeye-category-targeting-analytics\":0" }]
+}
