@@ -1,0 +1,17 @@
+{
+    "name": "op-consent-manager",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#ocm-container.ocm-container--banner"],
+    "detectCmp": [{ "exists": "#ocm-container.ocm-container--banner .ocm-button--continue" }],
+    "detectPopup": [{ "visible": "#ocm-container.ocm-container--banner" }],
+    "optIn": [{ "waitForThenClick": "#ocm-container .ocm-button--accept-all" }],
+    "optOut": [
+        { "waitForThenClick": "#ocm-container .ocm-button--continue" },
+        { "waitForVisible": "#ocm-container.ocm-container--banner", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "anoConsent=%7B%22categories%22%3A%5B1%2C0%2C0%2C0%5D" }]
+}
