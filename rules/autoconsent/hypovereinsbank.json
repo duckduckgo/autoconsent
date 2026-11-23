@@ -1,0 +1,39 @@
+{
+    "name": "hypovereinsbank",
+    "vendorUrl": "https://www.hypovereinsbank.de/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?hypovereinsbank\\.de/"
+    },
+    "prehideSelectors": [".uccb"],
+    "detectCmp": [
+        {
+            "exists": ".uccb .uccb__accept-selection"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".uccb .uccb__wrapper"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".uccb .uccb__accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".uccb .uccb__accept-selection"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"statistics\":false"
+        },
+        {
+            "cookieContains": "\"marketing\":false"
+        },
+        {
+            "cookieContains": "\"personalise\":false"
+        }
+    ]
+}
