@@ -399,6 +399,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Please can I use cookies to see how the site is used and which of my ads work? Privacy',
             'Welcome! We use third-party tools to collect information about you as you enjoy our site.',
             'We and our advertising partners use cookies for ad measurement, personalised ads and analytics.',
+            'Pick My Postcode and its partners use cookies and other similar identifiers for analytics, personalisation, and ads.',
             'By using our site, you acknowledge that you read and understand our Cookie Policy.',
             'By using this website you agree to our use of cookie technology.',
             'Allow analytics cookies? They help us understand how visitors use this website. Your choice does not affect access.',
@@ -437,6 +438,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Please allow cookies in your browser settings',
             'We use data analytics tools in our consulting work',
             'We use the best chocolate in our cookies',
+            'The bakery and its partners use fresh butter in their cookies',
         ]);
     });
 });
