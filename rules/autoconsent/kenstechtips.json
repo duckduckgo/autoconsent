@@ -1,0 +1,12 @@
+{
+    "name": "kenstechtips",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?kenstechtips\\.com/"
+    },
+    "prehideSelectors": [".cookie-alert:has(> .cookie-alert-container)"],
+    "detectCmp": [{ "exists": ".cookie-alert .cookie-alert-container .accept-cookies" }],
+    "detectPopup": [{ "visible": ".cookie-alert.show .accept-cookies" }],
+    "optIn": [{ "waitForThenClick": ".cookie-alert .accept-cookies" }],
+    "optOut": [{ "waitForThenClick": ".cookie-alert .accept-cookies" }],
+    "test": [{ "cookieContains": "acceptedCookies=true" }]
+}
