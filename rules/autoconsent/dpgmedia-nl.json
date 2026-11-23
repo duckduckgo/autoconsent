@@ -1,37 +1,37 @@
 {
     "name": "dpgmedia-nl",
-    "prehideSelectors": ["#pg-shadow-host-dom"],
+    "prehideSelectors": ["#pg-dom-shadow-host"],
     "detectCmp": [
         {
-            "exists": "#pg-shadow-host-dom"
+            "exists": "#pg-dom-shadow-host"
         }
     ],
     "detectPopup": [
         {
-            "visible": ["#pg-shadow-host-dom", "#pg-modal"]
+            "visible": ["#pg-dom-shadow-host", "#pg-modal"]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["#pg-shadow-host-dom", "#pg-accept-btn"]
+            "waitForThenClick": ["#pg-dom-shadow-host", "#pg-accept-btn"]
         }
     ],
     "optOut": [
         {
             "if": {
-                "visible": ["#pg-shadow-host-dom", "#pg-reject-btn"]
+                "visible": ["#pg-dom-shadow-host", "#pg-reject-btn"]
             },
             "then": [
                 {
-                    "click": ["#pg-shadow-host-dom", "#pg-reject-btn"]
+                    "click": ["#pg-dom-shadow-host", "#pg-reject-btn"]
                 }
             ],
             "else": [
                 {
-                    "waitForThenClick": ["#pg-shadow-host-dom", "#pg-configure-btn"]
+                    "waitForThenClick": ["#pg-dom-shadow-host", "#pg-configure-btn"]
                 },
                 {
-                    "waitForThenClick": ["#pg-shadow-host-dom", "#pg-reject-btn"]
+                    "waitForThenClick": ["#pg-dom-shadow-host", "#pg-reject-btn"]
                 }
             ]
         }
