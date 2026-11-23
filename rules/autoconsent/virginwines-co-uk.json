@@ -1,0 +1,32 @@
+{
+    "name": "virginwines.co.uk",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?virginwines\\.co\\.uk/"
+    },
+    "prehideSelectors": ["wc-consent-modal"],
+    "detectCmp": [
+        {
+            "exists": "wc-consent-modal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["wc-consent-modal", "#wc-consent-modal__rejectCookies"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["wc-consent-modal", "#wc-consent-modal__acceptCookies"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["wc-consent-modal", "#wc-consent-modal__rejectCookies"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "acceptEssentialCookies=true"
+        }
+    ]
+}
