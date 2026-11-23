@@ -1,0 +1,23 @@
+{
+    "name": "incogni",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?incogni\\.com/"
+    },
+    "prehideSelectors": ["aside[data-testid=cookie-consent-wrapper]"],
+    "detectCmp": [{ "exists": "aside[data-testid=cookie-consent-wrapper]" }],
+    "detectPopup": [{ "visible": "aside[data-testid=cookie-consent-wrapper]" }],
+    "optIn": [{ "waitForThenClick": "aside[data-testid=cookie-consent-wrapper] [data-testid=cookie-consent-left]" }],
+    "optOut": [
+        {
+            "if": { "exists": "aside[data-testid=cookie-consent-wrapper] [data-testid=cookie-consent-reject]" },
+            "then": [{ "click": "aside[data-testid=cookie-consent-wrapper] [data-testid=cookie-consent-reject]" }],
+            "else": [
+                {
+                    "click": "aside[data-testid=cookie-consent-wrapper] :is([data-testid=cookie-consent-right], [data-testid=cookie-consent-settings-link])"
+                },
+                { "waitForThenClick": "aside[data-testid=cookie-consent-wrapper] [data-testid=cookie-consent-reject]" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "incogni-consent-state=a:0|m:0" }]
+}
