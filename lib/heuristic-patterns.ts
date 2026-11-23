@@ -89,6 +89,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bwe have cookies\b/gi,
     /\b(?:revoke|withdraw) your consent at any time\b|\beinwilligung jederzeit widerrufen\b/gi,
     /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi,
+    // consent asked for analytics without the cookie noun: "we'd like to load optional Google Analytics to …"
+    /\b(?:like|want) to (?:load|use|enable) (?:[\w-]+ ){0,2}analytics (?:to|for)\b/gi,
     /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi,
     /\baccept or (?:reject|decline) (?:all |optional |non-essential )?cookies\b/gi,
 
