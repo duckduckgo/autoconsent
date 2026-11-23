@@ -46,6 +46,13 @@ export default class Uniconsent extends AutoConsentCMPBase {
             return this.rejectAll();
         }
 
+        // US (CCPA) variant: a single button opts out of sale/sharing
+        if (this.elementVisible(this.sel('.unic .unic-opt-out-data-button'), 'any')) {
+            await this.click(this.sel('.unic .unic-opt-out-data-button'));
+            await this.wait(500); // give it some time to close the popup
+            return true;
+        }
+
         if (this.elementExists(this.sel('.unic .unic-manage-options-button'))) {
             await this.click(this.sel('.unic .unic-manage-options-button'));
         } else {
