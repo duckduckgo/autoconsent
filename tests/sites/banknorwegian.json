@@ -1,0 +1,27 @@
+{
+    "cmp": "banknorwegian",
+    "tests": [
+        {
+            "sites": [
+                "https://www.banknorwegian.no/",
+                "https://www.banknorwegian.se/",
+                "https://www.banknorwegian.dk/",
+                "https://www.banknorwegian.fi/",
+                "https://www.banknorwegian.de/",
+                "https://www.banknorwegian.es/"
+            ],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": [
+                "https://www.banknorwegian.no/",
+                "https://www.banknorwegian.se/",
+                "https://www.banknorwegian.dk/",
+                "https://www.banknorwegian.fi/",
+                "https://www.banknorwegian.de/",
+                "https://www.banknorwegian.es/"
+            ],
+            "options": { "mobile": false }
+        }
+    ]
+}

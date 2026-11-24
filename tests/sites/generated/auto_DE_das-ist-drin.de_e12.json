@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_DE_das-ist-drin.de_e12",
+    "tests": [
+        {
+            "sites": ["https://das-ist-drin.de/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["DE"] }
+        }
+    ]
+}

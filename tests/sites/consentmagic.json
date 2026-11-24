@@ -1,0 +1,14 @@
+{
+    "cmp": "consentmagic",
+    "tests": [
+        {
+            "note": "these sites reload the page after consent, which races with the self-test",
+            "sites": ["https://me-fa.dk/", "https://glenroy.com/", "https://cooksandcompany.co.uk/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "sites": ["https://pixelyoursite.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

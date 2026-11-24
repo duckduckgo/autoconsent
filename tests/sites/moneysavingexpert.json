@@ -1,0 +1,9 @@
+{
+    "cmp": "moneysavingexpert.com",
+    "tests": [
+        {
+            "sites": ["https://moneysavingexpert.com"],
+            "options": { "skipRegions": ["US", "FR", "DE"] }
+        }
+    ]
+}

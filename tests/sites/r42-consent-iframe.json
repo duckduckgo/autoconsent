@@ -1,0 +1,16 @@
+{
+    "cmp": "r42-consent-iframe",
+    "tests": [
+        {
+            "sites": [
+                "https://www.corendon.nl/",
+                "https://www.corendon.be/",
+                "https://www.corendon.de/",
+                "https://www.corendon.dk/",
+                "https://www.corendon.se/",
+                "https://www.stipreizen.nl/"
+            ],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

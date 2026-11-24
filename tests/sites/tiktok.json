@@ -1,0 +1,13 @@
+{
+    "cmp": "tiktok.com",
+    "tests": [
+        {
+            "sites": ["https://tiktok.com/", "https://www.capcut.com/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "sites": ["https://tiktok.com/", "https://www.capcut.com/"],
+            "options": { "skipRegions": ["US"], "mobile": true }
+        }
+    ]
+}

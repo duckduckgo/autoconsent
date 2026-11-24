@@ -1,0 +1,24 @@
+{
+    "cmp": "outdooractive",
+    "tests": [
+        {
+            "sites": ["https://www.alpenvereinaktiv.com/de/", "https://www.altenberg.de/en/"]
+        },
+        {
+            "sites": [
+                "https://www.maps.engadin.ch/en/",
+                "https://www.maps.viamala.ch/de/reisefuehrer/schweiz/viamala/1607085/",
+                "https://outdoor.glarnerland.ch/en/"
+            ],
+            "options": { "onlyRegions": ["CH"] }
+        },
+        {
+            "sites": ["https://www.tourenplaner-rheinland-pfalz.de/en/"],
+            "options": { "onlyRegions": ["DE"] }
+        },
+        {
+            "sites": ["https://www.maps.engadin.ch/en/"],
+            "options": { "mobile": true }
+        }
+    ]
+}

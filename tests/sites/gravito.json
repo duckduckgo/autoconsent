@@ -1,0 +1,20 @@
+{
+    "cmp": "gravito",
+    "tests": [
+        {
+            "sites": [
+                "https://www.gp.se/",
+                "https://www.hitta.se/",
+                "https://www.suomi24.fi/",
+                "https://www.foreca.fi/",
+                "https://www.veikkaus.fi/",
+                "https://www.apu.fi/"
+            ]
+        },
+        {
+            "note": "popup is not shown in the US",
+            "sites": ["https://www.flightradar24.com/45.96,14.66/6"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "cmp": "avada-cookie-consent",
+    "tests": [
+        {
+            "sites": [
+                "https://www.nativeunion.com/products/belt-cable-usb-c-to-usb-c",
+                "https://www.marinbikes.com/",
+                "https://www.simplemodern.com/"
+            ]
+        },
+        {
+            "note": "Deny button opens the preferences popup",
+            "sites": ["https://www.outdoortechnology.com/"]
+        }
+    ]
+}

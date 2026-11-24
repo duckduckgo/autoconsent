@@ -1,0 +1,10 @@
+{
+    "cmp": "disturbia",
+    "tests": [
+        {
+            "note": "the banner is only shown in regions that require consent",
+            "sites": ["https://www.disturbia.co.uk/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

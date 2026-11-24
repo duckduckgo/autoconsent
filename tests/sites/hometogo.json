@@ -1,0 +1,13 @@
+{
+    "cmp": "hometogo",
+    "tests": [
+        {
+            "sites": ["https://www.hometogo.com/", "https://www.casamundo.com/", "https://www.hometogo.de/"],
+            "options": { "mobile": false }
+        },
+        {
+            "sites": ["https://www.hometogo.com/", "https://www.casamundo.com/", "https://www.hometogo.de/"],
+            "options": { "mobile": true }
+        }
+    ]
+}

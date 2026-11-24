@@ -1,0 +1,9 @@
+{
+    "cmp": "eltax-lta-go-jp",
+    "tests": [
+        {
+            "sites": ["https://portal.payment.eltax.lta.go.jp/efp/xnd/index"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

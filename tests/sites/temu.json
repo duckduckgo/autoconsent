@@ -1,0 +1,9 @@
+{
+    "cmp": "temu",
+    "tests": [
+        {
+            "sites": ["https://www.temu.com/"],
+            "options": { "skipRegions": ["US", "CA", "AU", "JP"] }
+        }
+    ]
+}

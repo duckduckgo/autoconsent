@@ -1,0 +1,25 @@
+{
+    "cmp": "sc-cookie-banner",
+    "tests": [
+        {
+            "sites": [
+                "https://www.energyplus.co.uk/",
+                "https://bestbuilders.co.uk/",
+                "https://myinsuranceexpert.co.uk/",
+                "https://eyesurgeryclinic.co.uk/",
+                "https://airconsurrey.co.uk/"
+            ],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": [
+                "https://www.energyplus.co.uk/",
+                "https://bestbuilders.co.uk/",
+                "https://myinsuranceexpert.co.uk/",
+                "https://eyesurgeryclinic.co.uk/",
+                "https://airconsurrey.co.uk/"
+            ],
+            "options": { "mobile": false }
+        }
+    ]
+}

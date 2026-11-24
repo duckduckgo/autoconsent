@@ -1,0 +1,10 @@
+{
+    "cmp": "cookieconsent3",
+    "tests": [
+        {
+            "note": "consent may be stored in localStorage (odprentals) or arrive late (bookboon), so the cookie self-test is unreliable",
+            "sites": ["https://bookboon.com/", "https://odprentals.co.za/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

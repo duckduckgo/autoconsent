@@ -1,0 +1,13 @@
+{
+    "cmp": "grupa-pracuj",
+    "tests": [
+        {
+            "sites": ["https://www.pracuj.pl/", "https://pracodawcy.pracuj.pl/"]
+        },
+        {
+            "note": "these sites reload the page after saving consent (or store it without the cp_* cookies), so the self-test cannot run",
+            "sites": ["https://zarobki.pracuj.pl/", "https://grupapracuj.pl/", "https://theprotocol.it/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

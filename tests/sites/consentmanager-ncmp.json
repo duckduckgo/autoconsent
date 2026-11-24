@@ -1,0 +1,9 @@
+{
+    "cmp": "consentmanager-ncmp",
+    "tests": [
+        {
+            "sites": ["https://www.royalroad.com/", "https://www.lolalytics.com/"],
+            "options": { "onlyRegions": ["DE"] }
+        }
+    ]
+}

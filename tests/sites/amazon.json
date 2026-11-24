@@ -1,0 +1,14 @@
+{
+    "cmp": "amazon.com",
+    "tests": [
+        {
+            "note": "amazon.com shows no consent banner in any region, so it is not listed.",
+            "sites": ["https://www.amazon.co.uk/", "https://www.amazon.de/", "https://www.amazon.nl/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://www.amazon.co.uk/", "https://www.amazon.de/", "https://www.amazon.nl/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

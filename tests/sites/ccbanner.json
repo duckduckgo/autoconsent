@@ -1,0 +1,12 @@
+{
+    "cmp": "cc_banner",
+    "tests": [
+        {
+            "sites": ["https://www.w3resource.com/", "https://bitcoin.org/en/"]
+        },
+        {
+            "sites": ["https://distrowatch.com/"],
+            "options": { "skipRegions": ["US", "GB"] }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "adblockplus",
+    "tests": [
+        {
+            "sites": ["https://adblockplus.org/"],
+            "options": { "testOptIn": true, "testSelfTest": true, "onlyRegions": ["US"] }
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "cmp": "help-ch",
+    "tests": [
+        {
+            "sites": [
+                "https://www.wirtschaftsregister.ch/",
+                "https://www.gemeinderegister.ch/",
+                "https://www.registreducommerce.ch/",
+                "https://www.plz-postleitzahl.ch/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

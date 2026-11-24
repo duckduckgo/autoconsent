@@ -1,0 +1,13 @@
+{
+    "cmp": "mainichi",
+    "tests": [
+        {
+            "sites": ["https://mainichi.jp/"],
+            "options": { "onlyRegions": ["JP", "US"] }
+        },
+        {
+            "sites": ["https://mainichi.jp/"],
+            "options": { "onlyRegions": ["JP", "US"], "mobile": true }
+        }
+    ]
+}

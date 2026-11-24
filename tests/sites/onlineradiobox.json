@@ -1,0 +1,9 @@
+{
+    "cmp": "onlineradiobox",
+    "tests": [
+        {
+            "sites": ["https://onlineradiobox.com/", "https://onlineradiobox.com/us/"],
+            "options": { "onlyRegions": ["US", "CA"] }
+        }
+    ]
+}

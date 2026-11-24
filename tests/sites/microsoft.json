@@ -1,0 +1,9 @@
+{
+    "cmp": "microsoft.com",
+    "tests": [
+        {
+            "sites": ["https://docs.microsoft.com", "https://answers.microsoft.com", "https://github.com/enterprise"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

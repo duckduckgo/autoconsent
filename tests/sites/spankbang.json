@@ -1,0 +1,18 @@
+{
+    "cmp": "spankbang",
+    "tests": [
+        {
+            "note": "US visitors get no banner",
+            "sites": ["https://spankbang.com/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "sites": ["https://nl.spankbang.com/"],
+            "options": { "onlyRegions": ["NL"] }
+        },
+        {
+            "sites": ["https://la.spankbang.com/"],
+            "options": { "onlyRegions": ["DE"] }
+        }
+    ]
+}

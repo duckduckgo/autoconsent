@@ -1,0 +1,31 @@
+{
+    "cmp": "didomi",
+    "tests": [
+        {
+            "note": "Self-test is disabled because some sites (e.g. planet.fr) navigate away after clicking the disagree button, which destroys the Didomi state.",
+            "sites": [
+                "https://nothing.tech/",
+                "http://www.allocine.fr/",
+                "https://www.boursorama.com/",
+                "https://www.theoriginalshotels.com/en/hotels/la-villa-vicha",
+                "https://support.didomi.io/set-up-the-absence-of-interaction-as-a-cookie-denial"
+            ],
+            "options": { "testOptIn": true, "testSelfTest": false, "onlyRegions": ["US", "FR"] }
+        },
+        {
+            "note": "US-specific Didomi sites where the CMP runs in CCPA/CPRA mode. In CCPA mode there is no explicit reject button, so the rule relies on the Didomi JS API (EVAL_DIDOMI_OPT_OUT) instead of clicking a DOM element.",
+            "sites": ["https://newrepublic.com/article/162247/andreas-malm-blow-up-pipeline-climate-direct-action"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["US"] }
+        },
+        {
+            "note": "Publisher wrapper (#acceptationCMPWall) that only unlocks the page on Didomi UI click events, so the rule rejects via the preferences screen instead of the JS API.",
+            "sites": ["https://en.as.com/", "https://cadenaser.com/"],
+            "options": { "testOptIn": true, "testSelfTest": true, "onlyRegions": ["US"] }
+        },
+        {
+            "note": "\"Consent or pay\" notices where the disagree button is a paid or subscription option: the rule must leave them to the user.",
+            "sites": ["https://www.elconfidencial.com/", "https://www.20minutes.fr/", "https://www.publico.es/"],
+            "options": { "expectPopupOpen": false, "testOptIn": false, "testOptOut": false, "testSelfTest": false, "onlyRegions": ["FR"] }
+        }
+    ]
+}

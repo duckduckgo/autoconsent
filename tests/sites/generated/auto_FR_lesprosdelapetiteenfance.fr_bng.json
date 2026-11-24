@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_lesprosdelapetiteenfance.fr_bng",
+    "tests": [
+        {
+            "sites": ["https://www.lesprosdelapetiteenfance.fr/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

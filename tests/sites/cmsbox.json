@@ -1,0 +1,14 @@
+{
+    "cmp": "cmsbox",
+    "tests": [
+        {
+            "note": "declining submits a form and reloads the page, so there is no stable state to self-test",
+            "sites": ["https://www.gstaadmenuhinfestival.ch/en", "https://www.vivanta.ch/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "sites": ["https://www.abenco.ch/"],
+            "options": { "testSelfTest": false, "onlyRegions": ["CH"] }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CH_kobo.com_p4l",
+    "tests": [
+        {
+            "sites": ["https://www.kobo.com/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CH"] }
+        }
+    ]
+}

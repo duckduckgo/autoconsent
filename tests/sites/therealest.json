@@ -1,0 +1,10 @@
+{
+    "cmp": "therealest",
+    "tests": [
+        {
+            "note": "saving preferences reloads the page when analytics was on by default (US), which interrupts the self-test",
+            "sites": ["https://mls.therealest.com/", "https://therealest.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

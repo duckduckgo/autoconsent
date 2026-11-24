@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_psv.nl_2pt",
+    "tests": [
+        {
+            "sites": ["https://www.psv.nl/home"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

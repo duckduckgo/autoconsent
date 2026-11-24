@@ -1,0 +1,13 @@
+{
+    "cmp": "facebook",
+    "tests": [
+        {
+            "sites": ["https://facebook.com/", "https://www.facebook.com/friends"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "sites": ["https://facebook.com/"],
+            "options": { "mobile": true, "skipRegions": ["US"] }
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "cmp": "pe-cookies",
+    "tests": [
+        {
+            "sites": [
+                "https://candidat.francetravail.fr/",
+                "https://www.francetravail.fr/accueil/",
+                "https://pro.francetravail.fr/accueil/"
+            ],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": [
+                "https://candidat.francetravail.fr/",
+                "https://www.francetravail.fr/accueil/",
+                "https://pro.francetravail.fr/accueil/"
+            ],
+            "options": { "mobile": false }
+        }
+    ]
+}

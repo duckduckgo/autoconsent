@@ -1,0 +1,9 @@
+{
+    "cmp": "gov.uk",
+    "tests": [
+        {
+            "sites": ["https://gov.uk", "https://data.gov.uk", "https://sorn.service.gov.uk/"],
+            "options": { "skipRegions": ["US", "FR", "DE"] }
+        }
+    ]
+}

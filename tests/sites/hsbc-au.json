@@ -1,0 +1,13 @@
+{
+    "cmp": "hsbc-au",
+    "tests": [
+        {
+            "sites": ["https://www.hsbc.com.au/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://www.hsbc.com.au/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

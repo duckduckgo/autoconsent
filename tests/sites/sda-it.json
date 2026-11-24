@@ -1,0 +1,10 @@
+{
+    "cmp": "sda-it",
+    "tests": [
+        {
+            "note": "the site reloads the page after the click, so the self-test cannot run",
+            "sites": ["https://www.sda.it/"],
+            "options": { "testOptIn": true, "testSelfTest": false }
+        }
+    ]
+}

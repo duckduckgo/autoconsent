@@ -1,0 +1,14 @@
+{
+    "cmp": "plex.tv",
+    "tests": [
+        {
+            "sites": [
+                "https://watch.plex.tv/",
+                "https://support.plex.tv/",
+                "https://www.plex.tv/en-gb/plans/",
+                "https://www.plex.tv/media-server-downloads/?cat=computer&plat=macos"
+            ],
+            "options": { "skipRegions": ["US", "CA", "AU", "JP"] }
+        }
+    ]
+}

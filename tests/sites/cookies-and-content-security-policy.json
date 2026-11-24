@@ -1,0 +1,15 @@
+{
+    "cmp": "cookies-and-content-security-policy",
+    "tests": [
+        {
+            "note": "the plugin reloads the page after saving consent",
+            "sites": ["https://www.sd.se/", "https://esny.se/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "the plugin reloads the page after saving consent. no reject button: opt out via settings",
+            "sites": ["https://hdrmaps.com/", "https://geijerskolan.se/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

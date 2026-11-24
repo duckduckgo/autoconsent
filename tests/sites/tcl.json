@@ -1,0 +1,9 @@
+{
+    "cmp": "tcl.com",
+    "tests": [
+        {
+            "sites": ["https://www.tcl.com/it/it", "https://www.tcl.com/de/de", "https://www.tcl.com/uk/en", "https://www.tcl.com/au/en"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

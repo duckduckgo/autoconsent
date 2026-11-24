@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_bobvoyeur.com_qm5",
+    "tests": [
+        {
+            "sites": ["https://www.bobvoyeur.com/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

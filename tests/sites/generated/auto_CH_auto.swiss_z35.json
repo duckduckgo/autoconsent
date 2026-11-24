@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CH_auto.swiss_z35",
+    "tests": [
+        {
+            "sites": ["https://www.auto.swiss/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CH"] }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_AU_lush.com_bdf",
+    "tests": [
+        {
+            "sites": ["https://www.lush.com/uk/en"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["AU"] }
+        }
+    ]
+}

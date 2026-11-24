@@ -1,0 +1,10 @@
+{
+    "cmp": "laxd",
+    "tests": [
+        {
+            "note": "Banner is shown in EEA; US and GB get a 403 page",
+            "sites": ["https://video.laxd.com/"],
+            "options": { "onlyRegions": ["DE", "FR", "NL"] }
+        }
+    ]
+}

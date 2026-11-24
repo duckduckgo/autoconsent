@@ -1,0 +1,20 @@
+{
+    "cmp": "sitevision-cookie-consent",
+    "tests": [
+        {
+            "sites": [
+                "https://www.ltu.se/",
+                "https://www.umea.se/",
+                "https://www.linkoping.se/",
+                "https://www.boras.se/",
+                "https://sundsvall.se/"
+            ],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "no \"necessary only\" button, opt-out goes through the settings view",
+            "sites": ["https://www.su.se/", "https://www.huddinge.se/", "https://www.sh.se/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

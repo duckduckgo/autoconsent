@@ -1,0 +1,13 @@
+{
+    "cmp": "quick-cookie-consent",
+    "tests": [
+        {
+            "sites": ["https://www.emvco.com/", "https://spares4appliances.co.uk/"]
+        },
+        {
+            "note": "older plugin version: saving a changed level reloads the page before the self-test runs",
+            "sites": ["https://stcuthberts.com/", "https://cbat.academy/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

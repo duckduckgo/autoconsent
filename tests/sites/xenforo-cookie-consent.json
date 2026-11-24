@@ -1,0 +1,10 @@
+{
+    "cmp": "xenforo-cookie-consent",
+    "tests": [
+        {
+            "note": "XenForo reloads the page after saving consent, so the in-page self-test cannot complete",
+            "sites": ["https://www.macuser.de/", "https://thehostingforums.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

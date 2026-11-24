@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CA_bet365.bet.br_kkx",
+    "tests": [
+        {
+            "sites": ["https://www.bet365.bet.br/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CA"] }
+        }
+    ]
+}

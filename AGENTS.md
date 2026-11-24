@@ -13,7 +13,8 @@ rules/autoconsent/    Hand-maintained JSON rules
 rules/generated/      Crawler-generated JSON rules (auto_XX_domain_hash.json)
 rules/build.ts        Merges all rules into rules.json, compact-rules.json
 data/                 Coverage data (coverage.json) and site lists
-tests/                Playwright E2E test specs (one per CMP)
+tests/sites/          E2E test data: sites and test options per rule (JSON)
+tests/rule-sites.spec.ts  Playwright spec that runs the tests/sites files
 tests-wtr/            Web Test Runner unit tests for DOM actions and rule logic
 playwright/runner.ts  Test harness: generateCMPTests(name, urls, options)
 addon/                Browser extension (MV3 + Firefox)
@@ -32,15 +33,17 @@ npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 | Command | Purpose |
 |---------|---------|
 | `npm run watch` | Auto-rebuild on changes to `lib/`, `addon/`, `rules/` (runs `prepublish` on each change) |
-| `npm run lint` | ESLint + Prettier + JSON rule schema validation |
+| `npm run lint` | ESLint + Prettier + JSON rule and test data validation |
 | `npm run lint-fix` | Auto-fix lint and formatting issues |
 | `npm run rule-syntax-check` | Validate `rules/autoconsent/*.json` against the TypeScript schema |
+| `npm run rule-sites-check` | Validate `tests/sites/**/*.json` against the schema and the rule names |
 | `npm run test:lib` | Unit tests (Web Test Runner) |
 | `npm run test` | All Playwright E2E tests |
+| `SPECS=<name> npx playwright test tests/rule-sites.spec.ts` | E2E tests of `tests/sites/<name>.json` only (comma-separate several) |
 | `npm run test:webkit` | Playwright tests in WebKit only |
 | `npm run test:chrome` | Playwright tests in Chrome only |
 | `npm run build-rules` | Rebuild `rules.json`, `compact-rules.json` |
-| `npm run create-rule` | Scaffold a new JSON rule + test spec |
+| `npm run create-rule` | Scaffold a new JSON rule + test file |
 | `npm run benchmark-buttons` | Score heuristic button classification against labelled button texts |
 
 ## Code Style
@@ -56,6 +59,9 @@ An out-of-scope overlay often sits in front of a real consent popup. Click throu
 
 ### Rule syntax
 For the complete rule syntax reference (all step types, element selectors, conditionals, etc.), see [docs/rule-syntax.md](docs/rule-syntax.md).
+
+### Rule test files
+Each rule's E2E test sites live in `tests/sites/<name>.json` (`tests/sites/generated/<name>.json` for generated rules): the rule name, groups of sites, and per-group test options such as `onlyRegions`, `skipRegions`, `mobile` or `testSelfTest: false`. Explain each non-obvious group or option in its `note` field, since JSON has no comments. Do not write new `tests/*.spec.ts` files. The format, the options and how CI picks the files to run are in [docs/rule-tests.md](docs/rule-tests.md).
 
 ### Regional Differences
 
@@ -77,7 +83,7 @@ Site-specific rules are rules scoped to specific sites with a `urlPattern`. Rule
 
 ### JSON Rules vs Code-based rules
 
-JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/` (auto-generated). Each file defines one CMP rule following the `AutoConsentCMPRule` type in `lib/rules.ts`. **Add new JSON rules only to `rules/autoconsent/`.** Do not add new files to `rules/generated/`: only the crawler creates them. You may remove a generated rule, for example when it is stale. Before removing any rule, test every site in its spec with the rule removed, in the core regions and every region the spec runs in, and confirm that another rule or the heuristic handles each one, or that the site no longer shows the popup.
+JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/` (auto-generated). Each file defines one CMP rule following the `AutoConsentCMPRule` type in `lib/rules.ts`. **Add new JSON rules only to `rules/autoconsent/`.** Do not add new files to `rules/generated/`: only the crawler creates them. You may remove a generated rule, for example when it is stale. Before removing any rule, test every site in its test file with the rule removed, in the core regions and every region the test file runs it in, and confirm that another rule or the heuristic handles each one, or that the site no longer shows the popup.
 
 ```json
 {
@@ -116,11 +122,11 @@ shadow root or same-origin iframe.
 - `detectCmp` and `detectPopup` must be fast. Do NOT use waiting steps — the engine retries automatically.
 - Keep regexes in `urlPattern` as simple as possible to avoid unnecessary performance overhead. In most cases, a simple "^https?://(\w+\.)?domain\.com/" is sufficient. Always end the pattern at the hostname boundary with a trailing `/`.
 - **`prehideSelectors` do not affect autoconsent visibility checks.** Prehide selectors are injected early to prevent flicker, and are intentionally implemented using opacity, which hides elements from the user, but not from built-in steps such as `waitForVisible` and `visible`. That said, _prehide selectors should be narrow_: overly broad selectors (e.g. `body`) could hide the entire page.
-- If you cover a new CMP or a new flavor of the existing CMP, ALWAYS try to look for more examples of that case, and add to the spec file.
+- If you cover a new CMP or a new flavor of the existing CMP, ALWAYS try to look for more examples of that case, and add them to the rule's test file.
 - Prefer DOM-based steps when possible — `eval` steps are a last resort.
 - Set `minimumRuleStepVersion: 2` if using `removeClass`, `setStyle`, or `addStyle`; set `minimumRuleStepVersion: 3` if using `stylesheet`.
 - Prefer `cookieContains` in `test` when the CMP stores consent in cookies.
-- Use `npm run create-rule` to scaffold a new rule and a spec file.
+- Use `npm run create-rule` to scaffold a new rule and its test file.
 - Code comments: keep them brief (max one line), explain why not what, no references to specific sites in library code
 
 ### Rule step traps
@@ -150,16 +156,16 @@ shadow root or same-origin iframe.
 - **Handling timing and DOM races.** A common pitfall is clicking before the site's JS handlers are ready. Prefer a state-based wait (`waitForVisible`, `waitForThenClick`) over an unconditional `wait`, and cap any unconditional `wait` at 1s — unconditional waits are a last resort because they hurt UX. When a click lands before handlers are attached, use `retry` / `retryInterval` on `waitForThenClick` (see `lib/rules.ts` and [docs/rule-syntax.md](docs/rule-syntax.md)) rather than padding a wait. `retry` only suits elements expected to **disappear** once the click is handled; extra clicks on a persistent control (e.g. a toggle) are wasted or harmful.
 - **Watch out for false positive detections**. Verify that the rule does NOT match after the popup is dismissed and the page is reloaded. A cosmetic rule is the exception: it stores no consent state, so it matches every load by design — there the thing to rule out is the repeated handling making the page reload. Over-detection can lead to reload loops.
 - **selfTests are optional.** It is okay to NOT have a self-test, or have it failing as long as the popup is handled correctly. Confirm this with screenshots.
-- Generic rules without a urlPattern MUST have at least two sites in the spec file.
-- If the popup comes in different DOM structures, cover all of them in the spec file.
-- **Keep spec URLs current.** When a site in a spec file no longer uses the rule's CMP (it switched CMPs or dropped its banner), replace it with a site that does, found in `data/coverage.json` or with the `publicwww-search` skill, and check the new site like any other. Do not just delete it: generic rules still need two sites. First check every region the spec runs in; if the popup only stopped showing in some of them, adjust `onlyRegions` or `skipRegions` instead. For a site-specific rule, the site no longer using the CMP means the rule itself may be stale (see Updating existing rules).
+- Generic rules without a urlPattern MUST have at least two sites in the test file.
+- If the popup comes in different DOM structures, cover all of them in the test file, and say in a `note` which variant each group covers.
+- **Keep test sites current.** When a site in a test file no longer uses the rule's CMP (it switched CMPs or dropped its banner), replace it with a site that does, found in `data/coverage.json` or with the `publicwww-search` skill, and check the new site like any other. Do not just delete it: generic rules still need two sites. First check every region the test file runs it in; if the popup only stopped showing in some of them, adjust `onlyRegions` or `skipRegions` instead. For a site-specific rule, the site no longer using the CMP means the rule itself may be stale (see Updating existing rules).
 
 ### Breakage in cosmetic rules
 **Prefer a non-cosmetic rule.** A cosmetic (`hide`) rule is a last resort when there is no reject/dismiss path. If cosmetic is unavoidable, verify that hiding the element does not break the page and **report that evidence**. Cosmetic rule without breakage-check evidence is incomplete.
 
 Check each breakage type separately and report a verdict on each, rather than a general "looks fine": **leftover overlay** (a banner remnant or backdrop still covering the page), **blocked scrolling** (a scroll or overflow lock left on html/body or the dialog), **blocked interaction** (clicks or taps not reaching the page), and **reload loop** (the rule still matching after the popup is dismissed and the page is reloaded).
 
-**Check a generic cosmetic rule on every site it applies to, not only the reported one.** A rule without a `urlPattern` hides elements on every site with that CMP, and each site can break differently. Run the breakage check on all known sites (the spec file, `data/coverage.json`, and the publicwww sites you tested), and report the verdicts for each site.
+**Check a generic cosmetic rule on every site it applies to, not only the reported one.** A rule without a `urlPattern` hides elements on every site with that CMP, and each site can break differently. Run the breakage check on all known sites (the test file, `data/coverage.json`, and the publicwww sites you tested), and report the verdicts for each site.
 
 When using `hide`, the CMP may lock scrolling or add overlays. Add fixes AFTER the `hide` step, marked `"optional": true`:
 
@@ -213,7 +219,7 @@ After creating or modifying a rule:
 
 1. `npm run build-rules` — rebuild rules.json (required for tests)
 2. `npm run rule-syntax-check` — validate rule JSON against schema
-3. `npx playwright test tests/<name>.spec.ts` — run the E2E test
+3. `npm run rule-sites-check`, then `SPECS=<name> npx playwright test tests/rule-sites.spec.ts` — validate and run the E2E tests in `tests/sites/<name>.json`
 4. `npm run prepublish` — full build including extension bundle
 5. Validate that the rule stops matching after the popup is dismissed and the page is reloaded (unless it's a cosmetic rule).
 6. Check the rule works across regions as per guidelines above.

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CH_arttv.ch_2lm",
+    "tests": [
+        {
+            "sites": ["https://arttv.ch/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CH"] }
+        }
+    ]
+}

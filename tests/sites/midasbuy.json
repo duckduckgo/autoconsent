@@ -1,0 +1,13 @@
+{
+    "cmp": "midasbuy",
+    "tests": [
+        {
+            "sites": ["https://www.midasbuy.com/"],
+            "options": { "mobile": false }
+        },
+        {
+            "sites": ["https://www.midasbuy.com/"],
+            "options": { "mobile": true }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "selection-cookie-banner",
+    "tests": [
+        {
+            "sites": ["https://www.jugend-musiziert.org/", "https://elstercube.de/", "https://www.stadtwerke-neustadt-orla.de/"],
+            "options": { "onlyRegions": ["DE"] }
+        }
+    ]
+}

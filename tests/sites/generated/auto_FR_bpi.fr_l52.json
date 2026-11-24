@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_bpi.fr_l52",
+    "tests": [
+        {
+            "sites": ["https://www.bpi.fr/en/home/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

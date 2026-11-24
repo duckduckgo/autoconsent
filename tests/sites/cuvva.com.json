@@ -1,0 +1,13 @@
+{
+    "cmp": "cuvva.com",
+    "tests": [
+        {
+            "sites": ["https://www.cuvva.com/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://www.cuvva.com/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

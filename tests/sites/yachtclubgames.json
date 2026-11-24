@@ -1,0 +1,12 @@
+{
+    "cmp": "yachtclubgames.com",
+    "tests": [
+        {
+            "sites": ["https://www.yachtclubgames.com/"]
+        },
+        {
+            "sites": ["https://www.yachtclubgames.com/"],
+            "options": { "mobile": true }
+        }
+    ]
+}

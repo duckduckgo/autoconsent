@@ -1,0 +1,10 @@
+{
+    "cmp": "greengo",
+    "tests": [
+        {
+            "note": "US visitors get no banner",
+            "sites": ["https://www.greengo.voyage/en"],
+            "options": { "onlyRegions": ["FR", "GB", "DE"] }
+        }
+    ]
+}

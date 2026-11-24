@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_duitslandinstituut.nl_d4q",
+    "tests": [
+        {
+            "sites": ["https://duitslandinstituut.nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

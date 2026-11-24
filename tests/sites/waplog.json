@@ -1,0 +1,13 @@
+{
+    "cmp": "waplog",
+    "tests": [
+        {
+            "sites": ["https://waplog.com/", "https://wchat.mobi/", "https://w-match.com/", "https://dateway.app/"],
+            "options": { "mobile": false }
+        },
+        {
+            "sites": ["https://waplog.com/", "https://wchat.mobi/", "https://w-match.com/", "https://dateway.app/"],
+            "options": { "mobile": true }
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "cmp": "altamar-cookieconsent",
+    "tests": [
+        {
+            "sites": ["https://altamar.es/", "https://altamar.cat/", "https://inoxcyl.com/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://altamar.es/", "https://altamar.cat/", "https://inoxcyl.com/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

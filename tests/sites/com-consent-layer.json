@@ -1,0 +1,13 @@
+{
+    "cmp": "com-consent-layer",
+    "tests": [
+        {
+            "sites": ["https://www.comdirect.de/", "https://magazin.comdirect.de/", "https://akademie.comdirect.de/"],
+            "options": { "mobile": false }
+        },
+        {
+            "sites": ["https://www.comdirect.de/", "https://magazin.comdirect.de/", "https://akademie.comdirect.de/"],
+            "options": { "mobile": true }
+        }
+    ]
+}

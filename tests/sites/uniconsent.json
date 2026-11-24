@@ -1,0 +1,15 @@
+{
+    "cmp": "Uniconsent",
+    "tests": [
+        {
+            "note": "No popup is shown to US visitors. popup in a shadow root on #uniccmp",
+            "sites": ["https://www.autoforum.cz/", "https://synonymer.se/", "https://www.searchenginejournal.com/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "No popup is shown to US visitors. older markup without the shadow root",
+            "sites": ["https://www.offen.net/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

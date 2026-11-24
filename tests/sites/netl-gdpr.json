@@ -1,0 +1,16 @@
+{
+    "cmp": "netl-gdpr",
+    "tests": [
+        {
+            "note": "sites reload the page after the consent choice, so the self-test cannot run",
+            "sites": [
+                "https://www.geomar.de/",
+                "https://evangelische-jugend-luebeck-lauenburg.de/",
+                "https://www.diakonie-sh.de/",
+                "https://www.merz-dental.de/",
+                "https://www.befg.de/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "cmp": "spaggiari-pvw",
+    "tests": [
+        {
+            "note": "the page reloads as soon as consent is stored",
+            "sites": [
+                "https://www.icmerano1.edu.it/",
+                "https://www.bonfantini.it/",
+                "https://www.liceodarwin.net/",
+                "https://www.istruzioneliguria.gov.it/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

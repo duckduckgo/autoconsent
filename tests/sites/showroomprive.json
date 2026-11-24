@@ -1,0 +1,24 @@
+{
+    "cmp": "showroomprive",
+    "tests": [
+        {
+            "note": "desktop banner reloads the page after a choice, so the self-test never runs",
+            "sites": [
+                "https://www.showroomprive.com/",
+                "https://www.showroomprive.es/",
+                "https://www.showroomprive.nl/",
+                "https://www.saldiprivati.com/"
+            ],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "sites": [
+                "https://www.showroomprive.com/",
+                "https://www.showroomprive.es/",
+                "https://www.showroomprive.nl/",
+                "https://www.saldiprivati.com/"
+            ],
+            "options": { "mobile": true }
+        }
+    ]
+}

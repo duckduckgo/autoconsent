@@ -1,0 +1,13 @@
+{
+    "cmp": "consentaur",
+    "tests": [
+        {
+            "sites": ["https://companydata.dk/", "https://sureit.dk/", "https://regrettable.eu/", "https://sirefs.com/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://companydata.dk/", "https://sureit.dk/", "https://regrettable.eu/", "https://sirefs.com/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

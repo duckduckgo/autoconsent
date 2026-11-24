@@ -1,0 +1,14 @@
+{
+    "cmp": "consentmanager.net",
+    "tests": [
+        {
+            "sites": [
+                "https://www.dastelefonbuch.de/",
+                "https://www.history.de/",
+                "https://www.consentmanager.net/",
+                "https://www.thermador.com/us/"
+            ],
+            "options": { "skipRegions": ["US", "GB"] }
+        }
+    ]
+}

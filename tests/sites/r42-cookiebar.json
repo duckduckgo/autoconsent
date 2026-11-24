@@ -1,0 +1,9 @@
+{
+    "cmp": "r42-cookiebar",
+    "tests": [
+        {
+            "sites": ["https://www.zilverenkruis.nl/", "https://www.fbto.nl/", "https://www.centraalbeheer.nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

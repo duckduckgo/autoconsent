@@ -1,0 +1,10 @@
+{
+    "cmp": "bundesregierung.de",
+    "tests": [
+        {
+            "note": "our crawler proxy hits a bot wall, but it still passes locally",
+            "sites": ["https://bundesregierung.de"],
+            "options": { "skipRegions": ["US", "FR", "GB", "DE"] }
+        }
+    ]
+}

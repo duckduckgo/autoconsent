@@ -1,0 +1,9 @@
+{
+    "cmp": "uswitch.com",
+    "tests": [
+        {
+            "sites": ["https://uswitch.com"],
+            "options": { "skipRegions": ["US", "FR", "DE"] }
+        }
+    ]
+}

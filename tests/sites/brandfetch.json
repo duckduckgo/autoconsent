@@ -1,0 +1,9 @@
+{
+    "cmp": "brandfetch",
+    "tests": [
+        {
+            "sites": ["https://brandfetch.com/"],
+            "options": { "skipRegions": ["US", "CA", "AU", "JP"] }
+        }
+    ]
+}

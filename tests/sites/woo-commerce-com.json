@@ -1,0 +1,10 @@
+{
+    "cmp": "woo-commerce-com",
+    "tests": [
+        {
+            "note": "The banner is not shown in AU and CA.",
+            "sites": ["https://woocommerce.com/"],
+            "options": { "skipRegions": ["AU", "CA"] }
+        }
+    ]
+}

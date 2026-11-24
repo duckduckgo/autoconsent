@@ -1,0 +1,10 @@
+{
+    "cmp": "poki",
+    "tests": [
+        {
+            "note": "\"Choose your cookies in the Privacy Center\" (CA) and \"Privacy & cookies\" (NL) notices",
+            "sites": ["https://poki.com/"],
+            "options": { "onlyRegions": ["CA", "NL"] }
+        }
+    ]
+}

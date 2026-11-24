@@ -1,0 +1,26 @@
+{
+    "cmp": "Tealium",
+    "tests": [
+        {
+            "sites": [
+                "http://www.tui.com/",
+                "https://www.nsandi.com/",
+                "https://www.telenor.com/",
+                "https://www.allaboutvision.com/",
+                "https://www.chs.net/",
+                "https://www.nito.no/",
+                "https://www.about.hsbc.pl/pl-pl/hsbc-service-delivery",
+                "https://www.hsbc.com/",
+                "https://www.telekom.de/",
+                "https://www.telekom.com/",
+                "https://www.t-systems.com/",
+                "https://www.mainova.de/"
+            ]
+        },
+        {
+            "note": "preferences prompt variant; the popup shows inconsistently to US visitors",
+            "sites": ["https://www.keurig.ca/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

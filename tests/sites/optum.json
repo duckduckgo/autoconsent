@@ -1,0 +1,13 @@
+{
+    "cmp": "optum",
+    "tests": [
+        {
+            "sites": ["https://www.optum.com/", "https://www.optum.com/es/", "https://business.optum.com/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://www.optum.com/", "https://www.optum.com/es/", "https://business.optum.com/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

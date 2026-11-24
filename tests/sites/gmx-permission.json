@@ -1,0 +1,9 @@
+{
+    "cmp": "gmx-permission",
+    "tests": [
+        {
+            "sites": ["https://www.gmx.com/", "https://support.gmx.com/"],
+            "options": { "mobile": true }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_DE_bmz.de_nss",
+    "tests": [
+        {
+            "sites": ["https://www.bmz.de/de"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["DE"] }
+        }
+    ]
+}

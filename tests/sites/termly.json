@@ -1,0 +1,18 @@
+{
+    "cmp": "Termly",
+    "tests": [
+        {
+            "sites": [
+                "https://itsalovelylife.com/",
+                "https://www.iccsafe.org/",
+                "https://cooper.edu/",
+                "https://www.chateauelan.com/",
+                "https://www.bentley.edu/"
+            ]
+        },
+        {
+            "sites": ["https://visualsbyimpulse.com/"],
+            "options": { "skipRegions": ["DE"] }
+        }
+    ]
+}

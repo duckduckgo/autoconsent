@@ -1,0 +1,9 @@
+{
+    "cmp": "mensaje-cookies",
+    "tests": [
+        {
+            "sites": ["https://www.poderjudicial.es/", "https://www.idepa.es/"],
+            "options": { "testOptIn": false }
+        }
+    ]
+}

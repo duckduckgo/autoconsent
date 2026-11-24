@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_DE_originalteile.mercedes-benz.de_tce",
+    "tests": [
+        {
+            "sites": ["https://originalteile.mercedes-benz.de/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["DE"] }
+        }
+    ]
+}

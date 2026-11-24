@@ -1,0 +1,9 @@
+{
+    "cmp": "steampowered.com",
+    "tests": [
+        {
+            "sites": ["https://store.steampowered.com"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

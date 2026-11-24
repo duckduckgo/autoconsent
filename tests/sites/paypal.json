@@ -1,0 +1,9 @@
+{
+    "cmp": "paypal.com",
+    "tests": [
+        {
+            "sites": ["https://paypal.de", "https://paypal.com"],
+            "options": { "skipRegions": ["US", "CA"], "testSelfTest": false }
+        }
+    ]
+}

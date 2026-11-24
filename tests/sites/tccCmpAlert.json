@@ -1,0 +1,10 @@
+{
+    "cmp": "tccCmpAlert",
+    "tests": [
+        {
+            "note": "In the EU these sites show a Quantcast dialog first; the tccCmpAlert popup only comes after it",
+            "sites": ["https://www.radiobianconera.com/", "https://www.radiofirenzeviola.it/", "https://www.tmwradio.com/"],
+            "options": { "onlyRegions": ["US"] }
+        }
+    ]
+}

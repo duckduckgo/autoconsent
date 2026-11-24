@@ -1,0 +1,18 @@
+{
+    "cmp": "dandomain",
+    "tests": [
+        {
+            "note": "saving consent reloads the page, which can drop the self-test message",
+            "sites": [
+                "https://www.lamper.dk/",
+                "https://www.fruskov.dk/",
+                "https://www.bestman.dk/",
+                "https://www.whisky.dk/",
+                "https://www.skiltex.dk/",
+                "https://www.fashiongirls.se/",
+                "https://www.plastbutikken.no/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
