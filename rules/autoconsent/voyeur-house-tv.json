@@ -1,0 +1,33 @@
+{
+    "name": "voyeur-house-tv",
+    "vendorUrl": "https://voyeur-house.tv/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?voyeur-house\\.tv/"
+    },
+    "prehideSelectors": [".consent-modal"],
+    "detectCmp": [
+        {
+            "exists": ".consent-modal #cNecessaryOnly"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".consent-modal #cNecessaryOnly"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".consent-modal #cAcceptAll"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".consent-modal #cNecessaryOnly"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_consent=necessary"
+        }
+    ]
+}
