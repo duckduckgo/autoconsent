@@ -1,0 +1,42 @@
+{
+    "name": "worldshopping",
+    "vendorUrl": "https://www.worldshopping.global/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ["div#zigzag-worldshopping-checkout", "#zigzag-test__cookie-banner-settings"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["div#zigzag-worldshopping-checkout", "#zigzag-test__cookie-banner-settings"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["div#zigzag-worldshopping-checkout", "#zigzag-test__cookie-banner-accept-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["div#zigzag-worldshopping-checkout", "#zigzag-test__cookie-banner-settings"]
+        },
+        {
+            "waitFor": ["div#zigzag-worldshopping-checkout", "#zigzag-test__cookie-settings-save"],
+            "timeout": 2000
+        },
+        {
+            "click": ["div#zigzag-worldshopping-checkout", "input[type=checkbox]:checked"],
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": ["div#zigzag-worldshopping-checkout", "#zigzag-test__cookie-settings-save"]
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_WORLDSHOPPING_TEST"
+        }
+    ]
+}

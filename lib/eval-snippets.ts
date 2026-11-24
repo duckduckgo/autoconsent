@@ -308,6 +308,8 @@ export const snippets = {
     EVAL_USERCENTRICS_API_5: () => UC_UI.areAllConsentsAccepted() === true,
     EVAL_USERCENTRICS_API_6: () => UC_UI.areAllConsentsAccepted() === false,
     EVAL_WBD_LTP_CLOSE: () => document.querySelector('dialog#ltp-dialog').close() || true,
+    EVAL_WORLDSHOPPING_TEST: () =>
+        JSON.parse(decodeURIComponent(atob(localStorage.getItem('zigzag')))).cookieConsentConfig.groups.C0002 === false,
     EVAL_ZOHO_TEST: () => localStorage.getItem('zglobal_Acookie_optOut') === '3',
 };
 
