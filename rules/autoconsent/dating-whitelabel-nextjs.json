@@ -1,0 +1,19 @@
+{
+    "name": "dating-whitelabel-nextjs",
+    "vendorUrl": "https://michverlieben.com/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#__next > div.fixed.bottom-0.z-\\[70\\] div.flex.gap-2.shrink-0 > button:first-child + button.from-blue-500:last-child"
+        }
+    ],
+    "detectPopup": [{ "visible": "#__next > div.fixed.bottom-0.z-\\[70\\] div.flex.gap-2.shrink-0 > button.from-blue-500:last-child" }],
+    "optIn": [{ "waitForThenClick": "#__next > div.fixed.bottom-0.z-\\[70\\] div.flex.gap-2.shrink-0 > button.from-blue-500:last-child" }],
+    "optOut": [
+        { "waitForThenClick": "#__next > div.fixed.bottom-0.z-\\[70\\] div.flex.gap-2.shrink-0 > button:first-child" },
+        { "waitForVisible": "[role='dialog'] button[role='switch']" },
+        { "click": "[role='dialog'] button[role='switch'][aria-checked='true']:not([disabled])", "all": true, "optional": true },
+        { "waitForThenClick": "[role='dialog']:has(button[role='switch']) div.justify-end > button.from-blue-500:last-child" }
+    ],
+    "test": [{ "cookieContains": "%22statistics%22:false%2C%22marketing%22:false" }]
+}
