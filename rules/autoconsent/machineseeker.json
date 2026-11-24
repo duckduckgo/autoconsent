@@ -1,0 +1,31 @@
+{
+    "name": "machineseeker",
+    "_metadata": {
+        "vendorUrl": "https://www.machineseeker.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#cookie-notification:has(button[onclick^=\"frontend.consent.acceptAll\"])"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-notification button[onclick^=\"frontend.consent.acceptAll\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-notification"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-notification button[onclick^=\"frontend.consent.acceptAll\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "eval": "EVAL_MACHINESEEKER_OPT_OUT"
+        }
+    ]
+}

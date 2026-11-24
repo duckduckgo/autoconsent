@@ -186,6 +186,17 @@ export const snippets = {
         document
             .querySelector('.consent-banner .cookie-decline')
             .dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window })) || true,
+    EVAL_MACHINESEEKER_OPT_OUT: () => {
+        // the banner has no reject button, and binds a handler that accepts all on any link click
+        frontend.consent.denyAll();
+        $('a').each((_, a) =>
+            ($._data(a, 'events')?.click || [])
+                .filter((e) => String(e.handler).includes('acceptAll'))
+                .forEach((e) => $(a).off('click', e.handler)),
+        );
+        $('#cookie-notification').hide();
+        return true;
+    },
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]
