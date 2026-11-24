@@ -21,7 +21,8 @@ PR Verification:
 npm run lint
 npm run rule-syntax-check
 npm run test:lib
-npx playwright test tests/<cmp>.spec.ts --project webkit
+npm run rule-sites-check
+SPECS=<name> npx playwright test tests/rule-sites.spec.ts --project webkit
 ```
 
 If any check fails, fix the issue and re-run before proceeding.
@@ -30,7 +31,7 @@ If any check fails, fix the issue and re-run before proceeding.
 
 ### JSON rule PRs
 
-- [ ] Test spec exists in `tests/` with reachable URLs
+- [ ] Test file exists in `tests/sites/` (`tests/sites/generated/` for generated rules) with reachable URLs, and its `note`s explain non-obvious groups and options
 - [ ] Selectors are stable (no CSS module hashes, dynamic IDs, or framework-generated IDs)
 - [ ] `optOut` targets a reject/decline button, not a privacy policy link or close button
 - [ ] `prehideSelectors` are narrow (no `body` or full-page selectors)

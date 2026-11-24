@@ -10,6 +10,7 @@ import compactRules from '../rules/compact-rules.json';
 // We need both formats: compact for optOut tests, full for optIn tests.
 import { autoconsent as fullRules } from '../rules/rules.json';
 import { injectIntoIsolatedWorld } from './isolated-world.mjs';
+import type { TestOptions } from './spec-types';
 import { connectOxylabs, createCaptchaTracker } from './oxylabs.mjs';
 
 const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
@@ -37,9 +38,6 @@ const useOxylabs = process.env.OXYLABS === '1';
 const oxylabsCandidatesFile = process.env.OXYLABS_CANDIDATES;
 const oxylabsCandidates = useOxylabs && oxylabsCandidatesFile ? readOxylabsCandidates(oxylabsCandidatesFile) : null;
 const recordOxylabsCandidates = !useOxylabs && !!oxylabsCandidatesFile;
-// SPEC_MANIFEST=<file> also appends each generateCMPTests call to the file as a JSON line, so tools can read
-// the specs as Playwright loads them (`npx playwright test --list`). Tests are defined as usual.
-const specManifestFile = process.env.SPEC_MANIFEST;
 // Pages load slower through remote Oxylabs sessions, so detection gets a longer window there.
 const detectionSlowdown = useOxylabs ? 2 : 1;
 // Status codes that bot protection answers with; other errors (404, 5xx) point to a stale spec URL instead.
@@ -80,17 +78,6 @@ function readOxylabsCandidates(file: string) {
     }
 }
 
-type TestOptions = {
-    testOptOut: boolean;
-    testSelfTest: boolean;
-    testOptIn: boolean;
-    skipRegions?: string[];
-    onlyRegions?: string[];
-    mobile: boolean;
-    expectPopupOpen: boolean;
-    expectedRuns: number;
-    gpc: boolean;
-};
 // A frame's content script, reached through either the isolated-world transport or a main-world Frame.
 type ContentScriptTarget = {
     send: (message: object) => Promise<unknown>;
@@ -501,17 +488,7 @@ function pickCIRegions(options: TestOptions): string[] {
     return [...picked, ...rest].slice(0, MAX_CI_REGIONS);
 }
 
-// The spec file that called generateCMPTests, relative to the repository root.
-function callingSpecFile(): string | null {
-    const frames = new Error().stack?.split('\n') ?? [];
-    const file = frames.map((frame) => frame.match(/\(?([^()\s]+\.spec\.ts):\d+:\d+\)?$/)?.[1]).find(Boolean);
-    return file ? path.relative(path.join(__dirname, '..'), file) : null;
-}
-
 export default function generateCMPTests(cmp: string, sites: string[], overrideOptions: Partial<TestOptions> = {}) {
-    if (specManifestFile) {
-        fs.appendFileSync(specManifestFile, `${JSON.stringify({ spec: callingSpecFile(), cmp, sites, options: overrideOptions })}\n`);
-    }
     test.describe(cmp, () => {
         if (recordOxylabsCandidates) {
             // eslint-disable-next-line no-empty-pattern
@@ -543,6 +520,9 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
                     return;
                 }
                 test(testName, async ({ page }, testInfo) => {
+                    if (finalOptions.timeout) {
+                        test.setTimeout(Math.max(finalOptions.timeout, testInfo.timeout));
+                    }
                     const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, autoAction);
                     if (recordOxylabsCandidates) {
                         testRuns.set(testInfo.testId, testRun);

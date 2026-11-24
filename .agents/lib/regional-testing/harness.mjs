@@ -33,7 +33,7 @@
  * @property {string[]} [disabledCmps=[]] - Rule names autoconsent skips, e.g. to see what handles the page without a rule.
  * @property {HeuristicLevel} [heuristicMode='tier2'] - Heuristic level; 'tier1' leaves out popups whose only button is Accept.
  * @property {string} [emulateDevice] - Playwright device to emulate on Chromium, e.g. 'Pixel 7'. Desktop when unset. Applied by the providers' `testUrl` when they open the page.
- * @property {boolean} [gpc=true] - Send the Global Privacy Control signal, as DuckDuckGo browsers do. `false` tests a page the way a spec without the `gpc` option does.
+ * @property {boolean} [gpc=true] - Send the Global Privacy Control signal, as DuckDuckGo browsers do. `false` tests a page the way a rule test file without the `gpc` option does.
  */
 
 /**

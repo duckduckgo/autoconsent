@@ -103,7 +103,7 @@ Options (all optional):
 - `detectionTimeout` — max wait for `cmpDetected` before giving up (default: `completionTimeout`).
 - `disabledCmps` — rule names autoconsent skips (default `[]`), e.g. to see whether another rule or the heuristic handles the page without a rule.
 - `heuristicMode` — heuristic level: `'off'`, `'reject'`, `'tier1'` or `'tier2'` (default `'tier2'`). `'tier1'` leaves out popups whose only button is Accept.
-- `gpc` — send the Global Privacy Control signal (`Sec-GPC: 1` and `navigator.globalPrivacyControl`), as DuckDuckGo browsers do (default `true`). Set `false` to test the way a spec without the `gpc` option does, which is how CI runs most specs.
+- `gpc` — send the Global Privacy Control signal (`Sec-GPC: 1` and `navigator.globalPrivacyControl`), as DuckDuckGo browsers do (default `true`). Set `false` to test the way a rule test file without the `gpc` option does, which is how CI runs most of them.
 - `emulateDevice` — Playwright device to emulate on Chromium, e.g. `'Pixel 7'` (viewport, user agent, touch), applied by `testUrl`. Desktop when unset. Prefer an Android device: an emulated iPhone still exposes Chrome-only APIs such as `navigator.userAgentData`, so a site can tell it is not Safari.
 - `headless` — run Chromium headless (default `true`).
 - `launchOptions` — extra options merged into `chromium.launch()` (e.g. `args`); the regional `proxy` is always applied on top.
