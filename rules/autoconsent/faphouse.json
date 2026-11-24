@@ -1,0 +1,18 @@
+{
+    "name": "faphouse",
+    "runContext": {
+        "urlPattern": "^https://(\\w+\\.)?faphouse\\d*\\.com/"
+    },
+    "prehideSelectors": ["#cookie-wall-short"],
+    "detectCmp": [{ "exists": "#cw-controls #cwc-accept" }],
+    "detectPopup": [{ "visible": "#cw-controls #cwc-accept" }],
+    "optIn": [{ "waitForThenClick": "#cw-controls #cwc-accept" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cw-controls #cwc-reject" },
+            "then": [{ "waitForThenClick": "#cw-controls #cwc-reject" }],
+            "else": [{ "waitForThenClick": "#cookie-wall-short #cwc-accept" }]
+        }
+    ],
+    "test": [{ "visible": "#cw-controls", "check": "none" }]
+}
