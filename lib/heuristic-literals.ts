@@ -144,6 +144,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["cookies"],
     ["zwecken und anbietern"],
     ["weiter ohne akzeptanz"],
+    [" von cookies"],
     ["gebruik"],
     ["gebruiken"],
     ["vergelijkbare"],

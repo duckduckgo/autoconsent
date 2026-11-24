@@ -197,6 +197,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bwir\s+(?:verwenden|nutzen|setzen)\s+cookies\b/gi,
     /\bzwecken und anbietern\b/gi,
     /\bweiter ohne akzeptanz\b/gi,
+    // "... erbringen wir mit der Hilfe von Cookies"; privacy policies use the phrase too, so popup text only
+    { pattern: /\b(?:mit(?: der)? hilfe|mithilfe) von cookies\b/gi, input: 'popup' },
 
     // NL
     GEBRUIK_VAN_COOKIES,

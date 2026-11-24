@@ -269,6 +269,11 @@ describe('checkHeuristicPatterns with inputs and context negatives', () => {
             checkHeuristicPatterns('Wij en onze partners slaan informatie op en/of lezen deze.', 'popup').patterns.length,
         ).to.be.greaterThan(0);
         expect(checkHeuristicPatterns('Auf dieser Seite werden Cookies verwendet.', 'popup').patterns.length).to.be.greaterThan(0);
+        expect(
+            checkHeuristicPatterns('Personalisierte Werbung und Analyse-Services erbringen wir mit der Hilfe von Cookies.', 'popup')
+                .patterns.length,
+        ).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns('Wir bieten Hilfe beim Backen von Cookies.', 'popup').patterns.length).to.equal(0);
     });
 
     it('hasHeuristicPatterns agrees with checkHeuristicPatterns on inputs and negatives', () => {
