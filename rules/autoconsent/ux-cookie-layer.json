@@ -1,0 +1,30 @@
+{
+    "name": "ux-cookie-layer",
+    "vendorUrl": "https://www.trumpf.com/",
+    "prehideSelectors": ["ux-cookie-layer"],
+    "detectCmp": [
+        {
+            "exists": ["ux-cookie-layer", "ux-cookie-layer-modal"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["ux-cookie-layer", "ux-cookie-layer-modal[opened]"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["ux-cookie-layer", "[data-testid=cookie-layer-button-accept-all]"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["ux-cookie-layer", "a[data-ux-cookie-layer=accept-required]"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22optional%22:false"
+        }
+    ]
+}
