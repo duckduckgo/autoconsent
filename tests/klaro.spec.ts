@@ -4,7 +4,7 @@ generateCMPTests('Klaro', [
     'https://heyklaro.com/',
     'https://www.zeitraum-moebel.de/',
     'https://repisalud.isciii.es/',
-    'https://www.innogames.com/',
-    'https://www.lebenslauf.de/',
+    'https://www.autoreparaturen.de/',
+    'https://www.merton.gov.uk/',
     // 'https://dspace.library.stonybrook.edu', // polyfills Promise so playwright doesn't work
 ]);

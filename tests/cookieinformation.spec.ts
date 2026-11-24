@@ -9,6 +9,7 @@ generateCMPTests(
         'https://consumer.huawei.com/uk/',
         'https://www.tokmanni.fi/',
         'https://www.puuilo.fi/',
+        'https://aetka.de/',
     ],
     {},
 );

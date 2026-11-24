@@ -18,7 +18,11 @@ export default class Klaro extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
-        if (this.elementExists('.klaro > .cookie-modal')) {
+        // embedded modals are part of the page content and may be present but hidden
+        if (
+            this.elementExists('.klaro > .cookie-modal:not(.cm-embedded)') ||
+            this.elementVisible('.klaro > .cookie-modal.cm-embedded', 'any')
+        ) {
             this.settingsOpen = true;
             return true;
         }
