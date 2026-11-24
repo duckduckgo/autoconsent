@@ -1,0 +1,14 @@
+{
+    "name": "clym-tcf-frame",
+    "vendorUrl": "https://www.clym.io/",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://cf\\.clym-widget\\.net/latest/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#clym-app-layout #handle-reject" }],
+    "detectPopup": [{ "visible": "#clym-app-layout #handle-reject" }],
+    "optIn": [{ "waitForThenClick": "#clym-app-layout #handle-accept-all" }],
+    "optOut": [{ "waitForThenClick": "#clym-app-layout #handle-reject" }]
+}
