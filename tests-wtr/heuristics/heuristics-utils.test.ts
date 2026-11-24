@@ -893,6 +893,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Entesos')).to.equal('acknowledge');
     });
 
+    it('matches Portuguese acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('Ciente')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Estou ciente')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Entendi!')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Eficiente')).to.equal('other');
+    });
+
     it('matches Catalan necessary-only buttons as reject', () => {
         expect(classifyButtonTextRegex('Només les necessàries')).to.equal('reject');
         expect(classifyButtonTextRegex('Només necessàries')).to.equal('reject');
