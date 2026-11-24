@@ -1,0 +1,18 @@
+{
+    "name": "selection-cookie-banner",
+    "vendorUrl": "https://www.jugend-musiziert.org/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "div.cookie-banner[role=alert] input#marketing-cookies" }],
+    "detectPopup": [{ "visible": "div.cookie-banner[role=alert]" }],
+    "optIn": [{ "waitForThenClick": "div.cookie-banner[role=alert] button[aria-label='Alle Cookies zulassen']" }],
+    "optOut": [
+        {
+            "click": "div.cookie-banner[role=alert] input.form-check-input:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "div.cookie-banner[role=alert] button[aria-label='Nur ausgewählte Cookies erlauben']" }
+    ],
+    "test": [{ "cookieContains": "%22marketing%22:false" }]
+}
