@@ -1,0 +1,10 @@
+{
+    "name": "2gis",
+    "vendorUrl": "https://2gis.ru/",
+    "prehideSelectors": ["div:has(> div > a[href*=\"law.2gis.\"][href*=\"/privacy/cookie\"])"],
+    "detectCmp": [{ "exists": "div:has(> div > a[href*=\"law.2gis.\"][href*=\"/privacy/cookie\"])" }],
+    "detectPopup": [{ "visible": "div:has(> div > a[href*=\"law.2gis.\"][href*=\"/privacy/cookie\"])" }],
+    "optIn": [{ "waitForThenClick": "div:has(> div > a[href*=\"law.2gis.\"][href*=\"/privacy/cookie\"]) > div:last-child" }],
+    "optOut": [{ "waitForThenClick": "div:has(> div > a[href*=\"law.2gis.\"][href*=\"/privacy/cookie\"]) > div:last-child" }],
+    "test": [{ "waitForVisible": "div:has(> div > a[href*=\"law.2gis.\"][href*=\"/privacy/cookie\"])", "check": "none", "timeout": 1000 }]
+}

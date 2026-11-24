@@ -1,0 +1,17 @@
+{
+    "name": "cookie-banner-required-only",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#cookieBanner.cookie-banner"],
+    "detectCmp": [{ "exists": "#cookieBanner.cookie-banner .cookie-actions button.btn-required-only" }],
+    "detectPopup": [{ "visible": "#cookieBanner.cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookieBanner.cookie-banner .cookie-actions button.btn-accept-all" }],
+    "optOut": [
+        { "waitForThenClick": "#cookieBanner.cookie-banner .cookie-actions button.btn-required-only" },
+        { "waitForVisible": "#cookieBanner.cookie-banner", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "cookie-analytics=0" }, { "cookieContains": "cookie-functional=0" }]
+}

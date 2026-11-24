@@ -1,0 +1,54 @@
+{
+    "name": "instagram-help-center",
+    "vendorUrl": "https://help.instagram.com/",
+    "runContext": {
+        "urlPattern": "^https://(help|about|privacycenter)\\.instagram\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/1896641480634370\"]) div[aria-hidden=\"true\"] + div[role=\"button\"][tabindex=\"0\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/1896641480634370\"]) div[aria-hidden=\"true\"] + div[role=\"button\"][tabindex=\"0\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/1896641480634370\"]) div[role=\"button\"][tabindex=\"0\"]:has(+ div[aria-hidden=\"true\"])"
+        },
+        {
+            "waitForVisible": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/1896641480634370\"])",
+            "check": "none"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/1896641480634370\"]) div[aria-hidden=\"true\"] + div[role=\"button\"][tabindex=\"0\"]"
+        },
+        {
+            "waitFor": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/1896641480634370\"]) input[role=\"switch\"]",
+            "timeout": 5000
+        },
+        {
+            "if": {
+                "exists": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/1896641480634370\"]) input[role=\"switch\"][aria-checked=\"true\"]"
+            },
+            "then": [
+                {
+                    "click": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/1896641480634370\"]) input[role=\"switch\"][aria-checked=\"true\"]",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/1896641480634370\"]) div[role=\"button\"][tabindex=\"0\"]:not([aria-haspopup]):not([aria-hidden=\"true\"] *)"
+        },
+        {
+            "waitForVisible": "[role=\"dialog\"][aria-modal=\"true\"]:has(a[href*=\"/1896641480634370\"])",
+            "check": "none"
+        }
+    ]
+}

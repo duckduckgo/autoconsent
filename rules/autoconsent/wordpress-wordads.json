@@ -1,0 +1,20 @@
+{
+    "name": "wordpress-wordads",
+    "prehideSelectors": ["#cmp-app-container"],
+    "detectCmp": [{ "exists": ["#cmp-app-container iframe", ".cmp__notice, .cmp__dialog"] }],
+    "detectPopup": [{ "visible": ["#cmp-app-container iframe", ".cmp__notice, .cmp__dialog"], "check": "any" }],
+    "optIn": [
+        { "waitForThenClick": ["#cmp-app-container iframe", ".cmp__notice-buttons .is-primary, .cmp__dialog-footer-buttons .is-primary"] }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ["#cmp-app-container iframe", ".cmp__notice-buttons .is-secondary"] },
+            "then": [{ "click": ["#cmp-app-container iframe", ".cmp__notice-buttons .is-secondary"] }]
+        },
+        {
+            "waitForThenClick": ["#cmp-app-container iframe", ".cmp__dialog-footer-buttons .is-secondary"],
+            "timeout": 5000
+        }
+    ],
+    "test": [{ "waitForVisible": "#cmp-app-container iframe", "check": "none", "timeout": 3000 }]
+}

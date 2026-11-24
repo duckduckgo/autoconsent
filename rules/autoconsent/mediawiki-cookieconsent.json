@@ -1,0 +1,24 @@
+{
+    "name": "mediawiki-cookieconsent",
+    "prehideSelectors": [".cookie-consent-simple-dialog"],
+    "detectCmp": [{ "exists": ".cookie-consent-simple-dialog" }],
+    "detectPopup": [{ "visible": ".cookie-consent-simple-dialog .oo-ui-processDialog-actions-other a" }],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-consent-simple-dialog .oo-ui-processDialog-actions-other .oo-ui-flaggedElement-progressive a"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-consent-simple-dialog .oo-ui-processDialog-actions-other .oo-ui-buttonWidget:not(.oo-ui-flaggedElement-progressive) a"
+        },
+        { "waitForVisible": ".cookie-consent-detailed-dialog .oo-ui-processDialog-actions-primary a" },
+        {
+            "click": ".cookie-consent-detailed-dialog input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        { "click": ".cookie-consent-detailed-dialog .oo-ui-processDialog-actions-primary a" }
+    ],
+    "test": [{ "cookieContains": "cookieconsent_dialog_dismissed=dismissed" }]
+}

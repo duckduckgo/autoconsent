@@ -1,0 +1,33 @@
+{
+    "name": "copaair",
+    "vendorUrl": "https://www.copaair.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?copaair\\.com/"
+    },
+    "prehideSelectors": ["[role=dialog]:has(img[src*=\"/assets/Cookies.svg\"])"],
+    "detectCmp": [
+        {
+            "exists": "[role=dialog]:has(img[src*=\"/assets/Cookies.svg\"])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=dialog]:has(img[src*=\"/assets/Cookies.svg\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[role=dialog]:has(img[src*=\"/assets/Cookies.svg\"]) button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[role=dialog]:has(img[src*=\"/assets/Cookies.svg\"]) button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "gdprcm=true"
+        }
+    ]
+}

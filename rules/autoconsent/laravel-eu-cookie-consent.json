@@ -1,0 +1,47 @@
+{
+    "name": "laravel-eu-cookie-consent",
+    "vendorUrl": "https://github.com/the42coders/the-laravel-eu-cookie-consent",
+    "prehideSelectors": [".eu-popup:has(form[action$=\"/saveTheCookie\"])"],
+    "detectCmp": [
+        {
+            "exists": ".eu-popup form[action$=\"/saveTheCookie\"] input[type=checkbox]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".eu-popup:has(form[action$=\"/saveTheCookie\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "click": ".eu-popup form[action$=\"/saveTheCookie\"] input[type=checkbox]:not(:checked):not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".eu-popup:has(form[action$=\"/saveTheCookie\"]) #saveButton"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ".eu-popup:has(form[action$=\"/saveTheCookie\"]) #rejectAllButton"
+            },
+            "then": [
+                {
+                    "click": ".eu-popup:has(form[action$=\"/saveTheCookie\"]) #rejectAllButton"
+                }
+            ],
+            "else": [
+                {
+                    "click": ".eu-popup form[action$=\"/saveTheCookie\"] input[type=checkbox]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ".eu-popup:has(form[action$=\"/saveTheCookie\"]) #saveButton"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "name": "noticiasdatv",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?noticiasdatv\\.uol\\.com\\.br/"
+    },
+    "prehideSelectors": [".ntv-user-notification-container"],
+    "detectCmp": [
+        {
+            "exists": ".ntv-user-notification-container .ntv-lgpd-consent-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".ntv-user-notification-container"
+        },
+        {
+            "cookieContains": "acceptCookies=true",
+            "negated": true
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": ".ntv-user-notification-show .ntv-lgpd-consent-accept" },
+            "then": [{ "click": ".ntv-user-notification-show .ntv-lgpd-consent-accept" }],
+            "else": [{ "hide": ".ntv-user-notification-container" }]
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".ntv-user-notification-container"
+        }
+    ]
+}

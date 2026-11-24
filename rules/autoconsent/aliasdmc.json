@@ -1,0 +1,46 @@
+{
+    "name": "aliasdmc",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?aliasdmc\\.fr/"
+    },
+    "prehideSelectors": ["#cookieBarRGPDPop", "#cookieBarRGPDOverlay"],
+    "detectCmp": [
+        {
+            "exists": "#cookieBarRGPDPop"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieBarRGPDPop"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieBarRGPDPop a[href*='validerAll']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieBarRGPDPop a[href*='loadParam']"
+        },
+        {
+            "waitForVisible": "#cookieBarRGPDPopContent [data-cookiebarrgpd='0']"
+        },
+        {
+            "click": "#cookieBarRGPDPopContent [data-cookiebarrgpd='0']",
+            "all": true
+        },
+        {
+            "waitForThenClick": "#cookieBarRGPDPop a[href*='valideChoix']"
+        },
+        {
+            "waitForVisible": "#cookieBarRGPDPop",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieBarRGPDpublicite\":0"
+        }
+    ]
+}

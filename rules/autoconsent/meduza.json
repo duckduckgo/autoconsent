@@ -1,0 +1,38 @@
+{
+    "name": "meduza",
+    "vendorUrl": "https://meduza.io/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?meduza\\.io/"
+    },
+    "prehideSelectors": [".GDPRPanel-module-root"],
+    "detectCmp": [
+        {
+            "exists": ".GDPRPanel-module-root .GDPRPanel-module-dismiss"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".GDPRPanel-module-root .GDPRPanel-module-dismiss"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".GDPRPanel-module-root .GDPRPanel-module-dismiss"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".GDPRPanel-module-root .GDPRPanel-module-dismiss"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".GDPRPanel-module-root",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

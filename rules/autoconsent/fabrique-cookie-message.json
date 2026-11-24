@@ -1,0 +1,29 @@
+{
+    "name": "fabrique-cookie-message",
+    "prehideSelectors": ["[data-controller=\"cookie-message\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-controller=\"cookie-message\"] [data-level=\"minimal\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-controller=\"cookie-message\"] [data-level=\"minimal\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-controller=\"cookie-message\"] [data-level=\"all\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-controller=\"cookie-message\"] [data-level=\"minimal\"]"
+        }
+    ],
+    "test": [
+        {
+            "any": [{ "cookieContains": "cookies=nok" }, { "cookieContains": "cookies=minimal" }]
+        }
+    ]
+}

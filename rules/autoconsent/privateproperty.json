@@ -1,0 +1,20 @@
+{
+    "name": "privateproperty",
+    "vendorUrl": "https://www.privateproperty.co.za/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?privateproperty\\.co\\.za/"
+    },
+    "prehideSelectors": ["#consentManager .privacy-toast-holder"],
+    "detectCmp": [{ "exists": "#consentManager .privacy-toast-message" }],
+    "detectPopup": [{ "visible": "#consentManager .privacy-toast-message" }],
+    "optIn": [{ "waitForThenClick": "#consentManager .privacy-toast-message__button:not(.outline)" }],
+    "optOut": [
+        { "waitForThenClick": "#consentManager .privacy-toast-message__button.outline" },
+        { "waitForThenClick": "xpath///footer[contains(@class, 'cookie-preferences__footer')]/button[contains(., 'Reject all')]" }
+    ],
+    "test": [
+        { "waitForVisible": "#consentManager .privacy-toast-message", "check": "none", "timeout": 2000 },
+        { "visible": ".cookie-preferences-dialog", "check": "none" }
+    ]
+}

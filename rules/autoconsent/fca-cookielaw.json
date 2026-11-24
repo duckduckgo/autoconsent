@@ -1,0 +1,34 @@
+{
+    "name": "fca-cookielaw",
+    "vendorUrl": "https://www.stellantis.com/",
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https://cookielaw\\.emea\\.fcagroup\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#dashboard #decline-text"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#dashboard #decline-text"
+        },
+        {
+            "eval": "EVAL_IFRAME_SHOWN",
+            "comment": "wait until the page actually shows the banner frame"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#dashboard #acceptAllBtn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#dashboard #decline-text"
+        }
+    ]
+}

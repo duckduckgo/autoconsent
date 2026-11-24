@@ -1,0 +1,35 @@
+{
+    "name": "newyorker-de",
+    "vendorUrl": "https://www.newyorker.de/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?newyorker\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["cookie-banner", ".cookie-banner .cookie-banner-controls"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["cookie-banner", ".cookie-banner-controls > button:nth-child(1)"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["cookie-banner", ".cookie-banner-controls > button:nth-child(2)"]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["cookie-banner", ".cookie-banner"],
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

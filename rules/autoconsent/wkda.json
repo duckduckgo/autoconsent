@@ -1,0 +1,47 @@
+{
+    "name": "wkda",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "form[action=\"/v1/gdpr-preferences/\"] [data-qa-selector=\"gdpr-banner-accept-all-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "form[action=\"/v1/gdpr-preferences/\"] [data-qa-selector=\"gdpr-banner-accept-all-button\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-qa-selector=\"gdpr-banner-accept-all-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "[data-qa-selector=\"gdpr-banner-configuration-button\"]"
+            },
+            "then": [
+                {
+                    "click": "[data-qa-selector=\"gdpr-banner-configuration-button\"]"
+                }
+            ]
+        },
+        {
+            "waitForVisible": "[data-qa-selector=\"gdpr-banner-accept-selected-button\"]"
+        },
+        {
+            "click": "input[data-qa-selector^=\"gdpr-banner-check-box-\"]:not([value=\"essential\"]):checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "[data-qa-selector=\"gdpr-banner-accept-selected-button\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "gdpr_consent=categories_denied"
+        }
+    ]
+}

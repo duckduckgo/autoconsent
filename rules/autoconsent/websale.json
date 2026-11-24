@@ -1,0 +1,20 @@
+{
+    "name": "websale",
+    "prehideSelectors": [],
+    "detectCmp": [
+        { "exists": ".ws_useragreement4alls" },
+        { "exists": "[onclick^='ws_agreementcookies_set'], [onclick*='wsConsentDefault']" }
+    ],
+    "detectPopup": [{ "visible": ":has(> .ws_useragreement4alls)", "check": "any" }],
+    "optIn": [{ "click": ".ws_useragreement4alls" }],
+    "optOut": [
+        { "click": "[class*='ws_useragreementcgc_']:checked", "all": true, "optional": true },
+        { "click": "[class*='ws_useragreement_optin_']:checked", "all": true, "optional": true },
+        {
+            "if": { "exists": "[onclick*='wsConsentDefault']" },
+            "then": [{ "waitForThenClick": "[onclick*='wsConsentDefault']", "retry": 3, "retryInterval": 500 }],
+            "else": [{ "waitForThenClick": "[onclick^='ws_agreementcookies_set']" }]
+        }
+    ],
+    "test": [{ "cookieContains": "websale_useragreement=" }]
+}

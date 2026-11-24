@@ -1,0 +1,54 @@
+{
+    "name": "chrono24",
+    "vendorUrl": "https://www.chrono24.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?chrono24\\.[a-z.]+/"
+    },
+    "detectCmp": [
+        {
+            "exists": ".wt-consent-layer-intro"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".wt-consent-layer-intro"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-consent-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".js-consent-accept-required"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".js-consent-accept-required",
+                    "retry": 5,
+                    "retryInterval": 500
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".js-consent-settings",
+                    "retry": 5,
+                    "retryInterval": 500
+                },
+                {
+                    "waitForThenClick": ".wt-consent-manager .wt-consent-manager-save",
+                    "timeout": 5000
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".wt-consent-layer-intro",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

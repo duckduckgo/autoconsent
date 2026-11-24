@@ -1,0 +1,34 @@
+{
+    "name": "kadokawa-ascii",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(weekly\\.ascii|mobileascii)\\.jp/"
+    },
+    "prehideSelectors": ["#cookie-pop-bn"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-pop-bn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "exists": "#cookie-pop-bn"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-pop-bn a[onclick=\"acceptClick()\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookie-pop-bn"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookie-pop-bn",
+            "check": "none"
+        }
+    ]
+}

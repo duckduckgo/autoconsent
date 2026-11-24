@@ -1,0 +1,15 @@
+{
+    "name": "casasrurales",
+    "vendorUrl": "https://www.casasrurales.net/",
+    "cosmetic": false,
+    "prehideSelectors": ["#cookiesLayer"],
+    "detectCmp": [{ "exists": "#cookiesLayerInn .act-cook[data-cook='2']" }],
+    "detectPopup": [{ "visible": "#cookiesLayerInn" }],
+    "optIn": [{ "waitForThenClick": "#cookiesLayerInn .act-cook[data-cook='1']" }],
+    "optOut": [
+        { "waitForThenClick": "#cookiesLayerInn .act-cook[data-cook='2']" },
+        { "waitForThenClick": "#cookiesLayerConfig #btn_no_cookies" },
+        { "waitForVisible": "#cookiesLayer", "check": "none", "timeout": 3000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "conf_cookies=2%3A2%3A2%3A2" }]
+}

@@ -9,7 +9,7 @@
     ],
     "detectPopup": [
         {
-            "visible": "#PiwikPROConsentForm-container, #ppms_cm_popup_wrapper",
+            "visible": "#PiwikPROConsentForm-container, #ppms_cm_popup_wrapper, #ppms_cm_popup_overlay #ppms_cm_popup",
             "check": "any"
         }
     ],

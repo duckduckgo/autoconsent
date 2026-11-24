@@ -1,0 +1,29 @@
+{
+    "name": "adeac-jp",
+    "vendorUrl": "https://adeac.jp/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?adeac\\.jp/"
+    },
+    "prehideSelectors": [".overlay-footer"],
+    "detectCmp": [
+        {
+            "exists": ".overlay-footer .btn-area-footer"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".overlay-footer"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".overlay-footer .overlay_button button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".overlay-footer"
+        }
+    ]
+}

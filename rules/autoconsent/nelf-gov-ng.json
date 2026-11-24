@@ -1,0 +1,24 @@
+{
+    "name": "nelf-gov-ng",
+    "runContext": {
+        "urlPattern": "^https://(\\w+\\.)?nelf\\.gov\\.ng/"
+    },
+    "prehideSelectors": ["#__next div.fixed.inset-0.bg-slate-700"],
+    "detectCmp": [
+        { "exists": "xpath///div[@id='__next']//div[contains(@class, 'inset-0')]//button[normalize-space(.)='Cookie Settings']" }
+    ],
+    "detectPopup": [
+        { "visible": "xpath///div[@id='__next']//div[contains(@class, 'inset-0')]//button[normalize-space(.)='Cookie Settings']" }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[@id='__next']//div[contains(@class, 'inset-0')]//button[normalize-space(.)='Accept All Cookies']"
+        }
+    ],
+    "optOut": [
+        { "waitForThenClick": "xpath///div[@id='__next']//div[contains(@class, 'inset-0')]//button[normalize-space(.)='Cookie Settings']" },
+        { "waitForVisible": "xpath///div[@id='__next']//div[contains(@class, 'inset-0')]//div[normalize-space(.)='Manage Cookies']" },
+        { "waitForThenClick": "xpath///div[@id='__next']//div[contains(@class, 'inset-0')]//button[normalize-space(.)='Allow Selection']" }
+    ],
+    "test": [{ "cookieContains": "localConsent=true" }]
+}

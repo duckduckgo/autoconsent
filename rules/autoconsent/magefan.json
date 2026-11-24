@@ -1,0 +1,17 @@
+{
+    "name": "magefan",
+    "_metadata": {
+        "vendorUrl": "https://magefan.com/magento-2-cookie-consent"
+    },
+    "prehideSelectors": ["dialog.mf-cookie-modal-container"],
+    "detectCmp": [{ "exists": "dialog.mf-cookie-modal-container .mf-decline" }],
+    "detectPopup": [{ "visible": "dialog.mf-cookie-modal-container" }],
+    "optIn": [{ "waitForThenClick": "dialog.mf-cookie-modal-container .mf-agree" }],
+    "optOut": [
+        {
+            "waitForThenClick": "dialog.mf-cookie-modal-container .mf-decline",
+            "comment": "some shops hide this button, but its click handler still records the refusal"
+        }
+    ],
+    "test": [{ "cookieContains": "mf_cookie_consent=0" }]
+}

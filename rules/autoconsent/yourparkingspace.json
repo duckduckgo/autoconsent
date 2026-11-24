@@ -1,0 +1,47 @@
+{
+    "name": "yourparkingspace",
+    "vendorUrl": "https://www.yourparkingspace.co.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?yourparkingspace\\.(co\\.uk|ie)/"
+    },
+    "prehideSelectors": ["section.cookie-banner[aria-labelledby=cookieHeading]"],
+    "detectCmp": [
+        {
+            "exists": "section.cookie-banner[aria-labelledby=cookieHeading]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section.cookie-banner[aria-labelledby=cookieHeading]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "section.cookie-banner .controls button.btn-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "section.cookie-banner .controls button.btn-outline-primary",
+            "retry": 5,
+            "retryInterval": 500
+        },
+        {
+            "waitForVisible": "#cookieModal .modal-footer button.btn-outline-primary"
+        },
+        {
+            "click": "#cookieModal .modal-body input[type=checkbox]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#cookieModal .modal-footer button.btn-outline-primary",
+            "retry": 3
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22marketing%22%3Afalse"
+        }
+    ]
+}

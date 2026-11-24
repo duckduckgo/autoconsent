@@ -1,0 +1,33 @@
+{
+    "name": "ometv.pl",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?ometv\\.pl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "section.cookie-note[role=region] > button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section.cookie-note[role=region]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "section.cookie-note[role=region] > button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "section.cookie-note[role=region] > button"
+        }
+    ],
+    "test": [
+        {
+            "visible": "section.cookie-note[role=region]",
+            "check": "none"
+        }
+    ]
+}

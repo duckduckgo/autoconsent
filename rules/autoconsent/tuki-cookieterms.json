@@ -1,0 +1,20 @@
+{
+    "name": "tuki-cookieterms",
+    "prehideSelectors": [".box-cookieterms"],
+    "detectCmp": [{ "exists": ".box-cookieterms[data-cookieterms-cookie]" }],
+    "detectPopup": [{ "visible": "body:not(.cookieterms-hidden) .box-cookieterms" }],
+    "optIn": [{ "waitForThenClick": ".box-cookieterms-accept [data-cookieterms-accept]" }],
+    "optOut": [
+        {
+            "if": { "exists": ".box-cookieterms [data-cookieterms-customize]" },
+            "then": [
+                { "click": ".box-cookieterms [data-cookieterms-customize]" },
+                { "waitForVisible": ".box-cookieterms-settings" },
+                { "click": ".box-cookieterms input[data-cookieterms-group]:checked:not([disabled])", "all": true, "optional": true },
+                { "click": ".box-cookieterms [data-cookieterms-save]" }
+            ],
+            "else": [{ "waitForThenClick": ".box-cookieterms [data-cookieterms-decline]" }]
+        }
+    ],
+    "test": [{ "cookieContains": "\"analytics\":false" }]
+}

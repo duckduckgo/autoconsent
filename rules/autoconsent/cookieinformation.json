@@ -8,7 +8,8 @@
     ],
     "detectPopup": [
         {
-            "visible": "#cookie-information-template-wrapper"
+            "visible": "#cookie-information-template-wrapper :is(#coiOverlay, #ccb-coiOverlay, #coiConsentBanner, #CcpaWrapper)",
+            "check": "any"
         }
     ],
     "optIn": [

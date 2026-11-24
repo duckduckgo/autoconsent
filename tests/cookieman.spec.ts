@@ -8,4 +8,7 @@ generateCMPTests('cookieman', [
     'https://www.foodwatch.org/',
     'https://www.wu.ac.at/',
     'https://www.warta.pl/',
+    'https://www.autobahn.de/',
+    'https://www.smb.museum/',
+    'https://www.b-tu.de/',
 ]);

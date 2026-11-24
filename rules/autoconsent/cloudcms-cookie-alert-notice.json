@@ -1,0 +1,12 @@
+{
+    "name": "cloudcms-cookie-alert-notice",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookieAlert.cookie-alert-overlay"],
+    "detectCmp": [
+        { "exists": "#cookieAlert.cookie-alert-overlay #cookieAccept" },
+        { "exists": "#cookieAlert #saveCookieSettings", "negated": true }
+    ],
+    "detectPopup": [{ "visible": "#cookieAlert.cookie-alert-overlay.show" }],
+    "optIn": [{ "waitForThenClick": "#cookieAlert #cookieAccept" }],
+    "optOut": [{ "hide": "#cookieAlert.cookie-alert-overlay" }]
+}

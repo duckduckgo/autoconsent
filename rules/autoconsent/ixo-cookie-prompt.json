@@ -1,0 +1,12 @@
+{
+    "name": "ixo-cookie-prompt",
+    "prehideSelectors": ["#cookieprompt"],
+    "detectCmp": [{ "exists": "#cookieprompt #cookieAllow" }],
+    "detectPopup": [{ "visible": "#cookieprompt" }],
+    "optIn": [{ "waitForThenClick": "#cookieprompt #cookieAllow" }],
+    "optOut": [
+        { "waitForThenClick": "#cookiepromptinner a[href*=\"changeCookieSettings\"]" },
+        { "waitForThenClick": ".jqibuttons button[value=\"false\"], .ixoprompt-buttons button[data-value=\"false\"]" }
+    ],
+    "test": [{ "cookieContains": "allowAllCookies=no" }]
+}

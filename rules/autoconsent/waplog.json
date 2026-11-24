@@ -1,0 +1,30 @@
+{
+    "name": "waplog",
+    "vendorUrl": "https://waplog.com/",
+    "prehideSelectors": ["#cookie-statement"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-statement [onclick*=turnOffCookieStatement]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-statement"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-statement [onclick*=turnOffCookieStatement]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-statement [onclick*=turnOffCookieStatement]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "turn_off_cookie_statement=1"
+        }
+    ]
+}

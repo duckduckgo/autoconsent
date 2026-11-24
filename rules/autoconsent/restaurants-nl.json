@@ -1,0 +1,13 @@
+{
+    "name": "restaurants.nl",
+    "vendorUrl": "https://www.restaurants.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?restaurants\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#clawackdiv" }],
+    "detectPopup": [{ "visible": "#clawackdiv" }],
+    "optIn": [{ "waitForThenClick": "#clawackdiv > img[src*='iconClose']" }],
+    "optOut": [{ "waitForThenClick": "#clawackdiv > img[src*='iconClose']" }],
+    "test": [{ "visible": "#clawackdiv", "check": "none" }]
+}

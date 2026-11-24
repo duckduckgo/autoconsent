@@ -1,0 +1,15 @@
+{
+    "name": "generalitat-catalunya",
+    "prehideSelectors": ["gov-core-cookies .cl-cookies"],
+    "detectCmp": [{ "exists": "gov-core-cookies .cl-cookies__bar" }],
+    "detectPopup": [{ "visible": "gov-core-cookies .cl-cookies__bar" }],
+    "optIn": [{ "waitForThenClick": "gov-core-cookies .cl-cookies__bar gov-core-button:last-of-type button" }],
+    "optOut": [
+        {
+            "comment": "open the settings modal, where all optional purposes are off by default",
+            "waitForThenClick": "gov-core-cookies .cl-cookies__bar gov-core-button:first-of-type button"
+        },
+        { "waitForThenClick": "ngb-modal-window .modal-footer gov-core-button button" }
+    ],
+    "test": [{ "cookieContains": "gen_consent=" }]
+}

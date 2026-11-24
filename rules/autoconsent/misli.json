@@ -1,0 +1,13 @@
+{
+    "name": "misli",
+    "vendorUrl": "https://www.misli.az/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?misli\\.az/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".infoBarCookies .cookieSpan" }],
+    "detectPopup": [{ "visible": ".infoBarCookies" }],
+    "optIn": [{ "waitForThenClick": ".infoBarCookies img" }],
+    "optOut": [{ "waitForThenClick": ".infoBarCookies img" }],
+    "test": [{ "waitForVisible": ".infoBarCookies", "check": "none", "timeout": 2000 }]
+}

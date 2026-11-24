@@ -1,0 +1,35 @@
+{
+    "name": "atcom-cookiemon",
+    "vendorUrl": "https://www.atcom.gr/",
+    "prehideSelectors": ["div.nvcookies[data-nvcookies]"],
+    "detectCmp": [
+        {
+            "exists": "div.nvcookies[data-nvcookies] .consent-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.nvcookies[data-nvcookies]:not(.nvcookies--hide)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.nvcookies[data-nvcookies] .consent-give"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div.nvcookies[data-nvcookies] .consent-reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "div.nvcookies[data-nvcookies]:not(.nvcookies--hide)",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "cookieContains": "\"wanted\":false"
+        }
+    ]
+}

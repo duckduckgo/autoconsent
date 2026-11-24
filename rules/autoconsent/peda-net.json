@@ -1,0 +1,34 @@
+{
+    "name": "peda.net",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?peda\\.net/"
+    },
+    "prehideSelectors": [".systemmessages .cookieconsent"],
+    "detectCmp": [
+        {
+            "exists": ".systemmessages .cookieconsent button.dismiss"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".systemmessages .cookieconsent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".systemmessages .cookieconsent button.dismiss"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".systemmessages .cookieconsent button.dismiss"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".systemmessages .cookieconsent",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

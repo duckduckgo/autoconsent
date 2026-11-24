@@ -1,0 +1,48 @@
+{
+    "name": "roblox-creator-hub",
+    "vendorUrl": "https://create.roblox.com",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https://create\\.roblox\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".MuiDrawer-paperAnchorBottom a[href*=\"/info/privacy\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".MuiDrawer-paperAnchorBottom [class*=\"-Grid-root-buttons\"] button.MuiButton-outlined"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".MuiDrawer-paperAnchorBottom [class*=\"-Grid-root-buttons\"] button.MuiButton-contained"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".MuiDrawer-paperAnchorBottom [class*=\"-Grid-root-buttons\"] button.MuiButton-outlined"
+        },
+        {
+            "waitForVisible": ".MuiDrawer-paperAnchorBottom [class*=\"-Grid-root-buttons\"] button.MuiButton-outlined",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        },
+        {
+            "comment": "the banner is re-mounted shortly after page load, discarding an early choice",
+            "waitForThenClick": ".MuiDrawer-paperAnchorBottom [class*=\"-Grid-root-buttons\"] button.MuiButton-outlined",
+            "timeout": 3000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "GoogleAnalytics=false"
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "name": "random-org",
+    "vendorUrl": "https://www.random.org/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?random\\.org/"
+    },
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner #cookie-banner-statistics"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner button[onclick*=\"'all'\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#cookie-banner-preferences:checked" },
+            "then": [{ "click": "#cookie-banner-preferences" }]
+        },
+        {
+            "if": { "exists": "#cookie-banner-statistics:checked" },
+            "then": [{ "click": "#cookie-banner-statistics" }]
+        },
+        {
+            "waitForThenClick": "#cookie-banner button[onclick*=\"'selected'\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "RDOPRIVACY=%5Btrue%2Cfalse%2Cfalse%5D"
+        }
+    ]
+}

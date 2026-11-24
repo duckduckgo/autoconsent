@@ -1,0 +1,21 @@
+{
+    "name": "sanook",
+    "vendorUrl": "https://www.sanook.com/",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?sanook\\.com/"
+    },
+    "prehideSelectors": [".ConsentBanner"],
+    "detectCmp": [{ "exists": ".ConsentBanner .buttonGroup button.setting" }],
+    "detectPopup": [{ "visible": ".ConsentBanner .buttonGroup" }],
+    "optIn": [{ "waitForThenClick": ".ConsentBanner .buttonGroup button.button" }],
+    "optOut": [
+        { "waitForThenClick": ".ConsentBanner .buttonGroup button.setting" },
+        { "waitForVisible": ".CookieSetting .CookieSettingFooter .saveBtn" },
+        {
+            "if": { "exists": ".CookieSetting .switchBtn.active:not([disabled])" },
+            "then": [{ "click": ".CookieSetting .switchBtn.active:not([disabled])", "all": true }]
+        },
+        { "waitForThenClick": ".CookieSetting .CookieSettingFooter .saveBtn", "retry": 2, "retryInterval": 500 }
+    ],
+    "test": [{ "cookieContains": "ads_optout=1" }, { "cookieContains": "sa_optout=1" }, { "cookieContains": "dc_optout=1" }]
+}

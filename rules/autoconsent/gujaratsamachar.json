@@ -1,0 +1,21 @@
+{
+    "name": "gujaratsamachar",
+    "vendorUrl": "https://epaper.gujaratsamachar.com/",
+    "runContext": {
+        "urlPattern": "^https://(\\w+\\.)?gujaratsamachar\\.com/"
+    },
+    "prehideSelectors": ["#cookie_consent_model"],
+    "detectCmp": [{ "visible": "#cookie_consent_model" }],
+    "detectPopup": [{ "visible": "#cookie_consent_model" }],
+    "optIn": [{ "waitForThenClick": "#all_cookies" }],
+    "optOut": [
+        {
+            "click": "#analyticsCookieToggle:checked, #prefernceCookieToggle:checked, #marketingCookieToggle:checked",
+            "all": true,
+            "optional": true
+        },
+        { "click": "#customize_cookies" },
+        { "waitForVisible": "#cookie_consent_model", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "%22analytics%22%3Afalse%2C%22preference%22%3Afalse%2C%22marketing%22%3Afalse" }]
+}

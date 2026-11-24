@@ -1,0 +1,13 @@
+{
+    "name": "cookiecode",
+    "vendorUrl": "https://www.cookiecode.nl/",
+    "prehideSelectors": ["cookiecode-banner"],
+    "detectCmp": [{ "any": [{ "exists": "script[src*=\"cdn.cookiecode.nl/dist/\"]" }, { "exists": "cookiecode-banner" }] }],
+    "detectPopup": [{ "visible": ["cookiecode-banner", ".cc_root > div"] }],
+    "optIn": [{ "waitForThenClick": ["cookiecode-banner", ".cc_button_allowall"] }],
+    "optOut": [
+        { "waitForThenClick": ["cookiecode-banner", ".cc_button_rejectall"] },
+        { "waitForVisible": ["cookiecode-banner", ".cc_root > div"], "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "visible": ["cookiecode-banner", ".cc_root > div"], "check": "none" }]
+}

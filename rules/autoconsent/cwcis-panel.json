@@ -1,0 +1,20 @@
+{
+    "name": "cwcis-panel",
+    "_metadata": {
+        "vendorUrl": "https://www.gwynedd.llyw.cymru/"
+    },
+    "prehideSelectors": ["#cwcis_panel"],
+    "detectCmp": [{ "exists": "#cwcis_panel #accept_all_cwcis" }],
+    "detectPopup": [{ "visible": "#cwcis_panel" }],
+    "optIn": [{ "waitForThenClick": "#cwcis_panel #accept_all_cwcis" }],
+    "optOut": [
+        { "waitForThenClick": "#cwcis_panel #cwcis_preferences" },
+        { "waitForVisible": "#cwcis_manage" },
+        {
+            "if": { "exists": "#cwcis_toggle:checked" },
+            "then": [{ "click": "#cwcis_toggle" }]
+        },
+        { "click": "#cwcis_panel #cwcis_cadw" }
+    ],
+    "test": [{ "cookieContains": "cwcis_panel=true" }, { "cookieContains": "cwcis_dewisiad=true", "negated": true }]
+}

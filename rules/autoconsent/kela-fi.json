@@ -1,0 +1,32 @@
+{
+    "name": "kela.fi",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?kela\\.fi/"
+    },
+    "prehideSelectors": ["#kela-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#kela-cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#kela-cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#kela-cookie-banner [role=group] button:nth-child(1)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#kela-cookie-banner [role=group] button:nth-child(2)"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "KelafiCookies=false"
+        }
+    ]
+}

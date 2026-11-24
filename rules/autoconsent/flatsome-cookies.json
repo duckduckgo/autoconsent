@@ -1,0 +1,25 @@
+{
+    "name": "flatsome-cookies",
+    "cosmetic": true,
+    "prehideSelectors": [".flatsome-cookies"],
+    "detectCmp": [
+        {
+            "exists": ".flatsome-cookies--active .flatsome-cookies__accept-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".flatsome-cookies--active"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".flatsome-cookies--active .flatsome-cookies__accept-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".flatsome-cookies"
+        }
+    ]
+}

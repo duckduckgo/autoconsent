@@ -1,0 +1,13 @@
+{
+    "name": "betlive",
+    "vendorUrl": "https://www.betlive.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?betlive\\.com/"
+    },
+    "prehideSelectors": [".cookies-document-change-alert"],
+    "detectCmp": [{ "exists": ".cookies-document-change-alert" }],
+    "detectPopup": [{ "visible": ".cookies-document-change-alert" }],
+    "optIn": [{ "waitForThenClick": ".cookies-document-change-alert button.accept" }],
+    "optOut": [{ "waitForThenClick": ".cookies-document-change-alert button.close" }],
+    "test": [{ "waitForVisible": ".cookies-document-change-alert", "check": "none", "timeout": 1000 }]
+}
