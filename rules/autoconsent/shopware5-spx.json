@@ -1,0 +1,42 @@
+{
+    "name": "shopware5-spx",
+    "_metadata": {
+        "vendorUrl": "https://www.shopware.com/"
+    },
+    "prehideSelectors": [".page-wrap--cookie-permission.spx-cookie-wrapper"],
+    "detectCmp": [
+        {
+            "exists": ".page-wrap--cookie-permission.spx-cookie-wrapper:not(.is--hidden) .cookie-permission--configure-button",
+            "comment": "the banner is unhidden a few seconds after load, which can exceed the detectPopup window"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".page-wrap--cookie-permission.spx-cookie-wrapper"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".page-wrap--cookie-permission.spx-cookie-wrapper .cookie-permission--accept-button"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "the banner's decline button is hidden, the consent manager has a visible one",
+            "waitForThenClick": ".page-wrap--cookie-permission.spx-cookie-wrapper .cookie-permission--configure-button"
+        },
+        {
+            "comment": "decline closes the off-canvas by clicking its overlay, so wait until it is open",
+            "waitForVisible": ".js--overlay.is--open",
+            "timeout": 3000
+        },
+        {
+            "waitForThenClick": ".off-canvas.is--open #js-spx-cookie-decline-button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieDeclined=1"
+        }
+    ]
+}

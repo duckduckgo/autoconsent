@@ -1,0 +1,27 @@
+{
+    "name": "opencart-google-consent-v2",
+    "prehideSelectors": ["#google-consent-mode"],
+    "detectCmp": [{ "exists": "#google-consent-mode #consent-window-accept" }],
+    "detectPopup": [{ "visible": "#google-consent-mode #google-consent-mode-window" }],
+    "optIn": [{ "waitForThenClick": "#google-consent-mode #consent-window-accept" }],
+    "optOut": [
+        {
+            "if": { "visible": "#google-consent-mode #consent-window-reject" },
+            "then": [{ "click": "#google-consent-mode #consent-window-reject" }],
+            "else": [
+                { "click": "#google-consent-mode #consent-window-customise", "optional": true },
+                {
+                    "click": "#google-consent-mode-window-customise input[type=checkbox]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                { "click": "#google-consent-mode #consent-window-accept" }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [{ "cookieContains": "google_consent_mode_v2=reject" }, { "cookieContains": "analytics_storage=denied" }]
+        }
+    ]
+}

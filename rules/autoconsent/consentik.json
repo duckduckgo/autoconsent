@@ -1,0 +1,25 @@
+{
+    "name": "consentik",
+    "vendorUrl": "https://apps.shopify.com/consentik",
+    "prehideSelectors": [".otCookiesNotification #cookies-wrapper"],
+    "detectCmp": [{ "exists": ".otCookiesNotification #cookies-wrapper :is(#cookies-dismiss, #cookies-preferences)" }],
+    "detectPopup": [{ "visible": ".otCookiesNotification #cookies-wrapper" }],
+    "optIn": [{ "waitForThenClick": ".otCookiesNotification #cookies-wrapper #cookies-submit" }],
+    "optOut": [
+        {
+            "if": { "exists": ".otCookiesNotification #cookies-wrapper #cookies-dismiss" },
+            "then": [{ "waitForThenClick": ".otCookiesNotification #cookies-wrapper #cookies-dismiss" }],
+            "else": [
+                { "click": ".otCookiesNotification #cookies-wrapper #cookies-preferences" },
+                { "waitForVisible": ".otCookiesNotification .cookies-btn.btn-select", "check": "any" },
+                {
+                    "click": ".otCookiesNotification .omgCookie-input-switch:checked:not(:disabled):not([data-id=necessary])",
+                    "all": true,
+                    "optional": true
+                },
+                { "click": ".otCookiesNotification .cookies-btn.btn-select" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "\"categoriesSelected\":[" }, { "cookieContains": "\"marketing\"", "negated": true }]
+}

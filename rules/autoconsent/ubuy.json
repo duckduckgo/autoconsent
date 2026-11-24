@@ -1,0 +1,10 @@
+{
+    "name": "ubuy",
+    "vendorUrl": "https://www.ubuy.com/",
+    "prehideSelectors": ["#notice-cookie-block.notice-cookie"],
+    "detectCmp": [{ "exists": "#notice-cookie-block .notice-cookie-actions.reject button" }],
+    "detectPopup": [{ "visible": "#notice-cookie-block" }],
+    "optIn": [{ "waitForThenClick": "#notice-cookie-block .notice-cookie-actions.accept button" }],
+    "optOut": [{ "waitForThenClick": "#notice-cookie-block .notice-cookie-actions.reject button" }],
+    "test": [{ "waitForVisible": "#notice-cookie-block", "timeout": 1000, "check": "none" }]
+}

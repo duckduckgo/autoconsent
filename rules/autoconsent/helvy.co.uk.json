@@ -1,0 +1,21 @@
+{
+    "name": "helvy.co.uk",
+    "vendorUrl": "https://helvy.co.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?helvy\\.co\\.uk/"
+    },
+    "prehideSelectors": ["aside[data-consent-card]"],
+    "detectCmp": [{ "exists": "aside[data-consent-card]" }],
+    "detectPopup": [{ "visible": "aside[data-consent-card]" }],
+    "optIn": [
+        { "waitForThenClick": "xpath///aside[@data-consent-card]//button[normalize-space()='Accept']", "retry": 5, "retryInterval": 1000 }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///aside[@data-consent-card]//button[normalize-space()='Essential only']",
+            "retry": 5,
+            "retryInterval": 1000
+        }
+    ],
+    "test": [{ "cookieContains": "helvy_consent=reject" }]
+}

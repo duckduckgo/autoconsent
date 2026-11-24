@@ -1,0 +1,12 @@
+{
+    "name": "cookiebar-occ",
+    "_metadata": {
+        "vendorUrl": "https://www.softwareok.de/"
+    },
+    "prehideSelectors": ["#cookiebar"],
+    "detectCmp": [{ "exists": "#cookiebar input[onclick='OCC()']" }],
+    "detectPopup": [{ "visible": "#cookiebar" }],
+    "optIn": [{ "waitForThenClick": "#cookiebar input[onclick='OCC()']" }],
+    "optOut": [{ "waitForThenClick": "#cookiebar input[onclick='OCC()']", "comment": "the only control is an OK acknowledgement" }],
+    "test": [{ "cookieContains": "cooki_ok" }]
+}

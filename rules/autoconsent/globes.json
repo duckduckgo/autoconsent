@@ -1,0 +1,40 @@
+{
+    "name": "globes.co.il",
+    "vendorUrl": "https://www.globes.co.il/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?globes\\.co\\.il/"
+    },
+    "prehideSelectors": ["#cookiesConfirmDiv"],
+    "detectCmp": [{ "any": [{ "exists": "#cookiesConfirmDiv span[onclick]" }, { "exists": ".fc-consent-root" }] }],
+    "detectPopup": [{ "any": [{ "visible": "#cookiesConfirmDiv span[onclick]" }, { "exists": ".fc-consent-root .fc-dialog-container" }] }],
+    "optIn": [
+        {
+            "if": { "visible": ".fc-consent-root .fc-cta-consent" },
+            "then": [{ "click": ".fc-consent-root .fc-cta-consent" }]
+        },
+        { "waitForVisible": "#cookiesConfirmDiv span[onclick]", "timeout": 5000, "optional": true },
+        {
+            "if": { "visible": "#cookiesConfirmDiv span[onclick]" },
+            "then": [{ "click": "#cookiesConfirmDiv span[onclick]" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                {
+                    "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                    "then": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }]
+                },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        },
+        { "waitForVisible": "#cookiesConfirmDiv span[onclick]", "timeout": 5000, "optional": true },
+        {
+            "if": { "visible": "#cookiesConfirmDiv span[onclick]" },
+            "then": [{ "click": "#cookiesConfirmDiv span[onclick]" }]
+        }
+    ],
+    "test": [{ "visible": "#cookiesConfirmDiv", "check": "none" }]
+}

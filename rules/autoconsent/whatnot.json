@@ -1,0 +1,32 @@
+{
+    "name": "whatnot",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?whatnot\\.com/"
+    },
+    "prehideSelectors": ["[data-testid='consent-banner']"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid='consent-banner'] [data-testid='consent-banner-essential-only']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid='consent-banner']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid='consent-banner-accept-all']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid='consent-banner-essential-only']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "wn_consent=%7B%22groups%22%3A%5B%22ESSENTIAL%22%5D"
+        }
+    ]
+}

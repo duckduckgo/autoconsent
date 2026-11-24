@@ -26,10 +26,9 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": [
-                "div[consent-skip-blocker=\"1\"][id][data-bg] > dialog > div > div > div > div > div > a[role=button]:not([id])",
-                "xpath///span[contains(., ' ohne ') or contains(., 'without') or contains(., 'Ablehnen')]"
-            ]
+            "waitForThenClick": "xpath///div[@consent-skip-blocker='1'][@id][@data-bg]/dialog//a[@role='button'][not(@id)][contains(., ' ohne ') or contains(., 'without') or contains(., 'blehnen') or contains(., 'notwendig') or contains(., 'ssenziell') or contains(., 'ssential') or contains(., 'eject') or contains(., 'ecline') or contains(., 'Deny') or contains(., 'Afvis') or contains(., 'Avvis') or contains(., 'Refuse') or contains(., 'Weiger') or contains(., 'Rifiut') or contains(., 'Rechaz')]",
+            "retry": 10,
+            "retryInterval": 500
         }
     ],
     "test": [

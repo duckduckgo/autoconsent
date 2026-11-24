@@ -1,0 +1,29 @@
+{
+    "name": "laxd",
+    "vendorUrl": "https://laxd.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?laxd\\.com/"
+    },
+    "prehideSelectors": [".vpXfb2ak"],
+    "detectCmp": [
+        {
+            "exists": ".vpXfb2ak button[name=\"gdpr_agree_btn\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".vpXfb2ak"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".vpXfb2ak button[name=\"gdpr_agree_btn\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".vpXfb2ak"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "name": "anowave-gtm",
+    "vendorUrl": "https://www.anowave.com/marketplace/magento-2-extensions/magento-2-google-tag-manager-enhanced-ecommerce-ua-ga4-tracking/",
+    "prehideSelectors": [".ec-gtm-cookie-directive"],
+    "detectCmp": [{ "exists": ".ec-gtm-cookie-directive" }],
+    "detectPopup": [{ "visible": ".ec-gtm-cookie-directive" }],
+    "optIn": [{ "waitForThenClick": ".ec-gtm-cookie-directive a.accept-all" }],
+    "optOut": [
+        {
+            "if": { "exists": ".ec-gtm-cookie-directive a.decline" },
+            "then": [{ "click": ".ec-gtm-cookie-directive a.decline" }],
+            "else": [
+                { "exists": ".ec-gtm-cookie-directive input[name='cookie[]']" },
+                { "click": ".ec-gtm-cookie-directive input[name='cookie[]']:checked", "all": true, "optional": true },
+                { "click": ".ec-gtm-cookie-directive a.accept" }
+            ]
+        },
+        { "waitForVisible": ".ec-gtm-cookie-directive", "check": "none", "timeout": 5000 }
+    ],
+    "test": [{ "cookieContains": "cookieConsentGranted=" }, { "cookieContains": "cookieConsentMarketingGranted=1", "negated": true }]
+}

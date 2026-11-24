@@ -20,6 +20,9 @@ generateCMPTests(
         'https://vi.xhstream.com/',
         'https://id.xhname.com/',
         'https://vi.xhspot.com/',
+        'https://ko.xhfuck.com/',
+        'https://hi.xhzone.live/',
+        'https://id.xhsocial.com/',
     ],
     {
         onlyRegions: ['GB', 'DE', 'FR', 'NL', 'CH', 'NO', 'IT', 'ES', 'PL', 'SE', 'DK'],

@@ -11,17 +11,28 @@
             "if": { "exists": "#cookieman-modal [data-cookieman-accept-none]" },
             "then": [{ "waitForThenClick": "#cookieman-modal [data-cookieman-accept-none]", "retry": 3, "retryInterval": 500 }],
             "else": [
-                { "waitForThenClick": "#cookieman-modal [aria-controls=\"cookieman-settings\"]" },
-                { "waitForVisible": "#cookieman-modal [data-cookieman-form]", "timeout": 2000, "optional": true },
                 {
-                    "click": "#cookieman-modal [data-cookieman-form] input[type=\"checkbox\"]:checked:not(:disabled)",
-                    "all": true,
-                    "optional": true
-                },
-                {
-                    "waitForThenClick": "#cookieman-modal [data-cookieman-save]:not([data-cookieman-accept-all]):not([data-cookieman-accept-none])",
-                    "retry": 3,
-                    "retryInterval": 500
+                    "if": { "visible": "#cookieman-modal [data-cookieman-accept-mandatory]", "check": "any" },
+                    "then": [
+                        { "waitForThenClick": "#cookieman-modal [data-cookieman-accept-mandatory]", "retry": 3, "retryInterval": 500 }
+                    ],
+                    "else": [
+                        {
+                            "if": { "visible": "#cookieman-modal [data-cookieman-form]", "check": "none" },
+                            "then": [{ "waitForThenClick": "#cookieman-modal [aria-controls~=\"cookieman-settings\"]" }]
+                        },
+                        { "waitForVisible": "#cookieman-modal [data-cookieman-form]", "timeout": 2000, "optional": true },
+                        {
+                            "click": "#cookieman-modal [data-cookieman-form] input[type=\"checkbox\"]:checked:not(:disabled)",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": "#cookieman-modal [data-cookieman-save]:not([data-cookieman-accept-all]):not([data-cookieman-accept-none])",
+                            "retry": 3,
+                            "retryInterval": 500
+                        }
+                    ]
                 }
             ]
         }

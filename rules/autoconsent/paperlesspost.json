@@ -1,0 +1,64 @@
+{
+    "name": "paperlesspost",
+    "vendorUrl": "https://www.paperlesspost.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?paperlesspost\\.com/"
+    },
+    "prehideSelectors": ["[data-testid='cookie-consent-banner-notice'], [data-testid='cookie-consent-banner-eea']"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid='cookie-consent-banner-notice'], [data-testid='cookie-consent-banner-eea']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid='cookie-consent-banner-notice'], [data-testid='cookie-consent-banner-eea']"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "[data-testid='cookie-consent-banner-eea']"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "[data-testid='cookie-consent-banner-eea'] [data-testid='cookie-consent-accept']"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "[data-testid='cookie-consent-banner-notice'] [data-testid='close-cookie-banner']"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "[data-testid='cookie-consent-banner-eea']"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "[data-testid='cookie-consent-banner-eea'] [data-testid='cookie-consent-decline']"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "[data-testid='cookie-consent-banner-notice'] [data-testid='close-cookie-banner']"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "cookieContains": "consent_cookie=false"
+                },
+                {
+                    "cookieContains": "hideCookiesBanner=true"
+                }
+            ]
+        }
+    ]
+}
