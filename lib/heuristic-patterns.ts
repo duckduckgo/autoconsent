@@ -476,8 +476,8 @@ const REJECT_PATTERNS_GERMAN = [
     // verweigern / verweigere / verweigert (refuse)
     /verweiger/is,
 
-    // essential/necessary/functional-only variants (accepting only necessary → reject)
-    /^\s*(nur|ausschließlich|lediglich|weiter\s+mit|mit|akzeptiere?n?|unbedingt|es\s+werden\s+nur)?\s*(technisch\s+)?(notwendige?[nrs]?|essenzielle?[nrs]?|essentielle?[nrs]?|erforderliche?[nrs]?|funktionale?[nrs]?|funktionelle?[nrs]?|wesentliche?[nrs]?)\s*(cookies?|technologien|funktionscookies|dienste)?\s*(akzeptieren|erlauben|zulassen|verwenden|annehmen|setzen|speichern|zustimmen|auswählen)?\.?\s*$/is,
+    // essential/necessary/technical/functional-only variants (accepting only necessary → reject)
+    /^\s*(nur|ausschließlich|lediglich|weiter\s+mit|mit|akzeptiere?n?|unbedingt|es\s+werden\s+nur)?\s*(technisch\s+)?(notwendige?[nrs]?|technische?[nrs]?|essenzielle?[nrs]?|essentielle?[nrs]?|erforderliche?[nrs]?|funktionale?[nrs]?|funktionelle?[nrs]?|wesentliche?[nrs]?)\s*(cookies?|technologien|funktionscookies|dienste)?\s*(akzeptieren|erlauben|zulassen|verwenden|annehmen|setzen|speichern|zustimmen|auswählen)?\.?\s*$/is,
 
     // continue with only necessary/functional cookies
     /^(weiter\s+|nur\s+)?mit\s+(nur\s+|ausschließlich\s+|lediglich\s+)?(den\s+)?(technisch\s+)?(notwendigen|essenziellen|essentiellen|erforderlichen|funktionalen|funktionellen)\s+(cookies\s+)?fortfahren\.?$/is,
