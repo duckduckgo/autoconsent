@@ -1,0 +1,9 @@
+{
+    "name": "holidu",
+    "prehideSelectors": ["#cookie-selector"],
+    "detectCmp": [{ "exists": "#cookie-selector [data-testid=\"CookiesCheckbox__DeclineNonEssential\"]" }],
+    "detectPopup": [{ "visible": "#cookie-selector" }],
+    "optIn": [{ "waitForThenClick": "#cookie-selector [data-testid=\"CookiesCheckbox__SaveAllButton\"]" }],
+    "optOut": [{ "waitForThenClick": "#cookie-selector [data-testid=\"CookiesCheckbox__DeclineNonEssential\"]" }],
+    "test": [{ "cookieContains": "__mcons=false" }, { "cookieContains": "__acons=false" }]
+}

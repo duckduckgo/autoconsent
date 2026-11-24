@@ -2,7 +2,7 @@
     "name": "babylonbee",
     "vendorUrl": "https://babylonbee.com/",
     "runContext": {
-        "urlPattern": "^https?://(www\\.)?babylonbee\\.com/"
+        "urlPattern": "^https?://(www\\.)?(babylonbee|notthebee)\\.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [

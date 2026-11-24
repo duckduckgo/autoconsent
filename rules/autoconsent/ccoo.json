@@ -1,0 +1,40 @@
+{
+    "name": "ccoo",
+    "prehideSelectors": [".ccoo-cc-root"],
+    "detectCmp": [
+        {
+            "exists": ".ccoo-cc-root #sn-b-save"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".ccoo-cc-root .ccoo-cc-dialog"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".ccoo-cc-root #adv-cookies-1 #accept-choices"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".ccoo-cc-root #sn-b-custom"
+        },
+        {
+            "waitForVisible": ".ccoo-cc-root #adv-cookies-3"
+        },
+        {
+            "click": ".ccoo-cc-root #adv-cookies-3 input[type=checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".ccoo-cc-root #sn-b-save"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "config=0"
+        }
+    ]
+}

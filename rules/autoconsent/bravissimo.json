@@ -1,0 +1,18 @@
+{
+    "name": "bravissimo",
+    "vendorUrl": "https://www.bravissimo.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?bravissimo\\.com/"
+    },
+    "prehideSelectors": [".c-consent-modal__container"],
+    "detectCmp": [{ "exists": ".c-consent-modal__container" }],
+    "detectPopup": [{ "visible": ".c-consent-modal__container" }],
+    "optIn": [{ "waitForThenClick": ".c-consent-modal__content-container .c-consent-modal__accept-button-container button" }],
+    "optOut": [
+        { "waitForThenClick": ".c-consent-modal__reject-link-container button" },
+        { "waitForVisible": ".c-consent-modal__consent-preference-container" },
+        { "click": ".c-consent-modal__consent-preference-container .c-consent-modal__switch input:checked", "all": true, "optional": true },
+        { "click": ".c-consent-modal__consent-preference-container .c-consent-modal__accept-button-container button" }
+    ],
+    "test": [{ "wait": 1000 }, { "cookieContains": "COOKIE_CONSENT_MODAL=completed" }]
+}

@@ -1,0 +1,37 @@
+{
+    "name": "travix",
+    "_metadata": {
+        "vendorUrl": "https://www.travix.com/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "dialog [data-testid=\"cookieBannerV2\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog [data-testid=\"cookieBannerV2\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=\"cookieBannerV2.acceptButton\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=\"cookieBannerV2.rejectLink\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieConsentChoices=functional:true|analytics:false|marketing:false"
+        }
+    ]
+}

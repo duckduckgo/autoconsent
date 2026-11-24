@@ -1,0 +1,35 @@
+{
+    "name": "jne-co-id",
+    "vendorUrl": "https://jne.co.id/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?jne\\.co\\.id/"
+    },
+    "prehideSelectors": ["#cookies.cookies-box"],
+    "detectCmp": [
+        {
+            "exists": "#cookies.cookies-box button[onclick*=jnecookies]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies.cookies-box"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies.cookies-box button[onclick*=jnecookies]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookies.cookies-box"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookies.cookies-box",
+            "check": "none"
+        }
+    ]
+}

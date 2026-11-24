@@ -1,0 +1,15 @@
+{
+    "name": "passenger-cookie-opt-in",
+    "_metadata": {
+        "vendorUrl": "https://passenger.tech/"
+    },
+    "prehideSelectors": [".cookie-opt-in[data-cookie-role='cookie-message']"],
+    "detectCmp": [{ "exists": "[data-cookie-role='cookie-message'] [data-cookie-role='close-and-disallow']" }],
+    "detectPopup": [{ "visible": "[data-cookie-role='cookie-message']" }],
+    "optIn": [{ "waitForThenClick": "[data-cookie-role='cookie-choice'] [data-cookie-role='close-and-allow']" }],
+    "optOut": [
+        { "waitForThenClick": "[data-cookie-role='cookie-choice'] [data-cookie-role='manage-settings']" },
+        { "waitForThenClick": "[data-cookie-role='cookie-settings'] [data-cookie-role='close-and-disallow']" }
+    ],
+    "test": [{ "cookieContains": "cookies_disallowed=true" }]
+}

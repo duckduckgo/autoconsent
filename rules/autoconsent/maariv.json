@@ -1,0 +1,34 @@
+{
+    "name": "maariv.co.il",
+    "vendorUrl": "https://www.maariv.co.il/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?maariv\\.co\\.il/"
+    },
+    "prehideSelectors": [".cookies-notice-container"],
+    "detectCmp": [{ "exists": ".cookies-notice-container .cookies-notice-button" }],
+    "detectPopup": [{ "visible": ".cookies-notice-container .cookies-notice-button" }],
+    "optIn": [
+        { "waitForThenClick": ".cookies-notice-container .cookies-notice-button" },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "timeout": 4000, "optional": true },
+        {
+            "if": { "visible": ".fc-consent-root .fc-cta-consent" },
+            "then": [{ "click": ".fc-consent-root .fc-cta-consent" }]
+        }
+    ],
+    "optOut": [
+        { "waitForThenClick": ".cookies-notice-container .cookies-notice-button" },
+        { "waitFor": ".fc-consent-root .fc-dialog-container", "timeout": 4000, "optional": true },
+        {
+            "if": { "exists": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                {
+                    "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                    "then": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }]
+                },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "cookies_notice_accepted=1" }]
+}

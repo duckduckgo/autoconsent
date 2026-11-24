@@ -13,6 +13,11 @@ generateCMPTests(
         'https://www.autopflege-shop.de/',
         // has a "Decline" button in the bar, so the settings dialog is not needed
         'https://www.lamps-on-line.com/',
+        // Hyvä theme with "mst-gdpr-" class names and a "continue without accepting" button above the text
+        'https://www.promessedefleurs.es/',
     ],
     {},
 );
+
+// redirects visitors from other countries to a localized store, which reruns autoconsent
+generateCMPTests('mirasvit-gdpr', ['https://www.meillandrichardier.com/'], { onlyRegions: ['FR'] });

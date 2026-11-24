@@ -1,0 +1,30 @@
+{
+    "name": "captain-compliance",
+    "vendorUrl": "https://captaincompliance.com/",
+    "prehideSelectors": [".captain-compliance-modal-container"],
+    "detectCmp": [
+        {
+            "exists": [".captain-compliance-modal-container", "#cc-modal-cookies-banner"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": [".captain-compliance-modal-container", "#cc-modal-cookies-banner"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": [".captain-compliance-modal-container", "#cc-modal-allow-all"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": [".captain-compliance-modal-container", "#cc-modal-reject-all"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"status\":\"REJECTED\""
+        }
+    ]
+}

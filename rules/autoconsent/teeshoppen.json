@@ -1,0 +1,42 @@
+{
+    "name": "teeshoppen",
+    "vendorUrl": "https://teeshoppen.se/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?teeshoppen\\.(se|dk|no|fi|de|nl|com|co\\.uk|fr|at)/"
+    },
+    "prehideSelectors": ["#coiOverlay"],
+    "detectCmp": [
+        {
+            "exists": "#coiOverlay #declineButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#coiOverlay.coi-visible"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#coiOverlay #coiPage-1 .coi-banner__accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#coiOverlay #declineButton",
+            "retry": 3,
+            "retryInterval": 1000
+        },
+        {
+            "waitForVisible": "#coiOverlay",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ts_cookie_choice="
+        },
+        {
+            "cookieContains": "%22consents_denied%22%3A%5B%22cookie_cat_functional"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "name": "islamqa.org",
+    "vendorUrl": "https://islamqa.org/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?islamqa\\.org/"
+    },
+    "prehideSelectors": ["#cookie-law-info-bar, #cookie-law-bg, .cli-popupbar-overlay, #ez-cookie-dialog-wrapper"],
+    "detectCmp": [{ "exists": "#cookie-law-info-bar, #ez-cookie-dialog-wrapper" }],
+    "detectPopup": [{ "visible": "#cookie-law-info-bar, #ez-cookie-dialog-wrapper", "check": "any" }],
+    "optIn": [
+        { "click": "[data-cli_action=\"accept\"]", "optional": true },
+        { "waitForVisible": "#ez-cookie-dialog-wrapper", "timeout": 10000, "optional": true },
+        { "click": "#ez-accept-all", "optional": true }
+    ],
+    "optOut": [
+        { "hide": "#cookie-law-info-bar, #cookie-law-bg, .cli-popupbar-overlay" },
+        { "eval": "EVAL_COOKIE_LAW_INFO_0", "optional": true },
+        { "waitForVisible": "#ez-cookie-dialog-wrapper", "timeout": 10000, "optional": true },
+        {
+            "if": { "visible": "#ez-cookie-dialog-wrapper" },
+            "then": [
+                { "wait": 500 },
+                { "click": "#ez-manage-settings" },
+                { "waitFor": "#ez-cookie-dialog input[type=checkbox]" },
+                { "click": "#ez-cookie-dialog input[type=checkbox]:checked", "all": true, "optional": true },
+                { "waitForThenClick": "#ez-save-settings" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "cookielawinfo-checkbox-non-necessary=yes", "negated": true }]
+}

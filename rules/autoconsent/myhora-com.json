@@ -1,0 +1,13 @@
+{
+    "name": "myhora.com",
+    "vendorUrl": "https://myhora.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?myhora\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "visible": ".cookies-policy .cookies-policy-close" }, { "visible": ".fc-dialog-container", "check": "none" }],
+    "detectPopup": [{ "visible": ".cookies-policy .cookies-policy-close" }],
+    "optIn": [{ "waitForThenClick": ".cookies-policy .cookies-policy-accept" }],
+    "optOut": [{ "waitForThenClick": ".cookies-policy .cookies-policy-close" }],
+    "test": [{ "waitForVisible": ".cookies-policy", "check": "none", "timeout": 2000 }]
+}

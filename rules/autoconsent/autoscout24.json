@@ -20,6 +20,12 @@
     "optOut": [
         {
             "waitForThenClick": "#as24-cmp-popup [data-testid=\"as24-cmp-decline-all-button\"]"
+        },
+        {
+            "comment": "the full CMP script re-shows the popup if it initializes before the consent cookie is written",
+            "waitForThenClick": "#as24-cmp-popup [data-testid=\"as24-cmp-decline-all-button\"]",
+            "timeout": 1000,
+            "optional": true
         }
     ],
     "test": [

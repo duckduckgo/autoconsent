@@ -1,0 +1,36 @@
+{
+    "name": "oechsle",
+    "vendorUrl": "https://www.oechsle.pe/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?oechsle\\.pe/"
+    },
+    "prehideSelectors": ["#cookie-banner", ".cookie-modal__overlay"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner #cookie-banner-open-modal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner #cookie-banner-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-banner #cookie-banner-open-modal"
+        },
+        {
+            "waitForThenClick": ".cookie-modal__content #cookie-modal-reject"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "ad_storage=denied"
+        }
+    ]
+}

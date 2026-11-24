@@ -9,3 +9,8 @@ generateCMPTests('cookieyes-legacy', [
     'https://fozzy.com/',
     'https://kitecampione.it/',
 ]);
+
+// notice-only variant without reject or preferences buttons, the bar is hidden
+generateCMPTests('cookieyes-legacy', ['https://bobshop.co.za/'], {
+    testSelfTest: false,
+});

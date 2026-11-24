@@ -1,0 +1,30 @@
+{
+    "name": "adaptivemedia",
+    "vendorUrl": "https://www.adaptivemedia.se/",
+    "prehideSelectors": [".bg-modal:has(.preferences-modal)"],
+    "detectCmp": [
+        {
+            "exists": ".bg-modal .preferences-modal .content button.btn-ghost.is-neutral"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".bg-modal .preferences-modal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".preferences-modal .content button.btn-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".preferences-modal .content button.btn-ghost.is-neutral"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_consent_v2_0_marketing_third_party=0"
+        }
+    ]
+}

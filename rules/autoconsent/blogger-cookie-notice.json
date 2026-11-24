@@ -1,0 +1,10 @@
+{
+    "name": "blogger-cookie-notice",
+    "vendorUrl": "https://www.blogger.com/go/blogspot-cookies",
+    "prehideSelectors": ["#cookieChoiceInfo.cookie-choices-info"],
+    "detectCmp": [{ "exists": "#cookieChoiceInfo.cookie-choices-info #cookieChoiceDismiss" }],
+    "detectPopup": [{ "visible": "#cookieChoiceInfo.cookie-choices-info" }],
+    "optIn": [{ "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDismiss" }],
+    "optOut": [{ "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDismiss" }],
+    "test": [{ "cookieContains": "displayCookieNotice=y" }]
+}

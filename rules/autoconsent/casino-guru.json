@@ -1,0 +1,28 @@
+{
+    "name": "casino-guru",
+    "_metadata": {
+        "vendorUrl": "https://casino.guru/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": [".js-cookies-policy-alert"],
+    "detectCmp": [
+        {
+            "exists": ".js-cookies-policy-alert [class*=\"cookies-policy-alert-body\"] [onclick*=\"js-cookies-policy-alert\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-cookies-policy-alert [class*=\"cookies-policy-alert-body\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-cookies-policy-alert [onclick*=\"js-cookies-policy-alert\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".js-cookies-policy-alert"
+        }
+    ]
+}

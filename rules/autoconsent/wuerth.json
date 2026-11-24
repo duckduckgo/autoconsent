@@ -1,0 +1,57 @@
+{
+    "name": "wuerth",
+    "prehideSelectors": ["#consent-container", "#consent_modal_backdrop"],
+    "detectCmp": [
+        {
+            "exists": "#consent-container #consent-buttonConfirm"
+        },
+        {
+            "exists": "#consent-container #consent-linkCustomConsent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent-container #consent-buttonConfirm"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consent-container #consent-buttonConfirm"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#consent-container #consent-buttonReject"
+            },
+            "then": [
+                {
+                    "click": "#consent-container #consent-buttonReject"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#consent-container #consent-linkCustomConsent"
+                },
+                {
+                    "waitForVisible": "#consent-container #consent-buttonSaveChoices",
+                    "timeout": 2000
+                },
+                {
+                    "comment": "untick any pre-selected optional purposes",
+                    "click": "#consent-container input.consent-checkbox:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "#consent-container #consent-buttonSaveChoices"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22analytics%22:{%22status%22:0"
+        }
+    ]
+}

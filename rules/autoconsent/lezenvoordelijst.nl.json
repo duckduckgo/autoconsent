@@ -1,0 +1,38 @@
+{
+    "name": "lezenvoordelijst.nl",
+    "_metadata": {
+        "vendorUrl": "https://www.lezenvoordelijst.nl/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lezenvoordelijst\\.nl/"
+    },
+    "prehideSelectors": ["#cookiebar.mod_cookiebar", ".cookieBar-filler"],
+    "detectCmp": [
+        {
+            "exists": "#cookiebar[data-component='bw.bnl.tracking']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiebar.noticeActive .modalwindow-container.bar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiebar button.ok"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiebar button.notok"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "trackingapprovedv3=false"
+        }
+    ]
+}

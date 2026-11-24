@@ -1,6 +1,9 @@
 {
     "name": "hubspot",
-    "detectCmp": [{ "exists": "#hs-eu-cookie-confirmation" }],
+    "detectCmp": [
+        { "exists": "#hs-eu-cookie-confirmation" },
+        { "any": [{ "exists": "#hs-eu-decline-button" }, { "visible": "#hs-eu-close-button" }] }
+    ],
     "detectPopup": [{ "visible": "#hs-eu-cookie-confirmation" }],
     "optIn": [{ "click": "#hs-eu-confirmation-button" }],
     "optOut": [

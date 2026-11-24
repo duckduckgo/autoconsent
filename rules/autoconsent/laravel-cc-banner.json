@@ -1,0 +1,35 @@
+{
+    "name": "laravel-cc-banner",
+    "prehideSelectors": [".cookie-consent.cc-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cc-settings-form input[name=\"cookie_consent_types[]\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "input[type=hidden][name=\"cookie_consent_types[]\"] ~ div > button[type=submit]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "input[type=hidden][name=\"cookie_consent_types[]\"] ~ div > button[type=submit]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "input[type=hidden][name=\"cookie_consent_types[]\"] ~ div > button[type=button]"
+        },
+        {
+            "waitForVisible": "#cc-settings-form button[type=submit]"
+        },
+        {
+            "click": "#cc-settings-form input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#cc-settings-form button[type=submit]"
+        }
+    ]
+}

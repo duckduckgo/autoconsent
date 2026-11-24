@@ -1,0 +1,42 @@
+{
+    "name": "webnetism",
+    "vendorUrl": "https://www.webnetism.com/",
+    "prehideSelectors": ["#cookie-banner:has(#js-config-cookies)"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner #js-config-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner #js-config-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner #js-accept-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-banner #js-config-cookies"
+        },
+        {
+            "waitFor": "#cookie-container #js-save-cookies",
+            "timeout": 3000
+        },
+        {
+            "click": "#cookie-container input.switch-input:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#cookie-container #js-save-cookies"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "analytics=blocked"
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "name": "metaquotes",
+    "_metadata": {
+        "vendorUrl": "https://www.metaquotes.net/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        { "exists": ".float-vertical-panel > .float-vertical-panel__cross" },
+        { "exists": ".float-vertical-panel a[href*=\"cookies\"]" }
+    ],
+    "detectPopup": [{ "visible": ".float-vertical-panel" }],
+    "optIn": [{ "waitForThenClick": ".float-vertical-panel > .float-vertical-panel__cross" }],
+    "optOut": [
+        { "waitForThenClick": ".float-vertical-panel > .float-vertical-panel__cross" },
+        { "waitForVisible": ".float-vertical-panel", "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "cookieContains": "cookie_accept=1" }]
+}

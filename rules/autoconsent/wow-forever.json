@@ -1,0 +1,33 @@
+{
+    "name": "wow-forever.gg",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?wow-forever\\.gg/"
+    },
+    "prehideSelectors": ["section.cb[data-consent]"],
+    "detectCmp": [
+        {
+            "exists": "section.cb[data-consent] [data-consent-decline]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section.cb[data-consent] [data-consent-decline]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "section.cb[data-consent] [data-consent-accept]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "section.cb[data-consent] [data-consent-decline]"
+        }
+    ],
+    "test": [
+        {
+            "visible": "section.cb[data-consent]",
+            "check": "none"
+        }
+    ]
+}

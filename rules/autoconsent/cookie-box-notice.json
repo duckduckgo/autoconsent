@@ -1,0 +1,41 @@
+{
+    "name": "cookie-box-notice",
+    "detectCmp": [
+        {
+            "exists": "xpath///div[contains(@class,'cookie-box__in')]//*[contains(concat(' ',normalize-space(@class),' '),' cookie-box__btn ')][normalize-space()='OK' or normalize-space()='ＯＫ' or normalize-space()='確認しました' or normalize-space()='閉じる']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[contains(@class,'cookie-box__in')]//*[contains(concat(' ',normalize-space(@class),' '),' cookie-box__btn ')][normalize-space()='OK' or normalize-space()='ＯＫ' or normalize-space()='確認しました' or normalize-space()='閉じる']"
+        },
+        {
+            "exists": ".cookie-box__in.js-load--on:not(.js-load)",
+            "negated": true
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class,'cookie-box__in')]//*[contains(concat(' ',normalize-space(@class),' '),' cookie-box__btn ')][normalize-space()='OK' or normalize-space()='ＯＫ' or normalize-space()='確認しました' or normalize-space()='閉じる']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class,'cookie-box__in')]//*[contains(concat(' ',normalize-space(@class),' '),' cookie-box__btn ')][normalize-space()='OK' or normalize-space()='ＯＫ' or normalize-space()='確認しました' or normalize-space()='閉じる']"
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "exists": ".cookie-box__in.js-load--on:not(.js-load)"
+                },
+                {
+                    "waitForVisible": "xpath///div[contains(@class,'cookie-box__in')]//*[contains(concat(' ',normalize-space(@class),' '),' cookie-box__btn ')][normalize-space()='OK' or normalize-space()='ＯＫ' or normalize-space()='確認しました' or normalize-space()='閉じる']",
+                    "check": "none",
+                    "timeout": 2000
+                }
+            ]
+        }
+    ]
+}

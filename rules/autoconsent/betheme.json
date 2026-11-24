@@ -1,0 +1,10 @@
+{
+    "name": "betheme",
+    "vendorUrl": "https://muffingroup.com/betheme/",
+    "prehideSelectors": ["#mfn-consent-mode"],
+    "detectCmp": [{ "exists": "#mfn-consent-mode #consent_deny" }],
+    "detectPopup": [{ "visible": "body.mfn-cookies-open #mfn-consent-mode .mfn-cookies-popup" }],
+    "optIn": [{ "waitForThenClick": "#mfn-consent-mode #consent_allow" }],
+    "optOut": [{ "waitForThenClick": "#mfn-consent-mode #consent_deny" }],
+    "test": [{ "cookieContains": "%22analytics_storage%22%3A%22denied%22" }]
+}

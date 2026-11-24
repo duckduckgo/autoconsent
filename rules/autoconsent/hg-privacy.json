@@ -1,0 +1,9 @@
+{
+    "name": "hg-privacy",
+    "prehideSelectors": ["hg-privacy"],
+    "detectCmp": [{ "exists": "hg-privacy #Cookies_Decline" }],
+    "detectPopup": [{ "visible": "hg-privacy #Cookies_Decline" }],
+    "optIn": [{ "waitForThenClick": "hg-privacy #Cookies_Accept" }],
+    "optOut": [{ "waitForThenClick": "hg-privacy #Cookies_Decline" }],
+    "test": [{ "waitForVisible": "hg-privacy #Cookies_Decline", "check": "none", "timeout": 2000 }]
+}

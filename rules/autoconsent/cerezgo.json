@@ -1,0 +1,61 @@
+{
+    "name": "cerezgo",
+    "vendorUrl": "https://cerezgo.com/",
+    "prehideSelectors": [".nesil-component-banner", "cerezgo-app"],
+    "detectCmp": [
+        { "any": [{ "exists": ".nesil-component-banner .nesil-banner" }, { "exists": ["cerezgo-app", "dialog.cerezgo-consent-dialog"] }] }
+    ],
+    "detectPopup": [
+        {
+            "any": [{ "visible": ".nesil-component-banner .nesil-banner" }, { "visible": ["cerezgo-app", "dialog.cerezgo-consent-dialog"] }]
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": ["cerezgo-app", "dialog.cerezgo-consent-dialog"] },
+            "then": [
+                {
+                    "waitForThenClick": [
+                        "cerezgo-app",
+                        "dialog.cerezgo-consent-dialog button[value=accept], dialog.cerezgo-consent-dialog .cerezgo-accept-consent-trigger"
+                    ]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".nesil-component-banner .banner__accept-button, .nesil-component-banner .bruce_banner__accept-button"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ["cerezgo-app", "dialog.cerezgo-consent-dialog"] },
+            "then": [
+                {
+                    "waitForThenClick": [
+                        "cerezgo-app",
+                        "dialog.cerezgo-consent-dialog button[value=reject], dialog.cerezgo-consent-dialog .cerezgo-reject-consent-trigger, dialog.cerezgo-consent-dialog .nesil-link-reject"
+                    ]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".nesil-component-banner .banner__reject-button, .nesil-component-banner .bruce_banner__reject-button, .nesil-component-banner .nesil-link-reject"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": [".nesil-component-banner .nesil-banner"],
+            "check": "none",
+            "timeout": 2000
+        },
+        {
+            "waitForVisible": ["cerezgo-app", "dialog.cerezgo-consent-dialog"],
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

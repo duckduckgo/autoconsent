@@ -1,0 +1,35 @@
+{
+    "name": "meteocat",
+    "_metadata": {
+        "vendorUrl": "https://www.meteo.cat/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?meteo\\.cat/"
+    },
+    "prehideSelectors": ["#missatge_cookie"],
+    "detectCmp": [
+        {
+            "exists": "#missatge_cookie #rebutjar"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#missatge_cookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#missatge_cookie #acceptar"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#missatge_cookie #rebutjar"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "avis=false"
+        }
+    ]
+}

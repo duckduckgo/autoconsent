@@ -1,0 +1,43 @@
+{
+    "name": "gsmpunt.nl",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?gsmpunt\\.nl/"
+    },
+    "prehideSelectors": ["[data-target='consent-wrapper']"],
+    "detectCmp": [
+        {
+            "exists": "[data-target='consent-wrapper'] [data-action='cookies-aanpassen']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-target='consent-wrapper'] .consent:not(.hidden)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-target='consent-wrapper'] .consent:not(.hidden) [data-action='alle-cookies-accepteren']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-target='consent-wrapper'] [data-action='cookies-aanpassen']"
+        },
+        {
+            "waitForVisible": "[data-target='cookies-aanpassen'] [data-action='save-cookies']"
+        },
+        {
+            "click": "[data-target='cookies-aanpassen'] input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "[data-target='cookies-aanpassen'] [data-action='save-cookies']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies_consent=1"
+        }
+    ]
+}

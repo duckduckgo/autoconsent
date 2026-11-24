@@ -1,0 +1,40 @@
+{
+    "name": "smartstore",
+    "vendorUrl": "https://smartstore.com/",
+    "prehideSelectors": ["#cookie-manager-window"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-manager-window #cookie-manager-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-manager-window"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-manager-window #accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#cookie-manager-consent input.form-check-input[type=checkbox]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#cookie-manager-window #accept-selected"
+        },
+        {
+            "waitForVisible": "#cookie-manager-window",
+            "check": "none",
+            "timeout": 5000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22AllowAnalytics%22%3Afalse"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "name": "erli-pl",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?erli\\.pl/"
+    },
+    "detectCmp": [
+        {
+            "exists": "xpath///div[h2[normalize-space()=\"Ustawienia prywatności i cookies\"]][.//button[normalize-space()=\"Zgadzam się\"]]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "xpath///div[h2[normalize-space()=\"Ustawienia prywatności i cookies\"]][.//button[normalize-space()=\"Zgadzam się\"]]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[h2[normalize-space()=\"Ustawienia prywatności i cookies\"]]//button[normalize-space()=\"Zgadzam się\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[h2[normalize-space()=\"Ustawienia prywatności i cookies\"]]//button[normalize-space()=\"Zmień ustawienia\"]"
+        },
+        {
+            "waitForThenClick": "xpath///div[h2[normalize-space()=\"Ustawienia prywatności i cookies\"]]//button[normalize-space()=\"Zezwól na wybrane\"]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "xpath///div[h2[normalize-space()=\"Ustawienia prywatności i cookies\"]][.//button[normalize-space()=\"Zgadzam się\"]]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

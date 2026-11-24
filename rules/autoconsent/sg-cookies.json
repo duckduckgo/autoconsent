@@ -1,0 +1,80 @@
+{
+    "name": "sg-cookies",
+    "prehideSelectors": ["#sg-cookiesBar #cookies-bar"],
+    "detectCmp": [
+        {
+            "exists": "#sg-cookiesBar #cookies-bar"
+        }
+    ],
+    "detectPopup": [
+        {
+            "comment": "some sites hide only the wrapper after consent, and the fixed inner bar still counts as visible",
+            "visible": "#sg-cookiesBar"
+        },
+        {
+            "visible": "#sg-cookiesBar #cookies-bar"
+        },
+        {
+            "exists": "#sg-cookiesBar .btn-disable-all, #sg-cookiesBar .cookies-decline-all, #sg-cookiesBar #cookies-manage-save-modal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#sg-cookiesBar #cookies-bar .btn-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#sg-cookiesBar #cookies-bar .btn-disable-all"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#sg-cookiesBar #cookies-bar .btn-disable-all"
+                },
+                {
+                    "waitForVisible": "#sg-cookiesBar #cookies-bar",
+                    "check": "none",
+                    "timeout": 2000
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": "#sg-cookiesBar .cookies-decline-all"
+                    },
+                    "then": [
+                        {
+                            "comment": "reject button lives in the hidden settings modal",
+                            "click": "#sg-cookiesBar .cookies-decline-all"
+                        },
+                        {
+                            "waitForVisible": "#sg-cookiesBar #cookies-bar",
+                            "check": "none",
+                            "timeout": 2000
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": "#sg-cookiesBar input[type=checkbox][id$=-modal]:checked:not(:disabled)",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "comment": "saving the settings modal usually reloads the page",
+                            "click": "#sg-cookiesBar #cookies-manage-save-modal"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "sg-cookies-"
+        },
+        {
+            "cookieContains": "-consent=1"
+        }
+    ]
+}

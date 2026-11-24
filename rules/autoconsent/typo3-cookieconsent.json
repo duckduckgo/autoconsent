@@ -1,0 +1,9 @@
+{
+    "name": "typo3-cookieconsent",
+    "prehideSelectors": ["#js-cookieconsent"],
+    "detectCmp": [{ "exists": "#js-cookieconsent [data-cookieconsent-accept-none]" }],
+    "detectPopup": [{ "visible": "#js-cookieconsent" }],
+    "optIn": [{ "waitForThenClick": "#js-cookieconsent [data-cookieconsent-accept-all]" }],
+    "optOut": [{ "waitForThenClick": "#js-cookieconsent [data-cookieconsent-accept-none]" }],
+    "test": [{ "cookieContains": "CookieConsent=mandatory" }]
+}

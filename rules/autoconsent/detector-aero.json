@@ -1,0 +1,21 @@
+{
+    "name": "detector-aero",
+    "vendorUrl": "https://detector-aero.ru/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?detector-aero\\.ru/"
+    },
+    "prehideSelectors": [".public-map-notices .cookie-consent"],
+    "detectCmp": [{ "exists": ".public-map-notices .cookie-consent" }],
+    "detectPopup": [{ "visible": ".public-map-notices .cookie-consent" }],
+    "optIn": [{ "waitForThenClick": ".public-map-notices .cookie-consent .cookie-accept" }],
+    "optOut": [
+        { "waitForVisible": ".public-map-notices .cookie-consent .cookie-opt-out", "timeout": 3000, "optional": true },
+        {
+            "if": { "exists": ".public-map-notices .cookie-consent .cookie-opt-out" },
+            "then": [{ "waitForThenClick": ".public-map-notices .cookie-consent .cookie-opt-out" }],
+            "else": [{ "waitForThenClick": ".public-map-notices .cookie-consent .cookie-dismiss" }]
+        },
+        { "waitForVisible": ".public-map-notices .cookie-consent", "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "visible": ".public-map-notices .cookie-consent", "check": "none" }]
+}

@@ -1,0 +1,25 @@
+{
+    "name": "privacy-policy-pop",
+    "cosmetic": true,
+    "prehideSelectors": [".privacy_policy_pop:has(> #closeGdpr, > #agreepolicy)"],
+    "detectCmp": [
+        {
+            "exists": ".privacy_policy_pop > #closeGdpr, .privacy_policy_pop > #agreepolicy"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".privacy_policy_pop"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".privacy_policy_pop > #closeGdpr, .privacy_policy_pop > #agreepolicy"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".privacy_policy_pop"
+        }
+    ]
+}
