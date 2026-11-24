@@ -1,0 +1,38 @@
+{
+    "name": "schullv.de",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?schullv\\.de/"
+    },
+    "prehideSelectors": [".MuiDialog-root:has([class*='CookieBar__DialogContent'])"],
+    "detectCmp": [
+        {
+            "exists": "[class*='CookieBar__DialogContent']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*='CookieBar__DialogContent']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[class*='CookieBar__ButtonsWrapper'] [class*='PrimaryButton__Button']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[class*='CookieBar__ButtonsWrapper'] [class*='SecondaryButton__Button']"
+        },
+        {
+            "waitFor": "[class*='CookieBar__OptionsContainer']"
+        },
+        {
+            "click": "[class*='CookieBar__OptionsContainer'] button:not([disabled]):has([class*='CheckBoxButton__CheckBoxIcon'])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[class*='CookieBar__OptionsContainer'] ~ [class*='CookieBar__ButtonsWrapper'] [class*='PrimaryButton__Button']"
+        }
+    ]
+}
