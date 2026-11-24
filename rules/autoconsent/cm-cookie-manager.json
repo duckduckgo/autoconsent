@@ -1,7 +1,7 @@
 {
     "name": "cm-cookie-manager",
     "prehideSelectors": ["#cm-wrapper:has(#cm-selectSpecific)", "#cookie-consent:has(#cm-selectSpecific)"],
-    "detectCmp": [{ "exists": "#cm-selectSpecific" }, { "exists": "#cm-selectAllCheckboxes" }],
+    "detectCmp": [{ "exists": "#cm-selectSpecific" }, { "visible": "#cm-selectAllCheckboxes" }],
     "detectPopup": [{ "visible": "#cm-selectAllCheckboxes" }],
     "optIn": [{ "waitForThenClick": "#cm-selectAllCheckboxes" }],
     "optOut": [
