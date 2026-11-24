@@ -1,0 +1,30 @@
+{
+    "name": "depositphotos.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?depositphotos\\.com/"
+    },
+    "prehideSelectors": ["[data-qa=\"CookieBar\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-qa=\"CookieBar\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-qa=\"CookieBar\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-qa=\"CookieBar\"] > button:first-of-type"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-qa=\"CookieBar\"] > button:last-of-type"
+        },
+        {
+            "waitForThenClick": "xpath///*[@data-qa=\"CookieTypesSelector\"]/following::button[1]"
+        }
+    ]
+}
