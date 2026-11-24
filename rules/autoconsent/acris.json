@@ -8,7 +8,7 @@
     ],
     "detectPopup": [
         {
-            "visible": ".acris-cookie-consent.is--modal"
+            "visible": ".acris-cookie-consent.is--modal, .acris-cookie-consent.is--default"
         }
     ],
     "optIn": [
@@ -20,7 +20,9 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "#ccConsentAcceptAllButton"
+            "waitForThenClick": "#ccConsentAcceptAllButton",
+            "retry": 10,
+            "retryInterval": 500
         }
     ],
     "optOut": [
@@ -32,7 +34,9 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "#ccAcceptOnlyFunctional"
+            "waitForThenClick": "#ccAcceptOnlyFunctional",
+            "retry": 10,
+            "retryInterval": 500
         }
     ]
 }
