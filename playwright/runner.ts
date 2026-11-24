@@ -37,8 +37,8 @@ const useOxylabs = process.env.OXYLABS === '1';
 const oxylabsCandidatesFile = process.env.OXYLABS_CANDIDATES;
 const oxylabsCandidates = useOxylabs && oxylabsCandidatesFile ? readOxylabsCandidates(oxylabsCandidatesFile) : null;
 const recordOxylabsCandidates = !useOxylabs && !!oxylabsCandidatesFile;
-// SPEC_MANIFEST=<file> appends each generateCMPTests call to the file as a JSON line instead of defining tests,
-// so tools can read the specs as Playwright loads them (`npx playwright test --list`).
+// SPEC_MANIFEST=<file> also appends each generateCMPTests call to the file as a JSON line, so tools can read
+// the specs as Playwright loads them (`npx playwright test --list`). Tests are defined as usual.
 const specManifestFile = process.env.SPEC_MANIFEST;
 // Pages load slower through remote Oxylabs sessions, so detection gets a longer window there.
 const detectionSlowdown = useOxylabs ? 2 : 1;
@@ -511,7 +511,6 @@ function callingSpecFile(): string | null {
 export default function generateCMPTests(cmp: string, sites: string[], overrideOptions: Partial<TestOptions> = {}) {
     if (specManifestFile) {
         fs.appendFileSync(specManifestFile, `${JSON.stringify({ spec: callingSpecFile(), cmp, sites, options: overrideOptions })}\n`);
-        return;
     }
     test.describe(cmp, () => {
         if (recordOxylabsCandidates) {
