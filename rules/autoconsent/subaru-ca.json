@@ -1,0 +1,23 @@
+{
+    "name": "subaru-ca",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)*subaru(dealer)?\\.ca/"
+    },
+    "prehideSelectors": ["#TermsSelector"],
+    "detectCmp": [{ "exists": "#TermsSelector .TermsOk" }],
+    "detectPopup": [
+        {
+            "visible": "#TermsSelector .openTermsContainer .TermsOk, #TermsSelector .sticky-wrapper:not(.MobileContainer) .TermsOk",
+            "check": "any"
+        }
+    ],
+    "optIn": [{ "waitForThenClick": "#TermsSelector .TermsOk" }],
+    "optOut": [{ "waitForThenClick": "#TermsSelector .TermsOk" }],
+    "test": [
+        {
+            "waitForVisible": "#TermsSelector .openTermsContainer .TermsOk, #TermsSelector .sticky-wrapper:not(.MobileContainer) .TermsOk",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
