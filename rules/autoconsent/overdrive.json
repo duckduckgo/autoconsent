@@ -1,0 +1,70 @@
+{
+    "name": "overdrive",
+    "_metadata": {
+        "vendorUrl": "https://www.overdrive.com/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://[^/]+\\.overdrive\\.com/"
+    },
+    "prehideSelectors": ["[class*=\"GpcBanner_gpcBanner\"]"],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"CookieSettingsModal_cookieSettingsModal\"], [class*=\"GpcBanner_gpcBanner\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*=\"CookieSettingsModal_cookieSettingsModal\"], [class*=\"GpcBanner_gpcBanner\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "[class*=\"CookieSettingsModal_cookieSettingsModal\"]"
+            },
+            "then": [
+                {
+                    "click": "[class*=\"CookieSettingsModal_cookieSettingsModal\"] input[type=checkbox]:not(:checked)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "[class*=\"CookieSettingsModal_cookieSettingsModal\"] button.primary"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "[class*=\"GpcBanner_gpcBanner\"] button[class*=\"GpcBanner_close\"]"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "[class*=\"CookieSettingsModal_cookieSettingsModal\"]"
+            },
+            "then": [
+                {
+                    "click": "[class*=\"CookieSettingsModal_cookieSettingsModal\"] input[type=checkbox]:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "[class*=\"CookieSettingsModal_cookieSettingsModal\"] button.primary"
+                }
+            ],
+            "else": [
+                {
+                    "comment": "the GPC banner is only a notice: the site has already disabled non-required cookies",
+                    "waitForThenClick": "[class*=\"GpcBanner_gpcBanner\"] button[class*=\"GpcBanner_close\"]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "od_track=0"
+        }
+    ]
+}
