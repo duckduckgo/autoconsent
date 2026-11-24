@@ -1,0 +1,19 @@
+{
+    "name": "agentii.getsbet.ro",
+    "vendorUrl": "https://agentii.getsbet.ro/",
+    "comment": "cookieconsent notice that renders after an inactive Cookiebot is already detected, so detect via its script",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?agentii\\.getsbet\\.ro/"
+    },
+    "prehideSelectors": [".cc-window[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": "script[src*=\"/js/cookieconsent.min.js\"]" }],
+    "detectPopup": [{ "visible": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible) .cc-dismiss" }],
+    "optIn": [{ "waitForThenClick": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible) .cc-dismiss" }],
+    "optOut": [
+        {
+            "comment": "clicks while cc-invisible is still set are ignored and the banner fades in again",
+            "waitForThenClick": ".cc-type-info[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible) .cc-dismiss"
+        }
+    ],
+    "test": [{ "cookieContains": "cookieconsent_status=dismiss" }]
+}

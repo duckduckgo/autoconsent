@@ -25,7 +25,7 @@ Important! Autoconsent results can have false positives. When testing, always in
 ## Prerequisites
 
 ```bash
-npm run prepublish # builds dist/autoconsent.playwright.js and rules/rules.json
+npm run prepublish # builds dist/ (content script and package bundles) and rules/rules.json, rules/compact-rules.json
 ```
 
 Environment variables:
@@ -97,10 +97,14 @@ export default defineConfig({
 Options (all optional):
 
 - `action` — `'optOut'` (default), `'optIn'`, or `null` to only detect (no opt-out/opt-in performed).
-- `screenshotsDir` — directory for the final screenshots (default: `test-results/regional-proxy`).
+- `screenshotsDir` — directory for the final screenshots (default: `test-results/regional-proxy`). If the final screenshot fails, `screenshotPaths` stays empty and `errors` gets `Screenshot failed: <reason>`.
 - `navigationTimeout` — `page.goto` timeout in ms (default `45000`).
 - `completionTimeout` — max wait for autoconsent to finish opt-out/opt-in in ms (default `45000`).
 - `detectionTimeout` — max wait for `cmpDetected` before giving up (default: `completionTimeout`).
+- `disabledCmps` — rule names autoconsent skips (default `[]`), e.g. to see whether another rule or the heuristic handles the page without a rule.
+- `heuristicMode` — heuristic level: `'off'`, `'reject'`, `'tier1'` or `'tier2'` (default `'tier2'`). `'tier1'` leaves out popups whose only button is Accept.
+- `gpc` — send the Global Privacy Control signal (`Sec-GPC: 1` and `navigator.globalPrivacyControl`), as DuckDuckGo browsers do (default `true`). Set `false` to test the way a spec without the `gpc` option does, which is how CI runs most specs.
+- `emulateDevice` — Playwright device to emulate on Chromium, e.g. `'Pixel 7'` (viewport, user agent, touch), applied by `testUrl`. Desktop when unset. Prefer an Android device: an emulated iPhone still exposes Chrome-only APIs such as `navigator.userAgentData`, so a site can tell it is not Safari.
 - `headless` — run Chromium headless (default `true`).
 - `launchOptions` — extra options merged into `chromium.launch()` (e.g. `args`); the regional `proxy` is always applied on top.
 
@@ -131,6 +135,7 @@ await browser.close();
 - Never embed proxy credentials in URLs, command lines, logs, traces, or source.
 - Call `injectAutoconsent(page)` before `page.goto()` so the init script is installed before page scripts run.
 - The content script runs in an isolated world (via CDP) and `eval` snippets run in the page's main world, matching the extension. Chromium only.
+- Like the extension, each frame gets only the rules that can run in it: the compact rules filtered by the frame's URL and whether it is the main frame. Opt-in gets the full `rules.json` instead, since compact rules have no opt-in steps.
 - Use a fresh browser per region to avoid leaking proxy state, cookies, cache, or DNS.
 - Some sites localize by more than IP; only add locale/geolocation settings intentionally.
 - Some sites block proxy traffic outright (captcha, 403, endless challenge page). Retest the affected regions with the `oxylabs-testing` skill, and say in the report which regions were tested through Oxylabs. If Oxylabs is blocked too or not available, retest over a direct connection and state explicitly in the report that the result is unproxied. If direct access is blocked too, ask the triager for the popup's HTML pasted from their own browser as a last resort, and note that the rule was written from pasted markup rather than a live run.

@@ -1,0 +1,46 @@
+{
+    "name": "derby-council",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner .cookie-buttons [data-modal-content-id=\"cookie-modal\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner .cookie-buttons"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner #allow-all-cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-banner .cookie-buttons [data-modal-content-id=\"cookie-modal\"]"
+        },
+        {
+            "waitForVisible": "#js-modal #save-cookie-preferences"
+        },
+        {
+            "if": {
+                "exists": "#js-modal #choice-analytical-cookies:checked"
+            },
+            "then": [
+                {
+                    "click": "#js-modal #choice-analytical-cookies"
+                }
+            ]
+        },
+        {
+            "click": "#js-modal #save-cookie-preferences"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "analytical%22:0"
+        }
+    ]
+}

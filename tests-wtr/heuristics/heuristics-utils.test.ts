@@ -404,6 +404,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Allow analytics cookies? They help us understand how visitors use this website. Your choice does not affect access.',
             'Allow cookies? We use them to measure traffic.',
             'We use a cookie to remember you are 18+ and keep your preferences on this device.',
+            'Continue without accepting\nProtecting your privacy is our priority',
             'Choose between essential cookies that are required for the site to work or all cookies, including non-essential ones.',
         ]);
     });
@@ -438,6 +439,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Please allow cookies in your browser settings',
             'We use data analytics tools in our consulting work',
             'We use the best chocolate in our cookies',
+            'Continue without signing in',
             'Choose between chocolate or oatmeal cookies for the party.',
             'JavaScript is required for the site to work.',
         ]);
@@ -460,6 +462,7 @@ describe('checkHeuristicPatterns with more French, German, Dutch, Polish and Rus
             'Onze cookies geven je de best mogelijke ervaring op onze website. Accepteer ze, of lees onze cookieverklaring.',
             'Informujemy, że niniejsza strona internetowa wykorzystuje pliki „cookies”.',
             'Strona wykorzystuje pliki "cookies" w celach statystycznych.',
+            'Firma i jej partnerzy używają plików cookie i innych trackerów na naszej stronie internetowej.',
             'Обрабатываем cookie, чтобы сделать сайт удобнее. Продолжая использовать сайт, вы соглашаетесь на их обработку.',
             'Сайт обрабатывает пользовательские данные с использованием файлов, сохраняемых в браузере пользователя, в соответствии с Условиями.',
         ]);
@@ -891,6 +894,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Ho entenc')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Entès!')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Entesos')).to.equal('acknowledge');
+    });
+
+    it('matches Portuguese acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('Ciente')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Estou ciente')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Entendi!')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Eficiente')).to.equal('other');
     });
 
     it('matches Catalan necessary-only buttons as reject', () => {

@@ -1,0 +1,84 @@
+{
+    "name": "shopware5",
+    "_metadata": {
+        "vendorUrl": "https://www.shopware.com/"
+    },
+    "prehideSelectors": [".page-wrap--cookie-permission[data-cookie-permission]:not(.spx-cookie-wrapper)"],
+    "detectCmp": [
+        {
+            "comment": "the spx theme's variant is handled by shopware5-spx",
+            "exists": ".page-wrap--cookie-permission[data-cookie-permission]:not(.spx-cookie-wrapper) .cookie-permission--decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".page-wrap--cookie-permission[data-cookie-permission]"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ".page-wrap--cookie-permission .cookie-permission--accept-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".page-wrap--cookie-permission .cookie-permission--accept-button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".page-wrap--cookie-permission .cookie-permission--configure-button"
+                },
+                {
+                    "waitForVisible": ".cookie-consent--save-button"
+                },
+                {
+                    "click": ".cookie-consent--group-state-input:not(:checked):not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".cookie-consent--save-button"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ".page-wrap--cookie-permission .cookie-permission--decline-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".page-wrap--cookie-permission .cookie-permission--decline-button"
+                }
+            ],
+            "else": [
+                {
+                    "comment": "non-essential groups are unchecked by default in the consent manager",
+                    "waitForThenClick": ".page-wrap--cookie-permission .cookie-permission--configure-button"
+                },
+                {
+                    "waitForThenClick": ".cookie-consent--save-button"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".page-wrap--cookie-permission[data-cookie-permission]",
+            "timeout": 2000,
+            "check": "none"
+        },
+        {
+            "any": [
+                {
+                    "cookieContains": "cookieDeclined=1"
+                },
+                {
+                    "cookieContains": "\"active\":false"
+                }
+            ]
+        }
+    ]
+}

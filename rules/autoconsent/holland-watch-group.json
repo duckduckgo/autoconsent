@@ -1,0 +1,12 @@
+{
+    "name": "holland-watch-group",
+    "vendorUrl": "https://www.hollandwatchgroup.com/",
+    "prehideSelectors": ["[x-data^=\"App.CookieConsent\"]"],
+    "detectCmp": [{ "exists": "[x-data^=\"App.CookieConsent\"] button[x-on\\:click=\"saveSettings();\"]" }],
+    "detectPopup": [{ "visible": "[x-data^=\"App.CookieConsent\"] button[x-on\\:click=\"saveSettings();\"]" }],
+    "optIn": [{ "waitForThenClick": "[x-data^=\"App.CookieConsent\"] button[x-on\\:click=\"allowAll();\"]" }],
+    "optOut": [
+        { "waitForThenClick": "[x-data^=\"App.CookieConsent\"] button[x-on\\:click=\"saveSettings();\"]" },
+        { "waitForVisible": "[x-data^=\"App.CookieConsent\"]", "check": "none" }
+    ]
+}

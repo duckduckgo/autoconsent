@@ -1,0 +1,30 @@
+{
+    "name": "justica-eleitoral",
+    "vendorUrl": "https://www.tse.jus.br/",
+    "prehideSelectors": ["#modal-lgpd.pat-cookies"],
+    "detectCmp": [
+        {
+            "exists": "#modal-lgpd.pat-cookies.cookies--ativo .btn--rejeitar"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#modal-lgpd.pat-cookies.cookies--ativo"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#modal-lgpd.pat-cookies .btn--aceitar"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#modal-lgpd.pat-cookies .btn--rejeitar"
+        }
+    ],
+    "test": [
+        {
+            "waitFor": "#modal-lgpd.pat-cookies.cookies--desabilitado"
+        }
+    ]
+}

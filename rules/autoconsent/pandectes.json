@@ -4,12 +4,18 @@
     "prehideSelectors": [".cc-window-wrapper:has(> .pd-cookie-banner-window)", "pandectes-cmp"],
     "detectCmp": [
         {
-            "any": [{ "exists": ".cc-window-wrapper > .pd-cookie-banner-window" }, { "exists": ["pandectes-cmp", "dialog.notice"] }]
+            "any": [
+                { "exists": ".cc-window-wrapper > .pd-cookie-banner-window" },
+                { "exists": ["pandectes-cmp", "dialog.notice, dialog.preferences"] }
+            ]
         }
     ],
     "detectPopup": [
         {
-            "any": [{ "visible": ".cc-window-wrapper:has(> .pd-cookie-banner-window)" }, { "visible": ["pandectes-cmp", "dialog.notice"] }]
+            "any": [
+                { "visible": ".cc-window-wrapper:has(> .pd-cookie-banner-window)" },
+                { "visible": ["pandectes-cmp", "dialog.notice, dialog.preferences"], "check": "any" }
+            ]
         }
     ],
     "optIn": [
@@ -21,7 +27,7 @@
                 },
                 { "hide": ".cc-window-wrapper:has(> .pd-cookie-banner-window)", "optional": true }
             ],
-            "else": [{ "waitForThenClick": ["pandectes-cmp", "dialog.notice button.allow"] }]
+            "else": [{ "waitForThenClick": ["pandectes-cmp", "dialog.notice button.allow, dialog.preferences button.allow"] }]
         }
     ],
     "optOut": [
@@ -45,7 +51,10 @@
                     "if": { "visible": ["pandectes-cmp", "dialog.notice button.deny"] },
                     "then": [{ "waitForThenClick": ["pandectes-cmp", "dialog.notice button.deny"] }],
                     "else": [
-                        { "waitForThenClick": ["pandectes-cmp", "dialog.notice button.preferences"] },
+                        {
+                            "if": { "exists": ["pandectes-cmp", "dialog.notice"] },
+                            "then": [{ "waitForThenClick": ["pandectes-cmp", "dialog.notice button.preferences"] }]
+                        },
                         { "waitForVisible": ["pandectes-cmp", "dialog.preferences"] },
                         {
                             "if": { "exists": ["pandectes-cmp", "dialog.preferences button.deny"] },

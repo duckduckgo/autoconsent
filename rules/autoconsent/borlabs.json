@@ -3,7 +3,7 @@
     "prehideSelectors": ["#BorlabsCookieBox"],
     "detectCmp": [
         {
-            "exists": "._brlbs-block-content,.brlbs-cmpnt-dialog"
+            "exists": "#BorlabsCookieBox,._brlbs-block-content,.brlbs-cmpnt-dialog"
         }
     ],
     "detectPopup": [

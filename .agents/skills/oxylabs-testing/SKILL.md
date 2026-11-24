@@ -18,7 +18,7 @@ The region policy (core and expanded sets) is the one in the `proxy-testing` ski
 ## Prerequisites
 
 ```bash
-npm run prepublish  # builds dist/autoconsent.playwright.js and rules/rules.json
+npm run prepublish  # builds dist/ (content script and package bundles) and rules/rules.json, rules/compact-rules.json
 ```
 
 Environment variables:
@@ -64,11 +64,12 @@ const result = await withOxylabsPage('de', { device: 'mobile' }, async (page) =>
 - `isOxylabsConfigured()` — whether `OXYLABS_USER` and `OXYLABS_PASSWORD` are set.
 - `formatResult(result)`, `CORE_REGIONS`, `EXPANDED_REGIONS`, `ALL_REGIONS` — same as `proxy-testing`.
 
-Options: everything `testPage` takes in `proxy-testing` (`action`, `screenshotsDir`, `navigationTimeout`, `completionTimeout`, `detectionTimeout`), plus:
+Options: everything `testPage` takes in `proxy-testing` (`action`, `screenshotsDir`, `navigationTimeout`, `completionTimeout`, `detectionTimeout`, `disabledCmps`, `heuristicMode`, `gpc`), plus:
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `device` | `'desktop'` | `'desktop' \| 'mobile'` — sets [`?p_device=`](https://developers.oxylabs.io/products/agent-browser/device-type) (viewport, touch, headers, User-Agent). Use it for mobile tests instead of Playwright device descriptors, which would contradict the Oxylabs fingerprint. |
+| `device` | `'desktop'` | `'desktop' \| 'mobile'` — sets [`?p_device=`](https://developers.oxylabs.io/products/agent-browser/device-type), which gives an Android user agent but no touch and a desktop-sized page. With `'mobile'`, `testUrl` and `withOxylabsPage` open the page in a context with touch and a phone viewport (`OXYLABS_MOBILE_CONTEXT`), keeping Oxylabs' user agent. Pages stay at least 500px wide, and `navigator.userAgentData` still reports desktop Linux. |
+| `emulateDevice` | none | A Playwright device to emulate instead, e.g. `'Pixel 7'`: its viewport, touch and user agent, which replaces the Oxylabs one. |
 | `solveCaptcha` | `true` | Sends [`?solve_captcha=true`](https://developers.oxylabs.io/products/agent-browser/captcha-handling) so Oxylabs solves captchas on the page, and waits for the solver (see Gotchas). Our account has captcha solving enabled; an account without it gets HTTP 400 for every session. |
 
 Screenshots default to `test-results/oxylabs`, named `<domain>-<region>-oxylabs-final.jpg`.

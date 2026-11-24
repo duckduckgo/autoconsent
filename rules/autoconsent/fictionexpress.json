@@ -1,0 +1,33 @@
+{
+    "name": "fictionexpress",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?fictionexpress\\.com/"
+    },
+    "prehideSelectors": ["#avisoCookies"],
+    "detectCmp": [
+        {
+            "exists": "#avisoCookies .cerrarAvisoCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#avisoCookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#avisoCookies .cerrarAvisoCookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#avisoCookies .cerrarAvisoCookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#avisoCookies",
+            "check": "none"
+        }
+    ]
+}

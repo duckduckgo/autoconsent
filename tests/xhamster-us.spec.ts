@@ -16,6 +16,13 @@ generateCMPTests(
         'https://xhvid.com/',
         'https://xhfanclub.com/',
         'https://id.xhfanclub.com/',
+        'https://id.xhamster.desi/',
+        'https://vi.xhstream.com/',
+        'https://id.xhname.com/',
+        'https://vi.xhspot.com/',
+        'https://ko.xhfuck.com/',
+        'https://hi.xhzone.live/',
+        'https://id.xhsocial.com/',
     ],
     {
         onlyRegions: ['US'],

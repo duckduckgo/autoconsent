@@ -1,0 +1,24 @@
+{
+    "name": "cookie-bar-preference",
+    "prehideSelectors": ["#cookie-bar[data-excluded-urls]"],
+    "detectCmp": [{ "exists": "#cookie-bar.active .cookie-bar__preference .btn-cookie-accept" }],
+    "detectPopup": [{ "visible": "#cookie-bar.active .cookie-bar__preference .btn-cookie-accept" }],
+    "optIn": [{ "waitForThenClick": "#cookie-bar .cookie-bar__preference .btn-cookie-accept-all" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookie-bar .cookie-bar__preference .btn-cookie-decline-all" },
+            "then": [{ "waitForThenClick": "#cookie-bar .cookie-bar__preference .btn-cookie-decline-all" }],
+            "else": [
+                {
+                    "click": "#cookie-bar .cookie-bar__preference input[type=checkbox]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#cookie-bar .cookie-bar__preference .btn-cookie-accept:not(.btn-cookie-accept-all):not(.btn-cookie-decline-all)"
+                }
+            ]
+        }
+    ],
+    "test": [{ "wait": 500 }, { "visible": "#cookie-bar.active .cookie-bar__preference .btn-cookie-accept", "check": "none" }]
+}

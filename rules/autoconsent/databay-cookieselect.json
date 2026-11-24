@@ -1,0 +1,47 @@
+{
+    "name": "databay-cookieselect",
+    "vendorUrl": "https://www.databay.de/",
+    "prehideSelectors": [".dbayCookieSelect .cookieConsentMessage"],
+    "detectCmp": [
+        {
+            "exists": ".dbayCookieSelect #cookieSelectForm"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".dbayCookieSelect .cookieConsentMessage"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".dbayCookieSelect .cookieSelectAcceptAll"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".dbayCookieSelect .cookieSelectReject"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".dbayCookieSelect .cookieSelectReject"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#cookieSelectForm input[type=checkbox]:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ".dbayCookieSelect .cookieSelectAccept"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieConsent=1"
+        }
+    ]
+}

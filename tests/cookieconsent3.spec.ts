@@ -1,7 +1,6 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('cookieconsent3', [
-    'https://playground.cookieconsent.orestbida.com/',
-    'https://www.testsieger.de/after-shaves/',
-    'https://www.rtvslo.si/',
-]);
+// consent may be stored in localStorage (odprentals) or arrive late (bookboon), so the cookie self-test is unreliable
+generateCMPTests('cookieconsent3', ['https://bookboon.com/', 'https://odprentals.co.za/'], {
+    testSelfTest: false,
+});

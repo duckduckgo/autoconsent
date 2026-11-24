@@ -5,7 +5,7 @@
     "prehideSelectors": ["#cc-main"],
     "detectCmp": [
         {
-            "exists": "#cc-main"
+            "exists": "#cc-main .cm-wrapper"
         }
     ],
     "detectPopup": [
