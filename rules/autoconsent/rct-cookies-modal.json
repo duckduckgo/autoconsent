@@ -1,0 +1,36 @@
+{
+    "name": "rct-cookies-modal",
+    "vendorUrl": "https://www.protilertools.co.uk/",
+    "prehideSelectors": [".rct-cookies-modal-trigger > div"],
+    "detectCmp": [
+        {
+            "exists": ".rct-cookies-modal-trigger > div"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".rct-cookies-modal-trigger > div"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".rct-cookies-modal-trigger .mt-4 > button:last-child"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".rct-cookies-modal-trigger .mt-4 > button:first-child"
+        },
+        {
+            "waitFor": ".rct-cookies-modal-trigger ul input[type=checkbox]"
+        },
+        {
+            "waitForThenClick": ".rct-cookies-modal-trigger .mt-4 > button:first-child"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "isCookiesBannerDismissed=true"
+        }
+    ]
+}

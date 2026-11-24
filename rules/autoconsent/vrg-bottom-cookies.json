@@ -1,0 +1,52 @@
+{
+    "name": "vrg-bottom-cookies",
+    "vendorUrl": "https://vistula.pl/",
+    "prehideSelectors": ["#bottom-cookies"],
+    "detectCmp": [
+        {
+            "exists": "#bottom-cookies.bottom-cookies-modal #openCookiesSettings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#bottom-cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#acceptAllCookiesBottom"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#openCookiesSettings"
+        },
+        {
+            "waitForVisible": "#cookiesModal #saveSelectedCookies",
+            "timeout": 10000
+        },
+        {
+            "if": {
+                "exists": "#cookiesForm input[type=checkbox]:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookiesForm input[type=checkbox]:checked",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#cookiesModal #saveSelectedCookies",
+            "retry": 2,
+            "retryInterval": 1000
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#bottom-cookies",
+            "check": "none",
+            "timeout": 5000
+        }
+    ]
+}

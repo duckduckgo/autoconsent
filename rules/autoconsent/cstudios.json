@@ -1,0 +1,35 @@
+{
+    "name": "cstudios",
+    "vendorUrl": "https://www.cstudios.pl/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?cstudios\\.pl/"
+    },
+    "prehideSelectors": ["#CookiesWindow"],
+    "detectCmp": [
+        {
+            "exists": "#CookiesWindow .rodo-window"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#CookiesWindow .rodo-window"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#CookiesWindow .dnnSecondaryAction[onclick*=AcceptRODO]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#CookiesWindow"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#CookiesWindow",
+            "check": "none"
+        }
+    ]
+}

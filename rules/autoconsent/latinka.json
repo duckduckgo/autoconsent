@@ -1,0 +1,17 @@
+{
+    "name": "latinka",
+    "vendorUrl": "https://www.latinka.com.pe/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?latinka\\.com\\.pe/"
+    },
+    "prehideSelectors": ["#bannerCookies #cookieBanner"],
+    "detectCmp": [{ "exists": "#bannerCookies #cookieBanner" }],
+    "detectPopup": [{ "visible": "#bannerCookies #cookieBanner" }],
+    "optIn": [{ "waitForThenClick": "#bannerCookies #acceptAllBtn" }],
+    "optOut": [
+        { "waitForThenClick": "#cookieModal #rejectCustomizationsBtn" },
+        { "waitForVisible": "#bannerCookies #cookieBanner", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "ad_storage=denied" }]
+}

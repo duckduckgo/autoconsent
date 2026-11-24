@@ -1,0 +1,19 @@
+{
+    "name": "brandsforstudents.ch",
+    "runContext": { "urlPattern": "^https?://(www\\.)?brandsfor(students|employees)\\.ch/" },
+    "prehideSelectors": [".cookiebanner-container"],
+    "detectCmp": [{ "exists": ".cookiebanner-container [data-test=adjust-cookies]" }],
+    "detectPopup": [{ "visible": ".cookiebanner-container" }],
+    "optIn": [{ "waitForThenClick": ".cookiebanner-container .buttons-container button:not([data-test=adjust-cookies])" }],
+    "optOut": [
+        { "waitForThenClick": ".cookiebanner-container [data-test=adjust-cookies]" },
+        { "waitFor": ".cookiebanner-container .checkbox-container" },
+        {
+            "click": ".cookiebanner-container .checkbox-container input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": ".cookiebanner-container .buttons-container button:not([data-test=adjust-cookies])" }
+    ],
+    "test": [{ "cookieContains": "cookies-accepted=false" }]
+}

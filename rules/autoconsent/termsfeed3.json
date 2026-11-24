@@ -20,9 +20,9 @@
     ],
     "optOut": [
         {
-            "if": { "exists": ".cc_dialog.cc_css_reboot .cc_b_cp" },
+            "if": { "exists": ".cc_dialog.cc_css_reboot button.cc_b_cp:last-of-type" },
             "then": [
-                { "click": ".cc_dialog.cc_css_reboot .cc_b_cp" },
+                { "click": ".cc_dialog.cc_css_reboot button.cc_b_cp:last-of-type" },
                 { "waitForVisible": ".cookie-consent-preferences-dialog .cc_cp_f_save button" },
                 { "waitForThenClick": ".cookie-consent-preferences-dialog .cc_cp_f_save button" }
             ],

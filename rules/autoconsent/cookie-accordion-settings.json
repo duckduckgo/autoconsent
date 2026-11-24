@@ -1,0 +1,56 @@
+{
+    "name": "cookie-accordion-settings",
+    "vendorUrl": "https://unknown",
+    "prehideSelectors": [".cookie.cookie--open"],
+    "detectCmp": [
+        {
+            "exists": ".cookie .cookie__settings .cookie__save-settings"
+        },
+        {
+            "exists": ".cookie .cookie__open-settings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie.cookie--open .cookie__open-settings"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie.cookie--open .cookie__accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie.cookie--open .cookie__open-settings"
+        },
+        {
+            "waitForVisible": ".cookie .cookie__settings .cookie__save-settings"
+        },
+        {
+            "if": {
+                "visible": ".cookie .cookie__settings .cookie__decline-all"
+            },
+            "then": [
+                {
+                    "click": ".cookie .cookie__settings .cookie__decline-all"
+                }
+            ],
+            "else": [
+                {
+                    "click": ".cookie .cookie__settings input.switch-toggler__checkbox:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".cookie .cookie__settings .cookie__save-settings"
+                }
+            ]
+        },
+        {
+            "waitForVisible": ".cookie .cookie__open-settings",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}

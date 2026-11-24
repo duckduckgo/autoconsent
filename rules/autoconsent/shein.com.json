@@ -7,27 +7,62 @@
     "prehideSelectors": ["body > div[class*=_shein_privacy]"],
     "detectCmp": [
         {
-            "exists": "body > div[class*=_shein_privacy] > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(3)"
+            "exists": "body > div[class*=_shein_privacy_agreement] .cmp_c_1102 > .cmp_c_1"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[class*=_shein_privacy] > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(3)"
+            "visible": "body > div[class*=_shein_privacy_agreement] .cmp_c_1102 > .cmp_c_1"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "body > div[class*=_shein_privacy] > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(2)"
+            "waitForThenClick": "body > div[class*=_shein_privacy_agreement] .cmp_c_1102 > .cmp_c_2"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "body > div[class*=_shein_privacy] > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(3)"
+            "if": {
+                "visible": "body > div[class*=_shein_privacy_agreement] .cmp_c_1102 > .cmp_c_3"
+            },
+            "then": [
+                {
+                    "click": "body > div[class*=_shein_privacy_agreement] .cmp_c_1102 > .cmp_c_3"
+                }
+            ],
+            "else": [
+                {
+                    "click": "body > div[class*=_shein_privacy_agreement] .cmp_c_1102 > .cmp_c_1"
+                },
+                {
+                    "waitForVisible": "body > div[class*=_shein_privacy_preference] .cmp_c_1204"
+                },
+                {
+                    "if": {
+                        "visible": "body > div[class*=_shein_privacy_preference] .cmp_c_1204 > .cmp_c_3"
+                    },
+                    "then": [
+                        {
+                            "click": "body > div[class*=_shein_privacy_preference] .cmp_c_1204 > .cmp_c_3"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": "body > div[class*=_shein_privacy_preference] label:has(> input:checked) > .slider",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "click": "body > div[class*=_shein_privacy_preference] .cmp_c_1204 > .cmp_c_5"
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div[class*=_shein_privacy] > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(3)",
+            "waitForVisible": "body > div[class*=_shein_privacy] .cmp_c_1102 > .cmp_c_1",
             "timeout": 1000,
             "check": "none"
         }

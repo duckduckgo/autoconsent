@@ -1,0 +1,42 @@
+{
+    "name": "kiwi.com",
+    "vendorUrl": "https://www.kiwi.com/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kiwi\\.com/"
+    },
+    "prehideSelectors": ["#cookie_consent"],
+    "detectCmp": [
+        {
+            "exists": "#cookie_consent #cookies_accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_consent [role=dialog]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_consent #cookies_accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie_consent [data-test=ModalCloseButton]",
+            "retry": 5,
+            "retryInterval": 1000
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie_consent [role=dialog]",
+            "check": "none",
+            "timeout": 3000
+        },
+        {
+            "cookieContains": "__kwc_agreed=false"
+        }
+    ]
+}

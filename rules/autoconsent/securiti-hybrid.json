@@ -1,0 +1,30 @@
+{
+    "name": "securiti-hybrid",
+    "vendorUrl": "https://securiti.ai/",
+    "prehideSelectors": [".cc-type-hybrid[aria-describedby=\"cookieconsent:desc\"]"],
+    "detectCmp": [{ "exists": ".cc-type-hybrid[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible) .cmp-pref-link" }],
+    "detectPopup": [{ "visible": ".cc-type-hybrid[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible)" }],
+    "optIn": [{ "waitForThenClick": ".cc-type-hybrid[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible) .cc-allow" }],
+    "optOut": [
+        {
+            "if": { "visible": ".cc-type-hybrid[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible) .cc-deny" },
+            "then": [{ "click": ".cc-type-hybrid[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible) .cc-deny" }],
+            "else": [
+                {
+                    "comment": "the preferences link is often hidden in the banner, but still opens the preference center",
+                    "click": ".cc-type-hybrid[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible) .cmp-pref-link"
+                },
+                { "waitForVisible": ".cmp-body .cmp-save-btn" },
+                {
+                    "if": { "visible": ".cmp-body [id*=rejectAll]" },
+                    "then": [{ "click": ".cmp-body [id*=rejectAll]" }],
+                    "else": [{ "click": ".cmp-body input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true }]
+                },
+                {
+                    "comment": "some sites reload the page after saving, so this must be the last step",
+                    "click": ".cmp-body .cmp-save-btn"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "name": "dijklander",
+    "vendorUrl": "https://www.dijklander.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?dijklander\\.nl/"
+    },
+    "prehideSelectors": [".custom-cookiebar"],
+    "detectCmp": [{ "exists": ".custom-cookiebar .custom-cookiebar__link" }],
+    "detectPopup": [{ "visible": ".custom-cookiebar" }],
+    "optIn": [{ "waitForThenClick": ".custom-cookiebar .custom-cookiebar__link" }],
+    "optOut": [
+        {
+            "waitForThenClick": ".custom-cookiebar .custom-cookiebar__link",
+            "comment": "Notice only: the site uses only functional and anonymised analytics cookies"
+        }
+    ],
+    "test": [{ "waitForVisible": ".custom-cookiebar", "check": "none", "timeout": 2000 }]
+}

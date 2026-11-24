@@ -1,0 +1,28 @@
+{
+    "name": "marriott-notice",
+    "vendorUrl": "https://www.marriott.com/",
+    "prehideSelectors": ["#notice-popup"],
+    "detectCmp": [{ "exists": "#notice-popup #close-btn-notice, #notice-popup #close-btn-universal" }],
+    "detectPopup": [{ "visible": "#notice-popup .notice.show", "check": "any" }],
+    "optIn": [
+        {
+            "if": { "visible": "#close-btn-universal" },
+            "then": [{ "click": "#close-btn-universal" }]
+        },
+        {
+            "if": { "visible": "#close-btn-notice" },
+            "then": [{ "click": "#close-btn-notice" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": "#close-btn-universal" },
+            "then": [{ "click": "#close-btn-universal" }]
+        },
+        {
+            "if": { "visible": "#close-btn-notice" },
+            "then": [{ "click": "#close-btn-notice" }]
+        }
+    ],
+    "test": [{ "waitForVisible": "#notice-popup .notice", "check": "none", "timeout": 2000 }]
+}

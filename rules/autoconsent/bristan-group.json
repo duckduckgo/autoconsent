@@ -1,0 +1,58 @@
+{
+    "name": "bristan-group",
+    "vendorUrl": "https://www.bristan.com/",
+    "prehideSelectors": [".cookie-banner:has(.cookie-banner--content-basic)"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-banner .cookie-banner--content-basic"
+        },
+        {
+            "exists": ".cookie-banner #btn-necessary-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-banner.active #btn-necessary-cookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner #submit-cookie"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-banner #btn-necessary-cookie"
+        },
+        {
+            "waitForVisible": ".cookie-banner.active",
+            "check": "none",
+            "timeout": 1000,
+            "optional": true
+        },
+        {
+            "comment": "older script versions throw in the necessary-cookies handler before closing the banner",
+            "if": {
+                "exists": ".cookie-banner.active"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cookie-banner #btn-customize-cookie"
+                },
+                {
+                    "waitForThenClick": ".cookie-banner #btn-update-cookie-popup"
+                }
+            ]
+        },
+        {
+            "waitForVisible": ".cookie-banner.active",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".cookie-banner.active",
+            "check": "none"
+        }
+    ]
+}

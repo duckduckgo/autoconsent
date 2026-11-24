@@ -1,0 +1,52 @@
+{
+    "name": "autotrader-za",
+    "vendorUrl": "https://www.autotrader.co.za/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?autotrader\\.co\\.za/"
+    },
+    "prehideSelectors": ["#cookieBanner"],
+    "detectCmp": [
+        {
+            "exists": "#cookieBanner [class*='b-cookie-notice-banner__']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieBanner [class*='b-cookie-notice-banner__']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieBanner [class*='e-buttons__'] button:not([class*='m-outline__'])"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieBanner [class*='e-buttons__'] button[class*='m-outline__']"
+        },
+        {
+            "waitForVisible": "[class*='b-settings__'] [class*='e-button-container__'] button"
+        },
+        {
+            "if": {
+                "exists": "[class*='b-settings__'] [class*='e-checkbox__']:not([class*='m-unchecked__'])"
+            },
+            "then": [
+                {
+                    "click": "[class*='b-settings__'] [class*='e-checkbox__']:not([class*='m-unchecked__'])",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "[class*='b-settings__'] [class*='e-button-container__'] button",
+            "retry": 2,
+            "retryInterval": 1500
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22AdConsentGiven%22%3Afalse"
+        }
+    ]
+}

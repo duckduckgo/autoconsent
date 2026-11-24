@@ -1,0 +1,25 @@
+{
+    "name": "niceshops",
+    "vendorUrl": "https://www.niceshops.com/",
+    "prehideSelectors": ["[is=tracking-consent] form.tc-banner"],
+    "detectCmp": [
+        {
+            "exists": "[is=tracking-consent] form.tc-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[is=tracking-consent] form.tc-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[is=tracking-consent] button[name=tracking_command][value=consent_all]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[is=tracking-consent] button[name=tracking_command][value=deny_all]"
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "name": "doc-du-juriste",
+    "vendorUrl": "https://www.doc-du-juriste.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?doc-du-juriste\\.com/"
+    },
+    "prehideSelectors": [".privacy_policy_sec"],
+    "detectCmp": [
+        {
+            "exists": ".privacy_policy_sec .cookieinfocustom"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".privacy_policy_sec .cookieinfocustom"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".privacy_policy_sec .cookieinfoact"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".privacy_policy_sec .cookieinfocustom"
+        },
+        {
+            "waitForThenClick": "#cookiemodal .refuse_all_cookie"
+        },
+        {
+            "waitForThenClick": "#cookiemodal .acceptchoices"
+        },
+        {
+            "waitForVisible": "#cookiemodal",
+            "check": "none",
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_cookie_ads=0"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "name": "mblock",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://ide\\.mblock\\.cc/"
+    },
+    "prehideSelectors": [".privacy-license-bar"],
+    "detectCmp": [
+        {
+            "exists": ".privacy-license-bar .privacy-btn-wrapper"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".privacy-license-bar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".privacy-license-bar .privacy-btn-wrapper button:last-child"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".privacy-license-bar"
+        }
+    ]
+}

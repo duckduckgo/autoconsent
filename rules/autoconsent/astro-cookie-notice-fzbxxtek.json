@@ -1,0 +1,25 @@
+{
+    "name": "astro-cookie-notice-fzbxxtek",
+    "cosmetic": true,
+    "prehideSelectors": ["div[role=\"region\"][aria-label=\"Cookie notice\"][data-astro-cid-fzbxxtek]"],
+    "detectCmp": [
+        {
+            "exists": "div[role=\"region\"][aria-label=\"Cookie notice\"][data-astro-cid-fzbxxtek] > button[data-astro-cid-fzbxxtek]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[role=\"region\"][aria-label=\"Cookie notice\"][data-astro-cid-fzbxxtek]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[role=\"region\"][aria-label=\"Cookie notice\"][data-astro-cid-fzbxxtek] > button[data-astro-cid-fzbxxtek]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "div[role=\"region\"][aria-label=\"Cookie notice\"][data-astro-cid-fzbxxtek]"
+        }
+    ]
+}

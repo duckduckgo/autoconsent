@@ -1,0 +1,35 @@
+{
+    "name": "cookiefooter-tocookiesave",
+    "prehideSelectors": ["#cookieFooter"],
+    "detectCmp": [
+        {
+            "exists": "#cookieFooter .CookieButton[onclick*='toCookieOpen']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieFooter"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieFooter .CookieButton[onclick*='toCookieSave(9)']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieFooter .CookieButton[onclick*='toCookieOpen']"
+        },
+        {
+            "waitForVisible": "#cookieBox"
+        },
+        {
+            "click": "#cookieBox input.Cookie:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#cookieBox .CookieButton[onclick*='toCookieSave(1)']"
+        }
+    ]
+}

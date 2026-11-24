@@ -1,0 +1,21 @@
+{
+    "name": "vivo-vcm",
+    "prehideSelectors": ["#vcm-v-banner-sdk", "#vcm-v-mask-sdk"],
+    "detectCmp": [{ "exists": "#vcm-v-consent-sdk #vcm-v-banner-sdk" }],
+    "detectPopup": [{ "visible": "#vcm-v-banner-sdk" }],
+    "optIn": [
+        {
+            "if": { "exists": "#vcm-v-group-accept" },
+            "then": [{ "waitForThenClick": "#vcm-v-group-accept" }],
+            "else": [{ "waitForThenClick": "#vcm-v-close-btn" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#vcm-v-group-reject" },
+            "then": [{ "waitForThenClick": "#vcm-v-group-reject" }],
+            "else": [{ "waitForThenClick": "#vcm-v-close-btn" }]
+        }
+    ],
+    "test": [{ "waitForVisible": "#vcm-v-banner-sdk", "check": "none", "timeout": 1000 }]
+}

@@ -1,0 +1,40 @@
+{
+    "name": "oresundstag",
+    "_metadata": {
+        "vendorUrl": "https://www.oresundstag.se/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?oresundstag\\.se/"
+    },
+    "prehideSelectors": ["#consent-manager-modal"],
+    "detectCmp": [
+        {
+            "exists": "#consent-manager-modal #cookies-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent-manager-modal [role=dialog]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consent-manager-modal [class*=modal_buttons] button[type=button]"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#cookies-consent label[role=checkbox]:has(input:checked)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#consent-manager-modal [class*=modal_buttons] button[type=submit]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"analytics\":false"
+        }
+    ]
+}

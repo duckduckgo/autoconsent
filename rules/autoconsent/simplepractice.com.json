@@ -1,0 +1,60 @@
+{
+    "name": "simplepractice.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?simplepractice\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent[role=dialog]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent[role=dialog]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-consent[role=dialog] .cta--button_primary-sun"
+        }
+    ],
+    "optOut": [
+        {
+            "waitFor": ".dg-consent-banner",
+            "timeout": 10000
+        },
+        {
+            "waitForThenClick": ".cookie-consent[role=dialog] button[class*=cta--button_tertiary]"
+        },
+        {
+            "waitForVisible": [".dg-consent-banner", ".dg-app"]
+        },
+        {
+            "click": [".dg-consent-banner", "#dg-category-functional:checked"],
+            "optional": true
+        },
+        {
+            "click": [".dg-consent-banner", "#dg-category-performance:checked"],
+            "optional": true
+        },
+        {
+            "click": [".dg-consent-banner", "#dg-category-marketing:checked"],
+            "optional": true
+        },
+        {
+            "waitForThenClick": [".dg-consent-banner", "button.dg-button.custom"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "dg-category-functional:0"
+        },
+        {
+            "cookieContains": "dg-category-marketing:0"
+        },
+        {
+            "cookieContains": "dg-category-performance:0"
+        }
+    ]
+}

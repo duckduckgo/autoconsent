@@ -1,0 +1,50 @@
+{
+    "name": "reuma.nl",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?reuma\\.nl/"
+    },
+    "prehideSelectors": [".cookiebar"],
+    "detectCmp": [
+        {
+            "exists": ".cookiebar .cookiebar__button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookiebar .cookiebar__button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookiebar .cookiebar__button"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".cookiebar .cookiebar__link"
+            },
+            "then": [
+                {
+                    "click": ".cookiebar .cookiebar__link"
+                }
+            ]
+        },
+        {
+            "waitFor": ".cookiebar .cookiebar__form input[type=checkbox]"
+        },
+        {
+            "click": ".cookiebar .cookiebar__form input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".cookiebar .cookiebar__button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_consent_video=no"
+        }
+    ]
+}

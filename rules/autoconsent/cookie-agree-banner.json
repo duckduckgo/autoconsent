@@ -1,0 +1,9 @@
+{
+    "name": "cookie-agree-banner",
+    "cosmetic": true,
+    "prehideSelectors": [".cookie-consent:has(> .cookie-text + .cookie-agree:last-child)"],
+    "detectCmp": [{ "exists": ".cookie-consent > .cookie-text + .cookie-agree:last-child" }],
+    "detectPopup": [{ "visible": ".cookie-consent > .cookie-text + .cookie-agree:last-child" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent > .cookie-text + .cookie-agree:last-child" }],
+    "optOut": [{ "hide": ".cookie-consent:has(> .cookie-text + .cookie-agree:last-child)" }]
+}

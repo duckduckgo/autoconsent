@@ -1,0 +1,66 @@
+{
+    "name": "comparandonos",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?comparandonos\\.com/"
+    },
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner #customizeCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner #acceptCookies"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-banner #customizeCookies"
+        },
+        {
+            "waitForVisible": "#cookie-settings #saveCookies"
+        },
+        {
+            "if": {
+                "exists": "#analytics-cookies:checked"
+            },
+            "then": [
+                {
+                    "click": "#analytics-cookies"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#marketing-cookies:checked"
+            },
+            "then": [
+                {
+                    "click": "#marketing-cookies"
+                }
+            ]
+        },
+        {
+            "click": "#cookie-settings #saveCookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie-settings",
+            "timeout": 1000,
+            "check": "none"
+        },
+        {
+            "visible": "#cookie-banner",
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "name": "albelli-photobox",
+    "vendorUrl": "https://www.albelli.nl/",
+    "cosmetic": false,
+    "prehideSelectors": [".cookie-consent-modal"],
+    "detectCmp": [{ "exists": ".cookie-consent-modal [data-cy=cookie-consent-accept-all-button]" }],
+    "detectPopup": [{ "visible": ".cookie-consent-modal [data-cy=cookie-consent-accept-all-button]" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent-modal [data-cy=cookie-consent-accept-all-button]" }],
+    "optOut": [
+        {
+            "if": { "visible": ".cookie-consent-modal [data-cy=cookie-consent-reject-button]" },
+            "then": [{ "waitForThenClick": ".cookie-consent-modal [data-cy=cookie-consent-reject-button]" }],
+            "else": [
+                {
+                    "if": { "visible": ".cookie-consent-modal [data-cy=cookie-consent-manage-settings]" },
+                    "then": [{ "waitForThenClick": ".cookie-consent-modal [data-cy=cookie-consent-manage-settings]" }],
+                    "else": [{ "waitForThenClick": ".cookie-consent-modal [data-cy=cookie-consent-manage-settingsFR]" }]
+                },
+                { "waitForVisible": ".cookie-consent-modal [data-cy=cookie-consent-accept-selected-button]" },
+                {
+                    "click": ".cookie-consent-modal .cookie-selection.--full input[type=checkbox]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": ".cookie-consent-modal [data-cy=cookie-consent-accept-selected-button]" }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [{ "cookieContains": "cookie_consent=00" }, { "cookieContains": "cookie_consent=10" }]
+        }
+    ]
+}

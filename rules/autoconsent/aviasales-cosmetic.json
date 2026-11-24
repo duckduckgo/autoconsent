@@ -1,0 +1,39 @@
+{
+    "name": "aviasales-cosmetic",
+    "vendorUrl": "https://www.aviasales.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?aviasales\\.[a-z]+/"
+    },
+    "prehideSelectors": ["div:has(> div > [data-test-id=\"accept-cookies-button\"])"],
+    "detectCmp": [
+        {
+            "exists": "[data-test-id=\"accept-cookies-button\"]"
+        },
+        {
+            "exists": "div:has(> [data-test-id=\"accept-cookies-button\"]) a[data-test-id=\"link\"]:not([href])",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-test-id=\"accept-cookies-button\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-test-id=\"accept-cookies-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "div:has(> div > [data-test-id=\"accept-cookies-button\"])"
+        }
+    ],
+    "test": [
+        {
+            "visible": "[data-test-id=\"accept-cookies-button\"]",
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "name": "reviq",
+    "vendorUrl": "https://rev.iq/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ["[data-reviq-cmp=host]", "[data-reviq-cmp=banner]"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["[data-reviq-cmp=host]", "[data-reviq-cmp=first-layer] [data-reviq-cmp=banner]"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["[data-reviq-cmp=host]", "[data-reviq-cmp=banner] [data-cmp-action=accept]"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ["[data-reviq-cmp=host]", "[data-reviq-cmp=banner] [data-cmp-action=reject]"]
+            },
+            "then": [
+                {
+                    "click": ["[data-reviq-cmp=host]", "[data-reviq-cmp=banner] [data-cmp-action=reject]"]
+                }
+            ],
+            "else": [
+                {
+                    "click": ["[data-reviq-cmp=host]", "[data-reviq-cmp=banner] [data-cmp-action=customize]"]
+                },
+                {
+                    "waitForThenClick": ["[data-reviq-cmp=host]", "[data-reviq-cmp=overlay] [data-cmp-action=reject]"]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["[data-reviq-cmp=host]", "[data-reviq-cmp=first-layer] [data-reviq-cmp=banner]"],
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

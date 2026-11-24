@@ -6,4 +6,6 @@ generateCMPTests('stellantis-psa', [
     'https://www.fiat.it/',
     'https://www.opel.de/',
     'https://www.citroen.co.uk/',
+    'https://www.stellantisandyou.com/fr',
+    'https://www.stellantisandyou.com/es',
 ]);

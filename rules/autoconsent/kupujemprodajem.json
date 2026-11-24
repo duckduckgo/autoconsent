@@ -1,0 +1,31 @@
+{
+    "name": "kupujemprodajem",
+    "vendorUrl": "https://kupujemprodajem.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?kupujemprodajem\\.com/"
+    },
+    "prehideSelectors": [
+        "#__next div:has(> div > div > div > p > a[href=\"/polisa-o-postovanju-privatnosti\"]):has(button[aria-label=\"Prihvatam\"]), #__next section[class*=\"_consentHolder\"]"
+    ],
+    "detectCmp": [
+        {
+            "exists": "#__next div:has(> div > div > div > p > a[href=\"/polisa-o-postovanju-privatnosti\"]):has(button[aria-label=\"Prihvatam\"]), #__next section[class*=\"_consentHolder\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#__next div:has(> div > div > div > p > a[href=\"/polisa-o-postovanju-privatnosti\"]):has(button[aria-label=\"Prihvatam\"]), #__next section[class*=\"_consentHolder\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#__next button[aria-label=\"Prihvatam\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#__next div:has(> div > div > div > p > a[href=\"/polisa-o-postovanju-privatnosti\"]):has(button[aria-label=\"Prihvatam\"]), #__next section[class*=\"_consentHolder\"]"
+        }
+    ]
+}

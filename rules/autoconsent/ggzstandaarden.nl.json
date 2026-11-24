@@ -1,0 +1,13 @@
+{
+    "name": "ggzstandaarden.nl",
+    "vendorUrl": "https://www.ggzstandaarden.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?ggzstandaarden\\.nl/"
+    },
+    "prehideSelectors": [".cookie-consent-popup"],
+    "detectCmp": [{ "exists": ".cookie-consent-popup .cookie-consent-popup__decline-button" }],
+    "detectPopup": [{ "visible": ".cookie-consent-popup .cookie-consent-popup__decline-button" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent-popup .cookie-consent-popup__approve-button" }],
+    "optOut": [{ "waitForThenClick": ".cookie-consent-popup .cookie-consent-popup__decline-button" }],
+    "test": [{ "cookieContains": "cookie_consent_acquired=false" }]
+}

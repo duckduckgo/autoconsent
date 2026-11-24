@@ -1,0 +1,26 @@
+{
+    "name": "1fichier",
+    "vendorUrl": "https://1fichier.com/",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookie_box:has(a[href=\"https://1fichier.com/cgu.html\"])"],
+    "detectCmp": [
+        {
+            "exists": "#cookie_box a[href=\"https://1fichier.com/cgu.html\"] ~ a.cookie_box_close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_box"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_box a.cookie_box_close"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookie_box"
+        }
+    ]
+}

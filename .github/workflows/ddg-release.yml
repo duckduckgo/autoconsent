@@ -103,6 +103,7 @@ jobs:
                   ASANA_ACCESS_TOKEN: ${{ secrets.ASANA_ACCESS_TOKEN }}
                   PLATFORM_ANDROID: ${{ inputs.android }}
                   PLATFORM_APPLE: ${{ inputs.apple || inputs.apple_embedded }}
+                  PLATFORM_APPLE_EMBEDDED: ${{ inputs.apple_embedded }}
                   PLATFORM_WINDOWS: ${{ inputs.windows }}
                   PLATFORM_EXTENSION: ${{ inputs.extension || inputs.apple_embedded }}
               run: |
@@ -138,7 +139,8 @@ jobs:
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
             - uses: actions/setup-node@v3
               with:
-                  node-version: current
+                  # the Android repo has no .nvmrc, so use our own pinned Node version
+                  node-version-file: autoconsent/.node-version
             - name: Update Android autoconsent reference
               run: |
                   cd android
@@ -200,7 +202,8 @@ jobs:
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
             - uses: actions/setup-node@v3
               with:
-                  node-version: current
+                  # use the app's own Node version, to avoid package.lock inconsistencies
+                  node-version-file: apple-monorepo/.nvmrc
             - name: Update autoconsent version
               run: |
                   cd apple-monorepo/
@@ -241,8 +244,9 @@ jobs:
                   branch: update-autoconsent
                   title: Update autoconsent to ${{ env.TAG }}
                   body: '${{ env.PR_BODY_APPLE }}'
-                  # the PR will be marked ready when the extension PR is merged
+                  # the PR will be marked ready and unlabelled when the extension PR is merged
                   draft: ${{ inputs.apple_embedded }}
+                  labels: ${{ inputs.apple_embedded && 'DO NOT MERGE' || '' }}
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
 
     # ------------------------------------------------------------------------------
@@ -274,7 +278,8 @@ jobs:
                   token: ${{ secrets.DAX_WEB_AUTOFILL_AUTOMATION }}
             - uses: actions/setup-node@v3
               with:
-                  node-version: current
+                  # use the app's own Node version, to avoid package.lock inconsistencies
+                  node-version-file: windows/.nvmrc
             - name: Update Windows autoconsent reference
               run: |
                   cd windows/WindowsBrowser/Application/Autoconsent/External

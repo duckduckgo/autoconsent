@@ -1,0 +1,42 @@
+{
+    "name": "vogue.nl",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?vogue\\.nl/"
+    },
+    "prehideSelectors": ["dialog.cm-banner"],
+    "detectCmp": [
+        {
+            "exists": "dialog.cm-banner .cm-actions"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog.cm-banner[open]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///dialog[contains(@class,'cm-banner')]//div[contains(@class,'cm-actions')]/button[normalize-space()='Accepteer alles']"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "dialog.cm-banner .cm-actions .cm-btn--outline"
+            },
+            "then": [
+                {
+                    "click": "dialog.cm-banner .cm-actions .cm-btn--outline"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "xpath///dialog[contains(@class,'cm-banner')]//div[contains(@class,'cm-actions')]/button[normalize-space()='Weiger alles']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cm_consent_v3=necessary|"
+        }
+    ]
+}

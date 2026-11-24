@@ -1,0 +1,30 @@
+{
+    "name": "intermedia-cms-fsi",
+    "vendorUrl": "https://i.media.pl/",
+    "prehideSelectors": ["#stopka-polityka"],
+    "detectCmp": [
+        {
+            "exists": "#stopka-polityka #stopka-polityka-zamknij"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#stopka-polityka"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#stopka-polityka-zamknij"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#stopka-polityka-zamknij"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "prywatnosc=tak"
+        }
+    ]
+}

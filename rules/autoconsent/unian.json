@@ -1,0 +1,34 @@
+{
+    "name": "unian",
+    "vendorUrl": "https://www.unian.net",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?unian\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#langModal .lang-modal__text"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#langModal .lang-modal__text"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#langModal .lang-modal__content > .lang-modal__close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#langModal .lang-modal__content > .lang-modal__close"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#langModal .lang-modal__text",
+            "check": "none"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "name": "banamex",
+    "vendorUrl": "https://www.banamex.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?banamex\\.com/"
+    },
+    "prehideSelectors": ["cmp-cookie-bar"],
+    "detectCmp": [{ "exists": "cmp-cookie-bar.initialized" }],
+    "detectPopup": [{ "exists": "cmp-cookie-bar.initialized" }, { "cookieContains": "Cookie-Control=", "negated": true }],
+    "optIn": [{ "waitForThenClick": ["cmp-cookie-bar", "button.cmp-cookie-bar-close"] }],
+    "optOut": [{ "waitForThenClick": ["cmp-cookie-bar", "button.cmp-cookie-bar-close"] }],
+    "test": [{ "cookieContains": "Cookie-Control=notified" }]
+}

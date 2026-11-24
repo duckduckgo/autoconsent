@@ -1,0 +1,60 @@
+{
+    "name": "omroepflevoland",
+    "vendorUrl": "https://www.omroepflevoland.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?omroepflevoland\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".fn-cookiewall-container, .fn-cookiewall-banner-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".fn-cookiewall-container, .fn-cookiewall-banner-container",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "visible": ".fn-cookiewall-container" },
+            "then": [
+                { "click": ".fn-cookiewall-container .cookiewall--accept-btn" },
+                { "click": ".fn-cookiewall-container .cookiewall--pre-submit-btn" },
+                {
+                    "if": { "visible": ".fn-cookiewall-container .cookiewall--submit-btn" },
+                    "then": [{ "click": ".fn-cookiewall-container .cookiewall--submit-btn" }]
+                }
+            ]
+        },
+        {
+            "if": { "visible": ".fn-cookiewall-banner-container" },
+            "then": [{ "click": ".fn-cookiewall-banner-container .cookiewall-banner-close" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": ".fn-cookiewall-container" },
+            "then": [
+                { "click": ".fn-cookiewall-container .cookiewall--reject-btn" },
+                { "click": ".fn-cookiewall-container .cookiewall--pre-submit-btn" },
+                {
+                    "if": { "visible": ".fn-cookiewall-container .cookiewall--submit-btn" },
+                    "then": [{ "click": ".fn-cookiewall-container .cookiewall--submit-btn" }]
+                }
+            ]
+        },
+        {
+            "if": { "visible": ".fn-cookiewall-banner-container" },
+            "then": [{ "click": ".fn-cookiewall-banner-container .cookiewall-banner-close" }]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".fn-cookiewall-container, .fn-cookiewall-banner-container",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

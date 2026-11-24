@@ -1,3 +1,3 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('blocksy', ['https://newsweb.pl/', 'https://allcitynetwork.com/']);
+generateCMPTests('blocksy', ['https://apkmos.com/', 'https://fitnessgrit.com/']);

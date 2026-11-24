@@ -1,6 +1,6 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('facebook', ['https://facebook.com/'], {
+generateCMPTests('facebook', ['https://facebook.com/', 'https://www.facebook.com/friends'], {
     skipRegions: ['US'],
 });
 
