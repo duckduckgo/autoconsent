@@ -1,0 +1,10 @@
+{
+    "name": "rocket-cookie-consent-dialog",
+    "vendorUrl": "https://www.rocketmortgage.com/",
+    "cosmetic": true,
+    "prehideSelectors": ["cookie-consent-dialog"],
+    "detectCmp": [{ "exists": ["cookie-consent-dialog", "#cookie-consent-dialog-description"] }],
+    "detectPopup": [{ "visible": ["cookie-consent-dialog", "[role=dialog][aria-labelledby=cookie-consent-dialog-description]"] }],
+    "optIn": [{ "hide": "cookie-consent-dialog" }],
+    "optOut": [{ "hide": "cookie-consent-dialog" }]
+}
