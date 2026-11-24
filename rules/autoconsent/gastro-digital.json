@@ -1,0 +1,43 @@
+{
+    "name": "gastro-digital",
+    "vendorUrl": "https://www.gastro.digital/",
+    "prehideSelectors": ["#app-cookie-bar"],
+    "detectCmp": [{ "exists": "#app-cookie-bar .cookie-section .ion-toggle" }],
+    "detectPopup": [{ "visible": "#app-cookie-bar" }],
+    "optIn": [{ "waitForThenClick": "#app-cookie-bar .toast-modal button[onclick*='saveCookieSettings']" }],
+    "optOut": [
+        { "waitForThenClick": "#app-cookie-bar .toast-modal button[onclick*='page-modal']" },
+        { "waitForVisible": "#app-cookie-bar .page-modal" },
+        {
+            "if": { "exists": "#app-cookie-bar .cookie-section .ion-toggle.on:not(.disabled)" },
+            "then": [{ "click": "#app-cookie-bar .cookie-section .ion-toggle.on:not(.disabled)", "all": true }]
+        },
+        { "waitForThenClick": "#app-cookie-bar .page-modal button[onclick='saveCookieSettings()']" },
+        {
+            "if": { "exists": "script[src*='pagead2.googlesyndication.com/pagead/js/adsbygoogle.js']" },
+            "then": [
+                { "waitFor": ".fc-consent-root .fc-dialog-container", "timeout": 8000, "optional": true },
+                {
+                    "if": { "exists": ".fc-consent-root .fc-dialog-container" },
+                    "then": [
+                        {
+                            "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                            "then": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }],
+                            "else": [{ "exists": ".fc-li-only-placeholder", "optional": true }]
+                        },
+                        {
+                            "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "click": ".fc-confirm-choices", "optional": true }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        { "visible": "#app-cookie-bar", "check": "none" },
+        { "waitForVisible": ".fc-consent-root .fc-dialog-container", "check": "none", "timeout": 2000 }
+    ]
+}
