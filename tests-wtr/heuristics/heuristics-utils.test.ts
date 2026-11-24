@@ -412,6 +412,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
         const texts = [
             'We have cookies! Read our privacy policy',
             'No tracking will occur without your consent. You can revoke your consent at any time.',
+            'We use optional analytics only with your consent. You can change or withdraw your choice at any time in Cookie settings.',
             'Du kannst deine Einwilligung jederzeit widerrufen.',
             'We use privacy-friendly analytics to see which health guides are most useful. No ads, no profiling.',
             'We use Google Analytics to count page views and monthly active users. It sets a cookie and, when you are signed in, records your account id.',
