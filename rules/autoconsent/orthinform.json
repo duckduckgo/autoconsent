@@ -1,0 +1,37 @@
+{
+    "name": "orthinform.de",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?orthinform\\.de/"
+    },
+    "prehideSelectors": ["#cookie"],
+    "detectCmp": [
+        {
+            "exists": "#cookie a.close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie a.close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie a.close"
+        },
+        {
+            "waitForVisible": "#cookie",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookie",
+            "check": "none"
+        }
+    ]
+}
