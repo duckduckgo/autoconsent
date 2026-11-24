@@ -1,0 +1,18 @@
+{
+    "name": "tourradar",
+    "_metadata": {
+        "vendorUrl": "https://www.tourradar.com/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tourradar\\.(com|de|fr)/"
+    },
+    "prehideSelectors": ["#cookie-notification[data-cookie-name='cn_status']"],
+    "detectCmp": [{ "exists": "#cookie-notification[data-cookie-name='cn_status']" }],
+    "detectPopup": [{ "visible": "#cookie-notification[data-cookie-name='cn_status']" }],
+    "optIn": [{ "eval": "EVAL_TOURRADAR_1" }],
+    "optOut": [{ "eval": "EVAL_TOURRADAR_0" }],
+    "test": [{ "cookieContains": "cn_status=0" }]
+}

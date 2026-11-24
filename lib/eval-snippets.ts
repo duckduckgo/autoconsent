@@ -285,6 +285,21 @@ export const snippets = {
     EVAL_TESTCMP_STEP: () => !!document.querySelector('#reject-all'),
     EVAL_TESTCMP_0: () => window.results.results[0] === 'button_clicked',
     EVAL_TESTCMP_COSMETIC_0: () => window.results.results[0] === 'banner_hidden',
+    // banner buttons only react to mousedown after a user interaction, so store the choice the way the banner does
+    EVAL_TOURRADAR_0: () => {
+        const banner = document.querySelector('#cookie-notification');
+        document.cookie = `${banner.dataset.cookieName}=0; max-age=${banner.dataset.cookieTime}; path=/`;
+        fetch('/utils/cookie_agree', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' } });
+        banner.remove();
+        return true;
+    },
+    EVAL_TOURRADAR_1: () => {
+        const banner = document.querySelector('#cookie-notification');
+        document.cookie = `${banner.dataset.cookieName}=1; max-age=${banner.dataset.cookieTime}; path=/`;
+        fetch('/utils/cookie_agree', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' } });
+        banner.remove();
+        return true;
+    },
     // Same handler the banner buttons call; which button refuses differs per template.
     EVAL_TRUSTCOMMANDER_BANNER_SHOWN: () => {
         const wrapper = document.getElementById('tc-privacy-wrapper');
