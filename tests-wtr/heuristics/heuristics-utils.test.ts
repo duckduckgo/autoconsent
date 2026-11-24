@@ -409,6 +409,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Allow cookies? We use them to measure traffic.',
             'We use a cookie to remember you are 18+ and keep your preferences on this device.',
             'Continue without accepting\nProtecting your privacy is our priority',
+            'Choose between essential cookies that are required for the site to work or all cookies, including non-essential ones.',
         ]);
     });
 
@@ -443,6 +444,8 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'We use data analytics tools in our consulting work',
             'We use the best chocolate in our cookies',
             'Continue without signing in',
+            'Choose between chocolate or oatmeal cookies for the party.',
+            'JavaScript is required for the site to work.',
         ]);
     });
 });

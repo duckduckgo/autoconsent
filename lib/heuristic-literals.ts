@@ -59,6 +59,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     [" consenso"],
     ["accept or "],
     ["continue without accepting"],
+    ["cookies "],
     ["utilisons"],
     ["cookies"],
     ["consentement"],

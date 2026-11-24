@@ -93,6 +93,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\baccept or (?:reject|decline) (?:all |optional |non-essential )?cookies\b/gi,
     // the consent choice itself, as in FR/IT/ES: "continuer sans accepter"
     /\bcontinue without accepting\b/gi,
+    // "choose between essential cookies that are required for the site to work or all cookies"
+    /\bcookies (?:that are )?(?:strictly )?(?:required|necessary|needed) for (?:the|this|our) (?:web)?site to (?:work|function)\b/gi,
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
