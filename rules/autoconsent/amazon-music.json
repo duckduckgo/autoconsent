@@ -5,9 +5,78 @@
         "urlPattern": "^https?://music\\.amazon\\.[a-z.]+/"
     },
     "prehideSelectors": ["#banner"],
-    "detectCmp": [{ "exists": "#banner #bannerFooter music-button" }],
-    "detectPopup": [{ "visible": "#banner #bannerFooter" }],
-    "optIn": [{ "waitForThenClick": ["#bannerFooter music-button[variant=solid]", "button"] }],
-    "optOut": [{ "waitForThenClick": ["#bannerFooter music-button[variant=outline]", "button"] }],
-    "test": [{ "waitForVisible": "#banner #bannerFooter", "check": "none", "timeout": 2000 }]
+    "detectCmp": [
+        {
+            "any": [
+                {
+                    "exists": "#banner #bannerFooter music-button"
+                },
+                {
+                    "exists": "div:has(> div[role=presentation]:first-child > button[data-testid=Button][aria-label*=cookie i]):has(> div[role=presentation]:nth-child(3):last-child > button[data-testid=Button][aria-label*=cookie i])"
+                }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                {
+                    "visible": "#banner #bannerFooter"
+                },
+                {
+                    "visible": "div:has(> div[role=presentation]:first-child > button[data-testid=Button][aria-label*=cookie i]):has(> div[role=presentation]:nth-child(3):last-child > button[data-testid=Button][aria-label*=cookie i])"
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#banner #bannerFooter music-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["#bannerFooter music-button[variant=solid]", "button"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "div:has(> div[role=presentation]:nth-child(3):last-child > button[data-testid=Button][aria-label*=cookie i]) > div[role=presentation]:first-child > button[data-testid=Button][aria-label*=cookie i]",
+                    "retry": 10,
+                    "retryInterval": 1000
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#banner #bannerFooter music-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["#bannerFooter music-button[variant=outline]", "button"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "div:has(> div[role=presentation]:first-child > button[data-testid=Button][aria-label*=cookie i]):has(> div[role=presentation]:nth-child(3):last-child > button[data-testid=Button][aria-label*=cookie i]) > div[role=presentation]:nth-child(2) > button[data-testid=Button]",
+                    "retry": 10,
+                    "retryInterval": 1000
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#banner #bannerFooter",
+            "check": "none",
+            "timeout": 2000
+        },
+        {
+            "waitForVisible": "div:has(> div[role=presentation]:first-child > button[data-testid=Button][aria-label*=cookie i]):has(> div[role=presentation]:nth-child(3):last-child > button[data-testid=Button][aria-label*=cookie i])",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
 }

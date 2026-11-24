@@ -6,36 +6,56 @@
         "main": true,
         "frame": false
     },
-    "prehideSelectors": [".consent-studio .cookie-banner", ".consent-studio .consent-banner"],
-    "detectCmp": [{ "exists": ".consent-studio [cs-role=consent-banner]" }],
-    "detectPopup": [{ "visible": ".consent-studio [cs-role=consent-banner]" }],
-    "optIn": [{ "waitForThenClick": ".consent-studio [cs-role=consent-banner] [data-cs-button=accept_all]" }],
+    "prehideSelectors": [
+        ".consent-studio .cookie-banner",
+        ".consent-studio .consent-banner",
+        "#cs-banner-host .cs-stack",
+        "#cs-banner-host .cs-overlay"
+    ],
+    "detectCmp": [{ "exists": ".consent-studio [cs-role=consent-banner], #cs-banner-host [cs-role=consent-banner]" }],
+    "detectPopup": [{ "visible": ".consent-studio [cs-role=consent-banner], #cs-banner-host [cs-role=consent-banner]", "check": "any" }],
+    "optIn": [
+        {
+            "if": { "exists": "#cs-banner-host [cs-role=consent-banner]" },
+            "then": [{ "waitForThenClick": "#cs-banner-host .cs-banner [cs-consent=all]" }],
+            "else": [{ "waitForThenClick": ".consent-studio [cs-role=consent-banner] [data-cs-button=accept_all]" }]
+        }
+    ],
     "optOut": [
         {
-            "if": { "visible": ".consent-studio [cs-role=consent-banner] [data-cs-button=reject_all]" },
-            "then": [{ "click": ".consent-studio [cs-role=consent-banner] [data-cs-button=reject_all]" }],
+            "if": { "exists": "#cs-banner-host [cs-role=consent-banner]" },
+            "then": [
+                { "waitForThenClick": "#cs-banner-host .cs-banner [cs-consent=reject]" },
+                { "waitForVisible": "#cs-banner-host [cs-role=consent-banner]", "check": "none" }
+            ],
             "else": [
                 {
-                    "if": { "visible": ".consent-studio [cs-role=consent-banner] [cs-consent=reject]", "check": "any" },
-                    "then": [{ "click": ".consent-studio [cs-role=consent-banner] [cs-consent=reject]" }],
+                    "if": { "visible": ".consent-studio [cs-role=consent-banner] [data-cs-button=reject_all]" },
+                    "then": [{ "click": ".consent-studio [cs-role=consent-banner] [data-cs-button=reject_all]" }],
                     "else": [
                         {
-                            "if": {
-                                "exists": ".consent-studio [cs-role=consent-banner] .cookie-banner__switch[aria-checked=true]:not([aria-disabled=true])"
-                            },
-                            "then": [
+                            "if": { "visible": ".consent-studio [cs-role=consent-banner] [cs-consent=reject]", "check": "any" },
+                            "then": [{ "click": ".consent-studio [cs-role=consent-banner] [cs-consent=reject]" }],
+                            "else": [
                                 {
-                                    "click": ".consent-studio [cs-role=consent-banner] .cookie-banner__switch[aria-checked=true]:not([aria-disabled=true])",
-                                    "all": true
-                                }
+                                    "if": {
+                                        "exists": ".consent-studio [cs-role=consent-banner] .cookie-banner__switch[aria-checked=true]:not([aria-disabled=true])"
+                                    },
+                                    "then": [
+                                        {
+                                            "click": ".consent-studio [cs-role=consent-banner] .cookie-banner__switch[aria-checked=true]:not([aria-disabled=true])",
+                                            "all": true
+                                        }
+                                    ]
+                                },
+                                { "waitForThenClick": ".consent-studio [cs-role=consent-banner] [data-cs-button=save]" }
                             ]
-                        },
-                        { "waitForThenClick": ".consent-studio [cs-role=consent-banner] [data-cs-button=save]" }
+                        }
                     ]
-                }
+                },
+                { "waitForVisible": ".consent-studio [cs-role=consent-banner]", "check": "none" }
             ]
-        },
-        { "waitForVisible": ".consent-studio [cs-role=consent-banner]", "check": "none" }
+        }
     ],
     "test": [{ "wait": 500 }, { "cookieContains": "consent-studio__storage=[%22functional%22]" }]
 }

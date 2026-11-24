@@ -2,6 +2,7 @@
     "cmp": "amazon-music",
     "tests": [
         {
+            "note": "Each site serves either the older banner (#bannerFooter music-button) or the newer one (React Native Web buttons), apparently at random",
             "sites": [
                 "https://music.amazon.it/",
                 "https://music.amazon.de/",

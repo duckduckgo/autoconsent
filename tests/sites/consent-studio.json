@@ -2,11 +2,11 @@
     "cmp": "consent-studio",
     "tests": [
         {
+            "note": "Original banner markup (.consent-studio wrapper)",
             "sites": [
                 "https://www.eur.nl/",
                 "https://www.crunch.co.uk/",
                 "https://www.christenunie.nl/",
-                "https://www.moooi.com/",
                 "https://www.dentonet.pl/",
                 "https://www.budgetcam.nl/",
                 "https://www.jeanscentre.nl/",
@@ -16,9 +16,18 @@
             ]
         },
         {
-            "note": "No banner in the US",
+            "note": "Original banner markup; no banner in the US",
             "sites": ["https://www.msmode.nl/"],
             "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "Newer banner markup (#cs-banner-host)",
+            "sites": ["https://www.moooi.com/"]
+        },
+        {
+            "note": "Newer banner markup (#cs-banner-host); the banner only shows in some European regions",
+            "sites": ["https://consent.studio/"],
+            "options": { "onlyRegions": ["GB", "DE"] }
         }
     ]
 }
