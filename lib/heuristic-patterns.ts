@@ -1066,6 +1066,8 @@ export const ACKNOWLEDGE_PATTERNS = [
     /^continue (to )?brows(e|ing)( (the|our) (site|website))?$/is,
     // German "hide", e.g. "ausblenden", "hinweis ausblenden", "ok. ausblenden."
     /^(ok[ .!,]*)?(hinweis )?ausblenden[ .!]*$/is,
+    // German "don't show again", e.g. "nicht mehr zeigen", "hinweis nicht mehr anzeigen"
+    /^(ok[ .!,]*)?(hinweis )?nicht (mehr|wieder|erneut) (an)?zeigen[ .!]*$/is,
 
     'continue',
     'x',
