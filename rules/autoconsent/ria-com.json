@@ -1,0 +1,25 @@
+{
+    "name": "ria-com",
+    "vendorUrl": "https://auto.ria.com/",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?ria\\.com/"
+    },
+    "prehideSelectors": [".gdpr-wrapper > .gdpr"],
+    "detectCmp": [{ "exists": ".gdpr-wrapper > .gdpr .button-icon.close button" }],
+    "detectPopup": [{ "visible": ".gdpr-wrapper > .gdpr" }],
+    "optIn": [{ "waitForThenClick": ".gdpr-wrapper > .gdpr .button-main button" }],
+    "optOut": [
+        { "waitForThenClick": ".gdpr-wrapper > .gdpr .button-icon:not(.close) button" },
+        { "waitForVisible": ".gdpr-wrapper > .gdpr .container-select" },
+        {
+            "if": { "exists": ".gdpr-wrapper > .gdpr input[name=gdprType][value=byAnalitic]:checked" },
+            "then": [{ "click": ".gdpr-wrapper > .gdpr input[name=gdprType][value=byAnalitic] + label" }]
+        },
+        {
+            "if": { "exists": ".gdpr-wrapper > .gdpr input[name=gdprType][value=byMarketing]:checked" },
+            "then": [{ "click": ".gdpr-wrapper > .gdpr input[name=gdprType][value=byMarketing] + label" }]
+        },
+        { "waitForThenClick": ".gdpr-wrapper > .gdpr .container-select ~ .structure-row .button-main button" }
+    ],
+    "test": [{ "cookieContains": "gdpr=[]" }]
+}

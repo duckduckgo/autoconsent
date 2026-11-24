@@ -14,3 +14,12 @@ generateCMPTests('iubenda', ['https://www.yogurtland.com/', 'https://www.greenpl
 generateCMPTests('iubenda', ['https://newatlas.com/', 'https://plan.io/'], {
     skipRegions: ['US', 'AU'],
 });
+
+// custom template (#ameConsentUI) that locks body scrolling until its banner callbacks run
+generateCMPTests(
+    'iubenda',
+    ['https://www.nostrofiglio.it/neonato/cura-e-salute/pianto-ininterrotto-neonato', 'https://www.soldionline.it/'],
+    {
+        skipRegions: ['AU'],
+    },
+);

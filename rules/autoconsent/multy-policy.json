@@ -1,0 +1,34 @@
+{
+    "name": "multy-policy",
+    "vendorUrl": "https://unknown",
+    "prehideSelectors": [".cookies-policy.optional:has(.cookies-options a.cancel)"],
+    "detectCmp": [
+        {
+            "exists": ".cookies-policy.optional .cookies-options a.cancel"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies-policy.optional.show .cookies-options a.cancel"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies-policy.optional .cookies-options button#accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookies-policy.optional .cookies-options a.cancel"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookies-policy.optional .cookies-options",
+            "check": "none"
+        },
+        {
+            "cookieContains": "\"marketing\":false,\"analytic\":false,\"saved\":true"
+        }
+    ]
+}

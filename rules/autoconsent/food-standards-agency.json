@@ -1,0 +1,46 @@
+{
+    "name": "food-standards-agency",
+    "vendorUrl": "https://ratings.food.gov.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://ratings\\.food\\.gov\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".cookie-banner .cookie-banner__manage"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-banner .cookie-banner__manage"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner .cookie-banner__accept"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookie-banner"
+        },
+        {
+            "if": { "exists": "form.fsa-cookie-consent-form #reject-all-cookies" },
+            "then": [{ "click": "form.fsa-cookie-consent-form #reject-all-cookies" }],
+            "else": [
+                { "click": ".cookie-banner .cookie-banner__manage" },
+                { "waitForThenClick": "form.fsa-cookie-consent-form #reject-all-cookies" },
+                { "eval": "EVAL_POVR_GOBACK" }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieconsent_dismissed=yes"
+        },
+        {
+            "cookieContains": "\"analytics\":\"no\""
+        }
+    ]
+}

@@ -1,13 +1,8 @@
-import { RunContext } from '../rules';
 import { isElementVisible } from '../utils';
 import AutoConsentCMPBase from './base';
 
 export default class Tiktok extends AutoConsentCMPBase {
     name = 'tiktok.com';
-
-    runContext: RunContext = {
-        urlPattern: 'tiktok',
-    };
 
     get hasSelfTest(): boolean {
         return true;

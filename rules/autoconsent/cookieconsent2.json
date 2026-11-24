@@ -2,10 +2,14 @@
     "name": "cookieconsent2",
     "vendorUrl": "https://www.github.com/orestbida/cookieconsent",
     "comment": "supports v2.x.x of the library",
-    "prehideSelectors": ["#cc--main"],
+    "prehideSelectors": ["#cc--main", "#cc_div:has(#s-cnt)"],
     "detectCmp": [
         {
-            "exists": "#cc--main"
+            "exists": "#cc--main, #cc_div #s-cnt"
+        },
+        {
+            "comment": "notice-only configs without settings or optional categories are left to the heuristic",
+            "exists": "#s-rall-bn, #cm #c-s-bn, #cm [data-cc=\"c-settings\"], #s-bl input.c-tgl:not(:disabled)"
         }
     ],
     "detectPopup": [
@@ -26,7 +30,7 @@
             "if": { "exists": "#s-rall-bn" },
             "then": [{ "waitForThenClick": "#s-rall-bn" }],
             "else": [
-                { "waitForThenClick": "#c-s-bn" },
+                { "waitForThenClick": "#c-s-bn, #cm [data-cc=\"c-settings\"]" },
                 { "wait": 500 },
                 { "click": "#s-bl input.c-tgl:checked:not(:disabled)", "all": true, "optional": true },
                 { "waitForThenClick": "#s-sv-bn" }

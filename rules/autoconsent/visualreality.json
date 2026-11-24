@@ -1,0 +1,39 @@
+{
+    "name": "visualreality",
+    "vendorUrl": "https://www.tournamentsoftware.com/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".js-simple-accept-view .js-accept-basic"
+        },
+        {
+            "exists": "#form-purposes input[name=\"CookiePurposes\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-simple-accept-view .js-show-purposes"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-simple-accept-view .js-accept-basic"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".js-simple-accept-view .js-show-purposes"
+        },
+        {
+            "waitForVisible": "#form-purposes .js-save"
+        },
+        {
+            "click": "#form-purposes input[name=\"CookiePurposes\"]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#form-purposes .js-save"
+        }
+    ]
+}

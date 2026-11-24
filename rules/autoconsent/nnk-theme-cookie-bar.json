@@ -1,0 +1,29 @@
+{
+    "name": "nnk-theme-cookie-bar",
+    "prehideSelectors": [".govpl.cookie-bar-container"],
+    "detectCmp": [
+        {
+            "exists": ".govpl.cookie-bar-container .cookiebar-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".govpl.cookie-bar-container:not(.cookie-bar-hide) .cookiebar-close"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".govpl.cookie-bar-container .cookiebar-close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".govpl.cookie-bar-container .cookiebar-close"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-message-bar=true"
+        }
+    ]
+}

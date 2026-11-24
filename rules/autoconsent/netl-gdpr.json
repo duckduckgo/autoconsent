@@ -1,0 +1,70 @@
+{
+    "name": "netl-gdpr",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".tx-netl-gdpr #netl-gdpr-allowAllCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".tx-netl-gdpr .cookie-optin"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".tx-netl-gdpr #netl-gdpr-allowAllCookies"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#netl-gdpr-decline"
+            },
+            "then": [
+                {
+                    "click": "#netl-gdpr-decline"
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "visible": "#netl-gdpr-allowOnlyEssential-modal"
+                    },
+                    "then": [
+                        {
+                            "click": "#netl-gdpr-allowOnlyEssential-modal"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "if": {
+                                "visible": "#netl-gdpr-allowOnlyEssential"
+                            },
+                            "then": [
+                                {
+                                    "click": "#netl-gdpr-allowOnlyEssential"
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "click": "input[id^='netl-gdpr-cookie-']:checked:not(:disabled)",
+                                    "all": true,
+                                    "optional": true
+                                },
+                                {
+                                    "click": "#netl-gdpr-update"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "netl_gdpr_"
+        }
+    ]
+}

@@ -1,0 +1,75 @@
+{
+    "name": "welcome-city-yokohama",
+    "vendorUrl": "https://www.welcome.city.yokohama.jp/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?welcome\\.city\\.yokohama\\.jp/"
+    },
+    "prehideSelectors": [".cookie-consent:has(> .cookie-text + .cookie-agree:last-child)"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-consent > .cookie-text + .cookie-agree:last-child"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-consent > .cookie-text + .cookie-agree:last-child"
+        }
+    ],
+    "optIn": [
+        {
+            "waitFor": ".fc-cta-consent,.fc-li-only-placeholder",
+            "timeout": 8000,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": ".fc-cta-consent"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".fc-cta-consent"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".cookie-consent > .cookie-text + .cookie-agree:last-child"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".cookie-consent:has(> .cookie-text + .cookie-agree:last-child)"
+        },
+        {
+            "waitFor": ".fc-cta-do-not-consent,.fc-cta-manage-options,.fc-li-only-placeholder",
+            "timeout": 8000,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options,.fc-li-only-placeholder"
+            },
+            "then": [
+                {
+                    "if": {
+                        "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": ".fc-cta-do-not-consent,.fc-cta-manage-options"
+                        }
+                    ]
+                },
+                {
+                    "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".fc-confirm-choices",
+                    "optional": true
+                }
+            ]
+        }
+    ]
+}

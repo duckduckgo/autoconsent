@@ -1,0 +1,35 @@
+{
+    "name": "saos-org-pl",
+    "vendorUrl": "https://www.saos.org.pl/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?saos\\.org\\.pl/"
+    },
+    "prehideSelectors": ["#cookie-window", "#cookie-message"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-window #cookie-preview-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-window"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-preview-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookie-window, #cookie-message"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookie-window",
+            "check": "none"
+        }
+    ]
+}

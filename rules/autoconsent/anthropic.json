@@ -4,22 +4,22 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "div:has(> p > a[href='https://www.anthropic.com/legal/cookies'])"
+            "exists": "[data-testid='consent-banner']:has(a[href='https://www.anthropic.com/legal/cookies'])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "div:has(> p > a[href='https://www.anthropic.com/legal/cookies'])"
+            "visible": "[data-testid='consent-banner']:has(a[href='https://www.anthropic.com/legal/cookies'])"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "div:has(> p > a[href='https://www.anthropic.com/legal/cookies']) button:nth-child(3)"
+            "waitForThenClick": "[data-testid='consent-banner'] button:is([data-testid='consent-accept'], [class*='_acceptButton'])"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "div:has(> p > a[href='https://www.anthropic.com/legal/cookies']) button:nth-child(2)"
+            "waitForThenClick": "[data-testid='consent-banner'] button:is([data-testid='consent-reject'], [class*='_rejectButton'])"
         }
     ],
     "test": [

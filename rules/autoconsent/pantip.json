@@ -1,0 +1,35 @@
+{
+    "name": "pantip",
+    "vendorUrl": "https://pantip.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?pantip\\.com/"
+    },
+    "prehideSelectors": [".pt-snackbar--policy"],
+    "detectCmp": [
+        {
+            "exists": ".pt-snackbar--policy .pt-action-policy button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".pt-snackbar--policy"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".pt-snackbar--policy .pt-action-policy button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".pt-snackbar--policy"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".pt-snackbar--policy",
+            "check": "none"
+        }
+    ]
+}

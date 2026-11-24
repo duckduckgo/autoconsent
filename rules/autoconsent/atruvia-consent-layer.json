@@ -1,0 +1,10 @@
+{
+    "name": "atruvia-consent-layer",
+    "vendorUrl": "https://www.atruvia.de/",
+    "prehideSelectors": [".cookie-notice-container"],
+    "detectCmp": [{ "exists": "hra-consent-layer-ui" }],
+    "detectPopup": [{ "visible": "hra-consent-layer-ui hra-cookie-buttons" }],
+    "optIn": [{ "waitForThenClick": "hra-cookie-buttons [data-automation-id=\"consent-layer-accept-all\"]" }],
+    "optOut": [{ "waitForThenClick": "hra-cookie-buttons [data-automation-id=\"consent-layer-accept-required\"]" }],
+    "test": [{ "waitForVisible": "hra-consent-layer-ui hra-cookie-buttons", "timeout": 2000, "check": "none" }]
+}

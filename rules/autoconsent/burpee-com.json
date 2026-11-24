@@ -2,7 +2,11 @@
     "name": "burpee.com",
     "minimumRuleStepVersion": 2,
     "prehideSelectors": [".cookie-modal", "#notice-cookie-block"],
-    "detectCmp": [{ "exists": "#notice-cookie-block" }, { "exists": "#notice-cookie-block #cm-selectSpecific", "negated": true }],
+    "detectCmp": [
+        { "exists": "#notice-cookie-block" },
+        { "exists": "#notice-cookie-block #cm-selectSpecific", "negated": true },
+        { "any": [{ "visible": "#notice-cookie-block" }, { "cookieContains": "user_allowed_save_cookie=", "negated": true }] }
+    ],
     "detectPopup": [{ "visible": "#html-body #notice-cookie-block" }],
     "optIn": [
         {
@@ -13,8 +17,8 @@
     ],
     "optOut": [
         {
-            "if": { "exists": "#notice-cookie-block #btn-cookie-decline" },
-            "then": [{ "waitForThenClick": "#notice-cookie-block #btn-cookie-decline" }],
+            "if": { "exists": "#notice-cookie-block :is(#btn-cookie-decline, #btn-cookie-deny)" },
+            "then": [{ "waitForThenClick": "#notice-cookie-block :is(#btn-cookie-decline, #btn-cookie-deny)" }],
             "else": [
                 {
                     "if": { "exists": "#notice-cookie-block button[\\@click^='rejectAll']" },

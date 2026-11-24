@@ -1,0 +1,30 @@
+{
+    "name": "jquery-cookiepolicy",
+    "vendorUrl": "https://pkw.gov.pl/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [".js-cp-box"],
+    "detectCmp": [{ "exists": ".js-cp-box .js-cp-accept-all-button" }],
+    "detectPopup": [{ "visible": ".js-cp-box" }],
+    "optIn": [{ "waitForThenClick": ".js-cp-box .js-cp-accept-all-button" }],
+    "optOut": [
+        {
+            "if": { "exists": ".js-cp-box .js-cp-reject-all-button" },
+            "then": [{ "waitForThenClick": ".js-cp-box .js-cp-reject-all-button" }],
+            "else": [
+                { "click": ".js-cp-box .js-cp-settings-button" },
+                { "waitForVisible": ".js-cp-box .js-cp-settings-box" },
+                {
+                    "click": ".js-cp-box .new-cp-content-settings-options-one-cookie.on:not(.disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": ".js-cp-box .js-cp-accept-selected-button" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "cookiepolicyinfo_new" }]
+}

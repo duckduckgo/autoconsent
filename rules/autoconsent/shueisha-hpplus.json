@@ -1,0 +1,27 @@
+{
+    "name": "shueisha-hpplus",
+    "prehideSelectors": [":is(#cookieBanner, .fixed_cookie_banner):has(a[href*='shueisha.co.jp/privacy'])"],
+    "detectCmp": [
+        {
+            "exists": ":is(#cookieBanner, .fixed_cookie_banner):has(a[href*='shueisha.co.jp/privacy']) :is(#cookieBannerCloseButton, .cookieBannerCloseButton)"
+        }
+    ],
+    "detectPopup": [{ "visible": ":is(#cookieBanner, .fixed_cookie_banner):has(a[href*='shueisha.co.jp/privacy'])", "check": "any" }],
+    "optIn": [
+        {
+            "waitForThenClick": ":is(#cookieBanner, .fixed_cookie_banner):has(a[href*='shueisha.co.jp/privacy']) :is(#cookieBannerCloseButton, .cookieBannerCloseButton)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ":is(#cookieBanner, .fixed_cookie_banner):has(a[href*='shueisha.co.jp/privacy']) :is(#cookieBannerCloseButton, .cookieBannerCloseButton)"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ":is(#cookieBanner, .fixed_cookie_banner):has(a[href*='shueisha.co.jp/privacy'])",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

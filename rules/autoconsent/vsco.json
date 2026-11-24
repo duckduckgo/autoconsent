@@ -1,0 +1,27 @@
+{
+    "name": "vsco",
+    "vendorUrl": "https://vsco.co/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?vsco\\.co/"
+    },
+    "prehideSelectors": [".vsco-cookie[data-cookie=banner]"],
+    "detectCmp": [{ "visible": ".vsco-cookie[data-cookie=banner]" }],
+    "detectPopup": [{ "visible": ".vsco-cookie[data-cookie=banner]" }],
+    "optIn": [{ "waitForThenClick": ".vsco-cookie_buttons [data-cookie=close-btn]" }],
+    "optOut": [
+        { "waitForThenClick": ".vsco-cookie_buttons [data-cookie=close-btn]" },
+        {
+            "if": { "exists": ".footer_legal .ot-sdk-show-settings-vsco" },
+            "then": [
+                {
+                    "click": ".footer_legal .ot-sdk-show-settings-vsco",
+                    "comment": "the banner's own settings link closes the preference center right after opening it"
+                },
+                { "waitForVisible": "#onetrust-pc-sdk .ot-pc-refuse-all-handler", "timeout": 5000 },
+                { "click": "#onetrust-pc-sdk .ot-pc-refuse-all-handler" },
+                { "waitForVisible": "#onetrust-pc-sdk", "check": "none", "timeout": 3000, "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "visible": ".vsco-cookie[data-cookie=banner]", "check": "none" }, { "cookieContains": "C0004%3A0" }]
+}

@@ -1,0 +1,95 @@
+{
+    "name": "gotrust",
+    "vendorUrl": "https://gotrust.tech/",
+    "prehideSelectors": ["#gotrust-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#gotrust-cookie-banner > div"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#gotrust-cookie-banner > div", "[class*='cookieFooterBanner__']"]
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": ["#gotrust-cookie-banner > div", "button[data-tr-btn='allowAll']"]
+            },
+            "then": [
+                {
+                    "click": ["#gotrust-cookie-banner > div", "button[data-tr-btn='allowAll']"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": [
+                        "#gotrust-cookie-banner > div",
+                        "[class*='cookieFooterBanner__']",
+                        "xpath/.//button[normalize-space(.)='Allow all']"
+                    ]
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["#gotrust-cookie-banner > div", "button[data-tr-btn='deny']"]
+            },
+            "then": [
+                {
+                    "click": ["#gotrust-cookie-banner > div", "button[data-tr-btn='deny']"]
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": ["#gotrust-cookie-banner > div", "[class*='cookieFooterBanner__'] button[data-tr-btn='allowSelection']"]
+                    },
+                    "then": [
+                        {
+                            "click": [
+                                "#gotrust-cookie-banner > div",
+                                "[class*='cookieFooterBanner__'] button[data-tr-btn='allowSelection']"
+                            ]
+                        },
+                        {
+                            "waitForVisible": ["#gotrust-cookie-banner > div", "[class*='trPrefDialog__'] [role='switch']"]
+                        },
+                        {
+                            "comment": "category switches first: toggling a category also toggles its services",
+                            "click": [
+                                "#gotrust-cookie-banner > div",
+                                "[role='switch'][data-tr-checked='true'][data-tr-disabled='false']:not([id^='service-'])"
+                            ],
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "click": ["#gotrust-cookie-banner > div", "[role='switch'][data-tr-checked='true'][data-tr-disabled='false']"],
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": [
+                                "#gotrust-cookie-banner > div",
+                                "[class*='trPrefDialog__'] button[data-tr-btn='allowSelection']"
+                            ]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": [
+                                "#gotrust-cookie-banner > div",
+                                "[class*='cookieFooterBanner__']",
+                                "xpath/.//button[starts-with(normalize-space(.), 'Reject')]"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

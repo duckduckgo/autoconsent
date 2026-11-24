@@ -1,0 +1,25 @@
+{
+    "name": "conscious-solutions",
+    "vendorUrl": "https://www.conscious.co.uk/",
+    "prehideSelectors": ["#ccc-notify.cookie-bar"],
+    "detectCmp": [{ "exists": "#ccc-notify.cookie-bar" }],
+    "detectPopup": [{ "visible": "#ccc-notify.cookie-bar" }],
+    "optIn": [{ "waitForThenClick": "#ccc-notify.cookie-bar #ccc-notify-accept" }],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#ccc-notify.cookie-bar button[onclick^=\"manageCookies('disable')\"], #ccc-notify.cookie-bar button[onclick^=\"manageCookies()\"]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#ccc-notify.cookie-bar button[onclick^=\"manageCookies('disable')\"], #ccc-notify.cookie-bar button[onclick^=\"manageCookies()\"]"
+                }
+            ],
+            "else": [
+                { "waitForThenClick": "#ccc-notify.cookie-bar button[onclick^=\"manageSettings(\"]" },
+                { "waitForThenClick": ".cookie-modal button#ccc-close[onclick^=\"manageCookies()\"]" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "privacy_cookie_status=deny" }]
+}

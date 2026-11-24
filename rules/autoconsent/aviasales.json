@@ -1,0 +1,45 @@
+{
+    "name": "aviasales",
+    "vendorUrl": "https://www.aviasales.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?aviasales\\.[a-z]+/"
+    },
+    "prehideSelectors": ["div:has(> div > [data-test-id=\"accept-cookies-button\"])"],
+    "detectCmp": [
+        {
+            "exists": "div:has(> [data-test-id=\"accept-cookies-button\"]) a[data-test-id=\"link\"]:not([href])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-test-id=\"accept-cookies-button\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-test-id=\"accept-cookies-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div:has(> [data-test-id=\"accept-cookies-button\"]) a[data-test-id=\"link\"]:not([href])"
+        },
+        {
+            "waitFor": "[data-test-id=\"modal_base\"] form input[name=\"marketing\"]",
+            "timeout": 3000
+        },
+        {
+            "click": "[data-test-id=\"modal_base\"] form input[type=\"checkbox\"]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[data-test-id=\"modal_base\"] button[type=\"submit\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22marketing%22%3Afalse"
+        }
+    ]
+}

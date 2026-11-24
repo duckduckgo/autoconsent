@@ -1,9 +1,9 @@
 {
     "name": "wbd-legal-terms",
     "vendorUrl": "https://www.wbd.com/",
-    "comment": "Terms-and-cookies notice with only an Agree button. The <dialog> variant is modal, so hiding it with CSS leaves the page inert; close it without submitting the form instead. The MUI modal variant cannot be dismissed, so it is hidden. Sweepstakes pages only load their entry form (ngxFrame embed) after Agree, so the rule skips them to keep the popup available.",
+    "comment": "Terms-and-cookies notice with only an Agree button. The <dialog> variant is modal, so hiding it with CSS leaves the page inert; close it without submitting the form instead. The MUI modal variant cannot be dismissed, so it is hidden; its scroll lock is overridden with a stylesheet because the site re-applies it inline on client-side navigation. Sweepstakes pages only load their entry form (ngxFrame embed) after Agree, so the rule skips them to keep the popup available.",
     "cosmetic": true,
-    "minimumRuleStepVersion": 2,
+    "minimumRuleStepVersion": 3,
     "detectCmp": [
         {
             "exists": "dialog#ltp-dialog, [id=\"id/ltp\"]"
@@ -44,9 +44,8 @@
                     "hide": "[id=\"id/ltp\"]"
                 },
                 {
-                    "addStyle": "overflow: auto !important",
-                    "selector": "body",
-                    "optional": true
+                    "stylesheet": "body:has([id=\"id/ltp\"]) { overflow: auto !important; }",
+                    "stylesheetId": "wbd-legal-terms-scroll-unlock"
                 }
             ]
         }

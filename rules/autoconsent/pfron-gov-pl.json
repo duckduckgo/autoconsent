@@ -1,0 +1,37 @@
+{
+    "name": "pfron-gov-pl",
+    "vendorUrl": "https://www.pfron.gov.pl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?pfron\\.(gov|org)\\.pl/"
+    },
+    "prehideSelectors": ["#cookies-info"],
+    "detectCmp": [
+        {
+            "exists": "#cookies-info .btn-cookie-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies-info .btn-cookie-close"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies-info .btn-cookie-close",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookies-info .btn-cookie-close",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieInfoSZG=true"
+        }
+    ]
+}

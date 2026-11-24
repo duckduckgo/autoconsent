@@ -1,0 +1,11 @@
+{
+    "name": "egotec-cookie-bar",
+    "vendorUrl": "https://www.egotec.com/",
+    "prehideSelectors": [".cookie-bar:has(> span.btn > i.fa-check)"],
+    "cosmetic": true,
+    "detectCmp": [{ "exists": ".cookie-bar > span.btn > i.fa-check" }],
+    "detectPopup": [{ "visible": ".cookie-bar > span.btn" }],
+    "optIn": [{ "waitForThenClick": ".cookie-bar > span.btn" }],
+    "optOut": [{ "hide": ".cookie-bar:has(> span.btn > i.fa-check)" }],
+    "test": [{ "visible": ".cookie-bar > span.btn", "check": "none" }]
+}

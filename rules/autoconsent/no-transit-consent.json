@@ -1,0 +1,32 @@
+{
+    "name": "no-transit-consent",
+    "vendorUrl": "https://reise.skyss.no/",
+    "prehideSelectors": [
+        "div.fixed.rounded-2xl.bg-background-secondary:has(> div.flex > button[class*=\"btn--skin-secondary___\"] + button[class*=\"btn--skin-primary___\"])"
+    ],
+    "detectCmp": [
+        {
+            "exists": "div.fixed.rounded-2xl.bg-background-secondary:has(> div.flex > button[class*=\"btn--skin-secondary___\"] + button[class*=\"btn--skin-primary___\"])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.fixed.rounded-2xl.bg-background-secondary:has(> div.flex > button[class*=\"btn--skin-secondary___\"] + button[class*=\"btn--skin-primary___\"])"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.fixed.rounded-2xl.bg-background-secondary > div.flex > button[class*=\"btn--skin-secondary___\"] + button[class*=\"btn--skin-primary___\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div.fixed.rounded-2xl.bg-background-secondary > div.flex > button[class*=\"btn--skin-secondary___\"]:first-child"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "r_consents=%7B%22required%22%3Atrue%2C%22analytics%22%3Afalse"
+        }
+    ]
+}

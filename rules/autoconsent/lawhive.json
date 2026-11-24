@@ -1,0 +1,27 @@
+{
+    "name": "lawhive",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?lawhive\\.co\\.uk/"
+    },
+    "prehideSelectors": ["div.fixed.bottom-4:has(> div > button > img[alt='close-black'])"],
+    "detectCmp": [
+        { "exists": "xpath///div[contains(@class,'fixed')][.//img[@alt='close-black']][.//button[contains(., 'Manage settings')]]" }
+    ],
+    "detectPopup": [
+        { "visible": "xpath///div[contains(@class,'fixed')][.//img[@alt='close-black']][.//button[contains(., 'Manage settings')]]" }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class,'fixed')][.//img[@alt='close-black']]//button[contains(., 'Allow cookies')]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class,'fixed')][.//img[@alt='close-black']]//button[contains(., 'Manage settings')]"
+        },
+        {
+            "waitForThenClick": "xpath///div[contains(@class,'fixed')][.//img[@alt='close-black']]//button[contains(., 'Reject cookies')]"
+        }
+    ],
+    "test": [{ "cookieContains": "%22advertisement%22%3Afalse" }]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "focal-cookie-bar",
+    "vendorUrl": "https://themes.shopify.com/themes/focal",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "cookie-bar:not([hidden]) [data-action='decline-policy']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "cookie-bar:not([hidden]) [data-action='decline-policy']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "cookie-bar [data-action='accept-policy']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "cookie-bar [data-action='decline-policy']",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "cookie-bar:not([hidden])",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

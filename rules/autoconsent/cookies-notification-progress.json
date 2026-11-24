@@ -1,0 +1,9 @@
+{
+    "name": "cookies-notification-progress",
+    "prehideSelectors": [".js-cookies-notification"],
+    "detectCmp": [{ "exists": ".js-cookies-notification .js-cookies-confirm" }],
+    "detectPopup": [{ "visible": ".js-cookies-notification._active" }],
+    "optIn": [{ "waitForThenClick": ".js-cookies-notification._active .js-cookies-confirm" }],
+    "optOut": [{ "waitForThenClick": ".js-cookies-notification._active .js-cookies-confirm" }],
+    "test": [{ "cookieContains": "cookies_notification=1" }]
+}

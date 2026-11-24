@@ -1,6 +1,6 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('AppConsent', ['https://magasin.darty.com/'], {
+generateCMPTests('AppConsent', ['https://magasin.darty.com/', 'https://www.iturf.fr/'], {
     testOptIn: false,
     testOptOut: true,
     onlyRegions: ['US', 'FR'],
