@@ -1,0 +1,17 @@
+{
+    "name": "anwalt-suchservice",
+    "prehideSelectors": [],
+    "detectCmp": [
+        { "exists": "#cookiebanner #stat_cookies.checkbox_image" },
+        { "exists": "#cookiebanner .button-auswahl, #cookiebanner .button-mehr-erfahren" }
+    ],
+    "detectPopup": [{ "visible": "#cookiebanner .button-auswahl, #cookiebanner .button-mehr-erfahren" }],
+    "optIn": [{ "waitForThenClick": "#cookiefrontpage .button-alles, #cookiebanner > .cookiebuttons .button-zustimmen" }],
+    "optOut": [
+        { "waitForThenClick": "#cookiebanner .button-auswahl, #cookiebanner .button-mehr-erfahren", "comment": "Einstellungen verwalten" },
+        { "waitForVisible": "#stat_cookies" },
+        { "click": "#stat_cookies.checkbox_checked", "optional": true },
+        { "waitForThenClick": "#cookiedetails .button-alles, #cookie-einstellungen-wrapper .button-zustimmen", "comment": "save selection" }
+    ],
+    "test": [{ "cookieContains": "stat_cookies=NOK" }]
+}
