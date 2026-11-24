@@ -379,6 +379,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+
+    // Turkish (TR)
+    // e.g. "gerekli çerezleri kullanıyoruz", "çerezler kullanılmaktadır", "ek çerezlere de izin verebilirsin"; not "kullanım" (terms of use)
+    /[çc]erez\S*(?:\s\S+){0,3}\s(?:kullan[ıi](?:yor|l|r)|kullanmakta|izin ver)/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -1118,6 +1122,11 @@ export const ACKNOWLEDGE_PATTERNS = [
     // e.g. "подтвердить", "подтверждаю выбор", "сохранить настройки", "сохранить и закрыть"
     /^\s*(подтвер(дить|ждаю|ждени[а-яё]*)|сохран(ить|яю|ение))([\s-]+(мой|мои|моё|свой|свои|своё)?[\s-]*(выбор[а-яё]*|настройк[а-яё]*|парамет[а-яё]*|предпочтени[а-яё]*|согласи[а-яё]*))?([\s-]+и[\s-]+(закрыть|продолжить))?\s*$/is,
     'продолжить',
+
+    // Turkish (TR)
+    'kapat',
+    'tamam',
+    'anladım',
 
     // Japanese (JA)
     // e.g. "閉じる" (close), "確認" / "確認しました" (confirmed), "了解" (understood), "確認して閉じる";
