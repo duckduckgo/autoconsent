@@ -7,6 +7,10 @@
     "detectCmp": [
         {
             "exists": ".cookie-permission-container[data-cookie-permission] .js-cookie-configuration-button"
+        },
+        {
+            "visible": ".cookie-permission-container[data-cookie-permission]",
+            "comment": "the container stays hidden on sites that use a third-party CMP instead"
         }
     ],
     "detectPopup": [
