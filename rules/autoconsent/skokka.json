@@ -1,0 +1,35 @@
+{
+    "name": "skokka",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?skokka\\.com/"
+    },
+    "prehideSelectors": ["#cookieBannerV2"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=banner-cookies-v2-modal]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=banner-cookies-v2-modal]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=banner-cookies-v2-accept-all-button]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=banner-cookies-v2-manage-button]"
+        },
+        {
+            "waitForThenClick": "[data-testid=banner-cookies-v2-manager-reject-link]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "privacy_cookie=1"
+        }
+    ]
+}
