@@ -1,0 +1,34 @@
+{
+    "name": "ersatzteil-service.de",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?ersatzteil-service\\.de/"
+    },
+    "prehideSelectors": ["#cookie-information"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-information button.close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-information"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-information button.close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-information button.close"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie-information",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
