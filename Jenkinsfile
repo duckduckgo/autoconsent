@@ -173,8 +173,9 @@ pipeline {
                         }
                     }
 
-                    // Apply the status to the previous commit: We're assuming that there was a merge commit when Jenkins picked up the PR.
-                    def prCommitSha = sh(script: "git rev-parse HEAD~1", returnStdout: true).trim()
+                    // Apply the status to the PR head commit. Jenkins merges the target branch into the PR head, so HEAD^1 is the PR head
+                    // when that made a merge commit. When the PR is already up to date with the target branch, there is no merge and HEAD is the PR head.
+                    def prCommitSha = sh(script: "if git rev-parse -q --verify HEAD^2 >/dev/null; then git rev-parse HEAD^1; else git rev-parse HEAD; fi", returnStdout: true).trim()
                     githubNotify(
                         account: 'duckduckgo',
                         repo: 'autoconsent',

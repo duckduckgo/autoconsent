@@ -243,6 +243,8 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["cookie","куки"],
     [],
     ["браузер"],
+    ["продолжая"],
+    ["принима"],
     ["usiamo","utilizziamo"],
     ["cookie"],
     ["noi e i nostri"],
@@ -280,4 +282,9 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["informasjonskapsler","cookies"],
     ["vi benytter"],
     ["bruk av "],
+    ["χρησιμοποι"],
+    ["τεχνολογ"],
+    ["συγκατ"],
+    ["αποδοχ"],
+    ["ρριψη"],
 ];
