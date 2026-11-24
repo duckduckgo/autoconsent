@@ -1,0 +1,13 @@
+{
+    "name": "fanfiction",
+    "vendorUrl": "https://www.fanfiction.net/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(fanfiction\\.net|fictionpress\\.com)/"
+    },
+    "prehideSelectors": ["#cookie_notice"],
+    "detectCmp": [{ "exists": "#cookie_notice [onclick=\"_cookieAccept()\"]" }],
+    "detectPopup": [{ "visible": "#cookie_notice" }],
+    "optIn": [{ "waitForThenClick": "#cookie_notice [onclick=\"_cookieAccept()\"]" }],
+    "optOut": [{ "hide": "#cookie_notice" }]
+}

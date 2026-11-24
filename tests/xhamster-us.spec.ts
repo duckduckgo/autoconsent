@@ -22,6 +22,7 @@ generateCMPTests(
         'https://vi.xhspot.com/',
         'https://ko.xhfuck.com/',
         'https://hi.xhzone.live/',
+        'https://id.xhsocial.com/',
     ],
     {
         onlyRegions: ['US'],

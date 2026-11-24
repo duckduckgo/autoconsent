@@ -1,0 +1,30 @@
+{
+    "name": "cookies-info",
+    "prehideSelectors": [".cookies-info:has(.js-cookies-info-reject, .js-cookie-reject-all)"],
+    "detectCmp": [
+        {
+            "exists": ".cookies-info .js-cookies-info-reject, .cookies-info .js-cookie-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies-info .js-cookies-info-reject, .cookies-info .js-cookie-reject-all",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies-info .js-cookies-info-accept, .cookies-info .js-cookie-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookies-info .js-cookies-info-reject, .cookies-info .js-cookie-reject-all"
+        },
+        {
+            "waitForVisible": ".cookies-info .js-cookies-info-reject, .cookies-info .js-cookie-reject-all",
+            "check": "none",
+            "timeout": 5000
+        }
+    ]
+}

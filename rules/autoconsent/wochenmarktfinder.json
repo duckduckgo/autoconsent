@@ -1,0 +1,27 @@
+{
+    "name": "wochenmarktfinder.de",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?wochenmarktfinder\\.de/"
+    },
+    "prehideSelectors": ["#wmf-consent-banner"],
+    "detectCmp": [
+        {
+            "exists": "#wmf-consent-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#wmf-consent-banner [data-consent=reject]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#wmf-consent-banner [data-consent=accept]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#wmf-consent-banner [data-consent=reject]"
+        }
+    ]
+}

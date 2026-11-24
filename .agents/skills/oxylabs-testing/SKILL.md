@@ -18,7 +18,7 @@ The region policy (core and expanded sets) is the one in the `proxy-testing` ski
 ## Prerequisites
 
 ```bash
-npm run prepublish  # builds dist/autoconsent.playwright.js and rules/rules.json
+npm run prepublish  # builds dist/ (content script and package bundles) and rules/rules.json, rules/compact-rules.json
 ```
 
 Environment variables:

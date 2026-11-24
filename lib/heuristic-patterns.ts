@@ -91,6 +91,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi,
     /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi,
     /\baccept or (?:reject|decline) (?:all |optional |non-essential )?cookies\b/gi,
+    // the consent choice itself, as in FR/IT/ES: "continuer sans accepter"
+    /\bcontinue without accepting\b/gi,
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
@@ -275,7 +277,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /strona.{0,50} używa (ciasteczek|cookie)/gi,
     /ta strona korzysta z ciasteczek/gi,
     /uzyskujemy dostęp i przechowujemy informacje na urządzeniu/gi,
-    /używa plik[ió]w? cookie/gi,
+    /używa(?:ją)? plik[ió]w? cookie/gi,
     /używamy plików.{0,20}cookie/gi,
     /wykorzystują .{0,100}cookie/gi,
     /za pomocą plików cookies.{0,100} my lub nasi partnerzy/gi,
@@ -1090,8 +1092,16 @@ export const ACKNOWLEDGE_PATTERNS = [
     'vale',
     '¡vamos!',
 
+    // Portuguese (PT)
+    'prosseguir',
+
     // Catalan (CA)
     /^(ho )?(entenc|entès|entesos)[ !.]*$/s,
+
+    // Portuguese (PT)
+    // e.g. "ciente" / "estou ciente" (I'm aware), "entendi" (got it)
+    /^(estou )?ciente[ !.]*$/s,
+    /^entendi[ !.]*$/s,
 
     // Polish (PL)
     'kontynuuj',
