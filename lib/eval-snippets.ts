@@ -268,6 +268,8 @@ export const snippets = {
         });
         return true;
     },
+    EVAL_SS_COM_OPT_OUT: () => _gdpr_confirm(false) || true,
+    EVAL_SS_COM_TEST: () => /-necessary$/.test(localStorage.getItem('ss_cc')),
     EVAL_STEAMPOWERED_0: () =>
         JSON.parse(
             decodeURIComponent(

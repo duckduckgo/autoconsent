@@ -363,6 +363,44 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Turkish popups', () => {
+    it('detects Turkish cookie notices', () => {
+        const texts = [
+            // hepsiburada.com
+            'İnternet sitemizde deneyimlerinizi kişiselleştirmek amacıyla çerezler kullanılmakta olup, izin vermeniz halinde zorunlu çerezler haricindeki çerezlerle toplanan veriler işlenmekte ve tüm çerezler yurt dışında yerleşik altyapı tedarikçilerimize aktarılmaktadır.',
+            // mediamarkt.com.tr
+            'Sitemizin içeriğinin sağlanması ve belli fonksiyonların çalışması için zorunlu çerezler kullanmaktayız.',
+            // trendyol.com (OneTrust's Turkish text)
+            'Tanımlama bilgilerini; sitemizin doğru şekilde çalışmasını sağlamak, içerikleri ve reklamları kişiselleştirmek, sosyal medya özellikleri sunmak ve site trafiğimizi analiz etmek için kullanıyoruz.',
+            // vatanbilgisayar.com
+            'Çerezleri kullanıyoruz Sitemizden en iyi şekilde faydalanabilmeniz için, amaçlarla sınırlı ve gizliliğe uygun şekilde çerez konumlandırmaktayız.',
+            // lcw.com
+            'Tüm site ziyaretçilerimizi daha iyi tanımak, sitemizdeki kullanıcı deneyimini kişiselleştirmek ve iyileştirmek için web sitemizde çerezler kullanıyoruz.',
+            // defacto.com.tr, shown in capitals
+            'İNTERNET SİTEMİZDE ÇEREZLER YOLUYLA KİŞİSEL VERİ İŞLENMEKTE OLUP; GEREKLİ OLAN ÇEREZLER, BİLGİ TOPLUMU HİZMETLERİNİN SUNULMASI AMACIYLA KULLANILMAKTADIR.',
+            // migros.com.tr
+            'Şirketimizle paylaştığınız kişisel verilerinizin güvenliğine önem veriyor; bu amaçla kişisel verilerinizin hukuka uygun olarak işlenmesi ve korunması için azami hassasiyeti gösteriyoruz. Detaylı bilgi için Çerez Politikamızı inceleyebilirsiniz.',
+            // boyner.com.tr
+            'Çünkü kullandığımız çerezlerle sana daha güvenilir, gelişmiş ve ilgi alanlarına yönelik özel bir deneyim sunuyoruz.',
+            // getir.com
+            'İnternet sitemizde deneyiminizi iyileştirmek, kişiselleştirmek ve ilgi alanlarınıza göre özelleştirilmiş reklam/pazarlama faaliyetleri yürütebilmek için çerezler kullanıyoruz.',
+            // carrefoursa.com
+            'İnternet sayfamızda çerezler yoluyla kişisel veri işlemekte olup gerekli olan bilgi ve toplumu hizmetlerinizin sunulması amacıyla kullanılmaktadır.',
+            'Web sitemizde çerezlerden yararlanıyoruz.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Turkish text', () => {
+        // "çerez" also means snacks
+        expect(checkHeuristicPatterns('Kuruyemiş ve çerez çeşitlerimizi keşfedin').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Çerez tabağı hazırlarken kullanabileceğiniz tarifler').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Çerez Politikası ve Kullanım Koşulları').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Norwegian popups', () => {
     it('detects Norwegian cookie notices', () => {
         const texts = [
@@ -409,6 +447,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Allow cookies? We use them to measure traffic.',
             'We use a cookie to remember you are 18+ and keep your preferences on this device.',
             'Continue without accepting\nProtecting your privacy is our priority',
+            'Choose between essential cookies that are required for the site to work or all cookies, including non-essential ones.',
         ]);
     });
 
@@ -443,6 +482,8 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'We use data analytics tools in our consulting work',
             'We use the best chocolate in our cookies',
             'Continue without signing in',
+            'Choose between chocolate or oatmeal cookies for the party.',
+            'JavaScript is required for the site to work.',
         ]);
     });
 });
@@ -742,6 +783,11 @@ describe('popup exclusions', () => {
 });
 
 describe('cleanButtonText', () => {
+    it('lowercases Turkish İ without a leftover combining dot', () => {
+        // toLowerCase() is not locale-aware, so I still becomes i rather than ı
+        expect(cleanButtonText('İSTEĞE BAĞLI ÇEREZLERİ REDDET')).to.equal('isteğe bağli çerezleri reddet');
+    });
+
     it('converts to lowercase', () => {
         expect(cleanButtonText('REJECT ALL')).to.equal('reject all');
     });
@@ -867,6 +913,38 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Tillad kun nødvendige cookies')).to.equal('reject');
         expect(classifyButtonTextRegex('Ja tak')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Læs mere om brugen af cookies på sundhed.dk')).not.to.equal('reject');
+    });
+
+    it('matches Turkish reject buttons', () => {
+        expect(classifyButtonTextRegex('Reddet')).to.equal('reject');
+        expect(classifyButtonTextRegex('Tümünü Reddet')).to.equal('reject');
+        expect(classifyButtonTextRegex('Hepsini reddet')).to.equal('reject');
+        expect(classifyButtonTextRegex('Tüm Çerezleri Reddet')).to.equal('reject');
+        expect(classifyButtonTextRegex('Çerezleri reddet')).to.equal('reject');
+        expect(classifyButtonTextRegex('İsteğe Bağlı Çerezleri Reddet')).to.equal('reject');
+        // defacto.com.tr shows its buttons in capitals
+        expect(classifyButtonTextRegex('İSTEĞE BAĞLI ÇEREZLERİ REDDET')).to.equal('reject');
+        expect(classifyButtonTextRegex('TÜMÜNÜ REDDET')).to.equal('reject');
+        expect(classifyButtonTextRegex('Reddet ve Kapat')).to.equal('reject');
+        expect(classifyButtonTextRegex('Reddediyorum')).to.equal('reject');
+        expect(classifyButtonTextRegex('Kabul Etmiyorum')).to.equal('reject');
+        expect(classifyButtonTextRegex('Kabul Et')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Reddetme hakkınız hakkında bilgi')).not.to.equal('reject');
+    });
+
+    it('matches Turkish settings buttons', () => {
+        expect(classifyButtonTextRegex('Çerez Ayarları')).to.equal('settings');
+        expect(classifyButtonTextRegex('ÇEREZ TERCİHLERİ')).to.equal('settings');
+        expect(classifyButtonTextRegex('ÇEREZ TERCİHLERİNİ YAPILANDIR')).to.equal('settings');
+        expect(classifyButtonTextRegex('Tanımlama Bilgisi Ayarları')).to.equal('settings');
+        expect(classifyButtonTextRegex('Ayarlar')).to.equal('settings');
+        expect(classifyButtonTextRegex('Çerez Tercihleri')).to.equal('settings');
+        expect(classifyButtonTextRegex('Çerezleri Yönet')).to.equal('settings');
+        expect(classifyButtonTextRegex('Tercihleri yönetin')).to.equal('settings');
+        expect(classifyButtonTextRegex('Seçenekler')).to.equal('settings');
+        expect(classifyButtonTextRegex('Çerez tercihlerini yapılandır')).to.equal('settings');
+        expect(classifyButtonTextRegex('Kişiselleştir')).to.equal('settings');
+        expect(classifyButtonTextRegex('Çerez Politikası')).to.equal('other');
     });
 
     it('matches Norwegian reject buttons', () => {
