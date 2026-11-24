@@ -13,4 +13,6 @@ generateCMPTests('piwik-pro', [
     'https://www.ugent.be/',
     'https://www.lotto.de/',
     'https://www.andritz.com/',
+    'https://www.boell.de/',
+    'https://www.gwi-boell.de/',
 ]);

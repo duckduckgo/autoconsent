@@ -1,0 +1,12 @@
+{
+    "name": "samsung-account",
+    "runContext": {
+        "urlPattern": "^https://(\\w+\\.)?account\\.samsung\\.com/"
+    },
+    "prehideSelectors": [".MuiDrawer-root:has(a[href*=\"/policies/cookie\"])"],
+    "detectCmp": [{ "exists": ".MuiDrawer-root:has(a[href*=\"/policies/cookie\"]) button[data-log-id=\"close\"]" }],
+    "detectPopup": [{ "visible": ".MuiDrawer-root:has(a[href*=\"/policies/cookie\"]) button[data-log-id=\"close\"]" }],
+    "optIn": [{ "waitForThenClick": ".MuiDrawer-root:has(a[href*=\"/policies/cookie\"]) button[data-log-id=\"close\"]" }],
+    "optOut": [{ "waitForThenClick": ".MuiDrawer-root:has(a[href*=\"/policies/cookie\"]) button[data-log-id=\"close\"]" }],
+    "test": [{ "cookieContains": "sa_enable=on" }]
+}

@@ -1,0 +1,38 @@
+{
+    "name": "disturbia",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?disturbia\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner.CookieBanner [data-action='show-settings']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner.CookieBanner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner .CookieBanner__Notice .Button--primary[data-action='close-modal']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-banner .CookieBanner__Notice [data-action='show-settings']"
+        },
+        {
+            "waitForThenClick": "#cookie-banner .CookieBanner__Settings .Button--secondary[data-action='close-modal']",
+            "comment": "Not today"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie-banner.CookieBanner",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

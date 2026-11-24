@@ -1,0 +1,19 @@
+{
+    "name": "cookie-consent-save-settings",
+    "prehideSelectors": ["body.cookieConsent--pending [class*=\"cookie-consent__modal\"]"],
+    "detectCmp": [{ "exists": "body.cookieConsent--pending [class*=\"cookie-consent__button--saveSettings\"]" }],
+    "detectPopup": [
+        { "visible": "body.cookieConsent--pending [class*=\"cookie-consent__info\"] [class*=\"cookie-consent__button--acceptAll\"]" }
+    ],
+    "optIn": [{ "waitForThenClick": "[class*=\"cookie-consent__info\"] [class*=\"cookie-consent__button--acceptAll\"]" }],
+    "optOut": [
+        { "waitForThenClick": "[class*=\"cookie-consent__info\"] [class*=\"cookie-consent__button--settings\"]" },
+        { "waitForVisible": "[class*=\"cookie-consent__button--saveSettings\"]" },
+        {
+            "if": { "exists": "[class*=\"cookie-consent__selection\"] input:checked:not(:disabled)" },
+            "then": [{ "click": "[class*=\"cookie-consent__selection\"] input:checked:not(:disabled)", "all": true }]
+        },
+        { "click": "[class*=\"cookie-consent__button--saveSettings\"]" }
+    ],
+    "test": [{ "cookieContains": "cookieConsentClicked=true" }, { "visible": "body.cookieConsent--pending", "check": "none" }]
+}

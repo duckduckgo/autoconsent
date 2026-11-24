@@ -5,7 +5,7 @@
     "prehideSelectors": ["#cc-main"],
     "detectCmp": [
         {
-            "exists": "#cc-main"
+            "exists": "#cc-main .cm-wrapper"
         }
     ],
     "detectPopup": [
@@ -31,7 +31,25 @@
                     "waitForThenClick": ".cm__btn[data-role=show]"
                 },
                 {
-                    "waitForThenClick": "#cc-main .pm__btn[data-role=necessary]"
+                    "waitFor": "#cc-main .pm__btn"
+                },
+                {
+                    "if": { "exists": "#cc-main .pm__btn[data-role=necessary]" },
+                    "then": [
+                        {
+                            "click": "#cc-main .pm__btn[data-role=necessary]"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": "#cc-main .pm input.section__toggle:not([data-category]):not(:disabled):checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": "#cc-main .pm__btn[data-role=save]"
+                        }
+                    ]
                 }
             ]
         }

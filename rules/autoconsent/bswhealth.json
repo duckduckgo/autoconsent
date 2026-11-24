@@ -1,37 +1,40 @@
 {
     "name": "bswhealth",
     "vendorUrl": "https://www.bswhealth.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?bswhealth\\.com/"
+    },
     "cosmetic": false,
-    "prehideSelectors": ["#bsw-consentCookie"],
+    "prehideSelectors": [".consent-banner"],
     "detectCmp": [
         {
-            "exists": "#bsw-consentCookie"
+            "exists": ".consent-banner .manage-cookies-btn"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#bsw-consentCookie .accept-btn"
+            "visible": ".consent-banner .manage-cookies-btn"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#bsw-consentCookie .accept-btn"
+            "waitForThenClick": ".consent-banner .accept-btn"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "#bsw-consentCookie .manage-cookies-btn"
+            "waitForThenClick": ".consent-banner .manage-cookies-btn"
         },
         {
-            "waitForVisible": "#bsw-consentCookie .config-banner_section"
+            "waitForVisible": ".config-banner .config-banner_section"
         },
         {
-            "waitForThenClick": "#bsw-consentCookie input[type=checkbox]:checked:not(:disabled)",
+            "waitForThenClick": ".config-banner input[type=checkbox]:checked:not(:disabled)",
             "all": true,
             "optional": true
         },
         {
-            "waitForThenClick": "#bsw-consentCookie .accept-btn"
+            "waitForThenClick": ".config-banner .accept-btn"
         }
     ],
     "test": [

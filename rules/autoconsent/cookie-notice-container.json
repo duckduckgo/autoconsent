@@ -1,0 +1,9 @@
+{
+    "name": "cookie-notice-container",
+    "cosmetic": true,
+    "prehideSelectors": [".cookie-notice-container:has(.cookie-notice-box #cookie-notice-ok-button)"],
+    "detectCmp": [{ "exists": ".cookie-notice-container .cookie-notice-box #cookie-notice-ok-button" }],
+    "detectPopup": [{ "visible": ".cookie-notice-container .cookie-notice-box:has(#cookie-notice-ok-button)" }],
+    "optIn": [{ "waitForThenClick": ".cookie-notice-container #cookie-notice-ok-button" }],
+    "optOut": [{ "hide": ".cookie-notice-container:has(.cookie-notice-box #cookie-notice-ok-button)" }]
+}

@@ -25,32 +25,46 @@
         },
         {
             "if": {
-                "visible": "#elc-accept-link"
+                "visible": "#elc-deny-link"
             },
             "then": [
                 {
-                    "click": "#elc-accept-link"
+                    "waitForThenClick": "#elc-deny-link",
+                    "retry": 10,
+                    "retryInterval": 1000
                 }
             ],
             "else": [
                 {
-                    "click": "#elc-detail-link"
-                },
-                {
-                    "waitForVisible": "#elc-save-link, #elc-accept-link"
-                },
-                {
                     "if": {
-                        "visible": "#elc-save-link"
+                        "visible": "#elc-accept-link"
                     },
                     "then": [
                         {
-                            "click": "#elc-save-link"
+                            "click": "#elc-accept-link"
                         }
                     ],
                     "else": [
                         {
-                            "click": "#elc-accept-link"
+                            "click": "#elc-detail-link"
+                        },
+                        {
+                            "waitForVisible": "#elc-save-link, #elc-accept-link"
+                        },
+                        {
+                            "if": {
+                                "visible": "#elc-save-link"
+                            },
+                            "then": [
+                                {
+                                    "click": "#elc-save-link"
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "click": "#elc-accept-link"
+                                }
+                            ]
                         }
                     ]
                 }

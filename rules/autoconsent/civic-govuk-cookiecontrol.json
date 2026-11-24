@@ -1,0 +1,16 @@
+{
+    "name": "civic-govuk-cookiecontrol",
+    "vendorUrl": "https://www.drupal.org/project/civic_govuk_cookiecontrol",
+    "prehideSelectors": [".civic-govuk-cookiecontrol .cookie-banner"],
+    "detectCmp": [{ "exists": ".civic-govuk-cookiecontrol .cookie-banner--main .cookie-banner-button--reject" }],
+    "detectPopup": [{ "visible": ".civic-govuk-cookiecontrol .cookie-banner--main .cookie-banner-button--reject" }],
+    "optIn": [
+        { "waitForThenClick": ".civic-govuk-cookiecontrol .cookie-banner--main .cookie-banner-button--accept" },
+        { "waitForThenClick": ".civic-govuk-cookiecontrol .cookie-banner-accept--hide", "timeout": 2000, "optional": true }
+    ],
+    "optOut": [
+        { "waitForThenClick": ".civic-govuk-cookiecontrol .cookie-banner--main .cookie-banner-button--reject" },
+        { "waitForThenClick": ".civic-govuk-cookiecontrol .cookie-banner-reject--hide", "timeout": 2000, "optional": true }
+    ],
+    "test": [{ "visible": ".civic-govuk-cookiecontrol .cookie-banner--main", "check": "none" }]
+}

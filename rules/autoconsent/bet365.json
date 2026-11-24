@@ -1,0 +1,12 @@
+{
+    "name": "bet365",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?bet365\\.[a-z.]+/"
+    },
+    "prehideSelectors": [".rcc-f"],
+    "detectCmp": [{ "exists": ".rcc-61 > button.rcc-3" }],
+    "detectPopup": [{ "visible": ".rcc-61 > button.rcc-3" }],
+    "optIn": [{ "waitForThenClick": ".rcc-61 > button.rcc-4" }],
+    "optOut": [{ "waitForThenClick": ".rcc-61 > button.rcc-3" }],
+    "test": [{ "waitForVisible": ".rcc-61", "timeout": 1000, "check": "none" }]
+}

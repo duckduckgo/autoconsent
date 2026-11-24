@@ -91,6 +91,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi,
     /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi,
     /\baccept or (?:reject|decline) (?:all |optional |non-essential )?cookies\b/gi,
+    // the consent choice itself, as in FR/IT/ES: "continuer sans accepter"
+    /\bcontinue without accepting\b/gi,
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
@@ -144,6 +146,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     VERWENDUNG_VON_COOKIES,
     /wir.{0,100}nutzen.{0,100}cookies/gi,
     /verwendet.{0,100}cookies/gi,
+    /nutzt.{0,100}cookies/gi,
     /sie.{0,100}können.{0,100}ihre.{0,100}auswahl/gi,
     /und.{0,100}ähnliche.{0,100}technologien/gi,
     /cookies.{0,100}wir.{0,100}verwenden/gi,
@@ -274,7 +277,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /strona.{0,50} używa (ciasteczek|cookie)/gi,
     /ta strona korzysta z ciasteczek/gi,
     /uzyskujemy dostęp i przechowujemy informacje na urządzeniu/gi,
-    /używa plik[ió]w? cookie/gi,
+    /używa(?:ją)? plik[ió]w? cookie/gi,
     /używamy plików.{0,20}cookie/gi,
     /wykorzystują .{0,100}cookie/gi,
     /za pomocą plików cookies.{0,100} my lub nasi partnerzy/gi,
@@ -476,6 +479,9 @@ const REJECT_PATTERNS_GERMAN = [
     // essential/necessary/functional-only variants (accepting only necessary → reject)
     /^\s*(nur|ausschließlich|lediglich|weiter\s+mit|mit|akzeptiere?n?|unbedingt|es\s+werden\s+nur)?\s*(technisch\s+)?(notwendige?[nrs]?|essenzielle?[nrs]?|essentielle?[nrs]?|erforderliche?[nrs]?|funktionale?[nrs]?|funktionelle?[nrs]?|wesentliche?[nrs]?)\s*(cookies?|technologien|funktionscookies|dienste)?\s*(akzeptieren|erlauben|zulassen|verwenden|annehmen|setzen|speichern|zustimmen|auswählen)?\.?\s*$/is,
 
+    // continue with only necessary/functional cookies
+    /^(weiter\s+|nur\s+)?mit\s+(nur\s+|ausschließlich\s+|lediglich\s+)?(den\s+)?(technisch\s+)?(notwendigen|essenziellen|essentiellen|erforderlichen|funktionalen|funktionellen)\s+(cookies\s+)?fortfahren\.?$/is,
+
     // continue without consent
     /(^|\s)(ohne\s+(zu\s+)?(einwilligung|zustimmung|einverständnis|annahme|annehmen|akzeptanz|akzeptieren)|(weiter|fortfahren)\s+ohne)/is,
 
@@ -487,8 +493,6 @@ const REJECT_PATTERNS_GERMAN = [
     'nicht einverstanden',
     'ich lehne ab',
     'mit erforderlichen einstellungen fortfahren',
-    'mit erforderlichen cookies fortfahren',
-    'mit notwendigen fortfahren',
 ];
 
 const REJECT_PATTERNS_ITALIAN = [
@@ -530,7 +534,7 @@ const REJECT_PATTERNS_SPANISH = [
     /(^|\s)(rechaz|recház|deneg|negar|declin)/is,
 
     // accept/allow/use (only) necessary / essential / technical / functional / own
-    /^\s*(aceptar?|acepta|permitir|permite|usar|utilizar)?\s*(solo|sólo|només|únicamente)?\s*(las?\s+|los\s+)?(cookies?\s+)?(estrictamente\s+)?(necesari\w*|esencial\w*|técnic\w*|obligatori\w*|funcional\w*|propias)\s*$/is,
+    /^\s*(aceptar?|acepta|permitir|permite|usar|utilizar)?\s*(solo|sólo|només|únicamente)?\s*(las?\s+|los\s+)?(cookies?\s+)?(estrictamente\s+)?(necesari\w*|esencial\w*|imprescindibl\w*|técnic\w*|obligatori\w*|funcional\w*|propias)\s*$/is,
 
     // "solo/sólo/no, sólo ... necessary/essential"
     /^(no,?\s+)?(solo|sólo|només)\s+(usar\s+|las?\s+|los\s+|lo\s+)?.{0,20}(necesari|esencial|estrictamente)/is,
@@ -698,7 +702,7 @@ export const BUTTON_NEVER_MATCH_PATTERNS = [
     /sin cookies .{0,10}euro/s,
 
     // Polish (PL)
-    /subskrybuj/,
+    /subskrybuj|subskrypcj/,
 
     // Russian (RU): paywall/subscription wording, e.g. "отказаться от подписки", "оплатить"
     /подписатьс|подписк|оплатит|оплачива/is,
@@ -1051,7 +1055,7 @@ export const ACKNOWLEDGE_PATTERNS = [
     /^(ok|okay|oké|okey|k)([ .!,]*)(got it|verstanden|compris|rozumiem|thanks|gracias|ik begrijp( dat| het)?|continue to website|pour moi|fermer)?[ .!]*$/is,
 
     // "understood" / "got it" / "that's ok" (multilingual)
-    /^(i understand|understood|got it|thats (ok|fine|okay)|alright|alles klar|in ordnung|verstanden|begrepen|jai compris|je comprends|compris|ik begrijp het|ik snap het|entendido|c(e)?st ok pour moi)[ !.,]*(merci|bedankt|dismiss this banner)?[ !.]*$/is,
+    /^(i understand|understood|got it|thats (ok|fine|okay)|alright|alles klar|in ordnung|verstanden|ich verstehe|ho capito|jag förstår|begrepen|jai compris|je comprends|compris|ik begrijp het|ik snap het|entendido|c(e)?st ok pour moi)[ !.,]*(merci|bedankt|dismiss this banner)?[ !.]*$/is,
 
     // confirm
     /^(confirm|bestätigen|bevestigen|confirmar|potwierdź)[ !.]*$/is,
@@ -1088,8 +1092,16 @@ export const ACKNOWLEDGE_PATTERNS = [
     'vale',
     '¡vamos!',
 
+    // Portuguese (PT)
+    'prosseguir',
+
     // Catalan (CA)
     /^(ho )?(entenc|entès|entesos)[ !.]*$/s,
+
+    // Portuguese (PT)
+    // e.g. "ciente" / "estou ciente" (I'm aware), "entendi" (got it)
+    /^(estou )?ciente[ !.]*$/s,
+    /^entendi[ !.]*$/s,
 
     // Polish (PL)
     'kontynuuj',

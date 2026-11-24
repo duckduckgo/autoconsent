@@ -1,0 +1,32 @@
+{
+    "name": "jtl-consent-manager",
+    "vendorUrl": "https://www.jtl-software.de/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#consent-manager #consent-banner #consent-banner-btn-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#consent-manager #consent-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#consent-manager #consent-banner-btn-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#consent-manager #consent-banner-btn-close"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#consent-manager #consent-banner",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

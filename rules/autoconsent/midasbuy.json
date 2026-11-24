@@ -1,0 +1,36 @@
+{
+    "name": "midasbuy",
+    "vendorUrl": "https://www.midasbuy.com/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?midasbuy\\.com/"
+    },
+    "prehideSelectors": ["[data-component-id=\"cookie\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-component-id=\"cookie\"] [data-id=\"refuse\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-component-id=\"cookie\"] [data-id=\"refuse\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-component-id=\"cookie\"] [data-id=\"accept\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-component-id=\"cookie\"] [data-id=\"refuse\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "select_cookie=1"
+        },
+        {
+            "cookieContains": "cookie_control=0|0|0"
+        }
+    ]
+}

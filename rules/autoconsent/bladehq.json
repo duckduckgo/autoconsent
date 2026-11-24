@@ -1,0 +1,13 @@
+{
+    "name": "bladehq",
+    "runContext": { "urlPattern": "^https?://(www\\.)?bladehq\\.com/" },
+    "prehideSelectors": [".message-accept-container"],
+    "detectCmp": [{ "exists": ".message-accept-container[style*='flex'] .message-x" }],
+    "detectPopup": [{ "visible": ".message-accept-container" }],
+    "optIn": [{ "waitForThenClick": ".message-accept-container .message-x", "retry": 5, "retryInterval": 500 }],
+    "optOut": [
+        { "waitForThenClick": ".message-accept-container .message-x", "retry": 5, "retryInterval": 500 },
+        { "waitForVisible": ".message-accept-container", "check": "none" }
+    ],
+    "test": [{ "visible": ".message-accept-container", "check": "none" }]
+}

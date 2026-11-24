@@ -1,0 +1,21 @@
+{
+    "name": "makemytrip",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?makemytrip\\.(com|global)/"
+    },
+    "prehideSelectors": [".cookiesModalOuterWrapper"],
+    "detectCmp": [{ "exists": ".cookiesModalOuterWrapper [data-cy=ManageButton]" }],
+    "detectPopup": [{ "visible": ".cookiesModalOuterWrapper" }],
+    "optIn": [{ "waitForThenClick": ".cookiesModalOuterWrapper .cookiesModal__acceptCookiesBtn" }],
+    "optOut": [
+        { "waitForThenClick": ".cookiesModalOuterWrapper [data-cy=ManageButton]" },
+        { "waitForVisible": "[data-cy=settingsModal] [data-cy=saveSettingsCta]" },
+        {
+            "if": { "exists": "[data-cy=settingsModal] input.switch-checkbox:checked" },
+            "then": [{ "click": "[data-cy=settingsModal] input.switch-checkbox:checked + label", "all": true }]
+        },
+        { "click": "[data-cy=settingsModal] [data-cy=saveSettingsCta]" },
+        { "waitForVisible": "[data-cy=settingsModal]", "check": "none", "timeout": 3000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "GDPR_C=11" }]
+}

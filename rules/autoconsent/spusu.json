@@ -1,0 +1,18 @@
+{
+    "name": "spusu",
+    "vendorUrl": "https://www.spusu.co.uk/",
+    "prehideSelectors": ["dialog.modal-overlay:has(.kaiserschmarn-banner)"],
+    "detectCmp": [{ "exists": ".kaiserschmarn-banner" }],
+    "detectPopup": [{ "visible": ".kaiserschmarn-banner" }],
+    "optIn": [{ "waitForThenClick": ".kaiserschmarn-banner button.green" }],
+    "optOut": [
+        { "waitForThenClick": ".kaiserschmarn-banner button.light-green" },
+        { "waitFor": ".kaiserschmarn-banner .checkbox-option" },
+        {
+            "if": { "exists": ".kaiserschmarn-banner .checkbox-option input:checked:not([disabled])" },
+            "then": [{ "click": ".kaiserschmarn-banner .checkbox-option input:checked:not([disabled])", "all": true }]
+        },
+        { "waitForThenClick": ".kaiserschmarn-banner button.light-green" }
+    ],
+    "test": [{ "cookieContains": "acceptSpusuCookies=necessary" }]
+}

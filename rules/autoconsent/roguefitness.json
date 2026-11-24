@@ -1,0 +1,18 @@
+{
+    "name": "roguefitness",
+    "vendorUrl": "https://www.roguefitness.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?roguefitness\\.com/"
+    },
+    "prehideSelectors": ["#cookie-agree"],
+    "detectCmp": [{ "exists": "#cookie-agree .cookie-intro-container" }],
+    "detectPopup": [{ "visible": "#cookie-agree .cookie-intro-container" }],
+    "optIn": [{ "waitForThenClick": "#cookie-agree .button-intro-container button.black" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-agree .button-intro-container button.gray" },
+        { "waitForVisible": "#cookie-agree .cookie-container label.checkbox:not(.disabled)" },
+        { "click": "#cookie-agree .cookie-container label.checkbox.checked:not(.disabled) input", "all": true, "optional": true },
+        { "waitForThenClick": "#cookie-agree .button-container button.black" }
+    ],
+    "test": [{ "cookieContains": "\"marketing\":false" }]
+}

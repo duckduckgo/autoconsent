@@ -1,0 +1,35 @@
+{
+    "name": "visit-x.net",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?visit-x\\.(net|us|co\\.uk)/"
+    },
+    "prehideSelectors": ["[class*='_cookies-root_']"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid='cookie-consent-accept-all']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid='cookie-consent-accept-all']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid='cookie-consent-accept-all']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid='cookie-consent-open-settings-button'], [class*='_vxcc__settings-trigger_']"
+        },
+        {
+            "waitForThenClick": "[data-testid='cookie-consent-settings-reject-all-button']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cc_cookie=%7B%22level%22%3A%5B%22necessary%22%5D"
+        }
+    ]
+}

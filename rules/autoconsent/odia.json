@@ -1,0 +1,12 @@
+{
+    "name": "odia.ig.com.br",
+    "runContext": {
+        "urlPattern": "^https?://odia\\.ig\\.com\\.br/"
+    },
+    "prehideSelectors": ["#policy-cookies-banner"],
+    "detectCmp": [{ "exists": "#policy-cookies-banner [onclick*='acceptLGPD']" }],
+    "detectPopup": [{ "visible": "#policy-cookies-banner" }],
+    "optIn": [{ "waitForThenClick": "#policy-cookies-banner [onclick*='acceptLGPD']" }],
+    "optOut": [{ "waitForThenClick": "#policy-cookies-banner [onclick*='acceptLGPD']" }],
+    "test": [{ "cookieContains": "LGPD-ACCEPTED=" }]
+}

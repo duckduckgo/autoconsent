@@ -1,0 +1,47 @@
+{
+    "name": "keurig.com",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?keurig\\.com/"
+    },
+    "prehideSelectors": ["#cookies-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookies-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookies-banner > button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookies-banner > button"
+        },
+        {
+            "comment": "Tealium consent API is ready once its tracking script is injected",
+            "waitFor": "script[src*='/utag.v.js']",
+            "timeout": 5000,
+            "optional": true
+        },
+        {
+            "eval": "EVAL_TEALIUM_1",
+            "optional": true
+        },
+        {
+            "eval": "EVAL_TEALIUM_DONOTSELL",
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookies-banner",
+            "check": "none"
+        }
+    ]
+}

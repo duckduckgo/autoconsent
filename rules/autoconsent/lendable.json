@@ -3,31 +3,45 @@
     "runContext": {
         "urlPattern": "^https?://([\\w-]+\\.)?lendable\\.co\\.uk/"
     },
-    "prehideSelectors": ["[class*=\"CookiesBanner_cookies-banner\"]"],
+    "prehideSelectors": ["section[aria-label=\"Cookie banner\"]"],
     "detectCmp": [
         {
-            "exists": "[class*=\"CookiesBanner_cookies-banner\"] [class*=\"CookiesBanner_buttons\"] button"
+            "exists": "section[aria-label=\"Cookie banner\"] button[aria-haspopup=\"dialog\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "[class*=\"CookiesBanner_cookies-banner\"]"
+            "visible": "section[aria-label=\"Cookie banner\"]"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "[class*=\"CookiesBanner_buttons\"] button:last-child"
+            "waitForThenClick": "section[aria-label=\"Cookie banner\"] button[type=\"button\"]"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "[class*=\"CookiesBanner_buttons\"] button:first-child"
+            "waitForThenClick": "section[aria-label=\"Cookie banner\"] button[aria-haspopup=\"dialog\"]",
+            "comment": "Manage cookies"
         },
         {
-            "waitForThenClick": "[role=\"dialog\"] [class*=\"_actions_\"] button:first-child"
+            "any": [
+                {
+                    "waitForVisible": "[role=\"dialog\"] button[class*=\"_secondary_\"]",
+                    "timeout": 2000
+                },
+                {
+                    "click": "section[aria-label=\"Cookie banner\"] button[aria-haspopup=\"dialog\"]"
+                }
+            ],
+            "comment": "the first click can land before the handler is attached"
         },
         {
-            "waitForVisible": "[class*=\"CookiesBanner_cookies-banner\"]",
+            "waitForThenClick": "[role=\"dialog\"] button[class*=\"_secondary_\"]",
+            "comment": "Reject all"
+        },
+        {
+            "waitForVisible": "section[aria-label=\"Cookie banner\"]",
             "check": "none"
         }
     ],

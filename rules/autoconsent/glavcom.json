@@ -1,0 +1,12 @@
+{
+    "name": "glavcom.ua",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?glavcom\\.ua/"
+    },
+    "prehideSelectors": [".cookie-label"],
+    "detectCmp": [{ "visible": ".cookie-label .js-cookies-hide" }],
+    "detectPopup": [{ "visible": ".cookie-label" }],
+    "optIn": [{ "waitForThenClick": ".cookie-label .js-cookies-hide" }],
+    "optOut": [{ "waitForThenClick": ".cookie-label .close-btn" }],
+    "test": [{ "cookieContains": "saved_agree=1" }]
+}

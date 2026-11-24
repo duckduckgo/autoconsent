@@ -1,0 +1,35 @@
+{
+    "name": "altin.in",
+    "vendorUrl": "https://altin.in/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?altin\\.in/"
+    },
+    "prehideSelectors": ["#kvkk"],
+    "detectCmp": [
+        {
+            "exists": "#kvkk a.onayliyor"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#kvkk"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#kvkk a.onayliyor"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#kvkk"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#kvkk",
+            "check": "none"
+        }
+    ]
+}
