@@ -25,14 +25,31 @@
     ],
     "optOut": [
         {
-            "waitForVisible": "#ccAcceptOnlyFunctional",
+            "waitForVisible": "#ccAcceptOnlyFunctional, #ccAcceptButton",
             "check": "any"
         },
         {
             "wait": 500
         },
         {
-            "waitForThenClick": "#ccAcceptOnlyFunctional"
+            "if": {
+                "exists": "#ccAcceptOnlyFunctional"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#ccAcceptOnlyFunctional"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#ccSettings input.cookie-setting--switch--group:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#ccAcceptButton"
+                }
+            ]
         }
     ]
 }

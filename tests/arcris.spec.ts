@@ -1,3 +1,7 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('acris', ['https://www.acris.at/', 'https://www.arctic.de/en/'], {});
+generateCMPTests(
+    'acris',
+    ['https://www.acris.at/', 'https://www.arctic.de/en/', 'https://www.ichliebedesign.de/', 'https://www.bresser.de/'],
+    {},
+);
