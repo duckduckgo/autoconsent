@@ -1,0 +1,29 @@
+{
+    "name": "globo-lgpd",
+    "vendorUrl": "https://privacidade.globo.com/",
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner-lgpd .cookie-banner-lgpd_privacy-portal-link[href*=\"privacidade.globo.com\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner-lgpd"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner-lgpd .cookie-banner-lgpd_accept-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-banner-lgpd .cookie-banner-lgpd_accept-button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-banner-consent-accepted=true"
+        }
+    ]
+}
