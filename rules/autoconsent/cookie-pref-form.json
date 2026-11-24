@@ -1,0 +1,48 @@
+{
+    "name": "cookie-pref-form",
+    "prehideSelectors": ["form.cookie-pref-form .cookie-bar"],
+    "detectCmp": [
+        {
+            "exists": "form.cookie-pref-form .cookie-bar .cookie-bar--action"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "form.cookie-pref-form .cookie-bar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "form.cookie-pref-form .cookie-bar .cookie-bar--submit"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "form.cookie-pref-form .cookie-bar .cookie-bar--reject"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "form.cookie-pref-form .cookie-bar .cookie-bar--reject"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "form.cookie-pref-form .show-cookie-pref"
+                },
+                {
+                    "waitForVisible": "form.cookie-pref-form .cookie-pref-save"
+                },
+                {
+                    "click": "form.cookie-pref-form .cookie-pref-overlay input[type=checkbox]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "form.cookie-pref-form .cookie-pref-save"
+                }
+            ]
+        }
+    ],
+    "test": []
+}

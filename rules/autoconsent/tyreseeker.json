@@ -1,0 +1,44 @@
+{
+    "name": "tyreseeker",
+    "vendorUrl": "https://www.tyreseeker.co.uk/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookieBanner #manage[data-bs-target='#cookieModalSettings']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieBanner .modal-content"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieBanner #confirm"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieBanner #manage"
+        },
+        {
+            "waitForVisible": "#cookieModalSettings form button[type=submit]"
+        },
+        {
+            "wait": 500
+        },
+        {
+            "click": "#cookieModalSettings form input[type=checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#cookieModalSettings form button[type=submit]"
+        },
+        {
+            "waitForVisible": "#cookieModalSettings .modal-content",
+            "check": "none"
+        }
+    ]
+}

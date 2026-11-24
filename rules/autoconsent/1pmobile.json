@@ -1,0 +1,44 @@
+{
+    "name": "1pmobile.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?1pmobile\\.com/"
+    },
+    "prehideSelectors": [".cookie-disclaimer"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-disclaimer a[href*='cprefs=change'], #myModal #cookieprefs"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-disclaimer, #myModal #cookieprefs"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-disclaimer a[href*='cprefs=agree'], #myModal #cookieprefs a[href*='cprefs=agree']"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#myModal #cookieprefs"
+            },
+            "then": [
+                {
+                    "click": "#cookieprefs input[type=checkbox]:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#cookieprefs input[type=submit]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cookie-disclaimer a[href*='cprefs=change']"
+                }
+            ]
+        }
+    ]
+}

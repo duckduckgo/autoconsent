@@ -1,0 +1,48 @@
+{
+    "name": "enzuzo",
+    "vendorUrl": "https://www.enzuzo.com/",
+    "prehideSelectors": ["#ez-cookie-notification"],
+    "detectCmp": [
+        {
+            "exists": "#ez-cookie-notification"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#ez-cookie-notification"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#ez-cookie-notification__accept"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#ez-cookie-notification__decline"
+            },
+            "then": [
+                {
+                    "click": "#ez-cookie-notification__decline"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#notificationManagerLink"
+                },
+                {
+                    "waitForThenClick": "#ez-reject-modal"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "cookies-marketing=false"
+        }
+    ]
+}

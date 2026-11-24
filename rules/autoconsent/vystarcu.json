@@ -1,0 +1,17 @@
+{
+    "name": "vystarcu.org",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?vystarcu\\.org/"
+    },
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [{ "exists": "#cookie-banner [class*='manage-preferences']" }],
+    "detectPopup": [{ "visible": "#cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner a[class*='buttonprimary']" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-banner [class*='manage-preferences']" },
+        { "waitForVisible": "[class*='cookies-modal'] form" },
+        { "click": "[class*='cookies-modal'] form input[type=checkbox]:checked", "all": true, "optional": true },
+        { "waitForThenClick": "[class*='cookies-modal'] .form-group-btn a" }
+    ],
+    "test": [{ "cookieContains": "marketing_storage=denied" }, { "cookieContains": "performance_storage=denied" }]
+}

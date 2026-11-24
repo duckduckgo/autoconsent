@@ -1,3 +1,7 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('EU Cookie Law', ['https://pv-magazine-usa.com/', 'https://www.prolificliving.com/'], {});
+generateCMPTests(
+    'EU Cookie Law',
+    ['https://cryptocurrencyfacts.com/', 'https://www.sharkthemes.com/', 'https://www.umrechnung-zoll-cm.de/'],
+    {},
+);

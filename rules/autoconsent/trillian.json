@@ -1,0 +1,10 @@
+{
+    "name": "trillian",
+    "vendorUrl": "https://www.ouh.nhs.uk/",
+    "prehideSelectors": [".trillian-cookie-consent-banner"],
+    "detectCmp": [{ "exists": ".trillian-cookie-consent-banner .tpc2-reject-all" }],
+    "detectPopup": [{ "visible": ".trillian-cookie-consent-banner" }],
+    "optIn": [{ "waitForThenClick": ".trillian-cookie-consent-banner .tpc2-accept-all" }],
+    "optOut": [{ "waitForThenClick": ".trillian-cookie-consent-banner .tpc2-reject-all" }],
+    "test": [{ "cookieContains": "t_privacy_confirmed=true" }]
+}

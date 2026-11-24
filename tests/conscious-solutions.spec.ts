@@ -1,0 +1,10 @@
+import generateCMPTests from '../playwright/runner';
+
+generateCMPTests('conscious-solutions', [
+    'https://www.jdspicer.co.uk/',
+    'https://www.stephensons.co.uk/',
+    'https://www.conscious.co.uk/',
+    'https://www.ashtonslegal.co.uk/',
+    'https://www.hansells.co.uk/',
+    'https://www.stuartslaw.com/',
+]);

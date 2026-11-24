@@ -1,0 +1,19 @@
+{
+    "name": "compricer",
+    "vendorUrl": "https://www.compricer.se/",
+    "prehideSelectors": ["#cookie-banner.cookie-banner", "#cookie-consent"],
+    "detectCmp": [{ "exists": "#cookie-button-settings-accept" }, { "exists": "#cookie_consent_Necessary" }],
+    "detectPopup": [{ "visible": "#cookie-button-settings" }],
+    "optIn": [{ "waitForThenClick": "#cookie_consent_accept_all, #cookie-consent-accept-all" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-button-settings" },
+        { "waitForVisible": "#cookie-button-settings-accept" },
+        { "click": "#cookie_consent_Product:checked, #cookie_consent_Marketing:checked", "all": true, "optional": true },
+        { "click": "#cookie-button-settings-accept" },
+        { "waitForVisible": "#cookie-button-settings-accept", "check": "none", "optional": true }
+    ],
+    "test": [
+        { "waitForVisible": "#cookie-button-settings", "check": "none", "timeout": 2000 },
+        { "exists": "#cookie_consent_Product:checked, #cookie_consent_Marketing:checked", "negated": true }
+    ]
+}

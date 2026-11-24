@@ -1,0 +1,25 @@
+{
+    "name": "grocefully",
+    "vendorUrl": "https://www.grocefully.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?grocefully\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "xpath///div[@role='dialog']//h2[normalize-space(.)='We value your privacy']" }],
+    "detectPopup": [{ "visible": "xpath///div[@role='dialog']//h2[normalize-space(.)='We value your privacy']" }],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog'][.//h2[normalize-space(.)='We value your privacy']]//button[normalize-space(.)='Allow All']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@role='dialog'][.//h2[normalize-space(.)='We value your privacy']]//button[normalize-space(.)='Manage Cookies']"
+        },
+        { "waitForVisible": "[role='dialog'] button[role='switch']" },
+        { "click": "[role='dialog'] button[role='switch'][aria-checked='true']:not([disabled])", "all": true, "optional": true },
+        {
+            "waitForThenClick": "xpath///div[@role='dialog'][.//button[@role='switch']]//button[normalize-space(.)='Save Preferences']"
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "name": "ntvspor.net",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?ntvspor\\.net/"
+    },
+    "prehideSelectors": [".bar-inner"],
+    "detectCmp": [{ "visible": ".bar-inner > button" }],
+    "detectPopup": [{ "visible": ".bar-inner > button" }],
+    "optIn": [{ "waitForThenClick": ".bar-inner > button" }],
+    "optOut": [
+        { "waitForThenClick": ".bar-inner > button" },
+        { "waitFor": ".fc-consent-root .fc-dialog-container", "timeout": 5000, "optional": true },
+        {
+            "if": { "exists": ".fc-consent-root .fc-dialog-container" },
+            "then": [
+                {
+                    "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options" },
+                    "then": [{ "click": ".fc-cta-do-not-consent,.fc-cta-manage-options" }],
+                    "else": [{ "exists": ".fc-li-only-placeholder" }]
+                },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "isPolicyCookieForAllPage=1" }]
+}

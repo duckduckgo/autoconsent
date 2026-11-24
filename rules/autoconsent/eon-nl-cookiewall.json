@@ -1,0 +1,30 @@
+{
+    "name": "eon-nl-cookiewall",
+    "vendorUrl": "https://www.essent.nl/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "wl-cookiewall [data-automation-id='cookiewall-reject']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["wl-cookiewall crnt-dialog", "dialog"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "wl-cookiewall [data-automation-id='cookiewall-accept']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "wl-cookiewall [data-automation-id='cookiewall-reject']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "consentLevel=1"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "name": "tiresize.com",
+    "vendorUrl": "https://tiresize.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?tiresize\\.com/"
+    },
+    "prehideSelectors": ["#CookieNotice"],
+    "detectCmp": [{ "exists": "#CookieNotice > div[onclick]" }],
+    "detectPopup": [{ "visible": "#CookieNotice" }],
+    "optIn": [{ "waitForThenClick": "#CookieNotice > div[onclick]" }],
+    "optOut": [
+        { "waitForThenClick": "#CookieNotice > div[onclick]" },
+        { "waitForVisible": "#CookieNotice", "check": "none", "timeout": 2000 }
+    ],
+    "test": [{ "cookieContains": "Notice=yes" }]
+}

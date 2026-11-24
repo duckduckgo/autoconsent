@@ -1,0 +1,38 @@
+{
+    "name": "gjerrigknark",
+    "vendorUrl": "https://gjerrigknark.com/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?gjerrigknark\\.com/"
+    },
+    "prehideSelectors": ["[class*=\"CookieConsentBanner_banner\"]"],
+    "detectCmp": [
+        {
+            "exists": "[class*=\"CookieConsentBanner_banner\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*=\"CookieConsentBanner_banner\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[class*=\"CookieConsentBanner_acceptButton\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[class*=\"CookieConsentBanner_customizeButton\"]"
+        },
+        {
+            "waitForThenClick": "[class*=\"CookiePreferencesModal_rejectButton\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "gk-cookie-consent=%7B%22necessary%22%3Atrue%2C%22analytics%22%3Afalse%2C%22marketing%22%3Afalse%2C%22functional%22%3Afalse%7D"
+        }
+    ]
+}

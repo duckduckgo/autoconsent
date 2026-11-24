@@ -1,0 +1,21 @@
+{
+    "name": "chimnie-co-uk",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?chimnie\\.co\\.uk/"
+    },
+    "prehideSelectors": ["div[role=\"dialog\"][aria-label=\"Cookie settings\"]"],
+    "detectCmp": [{ "exists": "div[role=\"dialog\"][aria-label=\"Cookie settings\"]" }],
+    "detectPopup": [{ "visible": "div[role=\"dialog\"][aria-label=\"Cookie settings\"]" }],
+    "optIn": [
+        { "waitForThenClick": "xpath///div[@role=\"dialog\"][@aria-label=\"Cookie settings\"]//button[normalize-space()=\"Accept\"]" }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@role=\"dialog\"][@aria-label=\"Cookie settings\"]//button[normalize-space()=\"Cookie settings\"]"
+        },
+        {
+            "waitForThenClick": "xpath///div[@role=\"dialog\"][@aria-label=\"Cookie settings\"]//button[normalize-space()=\"Do not accept\"]"
+        }
+    ],
+    "test": [{ "waitForVisible": "div[role=\"dialog\"][aria-label=\"Cookie settings\"]", "check": "none", "timeout": 2000 }]
+}

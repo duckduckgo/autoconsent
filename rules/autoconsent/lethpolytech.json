@@ -1,0 +1,40 @@
+{
+    "name": "lethpolytech",
+    "vendorUrl": "https://lethpolytech.ca/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lethpolytech\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": ".consent-banner .cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".consent-banner .cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "waitForVisible": ".consent-banner .cookie-decline"
+        },
+        {
+            "eval": "EVAL_LETHPOLYTECH_DECLINE",
+            "comment": "Decline"
+        },
+        {
+            "waitForVisible": ".consent-banner",
+            "check": "none",
+            "timeout": 3000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "tracking_consentv2=declined"
+        }
+    ]
+}

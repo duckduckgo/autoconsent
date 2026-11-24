@@ -1,0 +1,29 @@
+{
+    "name": "cdu-edu-au",
+    "vendorUrl": "https://www.cdu.edu.au/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?cdu\\.edu\\.au/"
+    },
+    "prehideSelectors": ["#cookie-compliance"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-compliance [data-cookie-accept]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-compliance"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-compliance [data-cookie-accept]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookie-compliance"
+        }
+    ]
+}

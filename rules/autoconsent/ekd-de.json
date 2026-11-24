@@ -1,0 +1,32 @@
+{
+    "name": "ekd.de",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?ekd\\.de/"
+    },
+    "prehideSelectors": ["#huk_cookie_prefernce_panel"],
+    "detectCmp": [
+        {
+            "exists": "#huk_cookie_prefernce_panel #EU_OPIN_REJECT"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#huk_cookie_prefernce_panel"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#huk_cookie_prefernce_panel #EU_OPIN_CANCEL"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#huk_cookie_prefernce_panel #EU_OPIN_REJECT"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "EKD_OPTIN=1"
+        }
+    ]
+}

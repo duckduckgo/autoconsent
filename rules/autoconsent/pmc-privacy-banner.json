@@ -1,9 +1,43 @@
 {
     "name": "pmc-privacy-banner",
-    "prehideSelectors": ["aside[aria-labelledby=\"pmc-privacy-banner-heading\"]"],
-    "detectCmp": [{ "exists": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]" }],
-    "detectPopup": [{ "visible": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]" }],
-    "optIn": [{ "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button" }],
-    "optOut": [{ "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button" }],
-    "test": [{ "visible": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"]", "check": "none" }]
+    "prehideSelectors": [
+        "aside[aria-labelledby=\"pmc-privacy-banner-heading\"], aside[class*=\"PrivacyPolicyBannerstyles__PrivacyBannerRoot\"]"
+    ],
+    "detectCmp": [
+        {
+            "exists": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"], aside[class*=\"PrivacyPolicyBannerstyles__PrivacyBannerRoot\"]"
+        },
+        {
+            "exists": "#onetrust-consent-sdk"
+        },
+        {
+            "exists": "#onetrust-banner-sdk",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"], aside[class*=\"PrivacyPolicyBannerstyles__PrivacyBannerRoot\"]"
+        },
+        {
+            "exists": "#onetrust-banner-sdk",
+            "negated": true
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button, aside[class*=\"PrivacyPolicyBannerstyles__PrivacyBannerRoot\"] button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"] button, aside[class*=\"PrivacyPolicyBannerstyles__PrivacyBannerRoot\"] button"
+        }
+    ],
+    "test": [
+        {
+            "visible": "aside[aria-labelledby=\"pmc-privacy-banner-heading\"], aside[class*=\"PrivacyPolicyBannerstyles__PrivacyBannerRoot\"]",
+            "check": "none"
+        }
+    ]
 }

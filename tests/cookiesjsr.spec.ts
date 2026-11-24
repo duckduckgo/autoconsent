@@ -6,4 +6,7 @@ generateCMPTests('cookiesjsr', [
     'https://www.csir.co.za/',
     'https://www.drive.gr/',
     'https://www.sralab.org/',
+    'https://www.literatuurgeschiedenis.org/',
+    'https://www.curio.nl/',
+    'https://www.scotlandspeople.gov.uk/',
 ]);

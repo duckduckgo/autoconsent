@@ -1,0 +1,21 @@
+{
+    "name": "surfshark",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?surfshark\\.com/"
+    },
+    "prehideSelectors": ["[data-test=cookie-consent-modal]"],
+    "detectCmp": [{ "exists": "[data-test=cookie-consent-modal]" }],
+    "detectPopup": [{ "visible": "[data-test=cookie-consent-modal]" }],
+    "optIn": [{ "waitForThenClick": "[data-test=cookie-consent-modal] [data-test=cookie-consent-accept-all]" }],
+    "optOut": [
+        {
+            "if": { "exists": "[data-test=cookie-consent-modal] [data-test=cookie-consent-decline-all]" },
+            "then": [{ "click": "[data-test=cookie-consent-modal] [data-test=cookie-consent-decline-all]" }],
+            "else": [
+                { "click": "[data-test=cookie-consent-modal] [data-test=cookie-consent-preferences]" },
+                { "waitForThenClick": "[data-test=cookie-consent-settings-decline-all]" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "surfshark-consent-state=a:0|m:0" }]
+}

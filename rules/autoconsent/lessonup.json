@@ -1,0 +1,24 @@
+{
+    "name": "lessonup",
+    "vendorUrl": "https://www.lessonup.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?lessonup\\.com/"
+    },
+    "prehideSelectors": ["#cookie-modal"],
+    "detectCmp": [{ "exists": "#cookie-modal [class*='CookieModal_changeCookies']" }],
+    "detectPopup": [{ "visible": "#cookie-modal [class*='CookieModal_popup']" }],
+    "optIn": [{ "waitForThenClick": "#cookie-modal [class*='CookieModal_acceptAll']" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-modal [class*='CookieModal_changeCookies']" },
+        { "waitForVisible": "form[class*='CookieBlock_form'] button" },
+        {
+            "if": { "exists": "form[class*='CookieBlock_form'] input:checked:not([disabled])" },
+            "then": [{ "click": "form[class*='CookieBlock_form'] input:checked:not([disabled])", "all": true }]
+        },
+        { "click": "form[class*='CookieBlock_form'] button" }
+    ],
+    "test": [
+        { "waitForVisible": "#cookie-modal", "check": "none", "timeout": 3000 },
+        { "cookieContains": "cookiePreferences-13_04_2022=[]" }
+    ]
+}

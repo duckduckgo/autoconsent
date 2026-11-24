@@ -1,0 +1,40 @@
+{
+    "name": "autoscout24",
+    "vendorUrl": "https://www.autoscout24.com/",
+    "prehideSelectors": ["#as24-cmp-popup"],
+    "detectCmp": [
+        {
+            "exists": "#as24-cmp-popup [data-testid=\"as24-cmp-container\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#as24-cmp-popup [data-testid=\"as24-cmp-container\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#as24-cmp-popup [data-testid=\"as24-cmp-accept-all-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#as24-cmp-popup [data-testid=\"as24-cmp-decline-all-button\"]"
+        },
+        {
+            "comment": "the full CMP script re-shows the popup if it initializes before the consent cookie is written",
+            "waitForThenClick": "#as24-cmp-popup [data-testid=\"as24-cmp-decline-all-button\"]",
+            "timeout": 1000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "wait": 500,
+            "comment": "consent cookie is written asynchronously after the popup closes"
+        },
+        {
+            "cookieContains": "%22consents%22%3A%5B%5D%7D%2C%22vendor%22"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "name": "matspar-se",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?matspar\\.se/"
+    },
+    "prehideSelectors": ["#app div:has(> div > img[src*='/illustrations/cookie.'])"],
+    "detectCmp": [{ "exists": "xpath///div[@id='app']//div[div/img[contains(@src, '/illustrations/cookie.')]]" }],
+    "detectPopup": [{ "visible": "xpath///div[@id='app']//div[div/img[contains(@src, '/illustrations/cookie.')]]" }],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[@id='app']//div[div/img[contains(@src, '/illustrations/cookie.')]]//button[normalize-space(.)='Jag godkänner']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@id='app']//div[div/img[contains(@src, '/illustrations/cookie.')]]//button[normalize-space(.)='Mina val']"
+        },
+        { "waitFor": "input[name='privacySettings']" },
+        {
+            "if": { "exists": "input[name='privacySettings']:checked" },
+            "then": [{ "click": "input[name='privacySettings']" }]
+        },
+        {
+            "click": "xpath///div[@id='app']//div[div/img[contains(@src, '/illustrations/cookie.')]]//button[normalize-space(.)='Jag godkänner']"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "xpath///div[@id='app']//div[div/img[contains(@src, '/illustrations/cookie.')]]",
+            "check": "none",
+            "timeout": 5000
+        }
+    ]
+}

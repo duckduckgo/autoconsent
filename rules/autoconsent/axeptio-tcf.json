@@ -1,0 +1,35 @@
+{
+    "name": "axeptio-tcf",
+    "_metadata": {
+        "vendorUrl": "https://www.axeptio.eu/"
+    },
+    "prehideSelectors": ["body > [style*='--ax-primary-color']"],
+    "detectCmp": [
+        {
+            "any": [
+                { "exists": "script[src*='axept.io/tcf/']" },
+                { "exists": ["body > [style*='--ax-primary-color']", "[id^='axeptio_btn_']"] }
+            ]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["body > [style*='--ax-primary-color']", ".modal.show"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["body > [style*='--ax-primary-color']", "#axeptio_btn_acceptAll"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": ["body > [style*='--ax-primary-color']", "#axeptio_btn_dismiss, .modal-continue a"]
+        },
+        {
+            "if": { "exists": ["body > [style*='--ax-primary-color']", "#axeptio_btn_dismiss"] },
+            "then": [{ "click": ["body > [style*='--ax-primary-color']", "#axeptio_btn_dismiss"] }],
+            "else": [{ "click": ["body > [style*='--ax-primary-color']", ".modal-continue a"] }]
+        }
+    ]
+}

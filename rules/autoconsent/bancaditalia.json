@@ -1,0 +1,29 @@
+{
+    "name": "bancaditalia",
+    "prehideSelectors": ["#banner-privacy"],
+    "detectCmp": [
+        {
+            "exists": "#banner-privacy #cb-RejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#banner-privacy"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#banner-privacy #cb-AcceptAll"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#banner-privacy #cb-RejectAll"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookiepolicy=1-"
+        }
+    ]
+}

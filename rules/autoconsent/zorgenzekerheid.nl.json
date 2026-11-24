@@ -1,0 +1,13 @@
+{
+    "name": "zorgenzekerheid.nl",
+    "runContext": { "urlPattern": "^https?://(www\\.)?zorgenzekerheid\\.nl/" },
+    "prehideSelectors": ["zz-cookie-banner"],
+    "detectCmp": [{ "exists": ["zz-cookie-banner", "zz-drawer"] }],
+    "detectPopup": [{ "visible": ["zz-cookie-banner[visible]", "zz-drawer"] }],
+    "optIn": [{ "waitForThenClick": ["zz-cookie-banner", ".footer zz-button[variant=secondary]", "button"] }],
+    "optOut": [
+        { "waitForThenClick": ["zz-cookie-banner", ".footer zz-button[variant=ghost]", "button"] },
+        { "waitForVisible": ["zz-cookie-banner[visible]", "zz-drawer"], "check": "none" }
+    ],
+    "test": [{ "cookieContains": "user.consent=true" }, { "cookieContains": "consent.analytics=false" }]
+}

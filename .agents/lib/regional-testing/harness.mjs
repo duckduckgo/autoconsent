@@ -11,6 +11,8 @@
  */
 
 /** @typedef {import('../../../lib/types.js').Config} Config */
+/** @typedef {import('../../../lib/types.js').HeuristicLevel} HeuristicLevel */
+/** @typedef {import('../../../lib/types.js').RuleBundle} RuleBundle */
 
 /**
  * @typedef {import('../../../playwright/isolated-world.mjs').MessageTransport} MessageTransport
@@ -28,6 +30,10 @@
  * @property {number} [navigationTimeout=45000]
  * @property {number} [completionTimeout=45000]
  * @property {number} [detectionTimeout] - How long to wait for `cmpDetected` before giving up. Defaults to `completionTimeout`.
+ * @property {string[]} [disabledCmps=[]] - Rule names autoconsent skips, e.g. to see what handles the page without a rule.
+ * @property {HeuristicLevel} [heuristicMode='tier2'] - Heuristic level; 'tier1' leaves out popups whose only button is Accept.
+ * @property {string} [emulateDevice] - Playwright device to emulate on Chromium, e.g. 'Pixel 7'. Desktop when unset. Applied by the providers' `testUrl` when they open the page.
+ * @property {boolean} [gpc=true] - Send the Global Privacy Control signal, as DuckDuckGo browsers do. `false` tests a page the way a spec without the `gpc` option does.
  */
 
 /**
@@ -76,8 +82,10 @@
  */
 
 import fs from 'fs';
+import { createRequire } from 'module';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { devices } from 'playwright';
 import { injectIntoIsolatedWorld } from '../../../playwright/isolated-world.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -86,6 +94,9 @@ export const projectRoot = path.resolve(__dirname, '../../..');
 const contentScript = fs.readFileSync(path.join(projectRoot, 'dist/autoconsent.playwright.js'), 'utf8');
 const rulesJson = JSON.parse(fs.readFileSync(path.join(projectRoot, 'rules/rules.json'), 'utf-8'));
 const fullRules = rulesJson.autoconsent;
+const compactRules = JSON.parse(fs.readFileSync(path.join(projectRoot, 'rules/compact-rules.json'), 'utf-8'));
+// The built package entry, since this plain-JS harness can't import the TypeScript sources.
+const { filterCompactRules } = createRequire(import.meta.url)('../../../dist/autoconsent.cjs.js');
 
 /** All regions in the verification policy (every region with a regional proxy). */
 export const ALL_REGIONS = ['us', 'gb', 'au', 'ca', 'de', 'fr', 'nl', 'ch', 'no', 'it', 'es', 'pl', 'se', 'dk', 'jp'];
@@ -95,6 +106,52 @@ export const CORE_REGIONS = ['us', 'gb', 'de'];
 
 /** Expanded pass: escalation set covering all non-GDPR regimes plus GDPR representatives. */
 export const EXPANDED_REGIONS = ['us', 'gb', 'de', 'fr', 'nl', 'pl', 'au', 'ca', 'jp'];
+
+/**
+ * Browser context options that emulate a Playwright device on Chromium: viewport, user agent, touch.
+ * @param {string} [deviceName] - A key of Playwright's `devices`, e.g. 'Pixel 7'.
+ * @returns {import('playwright').BrowserContextOptions}
+ */
+export function deviceContextOptions(deviceName) {
+    if (!deviceName) {
+        return {};
+    }
+    const descriptor = devices[deviceName];
+    if (!descriptor) {
+        throw new Error(`Unknown Playwright device "${deviceName}".`);
+    }
+    // The browser is always Chromium here, whatever the device ships with.
+    const { defaultBrowserType: _browserType, ...contextOptions } = descriptor;
+    return contextOptions;
+}
+
+/**
+ * Send the Global Privacy Control signal from a page, the way the spec runner does: the
+ * `Sec-GPC: 1` request header and `navigator.globalPrivacyControl`. Call before navigating.
+ * @param {Page} page
+ */
+export async function enableGpc(page) {
+    await page.setExtraHTTPHeaders({ 'Sec-GPC': '1' });
+    await page.addInitScript(() => {
+        Object.defineProperty(Navigator.prototype, 'globalPrivacyControl', { get: () => true, configurable: true });
+    });
+}
+
+/**
+ * The rules a frame gets in reply to its `init`. Like the browser extension, a frame gets only the compact
+ * rules that can run in it, so ad-heavy pages don't parse the whole bundle in every iframe. Opt-in gets the
+ * full rules, since compact rules have no opt-in steps.
+ * @param {'optOut'|'optIn'|null} action
+ * @param {string} url - The frame's URL.
+ * @param {boolean} mainFrame
+ * @returns {RuleBundle}
+ */
+export function rulesForFrame(action, url, mainFrame) {
+    if (action === 'optIn') {
+        return { autoconsent: fullRules };
+    }
+    return { autoconsent: [], compact: filterCompactRules(compactRules, { url, mainFrame }) };
+}
 
 /**
  * Inject autoconsent into a page. Call before navigating to the target URL.
@@ -115,13 +172,13 @@ export async function injectAutoconsent(page, options, provider, extension = {})
     const config = {
         enabled: true,
         autoAction: action,
-        disabledCmps: [],
+        disabledCmps: options.disabledCmps ?? [],
         enablePrehide: true,
         detectRetries: 20,
         enableCosmeticRules: true,
         enableGeneratedRules: true,
         enableHeuristicDetection: true,
-        heuristicMode: 'tier2',
+        heuristicMode: options.heuristicMode ?? 'tier2',
         // The engine runs in the isolated world; eval snippets are forwarded to the main world.
         isMainWorld: false,
         logs: { lifecycle: true, rulesteps: true, detectionsteps: false, evals: false, errors: true, messages: false, waits: false },
@@ -139,13 +196,17 @@ export async function injectAutoconsent(page, options, provider, extension = {})
     // This split mirrors the browser extension: the engine lives in an isolated world,
     // while `eval` snippets execute in the page's main world.
     /** @type {MessageHandlerFactory} */
-    const createMessageHandler = ({ sendToContentScript, evalInMainWorld }) => {
+    const createMessageHandler = ({ sendToContentScript, evalInMainWorld, isMainFrame }) => {
         return async function handleMessage(msg, frameRef) {
             received.push(msg);
             extension.onMessage?.(msg);
             switch (msg.type) {
                 case 'init':
-                    await sendToContentScript(frameRef, { type: 'initResp', config, rules: { autoconsent: fullRules } });
+                    await sendToContentScript(frameRef, {
+                        type: 'initResp',
+                        config,
+                        rules: rulesForFrame(action, msg.url ?? '', isMainFrame(frameRef)),
+                    });
                     break;
                 case 'eval': {
                     let result = false;
@@ -297,6 +358,9 @@ export async function runTest(page, url, regionKey, options, provider) {
 
     try {
         const ctx = await provider.inject(page, options);
+        if (options.gpc !== false) {
+            await enableGpc(page);
+        }
         await page.goto(url, { waitUntil: 'commit', timeout: navTimeout });
         await provider.afterNavigation?.(page, ctx, options);
 
@@ -325,9 +389,12 @@ export async function runTest(page, url, regionKey, options, provider) {
             const tag = provider.screenshotTag ? `-${provider.screenshotTag}` : '';
             const filepath = path.join(screenshotsDir, `${domain}-${regionKey}${tag}-final.jpg`);
             fs.mkdirSync(screenshotsDir, { recursive: true });
-            await page.screenshot({ path: filepath, quality: 50, scale: 'css', timeout: 5000, type: 'jpeg' });
+            // A remote browser on a busy page can take many seconds before Playwright captures.
+            await page.screenshot({ path: filepath, quality: 50, scale: 'css', timeout: 30000, type: 'jpeg' });
             result.screenshotPaths.push(filepath);
-        } catch {}
+        } catch (e) {
+            result.errors.push(`Screenshot failed: ${String(e instanceof Error ? e.message : e).split('\n')[0]}`);
+        }
 
         return result;
     } catch (e) {

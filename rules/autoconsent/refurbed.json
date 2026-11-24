@@ -1,0 +1,40 @@
+{
+    "name": "refurbed",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?refurbed\\.(com|co\\.uk|[a-z]{2})/"
+    },
+    "prehideSelectors": ["#cookiebanner"],
+    "detectCmp": [
+        {
+            "exists": "#cookiebanner #acceptNecessaryCookiesBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiebanner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiebanner #acceptAllCookiesBtn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiebanner #acceptNecessaryCookiesBtn"
+        },
+        {
+            "waitForVisible": "#cookiebanner",
+            "check": "none",
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "refbConsent={%22categories%22:[%22necessary%22]%2C"
+        },
+        {
+            "cookieContains": "%22consent_date%22:1"
+        }
+    ]
+}

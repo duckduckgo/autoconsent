@@ -1,0 +1,10 @@
+{
+    "name": "nikkeibp",
+    "vendorUrl": "https://www.nikkeibp.co.jp/",
+    "prehideSelectors": [".bpPrivacy"],
+    "detectCmp": [{ "exists": ".bpPrivacy .bpPrivacy_button-close" }],
+    "detectPopup": [{ "visible": ".bpPrivacy .bpPrivacy_button-close" }],
+    "optIn": [{ "waitForThenClick": ".bpPrivacy .bpPrivacy_button-close" }],
+    "optOut": [{ "waitForThenClick": ".bpPrivacy .bpPrivacy_button-close" }],
+    "test": [{ "waitForVisible": ".bpPrivacy", "timeout": 1000, "check": "none" }]
+}

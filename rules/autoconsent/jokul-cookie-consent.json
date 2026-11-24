@@ -1,0 +1,28 @@
+{
+    "name": "jokul-cookie-consent",
+    "vendorUrl": "https://jokul.fremtind.no/",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "[data-testid=\"jkl-cookie-consent-godta\"]" }],
+    "detectPopup": [{ "visible": "[data-testid=\"jkl-cookie-consent-godta\"]" }],
+    "optIn": [
+        {
+            "if": { "exists": "[data-testid=\"jkl-cookie-consent-godta-alle\"]" },
+            "then": [{ "waitForThenClick": "[data-testid=\"jkl-cookie-consent-godta-alle\"]" }],
+            "else": [{ "waitForThenClick": "[data-testid=\"jkl-cookie-consent-godta\"]" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "[data-testid=\"jkl-cookie-consent-nekt\"]" },
+            "then": [{ "waitForThenClick": "[data-testid=\"jkl-cookie-consent-nekt\"]" }],
+            "else": [
+                {
+                    "if": { "exists": "[id^=\"jkl-cookie-modal\"] input[type=\"checkbox\"]:checked" },
+                    "then": [{ "click": "[id^=\"jkl-cookie-modal\"] input[type=\"checkbox\"]:checked", "all": true }]
+                },
+                { "waitForThenClick": "[data-testid=\"jkl-cookie-consent-godta\"]" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "\"statistics\":\"denied\"" }]
+}

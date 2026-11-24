@@ -1,0 +1,55 @@
+{
+    "name": "mercedes-benz-cmm",
+    "vendorUrl": "https://www.mercedes-benz.com/",
+    "prehideSelectors": ["cmm-cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ["cmm-cookie-banner", ".cmm-cookie-banner__wrapper"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["cmm-cookie-banner", ".cmm-cookie-banner__wrapper.visible"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["cmm-cookie-banner", "wb7-button[data-test=handle-accept-all-button]"]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ["cmm-cookie-banner", "wb7-button[data-test=handle-deny-button]"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["cmm-cookie-banner", "wb7-button[data-test=handle-deny-button]"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["cmm-cookie-banner", "wb7-button[data-test=toggle-cookie-details]"]
+                },
+                {
+                    "waitForVisible": ["cmm-cookie-banner", "wb7-button[data-test=handle-confirm-selection-button]"]
+                },
+                {
+                    "click": ["cmm-cookie-banner", "input[data-test=handle-category-change]:checked:not([disabled])"],
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ["cmm-cookie-banner", "wb7-button[data-test=handle-confirm-selection-button]"]
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["cmm-cookie-banner", ".cmm-cookie-banner__wrapper.visible"],
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}

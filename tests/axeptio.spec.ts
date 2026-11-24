@@ -13,4 +13,9 @@ generateCMPTests('axeptio', ['https://mistral.ai/pricing', 'https://mistral.ai/n
 });
 
 // Widget opens after a configured delay
-generateCMPTests('axeptio', ['https://www.memo-de-vie.org/qui-sommes-nous', 'https://simmons.fr/', 'https://www.lyoncapitale.fr/']);
+generateCMPTests('axeptio', ['https://www.memo-de-vie.org/qui-sommes-nous', 'https://www.lyoncapitale.fr/']);
+
+// Newer widget layout (ax-widget-relifted): "Continuer sans accepter" is an unlabelled header button
+generateCMPTests('axeptio', ['https://www.savelys.fr/'], {
+    onlyRegions: ['FR'],
+});

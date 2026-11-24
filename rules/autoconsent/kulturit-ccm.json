@@ -1,0 +1,11 @@
+{
+    "name": "kulturit-ccm",
+    "vendorUrl": "https://kulturit.org/",
+    "cosmetic": false,
+    "prehideSelectors": ["#kit-ccm"],
+    "detectCmp": [{ "exists": ["#kit-ccm", ".ccm-container dialog"] }],
+    "detectPopup": [{ "visible": ["#kit-ccm", ".ccm-container dialog[open] .action-buttons"] }],
+    "optIn": [{ "waitForThenClick": ["#kit-ccm", "dialog[open] .action-buttons button:not(.accept-selected):nth-of-type(2)"] }],
+    "optOut": [{ "waitForThenClick": ["#kit-ccm", "dialog[open] .action-buttons button:not(.accept-selected):last-of-type"] }],
+    "test": [{ "waitForVisible": ["#kit-ccm", ".ccm-container dialog .action-buttons"], "check": "none", "timeout": 2000 }]
+}

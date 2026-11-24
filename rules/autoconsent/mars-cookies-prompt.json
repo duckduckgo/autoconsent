@@ -1,0 +1,20 @@
+{
+    "name": "mars-cookies-prompt",
+    "prehideSelectors": [".cookies-prompt__banner"],
+    "detectCmp": [{ "exists": ".cookies-prompt__wrapper .cookies-prompt__banner" }],
+    "detectPopup": [{ "visible": ".cookies-prompt__wrapper .cookies-prompt__banner" }],
+    "optIn": [{ "waitForThenClick": ".cookies-prompt__banner .cookies-prompt__actions-btn_danger" }],
+    "optOut": [
+        {
+            "if": { "exists": ".cookies-prompt__banner_preview" },
+            "then": [{ "click": ".cookies-prompt__banner_preview .cookies-prompt__actions-btn.btn-secondary" }]
+        },
+        { "waitForVisible": ".cookies-prompt__actions-wrap_details" },
+        {
+            "if": { "exists": ".cookies-prompt__banner_details .switch input:checked:not([disabled])" },
+            "then": [{ "click": ".cookies-prompt__banner_details .switch input:checked:not([disabled])", "all": true }]
+        },
+        { "click": ".cookies-prompt__actions-wrap_details .cookies-prompt__actions-btn.btn-secondary" }
+    ],
+    "test": [{ "cookieContains": "cookies_consent=" }]
+}

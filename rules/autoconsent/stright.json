@@ -18,8 +18,26 @@
                 {
                     "waitForThenClick": "#controlled_submit-cookie_consent-consent_banner-privacy_setting_banner_link"
                 },
+                { "waitForVisible": "#controlled_banner-cookie_consent-privacy_setting_banner" },
                 {
-                    "waitForThenClick": "#controlled_banner-cookie_consent-privacy_setting_banner [data-search-key-button=reject_all_text]"
+                    "if": {
+                        "exists": "#controlled_banner-cookie_consent-privacy_setting_banner [data-search-key-button=reject_all_text]"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#controlled_banner-cookie_consent-privacy_setting_banner [data-search-key-button=reject_all_text]"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": "#controlled_banner-cookie_consent-privacy_setting_banner [role=checkbox][aria-checked=true]",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": "#controlled_banner-cookie_consent-privacy_setting_banner [data-search-key-button=save_settings_text]"
+                        }
+                    ]
                 }
             ]
         },

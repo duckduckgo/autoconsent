@@ -1,0 +1,14 @@
+{
+    "name": "le-livre.fr",
+    "vendorUrl": "https://www.le-livre.fr/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?le-livre\\.fr/"
+    },
+    "prehideSelectors": ["#showcookie"],
+    "detectCmp": [{ "exists": "#showcookie #acceptCookie" }],
+    "detectPopup": [{ "visible": "#showcookie" }],
+    "optIn": [{ "waitForThenClick": "#showcookie #acceptCookie" }],
+    "optOut": [{ "hide": "#showcookie" }],
+    "test": [{ "visible": "#showcookie", "check": "none" }]
+}

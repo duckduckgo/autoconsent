@@ -1,0 +1,20 @@
+{
+    "name": "nts-org-uk",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?nts\\.org\\.uk/"
+    },
+    "prehideSelectors": [".cookie-control"],
+    "detectCmp": [{ "exists": ".cookie-control [data-cc-capture] button[name=\"save\"]" }],
+    "detectPopup": [{ "visible": ".cookie-control .cc-capture__message" }],
+    "optIn": [{ "waitForThenClick": ".cookie-control [data-cc-set-recommended]" }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-control [data-expandable-trigger]" },
+        { "waitForVisible": ".cookie-control [data-cc-capture] button[name=\"save\"]", "timeout": 2000 },
+        {
+            "if": { "exists": ".cookie-control input[name=\"cookie_control_optin_level[]\"]:checked" },
+            "then": [{ "click": ".cookie-control input[name=\"cookie_control_optin_level[]\"]:checked", "all": true }]
+        },
+        { "click": ".cookie-control [data-cc-capture] button[name=\"save\"]" }
+    ],
+    "test": [{ "cookieContains": "cookie_control_optin_level=0" }]
+}

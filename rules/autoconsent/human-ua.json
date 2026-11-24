@@ -1,0 +1,32 @@
+{
+    "name": "human-ua",
+    "vendorUrl": "https://human.ua/",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?human\\.ua/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "app-cookie-message .cookie-message-box"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "app-cookie-message .cookie-message-box"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "app-cookie-message .cookie-message-box__button button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "app-cookie-message .cookie-message-box__close-button button"
+        },
+        {
+            "waitForVisible": "app-cookie-message .cookie-message-box",
+            "check": "none"
+        }
+    ]
+}

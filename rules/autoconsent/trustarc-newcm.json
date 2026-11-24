@@ -4,27 +4,58 @@
     "prehideSelectors": [".truste_popframe.trustarc_newcm_container"],
     "detectCmp": [
         {
-            "exists": [".truste_popframe.trustarc_newcm_container", "a.required, a.call"]
+            "exists": [
+                ".truste_popframe.trustarc_newcm_container",
+                "a.required, a.call, button.required, button.call, button.trustarc-declineall-btn"
+            ]
         }
     ],
     "detectPopup": [
         {
-            "visible": [".truste_popframe.trustarc_newcm_container", "a.required, a.call"],
+            "visible": [
+                ".truste_popframe.trustarc_newcm_container",
+                "a.required, a.call, button.required, button.call, button.trustarc-declineall-btn, button.trustarc-primary-btn.submit"
+            ],
             "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": [".truste_popframe.trustarc_newcm_container", "a.call"]
+            "if": {
+                "exists": [".truste_popframe.trustarc_newcm_container", "a.call, button.call"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": [".truste_popframe.trustarc_newcm_container", "a.call, button.call"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": [".truste_popframe.trustarc_newcm_container", "button.trustarc-acceptall-btn"]
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": [".truste_popframe.trustarc_newcm_container", "a.required"]
+            "if": {
+                "exists": [".truste_popframe.trustarc_newcm_container", "a.required, button.required"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": [".truste_popframe.trustarc_newcm_container", "a.required, button.required"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": [".truste_popframe.trustarc_newcm_container", "button.trustarc-declineall-btn"]
+                }
+            ]
         }
     ],
     "test": [
-        { "cookieContains": "cmapi_cookie_privacy=permit 1" },
-        { "cookieContains": "cmapi_cookie_privacy=permit 1,2", "negated": true }
+        {
+            "cookieContains": "notice_preferences=0:"
+        }
     ]
 }

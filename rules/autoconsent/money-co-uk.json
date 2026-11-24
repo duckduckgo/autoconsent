@@ -1,0 +1,21 @@
+{
+    "name": "money.co.uk",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?money\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#cookie-banner-wrapper"],
+    "detectCmp": [{ "exists": "#cookie-banner-wrapper #cookie_banner_save" }],
+    "detectPopup": [{ "visible": "#cookie-banner-wrapper #cookie_banner_save" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner-wrapper #cookie_banner_accept" }],
+    "optOut": [
+        {
+            "click": "#cookie-banner-wrapper input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "#cookie-banner-wrapper #cookie_banner_save" }
+    ],
+    "test": [{ "cookieContains": "\"marketing\":false" }]
+}

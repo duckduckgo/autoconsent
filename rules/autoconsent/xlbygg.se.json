@@ -1,0 +1,44 @@
+{
+    "name": "xlbygg.se",
+    "vendorUrl": "https://www.xlbygg.se/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?xlbygg\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "form#consent-dialog button[data-testid=give-consent-button]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "form#consent-dialog"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "form#consent-dialog button[data-testid=give-consent-button]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "form#consent-dialog button[name=read-more]"
+        },
+        {
+            "waitForVisible": "form#consent-dialog fieldset"
+        },
+        {
+            "click": "form#consent-dialog fieldset input[type=checkbox]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "form#consent-dialog button[data-testid=give-consent-button]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies_marketing_ok=false"
+        }
+    ]
+}

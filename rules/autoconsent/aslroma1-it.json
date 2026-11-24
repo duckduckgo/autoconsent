@@ -1,0 +1,36 @@
+{
+    "name": "aslroma1-it",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?aslroma1\\.it/"
+    },
+    "prehideSelectors": ["#cookiePolicy"],
+    "detectCmp": [
+        {
+            "exists": "#cookiePolicy #cookiebar-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiePolicy"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiePolicy #cookiebar-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiePolicy #cookiebar-btn"
+        },
+        {
+            "waitForVisible": "#cookiePolicy",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie policy accepted="
+        }
+    ]
+}

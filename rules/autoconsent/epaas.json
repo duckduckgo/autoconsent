@@ -11,7 +11,24 @@
             "else": [
                 { "waitForThenClick": ["epaas-consent-drawer-shell", "button.personalize-button"] },
                 { "waitFor": ["epaas-consent-drawer-shell", "epaas-policy-page-shell"] },
-                { "waitForThenClick": ["epaas-consent-drawer-shell", "button.save-button"] }
+                {
+                    "waitFor": ["epaas-consent-drawer-shell", "epaas-policy-page-shell", "label[class*='category-header__switch']"],
+                    "optional": true
+                },
+                {
+                    "click": ["epaas-consent-drawer-shell", "epaas-policy-page-shell", "label.category-header__switch--on input"],
+                    "all": true,
+                    "optional": true
+                },
+                { "waitFor": ["epaas-consent-drawer-shell", "section.consentDrawer.layered button.accept-button"] },
+                {
+                    "if": { "exists": ["epaas-consent-drawer-shell", "button.save-button"] },
+                    "then": [{ "click": ["epaas-consent-drawer-shell", "button.save-button"] }],
+                    "else": [
+                        { "waitFor": ["epaas-consent-drawer-shell", "epaas-policy-page-shell", "label.category-header__switch--off"] },
+                        { "click": ["epaas-consent-drawer-shell", "button.accept-button"] }
+                    ]
+                }
             ]
         }
     ],

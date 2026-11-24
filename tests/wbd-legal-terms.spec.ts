@@ -3,6 +3,7 @@ import generateCMPTests from '../playwright/runner';
 generateCMPTests(
     'wbd-legal-terms',
     [
+        'https://www.food.com/recipe/best-banana-bread-2886',
         'https://www.foodnetwork.com/how-to/packages/shopping/product-reviews/best-food-processors',
         'https://www.hgtv.com/',
         'https://www.golfdigest.com/',

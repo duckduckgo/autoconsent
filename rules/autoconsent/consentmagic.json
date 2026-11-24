@@ -1,0 +1,62 @@
+{
+    "name": "consentmagic",
+    "vendorUrl": "https://www.pixelyoursite.com/plugins/consentmagic",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "visible": ".cs-info-bar[class*=\"cs-public-cookie-\"] .cs_action_btn[data-cs_action=\"allow_all\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cs-info-bar[class*=\"cs-public-cookie-\"] .cs_action_btn[data-cs_action=\"allow_all\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cs-info-bar .cs_action_btn[data-cs_action=\"allow_all\"]",
+            "retry": 5,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".cs-info-bar .cs_action_btn[data-cs_action=\"disable_all\"]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".cs-info-bar .cs_action_btn[data-cs_action=\"disable_all\"]",
+                    "retry": 5,
+                    "retryInterval": 500
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cs-info-bar .options_btn"
+                },
+                {
+                    "waitForVisible": ".cs_settings_popup [data-cs_action=\"cs_confirm\"]"
+                },
+                {
+                    "click": ".cs_settings_popup input.cs_script_action:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ".cs_settings_popup [data-cs_action=\"cs_confirm\"]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cs_viewed_cookie_policy="
+        }
+    ]
+}

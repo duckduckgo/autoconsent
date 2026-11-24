@@ -1,0 +1,50 @@
+{
+    "name": "roll20",
+    "vendorUrl": "https://roll20.net/",
+    "runContext": {
+        "urlPattern": "^https://([a-z0-9-]+\\.)?roll20\\.net/"
+    },
+    "prehideSelectors": ["#gdpr-notification"],
+    "detectCmp": [
+        {
+            "exists": "#gdpr-notification #banner-link-preferences"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gdpr-notification"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr-notification-dismiss-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#banner-link-preferences"
+        },
+        {
+            "waitForVisible": "#cookie-modal .cookie-modal-content",
+            "timeout": 2000
+        },
+        {
+            "if": {
+                "exists": "#cookie-modal-input:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookie-modal-input"
+                }
+            ]
+        },
+        {
+            "click": "#cookie-modal-dismiss"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "gdpr_accepts_cookies=false"
+        }
+    ]
+}

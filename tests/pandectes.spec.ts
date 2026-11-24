@@ -4,7 +4,13 @@ generateCMPTests('pandectes', [
     'https://hollandscountryclothing.co.uk/',
     'https://cluse.com/',
     'https://swedishstockings.com/', // full-page overlay ("blocking") banner variant
+    'https://hollandcooper.com/',
 ]);
+
+// "reject all" hidden in preferences; the site reloads after saving, so the self-test cannot run
+generateCMPTests('pandectes', ['https://snocks.com/'], {
+    testSelfTest: false,
+});
 
 // shadow DOM <pandectes-cmp> banner variant
 generateCMPTests(
@@ -25,3 +31,9 @@ generateCMPTests(
 generateCMPTests('pandectes', ['https://asmc.de/', 'https://crossrope.com/'], {
     testOptIn: false,
 });
+
+// banner wrapper with a shop-specific id instead of #pandectes-banner
+generateCMPTests('pandectes', ['https://www.aeris.de/']);
+
+// shadow DOM variant that opens straight into the preferences dialog, without a notice
+generateCMPTests('pandectes', ['https://cotswoldflour.com/', 'https://bymi.de/', 'https://lovenood.com/']);

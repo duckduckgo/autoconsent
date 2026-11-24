@@ -1,0 +1,13 @@
+{
+    "name": "fideuram",
+    "vendorUrl": "https://www.fideuram.it/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?fideuram\\.it/"
+    },
+    "prehideSelectors": [".fancybox-wrap:has(#cookiemanager-popup)"],
+    "detectCmp": [{ "exists": "#cookiemanager-popup #cookie-modal-close" }],
+    "detectPopup": [{ "visible": "#cookiemanager-popup #cookie-modal-close" }],
+    "optIn": [{ "waitForThenClick": "#cookiemanager-popup #cookie-consent-all" }],
+    "optOut": [{ "waitForThenClick": "#cookiemanager-popup #cookie-modal-close" }],
+    "test": [{ "cookieContains": "cookieConsent={\"cookie\":\"rejected\",\"cookieThird\":\"rejected\"}" }]
+}

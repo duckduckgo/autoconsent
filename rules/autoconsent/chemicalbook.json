@@ -1,0 +1,13 @@
+{
+    "name": "chemicalbook",
+    "vendorUrl": "https://www.chemicalbook.com/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?chemicalbook\\.com/"
+    },
+    "prehideSelectors": ["#usecookie"],
+    "detectCmp": [{ "exists": "#usecookie #usercookie_close" }],
+    "detectPopup": [{ "visible": "#usecookie" }],
+    "optIn": [{ "waitForThenClick": "#usecookie #continue" }],
+    "optOut": [{ "hide": "#usecookie" }]
+}

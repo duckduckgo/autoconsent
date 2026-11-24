@@ -1,0 +1,10 @@
+{
+    "name": "swedbank-ui-cookie-consent",
+    "vendorUrl": "https://www.swedbank.lt/",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "ui-cookie-consent .ui-cookie-consent__decline-button" }],
+    "detectPopup": [{ "visible": "ui-cookie-consent .ui-cookie-consent__decline-button" }],
+    "optIn": [{ "waitForThenClick": "ui-cookie-consent .ui-cookie-consent__accept-button" }],
+    "optOut": [{ "waitForThenClick": "ui-cookie-consent .ui-cookie-consent__decline-button" }],
+    "test": [{ "waitForVisible": "ui-cookie-consent .ui-cookie-consent__decline-button", "timeout": 1000, "check": "none" }]
+}

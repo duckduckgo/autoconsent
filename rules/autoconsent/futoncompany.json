@@ -1,0 +1,18 @@
+{
+    "name": "futoncompany",
+    "vendorUrl": "https://www.futoncompany.co.uk/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?futoncompany\\.co\\.uk/"
+    },
+    "prehideSelectors": [".cm-custom-cookie-line"],
+    "detectCmp": [{ "exists": ".cm-custom-cookie-line" }],
+    "detectPopup": [{ "visible": ".cm-custom-cookie-line" }],
+    "optIn": [{ "waitForThenClick": ".cm-custom-cookie-line a.dismiss-button" }],
+    "optOut": [
+        { "waitForThenClick": ".cm-custom-cookie-line a[onclick*='fn_show_cookie_popup']" },
+        { "waitForVisible": "#cookie_popup form[name=cookie_settings]" },
+        { "click": "#cookie_popup input.consent-checkbox:checked:not([disabled])", "all": true, "optional": true },
+        { "click": "#cookie_popup input[type=submit][name*='save_settings']" }
+    ],
+    "test": [{ "wait": 1500 }, { "cookieContains": "consent_cookie=%7B%22ad_storage%22%3A%22denied%22" }]
+}

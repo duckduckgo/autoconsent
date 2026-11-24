@@ -28,7 +28,22 @@
     "optOut": [
         { "wait": 500 },
         {
-            "waitForThenClick": ["cookie-banner#cookie-banner-host", "#onetrust-reject-all-handler"]
+            "if": {
+                "exists": ["cookie-banner#cookie-banner-host", "#onetrust-reject-all-handler"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["cookie-banner#cookie-banner-host", "#onetrust-reject-all-handler"]
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ["cookie-banner#cookie-banner-host", "#onetrust-pc-btn-handler"]
+                },
+                {
+                    "waitForThenClick": "#onetrust-pc-sdk .ot-pc-refuse-all-handler"
+                }
+            ]
         },
         {
             "waitForVisible": ["cookie-banner#cookie-banner-host", "#dialog_cookie_consent"],
@@ -38,7 +53,13 @@
     ],
     "test": [
         {
-            "cookieContains": "groups=C1%3A1%2CC2%3A0%2CC3%3A0%2CC4%3A0"
+            "cookieContains": "OptanonAlertBoxClosed"
+        },
+        {
+            "cookieContains": "C3%3A0"
+        },
+        {
+            "cookieContains": "C4%3A0"
         }
     ]
 }

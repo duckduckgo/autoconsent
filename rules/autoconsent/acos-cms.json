@@ -1,0 +1,14 @@
+{
+    "name": "acos-cms",
+    "vendorUrl": "https://www.acos.no/",
+    "intermediate": false,
+    "prehideSelectors": [".bc-content-modal:has([class*=\"_cookieFooter_\"])"],
+    "detectCmp": [{ "exists": ".bc-content-modal [class*=\"_cookieFooter_\"]" }],
+    "detectPopup": [{ "visible": ".bc-content-modal [class*=\"_cookieFooter_\"]" }],
+    "optIn": [{ "waitForThenClick": ".bc-content-modal [class*=\"_cookieFooter_\"] button:last-child" }],
+    "optOut": [
+        { "waitForThenClick": ".bc-content-modal [class*=\"_cookieFooter_\"] button:first-child" },
+        { "waitForVisible": ".bc-content-modal [class*=\"_cookieFooter_\"]", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "%222%22%3Afalse" }]
+}

@@ -1,0 +1,22 @@
+{
+    "name": "plumrocket-cookie-consent",
+    "vendorUrl": "https://plumrocket.com/magento-cookie-consent",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#pr-cookie-notice #btn-cookie-allow" }],
+    "detectPopup": [
+        { "visible": "#pr-cookie-notice #btn-cookie-allow" },
+        { "exists": ".pr-cookie-modal:not(._show) #pr-cookie-notice", "negated": true }
+    ],
+    "optIn": [{ "waitForThenClick": "#pr-cookie-notice #btn-cookie-allow" }],
+    "optOut": [
+        {
+            "if": { "exists": "#pr-cookie-notice #btn-cookie-decline" },
+            "then": [{ "waitForThenClick": "#pr-cookie-notice #btn-cookie-decline" }],
+            "else": [
+                { "waitForThenClick": "#pr-cookie-notice .pr-cookie-setting-btn" },
+                { "waitForThenClick": "#pr-cookie-setting-bar .pr-actions-buttons button.decline" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "pr-cookie-consent=%5B%5D" }]
+}

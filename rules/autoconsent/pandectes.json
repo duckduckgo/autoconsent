@@ -1,52 +1,60 @@
 {
     "name": "pandectes",
     "vendorUrl": "https://pandectes.io/",
-    "prehideSelectors": ["#pandectes-banner", "pandectes-cmp"],
+    "prehideSelectors": [".cc-window-wrapper:has(> .pd-cookie-banner-window)", "pandectes-cmp"],
     "detectCmp": [
         {
-            "any": [{ "exists": "#pandectes-banner" }, { "exists": ["pandectes-cmp", "dialog.notice"] }]
+            "any": [
+                { "exists": ".cc-window-wrapper > .pd-cookie-banner-window" },
+                { "exists": ["pandectes-cmp", "dialog.notice, dialog.preferences"] }
+            ]
         }
     ],
     "detectPopup": [
         {
-            "any": [{ "visible": "#pandectes-banner" }, { "visible": ["pandectes-cmp", "dialog.notice"] }]
+            "any": [
+                { "visible": ".cc-window-wrapper:has(> .pd-cookie-banner-window)" },
+                { "visible": ["pandectes-cmp", "dialog.notice, dialog.preferences"], "check": "any" }
+            ]
         }
     ],
     "optIn": [
         {
-            "if": { "exists": "#pandectes-banner" },
+            "if": { "exists": ".cc-window-wrapper > .pd-cookie-banner-window" },
             "then": [
                 {
-                    "waitForThenClick": "#pandectes-banner .cc-allow"
+                    "waitForThenClick": ".pd-cookie-banner-window .cc-allow"
                 },
-                { "hide": "#pandectes-banner", "optional": true }
+                { "hide": ".cc-window-wrapper:has(> .pd-cookie-banner-window)", "optional": true }
             ],
-            "else": [{ "waitForThenClick": ["pandectes-cmp", "dialog.notice button.allow"] }]
+            "else": [{ "waitForThenClick": ["pandectes-cmp", "dialog.notice button.allow, dialog.preferences button.allow"] }]
         }
     ],
     "optOut": [
         {
-            "if": { "exists": "#pandectes-banner" },
+            "if": { "exists": ".cc-window-wrapper > .pd-cookie-banner-window" },
             "then": [
                 {
-                    "if": { "visible": "#pandectes-banner .cc-deny" },
-                    "then": [{ "waitForThenClick": "#pandectes-banner .cc-deny" }],
+                    "if": { "visible": ".pd-cookie-banner-window .cc-deny" },
+                    "then": [{ "waitForThenClick": ".pd-cookie-banner-window .cc-deny" }],
                     "else": [
-                        { "waitForThenClick": "#pandectes-banner .cc-settings" },
-                        { "waitForVisible": ".pd-cp-ui-rejectAll" },
-                        { "click": ".pd-cp-ui-rejectAll" },
+                        { "waitForThenClick": ".pd-cookie-banner-window .cc-settings" },
                         { "waitForVisible": ".pd-cp-ui-save" },
+                        { "click": ".pd-cp-ui-rejectAll" },
                         { "click": ".pd-cp-ui-save" }
                     ]
                 },
-                { "hide": "#pandectes-banner", "optional": true }
+                { "hide": ".cc-window-wrapper:has(> .pd-cookie-banner-window)", "optional": true }
             ],
             "else": [
                 {
                     "if": { "visible": ["pandectes-cmp", "dialog.notice button.deny"] },
                     "then": [{ "waitForThenClick": ["pandectes-cmp", "dialog.notice button.deny"] }],
                     "else": [
-                        { "waitForThenClick": ["pandectes-cmp", "dialog.notice button.preferences"] },
+                        {
+                            "if": { "exists": ["pandectes-cmp", "dialog.notice"] },
+                            "then": [{ "waitForThenClick": ["pandectes-cmp", "dialog.notice button.preferences"] }]
+                        },
                         { "waitForVisible": ["pandectes-cmp", "dialog.preferences"] },
                         {
                             "if": { "exists": ["pandectes-cmp", "dialog.preferences button.deny"] },

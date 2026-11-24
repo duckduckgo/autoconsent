@@ -1,0 +1,32 @@
+{
+    "name": "planteportalen.no",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?planteportalen\\.no/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "div.cookies > .grid-container > span.icon-cross"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.cookies.active"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.cookies span.icon-cross"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div.cookies span.icon-cross"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies=cookies"
+        }
+    ]
+}

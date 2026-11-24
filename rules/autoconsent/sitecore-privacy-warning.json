@@ -1,0 +1,14 @@
+{
+    "name": "sitecore-privacy-warning",
+    "vendorUrl": "https://doc.sitecore.com/xp/en/developers/sxa/",
+    "prehideSelectors": [".privacy-warning.permisive"],
+    "detectCmp": [{ "exists": ".privacy-warning.permisive .close" }],
+    "detectPopup": [{ "visible": ".privacy-warning.permisive" }],
+    "optIn": [
+        {
+            "waitForThenClick": ".privacy-warning.permisive .submit a, .privacy-warning.permisive a.submit, .privacy-warning.permisive .accept-btn a"
+        }
+    ],
+    "optOut": [{ "waitForThenClick": ".privacy-warning.permisive .close a, .privacy-warning.permisive .close button" }],
+    "test": [{ "waitForVisible": ".privacy-warning.permisive", "check": "none", "timeout": 1000 }]
+}

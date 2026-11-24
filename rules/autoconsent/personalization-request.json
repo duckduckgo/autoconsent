@@ -1,0 +1,40 @@
+{
+    "name": "personalization-request",
+    "prehideSelectors": [".personalization-request[data-controller='consent']"],
+    "detectCmp": [
+        {
+            "exists": ".personalization-request [data-action='consent#manage']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".personalization-request [data-action='consent#manage']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".personalization-request [data-action='consent#permitAll']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".personalization-request [data-action='consent#manage']"
+        },
+        {
+            "waitForVisible": "#personalization-settings [data-action='consent#save']"
+        },
+        {
+            "click": "#personalization-settings input[type=checkbox]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#personalization-settings [data-action='consent#save']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "consent=essential"
+        }
+    ]
+}

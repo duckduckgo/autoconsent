@@ -1,0 +1,27 @@
+{
+    "name": "evozen.fr",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?evozen\\.fr/"
+    },
+    "prehideSelectors": [".privacy-bar"],
+    "detectCmp": [
+        {
+            "exists": ".privacy-bar #close-rgpd-notice"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".privacy-bar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#close-rgpd-notice"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#close-rgpd-notice"
+        }
+    ]
+}

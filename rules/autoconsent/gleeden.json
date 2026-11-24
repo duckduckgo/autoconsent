@@ -1,0 +1,14 @@
+{
+    "name": "gleeden",
+    "vendorUrl": "https://www.gleeden.com/",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?gleeden\\.com/" },
+    "prehideSelectors": ["#banner-cookie"],
+    "detectCmp": [{ "exists": "#banner-cookie #banner-cookie-button" }],
+    "detectPopup": [{ "visible": "body.with-banner-cookie #banner-cookie" }],
+    "optIn": [{ "waitForThenClick": "#banner-cookie-button .btn" }],
+    "optOut": [
+        { "waitForThenClick": "#banner-cookie-button .btn" },
+        { "waitForVisible": "body.with-banner-cookie #banner-cookie", "check": "none" }
+    ],
+    "test": [{ "visible": "body.with-banner-cookie #banner-cookie", "check": "none" }]
+}

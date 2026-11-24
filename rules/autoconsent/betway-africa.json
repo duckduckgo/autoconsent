@@ -1,0 +1,33 @@
+{
+    "name": "betway-africa",
+    "vendorUrl": "https://www.betway.co.za/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?betway\\.(co\\.|com\\.)?[a-z]{2}/"
+    },
+    "prehideSelectors": ["div.fixed.bottom-0.z-50:has(> span > a[href=\"/privacy-policy\"])"],
+    "detectCmp": [
+        {
+            "exists": "div.fixed.bottom-0.z-50:has(> span > a[href=\"/privacy-policy\"]) > button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.fixed.bottom-0.z-50:has(> span > a[href=\"/privacy-policy\"]) > button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.fixed.bottom-0.z-50:has(> span > a[href=\"/privacy-policy\"]) > button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div.fixed.bottom-0.z-50:has(> span > a[href=\"/privacy-policy\"]) > button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "betway-cookie-policy=true"
+        }
+    ]
+}

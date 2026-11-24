@@ -1,0 +1,32 @@
+{
+    "name": "vendic-cookiebar",
+    "cosmetic": false,
+    "prehideSelectors": ["#cookie-bar-modal[x-data^=\"initCookieBar\"]", ".cookie-bar-wrapper:has(.allow-only-functional-cookie)"],
+    "detectCmp": [
+        {
+            "exists": ":is([x-data^=\"initCookieBar\"], .cookie-bar-wrapper) .allow-only-functional-cookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ":is([x-data^=\"initCookieBar\"], .cookie-bar-wrapper.active) .allow-only-functional-cookie"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ":is([x-data^=\"initCookieBar\"], .cookie-bar-wrapper) :is(#cookie-bar-button, .allow-all-cookies-button)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ":is([x-data^=\"initCookieBar\"], .cookie-bar-wrapper) .allow-only-functional-cookie"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ":is([x-data^=\"initCookieBar\"], .cookie-bar-wrapper.active) .allow-only-functional-cookie",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}

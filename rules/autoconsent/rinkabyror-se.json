@@ -1,0 +1,29 @@
+{
+    "name": "rinkabyror-se",
+    "vendorUrl": "https://www.rinkabyror.se/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?rinkabyror\\.se/"
+    },
+    "prehideSelectors": ["#cookie_container"],
+    "detectCmp": [
+        {
+            "exists": "#cookie_container #accept_cookies_btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#accept_cookies_btn"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookie_container"
+        }
+    ]
+}

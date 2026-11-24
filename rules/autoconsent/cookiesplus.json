@@ -1,0 +1,20 @@
+{
+    "name": "cookiesplus",
+    "_metadata": { "vendorUrl": "https://www.idnovate.com/" },
+    "prehideSelectors": ["#cookiesplus-modal-container", "#cookiesplus-overlay"],
+    "detectCmp": [{ "exists": "#cookiesplus-modal #cookiesplus-form" }],
+    "detectPopup": [{ "visible": "#cookiesplus-modal" }],
+    "optIn": [{ "waitForThenClick": "#cookiesplus-modal .cookiesplus-accept" }],
+    "optOut": [
+        {
+            "if": { "visible": "#cookiesplus-modal .cookiesplus-reject", "check": "any" },
+            "then": [{ "click": "#cookiesplus-modal .cookiesplus-reject" }],
+            "else": [
+                { "click": "#cookiesplus-modal .cookiesplus-more-information" },
+                { "waitForThenClick": "#cookiesplus-modal .cookiesplus-save" }
+            ]
+        },
+        { "waitForVisible": "#cookiesplus-modal", "check": "none", "timeout": 5000 }
+    ],
+    "test": [{ "cookieContains": "C_P_DISPLAY_MODAL%22%3Afalse" }]
+}

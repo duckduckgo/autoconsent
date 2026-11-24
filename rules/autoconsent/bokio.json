@@ -1,0 +1,32 @@
+{
+    "name": "bokio",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?bokio\\.(se|co\\.uk)/"
+    },
+    "prehideSelectors": ["#cookiemodal"],
+    "detectCmp": [
+        {
+            "exists": "#cookiemodal #cookie-donottrack"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiemodal:not(.cookiemodal--hidden) #cookie-donottrack"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiemodal #cookie-dotrack"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiemodal #cookie-donottrack"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "BokioDNT=DoNotTrack"
+        }
+    ]
+}

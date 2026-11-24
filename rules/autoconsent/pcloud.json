@@ -1,0 +1,18 @@
+{
+    "name": "pcloud",
+    "vendorUrl": "https://www.pcloud.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?pcloud\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".cookie-consent-wrapper" }],
+    "detectPopup": [{ "visible": ".cookie-consent-wrapper" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent-wrapper a[color=cyan]" }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-consent-wrapper a[color=transparent]" },
+        { "waitForVisible": "input[name=ga-cookies]" },
+        { "click": "input[name=ga-cookies]:checked, input[name=fbq-cookies]:checked", "all": true, "optional": true },
+        { "click": "[class*=CookieConsentModal__ButtonContainer] a:not(.cancel-btn)" }
+    ],
+    "test": [{ "cookieContains": "cookieconsent=0" }]
+}

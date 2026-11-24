@@ -1,0 +1,27 @@
+{
+    "name": "alertnotification-alert-bar",
+    "cosmetic": true,
+    "prehideSelectors": [
+        ".alert-bar[data-alert-api$=\"api/alertnotification\"]:is(.alert-bar--notification, .alert-bar--cookie-message, #alert-COOKIES)"
+    ],
+    "detectCmp": [
+        {
+            "exists": ".alert-bar[data-alert-api$=\"api/alertnotification\"]:is(.alert-bar--notification, .alert-bar--cookie-message, #alert-COOKIES)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".alert-bar[data-alert-api$=\"api/alertnotification\"]:is(.alert-bar--notification, .alert-bar--cookie-message, #alert-COOKIES)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".alert-bar[data-alert-api$=\"api/alertnotification\"]:is(.alert-bar--notification, .alert-bar--cookie-message, #alert-COOKIES) :is(.alert-bar__close, .alert-bar__button)"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".alert-bar[data-alert-api$=\"api/alertnotification\"]:is(.alert-bar--notification, .alert-bar--cookie-message, #alert-COOKIES)"
+        }
+    ]
+}

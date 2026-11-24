@@ -1,0 +1,23 @@
+{
+    "name": "unitedconsumers.com",
+    "runContext": { "urlPattern": "^https?://(www\\.)?unitedconsumers\\.com/" },
+    "prehideSelectors": ["div[role='presentation']:has(p[data-sentry-source-file='CookieBanner.tsx'])"],
+    "detectCmp": [{ "exists": "p[data-sentry-source-file='CookieBanner.tsx']" }],
+    "detectPopup": [{ "visible": "div[role='presentation']:has(p[data-sentry-source-file='CookieBanner.tsx'])" }],
+    "optIn": [
+        {
+            "waitForThenClick": "div[role='presentation']:has(p[data-sentry-source-file='CookieBanner.tsx']) button[data-sentry-element='UCButton']:nth-of-type(1)",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div[role='presentation']:has(p[data-sentry-source-file='CookieBanner.tsx']) button[data-sentry-element='UCButton']:nth-of-type(2)",
+            "retry": 10,
+            "retryInterval": 500
+        },
+        { "waitForVisible": "div[role='presentation']:has(p[data-sentry-source-file='CookieBanner.tsx'])", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "UCAcceptCookie=3" }]
+}

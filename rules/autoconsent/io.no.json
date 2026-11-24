@@ -1,0 +1,36 @@
+{
+    "name": "io.no",
+    "vendorUrl": "https://io.no/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?io\\.no/"
+    },
+    "prehideSelectors": ["#cookiebox"],
+    "detectCmp": [
+        {
+            "exists": "#cookiebox a.close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiebox"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookiebox a.close"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookiebox a.close"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookiebox",
+            "check": "none",
+            "timeout": 1000
+        }
+    ]
+}

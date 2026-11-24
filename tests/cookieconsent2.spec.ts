@@ -1,8 +1,8 @@
 import generateCMPTests from '../playwright/runner';
 
 generateCMPTests('cookieconsent2', [
-    'https://alpha-heidelberg.de/',
-    'https://antitec.fi/',
+    'https://www.ausbildungsstellen.de/',
     'https://www.dm-tools.co.uk/',
     'https://gls-group.com/IT/it/home',
+    'https://www.czechwealth.cz/',
 ]);

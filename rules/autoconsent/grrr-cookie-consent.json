@@ -1,0 +1,24 @@
+{
+    "name": "grrr-cookie-consent",
+    "vendorUrl": "https://github.com/grrr-amsterdam/cookie-consent",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ["wookie-consent, cookie-consent", "aside.js-cookie-bar form button"] }],
+    "detectPopup": [{ "visible": ["wookie-consent, cookie-consent", "aside.js-cookie-bar[aria-hidden=false]"] }],
+    "optIn": [
+        {
+            "click": ["wookie-consent, cookie-consent", "aside.js-cookie-bar input[type=checkbox]:not(:checked):not([disabled])"],
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": ["wookie-consent, cookie-consent", "aside.js-cookie-bar form button"], "retry": 2 }
+    ],
+    "optOut": [
+        {
+            "click": ["wookie-consent, cookie-consent", "aside.js-cookie-bar input[type=checkbox]:checked:not([disabled])"],
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": ["wookie-consent, cookie-consent", "aside.js-cookie-bar form button"], "retry": 2 }
+    ],
+    "test": [{ "exists": ["wookie-consent, cookie-consent", "aside.js-cookie-bar[aria-hidden=true]"] }]
+}

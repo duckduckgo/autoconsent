@@ -1,0 +1,30 @@
+{
+    "name": "nyu-langone",
+    "vendorUrl": "https://nyulangone.org/",
+    "prehideSelectors": ["#privacy-banner.nyuuninav--privacy-banner"],
+    "detectCmp": [
+        {
+            "exists": ".nyuuninav--privacy-banner .nyuuninav--privacy-banner__accept-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".nyuuninav--privacy-banner:not(.nyuuninav--privacy-banner--hide)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".nyuuninav--privacy-banner__accept-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".nyuuninav--privacy-banner__accept-button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "privacy_banner="
+        }
+    ]
+}

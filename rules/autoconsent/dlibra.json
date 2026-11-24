@@ -1,0 +1,32 @@
+{
+    "name": "dlibra",
+    "vendorUrl": "https://dlibra.psnc.pl/",
+    "detectCmp": [
+        {
+            "exists": "script[src*=\"/style/dlibra/\"]"
+        },
+        {
+            "exists": ".cookies > p > button.cookies__button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookies > p > button.cookies__button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookies > p > button.cookies__button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookies > p > button.cookies__button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "AcceptCookie=true"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "name": "sparebank1-optin",
+    "vendorUrl": "https://www.sparebank1.no/",
+    "prehideSelectors": ["#opt-in .optin"],
+    "detectCmp": [{ "exists": "#opt-in .optin #optin--acceptAll" }],
+    "detectPopup": [{ "visible": "#opt-in .optin" }],
+    "optIn": [{ "waitForThenClick": "#opt-in #optin--acceptAll" }],
+    "optOut": [{ "waitForThenClick": "#opt-in #optin--rejectAll, #opt-in #optin--onlyNeeded" }],
+    "test": [{ "waitForVisible": "#opt-in .optin", "check": "none", "timeout": 2000 }]
+}

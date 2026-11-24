@@ -1,0 +1,13 @@
+{
+    "name": "bt-com-au",
+    "vendorUrl": "https://www.bt.com.au/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?bt\\.com\\.au/"
+    },
+    "prehideSelectors": ["#js-cookie-alert #cookie"],
+    "detectCmp": [{ "exists": "#js-cookie-alert #cookie" }],
+    "detectPopup": [{ "visible": "#js-cookie-alert.show #cookie" }],
+    "optIn": [{ "waitForThenClick": "#js-cookie-alert #cookie button.closeAlert" }],
+    "optOut": [{ "waitForThenClick": "#js-cookie-alert #cookie button.closeAlert" }],
+    "test": [{ "waitForVisible": "#js-cookie-alert #cookie", "check": "none", "timeout": 1000 }]
+}

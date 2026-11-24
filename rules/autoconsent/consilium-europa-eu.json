@@ -1,0 +1,35 @@
+{
+    "name": "consilium-europa-eu",
+    "vendorUrl": "https://www.consilium.europa.eu/",
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?consilium\\.europa\\.eu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "gsc-cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["gsc-cookie-banner", "dialog[data-consent-banner]"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["gsc-cookie-banner", ".gsc-cookie-banner__actions gsc-button:last-child"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["gsc-cookie-banner", ".gsc-cookie-banner__actions gsc-button:first-child"]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ["gsc-cookie-banner", "dialog[data-consent-banner]"],
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

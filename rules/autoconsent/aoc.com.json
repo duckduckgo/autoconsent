@@ -1,0 +1,35 @@
+{
+    "name": "aoc.com",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?aoc\\.com/"
+    },
+    "prehideSelectors": [".privacy-popup"],
+    "detectCmp": [
+        {
+            "exists": ".privacy-popup .privacy-popup__toolbar"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".privacy-popup .privacy-popup__toolbar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".privacy-popup__toolbar button:first-child",
+            "comment": "Accept all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".privacy-popup__toolbar button:last-child",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".privacy-popup",
+            "check": "none"
+        }
+    ]
+}

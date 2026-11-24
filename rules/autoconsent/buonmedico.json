@@ -1,0 +1,32 @@
+{
+    "name": "buonmedico",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?buonmedico\\.it/"
+    },
+    "prehideSelectors": [".cookieHolder"],
+    "detectCmp": [
+        {
+            "exists": ".cookieHolder .cookie-link"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookieHolder .cookie-link"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookieHolder .cookie-link"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookieHolder .cookie-link"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "GeneralCookieState=cookiestate"
+        }
+    ]
+}

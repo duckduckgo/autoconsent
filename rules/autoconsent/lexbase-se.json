@@ -1,0 +1,35 @@
+{
+    "name": "lexbase.se",
+    "vendorUrl": "https://lexbase.se/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?lexbase\\.se/"
+    },
+    "prehideSelectors": ["section.consent-banner"],
+    "detectCmp": [
+        {
+            "exists": "section.consent-banner button.hide-consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section.consent-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "section.consent-banner button.hide-consent"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "section.consent-banner"
+        }
+    ],
+    "test": [
+        {
+            "visible": "section.consent-banner",
+            "check": "none"
+        }
+    ]
+}

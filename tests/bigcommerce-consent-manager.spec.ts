@@ -6,4 +6,5 @@ generateCMPTests('bigcommerce-consent-manager', [
     'https://simplicity.com/',
     'https://smkw.com/',
     'https://www.musicdirect.com/',
+    'https://www.cassart.co.uk/',
 ]);

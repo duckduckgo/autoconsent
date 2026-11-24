@@ -1,0 +1,34 @@
+{
+    "name": "react-cookie-consent",
+    "_metadata": {
+        "vendorUrl": "https://github.com/Mastermindzh/react-cookie-consent"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#rcc-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#rcc-decline-button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#rcc-confirm-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#rcc-decline-button"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#rcc-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}

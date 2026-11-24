@@ -1,0 +1,66 @@
+{
+    "name": "united-online",
+    "vendorUrl": "https://www.juno.com/",
+    "prehideSelectors": ["#cookieDisclaimer.cookieDisc", "#cpra_banner_wrapper"],
+    "detectCmp": [
+        {
+            "exists": "#cookieDisclaimer a[onclick*=\"handleUSPrivacyAction('reject')\"], #cpra_banner_wrapper #cpra_btn_reject, #userConsentForAdsPopup #allowButton, #gdprPopup #consent_dialog_allow"
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                {
+                    "visible": "#cookieDisclaimer, #cpra_banner_wrapper, #userConsentForAdsPopup",
+                    "check": "any"
+                },
+                {
+                    "exists": "#gdprPopup-popup.ui-popup-active"
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieDisclaimer a[onclick*=\"handleUSPrivacyAction('accept')\"], #cpra_banner_wrapper #cpra_btn_accept"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#cookieDisclaimer, #cpra_banner_wrapper",
+                "check": "any"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookieDisclaimer a[onclick*=\"handleUSPrivacyAction('reject')\"], #cpra_banner_wrapper #cpra_btn_reject"
+                }
+            ]
+        },
+        {
+            "if": {
+                "visible": "#userConsentForAdsPopup"
+            },
+            "then": [
+                {
+                    "hide": "#userConsentForAdsPopup"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#gdprPopup-popup.ui-popup-active"
+            },
+            "then": [
+                {
+                    "click": "#gdprPopup a[data-rel=\"back\"]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "usprivacy=1YYN"
+        }
+    ]
+}

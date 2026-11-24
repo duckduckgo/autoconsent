@@ -1,0 +1,38 @@
+{
+    "name": "classbento",
+    "vendorUrl": "https://www.classbento.co.uk/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?classbento\\.co\\.uk/"
+    },
+    "prehideSelectors": ["#gdpr-banner"],
+    "detectCmp": [
+        {
+            "visible": "#gdpr-banner #gdpr-essential-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gdpr-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr-banner #gdpr-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#gdpr-banner #gdpr-essential-btn"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#gdpr-banner",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "name": "meowdb.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?meowdb\\.com/"
+    },
+    "prehideSelectors": ["div[role=region][aria-label='Cookie consent']", "#ncmp__tool .ncmp__banner"],
+    "detectCmp": [
+        {
+            "exists": "div[role=region][aria-label='Cookie consent'] button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[role=region][aria-label='Cookie consent']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[role=region][aria-label='Cookie consent'] button"
+        },
+        {
+            "waitFor": "#ncmp__tool .ncmp__banner.ncmp__active",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": "#ncmp__tool .ncmp__banner.ncmp__active"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_CONSENTMANAGER_NCMP_ACCEPT"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div[role=region][aria-label='Cookie consent'] button"
+        },
+        {
+            "waitFor": "#ncmp__tool .ncmp__banner.ncmp__active",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": "#ncmp__tool .ncmp__banner.ncmp__active"
+            },
+            "then": [
+                {
+                    "wait": 500
+                },
+                {
+                    "eval": "EVAL_CONSENTMANAGER_NCMP_REJECT"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "nia_consent_seen=1"
+        }
+    ]
+}

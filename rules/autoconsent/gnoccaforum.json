@@ -1,0 +1,12 @@
+{
+    "name": "gnoccaforum",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?gnoccaforum\\.com/"
+    },
+    "prehideSelectors": ["#cookieBanner"],
+    "detectCmp": [{ "exists": "#cookieBanner a[href*='cookies_agreed=']" }],
+    "detectPopup": [{ "visible": "#cookieBanner" }],
+    "optIn": [{ "waitForThenClick": "#cookieBanner a[href*='cookies_agreed=']" }],
+    "optOut": [{ "waitForThenClick": "#cookieBanner span[onclick*='cookieBanner']" }],
+    "test": [{ "waitForVisible": "#cookieBanner", "check": "none", "timeout": 2000 }]
+}

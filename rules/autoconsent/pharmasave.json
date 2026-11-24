@@ -1,0 +1,13 @@
+{
+    "name": "pharmasave",
+    "runContext": { "urlPattern": "^https?://(www\\.)?pharmasave\\.com/" },
+    "prehideSelectors": [".cookie-consent-popup"],
+    "detectCmp": [{ "exists": ".cookie-consent-popup .cookie-consent-accept" }],
+    "detectPopup": [{ "visible": ".cookie-consent-popup .cookie-consent-accept" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent-popup .cookie-consent-accept .elementor-button", "retry": 10, "retryInterval": 500 }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-consent-popup .cookie-consent-accept .elementor-button", "retry": 10, "retryInterval": 500 },
+        { "waitForVisible": ".cookie-consent-popup", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "cookie_consent=accepted" }]
+}

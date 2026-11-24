@@ -1,0 +1,22 @@
+{
+    "name": "nuxt-cookie-manager",
+    "prehideSelectors": [".cookie-manager .modal-mask"],
+    "detectCmp": [{ "exists": ".cookie-manager .modal-mask .accept-cookie-settings" }],
+    "detectPopup": [{ "visible": ".cookie-manager .modal-mask" }],
+    "optIn": [{ "waitForThenClick": ".cookie-manager .modal-mask .accept-cookie-settings" }],
+    "optOut": [
+        {
+            "if": { "exists": ".cookie-manager .modal-mask .decline-cookie-settings" },
+            "then": [{ "waitForThenClick": ".cookie-manager .modal-mask .decline-cookie-settings" }],
+            "else": [
+                {
+                    "click": ".cookie-manager .modal-mask input[type=\"checkbox\"]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": ".cookie-manager .modal-mask .save-cookie-settings" }
+            ]
+        }
+    ],
+    "test": [{ "waitForVisible": ".cookie-manager .modal-mask", "check": "none", "timeout": 2000 }]
+}

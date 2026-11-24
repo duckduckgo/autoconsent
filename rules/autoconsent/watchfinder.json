@@ -1,0 +1,16 @@
+{
+    "name": "watchfinder",
+    "vendorUrl": "https://www.watchfinder.co.uk/",
+    "cosmetic": false,
+    "prehideSelectors": ["#cookie-notice:has(.btn-configure)"],
+    "detectCmp": [{ "exists": "#cookie-notice .btn-configure" }, { "exists": "#modal_cookie-consent" }],
+    "detectPopup": [{ "visible": "#cookie-notice .btn-configure" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notice .btn-accept-all" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-notice .btn-configure" },
+        { "waitForVisible": "#modal_cookie-consent" },
+        { "click": "#modal_cookie-consent input.cookie-toggle:checked:not(:disabled)", "all": true, "optional": true },
+        { "waitForThenClick": ".cookie_preferences .modal-footer button.fill-primary" }
+    ],
+    "test": [{ "cookieContains": "%22ConsentAnalytical%22%3Afalse" }, { "cookieContains": "%22ConsentAdvertising%22%3Afalse" }]
+}

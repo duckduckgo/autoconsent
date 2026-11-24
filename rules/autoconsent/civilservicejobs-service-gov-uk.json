@@ -1,0 +1,38 @@
+{
+    "name": "civilservicejobs-service-gov-uk",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?civilservicejobs\\.service\\.gov\\.uk/"
+    },
+    "prehideSelectors": ["#csr-cookie-message"],
+    "detectCmp": [
+        {
+            "exists": "#csr-cookie-message #accept_essential_cookies_button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#csr-cookie-message #accept_essential_cookies_button"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#csr-cookie-message #accept_all_cookies_button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#csr-cookie-message #accept_essential_cookies_button"
+        },
+        {
+            "waitForVisible": "#csr-cookie-message",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies_accepted=essential"
+        }
+    ]
+}

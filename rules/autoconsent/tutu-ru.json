@@ -1,0 +1,35 @@
+{
+    "name": "tutu-ru",
+    "vendorUrl": "https://www.tutu.ru/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?tutu\\.ru/"
+    },
+    "prehideSelectors": ["[data-ti=\"disclaimer_wrapper\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-ti=\"disclaimer_wrapper\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-ti=\"disclaimer_wrapper\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-ti=\"disclaimer_wrapper\"] [data-ti=\"agree-button\"], [data-ti=\"disclaimer_wrapper\"] [data-ti=\"disclaimer_agree_button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "[data-ti=\"disclaimer_wrapper\"]"
+        }
+    ],
+    "test": [
+        {
+            "visible": "[data-ti=\"disclaimer_wrapper\"]",
+            "check": "none"
+        }
+    ]
+}

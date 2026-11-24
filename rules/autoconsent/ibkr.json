@@ -1,0 +1,16 @@
+{
+    "name": "ibkr",
+    "vendorUrl": "https://www.interactivebrokers.com/",
+    "prehideSelectors": ["#cookie-modal"],
+    "detectCmp": [{ "exists": "#cookie-modal #gdpr-customize-settings" }],
+    "detectPopup": [{ "visible": "#cookie-modal" }],
+    "optIn": [{ "waitForThenClick": "#cookie-modal #btn_accept_cookies" }],
+    "optOut": [
+        {
+            "if": { "visible": "#cookie-modal #gdpr-reject-all" },
+            "then": [{ "click": "#cookie-modal #gdpr-reject-all" }],
+            "else": [{ "click": "#cookie-modal #gdpr-customize-settings" }, { "waitForThenClick": "#cookie-modal #gdpr-save-settings" }]
+        }
+    ],
+    "test": [{ "cookieContains": "IB_PRIV_PREFS=1%7C1%7C1" }]
+}

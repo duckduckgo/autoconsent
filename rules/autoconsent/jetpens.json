@@ -1,0 +1,44 @@
+{
+    "name": "jetpens",
+    "vendorUrl": "https://www.jetpens.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?jetpens\\.com/"
+    },
+    "prehideSelectors": ["#cp-wrapper"],
+    "detectCmp": [
+        {
+            "exists": "#cp-wrapper #cp-small"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cp-wrapper"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cp-small button[onclick*='setConsentAll']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cp-small button[onclick*='cp-large']"
+        },
+        {
+            "waitForVisible": "#cp-large"
+        },
+        {
+            "click": "#cp-large input[type=checkbox]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#cp-large form > input[type=button]:not([onclick*='setConsentAll'])"
+        },
+        {
+            "waitForVisible": "#cp-wrapper",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}

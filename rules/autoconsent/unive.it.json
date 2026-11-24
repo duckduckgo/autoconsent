@@ -1,0 +1,62 @@
+{
+    "name": "unive.it",
+    "vendorUrl": "https://www.unive.it/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?unive\\.it/"
+    },
+    "cosmetic": false,
+    "prehideSelectors": ["#cookieModal"],
+    "detectCmp": [
+        {
+            "exists": "#cookieModal [onclick*=\"cookiesPolicy.selDefAndloadScript\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                {
+                    "visible": "#cookieModal [onclick*=\"cookiesPolicy.selDefAndloadScript\"]"
+                },
+                {
+                    "cookieContains": "unive.it=1",
+                    "negated": true
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForVisible": "#cookieModal [onclick*=\"cookiesPolicy.selAllAndloadScript\"]",
+            "timeout": 15000
+        },
+        {
+            "waitForThenClick": "#cookieModal [onclick*=\"cookiesPolicy.selAllAndloadScript\"]",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": "#cookieModal [onclick*=\"cookiesPolicy.selDefAndloadScript\"]",
+            "timeout": 15000
+        },
+        {
+            "waitForThenClick": "#cookieModal [onclick*=\"cookiesPolicy.selDefAndloadScript\"]",
+            "retry": 3,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "unive.it=1"
+        },
+        {
+            "cookieContains": "noiframe=checked",
+            "negated": true
+        },
+        {
+            "cookieContains": "socialpix=checked",
+            "negated": true
+        }
+    ]
+}

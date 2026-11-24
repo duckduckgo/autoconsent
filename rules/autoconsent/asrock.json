@@ -1,0 +1,44 @@
+{
+    "name": "asrock",
+    "vendorUrl": "https://www.asrock.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?asrock\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#AcceptCookies2 #MrktConfirm"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#AcceptCookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#AcceptCookies input[onclick*=SetCookie]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#AcceptCookies input[onclick*=AcceptCookies2]"
+        },
+        {
+            "waitForVisible": "#AcceptCookies2"
+        },
+        {
+            "click": "#AcceptCookies2 input[type=checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#AcceptCookies2 input[onclick*=SetCookie]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "MrktConfirm=false"
+        }
+    ]
+}
