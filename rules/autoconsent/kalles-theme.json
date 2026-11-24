@@ -1,0 +1,11 @@
+{
+    "name": "kalles-theme",
+    "vendorUrl": "https://the4.co/products/kalles-shopify-theme",
+    "comment": "Cookie popup built into The4's Kalles Shopify theme. Closing slides it off-screen and swaps on--show for on--hide.",
+    "prehideSelectors": ["#t4s-popup__cookies-law"],
+    "detectCmp": [{ "exists": "#t4s-popup__cookies-law" }],
+    "detectPopup": [{ "visible": "#t4s-popup__cookies-law.on--show" }],
+    "optIn": [{ "waitForThenClick": "#t4s-popup__cookies-law .t4s-pp_cookies__accept-btn" }],
+    "optOut": [{ "waitForThenClick": "#t4s-popup__cookies-law .t4s-pp_cookies__decline-btn" }],
+    "test": [{ "eval": "EVAL_KALLES_THEME_TEST" }]
+}
