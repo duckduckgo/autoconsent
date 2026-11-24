@@ -37,6 +37,9 @@ const useOxylabs = process.env.OXYLABS === '1';
 const oxylabsCandidatesFile = process.env.OXYLABS_CANDIDATES;
 const oxylabsCandidates = useOxylabs && oxylabsCandidatesFile ? readOxylabsCandidates(oxylabsCandidatesFile) : null;
 const recordOxylabsCandidates = !useOxylabs && !!oxylabsCandidatesFile;
+// SPEC_MANIFEST=<file> appends each generateCMPTests call to the file as a JSON line instead of defining tests,
+// so tools can read the specs as Playwright loads them (`npx playwright test --list`).
+const specManifestFile = process.env.SPEC_MANIFEST;
 // Pages load slower through remote Oxylabs sessions, so detection gets a longer window there.
 const detectionSlowdown = useOxylabs ? 2 : 1;
 // Status codes that bot protection answers with; other errors (404, 5xx) point to a stale spec URL instead.
@@ -498,7 +501,18 @@ function pickCIRegions(options: TestOptions): string[] {
     return [...picked, ...rest].slice(0, MAX_CI_REGIONS);
 }
 
+// The spec file that called generateCMPTests, relative to the repository root.
+function callingSpecFile(): string | null {
+    const frames = new Error().stack?.split('\n') ?? [];
+    const file = frames.map((frame) => frame.match(/\(?([^()\s]+\.spec\.ts):\d+:\d+\)?$/)?.[1]).find(Boolean);
+    return file ? path.relative(path.join(__dirname, '..'), file) : null;
+}
+
 export default function generateCMPTests(cmp: string, sites: string[], overrideOptions: Partial<TestOptions> = {}) {
+    if (specManifestFile) {
+        fs.appendFileSync(specManifestFile, `${JSON.stringify({ spec: callingSpecFile(), cmp, sites, options: overrideOptions })}\n`);
+        return;
+    }
     test.describe(cmp, () => {
         if (recordOxylabsCandidates) {
             // eslint-disable-next-line no-empty-pattern
