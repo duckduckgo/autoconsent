@@ -1,0 +1,18 @@
+{
+    "name": "humboldt-foundation",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?humboldt-foundation\\.de/"
+    },
+    "prehideSelectors": [".cookie:has(.js-cookie-collapse)"],
+    "detectCmp": [{ "exists": ".cookie .js-cookie-collapse" }],
+    "detectPopup": [{ "visible": ".cookie:not(.cookie--hidden) .cookie__inner" }],
+    "optIn": [
+        { "click": ".cookie #cookie-form input[type=checkbox]:not(:checked):not([disabled])", "all": true, "optional": true },
+        { "waitForThenClick": ".cookie .cookie__button button" }
+    ],
+    "optOut": [
+        { "click": ".cookie #cookie-form input[type=checkbox]:checked:not([disabled])", "all": true, "optional": true },
+        { "waitForThenClick": ".cookie .cookie__button button" }
+    ],
+    "test": [{ "exists": ".cookie.cookie--hidden" }]
+}
