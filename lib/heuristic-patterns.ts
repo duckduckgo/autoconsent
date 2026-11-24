@@ -476,6 +476,9 @@ const REJECT_PATTERNS_GERMAN = [
     // verweigern / verweigere / verweigert (refuse)
     /verweiger/is,
 
+    // noun form of reject, e.g. "Ablehnung", "Ablehnung nicht wesentlicher", "Ablehnung optionaler Cookies"
+    /^\s*ablehnung(\s+aller)?(\s+nicht)?(\s+(wesentlich|notwendig|essenziell|essentiell|erforderlich|optional|zusätzlich)e[nr]?)?(\s+cookies)?\s*$/is,
+
     // essential/necessary/functional-only variants (accepting only necessary → reject)
     /^\s*(nur|ausschließlich|lediglich|weiter\s+mit|mit|akzeptiere?n?|unbedingt|es\s+werden\s+nur)?\s*(technisch\s+)?(notwendige?[nrs]?|essenzielle?[nrs]?|essentielle?[nrs]?|erforderliche?[nrs]?|funktionale?[nrs]?|funktionelle?[nrs]?|wesentliche?[nrs]?)\s*(cookies?|technologien|funktionscookies|dienste)?\s*(akzeptieren|erlauben|zulassen|verwenden|annehmen|setzen|speichern|zustimmen|auswählen)?\.?\s*$/is,
 

@@ -769,6 +769,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Cookies akzeptieren')).to.equal('accept');
     });
 
+    it('matches the German noun form "Ablehnung"', () => {
+        expect(classifyButtonTextRegex('Ablehnung')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ablehnung nicht wesentlicher')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ablehnung optionaler Cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ablehnung der Datenschutzerklärung')).to.equal('other');
+    });
+
     it('matches German, Italian and Swedish "I understand" acknowledgements', () => {
         expect(classifyButtonTextRegex('Ich verstehe')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Ho capito')).to.equal('acknowledge');
