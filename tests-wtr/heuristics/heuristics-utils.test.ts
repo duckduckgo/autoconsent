@@ -423,6 +423,15 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects a German cookie consent question in popups only, with privacy wording after it', () => {
+        const text =
+            "Darf's ein Cookie sein?\n\nOptional, damit wir sehen, wie Bluepick genutzt wird. Mehr im Datenschutz.\n\nJa, gern\nNein, danke";
+        expect(detectsPopup(text)).to.be.true;
+        expect(detectsPage(text)).to.be.false;
+        expect(detectsPopup('Dürfen wir Analyse-Cookies setzen? Damit verbessern wir die Statistik.')).to.be.true;
+        expectNotDetected(['Darf es ein Cookie sein? Heute zwei Schoko-Cookies zum Preis von einem!']);
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';

@@ -197,6 +197,12 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bwir\s+(?:verwenden|nutzen|setzen)\s+cookies\b/gi,
     /\bzwecken und anbietern\b/gi,
     /\bweiter ohne akzeptanz\b/gi,
+    // consent asked as a question: "Darf's ein Cookie sein?"; "Cookie" is also a biscuit, so privacy wording must follow
+    {
+        pattern:
+            /\b(?:darf(?:'s|’s| es)|dürfen wir) (?:\S+[ -]){0,3}cookies? (?:sein|setzen|verwenden|nutzen|speichern)\?[\s\S]{0,150}?\b(?:datenschutz|analyse|statistik|tracking|einwilligung|zustimmung)/gi,
+        input: 'popup',
+    },
 
     // NL
     GEBRUIK_VAN_COOKIES,
