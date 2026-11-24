@@ -1,0 +1,29 @@
+{
+    "name": "tomplay",
+    "vendorUrl": "https://tomplay.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?tomplay\\.com/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["#cookies-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookies-banner #closeCookiesBanner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookies-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#closeCookiesBanner"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookies-banner"
+        }
+    ]
+}
