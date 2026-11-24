@@ -1420,6 +1420,7 @@ describe('checkHeuristicPatterns without bare accept-all / reject-all labels', (
             'Um diese Dienste verwenden zu dürfen, benötigen wir Ihre Einwilligung.',
             'Hier legen Sie fest, welche Cookies Sie zulassen.',
             'Dies geschieht meist in Form von Cookies.',
+            'Neben technisch notwendigen Cookies verwenden wir Google Analytics.',
             'Realisiert mit Klaro!',
             'Door op "Alle cookies accepteren" te klikken, gaat u akkoord met het opslaan van cookies.',
             'Wij vragen toestemming voor het plaatsen van cookies.',

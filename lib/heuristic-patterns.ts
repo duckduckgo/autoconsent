@@ -192,7 +192,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bwelche cookies sie (?:zulassen|akzeptieren)\b/gi,
     /\bcookies?\b.{0,60}\bauf (?:ihrem|deinem) (?:gerät|endgerät)\b/gi,
     /\bin form von cookies\b|\bblockierung bestimmter arten von cookies\b/gi,
-    /\b(?:notwendige|essenzielle|funktionale) cookies\b/gi,
+    /\b(?:notwendigen?|essenziellen?|funktionalen?) cookies\b/gi,
     // innerText can put every word on its own line
     /\bwir\s+(?:verwenden|nutzen|setzen)\s+cookies\b/gi,
     /\bzwecken und anbietern\b/gi,

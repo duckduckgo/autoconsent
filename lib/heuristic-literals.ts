@@ -140,7 +140,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["welche cookies sie "],
     ["cookie"],
     ["in form von cookies","blockierung bestimmter arten von cookies"],
-    ["notwendige","essenzielle","funktionale"],
+    [" cookies"],
     ["cookies"],
     ["zwecken und anbietern"],
     ["weiter ohne akzeptanz"],
