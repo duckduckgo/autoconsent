@@ -3,10 +3,11 @@
     "_metadata": {
         "vendorUrl": "https://www.shopware.com/"
     },
-    "prehideSelectors": [".page-wrap--cookie-permission[data-cookie-permission]"],
+    "prehideSelectors": [".page-wrap--cookie-permission[data-cookie-permission]:not(.spx-cookie-wrapper)"],
     "detectCmp": [
         {
-            "exists": ".page-wrap--cookie-permission[data-cookie-permission] .cookie-permission--decline-button"
+            "comment": "the spx theme's variant is handled by shopware5-spx",
+            "exists": ".page-wrap--cookie-permission[data-cookie-permission]:not(.spx-cookie-wrapper) .cookie-permission--decline-button"
         }
     ],
     "detectPopup": [
