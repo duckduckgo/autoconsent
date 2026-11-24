@@ -1,0 +1,32 @@
+{
+    "name": "studierendenwerk-stuttgart",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)*(studierendenwerk-stuttgart|studierendenhotel-stuttgart|boarding-wohnen|pausen-service|hochschulen-sw-stuttgart|sws-hochschulservice)\\.de/"
+    },
+    "prehideSelectors": ["#cookie-info"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-info .cookie-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-info"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-info .cookie-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-info .cookie-accept"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies_accepted=1"
+        }
+    ]
+}
