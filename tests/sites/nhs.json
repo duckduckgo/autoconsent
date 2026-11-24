@@ -1,0 +1,9 @@
+{
+    "cmp": "nhs.uk",
+    "tests": [
+        {
+            "sites": ["https://nhs.uk"],
+            "options": { "skipRegions": ["US", "DE", "GB"] }
+        }
+    ]
+}

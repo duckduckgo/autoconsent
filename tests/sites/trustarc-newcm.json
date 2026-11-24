@@ -1,0 +1,24 @@
+{
+    "cmp": "TrustArc-newcm",
+    "tests": [
+        {
+            "sites": [
+                "https://www.gwr.com/",
+                "https://www.avantiwestcoast.co.uk/",
+                "https://www.philips-hue.com/",
+                "https://www.signify.com/"
+            ],
+            "options": { "testOptOut": true, "testOptIn": false, "testSelfTest": false }
+        },
+        {
+            "note": "preference center shown without a banner",
+            "sites": ["https://www.dsc.com/"],
+            "options": { "testOptOut": true, "testOptIn": false, "testSelfTest": false, "skipRegions": ["US"] }
+        },
+        {
+            "note": "preference center with a hidden \"Decline All\" button",
+            "sites": ["https://www.magpul.com/"],
+            "options": { "testOptOut": true, "testOptIn": false, "testSelfTest": false, "skipRegions": ["US", "CA"] }
+        }
+    ]
+}

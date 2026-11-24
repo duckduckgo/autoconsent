@@ -1,0 +1,10 @@
+{
+    "cmp": "wbd-consent-modal",
+    "tests": [
+        {
+            "note": "US shows a single-button terms notice instead",
+            "sites": ["https://www.discoveryplus.com/", "https://www.hbomax.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

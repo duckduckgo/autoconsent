@@ -1,0 +1,16 @@
+{
+    "cmp": "jtl-consent-manager",
+    "tests": [
+        {
+            "sites": ["https://www.velofactory.ch/", "https://der-rasenmaeher.de/"]
+        },
+        {
+            "sites": ["https://ersatzteil-shop24.de/"],
+            "options": { "onlyRegions": ["CH"] }
+        },
+        {
+            "sites": ["https://edelstahl-tuerklingel.de/"],
+            "options": { "onlyRegions": ["DE"] }
+        }
+    ]
+}

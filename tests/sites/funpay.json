@@ -1,0 +1,9 @@
+{
+    "cmp": "funpay",
+    "tests": [
+        {
+            "sites": ["https://funpay.com/"],
+            "options": { "skipRegions": ["US", "JP"] }
+        }
+    ]
+}

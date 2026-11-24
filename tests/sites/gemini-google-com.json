@@ -1,0 +1,9 @@
+{
+    "cmp": "gemini.google.com",
+    "tests": [
+        {
+            "sites": ["https://gemini.google.com/app"],
+            "options": { "skipRegions": ["NA"] }
+        }
+    ]
+}

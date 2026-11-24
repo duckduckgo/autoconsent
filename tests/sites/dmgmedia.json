@@ -1,0 +1,13 @@
+{
+    "cmp": "dmgmedia",
+    "tests": [
+        {
+            "sites": ["https://www.dailymail.co.uk/", "https://metro.co.uk/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "sites": ["https://www.dailymail.co.uk/", "https://metro.co.uk/"],
+            "options": { "skipRegions": ["US"], "mobile": true }
+        }
+    ]
+}

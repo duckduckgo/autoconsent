@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_DE_finanzpartner.de_13s",
+    "tests": [
+        {
+            "sites": ["https://www.finanzpartner.de/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["DE"] }
+        }
+    ]
+}

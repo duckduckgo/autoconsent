@@ -1,0 +1,15 @@
+{
+    "cmp": "trillian",
+    "tests": [
+        {
+            "note": "the page reloads after a choice, so the self-test message is lost",
+            "sites": [
+                "https://www.ouh.nhs.uk/",
+                "https://www.sexualhealthoxfordshire.nhs.uk/",
+                "https://www.healthinnovationoxford.org/",
+                "https://www.thehilloxford.org/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

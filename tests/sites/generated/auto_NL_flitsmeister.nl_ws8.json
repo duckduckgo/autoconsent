@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_flitsmeister.nl_ws8",
+    "tests": [
+        {
+            "sites": ["https://www.flitsmeister.nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

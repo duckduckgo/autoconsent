@@ -1,0 +1,13 @@
+{
+    "cmp": "ixo-cookie-prompt",
+    "tests": [
+        {
+            "sites": ["https://www.castlecameras.co.uk/", "https://www.tripp.co.uk/"]
+        },
+        {
+            "note": "the page reloads right after opt-out, which interrupts the self-test",
+            "sites": ["https://www.riflemanfirearms.co.uk/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

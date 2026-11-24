@@ -1,0 +1,9 @@
+{
+    "cmp": "freak.no",
+    "tests": [
+        {
+            "note": "the site hides the deny button with CSS; it sets the same cookie as the \"Nei\" choice on the site's cookie page",
+            "sites": ["https://freak.no/"]
+        }
+    ]
+}

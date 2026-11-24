@@ -1,0 +1,13 @@
+{
+    "cmp": "jcookie",
+    "tests": [
+        {
+            "sites": ["https://javhd.com/en/"]
+        },
+        {
+            "note": "sister sites only show the banner outside the US",
+            "sites": ["https://av69.tv/en", "https://avtits.com/en", "https://heymilf.com/en"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

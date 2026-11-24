@@ -1,0 +1,10 @@
+{
+    "cmp": "vinnova-se",
+    "tests": [
+        {
+            "note": "saving the choice reloads the page before the self-test can run",
+            "sites": ["https://www.vinnova.se/", "https://www.vinnova.se/en/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

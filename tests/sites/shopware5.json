@@ -1,0 +1,13 @@
+{
+    "cmp": "shopware5",
+    "tests": [
+        {
+            "sites": ["https://battlemerchant.com/", "https://koesener.de/", "https://esmog-shop.com/", "https://ebike-solutions.com/"]
+        },
+        {
+            "note": "Decline button hidden by the theme; saving the consent manager reloads the page before the self-test runs",
+            "sites": ["https://sportfits.de/", "https://zazo.de/", "https://outdoor-renner.de/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

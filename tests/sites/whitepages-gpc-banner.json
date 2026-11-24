@@ -1,0 +1,10 @@
+{
+    "cmp": "whitepages-gpc-banner",
+    "tests": [
+        {
+            "note": "The banner is shown only to browsers that send the GPC signal.",
+            "sites": ["https://www.411.com/", "https://www.whitepages.com/"],
+            "options": { "gpc": true }
+        }
+    ]
+}

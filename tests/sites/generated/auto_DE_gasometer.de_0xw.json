@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_DE_gasometer.de_0xw",
+    "tests": [
+        {
+            "sites": ["https://www.gasometer.de/de"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["DE"] }
+        }
+    ]
+}

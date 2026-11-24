@@ -1,0 +1,17 @@
+{
+    "cmp": "belarus-cookie-info",
+    "tests": [
+        {
+            "note": "the site reloads the page right after the click, racing the self-test",
+            "sites": [
+                "https://belta.by/",
+                "https://eng.belta.by/",
+                "https://ont.by/",
+                "https://mininform.gov.by/",
+                "https://belneftekhim.by/",
+                "https://aqua-minsk.by/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

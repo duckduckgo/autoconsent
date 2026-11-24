@@ -1,0 +1,9 @@
+{
+    "cmp": "smallpdf",
+    "tests": [
+        {
+            "sites": ["https://smallpdf.com/", "https://smallpdf.com/de/pdf-zu-word"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

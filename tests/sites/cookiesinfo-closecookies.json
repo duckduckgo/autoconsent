@@ -1,0 +1,13 @@
+{
+    "cmp": "cookiesinfo-closecookies",
+    "tests": [
+        {
+            "sites": ["https://spmzoz-slupsk.pl/", "https://aktywator.witaj-swiecie.pl/", "https://poldan.pl/"]
+        },
+        {
+            "note": "only reachable from Polish IPs",
+            "sites": ["https://edu.gdansk.pl/"],
+            "options": { "onlyRegions": ["PL"] }
+        }
+    ]
+}

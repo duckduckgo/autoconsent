@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_DE_pflanzenhof-online.de_au2",
+    "tests": [
+        {
+            "sites": ["https://www.pflanzenhof-online.de/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["DE"] }
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "cmp": "sg-cookies",
+    "tests": [
+        {
+            "note": "Reject button only in the hidden settings modal",
+            "sites": [
+                "https://www.thuisbatterij-actie.nl/",
+                "https://www.nationaalbespaarcentrum.nl/",
+                "https://www.bestewarmtepomp.nl/",
+                "https://www.satt.cz/",
+                "https://epassage24.de/",
+                "https://www.babetkovo.sk/"
+            ]
+        },
+        {
+            "note": "Reject button in the bar",
+            "sites": ["https://www.geneva-arena.ch/"]
+        },
+        {
+            "note": "These sites reload the page after opt-out. Reject button in the bar",
+            "sites": ["https://www.buywithconfidence.gov.uk/", "https://www.luminsmart.com/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "These sites reload the page after opt-out. Only a settings modal",
+            "sites": ["https://www.zengo.eu/", "https://www.tanteanna.de/", "https://ceceurope.org/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

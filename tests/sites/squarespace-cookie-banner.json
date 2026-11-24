@@ -1,0 +1,17 @@
+{
+    "cmp": "squarespace-cookie-banner",
+    "tests": [
+        {
+            "sites": [
+                "https://insidethesquare.co/",
+                "https://www.urallawoolroom.com.au/",
+                "https://www.davidbowie.com/",
+                "https://www.thecorneroffice.uk/",
+                "https://www.theawkwardyeti.com/",
+                "https://www.radiotopia.fm/",
+                "https://meebook.com/"
+            ],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

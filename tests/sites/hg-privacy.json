@@ -1,0 +1,17 @@
+{
+    "cmp": "hg-privacy",
+    "tests": [
+        {
+            "sites": ["https://lonase.bet/"]
+        },
+        {
+            "note": "geo-restricted to their home countries",
+            "sites": ["https://bissaugames.net/"],
+            "options": { "onlyRegions": ["GW"] }
+        },
+        {
+            "sites": ["https://gambibet.net/"],
+            "options": { "onlyRegions": ["GM"] }
+        }
+    ]
+}

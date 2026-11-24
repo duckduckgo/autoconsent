@@ -1,0 +1,9 @@
+{
+    "cmp": "nhs-jobs",
+    "tests": [
+        {
+            "sites": ["https://www.jobs.nhs.uk/"],
+            "options": { "onlyRegions": ["GB"] }
+        }
+    ]
+}

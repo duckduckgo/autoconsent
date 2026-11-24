@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_beekman.nl_f9e",
+    "tests": [
+        {
+            "sites": ["https://www.beekman.nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

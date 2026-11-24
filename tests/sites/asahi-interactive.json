@@ -1,0 +1,13 @@
+{
+    "cmp": "asahi-interactive",
+    "tests": [
+        {
+            "sites": ["https://www.cnn.co.jp/", "https://japan.cnet.com/", "https://japan.zdnet.com/", "https://aiasahi.jp/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://www.cnn.co.jp/", "https://japan.cnet.com/", "https://japan.zdnet.com/", "https://aiasahi.jp/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

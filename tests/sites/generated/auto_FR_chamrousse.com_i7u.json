@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_chamrousse.com_i7u",
+    "tests": [
+        {
+            "sites": ["https://www.chamrousse.com/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

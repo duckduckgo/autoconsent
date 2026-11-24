@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CA_epihunter.eu_hd4",
+    "tests": [
+        {
+            "sites": ["http://epihunter.eu/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CA"] }
+        }
+    ]
+}

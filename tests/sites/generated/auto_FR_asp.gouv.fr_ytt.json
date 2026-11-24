@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_asp.gouv.fr_ytt",
+    "tests": [
+        {
+            "sites": ["https://www.asp.gouv.fr/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

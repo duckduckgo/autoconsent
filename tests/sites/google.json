@@ -1,0 +1,9 @@
+{
+    "cmp": "google.com",
+    "tests": [
+        {
+            "sites": ["https://google.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

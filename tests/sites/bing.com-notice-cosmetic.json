@@ -1,0 +1,9 @@
+{
+    "cmp": "bing.com-notice-cosmetic",
+    "tests": [
+        {
+            "sites": ["https://www.bing.com/", "https://www.bing.com/?setlang=fr-CA"],
+            "options": { "onlyRegions": ["CA"] }
+        }
+    ]
+}

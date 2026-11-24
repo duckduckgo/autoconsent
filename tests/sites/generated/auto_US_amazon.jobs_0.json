@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_US_amazon.jobs_0",
+    "tests": [
+        {
+            "sites": ["https://www.amazon.jobs/en/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["US"] }
+        }
+    ]
+}

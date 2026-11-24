@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_consumentenbond.nl_53g",
+    "tests": [
+        {
+            "sites": ["https://www.consumentenbond.nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

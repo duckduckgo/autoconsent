@@ -1,0 +1,10 @@
+{
+    "cmp": "scotland-police-uk",
+    "tests": [
+        {
+            "note": "the site geo-blocks DE visitors",
+            "sites": ["https://www.scotland.police.uk/"],
+            "options": { "skipRegions": ["DE"] }
+        }
+    ]
+}

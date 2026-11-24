@@ -1,0 +1,10 @@
+{
+    "cmp": "educastur-alojaweb",
+    "tests": [
+        {
+            "note": "site is not reachable from outside a few EU regions",
+            "sites": ["https://alojaweb.educastur.es/"],
+            "options": { "onlyRegions": ["DE", "FR", "NL", "ES"] }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "ccm-net",
+    "tests": [
+        {
+            "sites": ["https://es.ccm.net/", "https://de.ccm.net/", "https://it.ccm.net/"],
+            "options": { "testOptIn": false, "testSelfTest": false, "skipRegions": ["US"] }
+        }
+    ]
+}

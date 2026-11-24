@@ -1,0 +1,10 @@
+{
+    "cmp": "gjerrigknark",
+    "tests": [
+        {
+            "note": "the site reloads right after opt-out, so the self-test result is lost",
+            "sites": ["https://gjerrigknark.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

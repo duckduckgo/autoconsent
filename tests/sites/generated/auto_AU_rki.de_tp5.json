@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_AU_rki.de_tp5",
+    "tests": [
+        {
+            "sites": ["https://www.rki.de/DE/Home/home_node.html"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["AU"] }
+        }
+    ]
+}

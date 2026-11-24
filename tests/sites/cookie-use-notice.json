@@ -1,0 +1,10 @@
+{
+    "cmp": "cookie-use-notice",
+    "tests": [
+        {
+            "note": "the notice is only shown in the EEA, the UK, Brazil and Canada",
+            "sites": ["https://chatrandom.com/", "https://privr.com/"],
+            "options": { "onlyRegions": ["GB", "DE", "FR", "NL", "NO", "CA"] }
+        }
+    ]
+}

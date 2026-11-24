@@ -1,0 +1,14 @@
+{
+    "cmp": "natural-intelligence",
+    "tests": [
+        {
+            "note": "top bar banner, shown in the UK and EEA only",
+            "sites": ["https://www.top10.com/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "footer banner variant",
+            "sites": ["https://www.dating-site-vergleich.de/", "https://www.best-dating-sites-us.com/"]
+        }
+    ]
+}

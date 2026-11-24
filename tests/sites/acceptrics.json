@@ -1,0 +1,13 @@
+{
+    "cmp": "acceptrics",
+    "tests": [
+        {
+            "sites": ["https://www.vpnunlimited.com/"]
+        },
+        {
+            "note": "acceptrics.com shows its banner only in the EEA",
+            "sites": ["https://acceptrics.com/"],
+            "options": { "onlyRegions": ["DE", "FR"] }
+        }
+    ]
+}

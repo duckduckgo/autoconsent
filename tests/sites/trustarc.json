@@ -1,0 +1,28 @@
+{
+    "cmp": "TrustArc-top",
+    "tests": [
+        {
+            "sites": ["https://www.samsung.com/uk/smartphones/all-smartphones/"],
+            "options": { "testOptOut": true, "testSelfTest": false, "skipRegions": ["US"] }
+        },
+        {
+            "sites": ["https://www.garmin.com/de-DE/"],
+            "options": { "testOptOut": true, "testSelfTest": false, "skipRegions": ["US"] }
+        },
+        {
+            "note": "in-page preference center (no \"Decline\" shortcut on the banner)",
+            "sites": ["https://www.ea.com/games/it-takes-two/it-takes-two", "https://www.ea.com/"],
+            "options": { "testOptOut": true, "testOptIn": false, "onlyRegions": ["CA", "AU", "JP"] }
+        },
+        {
+            "note": "Magento store with a hidden built-in cookie notice next to TrustArc",
+            "sites": ["https://shop.royalmail.com/garden-wildlife-stamp-set"],
+            "options": { "testOptOut": true, "testSelfTest": false }
+        },
+        {
+            "note": "banner with a hidden, unwired \"Reject All\" shortcut (implied-consent regions)",
+            "sites": ["https://us.store.bambulab.com/"],
+            "options": { "testOptOut": true, "testSelfTest": false, "onlyRegions": ["US"] }
+        }
+    ]
+}

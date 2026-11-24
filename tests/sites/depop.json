@@ -1,0 +1,9 @@
+{
+    "cmp": "depop",
+    "tests": [
+        {
+            "sites": ["https://www.depop.com/", "https://www.depop.com/explore/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NO_arbetsformedlingen.se_wxz",
+    "tests": [
+        {
+            "sites": ["https://arbetsformedlingen.se/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NO"] }
+        }
+    ]
+}

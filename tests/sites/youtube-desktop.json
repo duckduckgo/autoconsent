@@ -1,0 +1,9 @@
+{
+    "cmp": "youtube-desktop",
+    "tests": [
+        {
+            "sites": ["https://youtube.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

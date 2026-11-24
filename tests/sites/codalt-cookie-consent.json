@@ -1,0 +1,10 @@
+{
+    "cmp": "codalt-cookie-consent",
+    "tests": [
+        {
+            "note": "rejecting reloads the page, which interrupts the self-test",
+            "sites": ["https://cvandaag.nl/", "https://dagaandag.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

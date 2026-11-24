@@ -1,0 +1,9 @@
+{
+    "cmp": "fonts.google.com",
+    "tests": [
+        {
+            "sites": ["https://fonts.google.com/"],
+            "options": { "skipRegions": ["NA", "US"] }
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "cmp": "yuntrack",
+    "tests": [
+        {
+            "sites": ["https://www.yuntrack.com/", "https://m.yuntrack.com/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://www.yuntrack.com/", "https://m.yuntrack.com/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "cmp": "fellow.pl",
+    "tests": [
+        {
+            "note": "the close link navigates away, so the self-test cannot run on the original page",
+            "sites": ["https://fellow.pl/", "https://fll.pl/"],
+            "options": { "mobile": false, "testSelfTest": false }
+        },
+        {
+            "sites": ["https://m.fellow.pl/", "https://m.fll.pl/"],
+            "options": { "mobile": true, "testSelfTest": false }
+        }
+    ]
+}

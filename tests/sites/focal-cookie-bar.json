@@ -1,0 +1,14 @@
+{
+    "cmp": "focal-cookie-bar",
+    "tests": [
+        {
+            "note": "stores show the bar only in regions that require consent",
+            "sites": ["https://hacksmith.store/en-no", "https://www.zuckersuessverlag.de/"],
+            "options": { "onlyRegions": ["GB", "DE", "NO"] }
+        },
+        {
+            "sites": ["https://obumi.de/"],
+            "options": { "onlyRegions": ["DE"] }
+        }
+    ]
+}

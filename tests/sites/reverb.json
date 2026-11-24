@@ -1,0 +1,10 @@
+{
+    "cmp": "reverb",
+    "tests": [
+        {
+            "note": "rejecting reloads the page, where reverb-gdpr-nag closes the remaining EU notice",
+            "sites": ["https://reverb.com/marketplace"],
+            "options": { "testSelfTest": false, "expectedRuns": 2 }
+        }
+    ]
+}

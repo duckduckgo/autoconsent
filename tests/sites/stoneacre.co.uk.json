@@ -1,0 +1,10 @@
+{
+    "cmp": "stoneacre.co.uk",
+    "tests": [
+        {
+            "note": "no banner shown in the US",
+            "sites": ["https://www.stoneacre.co.uk/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

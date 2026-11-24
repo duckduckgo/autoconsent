@@ -1,0 +1,9 @@
+{
+    "cmp": "x28-privacy-settings",
+    "tests": [
+        {
+            "note": "www.jobagent.ch also uses this CMP, but blocks automated browsers.",
+            "sites": ["https://stellenmarkt.wvib.de/", "https://www.x28.ch/", "https://www.job-radar.ch/"]
+        }
+    ]
+}

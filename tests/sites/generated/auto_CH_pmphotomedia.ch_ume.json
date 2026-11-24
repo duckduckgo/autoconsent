@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CH_pmphotomedia.ch_ume",
+    "tests": [
+        {
+            "sites": ["https://www.pmphotomedia.ch/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CH"] }
+        }
+    ]
+}

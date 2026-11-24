@@ -1,0 +1,16 @@
+{
+    "cmp": "laravel-eu-cookie-consent",
+    "tests": [
+        {
+            "note": "saving submits a form and reloads the page, so there is no stable state to self-test",
+            "sites": [
+                "https://www.digibron.nl/",
+                "https://flexiguide.com/",
+                "https://hife.es/",
+                "https://www.winterfeldt-tai-chi.de/",
+                "https://myteam.es/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

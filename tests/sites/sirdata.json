@@ -1,0 +1,15 @@
+{
+    "cmp": "Sirdata",
+    "tests": [
+        {
+            "note": "GDPR flavor: \"Do not accept\" button, or only a close (X) button",
+            "sites": ["https://www.comment-economiser.fr/", "https://www.futbolfantasy.com/", "https://kotaku.com/", "https://upway.de/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "US flavor: reject via \"Set your choices\"",
+            "sites": ["https://www.medicaldaily.com/", "https://www.ibtimes.co.uk/"],
+            "options": { "onlyRegions": ["US"] }
+        }
+    ]
+}

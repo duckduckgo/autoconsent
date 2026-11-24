@@ -1,0 +1,10 @@
+{
+    "cmp": "shimano-bike",
+    "tests": [
+        {
+            "note": "opt-in reloads the page, which makes the test flaky",
+            "sites": ["https://bike.shimano.com/", "https://bike.shimano.com/de-CH/home.html"],
+            "options": { "testOptIn": false }
+        }
+    ]
+}

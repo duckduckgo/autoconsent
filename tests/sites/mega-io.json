@@ -1,0 +1,9 @@
+{
+    "cmp": "mega.io",
+    "tests": [
+        {
+            "sites": ["https://mega.nz/", "https://mega.io/pricing"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

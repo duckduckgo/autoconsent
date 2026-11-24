@@ -1,0 +1,13 @@
+{
+    "cmp": "fixpart",
+    "tests": [
+        {
+            "sites": ["https://fixpart.se/", "https://fixpart.de/", "https://fixpart.nl/", "https://fixpart.fr/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://fixpart.se/", "https://fixpart.de/", "https://fixpart.nl/", "https://fixpart.fr/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

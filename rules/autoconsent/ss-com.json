@@ -1,0 +1,10 @@
+{
+    "name": "ss.com",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?ss\\.(com|lv)/" },
+    "prehideSelectors": ["#cookie_confirm_dv"],
+    "detectCmp": [{ "exists": "#cookie_confirm_dv" }],
+    "detectPopup": [{ "visible": "#cookie_confirm_dv" }],
+    "optIn": [{ "waitForThenClick": "#cookie_confirm_dv .cbtn:not(.setts)" }],
+    "optOut": [{ "eval": "EVAL_SS_COM_OPT_OUT" }, { "waitForVisible": "#cookie_confirm_dv", "check": "none" }],
+    "test": [{ "eval": "EVAL_SS_COM_TEST" }]
+}

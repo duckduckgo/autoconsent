@@ -1,0 +1,17 @@
+{
+    "cmp": "epaas",
+    "tests": [
+        {
+            "sites": ["https://www.bmw.de/de/index.html", "https://www.mini.co.uk/en_GB/home.html"]
+        },
+        {
+            "note": "No explicit reject button outside the EEA: opt-out goes through the \"customise\" layer.",
+            "sites": ["https://www.mini.jp/ja_JP/home.html"],
+            "options": { "testOptIn": false }
+        },
+        {
+            "note": "Opt-out-by-default variant: marketing pre-enabled in the \"customise\" layer, saved with \"Continue\".",
+            "sites": ["https://www.bmw.com.au/en/index.html", "https://www.mini.com.au/", "https://www.bmw.co.nz/"]
+        }
+    ]
+}

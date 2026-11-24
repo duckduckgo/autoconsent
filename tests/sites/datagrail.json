@@ -1,0 +1,21 @@
+{
+    "cmp": "datagrail",
+    "tests": [
+        {
+            "note": "dg-left, only accept_all + open_layer visible (exercises the customize + reject fallback)",
+            "sites": ["https://konghq.com/"]
+        },
+        {
+            "note": "dg-left, direct reject_all button (\"Accept Essentials Only\" label)",
+            "sites": ["https://www.earnin.com/"]
+        },
+        {
+            "note": "dg-left, direct reject_all with \"Reject All Cookies\" text",
+            "sites": ["https://www.getmyperks.com/"]
+        },
+        {
+            "note": "dg-bottom position variant",
+            "sites": ["https://kindthread.com/"]
+        }
+    ]
+}

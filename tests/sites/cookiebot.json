@@ -1,0 +1,31 @@
+{
+    "cmp": "Cybotcookiebot",
+    "tests": [
+        {
+            "sites": [
+                "https://www.wohnen.de/",
+                "https://www.zwilling.com/de/",
+                "https://forums.cpanel.net/",
+                "https://www.vatera.hu/",
+                "https://www.bax-shop.nl/"
+            ],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "Dialogs whose only decline control is CybotCookiebotDialogBodyButtonDecline",
+            "sites": ["https://www.drukwerkdeal.nl/", "https://www.freelance.de/", "https://www.printdeal.be/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "sites": [
+                "https://dl.acm.org/",
+                "https://www.ifm.org/",
+                "https://www.thule.com/",
+                "https://www.dezeen.com/",
+                "https://www.l3harris.com/",
+                "https://www.gog.com/",
+                "https://www.timeshighereducation.com/"
+            ]
+        }
+    ]
+}

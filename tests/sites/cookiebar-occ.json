@@ -1,0 +1,21 @@
+{
+    "cmp": "cookiebar-occ",
+    "tests": [
+        {
+            "sites": ["https://colorconsole.de/", "https://lokal-kabir.de/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://colorconsole.de/", "https://lokal-kabir.de/"],
+            "options": { "mobile": false }
+        },
+        {
+            "sites": ["https://softwareok.de/", "https://www.softwareok.com/"],
+            "options": { "mobile": true, "testSelfTest": false }
+        },
+        {
+            "sites": ["https://softwareok.de/", "https://www.softwareok.com/"],
+            "options": { "mobile": false, "testSelfTest": false }
+        }
+    ]
+}

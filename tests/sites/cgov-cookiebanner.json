@@ -1,0 +1,13 @@
+{
+    "cmp": "cgov-cookiebanner",
+    "tests": [
+        {
+            "sites": ["https://www.charnwood.gov.uk/", "https://www.oadby-wigston.gov.uk/"]
+        },
+        {
+            "note": "the form submit reloads the page before the self test can run",
+            "sites": ["https://www.nwleics.gov.uk/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

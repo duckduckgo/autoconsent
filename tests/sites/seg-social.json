@@ -1,0 +1,13 @@
+{
+    "cmp": "seg-social",
+    "tests": [
+        {
+            "sites": ["https://sede.seg-social.gob.es/", "https://www.seg-social.es/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://sede.seg-social.gob.es/", "https://www.seg-social.es/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

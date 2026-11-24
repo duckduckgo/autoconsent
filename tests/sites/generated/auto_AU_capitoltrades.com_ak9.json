@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_AU_capitoltrades.com_ak9",
+    "tests": [
+        {
+            "sites": ["https://www.capitoltrades.com/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["AU"] }
+        }
+    ]
+}

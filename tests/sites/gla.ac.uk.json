@@ -1,0 +1,10 @@
+{
+    "cmp": "gla.ac.uk",
+    "tests": [
+        {
+            "note": "the site reloads the page after saving choices, so the self-test runs in a fresh document",
+            "sites": ["https://www.gla.ac.uk/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "cmp": "fullertonhotels.com",
+    "tests": [
+        {
+            "sites": ["https://www.fullertonhotels.com/", "https://www.village-hotels.co.uk/", "https://www.falkensteiner.com/"],
+            "options": { "testOptIn": false, "testSelfTest": false, "onlyRegions": ["AU"] }
+        },
+        {
+            "note": "decline button hidden in the banner, opt-out goes through the preference center",
+            "sites": ["https://www.interstatebatteries.com/"],
+            "options": { "testOptIn": false, "testSelfTest": false }
+        },
+        {
+            "note": "older Secure Privacy banner template without button ids (evSpRejectBtn / evSpAcceptBtn classes)",
+            "sites": ["https://www.fireangel.co.uk/", "https://www.scholastic.co.uk/", "https://doorbraak.be/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

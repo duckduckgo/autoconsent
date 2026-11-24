@@ -1,0 +1,14 @@
+{
+    "cmp": "sicredi-frame",
+    "tests": [
+        {
+            "sites": ["https://ibpj.sicredi.com.br/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "Akamai shows \"Access Denied\" to GB and DE test browsers on this host",
+            "sites": ["https://ibpf.sicredi.com.br/"],
+            "options": { "testSelfTest": false, "onlyRegions": ["US"] }
+        }
+    ]
+}

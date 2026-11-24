@@ -1,0 +1,34 @@
+{
+    "cmp": "Sourcepoint-frame",
+    "note": "Groups with expectedRuns 2: The top-frame sourcepoint-top rule hides the message container as soon as it appears, without waiting to see whether Sourcepoint-frame can reject inside the iframe. Both rules therefore complete on sites that do offer a free reject, so two autoconsentDone messages per page is expected here rather than a sign of a reload loop.",
+    "tests": [
+        {
+            "sites": ["https://news.sky.com/", "https://www.economist.com/", "https://www.carwow.co.uk/"],
+            "options": { "expectedRuns": 2 }
+        },
+        {
+            "note": "The Guardian serves a \"consent or pay\" wall in the EU/EEA and UK, where Sourcepoint-frame bails and only sourcepoint-top acts; the remaining regions get a free-reject popup.",
+            "sites": ["https://www.theguardian.com/"],
+            "options": { "expectedRuns": 2, "skipRegions": ["GB", "DE", "FR", "IT", "ES", "NL", "PL", "SE", "NO", "DK", "CH"] }
+        },
+        {
+            "sites": [
+                "https://www.insider.com/",
+                "https://www.techtarget.com/searchvirtualdesktop/",
+                "https://www.independent.co.uk/",
+                "https://reitschuster.de/"
+            ],
+            "options": { "expectedRuns": 2, "skipRegions": ["US", "GB"] }
+        },
+        {
+            "sites": ["https://www.sueddeutsche.de/", "https://www.derstandard.at/", "https://www.heise.de/", "https://www.n-tv.de/"],
+            "options": {
+                "skipRegions": ["US", "GB", "FR"],
+                "expectPopupOpen": false,
+                "testOptIn": false,
+                "testOptOut": false,
+                "testSelfTest": false
+            }
+        }
+    ]
+}

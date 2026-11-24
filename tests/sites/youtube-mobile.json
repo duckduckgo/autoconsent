@@ -1,0 +1,9 @@
+{
+    "cmp": "youtube-mobile",
+    "tests": [
+        {
+            "sites": ["https://m.youtube.com/"],
+            "options": { "skipRegions": ["US"], "mobile": true }
+        }
+    ]
+}

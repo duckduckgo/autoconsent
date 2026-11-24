@@ -1,0 +1,10 @@
+{
+    "cmp": "cloudcms-cookie-alert",
+    "tests": [
+        {
+            "note": "saving settings reloads the page, so the self-test result is lost",
+            "sites": ["https://pgeenergiaciepla.pl/", "https://pgebaltica.pl/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

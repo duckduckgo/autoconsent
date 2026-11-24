@@ -1,0 +1,33 @@
+{
+    "cmp": "usercentrics-api",
+    "tests": [
+        {
+            "sites": ["https://hornbach.de"],
+            "options": { "skipRegions": ["US", "GB", "FR"] }
+        },
+        {
+            "note": "unsafe-eval CSP",
+            "sites": ["https://dm.de"],
+            "options": { "skipRegions": ["US", "GB", "FR"] }
+        },
+        {
+            "sites": [
+                "https://usercentrics.com/",
+                "https://shopbetreiber-blog.de/",
+                "https://www.kia.com/us/en",
+                "https://www.sportscheck.com/filialen/dortmund/",
+                "https://www.idealo.de/"
+            ],
+            "options": { "skipRegions": ["US", "GB", "FR"] }
+        },
+        {
+            "note": "many-vendor setup; eval-only optOut timed out before the fix",
+            "sites": ["https://www.condor.com/de/flug-vorbereiten/check-in/vorabend-check-in.jsp"],
+            "options": { "skipRegions": ["US", "GB", "FR"] }
+        },
+        {
+            "sites": ["https://www.cewe.de/"],
+            "options": { "skipRegions": ["US", "GB", "FR"] }
+        }
+    ]
+}

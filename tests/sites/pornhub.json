@@ -1,0 +1,9 @@
+{
+    "cmp": "pornhub.com",
+    "tests": [
+        {
+            "sites": ["https://pornhub.com/", "https://fr.pornhub.com/", "https://de.pornhub.org/"],
+            "options": { "expectedRuns": 2 }
+        }
+    ]
+}

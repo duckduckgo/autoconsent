@@ -1,0 +1,15 @@
+{
+    "cmp": "giustizia-it",
+    "tests": [
+        {
+            "note": "the save button is a link on some sites, so the page navigates before the self-test runs",
+            "sites": [
+                "https://www.cortedicassazione.it/",
+                "https://www.procuracassazione.it/",
+                "https://www.giustizia.it/giustizia/",
+                "https://datiestatistiche.giustizia.it/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

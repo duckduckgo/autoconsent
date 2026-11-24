@@ -1,8 +1,0 @@
-import generateCMPTests from '../playwright/runner';
-
-generateCMPTests('atcom-cookiemon', [
-    'https://www.sklavenitis.gr/',
-    'https://www.gregorys.gr/',
-    'https://www.atcom.gr/',
-    'https://www.dineathens.gr/',
-]);

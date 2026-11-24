@@ -1,0 +1,13 @@
+{
+    "cmp": "hacon-next-gen",
+    "tests": [
+        {
+            "sites": ["https://www.rejseplanen.dk/", "https://noevog-in1.verkehrsauskunft.at/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://www.rejseplanen.dk/", "https://noevog-in1.verkehrsauskunft.at/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

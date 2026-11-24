@@ -1,0 +1,13 @@
+{
+    "cmp": "telegram-im",
+    "tests": [
+        {
+            "sites": ["http://telegram.im/", "https://telegramcn.org.cn/", "https://telegramim.ru/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["http://telegram.im/", "https://telegramcn.org.cn/", "https://telegramim.ru/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

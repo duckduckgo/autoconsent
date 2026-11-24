@@ -1,0 +1,23 @@
+{
+    "cmp": "c15t",
+    "tests": [
+        {
+            "sites": [
+                "https://www.barefootandmore.nl/",
+                "https://adca.st/",
+                "https://waffles.ch/",
+                "https://geekflare.com/",
+                "https://cakewalk.com/",
+                "https://www.matsmart.se/",
+                "https://baptist.nl/",
+                "https://catalyst-demo.site/",
+                "https://expo.dev/"
+            ]
+        },
+        {
+            "note": "these sites show the banner only in GDPR regions",
+            "sites": ["https://www.mintlify.com/", "https://www.unkey.com/", "https://www.consent.io/"],
+            "options": { "skipRegions": ["US", "CA", "AU", "JP"] }
+        }
+    ]
+}

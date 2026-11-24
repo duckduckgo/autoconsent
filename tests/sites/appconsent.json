@@ -1,0 +1,13 @@
+{
+    "cmp": "AppConsent",
+    "tests": [
+        {
+            "sites": ["https://magasin.darty.com/", "https://www.iturf.fr/"],
+            "options": { "testOptIn": false, "testOptOut": true, "onlyRegions": ["US", "FR"] }
+        },
+        {
+            "sites": ["https://www.bestwordlist.com/", "https://www.sportsmole.co.uk/"],
+            "options": { "testOptIn": false, "testOptOut": true, "onlyRegions": ["GB", "US", "DE"] }
+        }
+    ]
+}

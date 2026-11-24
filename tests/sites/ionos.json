@@ -1,0 +1,17 @@
+{
+    "cmp": "ionos.de",
+    "tests": [
+        {
+            "sites": ["https://ionos.de"],
+            "options": { "skipRegions": ["US", "FR", "GB"] }
+        },
+        {
+            "sites": ["https://www.ionos.co.uk/"],
+            "options": { "onlyRegions": ["GB"] }
+        },
+        {
+            "sites": ["https://www.ionos.fr/"],
+            "options": { "onlyRegions": ["FR"], "testSelfTest": false }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CA_busbud.com_0sh",
+    "tests": [
+        {
+            "sites": ["https://www.busbud.com/en"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CA"] }
+        }
+    ]
+}

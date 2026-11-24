@@ -1,0 +1,13 @@
+{
+    "cmp": "cookiesplus",
+    "tests": [
+        {
+            "sites": ["https://farmaciasenante.com/", "https://www.ludum.fr/"]
+        },
+        {
+            "note": "the reject button submits a form, reloading the page before the self-test runs",
+            "sites": ["https://passion-radio.fr/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

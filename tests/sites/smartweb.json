@@ -1,0 +1,17 @@
+{
+    "cmp": "smartweb",
+    "tests": [
+        {
+            "note": "consent is saved via XHR followed by a page reload, so the self-test cannot observe the cookie",
+            "sites": [
+                "https://hellers.dk/",
+                "https://taon.dk/",
+                "https://exentri.com/",
+                "https://kraftblokk.no/",
+                "https://huntinglife.dk/",
+                "https://billigcykel.dk/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

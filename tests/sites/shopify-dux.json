@@ -1,0 +1,15 @@
+{
+    "cmp": "shopify-dux",
+    "tests": [
+        {
+            "sites": [
+                "https://shop.app/",
+                "https://www.shopify.com/uk",
+                "https://apps.shopify.com/",
+                "https://shopify.dev/docs",
+                "https://themes.shopify.com/"
+            ],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

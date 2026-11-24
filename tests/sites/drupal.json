@@ -1,0 +1,9 @@
+{
+    "cmp": "Drupal",
+    "tests": [
+        {
+            "sites": ["https://www.drupal.org/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

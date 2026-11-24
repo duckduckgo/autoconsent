@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CA_cfo.coop_edx",
+    "tests": [
+        {
+            "sites": ["https://www.cfo.coop/en/home"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CA"] }
+        }
+    ]
+}

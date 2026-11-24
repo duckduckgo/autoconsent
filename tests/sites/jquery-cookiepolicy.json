@@ -1,0 +1,10 @@
+{
+    "cmp": "jquery-cookiepolicy",
+    "tests": [
+        {
+            "note": "the page reloads after a consent choice, so the self-test result is lost",
+            "sites": ["https://pkw.gov.pl/", "https://www.etwinning.pl/", "https://pzw.org.pl/", "https://myslowice.pl/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

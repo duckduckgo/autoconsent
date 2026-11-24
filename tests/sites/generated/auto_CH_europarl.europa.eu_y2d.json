@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CH_europarl.europa.eu_y2d",
+    "tests": [
+        {
+            "sites": ["https://www.europarl.europa.eu/portal/en"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CH"] }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CH_galaxus.fr_rbg",
+    "tests": [
+        {
+            "sites": ["https://www.galaxus.fr/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CH"] }
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "cmp": "pieeye",
+    "tests": [
+        {
+            "sites": ["https://noahny.com/"]
+        },
+        {
+            "note": "The site reloads right after the consent choice, before the self-test can report.",
+            "sites": ["https://www.themeateater.com/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "sites": ["https://www.paulaschoice.de/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "sites": ["https://tandyleather.com/", "https://stetson.com/"],
+            "options": { "onlyRegions": ["US"] }
+        }
+    ]
+}

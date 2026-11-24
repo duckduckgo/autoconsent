@@ -1,0 +1,9 @@
+{
+    "cmp": "Yahoo",
+    "tests": [
+        {
+            "sites": ["https://ca.yahoo.com/", "https://tw.yahoo.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

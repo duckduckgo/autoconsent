@@ -1,0 +1,14 @@
+{
+    "cmp": "optum-legal-banner",
+    "tests": [
+        {
+            "sites": [
+                "https://www.optumrx.com/",
+                "https://www.optumbank.com/",
+                "https://www.genoahealthcare.com/",
+                "https://www.uhchousecalls.com/"
+            ],
+            "options": { "testOptIn": false }
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "cmp": "statamic-peak",
+    "tests": [
+        {
+            "sites": ["https://beducated.com/", "https://gehaltsreporter.de/"]
+        },
+        {
+            "sites": ["https://10design.co/"],
+            "options": { "onlyRegions": ["GB"] }
+        },
+        {
+            "note": "no reject button: the optional categories are unticked and saved",
+            "sites": ["https://cath.ch/"],
+            "options": { "onlyRegions": ["DE", "CH"] }
+        }
+    ]
+}

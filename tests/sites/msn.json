@@ -1,0 +1,9 @@
+{
+    "cmp": "msn",
+    "tests": [
+        {
+            "sites": ["https://www.msn.com/en-gb", "https://www.msn.com/de-de", "https://www.msn.com/fr-fr"],
+            "options": { "onlyRegions": ["GB", "DE", "FR"] }
+        }
+    ]
+}

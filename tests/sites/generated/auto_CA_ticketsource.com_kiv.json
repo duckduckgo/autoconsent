@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CA_ticketsource.com_kiv",
+    "tests": [
+        {
+            "sites": ["https://www.ticketsource.com/whats-on/hampton-college"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CA"] }
+        }
+    ]
+}

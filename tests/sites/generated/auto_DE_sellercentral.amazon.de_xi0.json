@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_DE_sellercentral.amazon.de_xi0",
+    "tests": [
+        {
+            "sites": ["https://sellercentral.amazon.de/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["DE"] }
+        }
+    ]
+}

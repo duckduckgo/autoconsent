@@ -1,0 +1,44 @@
+{
+    "cmp": "pandectes",
+    "tests": [
+        {
+            "sites": ["https://hollandscountryclothing.co.uk/", "https://cluse.com/"]
+        },
+        {
+            "note": "full-page overlay (\"blocking\") banner variant",
+            "sites": ["https://swedishstockings.com/"]
+        },
+        {
+            "sites": ["https://hollandcooper.com/"]
+        },
+        {
+            "note": "\"reject all\" hidden in preferences; the site reloads after saving, so the self-test cannot run",
+            "sites": ["https://snocks.com/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "shadow DOM <pandectes-cmp> banner variant",
+            "sites": [
+                "https://enron.com/",
+                "https://www.parent.com/",
+                "https://wetnwildbeauty.com/",
+                "https://www.yakima.com/",
+                "https://us.select-sport.com/collections/soccer-balls-training-series"
+            ],
+            "options": { "testOptIn": false }
+        },
+        {
+            "note": "shadow DOM variant without a decline button: opt out through preferences",
+            "sites": ["https://asmc.de/", "https://crossrope.com/"],
+            "options": { "testOptIn": false }
+        },
+        {
+            "note": "banner wrapper with a shop-specific id instead of #pandectes-banner",
+            "sites": ["https://www.aeris.de/"]
+        },
+        {
+            "note": "shadow DOM variant that opens straight into the preferences dialog, without a notice",
+            "sites": ["https://cotswoldflour.com/", "https://bymi.de/", "https://lovenood.com/"]
+        }
+    ]
+}
