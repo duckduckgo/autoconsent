@@ -1,0 +1,13 @@
+{
+    "cmp": "aa-cookie-banner",
+    "tests": [
+        {
+            "sites": ["https://www.envoyair.com/", "https://www.psaairlines.com/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://www.envoyair.com/", "https://www.psaairlines.com/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "cmp": "brandsforstudents.ch",
+    "tests": [
+        {
+            "note": "the site reloads the page after saving consent, so the self-test cannot run",
+            "sites": ["https://brandsforstudents.ch/", "https://brandsforemployees.ch/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

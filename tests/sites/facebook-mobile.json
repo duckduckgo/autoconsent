@@ -1,0 +1,9 @@
+{
+    "cmp": "facebook-mobile",
+    "tests": [
+        {
+            "sites": ["https://m.facebook.com/"],
+            "options": { "mobile": true, "skipRegions": ["US"] }
+        }
+    ]
+}

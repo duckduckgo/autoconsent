@@ -1,0 +1,10 @@
+{
+    "cmp": "gobiernodecanarias",
+    "tests": [
+        {
+            "note": "the site reloads the page after saving consent, so the self-test cannot run",
+            "sites": ["https://www.gobiernodecanarias.org/principal/", "https://www.gobiernodecanarias.org/educacion/web/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

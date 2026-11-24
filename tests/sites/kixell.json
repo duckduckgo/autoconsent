@@ -1,0 +1,17 @@
+{
+    "cmp": "kixell",
+    "tests": [
+        {
+            "sites": ["https://ocarat.com/"]
+        },
+        {
+            "note": "the site answers German IPs with 403 Forbidden",
+            "sites": ["https://www.magellan-bio.fr/"],
+            "options": { "skipRegions": ["DE"] }
+        },
+        {
+            "sites": ["https://www.mamaisonmonjardin.com/"],
+            "options": { "onlyRegions": ["FR"] }
+        }
+    ]
+}

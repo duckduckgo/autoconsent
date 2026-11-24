@@ -1,0 +1,18 @@
+{
+    "cmp": "in2cookiemodal",
+    "tests": [
+        {
+            "sites": [
+                "https://www.oth-regensburg.de/",
+                "https://www.leukaemie-hilfe.de/",
+                "https://www.seeburger.com/",
+                "https://www.thi.de/forschung/aimotion/"
+            ]
+        },
+        {
+            "note": "the page reloads after saving, so the self-test result is lost",
+            "sites": ["https://www.hs-esslingen.de/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

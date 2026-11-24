@@ -1,0 +1,9 @@
+{
+    "cmp": "arena.ai",
+    "tests": [
+        {
+            "sites": ["https://arena.ai/"],
+            "options": { "skipRegions": ["US", "CA", "AU", "JP"] }
+        }
+    ]
+}

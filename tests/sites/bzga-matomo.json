@@ -1,0 +1,12 @@
+{
+    "cmp": "bzga-matomo",
+    "tests": [
+        {
+            "sites": ["https://www.infektionsschutz.de/", "https://www.bioeg.de/"]
+        },
+        {
+            "sites": ["https://www.organspende-info.de/", "https://www.kindergesundheit-info.de/"],
+            "options": { "onlyRegions": ["DE"] }
+        }
+    ]
+}

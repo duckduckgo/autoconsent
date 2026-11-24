@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_norauto.fr_mbi",
+    "tests": [
+        {
+            "sites": ["https://www.norauto.fr/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

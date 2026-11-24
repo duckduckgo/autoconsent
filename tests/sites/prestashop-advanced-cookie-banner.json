@@ -1,0 +1,15 @@
+{
+    "cmp": "prestashop-advanced-cookie-banner",
+    "tests": [
+        {
+            "sites": [
+                "https://kluczesoft.pl/",
+                "https://buro-conseil.com/",
+                "https://reflecta.de/",
+                "https://bbois.com/",
+                "https://sosav.fr/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

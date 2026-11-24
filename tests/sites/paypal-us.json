@@ -1,0 +1,13 @@
+{
+    "cmp": "paypal-us",
+    "tests": [
+        {
+            "sites": ["https://www.paypal.com/us/home"]
+        },
+        {
+            "note": "This banner variant has no \"Decline\" button, so the rule hides it and no choice is stored.",
+            "sites": ["https://www.paypal.com/ca/home"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

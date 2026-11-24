@@ -1,0 +1,9 @@
+{
+    "cmp": "dmgmedia-us",
+    "tests": [
+        {
+            "sites": ["https://www.dailymail.co.uk/ushome/index.html", "https://metro.co.uk/"],
+            "options": { "skipRegions": ["DE", "FR", "GB", "NL"] }
+        }
+    ]
+}

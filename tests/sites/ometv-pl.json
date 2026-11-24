@@ -1,0 +1,13 @@
+{
+    "cmp": "ometv.pl",
+    "tests": [
+        {
+            "sites": ["https://ometv.pl/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://ometv.pl/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

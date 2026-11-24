@@ -1,0 +1,10 @@
+{
+    "cmp": "myhora.com",
+    "tests": [
+        {
+            "note": "in the EU and UK, Google Funding Choices is shown first and handled by its own rule",
+            "sites": ["https://myhora.com/"],
+            "options": { "onlyRegions": ["US", "CA", "AU", "JP"] }
+        }
+    ]
+}

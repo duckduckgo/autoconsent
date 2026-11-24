@@ -1,0 +1,13 @@
+{
+    "cmp": "visit-x.net",
+    "tests": [
+        {
+            "sites": ["https://www.visit-x.net/"],
+            "options": { "mobile": false }
+        },
+        {
+            "sites": ["https://m.visit-x.net/"],
+            "options": { "mobile": true }
+        }
+    ]
+}

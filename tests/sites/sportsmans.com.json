@@ -1,0 +1,10 @@
+{
+    "cmp": "sportsmans.com",
+    "tests": [
+        {
+            "note": "the site blocks visitors outside the US and CA",
+            "sites": ["https://www.sportsmans.com/"],
+            "options": { "onlyRegions": ["US", "CA"], "testSelfTest": false }
+        }
+    ]
+}

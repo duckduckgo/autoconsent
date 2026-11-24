@@ -1,0 +1,17 @@
+{
+    "cmp": "avada-privacy-bar",
+    "tests": [
+        {
+            "sites": ["https://www.levigo.de/"]
+        },
+        {
+            "note": "No reject button, consent checkboxes only",
+            "sites": ["https://www.bai.org/"]
+        },
+        {
+            "note": "The page reloads after the reject click, so the self-test never runs",
+            "sites": ["https://www.ccscollect.co.uk/", "https://comcavi.it/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

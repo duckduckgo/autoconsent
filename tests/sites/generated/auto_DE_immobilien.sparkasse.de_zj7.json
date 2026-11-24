@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_DE_immobilien.sparkasse.de_zj7",
+    "tests": [
+        {
+            "sites": ["https://immobilien.sparkasse.de/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["DE"] }
+        }
+    ]
+}

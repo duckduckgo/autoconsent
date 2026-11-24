@@ -1,0 +1,13 @@
+{
+    "cmp": "sparebank1-optin",
+    "tests": [
+        {
+            "sites": ["https://www.sparebank1.no/", "https://www.sparebank1.no/nb/ostlandet/privat.html"]
+        },
+        {
+            "note": "the page reloads right after opt-out, which interrupts the self-test",
+            "sites": ["https://www.eiendomsmegler1.no/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

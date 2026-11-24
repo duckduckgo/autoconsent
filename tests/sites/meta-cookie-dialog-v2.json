@@ -1,0 +1,13 @@
+{
+    "cmp": "meta-cookie-dialog-v2",
+    "tests": [
+        {
+            "sites": ["https://www.meta.com/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "sites": ["https://www.meta.com/"],
+            "options": { "mobile": true, "skipRegions": ["US"] }
+        }
+    ]
+}

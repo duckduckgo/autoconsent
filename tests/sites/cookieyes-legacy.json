@@ -1,0 +1,21 @@
+{
+    "cmp": "cookieyes-legacy",
+    "tests": [
+        {
+            "sites": ["https://www.cometafondo.it/", "https://www.playnet.it/"]
+        },
+        {
+            "note": "classic bar layout with inline preferences",
+            "sites": ["https://www.proteofaresapere.it/"]
+        },
+        {
+            "note": "variants without a reject button, opt-out goes through the preferences",
+            "sites": ["https://fozzy.com/", "https://kitecampione.it/"]
+        },
+        {
+            "note": "notice-only variant without reject or preferences buttons, the bar is hidden",
+            "sites": ["https://bobshop.co.za/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "cmp": "solvhealth.com",
+    "tests": [
+        {
+            "note": "the notice is shown in all regions, but non-US visitors get a bot challenge first",
+            "sites": [
+                "https://www.solvhealth.com/pa/c/east-stroudsburg-pa-srv-dot-physicals",
+                "https://www.solvhealth.com/urgent-care/ny/new-york"
+            ],
+            "options": { "onlyRegions": ["US"] }
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "cmp": "securiti-hybrid",
+    "tests": [
+        {
+            "sites": ["https://www.tollbrothers.com/"]
+        },
+        {
+            "note": "\"Unselect All\" is hidden, categories are unchecked one by one",
+            "sites": ["https://www.tollbrothersdesignstudio.com/", "https://www.rplighting.com/"]
+        },
+        {
+            "note": "preference center without any toggles",
+            "sites": ["https://www.fergusonhvac.com/"]
+        },
+        {
+            "note": "banner with a \"reject\" button; EU visitors get an opt-in banner instead",
+            "sites": ["https://www.cdmsmith.com/"],
+            "options": { "onlyRegions": ["US"] }
+        }
+    ]
+}

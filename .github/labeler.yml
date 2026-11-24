@@ -27,12 +27,13 @@
     - changed-files:
           - any-glob-to-any-file:
                 - 'rules/**'
-                - 'tests/**/*.spec.ts'
+                - 'tests/sites/**'
 
 'category: tests':
     - changed-files:
           - any-glob-to-any-file:
                 - 'playwright/**'
+                - 'tests/*.spec.ts'
                 - 'web-test-runner.config.mjs'
 
 # Not a release-note category: exactly one 'category:' label is required per PR.

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CH_astag.ch_1if",
+    "tests": [
+        {
+            "sites": ["https://www.astag.ch/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CH"] }
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "cmp": "amasty-gdpr-sidebar",
+    "tests": [
+        {
+            "note": "Save selection button only",
+            "sites": [
+                "https://www.jarbo.se/",
+                "https://www.badgematic.de/",
+                "https://www.dekaartendrukkerij.nl/",
+                "https://www.caterite.co.uk/"
+            ]
+        },
+        {
+            "note": "Decline button",
+            "sites": ["https://www.kedo.de/", "https://proedinc.com/", "https://millermedicalsupplies.com/"]
+        },
+        {
+            "note": "Customized templates with a decline button",
+            "sites": ["https://www.monnaiedeparis.fr/", "https://aminoexpert.com/"]
+        }
+    ]
+}

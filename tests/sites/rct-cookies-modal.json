@@ -1,0 +1,27 @@
+{
+    "cmp": "rct-cookies-modal",
+    "tests": [
+        {
+            "sites": [
+                "https://www.protilertools.co.uk/",
+                "https://www.ctdtiles.co.uk/",
+                "https://www.premiumtiletrim.co.uk/",
+                "https://www.warmfloorstore.co.uk/",
+                "https://www.northantstools.com/",
+                "https://www.flooringmaterials.co.uk/"
+            ],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": [
+                "https://www.protilertools.co.uk/",
+                "https://www.ctdtiles.co.uk/",
+                "https://www.premiumtiletrim.co.uk/",
+                "https://www.warmfloorstore.co.uk/",
+                "https://www.northantstools.com/",
+                "https://www.flooringmaterials.co.uk/"
+            ],
+            "options": { "mobile": false }
+        }
+    ]
+}

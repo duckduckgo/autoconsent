@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NO_apxml.com_l6n",
+    "tests": [
+        {
+            "sites": ["https://apxml.com/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NO"] }
+        }
+    ]
+}

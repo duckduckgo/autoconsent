@@ -1,0 +1,10 @@
+{
+    "cmp": "reuma.nl",
+    "tests": [
+        {
+            "note": "saving the cookie preferences reloads the page, so the self-test never runs",
+            "sites": ["https://reuma.nl/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

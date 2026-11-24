@@ -1,0 +1,13 @@
+{
+    "cmp": "united-online",
+    "tests": [
+        {
+            "sites": ["https://my.juno.com/start/sp.do", "https://my.netzero.net/start/sp.do"],
+            "options": { "mobile": false }
+        },
+        {
+            "sites": ["https://webmail.juno.com/", "https://webmail.netzero.net/"],
+            "options": { "mobile": true }
+        }
+    ]
+}

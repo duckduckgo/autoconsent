@@ -1,0 +1,13 @@
+{
+    "cmp": "django-gdpr-cookie-consent",
+    "tests": [
+        {
+            "note": "<dialog id=\"cc_modal_dialog\"> template",
+            "sites": ["https://alphaspel.se/", "https://www.djangotricks.com/"]
+        },
+        {
+            "note": "older <div id=\"cc_modal_window\"> template",
+            "sites": ["https://buckinghambooks.com/", "https://flon.ch/"]
+        }
+    ]
+}

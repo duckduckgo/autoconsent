@@ -1,0 +1,36 @@
+{
+    "cmp": "amasty-gdpr-hyva",
+    "tests": [
+        {
+            "sites": [
+                "http://stovesareus.co.uk/",
+                "https://www.strunz.com/",
+                "https://www.agri-expert.fr/",
+                "https://www.sigma-foto.de/",
+                "https://www.drankgigant.nl/",
+                "https://www.biocare.co.uk/",
+                "https://www.wrendaledesigns.co.uk/",
+                "https://www.snaintongolf.co.uk/",
+                "http://aeschbach-chaussures.ch/"
+            ]
+        },
+        {
+            "note": "Tabbed bar with in-bar group toggles",
+            "sites": ["http://happybeds.co.uk/"]
+        },
+        {
+            "note": "Decline link in the bar text",
+            "sites": ["http://openhaardhout-gigant.nl/"]
+        },
+        {
+            "note": "the site reloads the page after saving consent, so the self test never runs",
+            "sites": ["http://christmastreeworld.co.uk/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "no banner shown in the US",
+            "sites": ["https://www.brisa.fi/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

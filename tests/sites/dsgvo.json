@@ -1,0 +1,12 @@
+{
+    "cmp": "WP DSGVO Tools",
+    "tests": [
+        {
+            "sites": ["https://shop.fellhof.com/en/", "https://energiedirect-bayern.de/", "https://verkehrsdienste.at/"]
+        },
+        {
+            "note": "popup without an \"accept nothing\" button",
+            "sites": ["https://vfc-plauen.de/", "https://schluessel-mueller.de/"]
+        }
+    ]
+}

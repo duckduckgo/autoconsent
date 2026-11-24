@@ -1,0 +1,14 @@
+{
+    "cmp": "juzaphoto",
+    "tests": [
+        {
+            "note": "the site reloads the page after a choice is made, so the self-test cannot run on the original page",
+            "sites": ["https://www.juzaphoto.com/home.php?l=it", "https://www.juzaphoto.com/home.php?l=en"],
+            "options": { "mobile": true, "testSelfTest": false }
+        },
+        {
+            "sites": ["https://www.juzaphoto.com/home.php?l=it", "https://www.juzaphoto.com/home.php?l=en"],
+            "options": { "mobile": false, "testSelfTest": false }
+        }
+    ]
+}

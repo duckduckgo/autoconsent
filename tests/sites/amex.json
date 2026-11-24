@@ -1,0 +1,9 @@
+{
+    "cmp": "amex",
+    "tests": [
+        {
+            "sites": ["https://www.americanexpress.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

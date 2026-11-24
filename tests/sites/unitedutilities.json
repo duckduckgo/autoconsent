@@ -1,0 +1,14 @@
+{
+    "cmp": "unitedutilities",
+    "tests": [
+        {
+            "note": "saving preferences reloads the page, so the self-test cannot run",
+            "sites": ["https://www.unitedutilities.com/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "sites": ["https://www.unitedutilities.com/"],
+            "options": { "testSelfTest": false, "mobile": true }
+        }
+    ]
+}

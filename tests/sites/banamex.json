@@ -1,0 +1,10 @@
+{
+    "cmp": "banamex",
+    "note": "the site shows its cookie bar late in the page load",
+    "tests": [
+        {
+            "sites": ["https://www.banamex.com/"],
+            "options": { "timeout": 90000 }
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "cmp": "visualreality",
+    "tests": [
+        {
+            "note": "Destination pages may load a separate ad consent iframe (nojazz) after the cookiewall is submitted",
+            "sites": [
+                "https://www.tournamentsoftware.com/",
+                "https://be.tournamentsoftware.com/",
+                "https://www.turnier.de/",
+                "https://dbv.turnier.de/",
+                "https://www.toernooi.nl/",
+                "https://mijnknltb.toernooi.nl/",
+                "https://www.vetts.org.uk/"
+            ],
+            "options": { "expectedRuns": 2, "mobile": false }
+        },
+        {
+            "sites": [
+                "https://www.tournamentsoftware.com/",
+                "https://be.tournamentsoftware.com/",
+                "https://www.turnier.de/",
+                "https://dbv.turnier.de/",
+                "https://www.toernooi.nl/",
+                "https://mijnknltb.toernooi.nl/",
+                "https://www.vetts.org.uk/"
+            ],
+            "options": { "expectedRuns": 2, "mobile": true }
+        }
+    ]
+}

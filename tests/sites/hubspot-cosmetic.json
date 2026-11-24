@@ -1,0 +1,10 @@
+{
+    "cmp": "hubspot-cosmetic",
+    "tests": [
+        {
+            "note": "accept-only flavor: no decline button and the close button is hidden",
+            "sites": ["https://stacker.com/", "https://www.kff.org/", "https://www.hushmail.com/"],
+            "options": { "onlyRegions": ["US"] }
+        }
+    ]
+}

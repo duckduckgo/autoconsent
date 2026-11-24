@@ -93,6 +93,8 @@ export const snippets = {
     EVAL_TRUSTARC_FRAME_GTM: () => window && window.QueryString && window.QueryString.gtm === '1',
 
     // declarative rules
+    EVAL_ACCEPTRICS_TEST: () =>
+        Object.values(JSON.parse(localStorage.getItem('__acceptrics_settings')).purposes).every((purpose) => purpose === 'rejected'),
     EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
     EVAL_AYLO_COOKIE_MANAGER_READY: () => !!(window.wl_cookie_consent_manager || window._Cookie_Consent_Manager_brand),
@@ -180,6 +182,10 @@ export const snippets = {
             if (x.checked) x.click();
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
+    EVAL_KALLES_THEME_TEST: () => {
+        const consent = window.Shopify.customerPrivacy.currentVisitorConsent();
+        return consent.marketing === 'no' && consent.analytics === 'no';
+    },
     EVAL_KROWN_COOKIE_BANNER_TEST: () => localStorage.getItem('krown-cookie-banner') === 'true',
     // the decline handler listens for mouseup/touchend, which element.click() does not dispatch
     EVAL_LETHPOLYTECH_DECLINE: () =>
@@ -272,6 +278,8 @@ export const snippets = {
         });
         return true;
     },
+    EVAL_SS_COM_OPT_OUT: () => _gdpr_confirm(false) || true,
+    EVAL_SS_COM_TEST: () => /-necessary$/.test(localStorage.getItem('ss_cc')),
     EVAL_STEAMPOWERED_0: () =>
         JSON.parse(
             decodeURIComponent(

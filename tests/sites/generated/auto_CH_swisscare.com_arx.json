@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CH_swisscare.com_arx",
+    "tests": [
+        {
+            "sites": ["https://swisscare.com/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CH"] }
+        }
+    ]
+}

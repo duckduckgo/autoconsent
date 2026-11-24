@@ -1,0 +1,13 @@
+{
+    "cmp": "lawwwing",
+    "tests": [
+        {
+            "sites": ["https://ajuntament.barcelona.cat/", "https://graffica.info/", "https://supra.fr/", "https://arteche.com/"]
+        },
+        {
+            "note": "reloads the page after the consent choice, so the self-test cannot run",
+            "sites": ["https://auto10.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

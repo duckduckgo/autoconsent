@@ -1,0 +1,9 @@
+{
+    "cmp": "pcloud",
+    "tests": [
+        {
+            "sites": ["https://www.pcloud.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

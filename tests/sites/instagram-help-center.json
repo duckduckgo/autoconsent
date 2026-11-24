@@ -1,0 +1,9 @@
+{
+    "cmp": "instagram-help-center",
+    "tests": [
+        {
+            "sites": ["https://help.instagram.com/", "https://about.instagram.com/", "https://privacycenter.instagram.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

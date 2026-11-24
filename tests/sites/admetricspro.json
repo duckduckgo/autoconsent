@@ -1,0 +1,21 @@
+{
+    "cmp": "admetricspro",
+    "tests": [
+        {
+            "note": "US state privacy law flavor with consent toggles",
+            "sites": ["https://biblehub.com/", "https://tangorin.com/"],
+            "options": { "onlyRegions": ["US"] }
+        },
+        {
+            "note": "TCF flavor with a second \"Reject All and Exit\" layer",
+            "sites": [
+                "https://tangorin.com/",
+                "https://www.allfreecrochet.com/",
+                "https://www.behindthename.com/",
+                "https://www.helpteaching.com/",
+                "https://www.math-aids.com/"
+            ],
+            "options": { "onlyRegions": ["GB", "DE"] }
+        }
+    ]
+}

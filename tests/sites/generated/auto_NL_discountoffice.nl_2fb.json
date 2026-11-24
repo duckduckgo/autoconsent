@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_discountoffice.nl_2fb",
+    "tests": [
+        {
+            "sites": ["https://discountoffice.nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

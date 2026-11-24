@@ -1,0 +1,13 @@
+{
+    "cmp": "ux-cookie-layer",
+    "tests": [
+        {
+            "sites": ["https://www.trumpf.com/", "https://www.trumpf-scientific-lasers.com/"],
+            "options": { "mobile": true, "testSelfTest": false }
+        },
+        {
+            "sites": ["https://www.trumpf.com/", "https://www.trumpf-scientific-lasers.com/"],
+            "options": { "mobile": false, "testSelfTest": false }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_coutellerie-tourangelle.com_rcf",
+    "tests": [
+        {
+            "sites": ["https://www.coutellerie-tourangelle.com/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

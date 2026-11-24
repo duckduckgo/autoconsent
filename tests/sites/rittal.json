@@ -1,0 +1,10 @@
+{
+    "cmp": "rittal",
+    "tests": [
+        {
+            "note": "the page reloads after a choice is made, so the self-test cannot run on the original document",
+            "sites": ["https://www.rittal.com/com-en/", "https://www.rittal.com/uk-en/", "https://www.rittal.com/fr-fr/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

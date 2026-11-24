@@ -1,0 +1,10 @@
+{
+    "cmp": "modelsociety",
+    "tests": [
+        {
+            "note": "the cookie banner is only shown to visitors from the EU/UK",
+            "sites": ["https://modelsociety.com/"],
+            "options": { "onlyRegions": ["GB", "DE"] }
+        }
+    ]
+}

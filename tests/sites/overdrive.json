@@ -1,0 +1,15 @@
+{
+    "cmp": "overdrive",
+    "tests": [
+        {
+            "note": "The cookie settings modal is shown to EU/UK visitors without the GPC signal. Confirming the settings reloads the page, so the self-test cannot run.",
+            "sites": ["https://voebb.overdrive.com/", "https://nypl.overdrive.com/"],
+            "options": { "onlyRegions": ["DE", "GB", "FR"], "testSelfTest": false }
+        },
+        {
+            "note": "Browsers that send the GPC signal get a notice banner instead, in all regions.",
+            "sites": ["https://lapl.overdrive.com/"],
+            "options": { "gpc": true }
+        }
+    ]
+}

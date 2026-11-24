@@ -1,0 +1,10 @@
+{
+    "cmp": "scb.se",
+    "tests": [
+        {
+            "note": "opting out submits a form that reloads the page, so the self test runs against the page being unloaded",
+            "sites": ["https://www.scb.se/", "https://www.scb.se/en/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

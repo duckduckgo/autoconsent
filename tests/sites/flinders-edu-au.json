@@ -1,0 +1,12 @@
+{
+    "cmp": "flinders-edu-au",
+    "tests": [
+        {
+            "sites": ["https://www.flinders.edu.au/"]
+        },
+        {
+            "sites": ["https://staff.flinders.edu.au/", "https://students.flinders.edu.au/"],
+            "options": { "onlyRegions": ["AU"] }
+        }
+    ]
+}

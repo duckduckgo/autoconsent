@@ -1,0 +1,22 @@
+{
+    "cmp": "cookie-script",
+    "tests": [
+        {
+            "note": "reject button in the banner",
+            "sites": ["https://www.bes.co.uk/"]
+        },
+        {
+            "note": "no reject button: \"Save & Close\" in the preferences panel",
+            "sites": ["https://www.fairlawns.co.uk/", "https://www.aktionspreis.de/", "https://ikalender.org/"]
+        },
+        {
+            "note": "new banner layout without #cookiescript_injected",
+            "sites": ["https://mitsdu.dk/", "https://n8n.io/", "https://hearthis.at/"]
+        },
+        {
+            "note": "category checkboxes in the banner, no manage button, hidden \"Save & Close\"; site is blocked outside Europe",
+            "sites": ["https://alledaek365.dk/"],
+            "options": { "onlyRegions": ["DE", "FR", "NL", "PL", "DK"] }
+        }
+    ]
+}

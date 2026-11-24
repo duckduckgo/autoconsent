@@ -1,0 +1,13 @@
+{
+    "cmp": "ancestry",
+    "tests": [
+        {
+            "sites": ["https://www.ancestry.co.uk/", "https://www.ancestry.com/"],
+            "options": { "onlyRegions": ["GB"] }
+        },
+        {
+            "sites": ["https://www.ancestry.de/"],
+            "options": { "onlyRegions": ["DE"] }
+        }
+    ]
+}

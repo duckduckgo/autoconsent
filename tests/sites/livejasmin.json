@@ -1,0 +1,13 @@
+{
+    "cmp": "livejasmin",
+    "tests": [
+        {
+            "sites": ["https://www.livejasmin.com/en/girls/?forcedesktop=1"],
+            "options": { "testOptIn": false }
+        },
+        {
+            "sites": ["https://m.livejasmin.com/en/girls/girl"],
+            "options": { "testOptIn": false, "onlyRegions": ["DE"], "mobile": true }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_proantic.com_oyg",
+    "tests": [
+        {
+            "sites": ["https://www.proantic.com/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

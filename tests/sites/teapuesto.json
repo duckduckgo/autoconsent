@@ -1,0 +1,13 @@
+{
+    "cmp": "teapuesto",
+    "tests": [
+        {
+            "sites": ["https://www.teapuesto.pe/", "https://mobile.teapuesto.pe/"],
+            "options": { "mobile": false }
+        },
+        {
+            "sites": ["https://www.teapuesto.pe/", "https://mobile.teapuesto.pe/"],
+            "options": { "mobile": true }
+        }
+    ]
+}

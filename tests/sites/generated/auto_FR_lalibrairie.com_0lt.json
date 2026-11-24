@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_lalibrairie.com_0lt",
+    "tests": [
+        {
+            "sites": ["https://www.lalibrairie.com/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

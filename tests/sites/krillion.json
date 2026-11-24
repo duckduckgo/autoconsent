@@ -1,0 +1,10 @@
+{
+    "cmp": "krillion.to",
+    "tests": [
+        {
+            "note": "no banner shown in the US",
+            "sites": ["http://krillion.to/", "https://krillion.to/da"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

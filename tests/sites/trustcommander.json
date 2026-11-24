@@ -1,0 +1,26 @@
+{
+    "cmp": "trustcommander",
+    "tests": [
+        {
+            "sites": ["https://www.axa.de/", "https://aide.laposte.fr/"]
+        },
+        {
+            "sites": ["https://www.labanquepostale.fr/", "https://www.laposte.fr/", "https://localiser.laposte.fr/"],
+            "options": { "onlyRegions": ["CH"] }
+        },
+        {
+            "sites": [
+                "https://www.labanquepostale.com/",
+                "https://www.3ds.com/",
+                "https://www.maty.com/",
+                "https://www.pfg.fr/",
+                "https://www.pointdevente.parionssport.fdj.fr/"
+            ],
+            "options": { "onlyRegions": ["FR"] }
+        },
+        {
+            "sites": ["https://www.ernstings-family.de/"],
+            "options": { "onlyRegions": ["DE"] }
+        }
+    ]
+}

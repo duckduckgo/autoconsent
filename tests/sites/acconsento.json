@@ -1,0 +1,13 @@
+{
+    "cmp": "acconsento",
+    "tests": [
+        {
+            "sites": ["https://www.pizza.it/", "https://www.radiotoscana.it/"]
+        },
+        {
+            "note": "sites with automatic page refresh enabled reload right after the click, so the self-test result is lost",
+            "sites": ["https://www.055firenze.it/", "https://www.museoegizio.it/", "https://www.antimafiaduemila.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

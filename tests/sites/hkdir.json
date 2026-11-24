@@ -1,0 +1,10 @@
+{
+    "cmp": "hkdir",
+    "tests": [
+        {
+            "note": "the site reloads the page right after the click, so the self test cannot run",
+            "sites": ["https://hkdir.no/", "https://studentombudfagskole.no/", "https://fagskoleradet.no/", "https://erihplus.hkdir.no/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

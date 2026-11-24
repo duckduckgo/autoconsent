@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_AU_deezer.com_tmf",
+    "tests": [
+        {
+            "sites": ["https://www.deezer.com/us/offers"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["AU"] }
+        }
+    ]
+}

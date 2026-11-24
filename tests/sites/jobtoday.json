@@ -1,0 +1,9 @@
+{
+    "cmp": "jobtoday",
+    "tests": [
+        {
+            "sites": ["https://jobtoday.com/"],
+            "options": { "skipRegions": ["US", "NL"] }
+        }
+    ]
+}

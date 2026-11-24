@@ -1,0 +1,10 @@
+{
+    "cmp": "clym-tcf-frame",
+    "tests": [
+        {
+            "note": "The TCF notice is only shown in the EEA; other regions get Clym's main-page notice or nothing",
+            "sites": ["https://www.peoplefinders.com/", "https://www.spydialer.com/"],
+            "options": { "onlyRegions": ["DE", "ES", "FR", "NL", "PL"] }
+        }
+    ]
+}

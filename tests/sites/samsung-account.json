@@ -1,0 +1,9 @@
+{
+    "cmp": "samsung-account",
+    "tests": [
+        {
+            "sites": ["https://account.samsung.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

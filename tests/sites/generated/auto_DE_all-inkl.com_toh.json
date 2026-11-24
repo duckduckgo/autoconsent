@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_DE_all-inkl.com_toh",
+    "tests": [
+        {
+            "sites": ["https://all-inkl.com/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["DE"] }
+        }
+    ]
+}

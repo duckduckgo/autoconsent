@@ -93,6 +93,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\baccept or (?:reject|decline) (?:all |optional |non-essential )?cookies\b/gi,
     // the consent choice itself, as in FR/IT/ES: "continuer sans accepter"
     /\bcontinue without accepting\b/gi,
+    // "choose between essential cookies that are required for the site to work or all cookies"
+    /\bcookies (?:that are )?(?:strictly )?(?:required|necessary|needed) for (?:the|this|our) (?:web)?site to (?:work|function)\b/gi,
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
@@ -320,6 +322,9 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /(?:файл[а-яё]*[\s-]+(?:cookie|куки)|(?:cookie|куки)[\s-]+файл[а-яё]*)/gi,
     // cookies described without the word: "файлов, сохраняемых в браузере пользователя"
     /файл[а-яё]*,?\s+(?:сохраня[а-яё]*|хран[а-яё]*)[а-яё\s]{0,30}браузер/gi,
+    // e.g. "продолжая работу, ты принимаешь cookie", "вы принимаете куки"
+    /продолжая.{0,100}(?:cookie|куки)/gi,
+    /принима[а-яё]*\s+(?:cookie|куки)/gi,
 
     // Italian (IT)
     // e.g. "usiamo i cookie", "utilizziamo cookie tecnici", "questo sito utilizza i cookie", "noi e i nostri partner utilizziamo i cookie"
@@ -379,6 +384,22 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+
+    // Turkish (TR): the verb comes last, hence the long gap; [ıI]/[iİ] match capitals, where the i flag pairs neither
+    // e.g. "çerezler kullanıyoruz", "tanımlama bilgilerini ... için kullanıyoruz"; the verb endings skip "Kullanım Koşulları"
+    /(?:çerez|cookie|tan[ıI]mlama b[iİ]lg[iİ])[^.]{0,200}(?:kullan|yararlan|faydalan)(?:[ıI]yor|makta|[ıI]lmakta|[ıI]l[ıI]yor|[ıI]l[ıI]r|[ıI]r)/gi,
+    // e.g. "kullandığımız çerezler"
+    /kulland[ıI]ğ[ıI]m[ıI]z (?:çerez|cookie|tan[ıI]mlama b[iİ]lg[iİ])/gi,
+    // e.g. "Detaylı bilgi için Çerez Politikamızı inceleyebilirsiniz", "çerez aydınlatma metninden ulaşabilirsiniz"
+    /çerez (?:pol[iİ]t[iİ]ka|ayd[ıI]nlatma)[^.]{0,40}(?:[iİ]ncele|ula[şŞ]|oku)/gi,
+    // Greek (EL); accented vowels are matched with and without tonos, since all-caps Greek drops it
+    // e.g. "χρησιμοποιούμε cookies", "η ιστοσελίδα χρησιμοποιεί cookies", "χρησιμοποιεί αρχεία cookie"
+    /χρησιμοποι\S{0,6}\s(?:\S+\s){0,3}?(?:cookies?|μπισκ[οό]τα)/gi,
+    // e.g. "cookies και άλλες παρόμοιες τεχνολογίες"
+    /(?:cookies?|μπισκ[οό]τα).{0,40}παρ[οό]μοιε[σς]\s+τεχνολογ/gi,
+    /συγκατ[αά]θεσ[ηή].{0,60}(?:cookies?|μπισκ[οό]τ)/gi,
+    /αποδοχ[ηή]\s+[οό]λων/gi,
+    /απ[οό]ρριψη\s+[οό]λων/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -589,6 +610,22 @@ const REJECT_PATTERNS_NORWEGIAN = [
     /^nei(,?\s+takk)?$/is,
 ];
 
+const REJECT_PATTERNS_GREEK = [
+    // απόρριψη / απορρίπτω / απόρριψε (reject); not "απόρρητο" (privacy)
+    /(^|\s)απ[οό]ρρ[ιί](ψ|πτ)/is,
+    /^[αά]ρνηση/is,
+
+    // (accept) only necessary / mandatory / functional, e.g. "αποδοχή υποχρεωτικών", "μόνο τα απαραίτητα cookies"
+    /^(αποδοχ[ηή]\s+|αποδ[εέ]χομαι\s+|επιτρ[εέ]ψτε\s+)?(μ[οό]νο\s+)?(των\s+|τα\s+)?(απαρα[ιί]τητ\S*|υποχρεωτικ\S*|αναγκα[ιί]\S*|λειτουργικ\S*|τεχνικ\S*)(\s+(cookies?|μπισκ[οό]τα))?$/is,
+
+    // continue without accepting / consent
+    /^συν[εέ]χεια\s+χωρ[ιί][σς]\s+(αποδοχ|συγκατ[αά]θεση)/is,
+
+    // refusals: "δεν αποδέχομαι", "δε συμφωνώ", "όχι, ευχαριστώ"
+    /^δεν?\s+(αποδ[εέ]χομαι|συμφων[ωώ]|συναιν[ωώ])/is,
+    /^[οό]χι(,?\s+ευχαριστ[ωώ])?$/is,
+];
+
 const REJECT_PATTERNS_CATALAN = [
     /(^|\s)rebutj/is,
     'no accepto',
@@ -641,7 +678,12 @@ const REJECT_PATTERNS_RUSSIAN = [
     /^\s*(не\s+(принима[а-яё]+|соглас[а-яё]+|разреша[а-яё]+|хочу)|нет(,?\s+спасибо)?)\s*$/is,
 ];
 
-const REJECT_PATTERNS_TURKISH = ['reddet', 'çerezleri reddet'];
+const REJECT_PATTERNS_TURKISH = [
+    // e.g. "tümünü reddet", "isteğe bağlı çerezleri reddet"; [ıi] because text in capitals lowercases I to i
+    /^((tümünü|hepsini|tüm çerezleri|çerezleri|isteğe bağl[ıi] çerezleri|zorunlu olmayan çerezleri) )?reddet( ve kapat)?$/,
+    'reddediyorum',
+    'kabul etmiyorum',
+];
 
 const REJECT_PATTERNS_INDONESIAN = ['tolak cookie'];
 
@@ -666,6 +708,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_SWEDISH,
     ...REJECT_PATTERNS_DANISH,
     ...REJECT_PATTERNS_NORWEGIAN,
+    ...REJECT_PATTERNS_GREEK,
     ...REJECT_PATTERNS_CATALAN,
     ...REJECT_PATTERNS_GALICIAN,
     ...REJECT_PATTERNS_BASQUE,
@@ -881,8 +924,17 @@ export const SETTINGS_PATTERNS = [
     /^\s*(управл[а-яё]+|измен[а-яё]+|выбрать|персонализ[а-яё]+|расширенн[а-яё]+|индивидуальн[а-яё]+)[\s-]+.{0,20}(настройк[а-яё]*|парамет[а-яё]*|предпочтени[а-яё]*|категори[а-яё]*|файл[а-яё]*|cookie|куки[а-яё]*|согласи[а-яё]*|конфиденциальност[а-яё]*)\s*$/is,
     'подробные настройки',
 
+    // Turkish (TR)
+    // e.g. "çerez ayarları", "seçenekler", "tercihleri yönet", "çerez tercihlerini yapılandır", "kişiselleştir"
+    /^((çerez|tan[ıi]mlama bilgisi) )?(ayarlar[ıi]?|tercihler[ıi]?|seçenekler)$/,
+    /^(çerezleri|çerez ayarlar[ıi]n[ıi]|çerez tercihlerini|ayarlar[ıi]|tercihleri) (yönet|düzenle|özelleştir|yap[ıi]land[ıi]r)([ıi]n)?$/,
+    /^kişiselleştir(in)?$/,
+
     // Italian (IT)
     'personalizza cookie',
+
+    // Greek (EL), e.g. "ρυθμίσεις", "πληροφορίες και ρυθμίσεις", "διαχείριση cookies", "περισσότερες επιλογές"
+    /^(πληροφορ[ιί]ε[σς]\s+και\s+)?(ρυθμ[ιί]σει[σς]|προτιμ[ηή]σει[σς]|προσαρμογ[ηή]|διαχε[ιί]ριση|επιλογ[εέ][σς]|περισσ[οό]τερε[σς]\s+επιλογ[εέ][σς])(\s+(των\s+|για\s+)?(cookies?|μπισκ[οό]των|επιλογ[ωώ]ν|προτιμ[ηή]σεων|συγκατ[αά]θεσης))?$/is,
 
     // English (EN)
     'advanced settings',
@@ -1040,6 +1092,9 @@ export const ACCEPT_PATTERNS = [
     // Turkish (TR)
     'kabul et',
 
+    // Greek (EL), e.g. "αποδοχή", "αποδοχή όλων", "αποδέχομαι όλα τα cookies", "να επιτρέπονται όλα", "επιτρέπεται η επιλογή"
+    /^(ναι,?\s+)?(αποδοχ[ηή]|αποδ[εέ]χομαι|αποδεχτε[ιί]τε|συμφων[ωώ]|συναιν[ωώ]|επιτρ[εέ]ψτε|(να\s+)?επιτρ[εέ]π(ονται|εται))(\s+(τα\s+|η\s+)?([οό]λ(α|ων)|επιλεγμ[εέ]ν(α|ων)|επιλογ[ηή]))?(\s+(τα\s+|των\s+)?(cookies?|μπισκ[οό]τ(α|ων)))?(\s+(και|&)\s+(κλε[ιί]σιμο|συν[εέ]χεια))?$/is,
+
     // Italian (IT)
     'accetta',
     'accetta tutti i cookie',
@@ -1115,6 +1170,10 @@ export const ACKNOWLEDGE_PATTERNS = [
     'w porządku',
     /^zamknij informację o( plikach)? cookies$/,
     'zapisz i zamknij',
+
+    // Greek (EL), e.g. "εντάξει", "το κατάλαβα", "κλείσιμο", "συνέχεια", "αποθήκευση επιλογών"
+    /^(εντ[αά]ξει|(το\s+)?κατ[αά]λαβα|κλε[ιί]σιμο|συν[εέ]χεια|επιβεβα[ιί]ωση)[ !.]*$/is,
+    /^αποθ[ηή]κευση\s+(των\s+)?(επιλογ[ωώ]ν|ρυθμ[ιί]σεων|προτιμ[ηή]σεων)$/is,
 
     // Russian (RU)
     // e.g. "понятно", "всё понятно", "хорошо", "ясно"; \w does not match Cyrillic

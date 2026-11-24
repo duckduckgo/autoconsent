@@ -1,0 +1,13 @@
+{
+    "cmp": "octoparse",
+    "tests": [
+        {
+            "sites": ["https://www.octoparse.jp/", "https://www.octoparse.com/", "https://www.octoparse.de/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://www.octoparse.jp/", "https://www.octoparse.com/", "https://www.octoparse.de/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

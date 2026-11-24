@@ -1,0 +1,13 @@
+{
+    "cmp": "ing-nl",
+    "tests": [
+        {
+            "sites": ["https://www.ing.nl/particulier"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://www.ing.nl/particulier"],
+            "options": { "mobile": false }
+        }
+    ]
+}

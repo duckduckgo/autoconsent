@@ -1,0 +1,10 @@
+{
+    "cmp": "cz-eshop-cookies-consent",
+    "tests": [
+        {
+            "note": "opting out reloads the page, which interrupts the self-test",
+            "sites": ["https://www.plastikovy-model.cz/", "https://www.mps-nabytek.cz/", "https://www.ohnostroje-cbs.cz/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

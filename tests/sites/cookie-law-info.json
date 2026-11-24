@@ -1,0 +1,15 @@
+{
+    "cmp": "cookie-law-info",
+    "tests": [
+        {
+            "sites": ["https://www.omas-gegen-rechts.org/", "https://www.fitundattraktiv.de/"],
+            "options": { "skipRegions": ["US", "GB"] }
+        },
+        {
+            "sites": [
+                "https://www.sbid.org/",
+                "https://diroots.com/revit-plugins/renumber-revit-elements-using-a-prefix-a-suffix-and-a-multiplier-with-reordering/"
+            ]
+        }
+    ]
+}

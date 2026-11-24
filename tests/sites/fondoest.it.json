@@ -1,0 +1,10 @@
+{
+    "cmp": "fondoest.it",
+    "tests": [
+        {
+            "note": "The site reloads the page after a consent choice, so the self-test cannot run.",
+            "sites": ["https://fondoest.it/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

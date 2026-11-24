@@ -1,0 +1,14 @@
+{
+    "cmp": "pcspecialist",
+    "tests": [
+        {
+            "note": "each storefront shows the consent popup only to visitors from its own country (and the UK one also to the US)",
+            "sites": ["https://www.pcspecialist.co.uk/"],
+            "options": { "testSelfTest": false, "onlyRegions": ["GB", "US"] }
+        },
+        {
+            "sites": ["https://www.pcspecialist.de/"],
+            "options": { "testSelfTest": false, "onlyRegions": ["DE"] }
+        }
+    ]
+}

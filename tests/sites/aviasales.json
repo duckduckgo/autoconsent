@@ -1,0 +1,9 @@
+{
+    "cmp": "aviasales",
+    "tests": [
+        {
+            "sites": ["https://www.aviasales.kz/"],
+            "options": { "skipRegions": ["AU"] }
+        }
+    ]
+}

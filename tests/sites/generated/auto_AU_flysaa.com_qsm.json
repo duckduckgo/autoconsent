@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_AU_flysaa.com_qsm",
+    "tests": [
+        {
+            "sites": ["https://www.flysaa.com/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["AU"] }
+        }
+    ]
+}

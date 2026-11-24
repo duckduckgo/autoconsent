@@ -1,0 +1,9 @@
+{
+    "cmp": "etsy",
+    "tests": [
+        {
+            "sites": ["https://www.etsy.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

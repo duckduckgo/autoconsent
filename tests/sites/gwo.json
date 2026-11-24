@@ -1,0 +1,10 @@
+{
+    "cmp": "gwo",
+    "tests": [
+        {
+            "note": "The site reloads the page after consent is saved, so the self-test runs on a fresh page.",
+            "sites": ["https://gwo.pl/", "https://akademia.gwo.pl/", "https://multimedia.gwo.pl/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

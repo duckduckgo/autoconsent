@@ -1,0 +1,9 @@
+{
+    "cmp": "r42-st-popup",
+    "tests": [
+        {
+            "sites": ["https://www.randstad.nl/", "https://www.tempo-team.nl/", "https://www.bmc.nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

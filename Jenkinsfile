@@ -1,10 +1,11 @@
-def runPlaywrightTests(resultDir, browser, testFiles) {
+// specIds: data files in tests/sites (see scripts/get-tests-to-run.js), run through tests/rule-sites.spec.ts
+def runPlaywrightTests(resultDir, browser, specIds) {
     def junitFile = "results-${env.REGION}.xml"
     try {
         timeout(120) {
-            def testFilesArg = testFiles.join(' ')
+            def specsArg = specIds.join(',')
             sh """
-                PLAYWRIGHT_JUNIT_OUTPUT_NAME=${junitFile} npx playwright test ${testFilesArg} --project ${browser} --workers 10 --reporter=junit,line || true
+                SPECS='${specsArg}' PLAYWRIGHT_JUNIT_OUTPUT_NAME=${junitFile} npx playwright test tests/rule-sites.spec.ts --project ${browser} --workers 10 --reporter=junit,line || true
             """
         }
     } finally {
@@ -16,15 +17,15 @@ def runPlaywrightTests(resultDir, browser, testFiles) {
 }
 
 // Rerun the tests that the local pass listed as blocked by a bot wall, one Oxylabs session at a time.
-def runOxylabsTests(candidatesFile, testFiles) {
+def runOxylabsTests(candidatesFile, specIds) {
     def junitFile = "results-${env.REGION}-oxylabs.xml"
     try {
         // Playwright's --global-timeout ends the run first, so it still writes the JUnit XML
         timeout(60) {
-            def testFilesArg = testFiles.join(' ')
+            def specsArg = specIds.join(',')
             withCredentials([usernamePassword(credentialsId: 'autoconsent-oxylabs', usernameVariable: 'OXYLABS_USER', passwordVariable: 'OXYLABS_PASSWORD')]) {
                 sh """
-                    OXYLABS=1 OXYLABS_CANDIDATES=${candidatesFile} PLAYWRIGHT_JUNIT_OUTPUT_NAME=${junitFile} npx playwright test ${testFilesArg} --project chrome --workers 1 --retries 1 --global-timeout 3300000 --reporter=junit,line || true
+                    SPECS='${specsArg}' OXYLABS=1 OXYLABS_CANDIDATES=${candidatesFile} PLAYWRIGHT_JUNIT_OUTPUT_NAME=${junitFile} npx playwright test tests/rule-sites.spec.ts --project chrome --workers 1 --retries 1 --global-timeout 3300000 --reporter=junit,line || true
                 """
             }
         }
@@ -172,8 +173,9 @@ pipeline {
                         }
                     }
 
-                    // Apply the status to the previous commit: We're assuming that there was a merge commit when Jenkins picked up the PR.
-                    def prCommitSha = sh(script: "git rev-parse HEAD~1", returnStdout: true).trim()
+                    // Apply the status to the PR head commit. Jenkins merges the target branch into the PR head, so HEAD^1 is the PR head
+                    // when that made a merge commit. When the PR is already up to date with the target branch, there is no merge and HEAD is the PR head.
+                    def prCommitSha = sh(script: "if git rev-parse -q --verify HEAD^2 >/dev/null; then git rev-parse HEAD^1; else git rev-parse HEAD; fi", returnStdout: true).trim()
                     githubNotify(
                         account: 'duckduckgo',
                         repo: 'autoconsent',

@@ -1,0 +1,27 @@
+{
+    "cmp": "axeptio",
+    "tests": [
+        {
+            "sites": [
+                "https://docs.mistral.ai/",
+                "https://www.prestashop-project.org/",
+                "https://www.spareka.fr/",
+                "https://www.narbonneaccessoires.fr/fr-fr/"
+            ]
+        },
+        {
+            "note": "Step-based widget: \"Close\" rejects, \"Accept all\" only advances to the next step",
+            "sites": ["https://mistral.ai/pricing", "https://mistral.ai/news/le-chat-dives-deep"],
+            "options": { "testOptIn": false }
+        },
+        {
+            "note": "Widget opens after a configured delay",
+            "sites": ["https://www.memo-de-vie.org/qui-sommes-nous", "https://www.lyoncapitale.fr/"]
+        },
+        {
+            "note": "Newer widget layout (ax-widget-relifted): \"Continuer sans accepter\" is an unlabelled header button",
+            "sites": ["https://www.savelys.fr/"],
+            "options": { "onlyRegions": ["FR"] }
+        }
+    ]
+}

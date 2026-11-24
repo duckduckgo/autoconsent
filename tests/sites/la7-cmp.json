@@ -1,0 +1,10 @@
+{
+    "cmp": "la7-cmp",
+    "tests": [
+        {
+            "note": "the site reloads the page after opt-out, so the self-test cannot run in the original context",
+            "sites": ["https://www.la7.it/", "https://tg.la7.it/", "https://www.sedanoallegro.it/", "https://tv.torinofc.it/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

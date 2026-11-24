@@ -1,0 +1,10 @@
+{
+    "cmp": "reddit.com",
+    "tests": [
+        {
+            "note": "https://github.com/duckduckgo/autoconsent/issues/82",
+            "sites": ["https://www.reddit.com/r/AskReddit/"],
+            "options": { "mobile": false, "skipRegions": ["US", "DE", "FR", "GB"] }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "bing.com-notice",
+    "tests": [
+        {
+            "sites": ["https://www.bing.com/"],
+            "options": { "mobile": true, "onlyRegions": ["CA"] }
+        }
+    ]
+}

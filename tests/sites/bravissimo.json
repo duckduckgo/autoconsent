@@ -1,0 +1,13 @@
+{
+    "cmp": "bravissimo",
+    "tests": [
+        {
+            "sites": ["https://www.bravissimo.com/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "sites": ["https://www.bravissimo.com/us/"],
+            "options": { "onlyRegions": ["US"] }
+        }
+    ]
+}

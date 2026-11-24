@@ -1,0 +1,9 @@
+{
+    "cmp": "rule34-xxx",
+    "tests": [
+        {
+            "sites": ["https://rule34.xxx/index.php?page=post&s=list&tags=all"],
+            "options": { "onlyRegions": ["DE"], "testOptIn": false }
+        }
+    ]
+}

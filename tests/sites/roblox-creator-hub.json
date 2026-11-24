@@ -1,0 +1,9 @@
+{
+    "cmp": "roblox-creator-hub",
+    "tests": [
+        {
+            "sites": ["https://create.roblox.com/"],
+            "options": { "skipRegions": ["US", "AU", "CA", "CH"] }
+        }
+    ]
+}

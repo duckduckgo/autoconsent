@@ -1,0 +1,14 @@
+{
+    "cmp": "blogger-cookie-notice",
+    "tests": [
+        {
+            "sites": [
+                "http://petrusko.blogspot.com/",
+                "https://www.irasutoya.com/",
+                "https://www.surrenderat20.net/",
+                "https://forgetfulbc.blogspot.com/"
+            ],
+            "options": { "onlyRegions": ["GB", "DE", "FR", "SE"] }
+        }
+    ]
+}

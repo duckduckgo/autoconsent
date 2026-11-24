@@ -1,0 +1,13 @@
+{
+    "cmp": "betsson-fr",
+    "tests": [
+        {
+            "sites": ["https://betsson.fr/fr"],
+            "options": { "testSelfTest": false, "onlyRegions": ["FR"] }
+        },
+        {
+            "sites": ["https://betsson.fr/fr"],
+            "options": { "testSelfTest": false, "onlyRegions": ["FR"], "mobile": true }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_DE_survival-kompass.de_kv6",
+    "tests": [
+        {
+            "sites": ["https://survival-kompass.de/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["DE"] }
+        }
+    ]
+}

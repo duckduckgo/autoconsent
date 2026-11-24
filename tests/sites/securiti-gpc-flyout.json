@@ -1,0 +1,25 @@
+{
+    "cmp": "securiti-gpc-flyout",
+    "tests": [
+        {
+            "note": "Securiti shows the GPC flyout only to browsers that send the GPC signal.",
+            "sites": [
+                "https://www.newportbrass.com/products/kitchen/pull-down-faucets/",
+                "https://www.masco.com/",
+                "https://www.rollins.com/",
+                "https://www.hotspring.com/"
+            ],
+            "options": { "gpc": true }
+        },
+        {
+            "note": "Securiti shows the GPC flyout only to browsers that send the GPC signal. flyout variant with a \"Hide the banner\" button",
+            "sites": ["https://www.tollbrothers.com/"],
+            "options": { "gpc": true }
+        },
+        {
+            "note": "blocks visitors from Japan",
+            "sites": ["https://www.campingworld.com/"],
+            "options": { "gpc": true, "skipRegions": ["JP"] }
+        }
+    ]
+}

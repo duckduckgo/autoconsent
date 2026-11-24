@@ -10,6 +10,7 @@ import compactRules from '../rules/compact-rules.json';
 // We need both formats: compact for optOut tests, full for optIn tests.
 import { autoconsent as fullRules } from '../rules/rules.json';
 import { injectIntoIsolatedWorld } from './isolated-world.mjs';
+import type { TestOptions } from './spec-types';
 import { connectOxylabs, createCaptchaTracker } from './oxylabs.mjs';
 
 const LOG_MESSAGES: ContentScriptMessage['type'][] = process.env.CI
@@ -77,17 +78,6 @@ function readOxylabsCandidates(file: string) {
     }
 }
 
-type TestOptions = {
-    testOptOut: boolean;
-    testSelfTest: boolean;
-    testOptIn: boolean;
-    skipRegions?: string[];
-    onlyRegions?: string[];
-    mobile: boolean;
-    expectPopupOpen: boolean;
-    expectedRuns: number;
-    gpc: boolean;
-};
 // A frame's content script, reached through either the isolated-world transport or a main-world Frame.
 type ContentScriptTarget = {
     send: (message: object) => Promise<unknown>;
@@ -530,6 +520,9 @@ export default function generateCMPTests(cmp: string, sites: string[], overrideO
                     return;
                 }
                 test(testName, async ({ page }, testInfo) => {
+                    if (finalOptions.timeout) {
+                        test.setTimeout(Math.max(finalOptions.timeout, testInfo.timeout));
+                    }
                     const testRun = new TestRun(page, testInfo, url, cmp, finalOptions, autoAction);
                     if (recordOxylabsCandidates) {
                         testRuns.set(testInfo.testId, testRun);

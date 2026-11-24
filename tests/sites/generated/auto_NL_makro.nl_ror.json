@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_makro.nl_ror",
+    "tests": [
+        {
+            "sites": ["https://www.makro.nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "cmp": "enzuzo",
+    "tests": [
+        {
+            "sites": ["https://www.veluwe.nl/", "https://florea.cz/", "https://www.miltek.fr/", "https://ar.nl/"]
+        },
+        {
+            "note": "no banner shown in the US",
+            "sites": ["https://www.yeticycles.com/", "https://www.prageru.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

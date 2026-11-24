@@ -1,0 +1,17 @@
+{
+    "cmp": "bigid",
+    "tests": [
+        {
+            "sites": ["https://www.muchloved.com/", "https://www.remitly.com/", "https://www.zs.com/"]
+        },
+        {
+            "note": "no reject button on the first layer",
+            "sites": ["https://www.dexus.com/"]
+        },
+        {
+            "note": "notice-only layout with just \"Accept all\" and a close icon; the site is only reachable from the US",
+            "sites": ["https://www.meijer.com/"],
+            "options": { "onlyRegions": ["US"], "testSelfTest": false }
+        }
+    ]
+}
