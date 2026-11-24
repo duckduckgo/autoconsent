@@ -2,7 +2,9 @@
     "cmp": "xgroovy",
     "tests": [
         {
-            "sites": ["https://xgroovy.com/", "https://anysex.com/"]
+            "note": "Both sites block visitors from the UK under the Online Safety Act",
+            "sites": ["https://xgroovy.com/", "https://anysex.com/"],
+            "options": { "skipRegions": ["GB"] }
         }
     ]
 }
