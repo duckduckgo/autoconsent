@@ -1,0 +1,24 @@
+{
+    "cmp": "iubenda",
+    "tests": [
+        {
+            "sites": ["https://www.rossignol.com/us/", "https://www.lofficielusa.com/", "https://www.3bmeteo.com/"],
+            "options": { "skipRegions": ["AU"] }
+        },
+        {
+            "note": "accept-only banner without reject or customize buttons",
+            "sites": ["https://www.yogurtland.com/", "https://www.greenplanet.net/"],
+            "options": { "skipRegions": ["AU"], "testSelfTest": false }
+        },
+        {
+            "note": "\"Do Not Sell\" CCPA notice in California, GDPR banner in Europe",
+            "sites": ["https://newatlas.com/", "https://plan.io/"],
+            "options": { "skipRegions": ["US", "AU"] }
+        },
+        {
+            "note": "custom template (#ameConsentUI) that locks body scrolling until its banner callbacks run",
+            "sites": ["https://www.nostrofiglio.it/neonato/cura-e-salute/pianto-ininterrotto-neonato", "https://www.soldionline.it/"],
+            "options": { "skipRegions": ["AU"] }
+        }
+    ]
+}

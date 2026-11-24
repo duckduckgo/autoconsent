@@ -1,0 +1,9 @@
+{
+    "cmp": "zoho",
+    "tests": [
+        {
+            "sites": ["https://www.zoho.com/", "https://www.zohocorp.com/", "https://www.arattai.in/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

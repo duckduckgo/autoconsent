@@ -1,0 +1,9 @@
+{
+    "cmp": "chatgpt",
+    "tests": [
+        {
+            "sites": ["https://chatgpt.com/"],
+            "options": { "skipRegions": ["US", "AU", "CA", "JP"] }
+        }
+    ]
+}

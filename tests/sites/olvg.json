@@ -1,0 +1,10 @@
+{
+    "cmp": "olvg",
+    "tests": [
+        {
+            "note": "The site reloads the page after saving the preference, so the self-test cannot run.",
+            "sites": ["https://www.olvg.nl/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

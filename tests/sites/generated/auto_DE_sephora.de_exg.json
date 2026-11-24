@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_DE_sephora.de_exg",
+    "tests": [
+        {
+            "sites": ["https://www.sephora.de/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["DE"] }
+        }
+    ]
+}

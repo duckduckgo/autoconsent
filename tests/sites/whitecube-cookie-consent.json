@@ -1,0 +1,12 @@
+{
+    "cmp": "whitecube-cookie-consent",
+    "tests": [
+        {
+            "sites": ["https://onestream.co.uk/", "https://ddw.nl/en"]
+        },
+        {
+            "sites": ["https://woomie.ro/"],
+            "options": { "onlyRegions": ["DE"] }
+        }
+    ]
+}

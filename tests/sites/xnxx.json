@@ -1,0 +1,15 @@
+{
+    "cmp": "xnxx-com",
+    "tests": [
+        {
+            "note": "the disclaimer is only shown without a preceding age gate in the UK",
+            "sites": ["https://www.xnxx.com/"],
+            "options": { "onlyRegions": ["GB"] }
+        },
+        {
+            "note": "the same rule also covers a bottom cookie bar used by an unrelated group of sites",
+            "sites": ["https://newtabtvsearch.com/", "https://socialnewpagessearch.com/"],
+            "options": { "onlyRegions": ["GB", "DE"] }
+        }
+    ]
+}

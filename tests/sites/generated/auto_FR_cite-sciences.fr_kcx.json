@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_cite-sciences.fr_kcx",
+    "tests": [
+        {
+            "sites": ["https://www.cite-sciences.fr/fr/accueil"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

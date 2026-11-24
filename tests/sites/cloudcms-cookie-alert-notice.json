@@ -1,0 +1,16 @@
+{
+    "cmp": "cloudcms-cookie-alert-notice",
+    "tests": [
+        {
+            "sites": ["https://pgedystrybucja.pl/", "https://pge-obrot.pl/"]
+        },
+        {
+            "note": "acknowledge-style button text",
+            "sites": ["https://pgegiek.pl/"]
+        },
+        {
+            "note": "no cookie mode attribute on html",
+            "sites": ["https://fjp.org.pl/"]
+        }
+    ]
+}

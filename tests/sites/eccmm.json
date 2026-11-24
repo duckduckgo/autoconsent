@@ -1,0 +1,13 @@
+{
+    "cmp": "eccmm",
+    "tests": [
+        {
+            "sites": ["https://login.aliorbank.pl/", "https://www.aliorbank.pl/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://login.aliorbank.pl/", "https://www.aliorbank.pl/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

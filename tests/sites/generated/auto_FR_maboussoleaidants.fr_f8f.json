@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_maboussoleaidants.fr_f8f",
+    "tests": [
+        {
+            "sites": ["https://maboussoleaidants.fr/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

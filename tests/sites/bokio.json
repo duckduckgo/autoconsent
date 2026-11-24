@@ -1,0 +1,10 @@
+{
+    "cmp": "bokio",
+    "tests": [
+        {
+            "note": "the page reloads after saving, so the self-test result is lost",
+            "sites": ["https://www.bokio.se/", "https://www.bokio.co.uk/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CA_intact.ca_gax",
+    "tests": [
+        {
+            "sites": ["https://www.intact.ca/en/personal-insurance"],
+            "options": { "testOptIn": false, "testSelfTest": false, "onlyRegions": ["CA"] }
+        }
+    ]
+}

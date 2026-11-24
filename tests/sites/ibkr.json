@@ -1,0 +1,20 @@
+{
+    "cmp": "ibkr",
+    "note": "saving consent reloads the page, so the self-test runs before the cookie is set",
+    "tests": [
+        {
+            "sites": ["https://ibtweet.com/", "https://clientam.co.uk/", "https://interactivevp.com/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "EEA visitors get a region selection dialog before the cookie modal",
+            "sites": ["https://www.interactivebrokers.com/"],
+            "options": { "testSelfTest": false, "onlyRegions": ["US"] }
+        },
+        {
+            "note": "variant with a \"Reject All Cookies\" button",
+            "sites": ["https://www.interactivebrokers.ie/"],
+            "options": { "testSelfTest": false, "onlyRegions": ["DE"] }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_mijn.simyo.nl_xm9",
+    "tests": [
+        {
+            "sites": ["https://mijn.simyo.nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

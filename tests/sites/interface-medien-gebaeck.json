@@ -1,0 +1,13 @@
+{
+    "cmp": "interface-medien-gebaeck",
+    "tests": [
+        {
+            "sites": ["https://www.kraeuterhaus.de/", "https://www.brennenstuhl.com/", "https://www.febrotec.de/", "https://zero-lack.de/"]
+        },
+        {
+            "note": "no banner shown in DE",
+            "sites": ["https://www.burgerstein.ch/"],
+            "options": { "skipRegions": ["DE"] }
+        }
+    ]
+}

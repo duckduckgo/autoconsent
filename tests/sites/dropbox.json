@@ -1,0 +1,9 @@
+{
+    "cmp": "dropbox",
+    "tests": [
+        {
+            "sites": ["https://www.dropbox.com/", "https://help.dropbox.com/"],
+            "options": { "onlyRegions": ["AU", "GB", "US"] }
+        }
+    ]
+}

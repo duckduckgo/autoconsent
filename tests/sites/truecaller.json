@@ -1,0 +1,10 @@
+{
+    "cmp": "truecaller",
+    "tests": [
+        {
+            "note": "US visitors get consent applied automatically, without a banner",
+            "sites": ["https://www.truecaller.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

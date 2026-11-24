@@ -1,0 +1,10 @@
+{
+    "cmp": "autokostencheck.de",
+    "tests": [
+        {
+            "note": "the site reloads the page after the cookiefirst choice is saved",
+            "sites": ["https://www.autokostencheck.de/"],
+            "options": { "testSelfTest": false, "skipRegions": ["US"] }
+        }
+    ]
+}

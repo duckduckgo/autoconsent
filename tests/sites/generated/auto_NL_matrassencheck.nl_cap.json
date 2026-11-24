@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_matrassencheck.nl_cap",
+    "tests": [
+        {
+            "sites": ["https://www.matrassencheck.nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

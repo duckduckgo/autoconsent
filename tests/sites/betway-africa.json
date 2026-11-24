@@ -1,0 +1,10 @@
+{
+    "cmp": "betway-africa",
+    "tests": [
+        {
+            "note": "several other regions redirect to other betway sites",
+            "sites": ["https://www.betway.co.zm/", "https://www.betway.com.gh/", "https://www.betway.co.tz/", "https://www.betway.com.ng/"],
+            "options": { "onlyRegions": ["US", "GB"] }
+        }
+    ]
+}

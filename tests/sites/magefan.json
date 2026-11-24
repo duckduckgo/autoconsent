@@ -1,0 +1,18 @@
+{
+    "cmp": "magefan",
+    "tests": [
+        {
+            "sites": ["https://www.tileexperience.co.uk/"]
+        },
+        {
+            "note": "the popup is only shown to visitors from Germany",
+            "sites": ["https://www.meinduft.de/"],
+            "options": { "onlyRegions": ["DE"] }
+        },
+        {
+            "note": "the shop hides the decline button; the site blocks visitors from Germany",
+            "sites": ["https://www.silencershop.com/"],
+            "options": { "skipRegions": ["DE"] }
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "cmp": "niceshops",
+    "tests": [
+        {
+            "sites": ["https://www.3djake.de/", "https://www.vitalabo.ch/"]
+        },
+        {
+            "sites": ["https://www.3djake.ch/", "https://www.ecco-verde.ch/"],
+            "options": { "onlyRegions": ["CH"] }
+        },
+        {
+            "sites": ["https://www.3djake.uk/"],
+            "options": { "onlyRegions": ["GB"] }
+        }
+    ]
+}

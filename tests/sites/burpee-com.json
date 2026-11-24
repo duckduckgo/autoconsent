@@ -1,0 +1,30 @@
+{
+    "cmp": "burpee.com",
+    "tests": [
+        {
+            "note": "Decline button",
+            "sites": [
+                "https://www.discountsurgical.com/",
+                "https://www.lymphrx.com/",
+                "https://www.cutmy.co.uk/",
+                "https://www.workingperson.com/"
+            ]
+        },
+        {
+            "note": "Alpine rejectAll button",
+            "sites": ["https://www.manoloblahnik.com/us/", "https://www.tiendasublimacion.com/"]
+        },
+        {
+            "note": "Manage Cookies button",
+            "sites": ["https://www.hobbies.co.uk/"]
+        },
+        {
+            "note": "Allow button only: the banner is hidden",
+            "sites": ["https://www.oxfordproducts.com/", "https://www.testequipmentdepot.com/"]
+        },
+        {
+            "note": "Allow button only, with a body class scroll lock and backdrop",
+            "sites": ["https://www.leonpaul.com/"]
+        }
+    ]
+}

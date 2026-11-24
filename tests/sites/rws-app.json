@@ -1,0 +1,17 @@
+{
+    "cmp": "rws-app",
+    "tests": [
+        {
+            "note": "the site reloads the page after a consent choice, so the self-test message is lost",
+            "sites": [
+                "https://mollerbil.se/",
+                "https://motorhalland.se/",
+                "https://nordemansbil.se/",
+                "https://jlbilar.se/",
+                "https://frontbilar.se/",
+                "https://bilteam.com/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

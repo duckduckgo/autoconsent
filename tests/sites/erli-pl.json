@@ -1,0 +1,10 @@
+{
+    "cmp": "erli-pl",
+    "tests": [
+        {
+            "note": "Non-PL traffic often gets a bot check page in front of the site",
+            "sites": ["https://erli.pl/"],
+            "options": { "onlyRegions": ["PL"] }
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "cmp": "nuxt-cookie-manager",
+    "tests": [
+        {
+            "note": "Accept / Decline / Customize buttons",
+            "sites": ["https://www.koelner-philharmonie.de/", "https://www.thalia-theater.de/", "https://www.festspielhaus.de/"]
+        },
+        {
+            "note": "Accept all / Save settings with category toggles",
+            "sites": ["https://www.alteoper.de/de/", "https://konzerthaus.at/de"]
+        }
+    ]
+}

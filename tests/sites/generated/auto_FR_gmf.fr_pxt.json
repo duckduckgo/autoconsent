@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_gmf.fr_pxt",
+    "tests": [
+        {
+            "sites": ["https://www.gmf.fr/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

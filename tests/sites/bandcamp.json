@@ -1,0 +1,16 @@
+{
+    "cmp": "bandcamp.com",
+    "tests": [
+        {
+            "sites": ["https://bandcamp.com/"]
+        },
+        {
+            "note": "dialog lives in the menu-bar shadow root",
+            "sites": ["https://daily.bandcamp.com/"]
+        },
+        {
+            "note": "dialog lives in the page-footer shadow root",
+            "sites": ["https://radiohead.bandcamp.com/album/hail-to-the-thief-live-recordings-2003-2009"]
+        }
+    ]
+}

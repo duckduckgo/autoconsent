@@ -1,0 +1,14 @@
+{
+    "cmp": "Complianz opt-out",
+    "tests": [
+        {
+            "sites": ["https://www.thefoxandpheasant.com/food-menu/", "https://www.museum.de/", "https://www.dtv.de/"],
+            "options": { "testOptIn": false }
+        },
+        {
+            "note": "Securiti flavor: preference center with only the read-only essential category and no reject-all button",
+            "sites": ["https://www.beallsinc.com/"],
+            "options": { "testOptIn": false }
+        }
+    ]
+}

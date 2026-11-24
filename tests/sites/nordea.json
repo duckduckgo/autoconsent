@@ -1,0 +1,13 @@
+{
+    "cmp": "nordea",
+    "tests": [
+        {
+            "sites": ["https://www.nordea.se/", "https://www.nordea.fi/", "https://www.nordea.no/", "https://www.nordea.dk/"],
+            "options": { "mobile": false }
+        },
+        {
+            "sites": ["https://www.nordea.se/", "https://www.nordea.fi/", "https://www.nordea.no/", "https://www.nordea.dk/"],
+            "options": { "mobile": true }
+        }
+    ]
+}

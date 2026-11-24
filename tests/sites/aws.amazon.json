@@ -1,0 +1,9 @@
+{
+    "cmp": "aws.amazon.com",
+    "tests": [
+        {
+            "sites": ["https://docs.aws.amazon.com"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "cookie-banner-required-only",
+    "tests": [
+        {
+            "sites": ["https://eastdevon.gov.uk/", "https://exeter.gov.uk/", "https://www.teignbridge.gov.uk/"],
+            "options": { "onlyRegions": ["GB"] }
+        }
+    ]
+}

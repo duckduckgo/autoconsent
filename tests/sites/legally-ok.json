@@ -1,0 +1,23 @@
+{
+    "cmp": "legally-ok",
+    "tests": [
+        {
+            "sites": [
+                "https://www.persoenlich.com/",
+                "https://www.schulthess-klinik.ch/",
+                "https://www.rapid.ch/",
+                "https://www.foodaktuell.ch/"
+            ],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": [
+                "https://www.persoenlich.com/",
+                "https://www.schulthess-klinik.ch/",
+                "https://www.rapid.ch/",
+                "https://www.foodaktuell.ch/"
+            ],
+            "options": { "mobile": false }
+        }
+    ]
+}

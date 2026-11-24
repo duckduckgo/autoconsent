@@ -1,0 +1,9 @@
+{
+    "cmp": "linkedin.com",
+    "tests": [
+        {
+            "sites": ["https://www.linkedin.com/", "https://in.linkedin.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

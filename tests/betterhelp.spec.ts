@@ -1,9 +1,0 @@
-import generateCMPTests from '../playwright/runner';
-
-generateCMPTests('betterhelp', [
-    'https://www.betterhelp.com/',
-    'https://www.regain.us/',
-    'https://www.teencounseling.com/',
-    'https://www.faithfulcounseling.com/',
-    'https://www.pridecounseling.com/',
-]);

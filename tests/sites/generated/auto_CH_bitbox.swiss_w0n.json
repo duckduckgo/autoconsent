@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CH_bitbox.swiss_w0n",
+    "tests": [
+        {
+            "sites": ["https://bitbox.swiss/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CH"] }
+        }
+    ]
+}

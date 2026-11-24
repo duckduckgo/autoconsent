@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_FR_pointp.fr_2ft",
+    "tests": [
+        {
+            "sites": ["https://www.pointp.fr/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        }
+    ]
+}

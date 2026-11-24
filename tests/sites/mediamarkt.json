@@ -1,0 +1,9 @@
+{
+    "cmp": "mediamarkt.de",
+    "tests": [
+        {
+            "sites": ["https://mediamarkt.de", "https://www.mediamarkt.nl/nl/"],
+            "options": { "skipRegions": ["US", "FR", "GB"] }
+        }
+    ]
+}

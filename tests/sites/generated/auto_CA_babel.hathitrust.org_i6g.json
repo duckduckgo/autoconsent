@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CA_babel.hathitrust.org_i6g",
+    "tests": [
+        {
+            "sites": ["https://babel.hathitrust.org/cgi/mb"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CA"] }
+        }
+    ]
+}

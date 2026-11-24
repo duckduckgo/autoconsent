@@ -1,0 +1,18 @@
+{
+    "cmp": "mercedes-benz-cmm",
+    "tests": [
+        {
+            "sites": [
+                "https://www.mercedes-benz.pl/",
+                "https://www.mercedes-benz.de/",
+                "https://www.mercedes-benz.co.uk/",
+                "https://www.mercedes-benz.dk/",
+                "https://www.mercedes-benz.se/"
+            ]
+        },
+        {
+            "note": "variant without a reject button: opt out via settings",
+            "sites": ["https://www.mercedes-benz.co.jp/", "https://www.mercedes-benz.com.au/"]
+        }
+    ]
+}

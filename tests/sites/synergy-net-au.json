@@ -1,0 +1,14 @@
+{
+    "cmp": "synergy-net-au",
+    "note": "the site returns an error page to visitors from some regions, e.g. US",
+    "tests": [
+        {
+            "sites": ["https://www.synergy.net.au/"],
+            "options": { "mobile": true, "onlyRegions": ["AU", "GB", "DE"] }
+        },
+        {
+            "sites": ["https://www.synergy.net.au/"],
+            "options": { "mobile": false, "onlyRegions": ["AU", "GB", "DE"] }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NO_webank.it_6rx",
+    "tests": [
+        {
+            "sites": ["https://webank.it/webankpub/wbresp/home.do"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NO"] }
+        }
+    ]
+}

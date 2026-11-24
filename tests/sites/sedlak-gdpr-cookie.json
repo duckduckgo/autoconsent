@@ -1,0 +1,13 @@
+{
+    "cmp": "sedlak-gdpr-cookie",
+    "tests": [
+        {
+            "sites": ["https://wynagrodzenia.pl/", "https://sedlak.pl/", "https://rynekpracy.pl/"]
+        },
+        {
+            "note": "these sites reload immediately after the click, before the self-test can run",
+            "sites": ["https://sygnaapp.pl/", "https://zeta.pl/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

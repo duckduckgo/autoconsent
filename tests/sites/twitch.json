@@ -1,0 +1,9 @@
+{
+    "cmp": "twitch.tv",
+    "tests": [
+        {
+            "sites": ["https://www.twitch.tv/", "https://m.twitch.tv/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

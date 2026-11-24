@@ -1,0 +1,15 @@
+{
+    "cmp": "gm-consent",
+    "tests": [
+        {
+            "sites": [
+                "https://topgames.gg/",
+                "https://street-view.io/",
+                "https://2048classic.io/",
+                "https://cargames.co/",
+                "https://slope-3d.io/"
+            ],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_GB_fca.org.uk_9p9",
+    "tests": [
+        {
+            "sites": ["https://www.fca.org.uk/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["GB"] }
+        }
+    ]
+}

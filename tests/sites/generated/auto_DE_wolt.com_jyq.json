@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_DE_wolt.com_jyq",
+    "tests": [
+        {
+            "sites": ["https://wolt.com/en/deu"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["DE"] }
+        }
+    ]
+}

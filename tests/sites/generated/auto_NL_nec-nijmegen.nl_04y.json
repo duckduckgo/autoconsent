@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_nec-nijmegen.nl_04y",
+    "tests": [
+        {
+            "sites": ["https://www.nec-nijmegen.nl/home.htm"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "cmp": "ncsoft-cookie-toast",
+    "tests": [
+        {
+            "note": "The page reloads after a choice is made, which can interrupt the self-test.",
+            "sites": ["https://aion2.plaync.com/", "https://cinder-city.com/", "https://bns.plaync.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

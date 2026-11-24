@@ -1,0 +1,13 @@
+{
+    "cmp": "cookie-bar-eu",
+    "tests": [
+        {
+            "sites": ["https://slimbook.com/", "https://government.bg/", "https://federalismi.it/"]
+        },
+        {
+            "note": "these sites only show the banner to EU visitors",
+            "sites": ["https://afloat.ie/", "https://www.manualsdir.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

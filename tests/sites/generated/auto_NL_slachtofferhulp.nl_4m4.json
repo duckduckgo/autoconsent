@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_slachtofferhulp.nl_4m4",
+    "tests": [
+        {
+            "sites": ["https://www.slachtofferhulp.nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

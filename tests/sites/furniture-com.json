@@ -1,0 +1,10 @@
+{
+    "cmp": "furniture.com",
+    "tests": [
+        {
+            "note": "the site is only reachable from the US",
+            "sites": ["https://www.furniture.com/"],
+            "options": { "onlyRegions": ["US"] }
+        }
+    ]
+}

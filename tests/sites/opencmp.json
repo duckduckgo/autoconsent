@@ -1,0 +1,22 @@
+{
+    "cmp": "opencmp",
+    "tests": [
+        {
+            "note": "Settings-only flavor: reject via \"Settings or reject\" layer",
+            "sites": [
+                "https://www.brutto-netto-rechner.info/",
+                "https://www.englisch-hilfen.de/",
+                "https://www.wot-life.com/",
+                "https://www.gea.de/",
+                "https://www.shooter-bubble.de/",
+                "https://www.freitag.de/"
+            ],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "Flavor with a \"Reject all\" button on the first layer",
+            "sites": ["https://www.presseportal.de/", "https://www.biallo.de/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

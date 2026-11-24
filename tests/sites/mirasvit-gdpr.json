@@ -1,0 +1,26 @@
+{
+    "cmp": "mirasvit-gdpr",
+    "tests": [
+        {
+            "note": "www.wallmur.com uses the same CMP, but only serves the bar to consumer IPs, so it cannot be asserted here: from a datacenter IP the store consents on the visitor's behalf and shows nothing. Hyvä storefront: the bar has no reject, so the opt-out goes through the settings dialog",
+            "sites": ["https://kunstgrasdirect.nl/", "https://tapijtenlaminaatdirect.nl/"]
+        },
+        {
+            "note": "www.wallmur.com uses the same CMP, but only serves the bar to consumer IPs, so it cannot be asserted here: from a datacenter IP the store consents on the visitor's behalf and shows nothing. Luma storefront, settings dialog built by Magento's modal widget",
+            "sites": ["https://www.ilio.com/", "https://www.autopflege-shop.de/"]
+        },
+        {
+            "note": "www.wallmur.com uses the same CMP, but only serves the bar to consumer IPs, so it cannot be asserted here: from a datacenter IP the store consents on the visitor's behalf and shows nothing. has a \"Decline\" button in the bar, so the settings dialog is not needed",
+            "sites": ["https://www.lamps-on-line.com/"]
+        },
+        {
+            "note": "www.wallmur.com uses the same CMP, but only serves the bar to consumer IPs, so it cannot be asserted here: from a datacenter IP the store consents on the visitor's behalf and shows nothing. Hyvä theme with \"mst-gdpr-\" class names and a \"continue without accepting\" button above the text",
+            "sites": ["https://www.promessedefleurs.es/"]
+        },
+        {
+            "note": "redirects visitors from other countries to a localized store, which reruns autoconsent",
+            "sites": ["https://www.meillandrichardier.com/"],
+            "options": { "onlyRegions": ["FR"] }
+        }
+    ]
+}

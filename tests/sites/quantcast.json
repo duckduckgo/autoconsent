@@ -1,0 +1,23 @@
+{
+    "cmp": "quantcast",
+    "tests": [
+        {
+            "sites": [
+                "https://www.motor16.com/",
+                "https://routenplaner24.net/",
+                "https://www.miniplay.com/",
+                "https://www.geogebra.org/",
+                "https://www.gamepressure.com/",
+                "https://ffxiv.consolegameswiki.com/",
+                "https://www.quotev.com/",
+                "https://www.tide-forecast.com/"
+            ],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "US \"Do Not Process My Personal Information\" (USP/MSPA) dialog; footyheadlines renders the opt-out list collapsed",
+            "sites": ["https://www.motor16.com/", "https://www.quotev.com/", "https://www.footyheadlines.com/"],
+            "options": { "testOptIn": false, "onlyRegions": ["US"] }
+        }
+    ]
+}

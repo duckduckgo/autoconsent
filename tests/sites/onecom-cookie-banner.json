@@ -1,0 +1,9 @@
+{
+    "cmp": "onecom-cookie-banner",
+    "tests": [
+        {
+            "sites": ["http://utenfilter.no/", "https://mtv-einheit.de/", "https://oxarna.se/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

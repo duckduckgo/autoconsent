@@ -1,0 +1,9 @@
+{
+    "cmp": "twcc",
+    "tests": [
+        {
+            "sites": ["https://wise.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

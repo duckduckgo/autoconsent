@@ -1,0 +1,9 @@
+{
+    "cmp": "pakamera.pl",
+    "tests": [
+        {
+            "sites": ["https://www.pakamera.pl/"],
+            "options": { "onlyRegions": ["PL", "DE", "GB", "US"] }
+        }
+    ]
+}

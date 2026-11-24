@@ -1,0 +1,10 @@
+{
+    "cmp": "radboud-cookie-overlay",
+    "tests": [
+        {
+            "note": "the page reloads after a choice is made, so the self-test cannot run on the original document",
+            "sites": ["https://www.radboudumc.nl/", "https://www.radboudfonds.nl/", "https://www.healthybrainstudy.nl/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

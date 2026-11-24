@@ -1,0 +1,15 @@
+{
+    "cmp": "webnetism",
+    "tests": [
+        {
+            "note": "the page reloads after saving preferences, so the self-test result is lost",
+            "sites": [
+                "https://www.essexhighways.org/",
+                "https://www.freemantech.co.uk/",
+                "https://www.spectrummedical.com/",
+                "https://www.chace.ac.uk/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

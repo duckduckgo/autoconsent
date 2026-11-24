@@ -1,0 +1,24 @@
+{
+    "cmp": "Ensighten",
+    "tests": [
+        {
+            "sites": [
+                "https://www.audi.ca/en/",
+                "https://www.volkswagen.de/",
+                "https://de.rs-online.com/",
+                "https://www.easyjet.com/",
+                "https://jp.norton.com/"
+            ],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "banner with a single accept button; reject is only available in the hidden preferences modal",
+            "sites": ["https://www.redwingshoes.com/"]
+        },
+        {
+            "note": "collapsed banner: reject button exists but is not visible",
+            "sites": ["https://www.avast.com/"],
+            "options": { "testOptIn": false, "onlyRegions": ["US"] }
+        }
+    ]
+}

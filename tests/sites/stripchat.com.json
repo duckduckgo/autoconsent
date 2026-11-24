@@ -1,0 +1,10 @@
+{
+    "cmp": "stripchat.com",
+    "tests": [
+        {
+            "note": "Other regions put an 18+ gate in front of the banner, which the test runner cannot pass",
+            "sites": ["https://xhamsterlive.com/", "https://stripchat.com/", "https://superchat.live/"],
+            "options": { "onlyRegions": ["GB"] }
+        }
+    ]
+}

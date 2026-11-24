@@ -1,0 +1,9 @@
+{
+    "cmp": "sankei-digital",
+    "tests": [
+        {
+            "sites": ["https://jp.ign.com/", "https://www.sankei.com/", "https://www.sanspo.com/", "https://www.zakzak.co.jp/"],
+            "options": { "onlyRegions": ["JP"] }
+        }
+    ]
+}

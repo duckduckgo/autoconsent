@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_AU_telekom.hu_4lu",
+    "tests": [
+        {
+            "sites": ["https://www.telekom.hu/lakossagi"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["AU"] }
+        }
+    ]
+}

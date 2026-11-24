@@ -1,0 +1,10 @@
+{
+    "cmp": "hypovereinsbank",
+    "tests": [
+        {
+            "note": "The site reloads the page after a choice is made, so the self-test message is lost",
+            "sites": ["https://www.hypovereinsbank.de/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

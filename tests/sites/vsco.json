@@ -1,0 +1,10 @@
+{
+    "cmp": "vsco",
+    "tests": [
+        {
+            "note": "shown only where OneTrust does not serve its TCF banner",
+            "sites": ["https://vsco.co/"],
+            "options": { "testOptIn": false, "onlyRegions": ["US"] }
+        }
+    ]
+}

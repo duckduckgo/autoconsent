@@ -1,0 +1,10 @@
+{
+    "cmp": "librus",
+    "tests": [
+        {
+            "note": "saving the choice reloads the page, so the self-test never gets to run",
+            "sites": ["https://portal.librus.pl/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

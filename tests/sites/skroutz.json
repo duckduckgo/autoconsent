@@ -1,0 +1,10 @@
+{
+    "cmp": "skroutz",
+    "tests": [
+        {
+            "note": "the reject button submits a form, so the page reloads before the self test runs",
+            "sites": ["https://www.skroutz.gr/", "https://www.skroutz.cy/", "https://www.skroutz.de/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

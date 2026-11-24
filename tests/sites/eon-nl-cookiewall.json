@@ -1,0 +1,13 @@
+{
+    "cmp": "eon-nl-cookiewall",
+    "tests": [
+        {
+            "sites": ["https://www.energiedirect.nl/klantenservice/contract/opzegboete", "https://www.essent.nl/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://www.energiedirect.nl/klantenservice/contract/opzegboete", "https://www.essent.nl/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

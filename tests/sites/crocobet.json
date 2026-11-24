@@ -1,0 +1,14 @@
+{
+    "cmp": "crocobet",
+    "tests": [
+        {
+            "note": "The site is geo-blocked in the US and GB",
+            "sites": ["https://crocobet.com/"],
+            "options": { "skipRegions": ["US", "GB"] }
+        },
+        {
+            "sites": ["https://crocobet.com/"],
+            "options": { "skipRegions": ["US", "GB"], "mobile": true }
+        }
+    ]
+}

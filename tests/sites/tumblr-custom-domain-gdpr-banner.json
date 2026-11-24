@@ -1,0 +1,9 @@
+{
+    "cmp": "tumblr-custom-domain-gdpr-banner",
+    "tests": [
+        {
+            "sites": ["https://scumbagsandcavaliers.com/", "https://pauldolgov.com/", "https://giantcypress.net/", "https://loveform.com/"],
+            "options": { "mobile": true, "onlyRegions": ["CA"], "testOptIn": false }
+        }
+    ]
+}

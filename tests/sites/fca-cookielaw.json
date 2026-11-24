@@ -1,0 +1,18 @@
+{
+    "cmp": "fca-cookielaw",
+    "tests": [
+        {
+            "note": "US and GB visitors get no banner",
+            "sites": ["https://www.alfaromeo.de/", "https://www.fiat.de/", "https://www.jeep.de/"],
+            "options": { "onlyRegions": ["DE"] }
+        },
+        {
+            "sites": ["https://www.stellantis.com/en?adobe_mc_ref="],
+            "options": { "onlyRegions": ["FR"] }
+        },
+        {
+            "sites": ["https://www.jeep.nl/?adobe_mc_ref="],
+            "options": { "onlyRegions": ["NL"] }
+        }
+    ]
+}

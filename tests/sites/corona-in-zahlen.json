@@ -1,0 +1,9 @@
+{
+    "cmp": "corona-in-zahlen.de",
+    "tests": [
+        {
+            "sites": ["http://corona-in-zahlen.de"],
+            "options": { "skipRegions": ["US", "FR", "GB"] }
+        }
+    ]
+}

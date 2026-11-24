@@ -1,0 +1,13 @@
+{
+    "cmp": "hubspot",
+    "tests": [
+        {
+            "sites": ["https://blog.hubspot.com/", "https://www.hubspot.de/", "https://www.aafp.org/"]
+        },
+        {
+            "note": "notice-only flavor without a decline button",
+            "sites": ["https://www.hancockwhitney.com/"],
+            "options": { "onlyRegions": ["US"] }
+        }
+    ]
+}

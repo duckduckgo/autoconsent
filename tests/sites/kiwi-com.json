@@ -1,0 +1,10 @@
+{
+    "cmp": "kiwi.com",
+    "tests": [
+        {
+            "note": "consent cookie is written only after hydration, which can be later than the self-test",
+            "sites": ["https://www.kiwi.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

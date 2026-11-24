@@ -1,0 +1,10 @@
+{
+    "cmp": "databay-cookieselect",
+    "tests": [
+        {
+            "note": "the site reloads the page after saving consent",
+            "sites": ["https://www.staedteregion-aachen.de/", "https://www.databay.de/", "https://lzkh.de/", "https://danrw.de/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

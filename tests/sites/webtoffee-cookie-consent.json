@@ -1,0 +1,22 @@
+{
+    "cmp": "webtoffee-cookie-consent",
+    "tests": [
+        {
+            "sites": ["https://www.mergermarket.com/", "https://www.etsi.org/", "https://www.valeo.com/", "https://www.smartschool.be/"]
+        },
+        {
+            "note": "classic bar variant without a reject button",
+            "sites": ["https://www.interac.ca/"]
+        },
+        {
+            "note": "banner is only shown to EU/UK visitors",
+            "sites": ["https://www.humanitas.it/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "CCPA \"Do Not Sell or Share\" variant (US visitors only)",
+            "sites": ["https://commute.org/", "https://everytownresearch.org/"],
+            "options": { "onlyRegions": ["US"] }
+        }
+    ]
+}

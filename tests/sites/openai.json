@@ -1,0 +1,9 @@
+{
+    "cmp": "openai",
+    "tests": [
+        {
+            "sites": ["https://openai.com/", "https://openai.com/fr-FR/", "https://openai.com/de-DE/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

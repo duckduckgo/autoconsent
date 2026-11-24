@@ -1,0 +1,9 @@
+{
+    "cmp": "eset",
+    "tests": [
+        {
+            "sites": ["https://www.eset.com/pl/", "https://www.eset.com/de/", "https://www.welivesecurity.com/", "https://help.eset.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}

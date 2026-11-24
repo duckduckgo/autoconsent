@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_mijngelderland.nl_rkj",
+    "tests": [
+        {
+            "sites": ["https://mijngelderland.nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

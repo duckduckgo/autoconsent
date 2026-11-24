@@ -1,0 +1,13 @@
+{
+    "cmp": "carpetaciudadana",
+    "tests": [
+        {
+            "sites": ["https://carpetaciudadana.gob.es/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://carpetaciudadana.gob.es/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

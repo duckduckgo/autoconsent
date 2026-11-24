@@ -1,0 +1,9 @@
+{
+    "cmp": "moebel-de-group",
+    "tests": [
+        {
+            "sites": ["https://www.moebel.de/", "https://www.moebel24.ch/", "https://www.meubles.fr/", "https://www.meubelo.nl/"],
+            "options": { "skipRegions": ["US", "AU", "CA", "JP"] }
+        }
+    ]
+}

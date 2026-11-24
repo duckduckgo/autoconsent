@@ -1,0 +1,13 @@
+{
+    "cmp": "globo-lgpd",
+    "tests": [
+        {
+            "sites": ["https://g1.globo.com/", "https://ge.globo.com/", "https://gshow.globo.com/", "https://oglobo.globo.com/"],
+            "options": { "mobile": true }
+        },
+        {
+            "sites": ["https://g1.globo.com/", "https://ge.globo.com/", "https://gshow.globo.com/", "https://oglobo.globo.com/"],
+            "options": { "mobile": false }
+        }
+    ]
+}

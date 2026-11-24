@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NO_jaksta.com_own",
+    "tests": [
+        {
+            "sites": ["https://www.jaksta.com/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NO"] }
+        }
+    ]
+}

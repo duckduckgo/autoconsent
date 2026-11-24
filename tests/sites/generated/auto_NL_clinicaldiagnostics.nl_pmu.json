@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NL_clinicaldiagnostics.nl_pmu",
+    "tests": [
+        {
+            "sites": ["https://clinicaldiagnostics.nl/nl/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NL"] }
+        }
+    ]
+}

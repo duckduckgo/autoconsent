@@ -1,0 +1,15 @@
+{
+    "cmp": "wkda",
+    "tests": [
+        {
+            "note": "saving preferences submits a form that reloads the page, so the self-test runs before the cookie is set",
+            "sites": [
+                "https://www.wirkaufendeinauto.de/",
+                "https://www.noicompriamoauto.it/",
+                "https://www.vendezvotrevoiture.fr/",
+                "https://www.compramostucoche.es/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

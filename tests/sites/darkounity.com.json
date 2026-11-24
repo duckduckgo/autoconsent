@@ -1,0 +1,10 @@
+{
+    "cmp": "darkounity.com",
+    "tests": [
+        {
+            "note": "the banner is only shown in GDPR regions",
+            "sites": ["https://darkounity.com/blog/how-i-learned-unity-the-wrong-way"],
+            "options": { "onlyRegions": ["DE", "GB", "FR"] }
+        }
+    ]
+}

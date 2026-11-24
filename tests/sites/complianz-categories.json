@@ -1,0 +1,13 @@
+{
+    "cmp": "Complianz categories",
+    "tests": [
+        {
+            "sites": ["https://carnavaldecadiztv.com/"],
+            "options": { "skipRegions": ["GB"] }
+        },
+        {
+            "sites": ["https://hypotheses.org/"],
+            "options": { "skipRegions": ["US", "GB"] }
+        }
+    ]
+}

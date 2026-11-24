@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_NO_swedbank.se_63w",
+    "tests": [
+        {
+            "sites": ["https://www.swedbank.se/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["NO"] }
+        }
+    ]
+}

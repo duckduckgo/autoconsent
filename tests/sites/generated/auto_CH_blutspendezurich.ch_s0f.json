@@ -1,0 +1,9 @@
+{
+    "cmp": "auto_CH_blutspendezurich.ch_s0f",
+    "tests": [
+        {
+            "sites": ["https://www.blutspendezurich.ch/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["CH"] }
+        }
+    ]
+}

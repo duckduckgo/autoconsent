@@ -1,0 +1,13 @@
+{
+    "cmp": "meta-cookie-dialog",
+    "tests": [
+        {
+            "sites": ["https://www.messenger.com/", "https://developers.facebook.com/", "https://business.facebook.com/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "sites": ["https://www.messenger.com/"],
+            "options": { "mobile": true, "skipRegions": ["US"] }
+        }
+    ]
+}
