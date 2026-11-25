@@ -1,0 +1,13 @@
+{
+    "name": "emag",
+    "vendorUrl": "https://www.emag.ro/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?emag\\.ro/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".js-gdpr-cookie-banner .js-refuse" }],
+    "detectPopup": [{ "visible": ".js-gdpr-cookie-banner .js-refuse" }],
+    "optIn": [{ "waitForThenClick": ".js-gdpr-cookie-banner .js-accept" }],
+    "optOut": [{ "waitForThenClick": ".js-gdpr-cookie-banner .js-refuse" }],
+    "test": [{ "waitForVisible": ".js-gdpr-cookie-banner .js-refuse", "check": "none", "timeout": 2000 }]
+}

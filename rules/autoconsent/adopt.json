@@ -19,7 +19,23 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "#adopt-reject-all-button"
+            "waitFor": "#adopt-accept-all-button"
+        },
+        {
+            "if": {
+                "exists": "#adopt-reject-all-button"
+            },
+            "then": [
+                {
+                    "click": "#adopt-reject-all-button"
+                }
+            ],
+            "else": [
+                {
+                    "comment": "US notice: \"Do not sell\" sits between the preferences and accept buttons and has no id",
+                    "waitForThenClick": "#cookie-banner #adopt-preferences-button ~ button:not(#adopt-accept-all-button)"
+                }
+            ]
         }
     ],
     "test": [

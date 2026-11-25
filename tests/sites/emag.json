@@ -1,0 +1,10 @@
+{
+    "cmp": "emag",
+    "tests": [
+        {
+            "note": "the banner shows a few seconds after the page loads; US visitors get a bot check instead of the site",
+            "sites": ["https://www.emag.ro/"],
+            "options": { "gpc": true, "timeout": 60000, "onlyRegions": ["GB", "DE"] }
+        }
+    ]
+}
