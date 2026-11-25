@@ -1,0 +1,22 @@
+{
+    "cmp": "gsb-cookiebanner-close",
+    "tests": [
+        {
+            "note": "Variant with a classed accept button (consentToAll): the unclassed first button confirms the default selection; ausweisapp uses a plain .cookiebanner container",
+            "sites": [
+                "https://www.itzbund.de/",
+                "https://www.staedtebaufoerderung.info/",
+                "https://www.deutsche-islam-konferenz.de/",
+                "https://www.ausweisapp.bund.de/"
+            ]
+        },
+        {
+            "note": "Variant with an explicit reject button (rejectAll)",
+            "sites": ["https://www.innenstadtprogramm.bund.de/"]
+        },
+        {
+            "note": "Variant without button modifier classes: the first button confirms the default selection",
+            "sites": ["https://www.nexxt-change.org/", "https://www.existenzgruendungsportal.de/"]
+        }
+    ]
+}
