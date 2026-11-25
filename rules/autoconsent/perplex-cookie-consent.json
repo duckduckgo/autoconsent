@@ -1,0 +1,12 @@
+{
+    "name": "perplex-cookie-consent",
+    "prehideSelectors": [
+        ".consent__bar:has([data-cookie-consent-accept-necessary-btn])",
+        ".c-consent__bar:has([data-cookie-consent-accept-necessary-btn])"
+    ],
+    "detectCmp": [{ "exists": "[data-cookie-consent-accept-necessary-btn]" }],
+    "detectPopup": [{ "visible": "[data-cookie-consent-accept-necessary-btn]" }],
+    "optIn": [{ "waitForThenClick": "[data-cookie-consent-accept-all-btn]", "retry": 20, "retryInterval": 1000 }],
+    "optOut": [{ "waitForThenClick": "[data-cookie-consent-accept-necessary-btn]", "retry": 20, "retryInterval": 1000 }],
+    "test": [{ "waitForVisible": "[data-cookie-consent-accept-necessary-btn]", "check": "none", "timeout": 2000 }]
+}

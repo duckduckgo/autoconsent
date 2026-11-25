@@ -1,0 +1,22 @@
+{
+    "cmp": "perplex-cookie-consent",
+    "tests": [
+        {
+            "note": "consent__bar variant",
+            "sites": ["https://www.athlon.com/", "https://www.rijnstate.nl/"]
+        },
+        {
+            "note": "consent__bar variant without an accept-all button on the first layer",
+            "sites": ["https://www.isala.nl/"],
+            "options": { "testOptIn": false }
+        },
+        {
+            "note": "c-consent__bar variant",
+            "sites": ["https://www.mercedes-benz-financialservices.nl/"]
+        },
+        {
+            "note": "the click handler is attached late, after large module imports load",
+            "sites": ["https://www.perplex.nl/"]
+        }
+    ]
+}
