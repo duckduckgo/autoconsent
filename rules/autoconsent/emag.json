@@ -1,0 +1,10 @@
+{
+    "name": "emag",
+    "runContext": { "urlPattern": "^https://www\\.emag\\.ro/" },
+    "prehideSelectors": [".js-gdpr-cookie-banner:has(.js-refuse)"],
+    "detectCmp": [{ "exists": ".js-gdpr-cookie-banner .js-refuse" }],
+    "detectPopup": [{ "visible": ".js-gdpr-cookie-banner .js-refuse" }],
+    "optIn": [{ "waitForThenClick": ".js-gdpr-cookie-banner .js-accept" }],
+    "optOut": [{ "waitForThenClick": ".js-gdpr-cookie-banner .js-refuse" }],
+    "test": [{ "cookieContains": "gdpr_consent_type=2" }]
+}

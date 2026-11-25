@@ -1,0 +1,10 @@
+{
+    "cmp": "emag",
+    "tests": [
+        {
+            "note": "tested with GPC as the site was found in a top-sites sweep; the site shows US visitors a captcha instead",
+            "sites": ["https://www.emag.ro/"],
+            "options": { "gpc": true, "skipRegions": ["US"] }
+        }
+    ]
+}
