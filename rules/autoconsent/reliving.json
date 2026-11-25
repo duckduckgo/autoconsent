@@ -1,0 +1,39 @@
+{
+    "name": "reliving",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?reliving\\.(nl|be|fr)/"
+    },
+    "detectCmp": [{ "exists": "div.fixed:has(input#marketing):has(input#statistics)" }],
+    "detectPopup": [{ "visible": "div.fixed:has(input#marketing):has(input#statistics)" }],
+    "optIn": [
+        {
+            "waitFor": "next-route-announcer",
+            "timeout": 10000,
+            "optional": true,
+            "comment": "server-rendered popup ignores clicks until hydration"
+        },
+        { "waitForThenClick": "div.fixed:has(input#marketing):has(input#statistics) > div:last-child > button:first-child" }
+    ],
+    "optOut": [
+        {
+            "waitFor": "next-route-announcer",
+            "timeout": 10000,
+            "optional": true,
+            "comment": "server-rendered popup ignores clicks until hydration"
+        },
+        {
+            "if": { "exists": "div.fixed:has(input#marketing):has(input#statistics) input#marketing:checked" },
+            "then": [{ "click": "div.fixed:has(input#marketing):has(input#statistics) input#marketing" }]
+        },
+        {
+            "if": { "exists": "div.fixed:has(input#marketing):has(input#statistics) input#statistics:checked" },
+            "then": [{ "click": "div.fixed:has(input#marketing):has(input#statistics) input#statistics" }]
+        },
+        {
+            "waitForThenClick": "div.fixed:has(input#marketing):has(input#statistics) > div:last-child > button:last-child",
+            "retry": 3,
+            "retryInterval": 1000
+        }
+    ],
+    "test": [{ "cookieContains": "%22marketingConsent%22%3Afalse%2C%22statisticsConsent%22%3Afalse" }]
+}
