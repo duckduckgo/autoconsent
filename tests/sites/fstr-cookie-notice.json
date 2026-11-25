@@ -1,0 +1,13 @@
+{
+    "cmp": "fstr-cookie-notice",
+    "tests": [
+        {
+            "note": "settings variant: optional categories are unchecked in the settings form, then saved",
+            "sites": ["https://www.coda-apeldoorn.nl/", "https://teamfoster.nl/", "https://spoorzonezwolle.nl/"]
+        },
+        {
+            "note": "variant with a reject button",
+            "sites": ["https://www.terugwinnaars.nl/"]
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "name": "fstr-cookie-notice",
+    "prehideSelectors": [".fstr-cookie-notice"],
+    "detectCmp": [{ "exists": ".fstr-cookie-notice .button-group :is(.button--settings, .button--reject)" }],
+    "detectPopup": [{ "visible": ".fstr-cookie-notice .button-group" }],
+    "optIn": [{ "waitForThenClick": ".fstr-cookie-notice .button-group .button--primary" }],
+    "optOut": [
+        {
+            "if": { "exists": ".fstr-cookie-notice .button-group .button--reject" },
+            "then": [{ "waitForThenClick": ".fstr-cookie-notice .button-group .button--reject" }],
+            "else": [
+                { "waitForThenClick": ".fstr-cookie-notice .button-group .button--settings" },
+                { "waitForVisible": ".fstr-cookie-notice__form" },
+                {
+                    "click": ".fstr-cookie-notice__form input[type=checkbox]:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                { "waitForThenClick": ".fstr-cookie-notice .button-group .button--primary" }
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_FSTR_COOKIE_NOTICE_TEST" }]
+}
