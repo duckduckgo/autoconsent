@@ -1,0 +1,36 @@
+{
+    "name": "radish-cookie-consent",
+    "vendorUrl": "https://radishconcepts.com/",
+    "prehideSelectors": [".radish-cookie-bar"],
+    "detectCmp": [
+        {
+            "exists": ".radish-cookie-bar .cookie-bar-settings .cookie-approve"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".radish-cookie-bar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".radish-cookie-bar .cookie-agree-all-cookies, .radish-cookie-bar .cookie-bar-footer > .cookie-bar-buttons .cookie-approve"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".radish-cookie-bar .cookie-bar-footer > .cookie-bar-buttons .cookie-settings-toggle"
+        },
+        {
+            "waitForVisible": ".radish-cookie-bar .cookie-bar-settings"
+        },
+        {
+            "click": ".radish-cookie-bar .rcc-allow-cookie-type:checked:not(:disabled):not([data-cookietype='functional'])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".radish-cookie-bar .cookie-bar-settings .cookie-approve"
+        }
+    ]
+}
