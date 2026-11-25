@@ -1,0 +1,17 @@
+{
+    "cmp": "cookieconfirm",
+    "tests": [
+        {
+            "note": "banner with a Reject all button",
+            "sites": ["https://mediebruket.no/", "https://mypalmshop.de/", "https://galaxyclub.nl/", "https://06express.nl/"]
+        },
+        {
+            "note": "no Reject all button: the category toggles can be pre-checked and must be unchecked before Allow selection",
+            "sites": ["https://extrawarmte.nl/", "https://activityinternational.nl/"]
+        },
+        {
+            "note": "no Reject all button: Allow selection is hidden behind Customize",
+            "sites": ["https://bagnoitalia.it/"]
+        }
+    ]
+}
