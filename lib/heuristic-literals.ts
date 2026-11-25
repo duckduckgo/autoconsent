@@ -169,6 +169,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["te klikken"],
     ["alle cookies accepteren"],
     ["toestemming voor "],
+    ["site gebruikt"],
     [" contin"],
     ["cookie"],
     [" uso de cookies"],
