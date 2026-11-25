@@ -12,6 +12,7 @@ Search website source code via the [SearchWebCode](https://www.searchwebcode.com
 **Caveats:**
 
 - SearchWebCode indexes the raw HTML of **one homepage per site** (131M+ sites). It does not index JS or CSS files or deeper pages, so there is no equivalent of PublicWWW's `filetype:js` or `depth:`. CMPs injected purely by client-side JavaScript will not appear.
+- Most banners are injected by a script, so their element is rarely in the homepage HTML. To find sites using a CMP, search the CMP's script host (the `src` of the script that injects the banner) rather than the banner's ID or class. It finds many times more sites.
 - Its homepage snapshot can lack a string the live site has, even on large, well-known sites that are indexed. A site missing from the results is not evidence that it doesn't use the CMP. To check one site, fetch its homepage.
 - Each new listing query costs credit (see [Cost](#cost)). Use `counts_only` when you only need the number of sites: it is free.
 
@@ -85,10 +86,19 @@ Mostly the same as PublicWWW, so a PublicWWW query usually works unchanged once 
 - Exclude: `"cookie-banner" -"wordpress"` (or `NOT`). A query needs at least one positive term
 - Grouping: `("a" OR "b") -"c"`
 - TLD filter: `"sd-cmp" site:de` (alias `tld:`, exclude with `-site:de`). Only TLDs, not full domains
-- Regex: `/cookie-?consent-banner/` in `q`, or `regex=true` with a bare pattern
+- Regex: `/cookie-?consent-banner/` in `q`, or `regex=true` with a bare pattern (see [Regex](#regex))
 - Escape inner quotes: `"data-testid=\"cookie-reject\""`. Only `\"` and `\\` are escapes
 
 `AND`, `OR` and `NOT` are operators only in uppercase.
+
+### Regex
+
+PublicWWW has no regex, so use it to search for things PublicWWW can't express: generated class names, the shape of an attribute value, or two attributes near each other.
+
+- Supported: character classes, `{n}`, `\d` and `\w`, alternation `|`, groups, escaped `\.` and `\/`, quotes, and bounded spans like `.{0,80}`. For example `/sd-cmp-[A-Za-z0-9_]{5}/`, `/data-cbid="[0-9a-f]{8}-/` and `/id="usercentrics-cmp".{0,80}data-settings-id/`.
+- Not supported: look-ahead, look-behind and backreferences. They return HTTP 400, which is not charged.
+- Matching is case-sensitive. Write the exact case, or list the variants with `|`. Don't use `(?i)`: it is accepted but turns off the index lookup, so only a handful of hits come back. `ignore_case` can't be combined with regex.
+- Keep a long fixed part in the pattern. Each page checks only 256 candidate sites, so a pattern with a long literal part fills its pages, while a short or loose one returns a few hits per page and only about 180 sites across all the free pages.
 
 Full syntax: https://www.searchwebcode.com/syntax
 
