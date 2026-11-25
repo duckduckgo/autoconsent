@@ -40,6 +40,8 @@ export const snippets = {
         window.__npcmp('save');
         return true;
     },
+    EVAL_COOKIECONSENT_IO_TEST: () =>
+        /(^|; )cookie-consent-io=/.test(document.cookie) && !/(^|; )cookie-consent-io=[^;]*marketing/.test(document.cookie),
     EVAL_COOKIEBOT_1: () => !!window.Cookiebot,
     EVAL_COOKIEBOT_2: () => !window.Cookiebot.hasResponse && window.Cookiebot.dialog?.visible === true,
     EVAL_COOKIEBOT_3: () => window.Cookiebot.withdraw() || true,

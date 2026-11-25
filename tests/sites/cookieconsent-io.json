@@ -1,0 +1,13 @@
+{
+    "cmp": "cookieconsent-io",
+    "tests": [
+        {
+            "note": "Banner with a reject button",
+            "sites": ["https://www.s-bb.nl/", "https://www.licg.nl/", "https://www.cookieconsent.io/"]
+        },
+        {
+            "note": "Banner without a reject button: opt-out unticks the categories and saves from the settings panel",
+            "sites": ["https://www.cadeaukaart.nl/"]
+        }
+    ]
+}
