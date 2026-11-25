@@ -25,7 +25,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /accept cookies/gi,
     /only necessary cookies/gi, // "only necessary" is probably too broad
     /(?:by continuing.{0,100}cookie)|(?:cookie.{0,100}by continuing)/gi,
-    /\bby using (?:this|our) (?:web)?site\b.{0,100}cookie/gi,
+    /\bby using (?:this|our|the) (?:web)?site\b.{0,100}cookie/gi,
     // "By clicking 'Accept all', you agree to the storing of cookies …"
     /\bby clicking\b.{0,80}?\byou (?:allow|accept|agree|consent)\w*\b.{0,100}?\b(?:cookies?|technologies)\b/gi,
     // button labels count only with the cookie noun: bare "accept all" / "reject all" also label bulk actions in page content

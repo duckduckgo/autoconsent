@@ -443,6 +443,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'We and our advertising partners use cookies for ad measurement, personalised ads and analytics.',
             'By using our site, you acknowledge that you read and understand our Cookie Policy.',
             'By using this website you agree to our use of cookie technology.',
+            'By using the site, you agree to our cookie policy. Read more here.',
             'Allow analytics cookies? They help us understand how visitors use this website. Your choice does not affect access.',
             'Allow cookies? We use them to measure traffic.',
             'We use a cookie to remember you are 18+ and keep your preferences on this device.',
@@ -484,6 +485,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Continue without signing in',
             'Choose between chocolate or oatmeal cookies for the party.',
             'JavaScript is required for the site to work.',
+            'By using the sitemap you can find all our cookie recipes.',
         ]);
     });
 });
