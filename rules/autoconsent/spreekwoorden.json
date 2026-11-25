@@ -1,0 +1,31 @@
+{
+    "name": "spreekwoorden",
+    "_metadata": {
+        "vendorUrl": "https://spreekwoorden.nl/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?spreekwoorden\\.nl/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["div[x-data*=\"hide-gdpr-banner\"] > div"],
+    "detectCmp": [
+        {
+            "exists": "div[x-data*=\"hide-gdpr-banner\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div[x-data*=\"hide-gdpr-banner\"] > div"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div[x-data*=\"hide-gdpr-banner\"] button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "div[x-data*=\"hide-gdpr-banner\"]"
+        }
+    ]
+}
