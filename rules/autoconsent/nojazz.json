@@ -15,7 +15,11 @@
             "if": { "visible": "#consentui #buttons .btn.red" },
             "then": [{ "click": "#consentui #buttons .btn.red" }],
             "else": [
-                { "click": "#consentui #buttons .btn.amber" },
+                {
+                    "comment": "the button renders while the frame is still loading and early clicks are lost; it is gone on the next screen",
+                    "waitForThenClick": "#consentui #buttons .btn.amber",
+                    "retry": 10
+                },
                 { "waitFor": "#consentui.screen_2 #filters" },
                 { "click": "#consentui #filters input[type=checkbox]:checked", "all": true, "optional": true },
                 { "waitForThenClick": "#consentui.screen_2 #buttons .btn.green" }

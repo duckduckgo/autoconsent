@@ -10,16 +10,16 @@
     },
     "prehideSelectors": [],
     "detectCmp": [{ "exists": ".pp-cookies-item-switch .andes-ui-switch" }, { "eval": "EVAL_MERCADOLIBRE_CROSS_ORIGIN_PARENT" }],
-    "detectPopup": [{ "visible": ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled)" }],
+    "detectPopup": [{ "visible": ".pp-cookies-item-switch .andes-ui-switch" }],
     "optIn": [
-        { "waitFor": ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled)", "timeout": 10000 },
+        { "waitFor": ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled)", "timeout": 20000 },
         { "eval": "EVAL_MERCADOLIBRE_SAVE" }
     ],
     "optOut": [
         {
-            "comment": "toggles are server-rendered as disabled until the page hydrates",
+            "comment": "toggles are server-rendered as disabled until the page hydrates, which can take over 10s",
             "waitFor": ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled)",
-            "timeout": 10000
+            "timeout": 20000
         },
         {
             "if": { "exists": ".pp-cookies-item-switch .andes-ui-switch[data-andes-state=checked]:not(.andes-ui-switch--disabled)" },

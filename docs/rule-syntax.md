@@ -252,6 +252,8 @@ Some rules do not interact with the page, and only hide the cookie pop-ups with 
 
 By default, rules will be executed in all top-level documents. Some rules are designed for specific contexts (e.g. only nested iframes, or only specific URLs). This can be configured in `runContext` field (see [runContext](#rule-syntax-reference) above).
 
+Use `frame: true` only for pop-ups in cross-origin iframes, and in same-origin `<frame>`s of a frameset. For a pop-up in a same-origin iframe, prefer a top-frame rule that reaches into the iframe with array selectors (e.g. `["#cookie-iframe", "button.reject"]`). The browser extension does not inject into `about:blank`, `srcdoc`, `data:` or `blob:` frames, so a frame rule never runs there. Framesets are the exception: between detection attempts, autoconsent waits for a DOM mutation in its own document, and a frameset's top document does not change after load, so a top-frame rule there can miss a pop-up that appears late.
+
 ## Rule Step Versioning
 
 New step types are occasionally added to the autoconsent engine (e.g. `removeClass`, `setStyle`, `addStyle` were added in version 2). Because rules can be shipped to clients independently of app releases, a rule that uses a newer step type could end up on a client that doesn't support it yet.

@@ -1,0 +1,10 @@
+{
+    "cmp": "cookieform-iframe",
+    "tests": [
+        {
+            "note": "Shop consent module (#cookieform, #cookie_all_reject) rendered in a same-origin iframe; the rule reaches into it from the top frame",
+            "sites": ["https://www.modellbau-berlinski.de/", "https://www.huss-licht-ton.de/"],
+            "options": { "testOptIn": false, "onlyRegions": ["DE"] }
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "name": "cookieform-iframe",
+    "vendorUrl": "https://www.modellbau-berlinski.de/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ["iframe[src*=cookie]", "#cookieform"] }, { "exists": ["iframe[src*=cookie]", "#cookie_all_reject"] }],
+    "detectPopup": [{ "visible": ["iframe[src*=cookie]", "#cookie_all_accept"] }],
+    "optIn": [{ "waitForThenClick": ["iframe[src*=cookie]", "#cookie_all_accept"] }],
+    "optOut": [{ "waitForThenClick": ["iframe[src*=cookie]", "#cookie_all_reject"], "comment": "alle ablehnen / Optionale ablehnen" }],
+    "test": [{ "waitForVisible": ["iframe[src*=cookie]", "#cookie_all_reject"], "timeout": 1000, "check": "none" }]
+}
