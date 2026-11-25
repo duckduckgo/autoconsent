@@ -400,6 +400,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /συγκατ[αά]θεσ[ηή].{0,60}(?:cookies?|μπισκ[οό]τ)/gi,
     /αποδοχ[ηή]\s+[οό]λων/gi,
     /απ[οό]ρριψη\s+[οό]λων/gi,
+
+    // Romanian (RO)
+    // e.g. "folosim cookie-uri și tehnologii similare", "acest site utilizează module cookie"
+    /\b(?:folosim|utiliz[ăa]m|folose[șşs]te|utilizeaz[ăa])\s(?:\S+\s){0,3}?(?:cookie-uri|module cookie)/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -685,6 +689,11 @@ const REJECT_PATTERNS_TURKISH = [
     'kabul etmiyorum',
 ];
 
+const REJECT_PATTERNS_ROMANIAN = [
+    // e.g. "refuză toate", "refuz", "respinge toate cookie-urile"
+    /^(refuz[ăa]?|respinge|resping)( (toate|tot))?( cookie-urile)?$/,
+];
+
 const REJECT_PATTERNS_INDONESIAN = ['tolak cookie'];
 
 const REJECT_PATTERNS_JAPANESE = [
@@ -717,6 +726,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_POLISH,
     ...REJECT_PATTERNS_RUSSIAN,
     ...REJECT_PATTERNS_TURKISH,
+    ...REJECT_PATTERNS_ROMANIAN,
     ...REJECT_PATTERNS_INDONESIAN,
     ...REJECT_PATTERNS_JAPANESE,
 ];
@@ -1091,6 +1101,9 @@ export const ACCEPT_PATTERNS = [
 
     // Turkish (TR)
     'kabul et',
+
+    // Romanian (RO), e.g. "accept toate", "acceptă toate cookie-urile"
+    /^accept[ăa]?( (toate|tot))?( cookie-urile)?$/,
 
     // Greek (EL), e.g. "αποδοχή", "αποδοχή όλων", "αποδέχομαι όλα τα cookies", "να επιτρέπονται όλα", "επιτρέπεται η επιλογή"
     /^(ναι,?\s+)?(αποδοχ[ηή]|αποδ[εέ]χομαι|αποδεχτε[ιί]τε|συμφων[ωώ]|συναιν[ωώ]|επιτρ[εέ]ψτε|(να\s+)?επιτρ[εέ]π(ονται|εται))(\s+(τα\s+|η\s+)?([οό]λ(α|ων)|επιλεγμ[εέ]ν(α|ων)|επιλογ[ηή]))?(\s+(τα\s+|των\s+)?(cookies?|μπισκ[οό]τ(α|ων)))?(\s+(και|&)\s+(κλε[ιί]σιμο|συν[εέ]χεια))?$/is,

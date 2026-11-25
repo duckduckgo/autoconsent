@@ -418,6 +418,29 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Romanian popups', () => {
+    it('detects Romanian cookie notices', () => {
+        const texts = [
+            // emag.ro
+            'Noi, la eMAG, dorim să îți oferim o experiență cât mai plăcută. Folosim cookie-uri și tehnologii similare pentru: funcționarea corectă a site-ului',
+            'Acest site utilizează module cookie pentru a vă oferi o experiență mai bună.',
+            'Site-ul nostru folosește cookie-uri.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Romanian text', () => {
+        expect(checkHeuristicPatterns('Folosim cele mai bune ingrediente pentru prăjiturile noastre').patterns).to.have.length(0);
+    });
+
+    it('classifies Romanian buttons', () => {
+        expect(classifyButtonTextRegex('Refuză toate')).to.equal('reject');
+        expect(classifyButtonTextRegex('Accept toate')).to.equal('accept');
+    });
+});
+
 const detectsPopup = (text: string) => checkHeuristicPatterns(text, 'popup').patterns.length > 0;
 const detectsPage = (text: string) => checkHeuristicPatterns(text, 'page').patterns.length > 0;
 
