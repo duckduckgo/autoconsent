@@ -1,0 +1,45 @@
+{
+    "name": "wpj-cookiebar",
+    "vendorUrl": "https://www.wpj.cz/",
+    "prehideSelectors": ["#cookieBara"],
+    "detectCmp": [
+        {
+            "exists": "#cookieBara [data-cookie-bar=simple]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieBara [data-cookie-bar=simple]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieBara [data-cookie-bar=simpleAccept]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cookieBara [data-cookie-bar=reject]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookieBara [data-cookie-bar=reject]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookieBara [data-cookie-bar=details]"
+                },
+                {
+                    "waitForThenClick": "#cookieBara [data-cookie-bar=custom]:not([data-cookie-custom])"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie-bar=0"
+        }
+    ]
+}
