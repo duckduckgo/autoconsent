@@ -1,0 +1,14 @@
+{
+    "cmp": "fulmo",
+    "tests": [
+        {
+            "note": "consent modal; ikregeer.nl and mediumguru.com show no banner outside GDPR/UK regions",
+            "sites": ["https://ikregeer.nl/", "https://mediumguru.com/"],
+            "options": { "skipRegions": ["US", "CA", "AU", "JP"] }
+        },
+        {
+            "note": "fulmo.io shows the consent modal in every region",
+            "sites": ["https://fulmo.io/"]
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "name": "fulmo",
+    "vendorUrl": "https://fulmo.io/",
+    "prehideSelectors": ["#fulmo-consent-overlay"],
+    "detectCmp": [{ "exists": "#fulmo-consent-overlay [data-act=reject]" }],
+    "detectPopup": [{ "visible": "#fulmo-consent-overlay .fulmo-modal" }],
+    "optIn": [{ "waitForThenClick": "#fulmo-consent-overlay [data-act=accept]" }],
+    "optOut": [{ "waitForThenClick": "#fulmo-consent-overlay [data-act=reject]" }],
+    "test": [{ "cookieContains": "&a=0&" }]
+}
