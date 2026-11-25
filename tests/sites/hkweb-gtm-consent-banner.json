@@ -1,0 +1,13 @@
+{
+    "cmp": "hkweb-gtm-consent-banner",
+    "tests": [
+        {
+            "note": "plugin's default layout, with the reject button repeated in the hidden preferences view",
+            "sites": ["https://momentsuntil.com/"]
+        },
+        {
+            "note": "site template overrides of the layout",
+            "sites": ["https://www.oeteldonk.org/", "https://www.fanfaredevooruitgang.nl/"]
+        }
+    ]
+}

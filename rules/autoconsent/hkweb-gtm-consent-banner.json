@@ -1,0 +1,10 @@
+{
+    "name": "hkweb-gtm-consent-banner",
+    "vendorUrl": "https://github.com/hans2103/plg_system_googletagmanager",
+    "prehideSelectors": ["dialog[data-consent-banner]"],
+    "detectCmp": [{ "exists": "dialog[data-consent-banner] [data-consent-action=reject-all]" }],
+    "detectPopup": [{ "visible": "dialog[data-consent-banner][open]" }],
+    "optIn": [{ "waitForThenClick": "dialog[data-consent-banner] [data-consent-action=accept-all]" }],
+    "optOut": [{ "waitForThenClick": "dialog[data-consent-banner] [data-consent-action=reject-all]" }],
+    "test": [{ "eval": "EVAL_HKWEB_GTM_CONSENT_TEST" }]
+}
