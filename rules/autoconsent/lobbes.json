@@ -1,0 +1,18 @@
+{
+    "name": "lobbes",
+    "_metadata": { "vendorUrl": "https://www.lobbes.nl/" },
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?(lobbes\\.nl|lobbesspielzeug\\.de|lobbesjouet\\.fr)/"
+    },
+    "prehideSelectors": ["#accept_cookies_modal"],
+    "detectCmp": [{ "exists": "#accept_cookies_modal #edit_cookies_btn" }],
+    "detectPopup": [{ "visible": "#accept_cookies_modal.show" }],
+    "optIn": [{ "waitForThenClick": "#accept_cookies_modal #accept_all_cookies_btn" }],
+    "optOut": [
+        { "waitForThenClick": "#accept_cookies_modal #edit_cookies_btn" },
+        { "waitForVisible": "#accept_cookies_modal #cookie_customize" },
+        { "click": "#cookie_customize input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+        { "waitForThenClick": "#accept_cookies_modal #save_cookies_btn" }
+    ],
+    "test": [{ "cookieContains": "analytics_storage=denied" }, { "cookieContains": "ad_storage=denied" }]
+}
