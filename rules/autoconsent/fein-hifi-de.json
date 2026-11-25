@@ -1,0 +1,15 @@
+{
+    "name": "fein-hifi-de",
+    "vendorUrl": "https://www.fein-hifi.de/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fein-hifi\\.de/"
+    },
+    "prehideSelectors": [".as-oil"],
+    "detectCmp": [{ "exists": ".as-oil .as-js-optin .fa-window-close" }],
+    "detectPopup": [{ "visible": ".as-oil .as-js-optin .fa-window-close" }],
+    "optIn": [{ "waitForThenClick": ".as-oil .as-js-optin" }],
+    "optOut": [{ "waitForThenClick": ".as-oil .as-js-optin .fa-window-close" }],
+    "test": [{ "wait": 500 }, { "cookieContains": "MODs_ID=" }]
+}
