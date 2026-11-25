@@ -1,0 +1,34 @@
+{
+    "name": "icn-cookie-notice",
+    "prehideSelectors": ["#icn_cookie_notice"],
+    "detectCmp": [{ "exists": "#icn_cookie_notice" }],
+    "detectPopup": [{ "visible": "#icn_cookie_notice button", "check": "any" }],
+    "optIn": [
+        {
+            "if": { "exists": "#icn-cookie-notification__button-accept-all" },
+            "then": [{ "click": "#icn-cookie-notification__button-accept-all" }],
+            "else": [{ "waitForThenClick": "#ICN_complete" }, { "click": "#icn-cookie-notification__button-accept" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#icn-cookie-notification__button-decline" },
+            "then": [{ "click": "#icn-cookie-notification__button-decline" }],
+            "else": [
+                {
+                    "if": { "exists": "#icn-cookie-notification__button-decline-inline" },
+                    "then": [{ "click": "#icn-cookie-notification__button-decline-inline" }],
+                    "else": [
+                        {
+                            "if": { "visible": ".icn-cookie-notification__information-info" },
+                            "then": [{ "click": ".icn-cookie-notification__information-info" }]
+                        },
+                        { "waitForThenClick": "#ICN_anonymous" },
+                        { "click": "#icn-cookie-notification__button-accept" }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "waitForVisible": "#icn_cookie_notice button", "check": "none", "timeout": 3000 }, { "cookieContains": "consent=anonymous" }]
+}
