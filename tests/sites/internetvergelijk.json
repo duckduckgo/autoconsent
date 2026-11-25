@@ -1,0 +1,13 @@
+{
+    "cmp": "internetvergelijk",
+    "tests": [
+        {
+            "note": "Reject button only in the 'Aanpassen' settings layer",
+            "sites": ["https://www.internetvergelijk.nl/"]
+        },
+        {
+            "note": "Reject button on the first layer",
+            "sites": ["https://www.energieswitch.nl/"]
+        }
+    ]
+}
