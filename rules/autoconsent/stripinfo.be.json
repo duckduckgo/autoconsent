@@ -1,0 +1,18 @@
+{
+    "name": "stripinfo.be",
+    "runContext": { "urlPattern": "^https?://(www\\.)?stripinfo\\.be/" },
+    "prehideSelectors": ["#askToAcceptCookies"],
+    "detectCmp": [{ "exists": "#askToAcceptCookies #askToAcceptCookiesClose" }],
+    "detectPopup": [{ "visible": "#askToAcceptCookies" }],
+    "optIn": [{ "waitForThenClick": "#askToAcceptCookiesClose", "retry": 5, "retryInterval": 600 }],
+    "optOut": [
+        {
+            "waitForThenClick": "#askToAcceptCookiesClose",
+            "retry": 5,
+            "retryInterval": 600,
+            "comment": "notice-only banner, 'Deze melding verbergen' dismisses it; retry in case the jQuery handler is not attached yet"
+        },
+        { "waitForVisible": "#askToAcceptCookies", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "si_acceptedCookies=true" }]
+}
