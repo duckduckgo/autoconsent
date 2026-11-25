@@ -1,0 +1,56 @@
+{
+    "name": "moneywise",
+    "vendorUrl": "https://www.moneywise.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?moneywise\\.nl/"
+    },
+    "prehideSelectors": ["#cookieDialog"],
+    "detectCmp": [
+        {
+            "exists": "dialog#cookieDialog #cookieSettings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "dialog#cookieDialog[open]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieDialog [data-cc='accept-all'], #cookieDialog #ccAccepteer"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cookieDialog #ccWeiger"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookieDialog #ccWeiger"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookieDialog [data-cc='toggle-settings']"
+                },
+                {
+                    "waitForVisible": "#cookieSettings"
+                },
+                {
+                    "click": "#cookieSettings input[type=checkbox]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#cookieSettings [data-cc='save']"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieConsent=%7B%22analytics%22%3Afalse%2C%22marketing%22%3Afalse"
+        }
+    ]
+}

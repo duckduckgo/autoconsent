@@ -1,0 +1,14 @@
+{
+    "cmp": "moneywise",
+    "tests": [
+        {
+            "note": "Main site: no reject button, opt-out goes through the settings panel. The page reloads right after saving, so the self-test message never arrives.",
+            "sites": ["https://www.moneywise.nl/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "Weblog: same dialog and cookie, with a direct 'Alleen functioneel' reject button.",
+            "sites": ["https://weblog.moneywise.nl/"]
+        }
+    ]
+}
