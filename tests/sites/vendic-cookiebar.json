@@ -2,12 +2,17 @@
     "cmp": "vendic-cookiebar",
     "tests": [
         {
+            "note": "Popups with an inline 'weigeren' (.allow-only-functional-cookie) control",
             "sites": [
                 "https://www.shogun.nl/",
                 "https://www.online-lampen-winkel.nl/",
                 "https://www.verlichtingspecialist.nl/",
                 "https://www.degrootwonen.nl/"
             ]
+        },
+        {
+            "note": "initCookieBarWithTopics variant without a reject control: opt-out goes through 'Aanpassen' and 'Selectie toestaan'",
+            "sites": ["https://www.huissteden.nl/"]
         }
     ]
 }
