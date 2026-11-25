@@ -7,12 +7,27 @@
     "detectCmp": [
         {
             "comment": "the spx theme's variant is handled by shopware5-spx",
-            "exists": ".page-wrap--cookie-permission[data-cookie-permission]:not(.spx-cookie-wrapper) .cookie-permission--decline-button"
+            "any": [
+                {
+                    "exists": ".page-wrap--cookie-permission[data-cookie-permission]:not(.spx-cookie-wrapper) .cookie-permission--decline-button"
+                },
+                {
+                    "exists": ".page-wrap--cookie-permission[data-cookie-permission]:not(.spx-cookie-wrapper) .cookie-permission--configure-button[data-openconsentmanager]"
+                }
+            ]
         }
     ],
     "detectPopup": [
         {
-            "visible": ".page-wrap--cookie-permission[data-cookie-permission]"
+            "comment": "some themes show the banner's content in a modal instead",
+            "any": [
+                {
+                    "visible": ".page-wrap--cookie-permission[data-cookie-permission]"
+                },
+                {
+                    "visible": ".js--modal.cookiePermissions"
+                }
+            ]
         }
     ],
     "optIn": [
@@ -56,17 +71,28 @@
             "else": [
                 {
                     "comment": "non-essential groups are unchecked by default in the consent manager",
-                    "waitForThenClick": ".page-wrap--cookie-permission .cookie-permission--configure-button"
+                    "waitForThenClick": ".js--modal.cookiePermissions .cookie-permission--configure-button, .page-wrap--cookie-permission:not(.is--hidden) .cookie-permission--configure-button"
                 },
                 {
                     "waitForThenClick": ".cookie-consent--save-button"
+                },
+                {
+                    "comment": "some themes keep the consent manager open after saving",
+                    "if": {
+                        "visible": "#cookie-consent.is--open .cookie-consent--close"
+                    },
+                    "then": [
+                        {
+                            "click": "#cookie-consent.is--open .cookie-consent--close"
+                        }
+                    ]
                 }
             ]
         }
     ],
     "test": [
         {
-            "waitForVisible": ".page-wrap--cookie-permission[data-cookie-permission]",
+            "waitForVisible": ".page-wrap--cookie-permission[data-cookie-permission], .js--modal.cookiePermissions",
             "timeout": 2000,
             "check": "none"
         },
