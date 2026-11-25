@@ -1,0 +1,21 @@
+{
+    "cmp": "ohmyprints",
+    "note": "In-house consent dialog shared by the Werk aan de Muur / Art Heroes shops. Our regional proxies are not served the script that opens it, so the popup may only show through Oxylabs.",
+    "tests": [
+        {
+            "note": "outside the shop's home country a shipping/language prompt opens first and the consent dialog only after it is closed",
+            "sites": ["https://www.werkaandemuur.nl/"],
+            "options": { "onlyRegions": ["NL"] }
+        },
+        {
+            "note": "German sister shop, same dialog with localized texts",
+            "sites": ["https://www.artheroes.de/"],
+            "options": { "onlyRegions": ["DE"] }
+        },
+        {
+            "note": "French sister shop, same dialog with localized texts",
+            "sites": ["https://www.artheroes.fr/"],
+            "options": { "onlyRegions": ["FR"] }
+        }
+    ]
+}
