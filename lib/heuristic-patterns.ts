@@ -400,6 +400,9 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /συγκατ[αά]θεσ[ηή].{0,60}(?:cookies?|μπισκ[οό]τ)/gi,
     /αποδοχ[ηή]\s+[οό]λων/gi,
     /απ[οό]ρριψη\s+[οό]λων/gi,
+    // Romanian (RO); "cookie-uri" is the Romanian plural, and ș/ț also come with a cedilla
+    // e.g. "folosim cookie-uri și tehnologii similare", "acest site utilizează cookie-uri"
+    /\b(?:folosim|utiliz[aă]m|folose[sșş]te|utilizeaz[aă])(?: \S+){0,3} cookie-uri\b/gi,
 ];
 
 const REJECT_PATTERNS_ENGLISH = [
@@ -687,6 +690,11 @@ const REJECT_PATTERNS_TURKISH = [
 
 const REJECT_PATTERNS_INDONESIAN = ['tolak cookie'];
 
+const REJECT_PATTERNS_ROMANIAN = [
+    // e.g. "refuză toate", "refuz", "respinge toate cookie-urile"
+    /^(refuz[aă]?|respinge)( (toate|tot))?( cookie-urile)?$/,
+];
+
 const REJECT_PATTERNS_JAPANESE = [
     // e.g. "拒否", "すべて拒否", "全て拒否する", "cookieを拒否"
     /^(すべて|全て)?\s?(の)?(cookie|クッキー)?\s?(を)?拒否(する)?$/i,
@@ -718,6 +726,7 @@ export const REJECT_PATTERNS = [
     ...REJECT_PATTERNS_RUSSIAN,
     ...REJECT_PATTERNS_TURKISH,
     ...REJECT_PATTERNS_INDONESIAN,
+    ...REJECT_PATTERNS_ROMANIAN,
     ...REJECT_PATTERNS_JAPANESE,
 ];
 

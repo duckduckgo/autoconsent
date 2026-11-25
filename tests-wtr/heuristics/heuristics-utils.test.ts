@@ -401,6 +401,25 @@ describe('checkHeuristicPatterns with Turkish popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Romanian popups', () => {
+    it('detects Romanian cookie notices', () => {
+        const texts = [
+            // emag.ro
+            'Noi, la eMAG, dorim să îți oferim o experiență cât mai plăcută. Folosim cookie-uri și tehnologii similare pentru: funcționarea corectă a site-ului',
+            'Acest site utilizează cookie-uri pentru a îmbunătăți experiența ta.',
+            'Site-ul nostru folosește cookie-uri.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Romanian text', () => {
+        expect(checkHeuristicPatterns('Folosim cele mai bune materiale pentru produsele noastre').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Coșul tău de cumpărături este gol').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with Norwegian popups', () => {
     it('detects Norwegian cookie notices', () => {
         const texts = [
@@ -1105,10 +1124,12 @@ describe('classifyButtonTextRegex with more button labels', () => {
             'Du kan sige nej tak til statistik',
             'Avslå',
             'Avvis alle cookies',
+            'Refuză toate',
+            'Respinge toate cookie-urile',
         ]) {
             expect(classifyButtonTextRegex(text), text).to.equal('reject');
         }
-        for (const text of ['Ja, ik accepteer optimale cookies', 'Avslått', 'Tak']) {
+        for (const text of ['Ja, ik accepteer optimale cookies', 'Avslått', 'Tak', 'Accept toate', 'Refuzul comenzii']) {
             expect(classifyButtonTextRegex(text), text).to.not.equal('reject');
         }
     });

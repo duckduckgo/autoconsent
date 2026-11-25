@@ -291,4 +291,5 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["συγκατ"],
     ["αποδοχ"],
     ["ρριψη"],
+    [" cookie-uri"],
 ];
