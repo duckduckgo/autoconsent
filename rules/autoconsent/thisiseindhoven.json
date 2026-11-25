@@ -1,0 +1,17 @@
+{
+    "name": "thisiseindhoven",
+    "vendorUrl": "https://www.thisiseindhoven.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?thisiseindhoven\\.com/"
+    },
+    "prehideSelectors": ["aside:has([data-gtm-cookie-types])"],
+    "detectCmp": [{ "exists": "aside button[data-gtm-cookie-types]" }],
+    "detectPopup": [{ "visible": "aside button[data-gtm-cookie-types]" }],
+    "optIn": [{ "waitForThenClick": "aside button[data-gtm-cookie-types*=marketing]" }],
+    "optOut": [
+        { "waitForThenClick": "aside button[data-gtm-cookie-types] + button" },
+        { "waitForThenClick": "aside label:has(> input[type=radio][value=functional])" },
+        { "waitForThenClick": "aside div:has(> fieldset[role=radiogroup]) + div > button" }
+    ],
+    "test": [{ "cookieContains": "ConsentName=FunctionalConsent" }]
+}
