@@ -2,7 +2,12 @@
     "cmp": "adopt",
     "tests": [
         {
-            "sites": ["https://instanonimo.com/", "https://goadopt.io/"]
+            "sites": ["https://goadopt.io/"]
+        },
+        {
+            "note": "shows a \"Do not sell\" notice instead of Reject in the US; this setup stores no adoptConsentMode, so the self-test cannot pass",
+            "sites": ["https://www.hotelamourparis.fr/"],
+            "options": { "testSelfTest": false }
         }
     ]
 }
