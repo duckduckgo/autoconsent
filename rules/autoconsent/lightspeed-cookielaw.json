@@ -1,0 +1,30 @@
+{
+    "name": "lightspeed-cookielaw",
+    "vendorUrl": "https://www.lightspeedhq.com/ecommerce/",
+    "prehideSelectors": [".wsa-cookielaw"],
+    "detectCmp": [
+        {
+            "exists": ".wsa-cookielaw a[href*='/cookielaw/optOut']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".wsa-cookielaw"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".wsa-cookielaw a[href*='/cookielaw/optIn']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".wsa-cookielaw a[href*='/cookielaw/optOut']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "COOKIELAW=optout"
+        }
+    ]
+}

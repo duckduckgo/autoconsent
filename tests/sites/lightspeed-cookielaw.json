@@ -1,0 +1,10 @@
+{
+    "cmp": "lightspeed-cookielaw",
+    "tests": [
+        {
+            "note": "the Nee link navigates to /cookielaw/optOut/ and reloads the page, so the self-test result is lost",
+            "sites": ["https://www.sterkebollen.nl/", "https://www.solediesel.nl/nl/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
