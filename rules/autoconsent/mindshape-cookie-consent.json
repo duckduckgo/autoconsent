@@ -42,6 +42,11 @@
                     "optional": true
                 },
                 {
+                    "click": "#cookie-consent .consent-modal .cookieoptions input[type='checkbox']:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
                     "waitForThenClick": "#cookie-consent button[name='tx_mindshapecookieconsent_consent[consent][selectAll]'][value='0']"
                 }
             ]
