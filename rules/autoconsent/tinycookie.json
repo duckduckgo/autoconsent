@@ -1,0 +1,36 @@
+{
+    "name": "tinycookie",
+    "_metadata": {
+        "vendorUrl": "https://apps.shopify.com/tinycookie"
+    },
+    "prehideSelectors": ["#tinycookie-wrapper"],
+    "detectCmp": [{ "exists": "#tinycookie-wrapper" }],
+    "detectPopup": [
+        { "visible": "#tinycookie-wrapper" },
+        { "exists": "#tinycookie-wrapper .tinycookie-button:not(.tinycookie-accept-all)" }
+    ],
+    "optIn": [{ "waitForThenClick": "#tinycookie-wrapper .tinycookie-accept-all" }],
+    "optOut": [
+        {
+            "if": { "exists": "#tinycookie-wrapper .tinycookie-main-buttons > .tinycookie-button:not(.tinycookie-accept-all)" },
+            "then": [{ "click": "#tinycookie-wrapper .tinycookie-main-buttons > .tinycookie-button:not(.tinycookie-accept-all)" }],
+            "else": [
+                { "click": "#tinycookie-wrapper .tinycookie-buttons > .tinycookie-button:not(.tinycookie-accept-all)" },
+                { "waitForVisible": "#tinycookie-preferences-wrapper", "timeout": 2000 },
+                {
+                    "if": { "exists": "#tinycookie-preferences-wrapper .tinycookie-preferences-required" },
+                    "then": [{ "click": "#tinycookie-preferences-wrapper .tinycookie-preferences-required" }],
+                    "else": [
+                        {
+                            "click": "#tinycookie-preferences-wrapper .tinycookie-preferences-preference-checkbox:checked:not([disabled])",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "click": "#tinycookie-preferences-wrapper .tinycookie-preferences-save" }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "tinycookie_acc=req" }, { "cookieContains": "tinycookie_acc=req,", "negated": true }]
+}

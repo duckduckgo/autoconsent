@@ -1,0 +1,13 @@
+{
+    "cmp": "tinycookie",
+    "tests": [
+        {
+            "note": "no reject button on the first layer: opt out through the preferences dialog",
+            "sites": ["https://fournituren.nl/", "https://ladderstore.com/", "https://folkster.com/"]
+        },
+        {
+            "note": "reject (\"accept required only\") button on the first layer",
+            "sites": ["https://www.hifi-profis.de/", "https://www.knives.co.uk/", "https://kulte.fr/"]
+        }
+    ]
+}
