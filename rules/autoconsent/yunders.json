@@ -1,0 +1,16 @@
+{
+    "name": "yunders",
+    "vendorUrl": "https://www.yunders.com/",
+    "prehideSelectors": [".ycc-notice", ".ycc-notice-backdrop"],
+    "detectCmp": [{ "exists": ".ycc-notice #ycc_consent_save" }, { "visible": ".ycc-notice" }],
+    "detectPopup": [{ "visible": ".ycc-notice" }],
+    "optIn": [{ "waitForThenClick": ".ycc-notice #ycc_consent_save" }],
+    "optOut": [
+        { "waitForThenClick": ".ycc-notice #ycc_consent_modify" },
+        { "waitForVisible": "#ycc_consent_options" },
+        { "if": { "exists": "#ycc_analytics:checked" }, "then": [{ "click": "#ycc_analytics" }] },
+        { "if": { "exists": "#ycc_advertisements:checked" }, "then": [{ "click": "#ycc_advertisements" }] },
+        { "click": ".ycc-notice #ycc_consent_save" }
+    ],
+    "test": [{ "cookieContains": "\"analytics\":false" }, { "cookieContains": "\"advertisements\":false" }]
+}
