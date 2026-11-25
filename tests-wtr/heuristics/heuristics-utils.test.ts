@@ -502,6 +502,7 @@ describe('checkHeuristicPatterns with more French, German, Dutch, Polish and Rus
             'Cookies worden gebruikt voor metingen, advertenties en optimalisatie. Door onze site te blijven gebruiken, gaat u akkoord met ons privacybeleid.',
             'Alles accepteren Keuze opslaan Alleen standaard cookies',
             'Onze cookies geven je de best mogelijke ervaring op onze website. Accepteer ze, of lees onze cookieverklaring.',
+            'Daarvoor plaatsen Meta, Google en Microsoft een cookie. Inloggen en je voorkeuren werken zonder, dus nee zeggen kan gewoon.',
             'Informujemy, że niniejsza strona internetowa wykorzystuje pliki „cookies”.',
             'Strona wykorzystuje pliki "cookies" w celach statystycznych.',
             'Firma i jej partnerzy używają plików cookie i innych trackerów na naszej stronie internetowej.',
@@ -515,6 +516,8 @@ describe('checkHeuristicPatterns with more French, German, Dutch, Polish and Rus
             'On utilise du beurre dans nos cookies',
             'Analyse der Marketing-Strategie',
             'Durch die Nutzung unserer Webseite finden Sie schnell die neuesten Tests.',
+            'Ze plaatsten gisteren een cookie op elk bord.',
+            'Plaats een cookie op je bord.',
         ]);
     });
 });

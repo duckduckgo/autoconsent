@@ -158,6 +158,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["onze partners vragen om "],
     ["wij en onze "],
     [" cookies"],
+    ["plaatsen","plaatst"],
     ["accepteer alle cookies"],
     ["analytische","functionele","essentiële","noodzakelijke"],
     [],

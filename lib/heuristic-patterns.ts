@@ -215,6 +215,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bonze partners vragen om (?:jouw|uw|je) toestemming\b/gi,
     /\bwij en onze (?:\d+ )?partners\b/gi,
     /\b(?:gebruiken|gebruikt|plaatsen|plaatst)\b(?: \S+){0,3} cookies\b/gi,
+    // "plaatsen Meta, Google en Microsoft een cookie"
+    /\b(?:plaatsen|plaatst)\b(?:\s+\S+){0,5}\s+een\s+cookie\b/gi,
     /\baccepteer alle cookies\b/gi,
     // Dutch words only: "tracking cookies" and "marketing cookies" are also English prose and footer links
     /\b(?:analytische|functionele|essentiële|noodzakelijke) cookies\b/gi,
