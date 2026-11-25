@@ -1,0 +1,20 @@
+{
+    "name": "mindshape-cookie-consent",
+    "vendorUrl": "https://extensions.typo3.org/extension/mindshape_cookie_consent",
+    "prehideSelectors": ["#cookie-consent.cookie-consent-container"],
+    "detectCmp": [{ "exists": "#cookie-consent .consent-modal form[action*='tx_mindshapecookieconsent_consent']" }],
+    "detectPopup": [{ "visible": "#cookie-consent" }, { "cookieContains": "cookie_consent=%7B%22consent%22:true", "negated": true }],
+    "optIn": [{ "waitForThenClick": "#cookie-consent .consent-modal .select-all" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cookie-consent .consent-modal .deny" },
+            "then": [{ "waitForThenClick": "#cookie-consent .consent-modal .deny" }],
+            "else": [
+                { "click": "#cookie-consent .consent-modal input.option:checked", "all": true, "optional": true },
+                { "click": "#cookie-consent .consent-modal .cookieoptions input[type='checkbox']:checked", "all": true, "optional": true },
+                { "waitForThenClick": "#cookie-consent .consent-modal .save" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "cookie_consent=%7B%22consent%22:true,%22options%22:%5B%5D" }]
+}

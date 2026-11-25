@@ -1,0 +1,17 @@
+{
+    "cmp": "mindshape-cookie-consent",
+    "tests": [
+        {
+            "note": "no deny button, only \"select all\" and \"save\"; mythenregion.ch pre-checks optional categories",
+            "sites": ["https://www.kirche-mv.de/", "https://www.mythenregion.ch/", "https://www.conventus.de/"]
+        },
+        {
+            "note": "theme hides the closed modal with visibility: hidden",
+            "sites": ["https://www.paritaet-berlin.de/"]
+        },
+        {
+            "note": "with a deny button, in both the <dialog> and the older <div> container",
+            "sites": ["https://www.fes.de/", "https://www.ahk.nl/"]
+        }
+    ]
+}
