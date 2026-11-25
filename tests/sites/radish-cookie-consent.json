@@ -1,0 +1,16 @@
+{
+    "cmp": "radish-cookie-consent",
+    "note": "the plugin reloads the page after saving the choice, so there is no self-test",
+    "tests": [
+        {
+            "note": "classic layout: \"Ik ga akkoord\" and \"Instellingen\" on the first layer, all categories checked in the settings",
+            "sites": ["https://www.accountancyvanmorgen.nl/", "https://fiscaalvanmorgen.nl/", "https://tijdschriftfamiliebedrijven.nl/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "newer layout: \"Accepteer alle cookies\" on the first layer, \"Instellingen goedkeuren\" in the settings, some categories disabled",
+            "sites": ["https://aerofoaminsulation.eu/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
