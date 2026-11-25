@@ -1,0 +1,12 @@
+{
+    "name": "architectenweb",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?architectenweb\\.nl/"
+    },
+    "prehideSelectors": ["div[data-controlname='cookies'] .cookie-bar"],
+    "detectCmp": [{ "exists": "div[data-controlname='cookies'] .cookie-bar [data-action='accept']" }],
+    "detectPopup": [{ "visible": "div[data-controlname='cookies'] .cookie-bar [data-action='accept']" }],
+    "optIn": [{ "waitForThenClick": "div[data-controlname='cookies'] .cookie-bar [data-action='accept']" }],
+    "optOut": [{ "waitForThenClick": "div[data-controlname='cookies'] .cookie-bar [data-action='accept']" }],
+    "test": [{ "cookieContains": "cookieSettings=" }]
+}
