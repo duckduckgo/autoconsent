@@ -1,0 +1,10 @@
+{
+    "name": "isn-cookie-consent",
+    "vendorUrl": "https://isn.nl/",
+    "prehideSelectors": [".isn__cookie-consent"],
+    "detectCmp": [{ "exists": ".isn__cookie-consent .isn__cookie-consent__choice.required" }],
+    "detectPopup": [{ "visible": ".isn__cookie-consent" }],
+    "optIn": [{ "waitForThenClick": ".isn__cookie-consent__choice.accept" }],
+    "optOut": [{ "waitForThenClick": ".isn__cookie-consent__choice.required" }],
+    "test": [{ "waitForVisible": ".isn__cookie-consent", "check": "none", "timeout": 1000 }]
+}
