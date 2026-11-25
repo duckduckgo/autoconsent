@@ -1,0 +1,11 @@
+{
+    "name": "scriptex",
+    "vendorUrl": "https://www.scriptex.nl/",
+    "cosmetic": false,
+    "prehideSelectors": ["scriptex-consent-banner"],
+    "detectCmp": [{ "exists": ["scriptex-consent-banner", "#scriptexConsentBannerBox"] }],
+    "detectPopup": [{ "visible": ["scriptex-consent-banner", "#scriptexConsentBannerBox"] }],
+    "optIn": [{ "waitForThenClick": ["scriptex-consent-banner", "#scriptexConsentAgree"] }],
+    "optOut": [{ "waitForThenClick": ["scriptex-consent-banner", "#scriptexConsentDeny"] }],
+    "test": [{ "visible": "scriptex-consent-banner", "check": "none" }]
+}
