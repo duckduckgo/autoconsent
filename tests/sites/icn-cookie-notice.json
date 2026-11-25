@@ -1,0 +1,21 @@
+{
+    "cmp": "icn-cookie-notice",
+    "tests": [
+        {
+            "note": "Banner template without a reject button: opt-out selects the Anoniem level in the settings and saves",
+            "sites": ["https://www.keurslager.nl/", "https://www.vanhappencontainers.nl/"]
+        },
+        {
+            "note": "Banner template with an Afwijzen button",
+            "sites": ["https://www.riwal.com/", "https://www.awvn.nl/"]
+        },
+        {
+            "note": "Banner with options shown directly and an inline Afwijzen button",
+            "sites": ["https://www.brainportbereikbaar.nl/"]
+        },
+        {
+            "note": "Simple modal template, with and without an Afwijzen button",
+            "sites": ["https://www.hulco.eu/", "https://www.factuurvoldaan.nl/", "https://www.superunie.nl/"]
+        }
+    ]
+}
