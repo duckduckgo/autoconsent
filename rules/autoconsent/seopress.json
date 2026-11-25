@@ -1,0 +1,11 @@
+{
+    "name": "seopress",
+    "prehideSelectors": [".seopress-user-consent.seopress-user-message", ".seopress-user-consent-backdrop"],
+    "detectCmp": [
+        { "exists": ".seopress-user-consent.seopress-user-message:not(.seopress-user-consent-hide) #seopress-user-consent-close" }
+    ],
+    "detectPopup": [{ "visible": ".seopress-user-consent.seopress-user-message" }],
+    "optIn": [{ "waitForThenClick": ".seopress-user-consent #seopress-user-consent-accept" }],
+    "optOut": [{ "waitForThenClick": ".seopress-user-consent #seopress-user-consent-close", "retry": 3, "retryInterval": 500 }],
+    "test": [{ "any": [{ "cookieContains": "seopress-user-consent-close=1" }, { "cookieContains": "seopress-user-consent=necessary" }] }]
+}

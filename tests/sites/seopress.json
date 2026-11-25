@@ -1,0 +1,13 @@
+{
+    "cmp": "seopress",
+    "tests": [
+        {
+            "note": "banner with category preferences; Close/Decline stores seopress-user-consent=necessary",
+            "sites": ["https://gcca.org/", "https://voolume.fr/", "https://pnpgamesonline.com/"]
+        },
+        {
+            "note": "older two-button banner; Decline stores seopress-user-consent-close=1",
+            "sites": ["https://thebigword.com/"]
+        }
+    ]
+}
