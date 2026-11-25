@@ -1,0 +1,9 @@
+{
+    "cmp": "stripinfo.be",
+    "tests": [
+        {
+            "sites": ["https://stripinfo.be/"],
+            "note": "The site renders the notice on every page load even after dismissal, so the rule matches each load by design."
+        }
+    ]
+}
