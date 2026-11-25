@@ -2,10 +2,11 @@
     "name": "cookieconsent2",
     "vendorUrl": "https://www.github.com/orestbida/cookieconsent",
     "comment": "supports v2.x.x of the library",
-    "prehideSelectors": ["#cc--main", "#cc_div:has(#s-cnt)"],
+    "prehideSelectors": ["#cc--main #cc_div", "#cc_div:has(#s-cnt)"],
     "detectCmp": [
         {
-            "exists": "#cc--main, #cc_div #s-cnt"
+            "comment": "the library always renders #cc_div; custom clones of its markup without it are left to the heuristic",
+            "exists": "#cc--main #cc_div, #cc_div #s-cnt"
         },
         {
             "comment": "notice-only configs without settings or optional categories are left to the heuristic",
