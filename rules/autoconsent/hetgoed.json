@@ -1,0 +1,20 @@
+{
+    "name": "hetgoed",
+    "vendorUrl": "https://www.hetgoed.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?hetgoed\\.nl/"
+    },
+    "prehideSelectors": ["[aria-labelledby=cookieModalTitle]:has(.cookie-bar-buttons)"],
+    "detectCmp": [{ "exists": "[aria-labelledby=cookieModalTitle] .cookie-bar-buttons" }],
+    "detectPopup": [{ "visible": "[aria-labelledby=cookieModalTitle] .cookie-bar-buttons" }],
+    "optIn": [{ "waitForThenClick": "[aria-labelledby=cookieModalTitle] .cookie-bar-buttons > div:last-child > button" }],
+    "optOut": [
+        { "waitForThenClick": "[aria-labelledby=cookieModalTitle] .cookie-bar-buttons > div:first-child > button" },
+        { "waitForVisible": "[aria-labelledby=cookieModalTitle] label[for=tracking]" },
+        {
+            "if": { "exists": "[aria-labelledby=cookieModalTitle] #tracking:checked" },
+            "then": [{ "click": "[aria-labelledby=cookieModalTitle] label[for=tracking]" }]
+        },
+        { "waitForThenClick": "[aria-labelledby=cookieModalTitle] .cookie-bar-buttons > div:first-child > button" }
+    ]
+}
