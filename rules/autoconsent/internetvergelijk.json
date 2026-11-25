@@ -1,0 +1,47 @@
+{
+    "name": "internetvergelijk",
+    "vendorUrl": "https://www.internetvergelijk.nl/",
+    "prehideSelectors": [".cookie-banner[data-cookie-banner]"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-banner[data-cookie-banner] .cookie-banner__settings[data-cookie-settings] [data-cookie-deny]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-banner[data-cookie-banner] .cookie-banner__card"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner[data-cookie-banner] [data-cookie-actions] [data-cookie-accept]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ".cookie-banner[data-cookie-banner] [data-cookie-actions] [data-cookie-deny]"
+            },
+            "then": [
+                {
+                    "click": ".cookie-banner[data-cookie-banner] [data-cookie-actions] [data-cookie-deny]"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".cookie-banner[data-cookie-banner] [data-cookie-open]"
+                },
+                {
+                    "waitForThenClick": ".cookie-banner[data-cookie-banner] [data-cookie-settings] [data-cookie-deny]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookie-banner[data-cookie-banner] .cookie-banner__card",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
