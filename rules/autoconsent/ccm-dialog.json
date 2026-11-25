@@ -1,0 +1,48 @@
+{
+    "name": "ccm-dialog",
+    "prehideSelectors": ["#cookie-consent-manager:has([data-ccm-dialog])"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent-manager [data-ccm-dialog] button[data-cookie-consent=\"submit\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent-manager [data-ccm-dialog]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent-manager [data-ccm-dialog] button[data-cookie-consent=\"submit-all\"]",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cookie-consent-manager [data-ccm-dialog] input[data-ccm-checkbox]:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookie-consent-manager [data-ccm-dialog] input[data-ccm-checkbox]:checked",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#cookie-consent-manager [data-ccm-dialog] button[data-cookie-consent=\"submit\"]",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_consent_manager="
+        },
+        {
+            "cookieContains": "ccm_statistics=",
+            "negated": true
+        }
+    ]
+}

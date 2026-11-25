@@ -1,0 +1,9 @@
+{
+    "cmp": "ccm-dialog",
+    "tests": [
+        {
+            "note": "fh-erfurt.de renders the popup in a <dialog> element, schroepfglas-versand.de in a <div>",
+            "sites": ["https://www.fh-erfurt.de/", "https://www.schroepfglas-versand.de/"]
+        }
+    ]
+}
