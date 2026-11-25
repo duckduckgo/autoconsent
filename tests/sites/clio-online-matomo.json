@@ -1,0 +1,9 @@
+{
+    "cmp": "clio-online-matomo",
+    "tests": [
+        {
+            "sites": ["https://www.hsozkult.de/", "https://www.connections.clio-online.net/", "https://www.europa.clio-online.de/"],
+            "note": "Clio-online portals sharing the same Matomo consent modal; they sit behind an Anubis bot challenge, so unproxied runs may hit a bot wall"
+        }
+    ]
+}

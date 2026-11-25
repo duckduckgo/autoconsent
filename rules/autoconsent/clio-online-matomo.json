@@ -1,0 +1,10 @@
+{
+    "name": "clio-online-matomo",
+    "vendorUrl": "https://www.clio-online.de/",
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "#matomoConsentModal #matomoConsentReject" }],
+    "detectPopup": [{ "visible": "#matomoConsentModal #matomoConsentReject" }],
+    "optIn": [{ "waitForThenClick": "#matomoConsentModal #matomoConsentAccept" }],
+    "optOut": [{ "waitForThenClick": "#matomoConsentModal #matomoConsentReject" }],
+    "test": [{ "cookieContains": "mtm_consent_removed=1" }]
+}
