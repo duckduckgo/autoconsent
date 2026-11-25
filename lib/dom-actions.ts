@@ -146,7 +146,7 @@ export class DomActions implements DomActionsProvider {
         return elements.length > 0;
     }
 
-    prehide(selector: string | string[]): boolean {
+    prehide(selector: string): boolean {
         const styleEl = getStyleElement('autoconsent-prehide');
         this.autoconsentInstance.config.logs.lifecycle && console.log('[prehide]', styleEl, location.href);
         return hideElements(styleEl, selector, 'opacity');

@@ -21,14 +21,13 @@ export function getHidingStyle(method: HideMethod) {
     return `${hidingSnippet} !important; z-index: -1 !important; pointer-events: none !important;`;
 }
 
-// hide elements with a CSS rule; a list gets one rule per selector, so an invalid selector only drops its own rule
-export function hideElements(styleEl: HTMLStyleElement, selector: string | string[], method: HideMethod = 'display'): boolean {
-    const selectors = (Array.isArray(selector) ? selector : [selector]).filter((s) => s.length > 0);
-    const style = getHidingStyle(method);
+// hide elements with a CSS rule
+export function hideElements(styleEl: HTMLStyleElement, selector: string, method: HideMethod = 'display'): boolean {
+    const rule = `${selector} { ${getHidingStyle(method)} } `;
 
     if (styleEl instanceof HTMLStyleElement) {
-        styleEl.innerText += selectors.map((s) => `${s} { ${style} } `).join('');
-        return selectors.length > 0;
+        styleEl.innerText += rule;
+        return selector.length > 0;
     }
     return false;
 }
