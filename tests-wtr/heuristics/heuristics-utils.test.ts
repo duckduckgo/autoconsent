@@ -502,6 +502,8 @@ describe('checkHeuristicPatterns with more French, German, Dutch, Polish and Rus
             'Cookies worden gebruikt voor metingen, advertenties en optimalisatie. Door onze site te blijven gebruiken, gaat u akkoord met ons privacybeleid.',
             'Alles accepteren Keuze opslaan Alleen standaard cookies',
             'Onze cookies geven je de best mogelijke ervaring op onze website. Accepteer ze, of lees onze cookieverklaring.',
+            'Mogen we cookies gebruiken?',
+            'Door op "Akkoord" te klikken sta je ons toe om cookies te gebruiken op onze website.',
             'Informujemy, że niniejsza strona internetowa wykorzystuje pliki „cookies”.',
             'Strona wykorzystuje pliki "cookies" w celach statystycznych.',
             'Firma i jej partnerzy używają plików cookie i innych trackerów na naszej stronie internetowej.',
