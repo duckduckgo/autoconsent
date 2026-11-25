@@ -19,6 +19,10 @@
         {
             "eval": "EVAL_IFRAME_SHOWN",
             "comment": "wait until the page actually shows the banner frame"
+        },
+        {
+            "eval": "EVAL_FCA_COOKIELAW_FRAME_LOADED",
+            "comment": "clicks before the frame's load event are lost"
         }
     ],
     "optIn": [

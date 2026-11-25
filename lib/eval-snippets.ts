@@ -174,6 +174,8 @@ export const snippets = {
         }) || true,
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
+    // The embedding page only listens for the consent message after the frame's load event.
+    EVAL_FCA_COOKIELAW_FRAME_LOADED: () => document.readyState === 'complete',
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     // Zero while the embedding page still keeps the consent iframe collapsed.
     EVAL_IFRAME_SHOWN: () => window.innerHeight > 0,

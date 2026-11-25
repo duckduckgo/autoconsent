@@ -13,6 +13,11 @@
         {
             "sites": ["https://www.jeep.nl/?adobe_mc_ref="],
             "options": { "onlyRegions": ["NL"] }
+        },
+        {
+            "note": "banner shown in all regions; its frame loads slowly, so clicks before the frame's load event are lost. The page itself is slow to load, hence the longer timeout",
+            "sites": ["https://www.museoalfaromeo.com/en-us/museo/Pages/CentroDocumentazione-Alfa-Romeo.aspx"],
+            "options": { "timeout": 60000 }
         }
     ]
 }
