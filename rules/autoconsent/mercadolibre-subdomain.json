@@ -26,7 +26,7 @@
             "comment": "the settings iframe is cross-origin here, mercadolibre-frame unchecks the toggles and saves from inside it",
             "waitForVisible": ".cookie-consent-banner-opt-out__modal",
             "check": "none",
-            "timeout": 30000
+            "timeout": 15000
         }
     ],
     "test": [{ "cookieContains": "%22advertising%22%3Afalse" }, { "cookieContains": "%22traceability%22%3Afalse" }]
