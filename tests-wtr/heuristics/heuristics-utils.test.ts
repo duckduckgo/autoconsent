@@ -1006,6 +1006,8 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Понятно')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Всё понятно')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Хорошо')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Хорошо, понятно')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ок, понятно')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Закрыть')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Закрыть уведомление о cookie')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Больше не показывать')).to.equal('acknowledge');
