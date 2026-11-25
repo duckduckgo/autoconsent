@@ -1,0 +1,34 @@
+{
+    "name": "foster-cookie-notice",
+    "_metadata": {
+        "vendorUrl": "https://www.teamfoster.nl/"
+    },
+    "cosmetic": false,
+    "prehideSelectors": [".fstr-cookie-notice"],
+    "detectCmp": [{ "exists": ".fstr-cookie-notice :is(.button--settings, .button--reject)" }],
+    "detectPopup": [{ "visible": ".fstr-cookie-notice" }],
+    "optIn": [
+        {
+            "if": { "exists": ".fstr-cookie-notice .button--settings" },
+            "then": [{ "click": ".fstr-cookie-notice .button--primary" }],
+            "else": [
+                { "click": ".fstr-cookie-notice input[type=checkbox]:not(:checked):not(:disabled)", "all": true, "optional": true },
+                { "click": ".fstr-cookie-notice .button--primary" }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".fstr-cookie-notice .button--reject" },
+            "then": [{ "click": ".fstr-cookie-notice .button--reject" }],
+            "else": [
+                { "click": ".fstr-cookie-notice .button--settings" },
+                { "waitFor": ".fstr-cookie-notice__form", "timeout": 2000 },
+                { "comment": "the form may already exist hidden and only gets its values once opened", "wait": 500 },
+                { "click": ".fstr-cookie-notice input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+                { "click": ".fstr-cookie-notice .button--primary" }
+            ]
+        }
+    ],
+    "test": [{ "visible": ".fstr-cookie-notice", "check": "none" }]
+}

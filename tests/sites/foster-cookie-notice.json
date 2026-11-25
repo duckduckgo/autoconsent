@@ -1,0 +1,18 @@
+{
+    "cmp": "foster-cookie-notice",
+    "tests": [
+        {
+            "note": "\"type--settings\" variant: Settings button opens the toggles and turns Accept all into Save",
+            "sites": [
+                "https://www.rova.nl/",
+                "https://www.hedon-zwolle.nl/",
+                "https://www.stofwisselingsziekten.nl/",
+                "https://www.kcap.eu/"
+            ]
+        },
+        {
+            "note": "toggles shown upfront with a reject button",
+            "sites": ["https://www.terugwinnaars.nl/"]
+        }
+    ]
+}
