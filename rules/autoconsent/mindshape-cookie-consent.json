@@ -1,0 +1,55 @@
+{
+    "name": "mindshape-cookie-consent",
+    "vendorUrl": "https://extensions.typo3.org/extension/mindshape_cookie_consent",
+    "runContext": {
+        "frame": false,
+        "main": true
+    },
+    "prehideSelectors": ["#cookie-consent.cookie-consent-container .consent-modal"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent button[name^='tx_mindshapecookieconsent_consent[consent]']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent:not([style*='display: none']):not([style*='visibility: hidden']) .consent-modal"
+        },
+        {
+            "cookieContains": "cookie_consent=%7B",
+            "negated": true
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent button[name='tx_mindshapecookieconsent_consent[consent][selectAll]'][value='1']"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cookie-consent button[name='tx_mindshapecookieconsent_consent[consent][deny]']"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookie-consent button[name='tx_mindshapecookieconsent_consent[consent][deny]']"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#cookie-consent .consent-modal input.option:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#cookie-consent button[name='tx_mindshapecookieconsent_consent[consent][selectAll]'][value='0']"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_consent=%7B%22consent%22:true,%22options%22:%5B%5D"
+        }
+    ]
+}

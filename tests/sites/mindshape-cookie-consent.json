@@ -1,0 +1,13 @@
+{
+    "cmp": "mindshape-cookie-consent",
+    "tests": [
+        {
+            "note": "Variant without a deny button: unchecks optional categories and saves",
+            "sites": ["https://www.dptv.de/", "https://beup.de/"]
+        },
+        {
+            "note": "Variant with a deny button",
+            "sites": ["https://www.fes.de/", "https://www.haw-landshut.de/"]
+        }
+    ]
+}
