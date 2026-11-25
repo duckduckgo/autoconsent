@@ -227,6 +227,12 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bdoor op\b.{0,60}?\bte klikken\b.{0,40}?\bga(?:at)? (?:u|je) akkoord\b/gi,
     /\balle cookies accepteren\b/gi,
     /\btoestemming voor (?:\S+ ){0,3}cookies\b/gi,
+    // analytics only with consent: "met Google Analytics bijhouden … alleen als jij dat goed vindt"; privacy policies say this too
+    {
+        pattern:
+            /\banalytics\b.{0,100}\balleen (?:als (?:je|jij|u) (?:dat|daar ?mee) (?:goed ?vindt|akkoord (?:gaat|bent)|instemt)|met (?:je|jouw|uw) toestemming)\b/gi,
+        input: 'popup',
+    },
 
     // Spanish (ES)
     /(si|al) contin[úu]a[sr]?( navegando)?.{0,100} cookie/gi,
