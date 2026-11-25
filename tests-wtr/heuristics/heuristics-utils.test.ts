@@ -474,6 +474,15 @@ describe('checkHeuristicPatterns with more English wording', () => {
         expect(detectsPage(`${text}\nAlle akzeptieren\nAblehnen`)).to.be.true;
     });
 
+    it('detects Dutch "met je toestemming" in popups only', () => {
+        const text =
+            'Cookies voor bezoekersstatistieken\nMet je toestemming laden we Google Analytics om te zien welke artikelen gelezen worden.\nWeigeren\nAccepteren';
+        expect(detectsPopup(text)).to.be.true;
+        expect(detectsPopup('Met uw toestemming meten wij het bezoek aan deze website.')).to.be.true;
+        expect(detectsPage('Met uw toestemming delen wij uw gegevens met uw zorgverzekeraar.')).to.be.false;
+        expect(detectsPopup('Zonder toestemming van de eigenaar mag je dit niet delen.')).to.be.false;
+    });
+
     it('does not detect unrelated English text', () => {
         expectNotDetected([
             'We use cookiecutter templates',

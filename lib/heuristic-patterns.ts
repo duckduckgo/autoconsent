@@ -227,6 +227,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bdoor op\b.{0,60}?\bte klikken\b.{0,40}?\bga(?:at)? (?:u|je) akkoord\b/gi,
     /\balle cookies accepteren\b/gi,
     /\btoestemming voor (?:\S+ ){0,3}cookies\b/gi,
+    // "Met je toestemming laden we Google Analytics …"
+    { pattern: /\bmet (?:je|jouw|uw) toestemming\b/gi, input: 'popup' },
 
     // Spanish (ES)
     /(si|al) contin[úu]a[sr]?( navegando)?.{0,100} cookie/gi,
