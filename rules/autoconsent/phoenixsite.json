@@ -1,0 +1,35 @@
+{
+    "name": "phoenixsite",
+    "vendorUrl": "https://phoenixsite.nl/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#cookie.cookie-warning-modal"],
+    "detectCmp": [
+        {
+            "exists": "#cookie.cookie-warning-modal #accept-functional"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie.cookie-warning-modal.show #accept-functional"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie.cookie-warning-modal.show #accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie.cookie-warning-modal.show #accept-functional"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_PHOENIXSITE_TEST"
+        }
+    ]
+}

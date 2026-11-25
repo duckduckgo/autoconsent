@@ -1,0 +1,18 @@
+{
+    "cmp": "phoenixsite",
+    "tests": [
+        {
+            "note": "Ribbon variant: banner at the bottom of the page",
+            "sites": ["https://sproetonline.nl/", "https://www.florum.nl/", "https://www.digidog.nl/"]
+        },
+        {
+            "note": "Popup variant: centered modal with a backdrop",
+            "sites": ["https://plugandpay.nl/", "https://dehuishoudcoach.nl/"]
+        },
+        {
+            "note": "Popup variant with compatibility mode enabled: the page reloads right after the click, so the self-test result is lost",
+            "sites": ["https://www.hoc.nl/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
