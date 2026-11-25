@@ -1,0 +1,19 @@
+{
+    "name": "hyva-cookie-consent-modal",
+    "prehideSelectors": ["[x-data=cookieConsentModal]"],
+    "detectCmp": [{ "exists": "[x-data=cookieConsentModal] [elementtiming=cookie-consent-customize]" }],
+    "detectPopup": [{ "visible": "[x-data=cookieConsentModal] [elementtiming=cookie-consent-customize]" }],
+    "optIn": [{ "waitForThenClick": "[x-data=cookieConsentModal] [elementtiming=cookie-consent-accept-all]" }],
+    "optOut": [
+        { "waitForThenClick": "[x-data=cookieConsentModal] [elementtiming=cookie-consent-customize]" },
+        { "waitForVisible": "[x-data=cookieConsentModal] [elementtiming=cookie-consent-accept-selected]" },
+        {
+            "click": "[x-data=cookieConsentModal] form input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        { "click": "[x-data=cookieConsentModal] [elementtiming=cookie-consent-accept-selected]" },
+        { "waitForVisible": "[x-data=cookieConsentModal]", "check": "none", "optional": true }
+    ],
+    "test": [{ "cookieContains": "cookieConsentDeclined=1" }]
+}
