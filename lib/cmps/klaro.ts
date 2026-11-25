@@ -40,6 +40,11 @@ export default class Klaro extends AutoConsentCMPBase {
             return true;
         }
 
+        // older Klaro versions (0.2.x) render the decline button without the cn-decline class
+        if (await this.click('.klaro .cookie-notice .cn-ok > button.cm-btn:not(.cm-btn-success):not(.cm-btn-info)')) {
+            return true;
+        }
+
         // open popup via Javascript API
         await this.mainWorldEval('EVAL_KLARO_OPEN_POPUP');
 
