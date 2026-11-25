@@ -192,14 +192,6 @@ export const snippets = {
         document
             .querySelector('.consent-banner .cookie-decline')
             .dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window })) || true,
-    EVAL_MICROSOFT_0: () =>
-        Array.from(document.querySelectorAll('div > button'))
-            .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]
-            .click() || true,
-    EVAL_MICROSOFT_1: () =>
-        Array.from(document.querySelectorAll('div > button'))
-            .filter((el) => el.innerText.match('Accept|Annehmen'))[0]
-            .click() || true,
     EVAL_MICROSOFT_2: () => !!document.cookie.match('MSCC|GHCC'),
     EVAL_MOOVE_0: () =>
         document.querySelectorAll('#moove_gdpr_cookie_modal input').forEach((i) => {

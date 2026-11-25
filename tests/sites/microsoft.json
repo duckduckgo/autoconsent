@@ -2,7 +2,17 @@
     "cmp": "microsoft.com",
     "tests": [
         {
-            "sites": ["https://docs.microsoft.com", "https://answers.microsoft.com", "https://github.com/enterprise"],
+            "sites": [
+                "https://docs.microsoft.com",
+                "https://answers.microsoft.com",
+                "https://github.com/enterprise",
+                "https://web.groupme.com/"
+            ],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "localized banners: buttons are matched by position, not by text",
+            "sites": ["https://docs.azure.cn/", "https://learn.microsoft.com/da-dk/", "https://onedrive.com/"],
             "options": { "skipRegions": ["US"] }
         }
     ]

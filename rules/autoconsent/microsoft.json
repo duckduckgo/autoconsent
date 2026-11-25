@@ -3,7 +3,7 @@
     "prehideSelectors": ["#wcpConsentBannerCtrl"],
     "detectCmp": [{ "exists": "#wcpConsentBannerCtrl" }],
     "detectPopup": [{ "exists": "#wcpConsentBannerCtrl" }],
-    "optOut": [{ "eval": "EVAL_MICROSOFT_0" }],
-    "optIn": [{ "eval": "EVAL_MICROSOFT_1" }],
+    "optOut": [{ "waitForThenClick": "#wcpConsentBannerCtrl > div:last-child > button:nth-child(2):not(:last-child)" }],
+    "optIn": [{ "waitForThenClick": "#wcpConsentBannerCtrl > div:last-child > button:first-child" }],
     "test": [{ "eval": "EVAL_MICROSOFT_2" }]
 }
