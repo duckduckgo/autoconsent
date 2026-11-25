@@ -1573,6 +1573,17 @@ describe('checkHeuristicPatterns without bare accept-all / reject-all labels', (
         ]);
     });
 
+    it('detects Dutch notices that say what happens without consent', () => {
+        expectDetected([
+            'Wij meten anoniem hoe de site gebruikt wordt (Google Analytics). Zonder toestemming plaatsen we niets en werkt de site precies hetzelfde.',
+            'Zonder jouw toestemming gebruiken wij alleen functionele cookies.',
+        ]);
+        expectNotDetected([
+            'Zonder toestemming van de curator mag de schuldenaar niets verkopen.',
+            'Het zonder toestemming plaatsen van foto’s is niet toegestaan.',
+        ]);
+    });
+
     it('does not detect sign-up terms that start like a consent notice', () => {
         expectNotDetected([
             'En cliquant sur "Créer un compte", vous acceptez les conditions d’utilisation et la politique de confidentialité.',
