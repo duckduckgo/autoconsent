@@ -1,0 +1,9 @@
+{
+    "name": "hutshopping",
+    "prehideSelectors": ["#c-cookie-banner:has(#c-cookie-min)"],
+    "detectCmp": [{ "exists": "#c-cookie-banner #c-cookie-min" }],
+    "detectPopup": [{ "visible": "#c-cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "#c-cookie-banner #c-cookie-all" }],
+    "optOut": [{ "waitForThenClick": "#c-cookie-banner #c-cookie-min" }],
+    "test": [{ "cookieContains": "datenschutz_notwendig=1" }]
+}
