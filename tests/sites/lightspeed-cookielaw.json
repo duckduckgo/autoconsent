@@ -3,8 +3,17 @@
     "tests": [
         {
             "note": "the Nee link navigates to /cookielaw/optOut/ and reloads the page, so the self-test result is lost",
-            "sites": ["https://www.sterkebollen.nl/", "https://www.solediesel.nl/nl/"],
-            "options": { "testSelfTest": false }
+            "sites": [
+                "https://www.sterkebollen.nl/",
+                "https://www.solediesel.nl/nl/",
+                "https://www.audioexpert.nl/",
+                "https://www.kekhoreca.nl/",
+                "https://www.milawebshop.be/",
+                "https://www.tafelridder.nl/"
+            ],
+            "options": {
+                "testSelfTest": false
+            }
         }
     ]
 }
