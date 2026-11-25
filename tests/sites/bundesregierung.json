@@ -5,6 +5,14 @@
             "note": "our crawler proxy hits a bot wall, but it still passes locally",
             "sites": ["https://bundesregierung.de"],
             "options": { "skipRegions": ["US", "FR", "GB", "DE"] }
+        },
+        {
+            "note": "same banner layout as bundesregierung.de (with .bpa-module-full-hero)",
+            "sites": ["https://www.bundeskanzler.de/"]
+        },
+        {
+            "note": "compact banner layout without .bpa-module-full-hero; after dismissal it stays in the DOM with aria-hidden=true and height 0",
+            "sites": ["https://www.publikationen-bundesregierung.de/"]
         }
     ]
 }

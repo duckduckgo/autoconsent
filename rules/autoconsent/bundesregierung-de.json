@@ -2,7 +2,7 @@
     "name": "bundesregierung.de",
     "prehideSelectors": [".bpa-cookie-banner"],
     "detectCmp": [{ "exists": ".bpa-cookie-banner" }],
-    "detectPopup": [{ "visible": ".bpa-cookie-banner .bpa-module-full-hero" }],
+    "detectPopup": [{ "visible": ".bpa-cookie-banner:not([aria-hidden=\"true\"]) .bpa-close-button" }],
     "optIn": [{ "click": ".bpa-accept-all-button" }],
     "optOut": [
         {
@@ -10,7 +10,7 @@
             "comment": "click is not immediately recognized"
         },
         {
-            "waitForThenClick": ".bpa-close-button"
+            "waitForThenClick": ".bpa-cookie-banner .bpa-close-button"
         }
     ],
     "test": [{ "cookieContains": "cookie-allow-tracking=0" }]
