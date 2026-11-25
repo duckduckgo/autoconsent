@@ -12,7 +12,7 @@ Search website source code via the [SearchWebCode](https://www.searchwebcode.com
 **Caveats:**
 
 - SearchWebCode indexes the raw HTML of **one homepage per site** (131M+ sites). It does not index JS or CSS files or deeper pages, so there is no equivalent of PublicWWW's `filetype:js` or `depth:`. CMPs injected purely by client-side JavaScript will not appear.
-- Most banners are injected by a script, so their element is rarely in the homepage HTML. To find sites using a CMP, search the CMP's script host (the `src` of the script that injects the banner) rather than the banner's ID or class. It finds many times more sites.
+- When a banner is injected by a script, search the CMP's script host (the `src` of that script) rather than the banner's ID or class.
 - Its homepage snapshot can lack a string the live site has, even on large, well-known sites that are indexed. A site missing from the results is not evidence that it doesn't use the CMP. To check one site, fetch its homepage.
 - Each new listing query costs credit (see [Cost](#cost)). Use `counts_only` when you only need the number of sites: it is free.
 
