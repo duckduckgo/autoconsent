@@ -1,0 +1,27 @@
+{
+    "name": "gsb-cookiebanner-close",
+    "prehideSelectors": ["#cookiebanner.c-banner--cookie"],
+    "detectCmp": [{ "exists": "#cookiebanner .js-close-banner" }],
+    "detectPopup": [{ "visible": "#cookiebanner .js-close-banner", "check": "any" }],
+    "optIn": [
+        {
+            "if": { "exists": "#cookiebanner .js-close-banner.consentToAll" },
+            "then": [{ "waitForThenClick": "#cookiebanner .js-close-banner.consentToAll" }],
+            "else": [
+                { "click": "#cookiebanner input[type=checkbox]:not(:checked):not(:disabled)", "all": true, "optional": true },
+                { "waitForThenClick": "#cookiebanner .js-close-banner" }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#cookiebanner .js-close-banner.rejectAll" },
+            "then": [{ "waitForThenClick": "#cookiebanner .js-close-banner.rejectAll" }],
+            "else": [
+                { "click": "#cookiebanner input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+                { "waitForThenClick": "#cookiebanner .js-close-banner:not(.consentToAll)" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "cookiebanner=closed" }, { "cookieContains": "matomoTracking=true", "negated": true }]
+}
