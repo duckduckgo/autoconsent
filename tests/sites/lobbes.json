@@ -1,0 +1,10 @@
+{
+    "cmp": "lobbes",
+    "tests": [
+        {
+            "note": "The banner is shown only to UK and EEA visitors",
+            "sites": ["https://www.lobbes.nl/", "https://www.lobbesspielzeug.de/", "https://www.lobbesjouet.fr/"],
+            "options": { "onlyRegions": ["DE", "FR", "GB", "NL"] }
+        }
+    ]
+}
