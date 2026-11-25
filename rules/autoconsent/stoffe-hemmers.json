@@ -1,0 +1,21 @@
+{
+    "name": "stoffe-hemmers",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(stoffen?|tissus|fabrics)-hemmers\\.(de|nl|fr|com)/"
+    },
+    "prehideSelectors": [".app__misc-cookie__consent", ".app__misc-cookie__consent-background"],
+    "detectCmp": [{ "exists": ".app__misc-cookie__consent button.settings" }],
+    "detectPopup": [{ "visible": ".app__misc-cookie__consent button.settings" }],
+    "optIn": [{ "waitForThenClick": ".app__misc-cookie__consent-outer__shell-button__container button.consent" }],
+    "optOut": [
+        { "waitForThenClick": ".app__misc-cookie__consent-outer__shell-button__container button.settings" },
+        { "waitForVisible": ".app__modal-cookie__settings button.confirm" },
+        {
+            "click": ".app__modal-cookie__settings label.app__switch:not(.is__locked) input:checked",
+            "all": true,
+            "optional": true
+        },
+        { "click": ".app__modal-cookie__settings button.confirm" }
+    ],
+    "test": [{ "cookieContains": "\"active\":false" }, { "cookieContains": "\"active\":true", "negated": true }]
+}
