@@ -1,0 +1,15 @@
+{
+    "cmp": "lightspeed-cookielaw",
+    "tests": [
+        {
+            "note": "Lightspeed eCom built-in cookie bar in opt-in mode (Ja/Nee). The opt-out link navigates to /cookielaw/optOut/ and back, so the self-test result is lost on navigation.",
+            "sites": [
+                "https://www.audioexpert.nl/",
+                "https://www.kekhoreca.nl/",
+                "https://www.milawebshop.be/",
+                "https://www.tafelridder.nl/"
+            ],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "name": "lightspeed-cookielaw",
+    "vendorUrl": "https://ecom-support.lightspeedhq.com/hc/en-us/articles/220320548-Notifying-customers-about-cookies",
+    "prehideSelectors": [".wsa-cookielaw"],
+    "detectCmp": [{ "exists": ".wsa-cookielaw .wsa-cookielaw-button-red" }],
+    "detectPopup": [{ "visible": ".wsa-cookielaw" }],
+    "optIn": [{ "waitForThenClick": ".wsa-cookielaw .wsa-cookielaw-button-green" }],
+    "optOut": [{ "waitForThenClick": ".wsa-cookielaw .wsa-cookielaw-button-red" }],
+    "test": [{ "cookieContains": "COOKIELAW=optout" }]
+}
