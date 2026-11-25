@@ -2,7 +2,9 @@
     "cmp": "pcbway",
     "tests": [
         {
-            "sites": ["https://www.pcbway.com/", "https://www.protoease.com/"]
+            "note": "the banner only opens when /member/CheckEU/ says the visitor is in the EU",
+            "sites": ["https://www.pcbway.com/", "https://www.protoease.com/"],
+            "options": { "onlyRegions": ["DE", "FR", "NL"] }
         }
     ]
 }
