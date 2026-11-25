@@ -1,0 +1,13 @@
+<html>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./dom-actions.prehide.invalid-selector');
+            });
+        </script>
+        <div id="first">First popup</div>
+        <div id="second">Second popup</div>
+    </body>
+</html>

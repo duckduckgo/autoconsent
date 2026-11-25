@@ -598,7 +598,7 @@ export default class AutoConsent {
                 this.undoPrehide();
             }
         }, this.config.prehideTimeout || 2000);
-        return this.domActions.prehide(selectors.join(','));
+        return this.domActions.prehide(selectors);
     }
 
     undoPrehide(): void {

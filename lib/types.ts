@@ -42,7 +42,7 @@ export interface DomActionsProvider {
     removeClass(selector: ElementSelector, className: string): boolean;
     setStyle(selector: ElementSelector, css: string): boolean;
     addStyle(selector: ElementSelector, css: string): boolean;
-    prehide(selector: string): boolean;
+    prehide(selector: string | string[]): boolean;
     undoPrehide(): void;
     querySingleReplySelector(selector: string, parent?: any): HTMLElement[];
     querySelectorChain(selectors: string[]): HTMLElement[];

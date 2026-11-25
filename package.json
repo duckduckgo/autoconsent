@@ -33,7 +33,7 @@
     "test:webkit": "playwright test --project webkit",
     "test:firefox": "playwright test --project firefox",
     "test:chrome": "playwright test --project chrome",
-    "test:lib": "web-test-runner",
+    "test:lib": "npm run build-rules && web-test-runner",
     "build-heuristic-literals": "ts-node scripts/build-heuristic-literals.ts",
     "build-rules": "ts-node rules/build.ts",
     "version": "node update_version.js && git add addon/manifest.*.json",
