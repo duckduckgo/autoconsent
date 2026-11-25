@@ -72,6 +72,15 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:optional|additional|non-essential) cookies\b/gi,
     /\bstoring of cookies\b|\bplaced cookies\b/gi,
     /\b(?:store|stores) and access (?:data|information) on your device\b|\baccess and store (?:data|information) on your device\b/gi,
+    // CNIL wording without the cookie noun, in each language: "information may be stored or read (on your device), subject to your choices"
+    /\binformation (?:may|might|could|can|is likely to) be (?:stored|saved|recorded) (?:or|and\/or) read\b/gi,
+    /\binformations (?:sont susceptibles d.être|peuvent être) enregistrées,? (?:ou|et\/ou) lues\b/gi,
+    /\binformazioni (?:possono|potrebbero) essere (?:memorizzate|salvate|registrate) o lette\b/gi,
+    /\binformationen auf (?:ihrem|deinem) endgerät gespeichert oder\b/gi,
+    /\bse (?:guarde|almacene|registre) o se lea información\b/gi,
+    /\binformatie (?:worden|wordt) (?:gelezen of opgeslagen|opgeslagen of gelezen)\b/gi,
+    /\binformações podem ser (?:salvas|armazenadas|gravadas) ou lidas\b/gi,
+    /\binformacje mogą (?:zostać|być) zapisane lub odczytane\b/gi,
     /\bwe use (?:\S+ ){1,4}cookies\b/gi,
     // US privacy notices: opt-out sentences, not the footer link labels
     /\byou (?:can|may) opt[- ]out of (?:the |this )?(?:sale|sharing|use|selling)\b/gi,

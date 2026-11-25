@@ -519,6 +519,30 @@ describe('checkHeuristicPatterns with more French, German, Dutch, Polish and Rus
     });
 });
 
+describe('checkHeuristicPatterns with CNIL wording without the cookie noun', () => {
+    it('detects "information may be stored or read on your device" notices', () => {
+        expectDetected([
+            'When you browse our website, some information might be stored or read, within your device, subject to your choices. Do you agree?',
+            'Lorsque vous naviguez sur notre site internet, des informations sont susceptibles d’être enregistrées, ou lues, dans votre terminal, sous réserve de vos choix.',
+            "Des informations sont susceptibles d'être enregistrées ou lues dans votre terminal, sous réserve de vos choix.",
+            'Durante la navigazione sul nostro sito, alcune informazioni possono essere memorizzate o lette sul tuo dispositivo, in base alle tue scelte.',
+            'Wenn Sie auf unserer Website surfen, können Informationen auf Ihrem Endgerät gespeichert oder von diesem ausgelesen werden, je nach Ihrer Wahl.',
+            'Cuando navega por nuestro sitio web, es posible que se guarde o se lea información en su dispositivo, según sus preferencias.',
+            'Wanneer u onze website bezoekt, kan er informatie worden gelezen of opgeslagen op uw apparaat, afhankelijk van uw keuzes.',
+            'Quando você navega em nosso site, algumas informações podem ser salvas ou lidas em seu dispositivo, dependendo de suas preferências.',
+            'Podczas przeglądania naszej strony internetowej pewne informacje mogą zostać zapisane lub odczytane na Twoim urządzeniu końcowym.',
+        ]);
+    });
+
+    it('does not detect unrelated text about stored information', () => {
+        expectNotDetected([
+            'Your information is stored securely and can be read only by you.',
+            'Les informations enregistrées dans votre compte sont lues par notre service client.',
+            'Die Informationen werden auf unseren Servern gespeichert.',
+        ]);
+    });
+});
+
 describe('checkHeuristicPatterns with more Swedish wording', () => {
     it('detects Swedish cookie notices', () => {
         expectDetected([
