@@ -1,0 +1,10 @@
+{
+    "name": "knowunity",
+    "vendorUrl": "https://knowunity.com/",
+    "prehideSelectors": ["[data-cy=\"kn-consent-sheet\"]"],
+    "detectCmp": [{ "exists": "[data-cy=\"kn-consent-sheet\"] button[data-cy=\"accept-all\"]" }],
+    "detectPopup": [{ "visible": "[data-cy=\"kn-consent-sheet\"]" }],
+    "optIn": [{ "waitForThenClick": "[data-cy=\"kn-consent-sheet\"] button[data-cy=\"accept-all\"]" }],
+    "optOut": [{ "waitForThenClick": "[data-cy=\"kn-consent-sheet\"] button[data-cy=\"accept-all\"] + button" }],
+    "test": [{ "waitForVisible": "[data-cy=\"kn-consent-sheet\"]", "check": "none", "timeout": 1000 }]
+}

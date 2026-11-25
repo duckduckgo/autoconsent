@@ -1,0 +1,22 @@
+{
+    "cmp": "knowunity",
+    "note": "Knowunity's own consent dialog, shared by its country sites. Each site first shows a country picker to visitors from other countries and only then the cookie dialog, so each site runs only in its own region. The US site (knowunity.com) shows no cookie dialog.",
+    "tests": [
+        {
+            "sites": ["https://knowunity.nl/"],
+            "options": { "onlyRegions": ["NL"] }
+        },
+        {
+            "sites": ["https://knowunity.de/"],
+            "options": { "onlyRegions": ["DE"] }
+        },
+        {
+            "sites": ["https://knowunity.co.uk/"],
+            "options": { "onlyRegions": ["GB"] }
+        },
+        {
+            "sites": ["https://knowunity.fr/"],
+            "options": { "onlyRegions": ["FR"] }
+        }
+    ]
+}
