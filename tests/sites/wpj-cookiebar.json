@@ -1,0 +1,13 @@
+{
+    "cmp": "wpj-cookiebar",
+    "tests": [
+        {
+            "note": "Variant with a reject button in the first layer",
+            "sites": ["https://www.woolville.nl/", "https://www.parfimo.ch/", "https://www.lijepa.hr/"]
+        },
+        {
+            "note": "Variant without a first-layer reject button: rejects via the settings view",
+            "sites": ["https://www.jimbo.cz/", "https://www.ketomix.cz/"]
+        }
+    ]
+}
