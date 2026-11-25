@@ -192,6 +192,16 @@ export const snippets = {
         document
             .querySelector('.consent-banner .cookie-decline')
             .dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window })) || true,
+    // reading a cross-origin parent's document throws
+    EVAL_MERCADOLIBRE_CROSS_ORIGIN_PARENT: () => {
+        try {
+            return !window.parent.document;
+        } catch (e) {
+            return true;
+        }
+    },
+    // the embedded preferences page saves its current toggles on this message, normally sent by the parent's Save button
+    EVAL_MERCADOLIBRE_SAVE: () => window.postMessage({ eventName: 'saveCookiesPreference' }, '*') || true,
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]
