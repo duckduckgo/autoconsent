@@ -1084,6 +1084,14 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Accepter fermer')).to.equal('accept');
         expect(classifyButtonTextRegex('Accepteren sluiten')).to.equal('accept');
     });
+
+    it('classifies Dutch "sluit" close buttons as acknowledge', () => {
+        expect(classifyButtonTextRegex('Sluit melding')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Sluit deze melding')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Sluit cookiemelding')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Nee, sluit chatbot')).to.equal('other');
+        expect(classifyButtonTextRegex('Accepteer en sluit')).to.not.equal('acknowledge');
+    });
 });
 
 describe('classifyButtonTextRegex with more button labels', () => {
