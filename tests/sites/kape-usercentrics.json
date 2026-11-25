@@ -1,0 +1,13 @@
+{
+    "cmp": "kape-usercentrics",
+    "note": "Usercentrics geolocates datacenter IPs outside the EU and treats HeadlessChrome as a bot, showing no banner; the popup reproduces through Oxylabs",
+    "tests": [
+        {
+            "sites": ["https://www.cyberghostvpn.com/", "https://www.privateinternetaccess.com/"],
+            "note": "first layer has only Customize (More Information in the US) and Accept; opt-out saves the second layer with all optional categories off. US is skipped: the US notice renders late and the TIER2 heuristic can win the detection race",
+            "options": {
+                "skipRegions": ["US"]
+            }
+        }
+    ]
+}

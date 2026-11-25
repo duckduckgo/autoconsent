@@ -1,0 +1,43 @@
+{
+    "name": "kape-usercentrics",
+    "vendorUrl": "https://usercentrics.com/",
+    "detectCmp": [
+        {
+            "exists": ["#shadowHost", "#app .first-layer-card .moreButton button"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["#shadowHost", "#app .first-layer-card .moreButton button"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["#shadowHost", "#app .first-layer-card .acceptButton button"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["#shadowHost", "#app .first-layer-card .moreButton button"]
+        },
+        {
+            "waitForVisible": ["#shadowHost", ".v-dialog--active #saveButton"]
+        },
+        {
+            "click": ["#shadowHost", ".v-dialog--active .v-expansion-panel-header input[type=checkbox]:checked:not([disabled])"],
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ["#shadowHost", ".v-dialog--active #saveButton"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22marketing%22%3Afalse"
+        },
+        {
+            "cookieContains": "%22userInteraction%22%3Atrue"
+        }
+    ]
+}
