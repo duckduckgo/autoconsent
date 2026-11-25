@@ -1,0 +1,10 @@
+{
+    "cmp": "chesskid",
+    "tests": [
+        {
+            "note": "the banner is only shown to UK and EEA visitors (not US, CA, AU, JP)",
+            "sites": ["https://www.chesskid.com/"],
+            "options": { "onlyRegions": ["DE", "GB", "FR", "NL"] }
+        }
+    ]
+}

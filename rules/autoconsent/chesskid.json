@@ -1,0 +1,43 @@
+{
+    "name": "chesskid",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?chesskid\\.com/"
+    },
+    "prehideSelectors": [".cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-banner .cookie-banner__button-wrap"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-banner .cookie-banner__button-wrap"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner__button-wrap button.-default"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookie-banner__button-wrap button.-interaction"
+        },
+        {
+            "waitForVisible": ".cookie-banner-consent-modal__button"
+        },
+        {
+            "click": ".cookie-banner-consent-modal input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": ".cookie-banner-consent-modal__button"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"analytics_storage\":\"denied\""
+        }
+    ]
+}
