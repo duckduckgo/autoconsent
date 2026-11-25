@@ -1,0 +1,23 @@
+{
+    "name": "netwerknotarissen",
+    "vendorUrl": "https://netwerknotarissen.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?netwerknotarissen\\.nl/"
+    },
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [{ "exists": "#cookie-banner a[onclick^=cookieSettings]" }],
+    "detectPopup": [{ "visible": "#cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner a[onclick^=acceptCookies]" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-banner a[onclick^=cookieSettings]" },
+        { "waitForVisible": "#cookie-message .save-settings" },
+        { "click": "#cookie-message input[type=checkbox]:checked:not([disabled])", "all": true, "optional": true },
+        { "click": "#cookie-message .save-settings" },
+        { "waitForVisible": "#cookie-message", "check": "none" }
+    ],
+    "test": [
+        { "cookieContains": "_nnco_cookiesettings=functional" },
+        { "cookieContains": "_nnco_cookiesettings=functionalperformance", "negated": true },
+        { "cookieContains": "_nnco_cookiesettings=functionaltargeting", "negated": true }
+    ]
+}
