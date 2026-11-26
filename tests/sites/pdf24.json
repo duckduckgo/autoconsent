@@ -2,7 +2,9 @@
     "cmp": "pdf24",
     "tests": [
         {
-            "sites": ["https://www.pdf24.org/en/", "https://tools.pdf24.org/en/"]
+            "sites": ["https://www.pdf24.org/en/", "https://tools.pdf24.org/en/"],
+            "options": { "skipRegions": ["US"] },
+            "note": "the consent dialog does not show in the US"
         }
     ]
 }
