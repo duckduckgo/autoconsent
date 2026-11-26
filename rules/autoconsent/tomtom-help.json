@@ -1,0 +1,16 @@
+{
+    "name": "tomtom-help",
+    "vendorUrl": "https://help.tomtom.com/",
+    "runContext": {
+        "urlPattern": "^https?://help\\.tomtom\\.com/"
+    },
+    "prehideSelectors": ["#tt_cookie_bar"],
+    "detectCmp": [{ "exists": "#tt_cookie_bar #cookie_bar_buttons_preferences" }],
+    "detectPopup": [{ "visible": "#tt_cookie_bar:not(.cookie-panel--closed) #cookie_bar_first_page" }],
+    "optIn": [{ "waitForThenClick": "#tt_cookie_bar #cookie_bar_buttons_accept_all" }],
+    "optOut": [
+        { "waitForThenClick": "#tt_cookie_bar #cookie_bar_buttons_preferences" },
+        { "waitForVisible": "#tt_cookie_bar #cookie_bar_second_page" },
+        { "waitForThenClick": "#tt_cookie_bar #cookie_bar_buttons_accept" }
+    ]
+}
