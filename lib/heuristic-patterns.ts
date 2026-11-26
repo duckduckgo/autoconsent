@@ -135,6 +135,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\baccepter (?:&|et) fermer\b/gi,
     // up to two qualifiers, as in English: "nous utilisons nos propres cookies", "nous utilisons des cookies tiers"
     /\b(?:on utilise|nous utilisons)(?: \S+){0,2} cookies\b/gi,
+    // e.g. "ce site dépose un cookie", "nous souhaitons déposer des cookies"
+    /\b(?:dépose|déposons|déposent|déposer)(?: \S+){0,2} cookies?\b/gi,
     /\ben (?:naviguant|poursuivant)\b.{0,100}cookies/gi,
     /(?:en continuant.{0,100}cookie)|(?:cookie.{0,100}en continuant)/gi,
     /\ben (?:naviguant|poursuivant|continuant)\b.{0,100}confidentialité/gi,
