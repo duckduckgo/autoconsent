@@ -2,7 +2,12 @@
     "cmp": "eu-cookie-compliance-banner",
     "tests": [
         {
-            "sites": ["https://publichealth.jhu.edu/", "https://bibliotheek.be/"]
+            "sites": ["https://publichealth.jhu.edu/"]
+        },
+        {
+            "note": "the site blocks visitors from the US",
+            "sites": ["https://bibliotheek.be/"],
+            "options": { "skipRegions": ["US"] }
         }
     ]
 }
