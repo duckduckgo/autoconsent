@@ -173,6 +173,13 @@ describe('checkHeuristicPatterns with French popups', () => {
         }
     });
 
+    it('detects the French preference centre wording in popups only', () => {
+        const text =
+            'Lorsque vous visitez un site web ou une application, ceux-ci peuvent stocker ou récupérer des informations sur votre navigateur, principalement sous forme de cookies et technologies similaires.';
+        expect(checkHeuristicPatterns(text, 'popup').patterns.length, text).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns(text, 'page').patterns, text).to.have.length(0);
+    });
+
     it('does not detect unrelated French text', () => {
         const texts = [
             'Rejeter les candidatures incomplètes',

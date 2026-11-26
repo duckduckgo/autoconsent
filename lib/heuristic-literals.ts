@@ -52,7 +52,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["party tools to collect information"],
     ["continue reading with advertising"," tracking"],
     ["consent and continue"],
-    ["store or retrieve information on your browser","stockées dans votre navigateur ou récupérées"],
+    ["store or retrieve information on your browser","stockées dans votre navigateur ou récupérées","stocker ou récupérer des informations sur votre navigateur"],
     ["we have cookies"],
     [" your consent at any time","einwilligung jederzeit widerrufen"],
     ["analytics ","we use google analytics"],

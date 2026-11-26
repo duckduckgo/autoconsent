@@ -85,7 +85,11 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bcontinue reading with advertising\b|\b(?:with|mit) (?:advertising|werbung) (?:and|und) tracking\b/gi,
     /\bconsent and continue\b/gi,
     // preference centres are often in the page but hidden, so popup text only
-    { pattern: /\bstore or retrieve information on your browser\b|\bstockées dans votre navigateur ou récupérées\b/gi, input: 'popup' },
+    {
+        pattern:
+            /\bstore or retrieve information on your browser\b|\bstockées dans votre navigateur ou récupérées\b|\bstocker ou récupérer des informations sur votre navigateur\b/gi,
+        input: 'popup',
+    },
     /\bwe have cookies\b/gi,
     /\b(?:revoke|withdraw) your consent at any time\b|\beinwilligung jederzeit widerrufen\b/gi,
     /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi,
