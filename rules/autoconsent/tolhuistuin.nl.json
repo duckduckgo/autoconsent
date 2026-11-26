@@ -1,0 +1,13 @@
+{
+    "name": "tolhuistuin.nl",
+    "vendorUrl": "https://tolhuistuin.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?tolhuistuin\\.nl/"
+    },
+    "prehideSelectors": [".cookie-notice-holder"],
+    "detectCmp": [{ "exists": ".cookie-notice-holder #cookie-notice .cookie-notice__close-icon" }],
+    "detectPopup": [{ "visible": ".cookie-notice-holder #cookie-notice" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notice .cookie-notice__close-icon" }],
+    "optOut": [{ "waitForThenClick": "#cookie-notice .cookie-notice__close-icon" }],
+    "test": [{ "cookieContains": "cookie-message=1" }]
+}
