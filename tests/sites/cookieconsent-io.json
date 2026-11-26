@@ -1,0 +1,13 @@
+{
+    "cmp": "cookieconsent-io",
+    "tests": [
+        {
+            "note": "Banner without a reject button: opt-out unchecks the categories in the settings view and saves",
+            "sites": ["https://www.sanidump.nl/"]
+        },
+        {
+            "note": "Banner with a reject button",
+            "sites": ["https://www.schipperkozijnen.nl/", "https://www.abovomaxlead.nl/"]
+        }
+    ]
+}
