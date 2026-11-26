@@ -1,0 +1,16 @@
+{
+    "name": "pseudolab-fr",
+    "vendorUrl": "https://pseudolab.fr/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?pseudolab\\.fr/"
+    },
+    "prehideSelectors": [".consent-layer"],
+    "detectCmp": [{ "exists": ".consent-layer .consent-panel" }],
+    "detectPopup": [{ "visible": ".consent-layer .consent-panel" }],
+    "optIn": [{ "waitForThenClick": ".consent-panel .consent-actions button.consent-accept" }],
+    "optOut": [{ "waitForThenClick": ".consent-panel .consent-actions button.consent-choice:not(.consent-accept)" }],
+    "test": [{ "waitForVisible": ".consent-layer .consent-panel", "check": "none", "timeout": 2000 }]
+}
