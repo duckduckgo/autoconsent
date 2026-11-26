@@ -1,0 +1,62 @@
+{
+    "name": "cookieconfirm",
+    "vendorUrl": "https://cookieconfirm.com/",
+    "prehideSelectors": ["#cc-consent-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cc-consent-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cc-consent-banner .cc-b"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cc-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cc-reject-all"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cc-reject-all"
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "visible": "#cc-customize-selection"
+                    },
+                    "then": [
+                        {
+                            "click": "#cc-customize-selection"
+                        }
+                    ]
+                },
+                {
+                    "waitForVisible": "#cc-allow-selection",
+                    "timeout": 2000
+                },
+                {
+                    "comment": "only the About cookies tab: toggles elsewhere mirror it, so clicking both would re-check them",
+                    "click": "#cc-tab2 .cc-toggleable[aria-checked=\"true\"]",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#cc-allow-selection"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "CC_p_accepted_cookies=[\"functional\"]"
+        }
+    ]
+}

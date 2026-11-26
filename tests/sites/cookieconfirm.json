@@ -1,0 +1,22 @@
+{
+    "cmp": "cookieconfirm",
+    "tests": [
+        {
+            "note": "Reject all button",
+            "sites": [
+                "https://www.06express.nl/",
+                "https://www.galaxyclub.nl/",
+                "https://www.stedelijkcollege.nl/",
+                "https://lazeriniscentras.lt/"
+            ]
+        },
+        {
+            "note": "no Reject all: Customize, then Allow selection",
+            "sites": ["https://plukkers.com/", "https://www.bagnoitalia.it/"]
+        },
+        {
+            "note": "no Reject all: Allow selection with pre-checked toggles",
+            "sites": ["https://www.activityinternational.nl/"]
+        }
+    ]
+}
