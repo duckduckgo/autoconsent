@@ -2,7 +2,9 @@
     "cmp": "google-cookiebar",
     "tests": [
         {
-            "sites": ["https://www.android.com/better-together/quick-share-app/"]
+            "note": "the cookie bar is not shown in the US",
+            "sites": ["https://www.android.com/better-together/quick-share-app/", "https://source.android.com/"],
+            "options": { "skipRegions": ["US"] }
         }
     ]
 }
