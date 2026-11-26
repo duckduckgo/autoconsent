@@ -1029,6 +1029,13 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Entesos')).to.equal('acknowledge');
     });
 
+    it('matches Dutch hide-notice buttons', () => {
+        expect(classifyButtonTextRegex('Verberg deze melding X')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Verberg')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Verbergen')).to.equal('other');
+        expect(classifyButtonTextRegex('Melding verbergen')).to.equal('other');
+    });
+
     it('matches Portuguese acknowledge buttons', () => {
         expect(classifyButtonTextRegex('Ciente')).to.equal('acknowledge');
         expect(classifyButtonTextRegex('Estou ciente')).to.equal('acknowledge');
