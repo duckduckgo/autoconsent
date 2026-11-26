@@ -3,6 +3,10 @@
     "tests": [
         {
             "sites": ["https://aktienfinder.net/", "https://www.rnoh.nhs.uk/"]
+        },
+        {
+            "note": "Securiti flavor: no reject button, opt out via the preference center. With GPC, the site shows the securiti-gpc-flyout instead.",
+            "sites": ["https://www.jbhunt.com/"]
         }
     ]
 }
