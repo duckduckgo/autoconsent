@@ -20,12 +20,12 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": [".pencraft", "xpath///button[contains(., 'Accept All')] or contains(., 'Accept')]"]
+            "waitForThenClick": "div[class*=cookieBanner].pencraft button:last-of-type"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": [".pencraft", "xpath///button[contains(., 'Only Necessary') or contains(., 'Reject')]"]
+            "waitForThenClick": "div[class*=cookieBanner].pencraft button:nth-of-type(2):nth-last-of-type(2)"
         }
     ],
     "test": [

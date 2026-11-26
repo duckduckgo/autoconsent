@@ -18,7 +18,7 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "xpath///*[contains(@class, 'accept-cookie')]//*[contains(text(), 'Decline')]"
+            "waitForThenClick": ".accept-cookie [data-event-label=Reject], .accept-cookie [onclick*=rejectAllCookies]"
         }
     ],
     "test": [

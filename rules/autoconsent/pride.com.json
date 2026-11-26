@@ -15,12 +15,20 @@
     ],
     "optIn": [
         {
-            "waitForThenClick": ".gdpr-wrapper button.gdpr-cookie-accept"
+            "waitForThenClick": ".gdpr-wrapper .gdpr-cookie-accept"
         }
     ],
     "optOut": [
         {
             "hide": ".gdpr-wrapper"
+        },
+        {
+            "waitForThenClick": ".fc-consent-root .fc-cta-do-not-consent",
+            "timeout": 8000,
+            "retry": 2,
+            "retryInterval": 1000,
+            "optional": true,
+            "comment": "in the EU, a Funding Choices dialog follows the notice a few seconds later"
         }
     ]
 }
