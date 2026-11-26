@@ -1558,6 +1558,7 @@ describe('checkHeuristicPatterns without bare accept-all / reject-all labels', (
             'En cliquant sur « Tout accepter », vous acceptez le dépôt de cookies sur votre appareil.',
             'Les cookies nous permettent de mesurer l’audience.',
             'Nous pouvons utiliser des traceurs optionnels pour mesurer l’audience.',
+            "Les cookies de mesure d'audience et de publicité ne sont déposés que si vous les acceptez.",
             'Wenn Sie auf „Alle akzeptieren“ klicken, stimmen Sie der Speicherung von Cookies zu.',
             'Durch Klicken auf „Alle akzeptieren“ gestatten Sie den Einsatz folgender Dienste.',
             'Um diese Dienste verwenden zu dürfen, benötigen wir Ihre Einwilligung.',
@@ -1571,6 +1572,13 @@ describe('checkHeuristicPatterns without bare accept-all / reject-all labels', (
             'Cliccando su "Accetta tutti i cookie", accetti la memorizzazione dei cookie sul dispositivo.',
             'Noi e i nostri partner archiviamo informazioni su un dispositivo.',
         ]);
+    });
+
+    it('detects "cookies de mesure d\'audience" in popup text only', () => {
+        const text = "Les cookies de mesure d'audience ne sont déposés que si vous les acceptez.";
+        expect(detectsPopup(text), text).to.be.true;
+        expect(detectsPage(text), text).to.be.false;
+        expectNotDetected(['Les outils de mesure d’audience nous aident à améliorer le site.']);
     });
 
     it('does not detect sign-up terms that start like a consent notice', () => {

@@ -124,6 +124,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\baccepter ou refuser (?:\S+ ){0,3}cookies\b/gi,
     /\bles cookies nous (?:sont|permettent|aident)\b/gi,
     /\btraceurs (?:optionnels|publicitaires|non essentiels)\b/gi,
+    // cookie policy pages describe this category too, so popup text only
+    { pattern: /\bcookies (?:de |d.)mesure d.audience\b/gi, input: 'popup' },
     /seulement nécessaires/gi,
     /je désactive les finalités non essentielles/gi,
     /cookies essentiels uniquement/gi,
