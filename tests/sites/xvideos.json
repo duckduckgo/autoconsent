@@ -2,8 +2,11 @@
     "cmp": "xvideos",
     "tests": [
         {
-            "sites": ["https://www.xvideos.com/"],
-            "options": { "onlyRegions": ["GB"] }
+            "sites": ["https://www.xvideos.com/", "https://www.xnxx.com/"],
+            "options": {
+                "onlyRegions": ["GB"]
+            },
+            "note": "the disclaimer is only shown without a preceding age gate in the UK"
         }
     ]
 }
