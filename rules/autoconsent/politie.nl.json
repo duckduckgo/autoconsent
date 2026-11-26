@@ -1,0 +1,37 @@
+{
+    "name": "politie.nl",
+    "_metadata": {
+        "vendorUrl": "https://www.politie.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?politie\\.nl/"
+    },
+    "prehideSelectors": ["#cookie-bar"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-bar .button-group pwc-button[appearance=\"secondary\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-bar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-bar .button-group pwc-button[appearance=\"primary\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-bar .button-group pwc-button[appearance=\"secondary\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "pol_cookies=no"
+        }
+    ]
+}
