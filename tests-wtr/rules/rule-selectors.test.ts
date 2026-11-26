@@ -21,16 +21,18 @@ function collectStepSelectors(node: unknown, out: string[]) {
     }
 }
 
-function isValidSelector(selector: string) {
-    if (selector.startsWith('xpath/')) {
-        return true;
-    }
+function isValidCssSelector(selector: string) {
     try {
         document.querySelector(selector);
         return true;
     } catch {
         return false;
     }
+}
+
+// steps evaluate `xpath/` selectors as XPath; prehide selectors go straight into a CSS rule
+function isValidStepSelector(selector: string) {
+    return selector.startsWith('xpath/') || isValidCssSelector(selector);
 }
 
 describe('rule selectors', () => {
@@ -44,7 +46,7 @@ describe('rule selectors', () => {
 
     it('has only valid CSS prehide selectors', () => {
         const invalid = rules.flatMap((rule) =>
-            (rule.prehideSelectors || []).filter((s) => !isValidSelector(s)).map((s) => `${rule.name}: ${s}`),
+            (rule.prehideSelectors || []).filter((s) => !isValidCssSelector(s)).map((s) => `${rule.name}: ${s}`),
         );
         expect(invalid).to.deep.equal([]);
     });
@@ -53,7 +55,7 @@ describe('rule selectors', () => {
         const invalid = rules.flatMap((rule) => {
             const selectors: string[] = [];
             collectStepSelectors([rule.detectCmp, rule.detectPopup, rule.optIn, rule.optOut, rule.test], selectors);
-            return selectors.filter((s) => !isValidSelector(s)).map((s) => `${rule.name}: ${s}`);
+            return selectors.filter((s) => !isValidStepSelector(s)).map((s) => `${rule.name}: ${s}`);
         });
         expect(invalid).to.deep.equal([]);
     });
