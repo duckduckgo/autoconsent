@@ -1,41 +1,100 @@
 {
     "name": "Complianz optin",
     "prehideSelectors": [".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]"],
-    "detectCmp": [{ "exists": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]" }],
-    "detectPopup": [{ "visible": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible)" }],
+    "detectCmp": [
+        {
+            "exists": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"]:not(.cc-invisible)"
+        }
+    ],
     "optIn": [
         {
-            "any": [{ "click": ".cc-accept-all" }, { "click": ".cc-allow" }, { "click": ".cc-dismiss" }]
+            "any": [
+                {
+                    "click": ".cc-accept-all"
+                },
+                {
+                    "click": ".cc-allow"
+                },
+                {
+                    "click": ".cc-dismiss"
+                }
+            ]
         },
-        { "hide": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"].cc-invisible", "optional": true }
+        {
+            "hide": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"].cc-invisible",
+            "optional": true
+        }
     ],
     "optOut": [
         {
-            "if": { "visible": ".cc-deny" },
-            "then": [{ "click": ".cc-deny" }],
+            "if": {
+                "visible": ".cc-deny"
+            },
+            "then": [
+                {
+                    "click": ".cc-deny"
+                }
+            ],
             "else": [
                 {
-                    "if": { "visible": ".cc-settings" },
+                    "if": {
+                        "visible": ".cc-settings"
+                    },
                     "then": [
-                        { "waitForThenClick": ".cc-settings" },
-                        { "waitForVisible": ".cc-settings-view" },
-                        { "click": ".cc-settings-view input[type=checkbox]:not([disabled]):checked", "all": true, "optional": true },
-                        { "click": ".cc-settings-view .cc-btn-accept-selected" }
+                        {
+                            "waitForThenClick": ".cc-settings"
+                        },
+                        {
+                            "waitForVisible": ".cc-settings-view"
+                        },
+                        {
+                            "click": ".cc-settings-view input[type=checkbox]:not([disabled]):checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "click": ".cc-settings-view .cc-btn-accept-selected"
+                        }
                     ],
                     "else": [
                         {
-                            "if": { "exists": ".cc-dismiss" },
-                            "then": [{ "click": ".cc-dismiss" }],
+                            "if": {
+                                "exists": ".cc-dismiss"
+                            },
+                            "then": [
+                                {
+                                    "click": ".cc-dismiss"
+                                }
+                            ],
                             "else": [
-                                { "click": ".cmp-pref-link" },
-                                { "waitForThenClick": ".cmp-body [id*=rejectAll]" },
-                                { "waitForThenClick": ".cmp-body .cmp-save-btn" }
+                                {
+                                    "click": ".cmp-pref-link"
+                                },
+                                {
+                                    "waitForVisible": ".cmp-body .cmp-save-btn"
+                                },
+                                {
+                                    "click": ".cmp-body [id*=rejectAll]",
+                                    "optional": true,
+                                    "comment": "absent when the only category is the read-only essential one"
+                                },
+                                {
+                                    "click": ".cmp-body .cmp-save-btn"
+                                }
                             ]
                         }
                     ]
                 }
             ]
         },
-        { "hide": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"].cc-invisible", "optional": true }
+        {
+            "hide": ".cc-type-opt-in[aria-describedby=\"cookieconsent:desc\"].cc-invisible",
+            "optional": true
+        }
     ]
 }

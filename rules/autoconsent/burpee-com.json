@@ -1,39 +1,139 @@
 {
     "name": "burpee.com",
     "minimumRuleStepVersion": 2,
-    "prehideSelectors": [".cookie-modal", "#notice-cookie-block"],
+    "prehideSelectors": [".cookie-modal", "#notice-cookie-block", "[data-dialog-ref-name=\"cookie-text-popup\"]"],
     "detectCmp": [
-        { "exists": "#notice-cookie-block" },
-        { "exists": "#notice-cookie-block #cm-selectSpecific", "negated": true },
-        { "any": [{ "visible": "#notice-cookie-block" }, { "cookieContains": "user_allowed_save_cookie=", "negated": true }] }
+        {
+            "exists": "#notice-cookie-block"
+        },
+        {
+            "exists": "#notice-cookie-block #cm-selectSpecific",
+            "negated": true
+        },
+        {
+            "any": [
+                {
+                    "visible": "#notice-cookie-block"
+                },
+                {
+                    "cookieContains": "user_allowed_save_cookie=",
+                    "negated": true
+                }
+            ]
+        }
     ],
-    "detectPopup": [{ "visible": "#html-body #notice-cookie-block" }],
+    "detectPopup": [
+        {
+            "visible": "#html-body #notice-cookie-block"
+        }
+    ],
     "optIn": [
         {
-            "if": { "exists": "#notice-cookie-block button[\\@click^='acceptAll']" },
-            "then": [{ "waitForThenClick": "#notice-cookie-block button[\\@click^='acceptAll']" }],
-            "else": [{ "waitForThenClick": "#btn-cookie-allow" }]
+            "if": {
+                "exists": "#notice-cookie-block button[\\@click^='acceptAll']"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#notice-cookie-block button[\\@click^='acceptAll']"
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": "#notice-cookie-block .accept-cookies-button"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#notice-cookie-block .accept-cookies-button"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "#btn-cookie-allow"
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "optOut": [
         {
-            "if": { "exists": "#notice-cookie-block :is(#btn-cookie-decline, #btn-cookie-deny)" },
-            "then": [{ "waitForThenClick": "#notice-cookie-block :is(#btn-cookie-decline, #btn-cookie-deny)" }],
+            "if": {
+                "exists": "#notice-cookie-block :is(#btn-cookie-decline, #btn-cookie-deny, .reject-cookies-button)"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#notice-cookie-block :is(#btn-cookie-decline, #btn-cookie-deny, .reject-cookies-button)"
+                }
+            ],
             "else": [
                 {
-                    "if": { "exists": "#notice-cookie-block button[\\@click^='rejectAll']" },
-                    "then": [{ "waitForThenClick": "#notice-cookie-block button[\\@click^='rejectAll']" }],
+                    "if": {
+                        "exists": "#notice-cookie-block button[\\@click^='rejectAll']"
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": "#notice-cookie-block button[\\@click^='rejectAll']"
+                        }
+                    ],
                     "else": [
                         {
-                            "if": { "exists": "#btn-cookie-manage" },
+                            "if": {
+                                "exists": "#btn-cookie-manage"
+                            },
                             "then": [
-                                { "waitForThenClick": "#btn-cookie-manage" },
-                                { "click": "#notice-cookie-block input:checked", "all": true },
-                                { "click": "#btn-cookie-save" }
+                                {
+                                    "waitForThenClick": "#btn-cookie-manage"
+                                },
+                                {
+                                    "click": "#notice-cookie-block input:checked",
+                                    "all": true
+                                },
+                                {
+                                    "click": "#btn-cookie-save"
+                                }
                             ],
                             "else": [
-                                { "hide": "#html-body #notice-cookie-block, #notice-cookie" },
-                                { "removeClass": "cookie-notification-active", "selector": "body", "optional": true }
+                                {
+                                    "if": {
+                                        "exists": "#notice-cookie-block #btn-manage-cookie"
+                                    },
+                                    "then": [
+                                        {
+                                            "waitForThenClick": "#notice-cookie-block #btn-manage-cookie"
+                                        },
+                                        {
+                                            "waitForVisible": "#btn-manage-cookie-save-preferences"
+                                        },
+                                        {
+                                            "click": "#cookie-text-popup input[type=\"checkbox\"]:checked",
+                                            "all": true,
+                                            "optional": true
+                                        },
+                                        {
+                                            "waitForThenClick": "#btn-manage-cookie-save-preferences"
+                                        }
+                                    ],
+                                    "else": [
+                                        {
+                                            "hide": "#html-body #notice-cookie-block, #notice-cookie"
+                                        },
+                                        {
+                                            "removeClass": "cookie-notification-active",
+                                            "selector": "body",
+                                            "optional": true
+                                        },
+                                        {
+                                            "hide": ".header-slideout-overlay-cookie",
+                                            "optional": true
+                                        },
+                                        {
+                                            "removeClass": "no-scroll",
+                                            "selector": "body",
+                                            "optional": true
+                                        }
+                                    ]
+                                }
                             ]
                         }
                     ]

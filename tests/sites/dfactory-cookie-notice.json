@@ -3,6 +3,12 @@
     "tests": [
         {
             "sites": ["https://speedtest.dk/", "https://io-tech.fi/", "https://ubuntuhandbook.org/", "https://www.business2community.com/"]
+        },
+        {
+            "sites": ["https://stedelijkmuseumschiedam.nl/"],
+            "options": {
+                "onlyRegions": ["NL"]
+            }
         }
     ]
 }

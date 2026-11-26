@@ -25,6 +25,14 @@
         {
             "note": "Allow button only, with a body class scroll lock and backdrop",
             "sites": ["https://www.leonpaul.com/"]
+        },
+        {
+            "note": "formerly site-specific rules with a reject button or a preferences dialog",
+            "sites": ["https://dedeman.ro/", "https://www.lucrin.com/", "https://www.lucrin.de/", "https://www.lucrin.co.uk/"]
+        },
+        {
+            "note": "no reject button, the notice is hidden",
+            "sites": ["https://www.istore.co.za/", "https://istorepreowned.co.za/"]
         }
     ]
 }

@@ -3,6 +3,10 @@
     "tests": [
         {
             "sites": ["https://www.meingehalt.net/", "https://www.sg-akustik.de/"]
+        },
+        {
+            "note": "banners with a deny-all button (formerly the tarteaucitron deny rule)",
+            "sites": ["https://www.powellflutes.com/en/", "https://www.planetside2.com/home", "https://lingvanex.com/"]
         }
     ]
 }
