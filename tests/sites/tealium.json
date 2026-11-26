@@ -18,6 +18,11 @@
             ]
         },
         {
+            "note": "custom consent manager on top of Tealium; the site reloads the page after saving the selection",
+            "sites": ["https://www.tk-aerztefuehrer.de/TK/Suche_SN/index.js?a=FS1"],
+            "options": { "testSelfTest": false }
+        },
+        {
             "note": "preferences prompt variant; the popup shows inconsistently to US visitors",
             "sites": ["https://www.keurig.ca/"],
             "options": { "skipRegions": ["US"] }

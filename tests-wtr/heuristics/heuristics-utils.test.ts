@@ -223,6 +223,23 @@ describe('checkHeuristicPatterns with Japanese popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Chinese popups', () => {
+    it('detects Chinese cookie notices', () => {
+        const texts = [
+            '我們使用Cookies為您提供更好的體驗，繼續使用我們的網站即表示您同意我們的《Cookie聲明》',
+            '我们使用 cookie 来改善您的浏览体验',
+            '本网站使用cookie',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Chinese text', () => {
+        expect(checkHeuristicPatterns('我們使用最新的技術為您提供服務').patterns).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with inputs and context negatives', () => {
     it('runs patterns scoped to an input on that input only', () => {
         const patterns = [{ pattern: /accept all/gi, input: 'popup' as const }];
@@ -1132,10 +1149,13 @@ describe('classifyButtonTextRegex with more button labels', () => {
             '確認しました',
             '了解',
             '確認して閉じる',
+            '我知道了',
+            '知道了！',
+            '我了解了',
         ]) {
             expect(classifyButtonTextRegex(text), text).to.equal('acknowledge');
         }
-        for (const text of ['Details ausblenden', '同意して閉じる', '確認して同意する', '確認する']) {
+        for (const text of ['Details ausblenden', '同意して閉じる', '確認して同意する', '確認する', '了解更多']) {
             expect(classifyButtonTextRegex(text), text).to.not.equal('acknowledge');
         }
     });
