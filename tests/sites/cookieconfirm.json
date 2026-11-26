@@ -1,0 +1,13 @@
+{
+    "cmp": "cookieconfirm",
+    "tests": [
+        {
+            "note": "\"Reject all\" button on the first layer",
+            "sites": ["https://www.mypalmshop.de/", "https://www.galaxyclub.nl/", "https://www.lentiz.nl/"]
+        },
+        {
+            "note": "no reject button; categories are unticked on the \"Allow selection\" layer",
+            "sites": ["https://www.boekenvoordeel.nl/", "https://www.activityinternational.nl/", "https://www.boekengilde.nl/"]
+        }
+    ]
+}
