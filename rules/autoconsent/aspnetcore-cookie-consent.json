@@ -1,0 +1,26 @@
+{
+    "name": "aspnetcore-cookie-consent",
+    "vendorUrl": "https://learn.microsoft.com/en-us/aspnet/core/security/gdpr",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookieConsent:not(dialog):has(button[data-cookie-string]):not(:has(button:not([data-cookie-string])))"],
+    "detectCmp": [
+        {
+            "visible": "#cookieConsent:not(dialog):has(button[data-cookie-string]):not(:has(button:not([data-cookie-string])))"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieConsent:not(dialog):has(button[data-cookie-string]):not(:has(button:not([data-cookie-string])))"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieConsent button[data-cookie-string]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookieConsent:not(dialog):has(button[data-cookie-string]):not(:has(button:not([data-cookie-string])))"
+        }
+    ]
+}
