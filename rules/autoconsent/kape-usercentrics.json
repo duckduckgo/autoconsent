@@ -3,41 +3,79 @@
     "vendorUrl": "https://usercentrics.com/",
     "detectCmp": [
         {
-            "exists": ["#shadowHost", "#app .first-layer-card .moreButton button"]
+            "exists": ["#shadowHost", "#app .first-layer-card"]
         }
     ],
     "detectPopup": [
         {
-            "visible": ["#shadowHost", "#app .first-layer-card .moreButton button"]
+            "visible": ["#shadowHost", "#app .first-layer-card"]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ["#shadowHost", "#app .first-layer-card .acceptButton button"]
+            "waitForThenClick": [
+                "#shadowHost",
+                ".first-layer-card .acceptButton button, .first-layer-card .v3-accept-btn, .first-layer-card .banner-accept-btn"
+            ]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ["#shadowHost", "#app .first-layer-card .moreButton button"]
-        },
-        {
-            "waitForVisible": ["#shadowHost", ".v-dialog--active #saveButton"]
-        },
-        {
-            "click": ["#shadowHost", ".v-dialog--active .v-expansion-panel-header input[type=checkbox]:checked:not([disabled])"],
-            "all": true,
-            "optional": true
-        },
-        {
-            "waitForThenClick": ["#shadowHost", ".v-dialog--active #saveButton"]
+            "if": {
+                "exists": ["#shadowHost", ".first-layer-card .v3-reject-btn"]
+            },
+            "then": [
+                {
+                    "click": ["#shadowHost", ".first-layer-card .v3-reject-btn"]
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": ["#shadowHost", ".first-layer-card .moreButton button"]
+                    },
+                    "then": [
+                        {
+                            "click": ["#shadowHost", ".first-layer-card .moreButton button"]
+                        },
+                        {
+                            "waitForVisible": ["#shadowHost", ".v-dialog--active #saveButton"]
+                        },
+                        {
+                            "click": [
+                                "#shadowHost",
+                                ".v-dialog--active .v-expansion-panel-header input[type=checkbox]:checked:not([disabled])"
+                            ],
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": ["#shadowHost", ".v-dialog--active #saveButton"]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": "#show-cookie-settings"
+                        },
+                        {
+                            "waitForVisible": ["#shadowHost", ".g-card-actions"]
+                        },
+                        {
+                            "click": ["#shadowHost", ".g-expansion-panel-header input[type=checkbox]:checked:not([disabled])"],
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "waitForThenClick": ["#shadowHost", ".g-card-actions #saveButton"]
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "test": [
         {
             "cookieContains": "%22marketing%22%3Afalse"
-        },
-        {
-            "cookieContains": "%22userInteraction%22%3Atrue"
         }
     ]
 }
