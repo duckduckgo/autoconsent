@@ -10,7 +10,7 @@
     },
     "prehideSelectors": [],
     "detectCmp": [{ "exists": ".pp-cookies-item-switch .andes-ui-switch" }, { "eval": "EVAL_MERCADOLIBRE_CROSS_ORIGIN_PARENT" }],
-    "detectPopup": [{ "visible": ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled)" }],
+    "detectPopup": [{ "visible": ".pp-cookies-item-switch .andes-ui-switch" }],
     "optIn": [
         { "waitFor": ".pp-cookies-item-switch .andes-ui-switch:not(.andes-ui-switch--disabled)", "timeout": 10000 },
         { "eval": "EVAL_MERCADOLIBRE_SAVE" }

@@ -5,7 +5,7 @@
     "runContext": {
         "urlPattern": "^https://(?!www\\.)[\\w-]+\\.mercado(libre|livre|pago)\\.[a-z.]+/"
     },
-    "prehideSelectors": [".cookie-consent-banner-opt-out"],
+    "prehideSelectors": [".cookie-consent-banner-opt-out", ".cookie-consent-banner-opt-out__modal"],
     "detectCmp": [{ "exists": ".cookie-consent-banner-opt-out" }],
     "detectPopup": [{ "visible": ".cookie-consent-banner-opt-out" }],
     "optIn": [{ "waitForThenClick": ".cookie-consent-banner-opt-out__action--key-accept" }],
