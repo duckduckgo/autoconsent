@@ -19,7 +19,20 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "#adopt-reject-all-button"
+            "if": {
+                "exists": "#adopt-reject-all-button"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#adopt-reject-all-button"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#adopt-preferences-button ~ button:not([id])",
+                    "comment": "Do not sell"
+                }
+            ]
         }
     ],
     "test": [
