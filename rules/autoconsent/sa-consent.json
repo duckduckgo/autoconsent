@@ -1,0 +1,30 @@
+{
+    "name": "sa-consent",
+    "prehideSelectors": ["#sa-consent"],
+    "detectCmp": [
+        {
+            "exists": "#sa-consent #sa-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#sa-consent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#sa-consent #sa-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#sa-consent #sa-refuse"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#sa-consent",
+            "check": "none"
+        }
+    ]
+}
