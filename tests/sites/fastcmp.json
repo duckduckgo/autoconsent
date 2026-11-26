@@ -2,7 +2,9 @@
     "cmp": "fastcmp",
     "tests": [
         {
-            "sites": ["https://corporate.fastcmp.com/", "https://www.nigella.com/"]
+            "sites": ["https://corporate.fastcmp.com/", "https://www.nigella.com/", "https://www.mariefrance.fr/"],
+            "note": "no consent popup is shown to US visitors; corporate.fastcmp.com can show a bot challenge, so mariefrance.fr is a backup",
+            "options": { "skipRegions": ["US"] }
         }
     ]
 }
