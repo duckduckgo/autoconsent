@@ -2,15 +2,15 @@
     "name": "studentapan",
     "_metadata": { "vendorUrl": "https://www.studentapan.se/" },
     "runContext": { "urlPattern": "^https?://(www\\.)?studentapan\\.se/" },
-    "prehideSelectors": ["dialog[class*=\"CookieModal-module\"]"],
-    "detectCmp": [{ "exists": "dialog[class*=\"CookieModal-module\"]" }],
-    "detectPopup": [{ "visible": "dialog[class*=\"CookieModal-module\"]" }],
-    "optIn": [{ "waitForThenClick": "dialog[class*=\"CookieModal-module\"] button[class*=\"__primaryButton\"]" }],
+    "prehideSelectors": ["dialog[aria-labelledby=\"cookie-consent-title\"]"],
+    "detectCmp": [{ "exists": "dialog[aria-labelledby=\"cookie-consent-title\"]" }],
+    "detectPopup": [{ "visible": "dialog[aria-labelledby=\"cookie-consent-title\"]" }],
+    "optIn": [{ "waitForThenClick": "dialog[aria-labelledby=\"cookie-consent-title\"] button[class*=\"_primaryButton\"]" }],
     "optOut": [
-        { "waitForThenClick": "dialog[class*=\"CookieModal-module\"] button[class*=\"__secondaryButton\"]" },
-        { "waitForVisible": "[role=\"dialog\"] [class*=\"SettingsModal-module\"]" },
-        { "click": "[role=\"dialog\"] [class*=\"SettingsModal-module\"] input[type=\"checkbox\"]:checked", "all": true, "optional": true },
-        { "waitForThenClick": "[role=\"dialog\"]:has([class*=\"SettingsModal-module\"]) [class*=\"__footer\"] button" }
+        { "waitForThenClick": "dialog[aria-labelledby=\"cookie-consent-title\"] button[class*=\"_secondaryButton\"]" },
+        { "waitForVisible": "[role=\"dialog\"] [class*=\"_contentContainer\"]" },
+        { "click": "[role=\"dialog\"] [class*=\"_contentContainer\"] input[type=\"checkbox\"]:checked", "all": true, "optional": true },
+        { "waitForThenClick": "[role=\"dialog\"]:has([class*=\"_contentContainer\"]) [class*=\"_footer\"] button" }
     ],
     "test": [{ "cookieContains": "targTK=false" }]
 }
