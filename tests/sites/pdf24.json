@@ -2,7 +2,9 @@
     "cmp": "pdf24",
     "tests": [
         {
-            "sites": ["https://www.pdf24.org/en/", "https://tools.pdf24.org/en/"]
+            "sites": ["https://www.pdf24.org/en/", "https://tools.pdf24.org/en/"],
+            "note": "no consent popup in the US",
+            "options": { "skipRegions": ["US"] }
         }
     ]
 }

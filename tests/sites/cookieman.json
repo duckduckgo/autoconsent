@@ -14,6 +14,13 @@
                 "https://www.smb.museum/",
                 "https://www.b-tu.de/"
             ]
+        },
+        {
+            "sites": ["https://www.transn.ch/"],
+            "note": "Swiss site that refuses visitors from outside Switzerland and Germany",
+            "options": {
+                "onlyRegions": ["CH"]
+            }
         }
     ]
 }
