@@ -1,0 +1,18 @@
+{
+    "name": "genebase",
+    "_metadata": {
+        "vendorUrl": "https://genebase.fr/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?genebase\\.fr/"
+    },
+    "prehideSelectors": ["#gb-cookies"],
+    "detectCmp": [{ "exists": "#gb-cookies #gb-cookies-non" }],
+    "detectPopup": [{ "visible": "#gb-cookies" }],
+    "optIn": [{ "waitForThenClick": "#gb-cookies-oui" }],
+    "optOut": [{ "waitForThenClick": "#gb-cookies-non" }],
+    "test": [{ "waitForVisible": "#gb-cookies", "check": "none", "timeout": 1000 }]
+}
