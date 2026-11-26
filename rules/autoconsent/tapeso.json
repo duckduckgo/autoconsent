@@ -1,0 +1,21 @@
+{
+    "name": "tapeso",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?tapeso\\.(nl|de|co\\.uk|fr|it|es|pl)/"
+    },
+    "prehideSelectors": ["#cookie-notice2"],
+    "detectCmp": [{ "exists": "#cookie-notice2 [data-target-tab-id='personalize']" }],
+    "detectPopup": [{ "visible": "#cookie-notice2[data-status='open']" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notice2 [data-tab-id='intro'] a[data-consent-mode='all']" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-notice2 .cookie-notice2-tab-switcher[data-target-tab-id='personalize']" },
+        { "waitForVisible": "#cookie-notice2 [data-tab-id='personalize'] a[data-consent-mode='selection']" },
+        {
+            "click": "#cookie-notice2 input.cookie-notice2-toggle:checked:not([data-consent-type='functionality_storage'])",
+            "all": true,
+            "optional": true
+        },
+        { "click": "#cookie-notice2 [data-tab-id='personalize'] a[data-consent-mode='selection']" }
+    ],
+    "test": [{ "cookieContains": "an:0|ad:0|aud:0|ap:0|ps:0" }]
+}
