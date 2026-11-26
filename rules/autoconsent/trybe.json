@@ -7,26 +7,23 @@
     "detectPopup": [{ "visible": ".react-cookie-policy #cookie-policy" }],
     "optIn": [
         {
-            "waitForThenClick": "xpath///div[@class='react-cookie-policy']//button[contains(., 'Accept all')]"
+            "waitForThenClick": ".react-cookie-policy #cookie-policy button.bg-accent"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "xpath///div[@class='react-cookie-policy']//button[contains(., 'Cookie settings')]"
+            "waitForThenClick": ".react-cookie-policy #cookie-policy button:not(.bg-accent)"
         },
         {
-            "waitFor": "button[role='switch']"
+            "waitFor": "[id^='headlessui-dialog-panel'] button[role='switch']"
         },
         {
-            "click": "xpath///li[contains(., 'Tracking')]//button[@role='switch'][@aria-checked='true']",
+            "click": "[id^='headlessui-dialog-panel'] button[role='switch'][aria-checked='true']:not([disabled])",
+            "all": true,
             "optional": true
         },
         {
-            "click": "xpath///li[contains(., 'Advertising')]//button[@role='switch'][@aria-checked='true']",
-            "optional": true
-        },
-        {
-            "waitForThenClick": "xpath///button[contains(., 'Save and close')]"
+            "waitForThenClick": "[id^='headlessui-dialog-panel'] ul + button"
         }
     ],
     "test": [
