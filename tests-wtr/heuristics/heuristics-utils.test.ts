@@ -1084,6 +1084,16 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Accepter fermer')).to.equal('accept');
         expect(classifyButtonTextRegex('Accepteren sluiten')).to.equal('accept');
     });
+
+    it('classifies noun-first close buttons as acknowledge', () => {
+        expect(classifyButtonTextRegex('Melding sluiten')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Cookiemelding sluiten')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Dit bericht afsluiten')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Hinweis schließen')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Meldung schliessen')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Cookies accepteren en melding sluiten')).to.equal('other');
+        expect(classifyButtonTextRegex('Instellingen sluiten')).to.equal('other');
+    });
 });
 
 describe('classifyButtonTextRegex with more button labels', () => {
