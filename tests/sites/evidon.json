@@ -9,6 +9,11 @@
             "note": "barrier layout in the EU and UK",
             "sites": ["https://www.motorola.com/"],
             "options": { "testOptIn": false, "skipRegions": ["US"] }
+        },
+        {
+            "note": "barrier layout, shown in the US too",
+            "sites": ["https://www.lenovo.com/de/de/"],
+            "options": { "testOptIn": false }
         }
     ]
 }
