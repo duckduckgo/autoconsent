@@ -1,0 +1,70 @@
+{
+    "name": "dgm-cookie-popup",
+    "prehideSelectors": ["#cookie-popup.info-popup"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-popup.info-popup #more-info-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-popup .grey-main"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-popup #accept-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-popup #more-info-button"
+        },
+        {
+            "waitForVisible": "#cookie-popup .options-popup"
+        },
+        {
+            "if": {
+                "visible": "#cookie-popup #options-decline-button"
+            },
+            "then": [
+                {
+                    "click": "#cookie-popup #options-decline-button"
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": "#cookie-popup #analytics:checked"
+                    },
+                    "then": [
+                        {
+                            "click": "#cookie-popup #analytics"
+                        }
+                    ]
+                },
+                {
+                    "if": {
+                        "exists": "#cookie-popup #marketing:checked"
+                    },
+                    "then": [
+                        {
+                            "click": "#cookie-popup #marketing"
+                        }
+                    ]
+                },
+                {
+                    "click": "#cookie-popup #options-accept-button"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "analyticsCookies=0"
+        },
+        {
+            "cookieContains": "marketingCookies=0"
+        }
+    ]
+}

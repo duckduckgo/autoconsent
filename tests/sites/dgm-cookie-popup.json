@@ -1,0 +1,14 @@
+{
+    "cmp": "dgm-cookie-popup",
+    "tests": [
+        {
+            "note": "Settings view with a Weiger (decline) button",
+            "sites": ["https://www.bijbelgenootschap.nl/"]
+        },
+        {
+            "note": "Settings view without a decline button; optional cookies are saved unchecked. Saving reloads the page, so the self-test never runs",
+            "sites": ["https://www.worldvision.nl/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
