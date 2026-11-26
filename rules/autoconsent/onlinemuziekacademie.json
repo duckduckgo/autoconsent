@@ -1,0 +1,50 @@
+{
+    "name": "onlinemuziekacademie.nl",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?onlinemuziekacademie\\.nl/"
+    },
+    "prehideSelectors": [".cc-root", ".cc-overlay"],
+    "detectCmp": [
+        {
+            "exists": ".cc-root .cc-actions .cc-btn-primary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cc-root .cc-panel"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cc-root .cc-actions .cc-btn-primary"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cc-root .cc-actions .cc-btn:not(.cc-btn-primary)"
+        },
+        {
+            "waitForVisible": ".cc-root .cc-categories"
+        },
+        {
+            "click": ".cc-root .cc-categories input[type=checkbox]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".cc-root .cc-actions .cc-btn:not(.cc-btn-primary)"
+        },
+        {
+            "waitForVisible": ".cc-root",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "oma_consent="
+        },
+        {
+            "cookieContains": "%22marketing%22%3Afalse"
+        }
+    ]
+}
