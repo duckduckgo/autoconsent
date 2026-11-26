@@ -1,0 +1,10 @@
+{
+    "cmp": "tapeso",
+    "tests": [
+        {
+            "note": "custom popup shared by the Tapeso shops; the site reloads after saving preferences, so the self-test cannot report",
+            "sites": ["https://www.tapeso.nl/", "https://www.tapeso.de/", "https://www.tapeso.co.uk/", "https://www.tapeso.fr/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
