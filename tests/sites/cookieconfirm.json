@@ -1,0 +1,17 @@
+{
+    "cmp": "cookieconfirm",
+    "tests": [
+        {
+            "note": "\"Reject all\" button on the first layer",
+            "sites": ["https://www.06express.nl/", "https://www.galaxyclub.nl/", "https://www.mediebruket.no/"]
+        },
+        {
+            "note": "no reject button: \"Allow selection\" with the analytical toggle on by default",
+            "sites": ["https://www.mijnijzerwaren.nl/", "https://www.activityinternational.nl/"]
+        },
+        {
+            "note": "no reject button: \"Customize\" opens the details tab, where \"Allow selection\" saves the choice",
+            "sites": ["https://www.bagnoitalia.it/"]
+        }
+    ]
+}
