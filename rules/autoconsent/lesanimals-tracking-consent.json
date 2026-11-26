@@ -1,0 +1,9 @@
+{
+    "name": "lesanimals-tracking-consent",
+    "prehideSelectors": [".tracking-consent.tracking-message", ".tracking-consent-backdrop"],
+    "detectCmp": [{ "exists": ".tracking-consent.tracking-message #tracking-consent-close" }],
+    "detectPopup": [{ "visible": ".tracking-consent.tracking-message:not(.tracking-consent-hide)" }],
+    "optIn": [{ "waitForThenClick": ".tracking-consent.tracking-message #tracking-consent-accept" }],
+    "optOut": [{ "waitForThenClick": ".tracking-consent.tracking-message #tracking-consent-close" }],
+    "test": [{ "cookieContains": "tracking-consent-close=1" }, { "cookieContains": "tracking-consent-accept=", "negated": true }]
+}
