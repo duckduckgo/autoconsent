@@ -1,0 +1,15 @@
+{
+    "cmp": "wolfram",
+    "note": "notice-only banner with a single \"Accept & Close\" button, so opt-out hides it; the consent script only shows it to visitors it geolocates to Europe, and it reads our FR and IT proxies as European but not the others",
+    "tests": [
+        {
+            "sites": [
+                "https://mathworld.wolfram.com/",
+                "https://www.wolfram.com/",
+                "https://reference.wolfram.com/language/",
+                "https://blog.wolfram.com/"
+            ],
+            "options": { "onlyRegions": ["FR", "IT"] }
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "name": "wolfram",
+    "vendorUrl": "https://www.wolfram.com/",
+    "cosmetic": true,
+    "prehideSelectors": ["#__cookie-consent-wrapper"],
+    "detectCmp": [{ "exists": "#__cookie-consent-wrapper #__cookie-consent-button" }],
+    "detectPopup": [{ "visible": "#__cookie-consent" }],
+    "optIn": [{ "waitForThenClick": "#__cookie-consent-button" }],
+    "optOut": [{ "hide": "#__cookie-consent-wrapper" }]
+}
