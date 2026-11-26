@@ -9,7 +9,9 @@
     ],
     "detectPopup": [
         {
-            "visible": ".sv-cookie-consent-banner,.sv-cookie-consent-modal"
+            "visible": ".sv-cookie-consent-banner, .sv-cookie-consent-modal > *",
+            "check": "any",
+            "comment": "a modal <dialog> sits in the top layer and has no offsetParent, so check its children"
         }
     ],
     "optIn": [
@@ -47,7 +49,7 @@
     ],
     "test": [
         {
-            "waitForVisible": ".sv-cookie-consent-banner,.sv-cookie-consent-modal",
+            "waitForVisible": ".sv-cookie-consent-banner, .sv-cookie-consent-modal > *",
             "check": "none",
             "timeout": 2000
         }
