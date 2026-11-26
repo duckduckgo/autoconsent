@@ -1,0 +1,48 @@
+{
+    "name": "prestashop-gdpr-pro",
+    "vendorUrl": "https://addons.prestashop.com/en/legal/26049-gdpr-pro-cookie-consent-banner-google-consent-mode.html",
+    "prehideSelectors": [".gdprModal"],
+    "detectCmp": [
+        {
+            "exists": ".gdprModal .gdpr-consent-tabs #accept-all-gdpr"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".gdprModal .gdpr-consent-tabs",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".gdprModal #accept-all-gdpr"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": ".gdprModal #reject-all-gdpr",
+                "check": "any"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".gdprModal #reject-all-gdpr"
+                }
+            ],
+            "else": [
+                {
+                    "click": ".gdprModal input.module-cookies-chkbox:checked:not([disabled])",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": ".gdprModal #close-gdpr-consent"
+                }
+            ]
+        },
+        {
+            "waitForVisible": ".gdprModal .gdpr-consent-tabs",
+            "check": "none"
+        }
+    ]
+}

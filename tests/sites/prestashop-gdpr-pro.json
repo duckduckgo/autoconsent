@@ -1,0 +1,18 @@
+{
+    "cmp": "prestashop-gdpr-pro",
+    "tests": [
+        {
+            "note": "No reject button: optOut unchecks every non-required category and saves",
+            "sites": ["https://dolopwol.com/", "https://www.moustache.fr/", "https://shop.modelltech.ch/"]
+        },
+        {
+            "note": "Variant with a reject-all button",
+            "sites": ["https://www.elrocio.es/"]
+        },
+        {
+            "note": "Variant with a reject-all button; the site shows no popup to US visitors",
+            "sites": ["https://plantum.ro/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}
