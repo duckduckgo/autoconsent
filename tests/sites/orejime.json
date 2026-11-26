@@ -18,6 +18,10 @@
             ]
         },
         {
+            "note": "K-Sup variant: the notice has no decline button, only a 'Continuer sans accepter' link",
+            "sites": ["https://www.skolengo.com/", "https://www.kosmos-education.com/", "https://www.ens-rennes.fr/"]
+        },
+        {
             "note": "page reloads after the choice is saved, so the self-test cannot run",
             "sites": ["https://www.naval-group.com/"],
             "options": { "testSelfTest": false }

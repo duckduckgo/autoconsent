@@ -37,11 +37,11 @@
     "optOut": [
         {
             "if": {
-                "exists": ".orejime-Notice-declineButton, .orejime-Banner-declineButton, .orejime-banner-portal .fr-consent-banner"
+                "exists": ".orejime-Notice-declineButton, .orejime-Notice-link-decline, .orejime-Banner-declineButton, .orejime-banner-portal .fr-consent-banner"
             },
             "then": [
                 {
-                    "waitForThenClick": ".orejime-Notice-declineButton, .orejime-Banner-declineButton, .orejime-banner-portal .fr-consent-banner__buttons li:nth-child(2) button"
+                    "waitForThenClick": ".orejime-Notice-declineButton, .orejime-Notice-link-decline, .orejime-Banner-declineButton, .orejime-banner-portal .fr-consent-banner__buttons li:nth-child(2) button"
                 }
             ],
             "else": [
