@@ -1,0 +1,13 @@
+{
+    "cmp": "websentiment",
+    "tests": [
+        {
+            "note": "bar with an \"Instellingen\" link to a separate settings page and an \"Accept\" div",
+            "sites": ["https://rendezvousprive.nl/", "https://rs-elektro.nl/", "https://merelvandekeer.com/"]
+        },
+        {
+            "note": "layout with an \"Accepteren\" or \"Ik ga akkoord\" link and no link-pref class",
+            "sites": ["https://h19.nl/", "https://kgsystems.nl/", "https://yourvisa.nl/"]
+        }
+    ]
+}

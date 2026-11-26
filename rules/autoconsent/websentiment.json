@@ -1,0 +1,12 @@
+{
+    "name": "websentiment",
+    "_metadata": {
+        "vendorUrl": "https://websentiment.nl/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": ["#PopupCookie.Cookies"],
+    "detectCmp": [{ "exists": "#PopupCookie.Cookies .btnAccept" }],
+    "detectPopup": [{ "visible": "#PopupCookie.Cookies" }],
+    "optIn": [{ "waitForThenClick": "#PopupCookie.Cookies .btnAccept" }],
+    "optOut": [{ "hide": "#PopupCookie.Cookies" }]
+}
