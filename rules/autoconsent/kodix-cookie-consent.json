@@ -1,0 +1,52 @@
+{
+    "name": "kodix-cookie-consent",
+    "prehideSelectors": ["#kcc-modal", "#kcc-overlay"],
+    "detectCmp": [
+        {
+            "exists": "#kcc-modal #kcc-btn-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#kcc-modal:not(.kcc-hidden)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#kcc-btn-accept"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#kcc-btn-refuse"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#kcc-btn-refuse"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#kcc-btn-customize"
+                },
+                {
+                    "waitForVisible": "#kcc-view-detail"
+                },
+                {
+                    "click": "#kcc-view-detail .kcc-toggle-input:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#kcc-btn-save"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22marketing%22%3Afalse"
+        }
+    ]
+}
