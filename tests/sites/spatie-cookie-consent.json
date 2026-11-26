@@ -1,0 +1,15 @@
+{
+    "cmp": "spatie-cookie-consent",
+    "tests": [
+        {
+            "note": "spatie/laravel-cookie-consent banners with only an agree button (no reject control) are hidden cosmetically.",
+            "sites": [
+                "https://www.mtbroutes.nl/",
+                "https://velocidrone.com/",
+                "https://einfach-sparsam.de/",
+                "https://vliegcenter.nl/",
+                "https://tecdiary.com/"
+            ]
+        }
+    ]
+}

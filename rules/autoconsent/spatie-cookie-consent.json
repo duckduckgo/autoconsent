@@ -1,0 +1,32 @@
+{
+    "name": "spatie-cookie-consent",
+    "vendorUrl": "https://github.com/spatie/laravel-cookie-consent",
+    "cosmetic": true,
+    "prehideSelectors": [
+        ".js-cookie-consent.cookie-consent:not(.bik-cerez-bildirimi):has(.js-cookie-consent-agree):not(:has(:is(button, input):not(.js-cookie-consent-agree), .js-cookie-consent-refuse, .js-cookie-consent-reject, .no-cookie))"
+    ],
+    "detectCmp": [
+        {
+            "exists": ".js-cookie-consent.cookie-consent:not(.bik-cerez-bildirimi):has(.js-cookie-consent-agree):not(:has(:is(button, input):not(.js-cookie-consent-agree), .js-cookie-consent-refuse, .js-cookie-consent-reject, .no-cookie))"
+        },
+        {
+            "exists": "script[src*=\"pagead2.googlesyndication.com\"], script[src*=\"securepubads.g.doubleclick.net\"], script[src*=\"fundingchoicesmessages.google.com\"], ins.adsbygoogle",
+            "negated": true
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".js-cookie-consent.cookie-consent:not(.bik-cerez-bildirimi):has(.js-cookie-consent-agree):not(:has(:is(button, input):not(.js-cookie-consent-agree), .js-cookie-consent-refuse, .js-cookie-consent-reject, .no-cookie))"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".js-cookie-consent.cookie-consent .js-cookie-consent-agree"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".js-cookie-consent.cookie-consent:not(.bik-cerez-bildirimi):has(.js-cookie-consent-agree):not(:has(:is(button, input):not(.js-cookie-consent-agree), .js-cookie-consent-refuse, .js-cookie-consent-reject, .no-cookie))"
+        }
+    ]
+}
