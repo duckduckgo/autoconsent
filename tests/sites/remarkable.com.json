@@ -2,7 +2,9 @@
     "cmp": "remarkable.com",
     "tests": [
         {
-            "sites": ["https://remarkable.com/"]
+            "note": "the \"OK\" cookie notice only shows in the US; elsewhere the site shows a different banner that the heuristic handles",
+            "sites": ["https://remarkable.com/"],
+            "options": { "onlyRegions": ["US"] }
         }
     ]
 }
