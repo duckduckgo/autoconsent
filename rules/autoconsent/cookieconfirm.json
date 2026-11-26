@@ -1,0 +1,32 @@
+{
+    "name": "cookieconfirm",
+    "_metadata": {
+        "vendorUrl": "https://www.cookieconfirm.com/"
+    },
+    "prehideSelectors": ["#cc-consent-banner"],
+    "detectCmp": [{ "exists": "#cc-consent-banner" }],
+    "detectPopup": [{ "visible": "#cc-consent-banner .cc-container" }],
+    "optIn": [{ "waitForThenClick": "#cc-accept-all" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cc-reject-all" },
+            "then": [{ "waitForThenClick": "#cc-reject-all" }],
+            "else": [
+                {
+                    "if": { "exists": "#cc-allow-selection" },
+                    "then": [
+                        { "click": "#cc-customize-selection", "optional": true },
+                        {
+                            "click": "#cc-consent-banner .cc-toggle:has(input.cc-consent-type-value:checked)",
+                            "all": true,
+                            "optional": true
+                        },
+                        { "waitForThenClick": "#cc-allow-selection" }
+                    ],
+                    "else": [{ "waitForThenClick": "#cc-close-button" }]
+                }
+            ]
+        }
+    ],
+    "test": [{ "wait": 500 }, { "cookieContains": "CC_p_accepted_cookies=[\"functional\"]" }]
+}

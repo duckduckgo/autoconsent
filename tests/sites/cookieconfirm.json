@@ -1,0 +1,17 @@
+{
+    "cmp": "cookieconfirm",
+    "tests": [
+        {
+            "note": "\"Reject all\" button on the first layer",
+            "sites": ["https://www.mypalmshop.de/", "https://www.123planten.nl/", "https://lanterna.fi/"]
+        },
+        {
+            "note": "no reject button: \"Customize\" opens the details tab, where pre-checked categories are switched off before \"Allow selection\"",
+            "sites": ["https://www.src-reizen.nl/", "https://www.velde.nl/"]
+        },
+        {
+            "note": "no reject button: \"Allow selection\" on the first layer with pre-checked categories",
+            "sites": ["https://www.kleurmijninterieur.nl/", "https://www.charlottelabee.com/"]
+        }
+    ]
+}
