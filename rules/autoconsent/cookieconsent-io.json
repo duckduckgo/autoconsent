@@ -1,0 +1,61 @@
+{
+    "name": "cookieconsent-io",
+    "vendorUrl": "https://www.cookieconsent.io/",
+    "prehideSelectors": ["#cookie-consent-shadow-bg"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent-shadow-bg #cookie-consent-io-main"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent-shadow-bg #cookie-consent-io-main"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent-io-main .cookie-consent-approve-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#cookie-consent-io-main .cookie-consent-reject"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookie-consent-io-main .cookie-consent-reject"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#cookie-consent-io-main .cookie-consent-cookie-settings"
+                },
+                {
+                    "waitForVisible": "#cookie-consent-io-settings .cookie-consent-save-settings"
+                },
+                {
+                    "click": "#cookie-consent-io-settings input[type=checkbox]:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#cookie-consent-io-settings .cookie-consent-save-settings"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie-consent-shadow-bg",
+            "timeout": 2000,
+            "check": "none"
+        },
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "cookie-consent-io=necessary"
+        }
+    ]
+}
