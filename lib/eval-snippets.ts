@@ -225,6 +225,8 @@ export const snippets = {
         return true;
     },
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
+    EVAL_NUDUS_TEST: () =>
+        localStorage.getItem('user_consent_cookies') === 'true' && localStorage.getItem('marketing_cookies_accepted') === 'false',
     EVAL_OSANO_DETECT: () => !!window.Osano?.cm?.dialogOpen,
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&

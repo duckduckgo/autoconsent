@@ -1,0 +1,43 @@
+{
+    "name": "nudus",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?nudus\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent .cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent .cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent .cookie-banner .buttons-container button:first-child"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-consent .cookie-banner .buttons-container button:nth-child(2)"
+        },
+        {
+            "waitForVisible": "#cookie-consent .cookie-options-container"
+        },
+        {
+            "click": "#cookie-consent .cookie-options-container input[type=checkbox]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#cookie-consent .cookie-options-container ~ .buttons-container button:nth-child(2)"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_NUDUS_TEST"
+        }
+    ]
+}
