@@ -167,6 +167,8 @@ describe('checkHeuristicPatterns with French popups', () => {
             // change.org
             'Vos paramètres de confidentialité. Nous utilisons nos propres cookies et ceux de tiers. Accepter les cookies Rejeter les cookies non essentiels Gérer les cookies',
             'Nous utilisons nos propres cookies et ceux de tiers',
+            // lexbase.fr
+            "Considérant en premier lieu que le site requiert le consentement de l'utilisateur pour l'usage des cookies; Refuser les cookies Autoriser les cookies",
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -181,6 +183,7 @@ describe('checkHeuristicPatterns with French popups', () => {
             'Vous pouvez refuser les cookies dans les paramètres de votre navigateur.',
             // "cookies" more than two words after "nous utilisons"
             'Nous utilisons nos propres recettes pour préparer les cookies.',
+            "L'usage des fours pour préparer les biscuits.",
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);

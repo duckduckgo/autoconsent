@@ -8,6 +8,7 @@ export const patternOf = (p: DetectPattern): RegExp => (p instanceof RegExp ? p 
 export const BY_CONTINUING_PRIVACY = /(?:by continuing.{0,100}privacy)|(?:privacy.{0,100}by continuing)/gi;
 export const USE_OF_COOKIES = /use of cookies/gi;
 export const UTILISATION_DES_COOKIES = /utilisation.{0,100}des.{0,100}cookies/gi;
+export const USAGE_DES_COOKIES = /\busage (?:des|de) cookies\b/gi;
 export const ACCEPTEZ_UTILISATION = /acceptez.{0,100}l.{0,100}utilisation/gi;
 export const VERWENDUNG_VON_COOKIES = /verwendung.{0,100}von.{0,100}cookies/gi;
 export const DE_COOKIE_VERB =
@@ -112,6 +113,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /consentement.{0,100}à.{0,100}tout.{0,100}moment/gi,
     /votre.{0,100}consentement/gi,
     UTILISATION_DES_COOKIES,
+    USAGE_DES_COOKIES,
     /cookies.{0,100}ou.{0,100}technologies/gi,
     ACCEPTEZ_UTILISATION,
     /continuer sans accepter/gi,

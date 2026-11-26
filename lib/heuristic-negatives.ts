@@ -13,6 +13,7 @@ import {
     GEBRUIK_VAN_COOKIES,
     USE_OF_COOKIES,
     UTILISATION_DES_COOKIES,
+    USAGE_DES_COOKIES,
     VERWENDUNG_VON_COOKIES,
 } from './heuristic-patterns';
 
@@ -159,7 +160,7 @@ export const DETECT_CONTEXT_NEGATIVES: ContextNegative[] = [
         unless: NOTICE_CONTROL,
         lines: [0, 2],
         input: 'page',
-        appliesTo: [USE_OF_COOKIES, VERWENDUNG_VON_COOKIES, UTILISATION_DES_COOKIES, GEBRUIK_VAN_COOKIES],
+        appliesTo: [USE_OF_COOKIES, VERWENDUNG_VON_COOKIES, UTILISATION_DES_COOKIES, USAGE_DES_COOKIES, GEBRUIK_VAN_COOKIES],
     },
     {
         name: 'acceptez-terms',
