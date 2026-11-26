@@ -1,0 +1,30 @@
+{
+    "name": "veha-cookie-notice",
+    "_metadata": {
+        "vendorUrl": "https://flexxolutions.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#veha-cookie-banner"],
+    "detectCmp": [{ "exists": "#veha-cookie-banner" }],
+    "detectPopup": [{ "visible": "#veha-cookie-banner.veha-visible" }],
+    "optIn": [{ "waitForThenClick": "#veha-cookie-accept" }],
+    "optOut": [
+        {
+            "if": { "exists": "#veha-cookie-reject" },
+            "then": [{ "waitForThenClick": "#veha-cookie-reject" }],
+            "else": [
+                { "waitForThenClick": "#veha-cookie-settings" },
+                { "waitForVisible": "#veha-cookie-modal .veha-modal-box" },
+                {
+                    "if": { "exists": "#veha-pref-analytics:checked, #veha-pref-marketing:checked" },
+                    "then": [{ "click": "#veha-pref-analytics:checked, #veha-pref-marketing:checked", "all": true }]
+                },
+                { "waitForThenClick": "#veha-save-prefs" }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "%22analytics%22%3Afalse%2C%22marketing%22%3Afalse" }]
+}

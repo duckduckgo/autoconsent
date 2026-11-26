@@ -1,0 +1,13 @@
+{
+    "cmp": "veha-cookie-notice",
+    "tests": [
+        {
+            "note": "Banner without a reject button: opt-out goes through the preferences modal, where analytics is pre-checked",
+            "sites": ["https://bekendepersonen.nl/", "https://qeer.nl/", "https://vehaplastics.nl/"]
+        },
+        {
+            "note": "Newer plugin version with a Decline button on the banner",
+            "sites": ["https://flexxolutions.com/"]
+        }
+    ]
+}
