@@ -17,6 +17,10 @@
             "options": { "gpc": true }
         },
         {
+            "note": "shows the flyout without the GPC signal",
+            "sites": ["https://www.jbhunt.com/"]
+        },
+        {
             "note": "blocks visitors from Japan",
             "sites": ["https://www.campingworld.com/"],
             "options": { "gpc": true, "skipRegions": ["JP"] }

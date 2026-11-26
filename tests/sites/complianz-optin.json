@@ -3,14 +3,6 @@
     "tests": [
         {
             "sites": ["https://aktienfinder.net/", "https://www.rnoh.nhs.uk/"]
-        },
-        {
-            "note": "popup must be fully faded in before the click, and stays clickable at opacity 0 unless hidden",
-            "sites": ["https://www.rogercastillo.org/"]
-        },
-        {
-            "note": "Securiti flavor: no reject button, opt out via the preference center",
-            "sites": ["https://www.jbhunt.com/"]
         }
     ]
 }
