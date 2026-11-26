@@ -1,0 +1,17 @@
+{
+    "cmp": "cookieconfirm",
+    "tests": [
+        {
+            "note": "Customize then Allow selection, toggles pre-checked, no Reject all button",
+            "sites": ["https://behang.nl/", "https://bagnoitalia.it/"]
+        },
+        {
+            "note": "Allow selection shown directly, no Reject all button",
+            "sites": ["https://activityinternational.nl/"]
+        },
+        {
+            "note": "Reject all button",
+            "sites": ["https://galaxyclub.nl/", "https://indexpeople.nl/"]
+        }
+    ]
+}
