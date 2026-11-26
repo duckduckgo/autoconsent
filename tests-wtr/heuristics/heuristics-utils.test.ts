@@ -167,6 +167,9 @@ describe('checkHeuristicPatterns with French popups', () => {
             // change.org
             'Vos paramètres de confidentialité. Nous utilisons nos propres cookies et ceux de tiers. Accepter les cookies Rejeter les cookies non essentiels Gérer les cookies',
             'Nous utilisons nos propres cookies et ceux de tiers',
+            // securmanif.fr
+            "Si vous l'acceptez, nous déposons les cookies de Google Analytics et Google Ads pour mesurer la fréquentation. Refuser Accepter",
+            'Avec votre accord, nous souhaitons déposer des traceurs publicitaires.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -181,6 +184,8 @@ describe('checkHeuristicPatterns with French popups', () => {
             'Vous pouvez refuser les cookies dans les paramètres de votre navigateur.',
             // "cookies" more than two words after "nous utilisons"
             'Nous utilisons nos propres recettes pour préparer les cookies.',
+            // "cookies" more than two words after "nous déposons"
+            'Nous déposons la pâte sur une plaque avant de cuire les cookies.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
