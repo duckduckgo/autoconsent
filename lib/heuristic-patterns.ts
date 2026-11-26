@@ -221,6 +221,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /(?:te blijven gebruiken.{0,100}cookie)|(?:cookie.{0,100}te blijven gebruiken)/gi,
     /cookies.{0,100}beste? (?:mogelijke )?(?:ervaring|gebruikerservaring)/gi,
     /\b(?:we|wij) (?:gebruiken|plaatsen)\b.{0,100}cookies/gi,
+    // "cookies ... We gebruiken ze ..."; popup only, as recipes also use "cookies"
+    { pattern: /\bcookies\b.{0,100}\b(?:we|wij) (?:gebruiken|plaatsen) (?:ze|deze)\b/gi, input: 'popup' },
     /\bgebruiken (?:we|wij) cookies\b/gi,
     /\bplaatsen van\b.{0,50}cookies/gi,
     /\bte blijven gebruiken\b.{0,100}privacy/gi,
@@ -461,7 +463,7 @@ const REJECT_PATTERNS_DUTCH = [
     /(doorgaan|ga door|ga verder|verder)\s+.{0,15}(zonder|aanvaard)/is,
 
     // "nee" refusals (but not "nee, sluiten" → acknowledge)
-    /^nee(,?\s+(bedankt|dank je|dankje|liever niet|liever geen cookies|geen persoonlijke cookies|geen cookies.*|weigeren?))?$/is,
+    /^nee(,?\s+(bedankt|dank je( wel)?|dankje(wel)?|dank u( wel)?|dankuwel|liever niet|liever geen cookies|geen persoonlijke cookies|geen cookies.*|weigeren?))?$/is,
 
     'niet accepteren',
     'niet akkoord',

@@ -466,6 +466,13 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects Dutch "cookies ... we gebruiken ze" in popups only', () => {
+        const text = 'Ook wij houden van cookies, maar niet te veel natuurlijk. We gebruiken ze zodat de site goed werkt.';
+        expect(detectsPopup(text), text).to.be.true;
+        expect(detectsPage(text), text).to.be.false;
+        expect(detectsPopup('We gebruiken ze zodat de site goed werkt.')).to.be.false;
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';
@@ -1102,6 +1109,9 @@ describe('classifyButtonTextRegex with more button labels', () => {
             'Ik accepteer geen cookies',
             'Nee, ik wil geen optimale cookies',
             'Ik wil geen cookies',
+            'Nee, dank je wel',
+            'Nee, dank u wel',
+            'Nee dankjewel',
             'Du kan sige nej tak til statistik',
             'Avslå',
             'Avvis alle cookies',

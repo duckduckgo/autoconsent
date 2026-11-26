@@ -163,6 +163,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     [],
     ["ervaring","gebruikerservaring"],
     ["gebruiken","plaatsen"],
+    ["gebruiken","plaatsen"],
     ["gebruiken "],
     ["plaatsen van"],
     ["te blijven gebruiken"],
