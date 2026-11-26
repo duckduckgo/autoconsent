@@ -3,6 +3,11 @@
     "tests": [
         {
             "sites": ["https://speedtest.dk/", "https://io-tech.fi/", "https://ubuntuhandbook.org/", "https://www.business2community.com/"]
+        },
+        {
+            "note": "Cookie Notice together with the Ezoic CMP: the rule also rejects the Ezoic dialog, which shows up later in GDPR regions. Skip US: there Ezoic shows nothing and the Cookie Notice bar is intermittent",
+            "sites": ["https://frieord.no/", "https://wikibiography.in/", "https://periodic-table.org/"],
+            "options": { "skipRegions": ["US"], "timeout": 60000 }
         }
     ]
 }

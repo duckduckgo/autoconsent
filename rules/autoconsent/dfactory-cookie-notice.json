@@ -3,7 +3,7 @@
     "vendorUrl": "https://wordpress.org/plugins/cookie-notice/",
     "prehideSelectors": ["#cookie-notice"],
     "detectCmp": [{ "exists": "#cookie-notice :is(#cn-refuse-cookie, #cn-close-notice)" }],
-    "detectPopup": [{ "visible": "#cookie-notice.cookie-notice-visible #cn-notice-buttons" }],
+    "detectPopup": [{ "visible": "#cookie-notice.cookie-notice-visible #cn-notice-buttons, #ez-cookie-dialog-wrapper", "check": "any" }],
     "optIn": [
         { "waitForThenClick": "#cookie-notice #cn-accept-cookie" },
         { "waitForVisible": "#cookie-notice .cookie-notice-container", "check": "none", "timeout": 1000, "optional": true },
@@ -14,15 +14,36 @@
     ],
     "optOut": [
         {
-            "if": { "exists": "#cookie-notice #cn-refuse-cookie" },
-            "then": [{ "waitForThenClick": "#cookie-notice #cn-refuse-cookie" }],
-            "else": [{ "waitForThenClick": "#cookie-notice #cn-close-notice" }]
+            "if": { "visible": "#cookie-notice.cookie-notice-visible #cn-notice-buttons" },
+            "then": [
+                {
+                    "if": { "exists": "#cookie-notice #cn-refuse-cookie" },
+                    "then": [{ "waitForThenClick": "#cookie-notice #cn-refuse-cookie" }],
+                    "else": [{ "waitForThenClick": "#cookie-notice #cn-close-notice" }]
+                },
+                { "waitForVisible": "#cookie-notice .cookie-notice-container", "check": "none", "timeout": 1000, "optional": true },
+                {
+                    "if": { "visible": "#cookie-notice .cookie-notice-container" },
+                    "then": [{ "hide": "#cookie-notice .cookie-notice-container" }]
+                }
+            ]
         },
-        { "waitForVisible": "#cookie-notice .cookie-notice-container", "check": "none", "timeout": 1000, "optional": true },
         {
-            "if": { "visible": "#cookie-notice .cookie-notice-container" },
-            "then": [{ "hide": "#cookie-notice .cookie-notice-container" }]
+            "if": { "exists": "script[src*='gatekeeperconsent.com/']" },
+            "then": [
+                { "waitForVisible": "#ez-cookie-dialog-wrapper", "timeout": 5000, "optional": true },
+                {
+                    "if": { "visible": "#ez-cookie-dialog-wrapper" },
+                    "then": [
+                        { "wait": 500 },
+                        { "click": "#ez-manage-settings" },
+                        { "waitFor": "#ez-cookie-dialog input[type=checkbox]" },
+                        { "click": "#ez-cookie-dialog input[type=checkbox]:checked", "all": true, "optional": true },
+                        { "waitForThenClick": "#ez-save-settings" }
+                    ]
+                }
+            ]
         }
     ],
-    "test": [{ "cookieContains": "cookie_notice_accepted=false" }]
+    "test": [{ "any": [{ "cookieContains": "cookie_notice_accepted=false" }, { "cookieContains": "ez-consent-tcf" }] }]
 }
