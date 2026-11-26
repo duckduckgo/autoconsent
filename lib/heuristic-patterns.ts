@@ -138,6 +138,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\ben (?:naviguant|poursuivant)\b.{0,100}cookies/gi,
     /(?:en continuant.{0,100}cookie)|(?:cookie.{0,100}en continuant)/gi,
     /\ben (?:naviguant|poursuivant|continuant)\b.{0,100}confidentialité/gi,
+    // analytics-only notice heading; policy pages and footers name this cookie category too, so popup text only
+    { pattern: /\bcookies de mesure d['’]audience\b/gi, input: 'popup' },
 
     // DE
     /wir.{0,100}verwenden.{0,100}cookies/gi,
