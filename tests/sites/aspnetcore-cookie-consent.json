@@ -3,7 +3,12 @@
     "tests": [
         {
             "note": "stock ASP.NET Core consent partial (#cookieConsent with a single data-cookie-string accept button), inline or fixed; no reject control, so it is hidden",
-            "sites": ["https://jasperscryptogrammensite.nl/", "https://miktex.org/", "https://talentify.me/", "https://www.webdavsystem.com/"]
+            "sites": [
+                "https://jasperscryptogrammensite.nl/",
+                "https://miktex.org/",
+                "https://talentify.me/",
+                "https://www.webdavsystem.com/"
+            ]
         }
     ]
 }
