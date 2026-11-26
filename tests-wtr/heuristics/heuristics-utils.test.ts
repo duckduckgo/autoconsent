@@ -167,6 +167,8 @@ describe('checkHeuristicPatterns with French popups', () => {
             // change.org
             'Vos paramètres de confidentialité. Nous utilisons nos propres cookies et ceux de tiers. Accepter les cookies Rejeter les cookies non essentiels Gérer les cookies',
             'Nous utilisons nos propres cookies et ceux de tiers',
+            // concerts.paris
+            "Un mot sur les cookies Quelques cookies nous aident à mesurer l'audience et les clics vers la billetterie.",
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -181,6 +183,8 @@ describe('checkHeuristicPatterns with French popups', () => {
             'Vous pouvez refuser les cookies dans les paramètres de votre navigateur.',
             // "cookies" more than two words after "nous utilisons"
             'Nous utilisons nos propres recettes pour préparer les cookies.',
+            // "cookies nous …" without a determiner
+            'Des cookies nous sont servis avec le café.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
