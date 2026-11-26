@@ -5,12 +5,12 @@
     "prehideSelectors": ["#overlay-policy"],
     "detectCmp": [
         {
-            "exists": "#overlay-policy #policy_pop_close .fa-times-circle"
+            "visible": "#overlay-policy #policy_pop_close"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#overlay-policy #policy_pop_close .fa-times-circle"
+            "visible": "#overlay-policy #policy_pop_close"
         }
     ],
     "optIn": [
