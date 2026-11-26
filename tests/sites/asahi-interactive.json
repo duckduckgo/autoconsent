@@ -2,12 +2,22 @@
     "cmp": "asahi-interactive",
     "tests": [
         {
-            "sites": ["https://www.cnn.co.jp/", "https://japan.cnet.com/", "https://japan.zdnet.com/", "https://aiasahi.jp/"],
+            "sites": ["https://www.cnn.co.jp/", "https://japan.cnet.com/", "https://japan.zdnet.com/"],
             "options": { "mobile": true }
         },
         {
-            "sites": ["https://www.cnn.co.jp/", "https://japan.cnet.com/", "https://japan.zdnet.com/", "https://aiasahi.jp/"],
+            "sites": ["https://www.cnn.co.jp/", "https://japan.cnet.com/", "https://japan.zdnet.com/"],
             "options": { "mobile": false }
+        },
+        {
+            "note": "stores the choice in a gdpr=true cookie, which the self-test does not check",
+            "sites": ["https://sdunion.jp/"],
+            "options": { "mobile": true, "testSelfTest": false }
+        },
+        {
+            "note": "stores the choice in a gdpr=true cookie, which the self-test does not check",
+            "sites": ["https://sdunion.jp/"],
+            "options": { "mobile": false, "testSelfTest": false }
         }
     ]
 }

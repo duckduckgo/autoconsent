@@ -2,7 +2,11 @@
     "cmp": "fastcmp",
     "tests": [
         {
-            "sites": ["https://corporate.fastcmp.com/", "https://www.nigella.com/"]
+            "note": "no consent popup is shown in the US",
+            "sites": ["https://corporate.fastcmp.com/", "https://www.nigella.com/"],
+            "options": {
+                "skipRegions": ["US"]
+            }
         }
     ]
 }
