@@ -2,7 +2,9 @@
     "cmp": "dailymotion-us",
     "tests": [
         {
-            "sites": ["https://www.dailymotion.com/us"]
+            "note": "the US notice only shows in the US; elsewhere the site shows a Sourcepoint popup",
+            "sites": ["https://www.dailymotion.com/us"],
+            "options": { "onlyRegions": ["US"] }
         }
     ]
 }
