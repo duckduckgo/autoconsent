@@ -1,0 +1,48 @@
+{
+    "name": "podiumcadeaukaart",
+    "_metadata": {
+        "vendorUrl": "https://podiumcadeaukaart.nl/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?podiumcadeaukaart\\.(nl|be)/"
+    },
+    "prehideSelectors": ["#cookieBar.fixed", "#cookieModal.fixed"],
+    "detectCmp": [
+        {
+            "exists": "#cookieBar a.btn-text"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieBar.fixed"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieBar button.btn-red"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieBar a.btn-text"
+        },
+        {
+            "waitForVisible": "#cookieModal.fixed"
+        },
+        {
+            "waitForThenClick": "#cookieModal button.btn-red"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieSettings="
+        },
+        {
+            "cookieContains": "marketing",
+            "negated": true
+        }
+    ]
+}
