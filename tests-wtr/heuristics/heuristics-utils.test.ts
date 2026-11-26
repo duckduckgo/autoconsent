@@ -181,6 +181,8 @@ describe('checkHeuristicPatterns with French popups', () => {
             'Vous pouvez refuser les cookies dans les paramètres de votre navigateur.',
             // "cookies" more than two words after "nous utilisons"
             'Nous utilisons nos propres recettes pour préparer les cookies.',
+            // "déposer" with an object other than cookies
+            'Vous pouvez déposer des commentaires sur nos recettes de cookies.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
@@ -1557,6 +1559,7 @@ describe('checkHeuristicPatterns without bare accept-all / reject-all labels', (
             'Powered by Usercentrics Consent Management',
             'En cliquant sur « Tout accepter », vous acceptez le dépôt de cookies sur votre appareil.',
             'Les cookies nous permettent de mesurer l’audience.',
+            'Les cartes d’hébergement et les vidéos intégrées peuvent déposer des cookies : elles ne se chargent qu’avec votre accord.',
             'Nous pouvons utiliser des traceurs optionnels pour mesurer l’audience.',
             'Wenn Sie auf „Alle akzeptieren“ klicken, stimmen Sie der Speicherung von Cookies zu.',
             'Durch Klicken auf „Alle akzeptieren“ gestatten Sie den Einsatz folgender Dienste.',

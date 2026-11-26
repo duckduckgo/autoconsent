@@ -89,6 +89,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["stocker","stockons"],
     ["nos partenaires demandent votre consentement"],
     ["consentez à l"," cookies"],
+    ["déposer "],
     ["les cookies nous permettent","nos partenaires et nous"],
     ["accepter "],
     ["on utilise","nous utilisons"],
