@@ -2,8 +2,13 @@
     "cmp": "snigel",
     "tests": [
         {
-            "sites": ["https://w3schools.com"],
+            "sites": ["https://www.rapidtables.com/"],
             "options": { "skipRegions": ["US"] }
+        },
+        {
+            "sites": ["https://www.geoguessr.com/"],
+            "options": { "skipRegions": ["US"], "testSelfTest": false },
+            "note": "stores the choice in localStorage (_sn_snconsent) instead of the snconsent cookie"
         }
     ]
 }

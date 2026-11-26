@@ -2,7 +2,12 @@
     "cmp": "pornpics.de",
     "tests": [
         {
-            "sites": ["https://www.pornpics.de/", "https://www.pornpics.com/"]
+            "sites": ["https://www.pornpics.de/"]
+        },
+        {
+            "sites": ["https://www.pornpics.com/"],
+            "options": { "skipRegions": ["US"] },
+            "note": "no cookie notice in the US, where the site stores default consent settings without asking"
         }
     ]
 }
