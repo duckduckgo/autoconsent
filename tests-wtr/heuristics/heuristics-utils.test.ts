@@ -1553,6 +1553,7 @@ describe('checkHeuristicPatterns without bare accept-all / reject-all labels', (
             'Accept all cookies',
             'You can choose which cookies you accept.',
             'Example Corp stores cookies on your device to analyse traffic.',
+            'We place cookies on your device to keep the site running and to measure traffic.',
             'We would like your consent to collect data on how you use the site.',
             'Powered by Usercentrics Consent Management',
             'En cliquant sur « Tout accepter », vous acceptez le dépôt de cookies sur votre appareil.',

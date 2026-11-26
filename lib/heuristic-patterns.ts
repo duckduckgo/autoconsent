@@ -32,7 +32,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /accept all cookies/gi,
     /\breject non-(?:essential|necessary)\b/gi,
     /\bwhich (?:types? of )?cookies (?:that )?you (?:accept|allow|want)\b/gi,
-    /\bstores? cookies on your (?:device|computer|browser)\b/gi,
+    /\b(?:stores?|places?) cookies on your (?:device|computer|browser)\b/gi,
     /\byour consent to (?:collect|use|store|process|set)\b/gi,
     /\byou agree to (?:our |the )?cookie use\b/gi,
     /\bblocking some types of cookies\b/gi,
