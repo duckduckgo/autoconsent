@@ -2,7 +2,8 @@
     "cmp": "inmobi",
     "tests": [
         {
-            "sites": ["https://www.inmobi.com/", "https://advertising.inmobi.com/page/opt-out", "https://wildwestads.top/"]
+            "note": "inmobi.com and smartmobi.top mark the reject button with data-event-label, advertising.inmobi.com only with its onclick handler",
+            "sites": ["https://www.inmobi.com/", "https://advertising.inmobi.com/page/opt-out", "https://smartmobi.top/"]
         }
     ]
 }

@@ -2,7 +2,9 @@
     "cmp": "substack",
     "tests": [
         {
-            "sites": ["https://substack.com/", "https://www.marketingideas.com/"]
+            "note": "the banner is localized by visitor region and is not shown in the US",
+            "sites": ["https://substack.com/", "https://www.marketingideas.com/", "https://www.thebulwark.com/"],
+            "options": { "skipRegions": ["US"] }
         }
     ]
 }
