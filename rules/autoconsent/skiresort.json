@@ -1,0 +1,15 @@
+{
+    "name": "skiresort",
+    "vendorUrl": "https://www.skiresort.info/",
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": ["#dsgvo-panel"],
+    "detectCmp": [{ "exists": "#dsgvo-panel #dsgvo-button" }],
+    "detectPopup": [{ "visible": "#dsgvo-panel" }],
+    "optIn": [{ "waitForThenClick": "#dsgvo-panel #dsgvo-button" }],
+    "optOut": [{ "waitForThenClick": "#dsgvo-panel #dsgvo-button" }],
+    "test": [{ "visible": "#dsgvo-panel", "check": "none" }]
+}
