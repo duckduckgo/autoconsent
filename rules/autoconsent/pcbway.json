@@ -1,0 +1,13 @@
+{
+    "name": "pcbway",
+    "prehideSelectors": [".cookies-pop-alert"],
+    "detectCmp": [{ "exists": ".cookies-pop-alert .js-agree-all" }],
+    "detectPopup": [{ "visible": ".cookies-pop-alert" }],
+    "optIn": [{ "waitForThenClick": ".cookies-pop-alert .js-agree-all" }],
+    "optOut": [
+        { "waitForThenClick": ".cookies-pop-alert .cookies-pop-footer .js-preferences-btn" },
+        { "waitForThenClick": ".js-cookies-pop-box .js-decline-btn" },
+        { "waitForThenClick": ".js-cookies-pop-box .cookies-pop-body-submitted .cookies-pop-footer .js-close-btn", "optional": true }
+    ],
+    "test": [{ "cookieContains": "cookies_analytics=0" }, { "cookieContains": "cookies_functional=0" }]
+}
