@@ -9,7 +9,26 @@
         {
             "if": { "exists": "#silktide-banner .reject-all" },
             "then": [{ "click": "#silktide-banner .reject-all" }],
-            "else": [{ "click": "#silktide-banner .preferences" }, { "waitForThenClick": "#silktide-modal .preferences-reject-all" }]
+            "else": [
+                { "click": "#silktide-banner .preferences" },
+                { "waitForVisible": "#silktide-modal" },
+                {
+                    "if": { "exists": "#silktide-modal .preferences-reject-all" },
+                    "then": [{ "click": "#silktide-modal .preferences-reject-all" }],
+                    "else": [
+                        {
+                            "click": "#silktide-modal #cookie-preferences input[type=checkbox]:checked:not(:disabled)",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "if": { "exists": "#silktide-modal .save-preferences" },
+                            "then": [{ "click": "#silktide-modal .save-preferences" }],
+                            "else": [{ "click": "#silktide-modal .modal-close" }]
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "test": [{ "waitForVisible": "#silktide-banner", "check": "none", "timeout": 2000 }]
