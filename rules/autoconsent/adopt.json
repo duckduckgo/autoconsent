@@ -19,7 +19,8 @@
     ],
     "optOut": [
         {
-            "waitForThenClick": "#adopt-reject-all-button"
+            "waitForThenClick": "#adopt-reject-all-button, #cookie-banner #adopt-preferences-button ~ button:not([id])",
+            "comment": "US variant has a Do not sell button without an id instead of Reject"
         }
     ],
     "test": [

@@ -7,12 +7,12 @@
     "prehideSelectors": ["#cookies-banner"],
     "detectCmp": [
         {
-            "exists": "#cookies-banner [class*=\"CookiesFooter-module\"]"
+            "exists": "#cookies-banner [class*=\"_cookiesFooter\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookies-banner [class*=\"CookiesFooter-module\"]"
+            "visible": "#cookies-banner [class*=\"_cookiesFooter\"]"
         }
     ],
     "optIn": [
@@ -25,23 +25,23 @@
     "optOut": [
         {
             "if": {
-                "exists": "#cookies-banner [class*=\"CookiesFooter-module\"] > button:nth-child(2):not([id])"
+                "exists": "#cookies-banner [class*=\"_cookiesFooter\"] > button:nth-child(2):not([id])"
             },
             "then": [
                 {
-                    "waitForThenClick": "#cookies-banner [class*=\"CookiesFooter-module\"] > button:nth-child(2):not([id])",
+                    "waitForThenClick": "#cookies-banner [class*=\"_cookiesFooter\"] > button:nth-child(2):not([id])",
                     "retry": 5,
                     "retryInterval": 500
                 }
             ],
             "else": [
                 {
-                    "waitForThenClick": "#cookies-banner [class*=\"CookiesFooter-module\"] > button:first-child:not([id])",
+                    "waitForThenClick": "#cookies-banner [class*=\"_cookiesFooter\"] > button:first-child:not([id])",
                     "retry": 5,
                     "retryInterval": 500
                 },
                 {
-                    "waitForThenClick": "#cookies-banner [class*=\"CookiesSettings-module\"][class*=\"buttonsWrapper\"] > button:nth-child(2)",
+                    "waitForThenClick": "#cookies-banner [class*=\"_cookiesSettings\"] [class*=\"_buttonsWrapper\"] > button:nth-child(2)",
                     "retry": 5,
                     "retryInterval": 500
                 }
