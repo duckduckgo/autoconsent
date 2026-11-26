@@ -3,10 +3,27 @@
     "runContext": {
         "urlPattern": "^https://www\\.samsung\\.com/"
     },
-    "cosmetic": true,
     "prehideSelectors": ["div.cookie-bar"],
-    "detectCmp": [{ "exists": "div.cookie-bar" }],
-    "detectPopup": [{ "visible": "div.cookie-bar" }],
-    "optIn": [{ "hide": "div.cookie-bar" }],
-    "optOut": [{ "hide": "div.cookie-bar" }]
+    "detectCmp": [{ "exists": "div.cookie-bar, #truste-consent-track" }],
+    "detectPopup": [{ "visible": "div.cookie-bar, #truste-consent-track", "check": "any" }],
+    "optIn": [
+        { "hide": "div.cookie-bar" },
+        { "waitForVisible": "#truste-consent-track", "timeout": 5000, "optional": true },
+        {
+            "if": { "visible": "#truste-consent-track" },
+            "then": [{ "click": "#truste-consent-button" }]
+        }
+    ],
+    "optOut": [
+        { "hide": "div.cookie-bar" },
+        { "waitForVisible": "#truste-consent-track", "timeout": 5000, "optional": true },
+        {
+            "if": { "visible": "#truste-consent-track" },
+            "then": [
+                { "click": "#truste-show-consent" },
+                { "waitForThenClick": [".trustarc_newcm_container", "#decline_all_button"] },
+                { "waitForThenClick": [".trustarc_newcm_container", "a[data-button-key=\"close\"]"], "optional": true }
+            ]
+        }
+    ]
 }
