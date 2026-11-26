@@ -186,6 +186,17 @@ describe('checkHeuristicPatterns with French popups', () => {
             expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
         }
     });
+
+    it('detects a French notice naming Google Analytics in popup text only', () => {
+        // les-livres.net: "cookies" only appears in the policy link at the end
+        const text =
+            'Nous utilisons Google Analytics uniquement pour compter les visites et savoir quelles pages sont les plus utiles : aucune publicité, aucun profilage. Il ne se lance que si vous acceptez. Confidentialité et cookies\nRefuser\nAccepter';
+        expect(checkHeuristicPatterns(text, 'popup').patterns.length).to.be.greaterThan(0);
+        // a privacy policy page can say the same
+        expect(checkHeuristicPatterns('Nous utilisons Google Analytics pour mesurer l’audience du site.', 'page').patterns).to.have.length(
+            0,
+        );
+    });
 });
 
 describe('checkHeuristicPatterns with Swedish popups', () => {

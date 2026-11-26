@@ -138,6 +138,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\ben (?:naviguant|poursuivant)\b.{0,100}cookies/gi,
     /(?:en continuant.{0,100}cookie)|(?:cookie.{0,100}en continuant)/gi,
     /\ben (?:naviguant|poursuivant|continuant)\b.{0,100}confidentialité/gi,
+    // a notice naming its analytics tool rather than cookies: "Nous utilisons Google Analytics uniquement pour…"
+    { pattern: /\b(?:nous utilisons|on utilise) google analytics\b/gi, input: 'popup' },
 
     // DE
     /wir.{0,100}verwenden.{0,100}cookies/gi,

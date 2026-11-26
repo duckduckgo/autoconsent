@@ -95,6 +95,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["naviguant","poursuivant"],
     [],
     ["confidentialité"],
+    [" google analytics"],
     ["verwenden"],
     ["partner"],
     ["zugriff auf informationen auf"],
