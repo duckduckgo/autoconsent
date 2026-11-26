@@ -5,7 +5,7 @@
     "detectCmp": [{ "exists": "#pr-cookie-notice #btn-cookie-allow" }],
     "detectPopup": [
         { "visible": "#pr-cookie-notice #btn-cookie-allow" },
-        { "exists": ".pr-cookie-modal:not(._show) #pr-cookie-notice", "negated": true }
+        { "exists": ".pr-cookie-modal:not(._show):not(.show-without-overlay) #pr-cookie-notice", "negated": true }
     ],
     "optIn": [{ "waitForThenClick": "#pr-cookie-notice #btn-cookie-allow" }],
     "optOut": [
@@ -14,9 +14,25 @@
             "then": [{ "waitForThenClick": "#pr-cookie-notice #btn-cookie-decline" }],
             "else": [
                 { "waitForThenClick": "#pr-cookie-notice .pr-cookie-setting-btn" },
-                { "waitForThenClick": "#pr-cookie-setting-bar .pr-actions-buttons button.decline" }
+                { "waitForVisible": "#pr-cookie-setting-bar .pr-actions-buttons" },
+                {
+                    "if": { "exists": "#pr-cookie-setting-bar .pr-actions-buttons button.decline" },
+                    "then": [{ "click": "#pr-cookie-setting-bar .pr-actions-buttons button.decline" }],
+                    "else": [
+                        { "click": "#pr-cookie-setting-bar input[type=\"checkbox\"]:checked", "all": true, "optional": true },
+                        { "waitForThenClick": "#pr-cookie-setting-bar button.confirm" }
+                    ]
+                }
             ]
         }
     ],
-    "test": [{ "cookieContains": "pr-cookie-consent=%5B%5D" }]
+    "test": [
+        {
+            "any": [
+                { "cookieContains": "pr-cookie-consent=%5B%5D" },
+                { "cookieContains": "pr-cookie-consent=%5B%22necessary%22%5D" },
+                { "cookieContains": "pr-cookie-consent=[%22necessary%22]" }
+            ]
+        }
+    ]
 }
