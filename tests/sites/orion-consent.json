@@ -1,0 +1,16 @@
+{
+    "cmp": "orion-consent",
+    "note": "www.histoiresx.fr also uses this banner but is left out: its LiteSpeed Cache guest-vary script reloads the page once on the first visit, so the popup is reported twice and the reload-loop check fails",
+    "tests": [
+        {
+            "sites": [
+                "https://www.elockstore.com/",
+                "https://nuisibles-31.fr/",
+                "https://www.borne-tablette.com/",
+                "https://la-facturation.fr/",
+                "https://www.support-tablette-voiture.com/",
+                "https://coupefaimnaturel.fr/"
+            ]
+        }
+    ]
+}

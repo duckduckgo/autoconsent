@@ -1,0 +1,29 @@
+{
+    "name": "orion-consent",
+    "prehideSelectors": ["div[data-orion-consent]"],
+    "detectCmp": [
+        {
+            "exists": ["div[data-orion-consent]", "div.b[role=dialog]"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["div[data-orion-consent]", "div.b[role=dialog]"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["div[data-orion-consent]", "button#oui"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["div[data-orion-consent]", "button#non"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "orion_consent=denied"
+        }
+    ]
+}
