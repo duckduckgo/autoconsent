@@ -1,0 +1,46 @@
+{
+    "name": "sitecompany-gdpr",
+    "_metadata": {
+        "vendorUrl": "https://gdpr.sitecompany.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "detectCmp": [
+        {
+            "exists": ["body > div:empty:not([id]):not([class])", "#popup #hostWrapper"]
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ["body > div:empty:not([id]):not([class])", "#popup #intro"]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ["body > div:empty:not([id]):not([class])", "#intro .show-settings"]
+        },
+        {
+            "waitForVisible": ["body > div:empty:not([id]):not([class])", "#settings .save-settings"]
+        },
+        {
+            "click": ["body > div:empty:not([id]):not([class])", "#settings input.categ:checked:not([disabled])"],
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": ["body > div:empty:not([id]):not([class])", "#settings .save-settings"]
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ["body > div:empty:not([id]):not([class])", "#intro .accept-all"]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "\"2\":false,\"3\":false,\"4\":false"
+        }
+    ]
+}

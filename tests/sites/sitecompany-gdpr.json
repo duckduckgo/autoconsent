@@ -1,0 +1,13 @@
+{
+    "cmp": "sitecompany-gdpr",
+    "note": "the popup is only served to mobile browsers; desktop visitors get no popup from this CMP. The site reloads after saving consent, so the self-test is skipped",
+    "tests": [
+        {
+            "sites": ["https://bedrijvenpagina.nl/", "https://bouwenverbouw.nl/", "https://www.tuingids.nl/"],
+            "options": {
+                "mobile": true,
+                "testSelfTest": false
+            }
+        }
+    ]
+}
