@@ -1,0 +1,23 @@
+{
+    "name": "hdk-cookiebar",
+    "vendorUrl": "https://www.hogeschoolderkunsten.nl/",
+    "prehideSelectors": [".cookiebar:has(.cookiebar__accept-all)"],
+    "detectCmp": [{ "exists": ".cookiebar .cookiebar__accept-all" }],
+    "detectPopup": [{ "visible": ".cookiebar .cookiebar__accept-all" }],
+    "optIn": [{ "waitForThenClick": ".cookiebar .cookiebar__accept-all" }],
+    "optOut": [
+        { "waitForThenClick": ".cookiebar .cookie-modal-trigger" },
+        { "waitForVisible": ".cookie-modal .cookie-preferences__toggle" },
+        {
+            "click": ".cookie-modal .cookie-preferences__toggle[data-selected=\"true\"]:not([data-required])",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": ".cookie-modal [data-ga-action=\"apply-preferences\"]" }
+    ],
+    "test": [
+        { "cookieContains": "cookiebar_dismissed=1" },
+        { "cookieContains": "cookie_accept_analytical=1", "negated": true },
+        { "cookieContains": "cookie_accept_marketing=1", "negated": true }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "cmp": "hdk-cookiebar",
+    "note": "custom cookie bar shared by the Hogeschool der Kunsten Den Haag sites; opt-out goes through the preferences modal",
+    "tests": [
+        {
+            "sites": ["https://www.kabk.nl/", "https://www.koncon.nl/", "https://www.hogeschoolderkunsten.nl/"]
+        }
+    ]
+}
