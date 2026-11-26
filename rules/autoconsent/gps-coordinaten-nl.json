@@ -1,0 +1,17 @@
+{
+    "name": "gps-coordinaten.nl",
+    "runContext": { "urlPattern": "^https?://(www\\.)?gps-coordinaten\\.nl/" },
+    "prehideSelectors": ["#opencontroller"],
+    "detectCmp": [{ "exists": "#opencontroller #selectedcookies" }],
+    "detectPopup": [{ "visible": "#opencontroller.open #selectedcookies" }],
+    "optIn": [{ "waitForThenClick": "#opencontroller #allcookies" }],
+    "optOut": [
+        {
+            "click": "#opencontroller input[type=checkbox]:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "#opencontroller #selectedcookies" }
+    ],
+    "test": [{ "cookieContains": "marketing0" }]
+}
