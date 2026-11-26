@@ -9,6 +9,15 @@
                 "https://www.pocoyo.com/",
                 "https://www.storypark.com/"
             ]
+        },
+        {
+            "note": "page has a second, hidden copy of the banner, so visibility checks must accept any visible match",
+            "sites": ["https://www.byscenen.no/"]
+        },
+        {
+            "note": "close icon is the first deny control, and an early click stores the choice without closing the banner; the US banner shows too late for the popup check",
+            "sites": ["https://www.provet.com/"],
+            "options": { "skipRegions": ["US"] }
         }
     ]
 }

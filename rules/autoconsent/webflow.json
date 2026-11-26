@@ -4,15 +4,20 @@
     "prehideSelectors": [".fs-cc-components,[fs-cc=banner]"],
     "detectCmp": [
         {
-            "any": [{ "visible": ".fs-cc-components,[fs-cc=banner]" }, { "exists": "script[src*=\"@finsweet/cookie-consent\"]" }]
+            "any": [
+                { "visible": "[fs-cc=banner] [fs-cc=allow]", "check": "any" },
+                { "exists": "script[src*=\"@finsweet/cookie-consent\"]" }
+            ]
         }
     ],
     "detectPopup": [
         {
-            "visible": ".fs-cc-components,[fs-cc=banner]"
+            "visible": "[fs-cc=banner]",
+            "check": "any"
         },
         {
-            "visible": ".fs-cc-components,[fs-cc=banner] [fs-cc=allow]"
+            "visible": "[fs-cc=banner] [fs-cc=allow]",
+            "check": "any"
         }
     ],
     "optIn": [
@@ -26,7 +31,9 @@
             "then": [
                 { "wait": 500 },
                 {
-                    "waitForThenClick": "[fs-cc=banner] [fs-cc=deny]"
+                    "waitForThenClick": "[fs-cc=banner] [fs-cc=deny]",
+                    "retry": 5,
+                    "retryInterval": 1000
                 }
             ],
             "else": [
