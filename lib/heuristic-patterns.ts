@@ -130,6 +130,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /nécessaires uniquement/gi,
     /\b(?:stocker|stockons) et\/ou (?:accéder|accédons)\b/gi,
     /\bnos partenaires demandent votre consentement\b/gi,
+    // analytics notices that never say "cookies": "mesure son audience … qu'avec ton accord"
+    { pattern: /\bmesur\w* (?:\S+ ){0,2}(?:[dl]['’])?audience\b.{0,200}\b(?:accord|consentement)\b/gi, input: 'popup' },
     /\bconsentez à l.utilisation (?:de |des )?cookies\b|\bdépôt (?:de|des) cookies\b/gi,
     /\bles cookies nous permettent\b|\bnos partenaires et nous(?:-mêmes)?\b/gi,
     /\baccepter (?:&|et) fermer\b/gi,

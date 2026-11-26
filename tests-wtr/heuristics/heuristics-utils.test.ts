@@ -173,6 +173,20 @@ describe('checkHeuristicPatterns with French popups', () => {
         }
     });
 
+    it('detects French audience measurement notices in popups only', () => {
+        const texts = [
+            // nutriton-sante.com
+            'Nutrition & Santé mesure son audience (Google Analytics et Microsoft Clarity) pour améliorer le site. Ces outils ne se lancent qu’avec ton accord, et le site fonctionne pareil si tu refuses.',
+            'Nous utilisons des outils de mesure d’audience. Ils ne sont activés qu’avec votre accord.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text, 'popup').patterns.length, text).to.be.greaterThan(0);
+            expect(checkHeuristicPatterns(text, 'page').patterns, text).to.have.length(0);
+        }
+        // audience measurement without a consent request
+        expect(checkHeuristicPatterns('Nous mesurons l’audience de nos émissions chaque semaine.', 'popup').patterns).to.have.length(0);
+    });
+
     it('does not detect unrelated French text', () => {
         const texts = [
             'Rejeter les candidatures incomplètes',
