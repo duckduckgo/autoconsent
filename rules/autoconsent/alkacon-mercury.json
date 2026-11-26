@@ -1,0 +1,23 @@
+{
+    "name": "alkacon-mercury",
+    "vendorUrl": "https://www.opencms.org/",
+    "prehideSelectors": ["#privacy-policy-banner .banner"],
+    "detectCmp": [{ "exists": "#privacy-policy-banner" }],
+    "detectPopup": [{ "visible": "#privacy-policy-banner .banner" }],
+    "optIn": [{ "waitForThenClick": "#privacy-policy-banner .btn-accept" }],
+    "optOut": [
+        {
+            "if": { "exists": "#privacy-policy-banner .btn-deny-all" },
+            "then": [{ "waitForThenClick": "#privacy-policy-banner .btn-deny-all" }],
+            "else": [
+                { "click": "#privacy-policy-banner .options input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+                { "waitForThenClick": "#privacy-policy-banner .btn-save" }
+            ]
+        }
+    ],
+    "test": [
+        { "cookieContains": "privacy-options=" },
+        { "cookieContains": "|statistical", "negated": true },
+        { "cookieContains": "|external", "negated": true }
+    ]
+}

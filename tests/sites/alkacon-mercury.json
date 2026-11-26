@@ -1,0 +1,13 @@
+{
+    "cmp": "alkacon-mercury",
+    "tests": [
+        {
+            "note": "default Mercury banner: Save (with unchecked options) and Accept all",
+            "sites": ["https://www.opencms.org/en", "https://www.erzbistum-koeln.de/", "https://www.diakonie-hamburg.de/"]
+        },
+        {
+            "note": "customised banner with an extra Deny all button",
+            "sites": ["https://cts-strasbourg.eu/"]
+        }
+    ]
+}
