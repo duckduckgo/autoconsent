@@ -1,0 +1,15 @@
+{
+    "name": "handyman.nl",
+    "vendorUrl": "https://www.handyman.nl/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?handyman\\.nl/"
+    },
+    "prehideSelectors": [".cookie-popup.cookie-content"],
+    "detectCmp": [{ "exists": ".cookie-popup #frm-cookiebanner" }],
+    "detectPopup": [{ "visible": ".cookie-popup.cookie-content" }],
+    "optIn": [{ "waitForThenClick": ".cookie-popup .button.allow-cookies" }],
+    "optOut": [
+        { "click": "#frm-cookiebanner input[type=checkbox]:checked", "all": true, "optional": true },
+        { "waitForThenClick": ".cookie-popup .button.allow-cookies", "retry": 2 }
+    ]
+}

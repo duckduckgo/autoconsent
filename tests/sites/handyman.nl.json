@@ -1,0 +1,10 @@
+{
+    "cmp": "handyman.nl",
+    "tests": [
+        {
+            "note": "Opt-out cookies are set by an async POST after the click, so the self-test is unreliable; the site blocks US visitors",
+            "sites": ["https://www.handyman.nl/"],
+            "options": { "testSelfTest": false, "skipRegions": ["US"] }
+        }
+    ]
+}
