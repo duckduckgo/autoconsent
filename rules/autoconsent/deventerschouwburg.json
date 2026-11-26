@@ -1,0 +1,44 @@
+{
+    "name": "deventerschouwburg",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?deventerschouwburg\\.nl/"
+    },
+    "prehideSelectors": ["#cookie-consent.cookiemodal"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent.cookiemodal [data-consent-settings]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent.cookiemodal .cookiemodal__panel"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent [data-consent-accept]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-consent [data-consent-settings]"
+        },
+        {
+            "waitForVisible": "#cookie-consent [data-consent-save]"
+        },
+        {
+            "click": "#cookie-consent-optional:checked",
+            "optional": true
+        },
+        {
+            "click": "#cookie-consent [data-consent-save]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie-consent.cookiemodal .cookiemodal__panel",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}
