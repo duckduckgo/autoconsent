@@ -122,7 +122,8 @@ export const snippets = {
         document.querySelector('#cookie-popup #close-cookies').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
     EVAL_COOKIE_LAW_INFO_0: () => {
         if (CLI.disableAllCookies) CLI.disableAllCookies();
-        if (CLI.reject_close) CLI.reject_close();
+        // reject_close may reload the page; defer it so the eval result reaches the content script
+        if (CLI.reject_close) setTimeout(() => CLI.reject_close(), 500);
         document.body.classList.remove('cli-barmodal-open');
         return true;
     },
