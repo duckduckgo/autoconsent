@@ -466,6 +466,14 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects "analytics are off by default" in popup text only', () => {
+        const text = 'Your privacy. Your choice. Optional analytics are off by default. Your prompts and files are never tracked.';
+        expect(detectsPopup(text)).to.be.true;
+        expect(detectsPopup('Analytics is off by default. You can refuse or accept.')).to.be.true;
+        expect(detectsPage(text)).to.be.false;
+        expect(detectsPopup('Dark mode is off by default. Analytics dashboards are available on the Pro plan.')).to.be.false;
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';
