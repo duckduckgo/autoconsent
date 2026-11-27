@@ -2,7 +2,11 @@
     "cmp": "sex.com",
     "tests": [
         {
-            "sites": ["https://www.sex.com/"]
+            "note": "UK visitors are sent to another site without this popup",
+            "sites": ["https://www.sex.com/"],
+            "options": {
+                "skipRegions": ["GB"]
+            }
         }
     ]
 }

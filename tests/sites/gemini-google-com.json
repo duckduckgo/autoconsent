@@ -2,8 +2,11 @@
     "cmp": "gemini.google.com",
     "tests": [
         {
+            "note": "no popup in the US",
             "sites": ["https://gemini.google.com/app"],
-            "options": { "skipRegions": ["NA"] }
+            "options": {
+                "skipRegions": ["US"]
+            }
         }
     ]
 }

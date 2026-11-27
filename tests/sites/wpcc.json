@@ -2,14 +2,14 @@
     "cmp": "wpcc",
     "tests": [
         {
-            "sites": [
-                "https://www.aznude.com/",
-                "https://www.iihs.org/",
-                "https://www.e-grammar.org/",
-                "http://thisvid.com/",
-                "https://www.fintrux.com/",
-                "https://hdpornohub.com/"
-            ]
+            "sites": ["https://www.sparkol.com/", "https://www.animalgenetics.com/", "https://www.warwicksu.com/"]
+        },
+        {
+            "note": "UK visitors get an age verification wall in front of the page",
+            "sites": ["http://thisvid.com/"],
+            "options": {
+                "skipRegions": ["GB"]
+            }
         }
     ]
 }

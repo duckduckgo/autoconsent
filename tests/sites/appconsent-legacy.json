@@ -2,8 +2,13 @@
     "cmp": "AppConsent legacy",
     "tests": [
         {
+            "note": "the sites no longer show the popup in the US",
             "sites": ["https://www.meteociel.fr/", "https://www.maxifoot.fr/", "https://www.voltex.fr/"],
-            "options": { "testOptIn": false, "testOptOut": true, "onlyRegions": ["US", "FR"] }
+            "options": {
+                "testOptIn": false,
+                "testOptOut": true,
+                "onlyRegions": ["FR"]
+            }
         }
     ]
 }

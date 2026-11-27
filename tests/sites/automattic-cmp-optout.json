@@ -2,13 +2,17 @@
     "cmp": "automattic-cmp-optout",
     "tests": [
         {
+            "note": "the sites show no popup in the US",
             "sites": [
                 "https://automattic.com/",
                 "https://jetpack.com/",
                 "https://en.gravatar.com/",
                 "https://akismet.com/",
                 "https://wordpress.com/"
-            ]
+            ],
+            "options": {
+                "skipRegions": ["US"]
+            }
         }
     ]
 }
