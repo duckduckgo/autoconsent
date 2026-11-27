@@ -1,0 +1,17 @@
+{
+    "name": "escrapalia",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?escrapalia\\.com/"
+    },
+    "prehideSelectors": [".cookies-policy"],
+    "detectCmp": [{ "exists": ".cookies-policy .link-area a[href*=\"/configurar-cookies\"]" }],
+    "detectPopup": [{ "visible": ".cookies-policy" }],
+    "optIn": [{ "waitForThenClick": ".cookies-policy .button-area button" }],
+    "optOut": [
+        {
+            "comment": "repeated class outranks the site's .visible.transition { display: block !important }",
+            "hide": ".cookies-policy.cookies-policy.cookies-policy"
+        }
+    ]
+}

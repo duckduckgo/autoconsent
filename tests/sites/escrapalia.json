@@ -1,0 +1,9 @@
+{
+    "cmp": "escrapalia",
+    "tests": [
+        {
+            "note": "Reject is only possible on a separate settings view whose save always reloads the page, so the rule hides the banner instead",
+            "sites": ["https://www.escrapalia.com/es/", "https://www.escrapalia.com/en/", "https://inmuebles.escrapalia.com/es/"]
+        }
+    ]
+}
