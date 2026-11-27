@@ -1,0 +1,47 @@
+{
+    "name": "clideo",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?clideo\\.com/"
+    },
+    "prehideSelectors": [".widget-cookies.app-modal-layout--variant-cookies"],
+    "detectCmp": [
+        {
+            "exists": ".widget-cookies .app-modal-content-cookies__buttons"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".widget-cookies .app-modal-content-cookies__buttons"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".widget-cookies .app-modal-content-cookies__button-right button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".widget-cookies .app-modal-content-cookies__button-left button"
+        },
+        {
+            "waitForVisible": ".widget-cookies .app-modal-content-cookies__switch"
+        },
+        {
+            "waitForThenClick": ".widget-cookies .app-modal-content-cookies__button-left button"
+        },
+        {
+            "waitForVisible": ".widget-cookies",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22isAnalyticsAccepted%22:false"
+        },
+        {
+            "cookieContains": "%22isMarketingAccepted%22:false"
+        }
+    ]
+}
