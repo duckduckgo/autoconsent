@@ -1,0 +1,12 @@
+{
+    "name": "argosatlas",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?argosatlas\\.com/"
+    },
+    "prehideSelectors": ["#atlas-consent"],
+    "detectCmp": [{ "exists": "#atlas-consent [data-acx='reject']" }],
+    "detectPopup": [{ "visible": "#atlas-consent" }],
+    "optIn": [{ "waitForThenClick": "#atlas-consent [data-acx='accept']" }],
+    "optOut": [{ "waitForThenClick": "#atlas-consent [data-acx='reject']" }],
+    "test": [{ "waitForVisible": "#atlas-consent", "timeout": 1000, "check": "none" }]
+}
