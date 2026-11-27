@@ -6,10 +6,19 @@ appear in release notes needs two release-related decisions before merge:
 1. Exactly one version label using the `version:` prefix.
 2. Exactly one primary release-note category label using the `category:` prefix.
 
+Labels are not checked. When a PR is opened, the Pre-assign Labels workflow adds
+whichever of the two is still missing: path-based category labels (from
+`.github/labeler.yml`) and `version: patch`. It runs only on `opened`, so later
+label changes are left as they are.
+
 ## Version labels
 
 Use the `version:` prefix for labels that control the release impact, for
 example `version: patch`.
+
+A release bumps by the highest version label among all the PRs it includes, so
+an extra `version: major` makes the whole release major. PRs without a version
+label do not trigger a release on their own; they ship with the next release.
 
 ## Release-note category labels
 
@@ -19,6 +28,10 @@ release notes but do not fit another category.
 
 If a PR spans multiple categories, choose the category that best describes the
 user-visible release note. Mention secondary details in the PR description.
+
+PRs without a category label are listed under Other (`category: other` is the
+`default` label in `package.json`). A PR with several category labels is listed
+once, under the one that comes first in `package.json`.
 
 ## Syncing GitHub labels
 
