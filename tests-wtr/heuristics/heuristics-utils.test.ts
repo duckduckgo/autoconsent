@@ -109,6 +109,24 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
     });
 });
 
+describe('checkHeuristicPatterns with "you decide about cookies" headings', () => {
+    it('detects English and Spanish headings', () => {
+        const texts = [
+            'You decide about cookies\nGoogle Analytics · X\nNecessary only\nAccept measurement',
+            'Tú decides sobre las cookies\nGoogle Analytics · X\nSolo necesarias\nAceptar medición',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text, 'popup').patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not match decisions about other things', () => {
+        for (const text of ['You decide about the recipe', 'Tú decides sobre el diseño de las galletas']) {
+            expect(checkHeuristicPatterns(text, 'popup').patterns, text).to.have.length(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with Russian popups', () => {
     it('detects Russian cookie notices', () => {
         const texts = [
