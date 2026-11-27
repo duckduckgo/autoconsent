@@ -1,0 +1,13 @@
+{
+    "name": "jamendo",
+    "vendorUrl": "https://www.jamendo.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?jamendo\\.com/"
+    },
+    "prehideSelectors": [".messages_message.is-cookie-banner"],
+    "detectCmp": [{ "exists": ".messages_message.is-cookie-banner .messages_message_dismiss" }],
+    "detectPopup": [{ "visible": ".messages_message.is-cookie-banner" }],
+    "optIn": [{ "waitForThenClick": ".messages_message.is-cookie-banner .messages_message_dismiss" }],
+    "optOut": [{ "waitForThenClick": ".messages_message.is-cookie-banner .messages_message_dismiss" }],
+    "test": [{ "waitForVisible": ".messages_message.is-cookie-banner", "check": "none", "timeout": 2000 }]
+}
