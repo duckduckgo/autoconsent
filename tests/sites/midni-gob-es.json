@@ -1,0 +1,9 @@
+{
+    "cmp": "midni-gob-es",
+    "tests": [
+        {
+            "sites": ["https://www.midni.gob.es/"],
+            "note": "Technical-cookies notice with only an accept button, so the rule hides it. The site's WAF blocks some datacenter IPs."
+        }
+    ]
+}
