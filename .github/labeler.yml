@@ -10,18 +10,11 @@
           - any-glob-to-any-file:
                 - '.github/**'
                 - 'ci/**'
-                - 'scripts/**'
 
 'category: dependencies':
     - changed-files:
           - any-glob-to-any-file:
-                - 'package.json'
                 - 'package-lock.json'
-
-'category: documentation':
-    - changed-files:
-          - any-glob-to-any-file:
-                - 'docs/**'
 
 'category: rules':
     - changed-files:
@@ -33,7 +26,6 @@
     - changed-files:
           - any-glob-to-any-file:
                 - 'playwright/**'
-                - 'tests/*.spec.ts'
                 - 'web-test-runner.config.mjs'
 
 # Not a release-note category: exactly one 'category:' label is required per PR.
