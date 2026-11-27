@@ -1,0 +1,10 @@
+{
+    "cmp": "rexall.ca",
+    "tests": [
+        {
+            "sites": ["https://www.rexall.ca/"],
+            "options": { "onlyRegions": ["US", "CA"] },
+            "note": "The site blocks visitors from outside North America"
+        }
+    ]
+}

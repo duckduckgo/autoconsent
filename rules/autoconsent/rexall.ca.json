@@ -1,0 +1,18 @@
+{
+    "name": "rexall.ca",
+    "vendorUrl": "https://www.rexall.ca/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?rexall\\.ca/"
+    },
+    "prehideSelectors": ["[data-testid=cookie-banner]"],
+    "detectCmp": [{ "exists": "[data-testid=cookie-banner] [data-testid=cookie-banner-manage]" }],
+    "detectPopup": [{ "visible": "[data-testid=cookie-banner] [data-testid=cookie-banner-manage]" }],
+    "optIn": [{ "waitForThenClick": "[data-testid=cookie-banner] [data-testid=cookie-banner-ok]" }],
+    "optOut": [
+        { "waitForThenClick": "[data-testid=cookie-banner] [data-testid=cookie-banner-manage]" },
+        { "waitForVisible": "[role=dialog] [data-testid=consent-pref-save]" },
+        { "click": "[role=dialog] [role=switch][data-testid^=consent-toggle-][aria-checked=true]", "all": true, "optional": true },
+        { "waitForThenClick": "[role=dialog] [data-testid=consent-pref-save]" }
+    ],
+    "test": [{ "cookieContains": "rx_consent=%7B%22analytics%22%3Afalse%2C%22advertising%22%3Afalse" }]
+}
