@@ -1,0 +1,18 @@
+{
+    "name": "revolve-group",
+    "vendorUrl": "https://www.revolve.com/",
+    "detectCmp": [{ "exists": ":is(#cookiesBar, .cookies-banner--v2) :is(.js-cookie-settings-modal, .js-cookies-settings)" }],
+    "detectPopup": [{ "visible": ":is(#cookiesBar, .cookies-banner--v2) :is(.js-cookie-settings-modal, .js-cookies-settings)" }],
+    "optIn": [{ "waitForThenClick": ":is(#cookiesBar, .cookies-banner--v2) button[onclick^='cookiesClose']" }],
+    "optOut": [
+        { "waitForThenClick": ":is(#cookiesBar, .cookies-banner--v2) :is(.js-cookie-settings-modal, .js-cookies-settings)" },
+        { "waitFor": "#modal.is-active #advertising-cookies" },
+        { "click": "#modal input[type='checkbox']:checked:not([disabled])", "all": true, "optional": true },
+        {
+            "if": { "exists": "#modal a[href*='saveCookiePreference']" },
+            "then": [{ "click": "#modal a[href*='saveCookiePreference']" }],
+            "else": [{ "waitForVisible": "#modal button.js-modal-close.action-button" }, { "eval": "EVAL_REVOLVE_GROUP_SAVE" }]
+        }
+    ],
+    "test": [{ "cookieContains": "_fGA_=true" }, { "cookieContains": "_fTP_=true" }]
+}

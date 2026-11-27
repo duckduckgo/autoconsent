@@ -240,6 +240,16 @@ export const snippets = {
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
+    // some variants' save button does not save, and the modal only closes after a mousedown, which element.click() does not dispatch
+    EVAL_REVOLVE_GROUP_SAVE: () => {
+        window.saveCookiePreference();
+        const close = document.querySelector('#modal.is-active button.js-modal-close');
+        if (close) {
+            close.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, view: window }));
+            close.click();
+        }
+        return true;
+    },
     EVAL_SHOPIFY_TEST: () =>
         document.cookie.includes('gdpr_cookie_consent=0') ||
         (document.cookie.includes('_tracking_consent=') &&

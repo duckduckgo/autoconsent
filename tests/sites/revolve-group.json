@@ -1,0 +1,21 @@
+{
+    "cmp": "revolve-group",
+    "note": "in-house cookie bar of Revolve Group sites (also revolve.com and superdown.com, which are not listed: revolve.com blocks automated browsers, and superdown.com hides the bar behind its newsletter modal on most loads); the bar is not shown in the US",
+    "tests": [
+        {
+            "note": "settings modal saves when it is closed",
+            "sites": ["https://www.fwrd.com/"],
+            "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "mobile layout of the same bar",
+            "sites": ["https://www.fwrd.com/"],
+            "options": { "skipRegions": ["US"], "mobile": true }
+        },
+        {
+            "note": "settings modal with a Save Preferences link; the bar stays hidden while the newsletter modal is open",
+            "sites": ["https://www.loversandfriends.us/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}
