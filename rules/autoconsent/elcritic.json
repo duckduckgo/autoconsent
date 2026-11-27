@@ -1,0 +1,35 @@
+{
+    "name": "elcritic",
+    "vendorUrl": "https://www.elcritic.cat/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?elcritic\\.cat/"
+    },
+    "prehideSelectors": [".widget.cookies"],
+    "detectCmp": [
+        {
+            "exists": ".widget.cookies .accept-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".widget.cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".widget.cookies .accept-button"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".widget.cookies"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".widget.cookies",
+            "check": "none"
+        }
+    ]
+}
