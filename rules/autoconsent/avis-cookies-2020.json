@@ -1,0 +1,52 @@
+{
+    "name": "avis-cookies-2020",
+    "prehideSelectors": ["#divAvisCookies"],
+    "detectCmp": [
+        {
+            "exists": "#divAvisCookies #mesinfo[onclick*='loadFormDenegarCookies']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#divAvisCookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#divAvisCookies #acceptar"
+        }
+    ],
+    "optOut": [
+        {
+            "click": "#divAvisCookies #mesinfo"
+        },
+        {
+            "waitFor": "#formDenegarCookies input[name='DENEGAR']",
+            "timeout": 5000
+        },
+        {
+            "click": "#formDenegarCookies input[name='DENEGAR']:checked:not(:disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "wait": 500
+        },
+        {
+            "click": "#modalCookies .modal-footer button[data-dismiss='modal']",
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#modalCookies .modal-footer button[onclick*='formDenegarCookies']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "COOKIES2020=1%3A"
+        },
+        {
+            "cookieContains": "COOKIES2020=1%3A0",
+            "negated": true
+        }
+    ]
+}
