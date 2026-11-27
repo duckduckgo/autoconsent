@@ -1,0 +1,22 @@
+{
+    "name": "canlii",
+    "vendorUrl": "https://www.canlii.org/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?canlii(connects)?\\.org/"
+    },
+    "prehideSelectors": ["#cookieConsentBanner"],
+    "detectCmp": [{ "exists": "#cookieConsentBanner #advancedCookieConsent" }],
+    "detectPopup": [{ "visible": "#cookieConsentBanner" }],
+    "optIn": [{ "waitForThenClick": "#cookieConsentBanner #understandCookieConsent" }],
+    "optOut": [
+        { "waitForThenClick": "#cookieConsentBanner #advancedCookieConsent" },
+        { "waitForVisible": "#cookieConsentModal.show #acceptSelectedCookies" },
+        { "click": "#cookieConsentModal input.form-check-input:checked", "all": true, "optional": true },
+        {
+            "if": { "exists": "#cookieConsentBlocker" },
+            "then": [{ "waitForThenClick": "#cookieConsentModal #acceptSelectedCookies", "retry": 5, "retryInterval": 500 }],
+            "else": [{ "click": "#cookieConsentModal #acceptSelectedCookies" }]
+        }
+    ],
+    "test": [{ "cookieContains": "cookieConsent=NECESSARY" }]
+}

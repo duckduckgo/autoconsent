@@ -1,0 +1,13 @@
+{
+    "cmp": "canlii",
+    "tests": [
+        {
+            "note": "canlii.org shows the banner only once its handlers are bound, and reloads the page after the choice is saved",
+            "sites": ["https://www.canlii.org/"]
+        },
+        {
+            "note": "canliiconnects.org renders the banner and #cookieConsentBlocker before its handlers are bound, so the final click is retried",
+            "sites": ["https://canliiconnects.org/"]
+        }
+    ]
+}
