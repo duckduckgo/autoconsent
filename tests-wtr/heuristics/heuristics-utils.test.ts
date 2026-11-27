@@ -173,6 +173,14 @@ describe('checkHeuristicPatterns with French popups', () => {
         }
     });
 
+    it('detects an audience measurement opt-out in popup text only', () => {
+        const text =
+            'Maître Charlemagne compte les visites de façon anonyme. J’ai lu, continuons l’aventure Refuser la mesure d’audience Plus tard';
+        expect(checkHeuristicPatterns(text, 'popup').patterns, text).to.have.length(1);
+        expect(checkHeuristicPatterns(text, 'page').patterns, text).to.have.length(0);
+        expect(checkHeuristicPatterns('Nous réalisons une mesure d’audience anonyme.', 'popup').patterns).to.have.length(0);
+    });
+
     it('does not detect unrelated French text', () => {
         const texts = [
             'Rejeter les candidatures incomplètes',
