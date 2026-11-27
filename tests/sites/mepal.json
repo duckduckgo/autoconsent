@@ -1,0 +1,15 @@
+{
+    "cmp": "mepal.com",
+    "tests": [
+        {
+            "note": "custom Cookiebot template whose own Deny button also removes the page overlay; the banner is only shown in the EU, not in the US, GB, AU, CA or JP",
+            "sites": ["https://www.mepal.com/de", "https://www.mepal.com/nl"],
+            "options": { "onlyRegions": ["DE", "NL"] }
+        },
+        {
+            "note": "the overlay was reported on mobile",
+            "sites": ["https://www.mepal.com/de"],
+            "options": { "onlyRegions": ["DE"], "mobile": true }
+        }
+    ]
+}
