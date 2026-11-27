@@ -1,0 +1,30 @@
+{
+    "name": "palco4",
+    "vendorUrl": "https://www.palco4.com/",
+    "prehideSelectors": ["#cookieCapa.cookies_msg_wrapper"],
+    "detectCmp": [
+        {
+            "exists": "#cookieCapa #p4_cookies_alert_info"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieCapa #p4_cookies_alert_info"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#p4_cookies_alert_info button[onclick^=\"acceptAllCookies\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#p4_cookies_alert_info button[onclick^=\"declineCookies\"]"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_PALCO4_TEST"
+        }
+    ]
+}

@@ -226,6 +226,7 @@ export const snippets = {
     },
     EVAL_NHNIEUWS_TEST: () => !!localStorage.getItem('psh:cookies-seen'),
     EVAL_OSANO_DETECT: () => !!window.Osano?.cm?.dialogOpen,
+    EVAL_PALCO4_TEST: () => localStorage.getItem('adsCookies') === 'false',
     EVAL_PANDECTES_TEST: () =>
         document.cookie.includes('_pandectes_gdpr=') &&
         JSON.parse(
