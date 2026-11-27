@@ -1,0 +1,35 @@
+{
+    "name": "codeur",
+    "vendorUrl": "https://www.codeur.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?codeur\\.com/"
+    },
+    "prehideSelectors": [".accept-cookies[data-controller=\"cookie-consent\"]"],
+    "detectCmp": [
+        {
+            "exists": ".accept-cookies[data-controller=\"cookie-consent\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".accept-cookies[data-controller=\"cookie-consent\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".accept-cookies[data-controller=\"cookie-consent\"] .accept-cookies-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".accept-cookies[data-controller=\"cookie-consent\"] .accept-cookies-btn"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".accept-cookies[data-controller=\"cookie-consent\"]",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}
