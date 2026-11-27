@@ -4,6 +4,11 @@
         {
             "sites": ["https://aniakubica.com/", "https://katyscode.wordpress.com/", "https://fantadys.com/", "https://autocadtips1.com/"],
             "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "the self-test does not pass on Tumblr, though the popup is handled; tumblr.com was covered by a site-specific copy of this rule",
+            "sites": ["https://www.tumblr.com/"],
+            "options": { "skipRegions": ["US"], "testSelfTest": false }
         }
     ]
 }

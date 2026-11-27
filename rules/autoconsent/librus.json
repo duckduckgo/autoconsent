@@ -4,18 +4,18 @@
     "runContext": {
         "urlPattern": "^https?://([a-z0-9-]+\\.)?librus\\.pl/"
     },
-    "prehideSelectors": [".consent-categories-modal-wrapper"],
-    "detectCmp": [{ "exists": "#consent-categories-modal [data-modal-consent-open-settings]" }],
-    "detectPopup": [{ "visible": "#consent-categories-modal [data-modal-consent-open-settings]" }],
-    "optIn": [{ "waitForThenClick": "#consent-categories-description [data-modal-submit-all]" }],
+    "prehideSelectors": ["[class*=\"cookiesPolicyDrawerBackground\"]"],
+    "detectCmp": [{ "exists": "[class*=\"cookiesPolicyWrapper\"] > [class*=\"_actions_\"] > button[class*=\"buttonDefault\"]" }],
+    "detectPopup": [{ "visible": "[class*=\"cookiesPolicyWrapper\"] > [class*=\"_actions_\"] > button[class*=\"buttonDefault\"]" }],
+    "optIn": [{ "waitForThenClick": "[class*=\"cookiesPolicyWrapper\"] > [class*=\"_actions_\"] > button[class*=\"buttonSecondary\"]" }],
     "optOut": [
-        { "waitForThenClick": "#consent-categories-modal [data-modal-consent-open-settings]" },
-        { "waitFor": "#edit-consent-app input[name=consent-category][value=nc]:checked" },
+        { "waitForThenClick": "[class*=\"cookiesPolicyWrapper\"] > [class*=\"_actions_\"] > button[class*=\"buttonDefault\"]" },
+        { "waitForVisible": "[class*=\"cookiesPolicyWrapper\"] [class*=\"customizeDialogBackButton\"]" },
         {
-            "if": { "exists": "#edit-consent-app input[name=consent-category]:checked:not(:disabled)" },
-            "then": [{ "click": "#edit-consent-app input[name=consent-category]:checked:not(:disabled)", "all": true }]
+            "if": { "exists": "[class*=\"cookiesPolicyWrapper\"] input[role=switch]:checked:not(:disabled)" },
+            "then": [{ "click": "[class*=\"cookiesPolicyWrapper\"] input[role=switch]:checked:not(:disabled)", "all": true }]
         },
-        { "waitForThenClick": "#consent-categories-settings [data-modal-submit]" }
+        { "waitForThenClick": "[class*=\"cookiesPolicyWrapper\"] > [class*=\"_actions_\"] > button[class*=\"buttonDefault\"]" }
     ],
-    "test": [{ "waitForVisible": "#consent-categories-modal", "check": "none", "timeout": 2000 }]
+    "test": [{ "waitForVisible": "[class*=\"cookiesPolicyWrapper\"]", "check": "none", "timeout": 2000 }]
 }
