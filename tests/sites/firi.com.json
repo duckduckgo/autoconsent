@@ -1,0 +1,10 @@
+{
+    "cmp": "firi.com",
+    "tests": [
+        {
+            "note": "the site writes its consent cookie with an invalid domain, so the choice is never stored and there is nothing to self-test",
+            "sites": ["https://firi.com/", "https://firi.com/no/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

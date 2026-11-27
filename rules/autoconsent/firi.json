@@ -1,0 +1,30 @@
+{
+    "name": "firi.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?firi\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "div:has(> h2 + p > a[href$='/cookies']) > div.mt-4 button.bg-transparent, div:has(> h2 + p + a[href$='/cookies']) > div.mt-4 button.bg-transparent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div:has(> h2 + p > a[href$='/cookies']) > div.mt-4 button.bg-transparent, div:has(> h2 + p + a[href$='/cookies']) > div.mt-4 button.bg-transparent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div:has(> h2 + p > a[href$='/cookies']) > div.mt-4 button.bg-firi-blue, div:has(> h2 + p + a[href$='/cookies']) > div.mt-4 button.bg-firi-blue"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div:has(> h2 + p > a[href$='/cookies']) > div.mt-4 button.bg-transparent, div:has(> h2 + p + a[href$='/cookies']) > div.mt-4 button.bg-transparent"
+        },
+        {
+            "waitForThenClick": "section:has(input[type='checkbox']) + div.mt-6 > button"
+        }
+    ]
+}
