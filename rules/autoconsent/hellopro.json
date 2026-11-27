@@ -1,0 +1,13 @@
+{
+    "name": "hellopro",
+    "vendorUrl": "https://www.hellopro.fr/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?hellopro\\.fr/"
+    },
+    "prehideSelectors": ["#cookie-overlay"],
+    "detectCmp": [{ "exists": "#cookie-overlay #cookie-popup #continue-without-accepting" }],
+    "detectPopup": [{ "visible": "#cookie-overlay #cookie-popup" }],
+    "optIn": [{ "waitForThenClick": "#cookie-popup #accept-and-close" }],
+    "optOut": [{ "waitForThenClick": "#cookie-popup #continue-without-accepting" }],
+    "test": [{ "cookieContains": "analytics_storage%3Adenied" }]
+}
