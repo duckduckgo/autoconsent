@@ -2,7 +2,16 @@
     "cmp": "eu-cookie-compliance-banner",
     "tests": [
         {
-            "sites": ["https://publichealth.jhu.edu/", "https://bibliotheek.be/"]
+            "sites": ["https://publichealth.jhu.edu/", "https://bibliotheek.be/", "https://www.ru.nl/"]
+        },
+        {
+            "note": "older module builds that do not set the eu-cookie-compliance-popup-open body class; provincia.savona.it shows the popup at the top",
+            "sites": ["https://www.pkn.pl/", "https://www.provincia.savona.it/"]
+        },
+        {
+            "note": "older module build without the body class, decline button hidden but wired to the decline action; the page reloads after the click",
+            "sites": ["https://www.aqp.it/"],
+            "options": { "testSelfTest": false }
         }
     ]
 }
