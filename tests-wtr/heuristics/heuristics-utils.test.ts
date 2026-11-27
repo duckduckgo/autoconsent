@@ -466,6 +466,20 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects analytics-only consent without the cookie noun in popups, not in page text', () => {
+        const texts = [
+            'Allow Google Analytics to measure site visits and game-launch clicks? Your choice does not affect play. Privacy details',
+            'You can accept or decline analytics at any time.',
+            'Usamos Google Analytics para medir las visitas y mejorar la web.',
+            'Puedes aceptar o rechazar la analítica y cambiar tu elección en cualquier momento.',
+        ];
+        for (const text of texts) {
+            expect(detectsPopup(text), text).to.be.true;
+            expect(detectsPage(text), text).to.be.false;
+        }
+        expectNotDetected(['Allow Google Analytics access to your property', 'Usamos Google Ads para nuestras campañas.']);
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';
