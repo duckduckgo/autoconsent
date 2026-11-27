@@ -1,0 +1,9 @@
+{
+    "name": "citapasion",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?citapasion\\.com/" },
+    "detectCmp": [{ "exists": "#privacy-choices-banner #aceptar + button" }],
+    "detectPopup": [{ "visible": ".modal__aviso_18" }],
+    "optIn": [{ "waitForThenClick": "#privacy-choices-banner #aceptar" }],
+    "optOut": [{ "click": "#privacy-choices-banner #aceptar + button" }, { "eval": "EVAL_CITAPASION_0" }],
+    "test": [{ "cookieContains": "\"hasUserInteracted\":true" }, { "cookieContains": "\"analytics\":false" }]
+}

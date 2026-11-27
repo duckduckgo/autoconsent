@@ -117,6 +117,11 @@ export const snippets = {
             ),
         ).consents.statistics,
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
+    // the age gate's accept button also clicks the cookie banner button with this id, overriding a reject
+    EVAL_CITAPASION_0: () => {
+        document.querySelector('#privacy-choices-banner #aceptar')?.removeAttribute('id');
+        return true;
+    },
     // the close icon is an SVG, which has no click() method
     EVAL_COOKIE_POPUP_CLOSE: () =>
         document.querySelector('#cookie-popup #close-cookies').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
