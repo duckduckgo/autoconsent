@@ -117,6 +117,15 @@ export const snippets = {
             ),
         ).consents.statistics,
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
+    EVAL_COMPARABUS_OPT_OUT: () => {
+        localStorage.setItem('cookie_consent', 'false');
+        // the banner accepts on scroll; drop its jQuery window scroll handler, as the site does once it fires
+        Object.getOwnPropertyNames(window)
+            .filter((k) => /^jQuery\d+$/.test(k))
+            .forEach((k) => delete window[k]?.events?.scroll);
+        return true;
+    },
+    EVAL_COMPARABUS_TEST: () => localStorage.getItem('cookie_consent') === 'false',
     // the close icon is an SVG, which has no click() method
     EVAL_COOKIE_POPUP_CLOSE: () =>
         document.querySelector('#cookie-popup #close-cookies').dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,

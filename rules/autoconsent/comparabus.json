@@ -1,0 +1,18 @@
+{
+    "name": "comparabus",
+    "_metadata": {
+        "vendorUrl": "https://www.comparabus.com/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?comparabus\\.com/"
+    },
+    "prehideSelectors": ["#cookieInfo"],
+    "detectCmp": [{ "exists": "#cookieInfo[data-apiurl]" }],
+    "detectPopup": [{ "visible": "#cookieInfo" }],
+    "optIn": [{ "waitForThenClick": "#cookieInfo b" }],
+    "optOut": [{ "eval": "EVAL_COMPARABUS_OPT_OUT" }, { "hide": "#cookieInfo" }],
+    "test": [{ "eval": "EVAL_COMPARABUS_TEST" }]
+}
