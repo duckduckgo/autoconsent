@@ -1,0 +1,10 @@
+{
+    "cmp": "gayfute",
+    "tests": [
+        {
+            "note": "the site answers our non-FR regional proxies with a Cloudflare 522 error; through Oxylabs the same popup shows in US, GB and DE",
+            "sites": ["https://www.gayfute.com/"],
+            "options": { "onlyRegions": ["FR"] }
+        }
+    ]
+}
