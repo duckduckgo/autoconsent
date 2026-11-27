@@ -1,0 +1,24 @@
+{
+    "cmp": "pd-cookie-consent",
+    "tests": [
+        {
+            "note": "v1.5 div-based modal with a first-layer reject button",
+            "sites": ["https://www.radionervion.com/", "https://www.fuengirola.es/", "https://mobiliagestion.es/"]
+        },
+        {
+            "note": "v1.5 modal; accepting loads Google ads, which then show a Funding Choices popup",
+            "sites": ["https://radiopopular.com/"],
+            "options": { "testOptIn": false }
+        },
+        {
+            "note": "v1.7 dialog/button modal with a first-layer reject button; the page reloads after rejecting",
+            "sites": ["https://guiadecadiz.com/", "https://www.galiciadigital.com/", "https://www.calafell.cat/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "configured without a reject button: closing the modal stores the decision without consent; accepting loads Google ads with a Funding Choices popup",
+            "sites": ["https://electronoobs.com/", "https://avatarinternet.com/", "https://iber-dreams.com/"],
+            "options": { "testOptIn": false }
+        }
+    ]
+}

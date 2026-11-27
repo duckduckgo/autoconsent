@@ -1,0 +1,16 @@
+{
+    "name": "pd-cookie-consent",
+    "vendorUrl": "https://pdcc.gdpr.es/",
+    "prehideSelectors": ["#pdcc-modal-bg"],
+    "detectCmp": [{ "exists": "#pdcc-modal-bg #pdcc-modal-accept" }],
+    "detectPopup": [{ "visible": "#pdcc-modal-bg #pdcc-modal-accept" }],
+    "optIn": [{ "waitForThenClick": "#pdcc-modal-accept" }],
+    "optOut": [
+        {
+            "if": { "visible": "#pdcc-modal-reject" },
+            "then": [{ "click": "#pdcc-modal-reject" }],
+            "else": [{ "click": "#pdcc-close-modal" }]
+        }
+    ],
+    "test": [{ "cookieContains": "\"showModal\":false" }]
+}
