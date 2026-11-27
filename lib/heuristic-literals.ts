@@ -95,6 +95,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["naviguant","poursuivant"],
     [],
     ["confidentialité"],
+    [" technique","mesure "],
     ["verwenden"],
     ["partner"],
     ["zugriff auf informationen auf"],

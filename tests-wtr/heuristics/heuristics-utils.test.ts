@@ -173,6 +173,14 @@ describe('checkHeuristicPatterns with French popups', () => {
         }
     });
 
+    it('detects short French notices about technical and audience cookies in popups only', () => {
+        const text =
+            'Cookies Un cookie technique maintient la connexion. Une mesure de fréquentation recense les pages consultées. Elle ne sert pas à choisir une publicité. En savoir plus Compris';
+        expect(checkHeuristicPatterns(text, 'popup').patterns.length).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns(text, 'page').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Une technique de mesure du temps de connexion', 'popup').patterns).to.have.length(0);
+    });
+
     it('does not detect unrelated French text', () => {
         const texts = [
             'Rejeter les candidatures incomplètes',
