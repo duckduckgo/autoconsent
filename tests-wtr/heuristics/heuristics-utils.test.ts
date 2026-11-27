@@ -466,6 +466,18 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects optional personalized ads in popups only', () => {
+        const texts = [
+            'We count visits anonymously, without cookies or anything that identifies you. Detailed usage metrics and personalized ads are optional.',
+            'Contamos visitas de forma anónima, sin cookies ni datos que te identifiquen. Las métricas detalladas de uso y la publicidad personalizada son opcionales.',
+        ];
+        for (const text of texts) {
+            expect(detectsPopup(text), text).to.be.true;
+            expect(detectsPage(text), text).to.be.false;
+        }
+        expectNotDetected(['Personalized ads are shown to signed-in users.', 'Ofrecemos publicidad personalizada para tu negocio.']);
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';

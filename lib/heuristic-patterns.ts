@@ -89,6 +89,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bwe have cookies\b/gi,
     /\b(?:revoke|withdraw) your consent at any time\b|\beinwilligung jederzeit widerrufen\b/gi,
     /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi,
+    // consent for ads without cookie wording; page text has it in privacy policies, so popup text only
+    { pattern: /\bpersonali[sz]ed (?:ads|advertising) (?:are|is) optional\b/gi, input: 'popup' },
     /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi,
     /\baccept or (?:reject|decline) (?:all |optional |non-essential )?cookies\b/gi,
     // the consent choice itself, as in FR/IT/ES: "continuer sans accepter"
@@ -258,6 +260,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bestrictamente necesarias\b/gi,
     /\balmacenar o acceder a (?:la )?información\b/gi,
     /\btecnolog[ií]as de seguimiento\b/gi,
+    { pattern: /\bpublicidad personalizada (?:es|son) opcional(?:es)?\b/gi, input: 'popup' },
 
     // Polish (PL)
     // examples:
