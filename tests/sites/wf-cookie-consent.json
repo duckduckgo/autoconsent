@@ -1,0 +1,13 @@
+{
+    "cmp": "wf-cookie-consent",
+    "tests": [
+        {
+            "note": "current plugin markup (wf-cc classes)",
+            "sites": ["https://cineuropa.gal/", "https://www.asxetos.gr/", "https://edam.com.tr/", "https://scene360.com/"]
+        },
+        {
+            "note": "older plugin markup with inline styles and no classes",
+            "sites": ["https://joaoapps.com/", "https://quelle-demarche.com/"]
+        }
+    ]
+}

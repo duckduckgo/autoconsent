@@ -1,0 +1,10 @@
+{
+    "name": "wf-cookie-consent",
+    "vendorUrl": "https://wordpress.org/plugins/wf-cookie-consent/",
+    "prehideSelectors": ["#cookieChoiceInfo"],
+    "detectCmp": [{ "exists": "#cookieChoiceInfo #cookieChoiceDismissIcon" }],
+    "detectPopup": [{ "visible": "#cookieChoiceInfo" }],
+    "optIn": [{ "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDismiss" }],
+    "optOut": [{ "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDismissIcon" }],
+    "test": [{ "cookieContains": "displayCookieConsent=y" }]
+}
