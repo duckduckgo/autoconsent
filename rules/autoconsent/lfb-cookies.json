@@ -1,0 +1,9 @@
+{
+    "name": "lfb-cookies",
+    "prehideSelectors": ["#contenedor_aviso_cookies"],
+    "detectCmp": [{ "exists": "#contenedor_aviso_cookies [id^=\"rechazar_cookies_\"]" }],
+    "detectPopup": [{ "visible": "#contenedor_aviso_cookies" }],
+    "optIn": [{ "waitForThenClick": "#contenedor_aviso_cookies [id^=\"aceptar_cookies_\"]" }],
+    "optOut": [{ "waitForThenClick": "#contenedor_aviso_cookies [id^=\"rechazar_cookies_\"]", "retry": 2 }],
+    "test": [{ "waitForVisible": "#contenedor_aviso_cookies", "check": "none", "timeout": 1000 }]
+}
