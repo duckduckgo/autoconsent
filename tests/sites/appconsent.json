@@ -8,6 +8,16 @@
         {
             "sites": ["https://www.bestwordlist.com/", "https://www.sportsmole.co.uk/"],
             "options": { "testOptIn": false, "testOptOut": true, "onlyRegions": ["GB", "US", "DE"] }
+        },
+        {
+            "note": "\"Continue without accepting\" (.button__skip) link instead of a refuse button",
+            "sites": ["https://www.controinformazione.info/"],
+            "options": { "testOptIn": false, "testOptOut": true, "onlyRegions": ["GB", "US", "DE", "IT"] }
+        },
+        {
+            "note": "no refuse or skip on the first layer: opt-out goes through the global refuse switch in the settings layer",
+            "sites": ["https://www.lesbonsnumeros.com/", "https://www.mablouseblanche.fr/"],
+            "options": { "testOptIn": false, "testOptOut": true, "onlyRegions": ["GB", "US", "DE", "FR"] }
         }
     ]
 }

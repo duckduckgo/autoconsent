@@ -18,12 +18,43 @@
     ],
     "optOut": [
         {
-            "waitFor": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__refuseAll, .button__skip"]
+            "waitFor": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__refuseAll, .button__skip, .button__openPrivacyCenter"]
         },
         {
-            "if": { "exists": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__refuseAll"] },
-            "then": [{ "click": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__refuseAll"] }],
-            "else": [{ "click": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__skip"] }]
+            "if": {
+                "exists": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__refuseAll"]
+            },
+            "then": [
+                {
+                    "click": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__refuseAll"]
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__skip"]
+                    },
+                    "then": [
+                        {
+                            "click": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__skip"]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".button__openPrivacyCenter"]
+                        },
+                        {
+                            "waitForThenClick": ["iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']", ".globalChoice__switch .disallow"]
+                        },
+                        {
+                            "waitForThenClick": [
+                                "iframe[srcdoc*='cdn.appconsent.io/tcf2-clear/']",
+                                ".button__save:not([aria-disabled='true'])"
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "test": [
