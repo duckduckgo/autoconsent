@@ -4,25 +4,30 @@
     "runContext": {
         "urlPattern": "^https://(www\\.)?adultfriendfinder\\.com/"
     },
-    "prehideSelectors": [".fullpageCover"],
+    "prehideSelectors": [".fullpageCover", "[data-cookie-banner]"],
     "detectCmp": [
         {
-            "exists": ".fullpageCover a[href*='/go/page/privacy.html']"
+            "exists": ".fullpageCover a[href*='/go/page/privacy.html'], [data-cookie-banner] button"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".fullpageCover a[href*='/go/page/privacy.html']"
+            "visible": ".fullpageCover a[href*='/go/page/privacy.html'], [data-cookie-banner] button",
+            "check": "any"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": ".fullpageCover div.rounded-full:nth-child(1)"
+            "if": { "exists": ".fullpageCover a[href*='/go/page/privacy.html']" },
+            "then": [{ "waitForThenClick": ".fullpageCover div.rounded-full:nth-child(1)" }],
+            "else": [{ "waitForThenClick": "[data-cookie-banner] button.rd-btn-primary" }]
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": ".fullpageCover div.rounded-full:nth-child(2)"
+            "if": { "exists": ".fullpageCover a[href*='/go/page/privacy.html']" },
+            "then": [{ "waitForThenClick": ".fullpageCover div.rounded-full:nth-child(2)" }],
+            "else": [{ "waitForThenClick": "[data-cookie-banner] button:not(.rd-btn-primary):first-of-type" }]
         }
     ],
     "test": [
