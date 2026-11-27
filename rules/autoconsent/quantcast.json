@@ -1,5 +1,9 @@
 {
     "name": "quantcast",
+    "runContext": {
+        "main": true,
+        "frame": true
+    },
     "prehideSelectors": ["#qc-cmp2-main,#qc-cmp2-container"],
     "detectCmp": [
         {

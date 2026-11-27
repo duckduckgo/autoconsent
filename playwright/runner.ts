@@ -83,6 +83,8 @@ type ContentScriptTarget = {
     send: (message: object) => Promise<unknown>;
     evalInMainWorld: (code: string) => Promise<unknown>;
     isMainFrame: boolean;
+    // identifies the frame across its navigations
+    frameKey: unknown;
 };
 
 const defaultOptions: TestOptions = {
@@ -120,6 +122,7 @@ class TestRun {
     urlHash: string;
     formFactor: string;
     received: ContentScriptMessage[] = [];
+    messageFrames = new Map<ContentScriptMessage, unknown>();
     screenshotCounter = 0;
     selfTestTarget: ContentScriptTarget | null = null;
     response: Response | null = null;
@@ -167,6 +170,7 @@ class TestRun {
                         send: (message) => transport.sendToContentScript(frameRef, message),
                         evalInMainWorld: (code) => transport.evalInMainWorld(frameRef, code),
                         isMainFrame: transport.isMainFrame(frameRef),
+                        frameKey: transport.frameId(frameRef) ?? frameRef,
                     });
                 },
                 contentScript,
@@ -178,6 +182,7 @@ class TestRun {
                     send: (message) => frame.evaluate(`autoconsentReceiveMessage(${JSON.stringify(message)})`),
                     evalInMainWorld: (code) => frame.evaluate(code),
                     isMainFrame: frame.parentFrame() === null,
+                    frameKey: frame,
                 }),
             );
         }
@@ -279,6 +284,7 @@ class TestRun {
     async messageCallback(msg: ContentScriptMessage, target: ContentScriptTarget) {
         LOG_MESSAGES.includes(msg.type) && console.log(msg);
         this.received.push(msg);
+        this.messageFrames.set(msg, target.frameKey);
         switch (msg.type) {
             case 'init': {
                 // Use full rules for optIn (compact rules omit optIn steps), compact rules for optOut.
@@ -399,6 +405,10 @@ class TestRun {
         const popupFoundMessages = this.findReceivedMessages({ type: 'popupFound' });
         for (let i = 0; i < popupFoundMessages.length; i++) {
             for (let j = i + 1; j < popupFoundMessages.length; j++) {
+                // the same popup in two copies of a frame (e.g. ad iframes) is not a reload loop
+                if (this.messageFrames.get(popupFoundMessages[i]) !== this.messageFrames.get(popupFoundMessages[j])) {
+                    continue;
+                }
                 expect(popupFoundMessages[i], `Possible reload loop: found multiple identical popupFound messages`).not.toEqual(
                     popupFoundMessages[j],
                 );

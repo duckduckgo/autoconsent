@@ -18,6 +18,16 @@
             "note": "US \"Do Not Process My Personal Information\" (USP/MSPA) dialog; footyheadlines renders the opt-out list collapsed",
             "sites": ["https://www.motor16.com/", "https://www.quotev.com/", "https://www.footyheadlines.com/"],
             "options": { "testOptIn": false, "onlyRegions": ["US"] }
+        },
+        {
+            "note": "GDPR dialog only inside two cross-origin ad iframes, each handled on its own (hence expectedRuns 2); not shown in the US, CA, AU or JP",
+            "sites": ["https://slopecom.com/", "https://idle-breakout.github.io/"],
+            "options": { "expectedRuns": 2, "timeout": 60000, "skipRegions": ["US", "CA", "AU", "JP"] }
+        },
+        {
+            "note": "GDPR dialog on the page and inside three cross-origin ad iframes (hence expectedRuns 4); not shown in the US, CA, AU or JP",
+            "sites": ["https://cookieclickerunblocked.github.io/", "https://slopeunblock.github.io/"],
+            "options": { "expectedRuns": 4, "timeout": 60000, "skipRegions": ["US", "CA", "AU", "JP"] }
         }
     ]
 }

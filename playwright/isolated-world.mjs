@@ -16,6 +16,7 @@
  * @property {(frameRef: string, message: object) => Promise<void>} sendToContentScript
  * @property {(frameRef: string, code: string) => Promise<any>} evalInMainWorld
  * @property {(frameRef: string) => boolean} isMainFrame - Whether the frame is the page's top frame.
+ * @property {(frameRef: string) => string|undefined} frameId - The CDP frame id, stable across the frame's navigations.
  */
 
 /**
@@ -88,6 +89,7 @@ export async function injectIntoIsolatedWorld(page, createMessageHandler, conten
         },
         isMainFrame: (isolatedUniqueId) =>
             sessionByContext.get(isolatedUniqueId) === pageSession && frameByContext.get(isolatedUniqueId) === mainFrameId,
+        frameId: (isolatedUniqueId) => frameByContext.get(isolatedUniqueId),
     });
 
     async function attachToSession(/** @type {any} */ client) {
