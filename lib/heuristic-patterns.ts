@@ -123,7 +123,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bvous consentez\b.{0,60}\bcookies\b/gi,
     /\baccepter ou refuser (?:\S+ ){0,3}cookies\b/gi,
     /\bles cookies nous (?:sont|permettent|aident)\b/gi,
-    /\btraceurs (?:optionnels|publicitaires|non essentiels)\b/gi,
+    /\btraceurs (?:optionnels|facultatifs|publicitaires|non essentiels)\b/gi,
     /seulement nécessaires/gi,
     /je désactive les finalités non essentielles/gi,
     /cookies essentiels uniquement/gi,

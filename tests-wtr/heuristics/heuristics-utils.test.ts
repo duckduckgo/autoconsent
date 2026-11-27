@@ -1559,6 +1559,7 @@ describe('checkHeuristicPatterns without bare accept-all / reject-all labels', (
             'En cliquant sur « Tout accepter », vous acceptez le dépôt de cookies sur votre appareil.',
             'Les cookies nous permettent de mesurer l’audience.',
             'Nous pouvons utiliser des traceurs optionnels pour mesurer l’audience.',
+            'Nous utilisons des traceurs facultatifs pour mesurer l’audience et améliorer le site.',
             'Wenn Sie auf „Alle akzeptieren“ klicken, stimmen Sie der Speicherung von Cookies zu.',
             'Durch Klicken auf „Alle akzeptieren“ gestatten Sie den Einsatz folgender Dienste.',
             'Um diese Dienste verwenden zu dürfen, benötigen wir Ihre Einwilligung.',
