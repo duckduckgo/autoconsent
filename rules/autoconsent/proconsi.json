@@ -1,0 +1,35 @@
+{
+    "name": "proconsi",
+    "vendorUrl": "https://www.proconsi.com/",
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "#permiso_cookies #permiso_cookies_acepto"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#permiso_cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#permiso_cookies [id=\"permiso_cookies_acepto\"][onclick*=\"cargarTodasLasCookies\"]",
+            "retry": 5,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#permiso_cookies [id=\"permiso_cookies_acepto\"][onclick*=\"createCookie\"]:not([onclick*=\"cargarTodasLasCookies\"])",
+            "retry": 5,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "visible": "#permiso_cookies",
+            "check": "none"
+        }
+    ]
+}
