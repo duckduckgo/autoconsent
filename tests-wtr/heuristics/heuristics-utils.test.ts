@@ -1503,6 +1503,16 @@ describe('getButtonData', () => {
         expect(buttons[0].text).to.equal('Visible');
     });
 
+    it('keeps a button whose hidden part has a button-like class', () => {
+        container.innerHTML = '<button><span class="button__loading-icon" style="display:none"></span>Continue without accepting</button>';
+
+        const buttons = getButtonData(container);
+
+        expect(buttons).to.have.length(1);
+        expect(buttons[0].text).to.equal('Continue without accepting');
+        expect(buttons[0].element.tagName).to.equal('BUTTON');
+    });
+
     it('ignores buttons without text', () => {
         container.innerHTML = '<button></button><button>Has Text</button>';
 

@@ -463,8 +463,10 @@ function getPopupLikeElements(deadline: number): { elements: HTMLElement[]; shad
  */
 export function getButtonData(el: HTMLElement, shadowHosts?: HTMLElement[]): ButtonData[] {
     const buttons: ButtonData[] = [];
-    for (const b of excludeContainers(getButtonLikeElements(el, shadowHosts))) {
-        if (!isElementVisible(b) || isDisabled(b)) {
+    // drop hidden elements first, so a hidden [class*="button"] part (such as a loading icon) does not displace its button
+    const visibleButtons = getButtonLikeElements(el, shadowHosts).filter((b) => isElementVisible(b));
+    for (const b of excludeContainers(visibleButtons)) {
+        if (isDisabled(b)) {
             continue;
         }
         const text =
