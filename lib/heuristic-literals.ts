@@ -198,6 +198,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["estrictamente necesarias"],
     ["almacenar o acceder a "],
     ["as de seguimiento"],
+    ["aceptar","rechazar"],
     ["cookie"],
     ["używać","używamy"],
     ["cele przetwarzania twoich danych przez zaufanych partnerów iab"],

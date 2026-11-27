@@ -258,6 +258,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bestrictamente necesarias\b/gi,
     /\balmacenar o acceder a (?:la )?información\b/gi,
     /\btecnolog[ií]as de seguimiento\b/gi,
+    // analytics consent choice without the cookie noun: "Rechazar analítica" / "Aceptar analítica"
+    /\b(?:aceptar|rechazar) (?:la )?anal[ií]ticas?\b/gi,
 
     // Polish (PL)
     // examples:

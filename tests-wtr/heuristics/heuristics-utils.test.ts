@@ -161,6 +161,26 @@ describe('checkHeuristicPatterns with Italian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Spanish popups', () => {
+    it('detects Spanish analytics consent notices without the cookie noun', () => {
+        const texts = [
+            // financial-hub.es
+            'Preferencias de privacidad Usamos PostHog para medir qué páginas se visitan y detectar errores. Rechazar analítica Aceptar analítica',
+            'Puedes aceptar la analítica o rechazarla',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Spanish text', () => {
+        const texts = ['Curso de geometría analítica para principiantes', 'Aceptar analíticamente los resultados del estudio'];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with French popups', () => {
     it('detects French cookie notices', () => {
         const texts = [
