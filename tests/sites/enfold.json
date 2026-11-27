@@ -1,0 +1,18 @@
+{
+    "cmp": "enfold",
+    "tests": [
+        {
+            "note": "Refuse button in the cookie bar",
+            "sites": ["https://elspallaresos.cat/", "https://dgh.de/", "https://www.linksystems-uk.com/"]
+        },
+        {
+            "note": "No refuse button in the bar: the rule clicks the one in the settings modal",
+            "sites": ["https://ecma-international.org/", "https://maikpfingsten.de/", "https://sparkchart.com/"]
+        },
+        {
+            "note": "Settings modal opens on load, and refusing reloads the page",
+            "sites": ["https://bundesfeuerwehrverband.at/", "https://netgow.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

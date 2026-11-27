@@ -1,0 +1,19 @@
+{
+    "name": "enfold",
+    "vendorUrl": "https://kriesi.at/themes/enfold/",
+    "prehideSelectors": [".avia-cookie-consent-wrap .avia-cookie-consent"],
+    "detectCmp": [{ "exists": ".avia-cookie-consent" }, { "exists": ".avia-cookie-consent-button.avia-cookie-hide-notification" }],
+    "detectPopup": [{ "visible": ".avia-cookie-consent:not(.cookiebar-hidden)", "check": "any" }],
+    "optIn": [
+        {
+            "if": { "exists": ".avia-cookie-consent-button.avia-cookie-select-all" },
+            "then": [{ "click": ".avia-cookie-consent-button.avia-cookie-select-all" }],
+            "else": [{ "click": ".avia-cookie-consent-button.avia-cookie-close-bar" }]
+        }
+    ],
+    "optOut": [
+        { "eval": "EVAL_ENFOLD_SKIP_REFUSE_CONFIRM", "optional": true },
+        { "click": ".avia-cookie-consent-button.avia-cookie-hide-notification" }
+    ],
+    "test": [{ "waitFor": "html.av-cookies-session-refused", "timeout": 2000 }]
+}
