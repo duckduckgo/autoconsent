@@ -15,7 +15,6 @@ jobs:
     pre-assign-labels:
         runs-on: ubuntu-latest
         steps:
-            # Before reading the labels, to keep the gap between reading and adding them short.
             - uses: actions/checkout@v4
 
             - name: Check for category and version labels
