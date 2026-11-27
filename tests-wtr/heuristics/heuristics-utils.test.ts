@@ -188,6 +188,26 @@ describe('checkHeuristicPatterns with French popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Spanish popups', () => {
+    it('detects Spanish analytics consent notices', () => {
+        const texts = [
+            // aulapedia.com
+            '¿Nos ayudas a mejorar Aulapedia? Con tu permiso, usamos Umami en nuestro servidor para contar visitas, sin cookies de seguimiento ni grabaciones. Rechazar analítica Aceptar analítica',
+            'Puedes rechazar la analítica en cualquier momento.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Spanish text', () => {
+        const texts = ['Curso de geometría analítica para bachillerato', 'Rechazar solicitud', 'Aceptar analíticamente los resultados'];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with Swedish popups', () => {
     it('detects Swedish cookie notices', () => {
         const texts = [
