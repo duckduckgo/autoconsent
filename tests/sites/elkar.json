@@ -1,0 +1,11 @@
+{
+    "cmp": "elkar",
+    "note": "custom popup shared by Elkar group sites; saving the settings submits a form and reloads the page",
+    "tests": [
+        {
+            "note": "the sites do not load from US and GB IPs (connections time out)",
+            "sites": ["https://www.elkar.eus/", "https://www.dispesl.es/"],
+            "options": { "testSelfTest": false, "skipRegions": ["US", "GB"] }
+        }
+    ]
+}

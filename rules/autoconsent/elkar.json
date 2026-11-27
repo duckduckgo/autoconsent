@@ -1,0 +1,14 @@
+{
+    "name": "elkar",
+    "prehideSelectors": ["#cookie_oharra"],
+    "detectCmp": [{ "exists": "#cookie_oharra #cookie_politika" }],
+    "detectPopup": [{ "visible": "#cookie_oharra" }],
+    "optIn": [{ "waitForThenClick": "#cookie_oharra #btn_onartu" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie_oharra a[onclick*='cookie_politika']" },
+        { "waitForVisible": "#cookie_politika input[name='gorde']" },
+        { "click": "#cookie_politika input[name$='_ez']:not([style*='display: none'])", "all": true },
+        { "click": "#cookie_politika input[name='gorde']" }
+    ],
+    "test": [{ "cookieContains": "%22analisia%22%3A0" }]
+}
