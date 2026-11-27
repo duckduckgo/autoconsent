@@ -249,7 +249,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:tanto nosotros como|nosotros y) nuestros (?:\d+ )?socios\b/gi,
     /\bcontinuar sin aceptar\b|\bsolo las necesarias\b/gi,
     /\bacept\w* (?:\S+ ){0,3}uso de (?:las )?cookies\b/gi,
-    /\bcookies (?:técnicas|analíticas|propias|de terceros|opcionales|necesarias)\b/gi,
+    /\bcookies (?:técnicas|analíticas|propias|de terceros|opcionales|necesarias|de an[aá]lisis)\b/gi,
     /\blas cookies nos (?:ayudan|permiten)\b/gi,
     /\b(?:instalamos|empleamos)\b(?: \S+){0,4} cookies\b/gi,
     /\bacept(?:a|ar|as)? (?:el uso de |las )?(?:\S+ )?cookies\b|\bnecesitamos usar cookies\b/gi,

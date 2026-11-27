@@ -161,6 +161,24 @@ describe('checkHeuristicPatterns with Italian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Spanish popups', () => {
+    it('detects Spanish cookie notices', () => {
+        const texts = [
+            'Nos ayudas a mejorar si nos dejas contar visitas con cookies de análisis (Google Analytics).',
+            'Utilizamos cookies propias y de terceros para mejorar nuestros servicios',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Spanish text', () => {
+        expect(
+            checkHeuristicPatterns('Nos ayudas a mejorar si nos dejas tu opinión tras el análisis del concierto.').patterns,
+        ).to.have.length(0);
+    });
+});
+
 describe('checkHeuristicPatterns with French popups', () => {
     it('detects French cookie notices', () => {
         const texts = [
