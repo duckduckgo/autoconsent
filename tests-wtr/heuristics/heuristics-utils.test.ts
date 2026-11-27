@@ -167,6 +167,9 @@ describe('checkHeuristicPatterns with French popups', () => {
             // change.org
             'Vos paramètres de confidentialité. Nous utilisons nos propres cookies et ceux de tiers. Accepter les cookies Rejeter les cookies non essentiels Gérer les cookies',
             'Nous utilisons nos propres cookies et ceux de tiers',
+            // inpn.mnhn.fr
+            'Ces technologies déposent des cookies uniquement si vous l’acceptez.',
+            'Nous déposons des cookies pour mesurer l’audience.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -181,6 +184,8 @@ describe('checkHeuristicPatterns with French popups', () => {
             'Vous pouvez refuser les cookies dans les paramètres de votre navigateur.',
             // "cookies" more than two words after "nous utilisons"
             'Nous utilisons nos propres recettes pour préparer les cookies.',
+            // a negated statement
+            'Ce site ne dépose pas de cookies.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
