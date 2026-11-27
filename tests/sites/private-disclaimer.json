@@ -1,0 +1,16 @@
+{
+    "cmp": "private-disclaimer",
+    "note": "the cookie dialog only shows in the EEA; elsewhere the sites show just an age notice without it",
+    "tests": [
+        {
+            "note": "older template: consent stored in the personalized_experience cookie",
+            "sites": ["https://private.com/", "https://privateclassics.com/"],
+            "options": { "onlyRegions": ["DE", "DK"] }
+        },
+        {
+            "note": "newer template inside .privacy-modal: consent stored in a <prefix>_cookie_preferences cookie",
+            "sites": ["https://privatestars.com/", "https://privatecastings.com/"],
+            "options": { "onlyRegions": ["DE", "DK"] }
+        }
+    ]
+}
