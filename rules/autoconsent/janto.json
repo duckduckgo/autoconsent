@@ -1,0 +1,53 @@
+{
+    "name": "janto",
+    "_metadata": {
+        "vendorUrl": "https://janto.es/"
+    },
+    "prehideSelectors": ["#widgetCookiesPpal"],
+    "detectCmp": [
+        {
+            "exists": "#widgetCookiesPpal .widgetCookiesButtons"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#widgetCookiesPpal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#widgetCookiesPpal .widgetCookiesButtons button:first-child"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#widgetCookiesPpal .widgetCookiesButtons button:nth-child(3)"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#widgetCookiesPpal .widgetCookiesButtons button:nth-child(3)"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#widgetCookiesPpal .widgetCookiesOptions input[type=checkbox]:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "#widgetCookiesPpal .widgetCookiesButtons button:nth-child(2)"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "wait": 500,
+            "comment": "the reject-all button stores the consent cookie asynchronously"
+        },
+        {
+            "cookieContains": "cookies=%7B%220%22%3A%22N%22"
+        }
+    ]
+}
