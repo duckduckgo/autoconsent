@@ -188,6 +188,26 @@ describe('checkHeuristicPatterns with French popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Spanish popups', () => {
+    it('detects Spanish cookie notices', () => {
+        const texts = [
+            // the notice text names neither cookie use nor consent, only the "reject optional" label does
+            'Cookies y almacenamiento\nGuardamos tu elección para respetar tus preferencias. Con tu permiso podemos recordar tus datos durante 24 horas.\nAceptar todas\nRechazar opcionales\nConfigurar',
+            'Aceptar todo\nRechazar las opcionales',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text, 'popup').patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Spanish text', () => {
+        const texts = ['Puedes rechazar los complementos opcionales al finalizar la compra.', 'Rechazar todas las solicitudes'];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text, 'page').patterns, text).to.have.length(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with Swedish popups', () => {
     it('detects Swedish cookie notices', () => {
         const texts = [

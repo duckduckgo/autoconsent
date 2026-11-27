@@ -195,6 +195,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["cookies","necesitamos usar cookies"],
     ["al hacer clic en"],
     [" todas las cookies"],
+    ["opcionales"],
     ["estrictamente necesarias"],
     ["almacenar o acceder a "],
     ["as de seguimiento"],

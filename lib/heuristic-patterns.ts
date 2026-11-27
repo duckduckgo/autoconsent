@@ -255,6 +255,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bacept(?:a|ar|as)? (?:el uso de |las )?(?:\S+ )?cookies\b|\bnecesitamos usar cookies\b/gi,
     /\bal hacer clic en\b.{0,80}?\bcookies\b/gi,
     /\b(?:aceptar|rechazar) todas las cookies\b/gi,
+    /\brechazar (?:las )?opcionales\b/gi,
     /\bestrictamente necesarias\b/gi,
     /\balmacenar o acceder a (?:la )?información\b/gi,
     /\btecnolog[ií]as de seguimiento\b/gi,
