@@ -1,0 +1,28 @@
+{
+    "name": "novatest-es",
+    "vendorUrl": "https://novatest.es/",
+    "cosmetic": true,
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(\\w+\\.)?(novatest\\.es|elportaldelalumno\\.com|elportaldelprofesor\\.com)/"
+    },
+    "prehideSelectors": ["#FormLogin_LabelCookies"],
+    "detectCmp": [{ "exists": "#FormLogin_LabelCookies" }],
+    "detectPopup": [
+        { "visible": "#FormLogin_LabelCookies" },
+        {
+            "comment": "skip the first load: the page reloads itself after posting the timezone",
+            "exists": "xpath///script[contains(text(), 'SetTimeZone();')]",
+            "negated": true
+        }
+    ],
+    "optIn": [{ "hide": "#FormLogin_LabelCookies" }],
+    "optOut": [
+        {
+            "comment": "notice has no buttons, only policy links",
+            "hide": "#FormLogin_LabelCookies"
+        }
+    ],
+    "test": [{ "visible": "#FormLogin_LabelCookies", "check": "none" }]
+}
