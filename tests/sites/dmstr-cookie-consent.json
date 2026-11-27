@@ -1,0 +1,16 @@
+{
+    "cmp": "dmstr-cookie-consent",
+    "note": "These sites reload the page after saving consent, so the self-test never reports",
+    "tests": [
+        {
+            "note": "Bottom banner; Save sits in the collapsed controls panel behind 'Change cookies'",
+            "sites": ["https://www.merida-bikes.com/", "https://www.jagwire.com/", "https://www.mcg-parts.de/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "Full-screen variant with a separate 'Only necessary' button and Save next to Accept all",
+            "sites": ["https://www.centurion.de/", "https://www.starrag.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
