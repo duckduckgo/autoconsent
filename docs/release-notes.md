@@ -8,8 +8,10 @@ appear in release notes needs two release-related decisions before merge:
 
 Labels are not checked. When a PR is opened, the Pre-assign Labels workflow adds
 whichever of the two is still missing: path-based category labels (from
-`.github/labeler.yml`) and `version: patch`. It runs only on `opened`, so later
-label changes are left as they are.
+`.github/labeler.yml`) and `version: patch`. It also adds `needs-code-update`
+when the PR changes library code (`.github/labeler-code.yml`), whatever labels
+are already set. It runs only on `opened`, so later label changes are left as
+they are.
 
 ## Version labels
 

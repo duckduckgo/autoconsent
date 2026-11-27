@@ -37,6 +37,13 @@ jobs:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
                   sync-labels: false
 
+            - name: Add the needs-code-update label
+              uses: actions/labeler@v6
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  configuration-path: .github/labeler-code.yml
+                  sync-labels: false
+
             - name: Add the default version label
               if: steps.labels.outputs.has_version == 'false'
               env:
