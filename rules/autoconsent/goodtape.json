@@ -1,0 +1,43 @@
+{
+    "name": "goodtape",
+    "vendorUrl": "https://goodtape.io/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?goodtape\\.io/"
+    },
+    "prehideSelectors": ["#cookie-consent-modal"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-consent-modal"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-consent-modal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-consent-modal button[\\@click='acceptAll()']"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#growth-cookies-consent:checked"
+            },
+            "then": [
+                {
+                    "click": "#growth-cookies-consent"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "#cookie-consent-modal button[\\@click='acceptSelected()']"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieConsent=%7B%22analytics%22%3Afalse%2C%22marketing%22%3Afalse"
+        }
+    ]
+}
