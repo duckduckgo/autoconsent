@@ -1,0 +1,15 @@
+{
+    "cmp": "identity-noticebar",
+    "tests": [
+        {
+            "sites": [
+                "https://aunamendi.eusko-ikaskuntza.eus/",
+                "https://www.eusko-ikaskuntza.eus/",
+                "https://www.euskonews.eus/",
+                "https://alycotools.com/",
+                "https://fegemu.com/"
+            ],
+            "note": "Some sites with this banner (e.g. izaro.com, indaux.com) reload the page after saving, which breaks the self-test, so they are not listed."
+        }
+    ]
+}
