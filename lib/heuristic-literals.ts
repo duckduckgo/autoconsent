@@ -190,6 +190,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["continuar sin aceptar","solo las necesarias"],
     ["uso de "],
     ["cookies "],
+    [" de anal"],
     ["las cookies nos "],
     ["instalamos","empleamos"],
     ["cookies","necesitamos usar cookies"],

@@ -592,6 +592,7 @@ describe('checkHeuristicPatterns with more notice phrasings', () => {
             'Vi benytter informasjonskapsler for å forbedre nettsiden.',
             'Vi anvender cookies for at forbedre din oplevelse.',
             'Strona wykorzystuje pliki „cookies” w celach statystycznych.',
+            'Sin tu permiso no se carga y no se instala ninguna cookie de analítica.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text, 'popup').patterns.length, text).to.be.greaterThan(0);
@@ -603,6 +604,7 @@ describe('checkHeuristicPatterns with more notice phrasings', () => {
             'Vi använder förnybar energi och endast nödvändiga resurser',
             'We use data analytics tools in our consulting work',
             'Le ultime notizie su fisco, tasse e dichiarazione dei redditi',
+            'Ofrecemos servicios de analítica web para empresas',
         ]) {
             expect(checkHeuristicPatterns(text, 'popup').patterns, text).to.have.length(0);
         }
