@@ -281,7 +281,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["閲覧履歴","端末情報","利用者情報"],
     [" cookies"],
     ["informasjonskapsler","cookies"],
-    ["vi benytter"],
+    ["benytter "],
     ["bruk av "],
     ["kullan","yararlan","faydalan"],
     ["kulland"],

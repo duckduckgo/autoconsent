@@ -382,7 +382,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // Norwegian (NO)
     // e.g. "vi bruker informasjonskapsler", "kan vi bruke valgfrie informasjonskapsler", "nettstedet bruker cookies"
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
-    /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
+    // e.g. "vi benytter informasjonskapsler", "benytter vi oss av egne og tredjeparts informasjonskapsler"
+    /\bbenytter (?:vi )?(?:oss av )?(?:\S+ ){0,4}(?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
 
     // Turkish (TR): the verb comes last, hence the long gap; [ıI]/[iİ] match capitals, where the i flag pairs neither

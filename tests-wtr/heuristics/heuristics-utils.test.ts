@@ -407,6 +407,7 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
             'Kan vi bruke valgfrie informasjonskapsler for å forbedre tjenestene våre?',
             'Vi bruker informasjonskapsler for å gi deg en bedre opplevelse.',
             'Nettstedet bruker cookies til statistikk.',
+            'For å få dette til benytter vi oss av egne (førsteparts) og tredjeparts informasjonskapsler (cookies) og pixels.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -415,6 +416,7 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
 
     it('does not detect unrelated Norwegian text', () => {
         expect(checkHeuristicPatterns('Vi bruker skattemeldingen til å beregne skatten din').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Vi benytter oss av anledningen til å takke alle våre kunder').patterns).to.have.length(0);
     });
 });
 
