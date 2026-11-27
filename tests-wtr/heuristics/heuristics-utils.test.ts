@@ -161,6 +161,19 @@ describe('checkHeuristicPatterns with Italian popups', () => {
     });
 });
 
+describe('checkHeuristicPatterns with Catalan popups', () => {
+    it('detects Catalan cookie notices', () => {
+        const texts = [
+            'Utilitzem cookies pròpies i de tercers per a millorar els nostres serveis',
+            // quoted "cookies"
+            'Aquest portal utilitza "cookies" pròpies i de tercers, per a recopilar informació sobre com navega pel lloc.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text, 'popup').patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+});
+
 describe('checkHeuristicPatterns with French popups', () => {
     it('detects French cookie notices', () => {
         const texts = [

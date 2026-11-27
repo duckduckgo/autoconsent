@@ -286,7 +286,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /zgodą my i nasi partnerzy możemy wykorzystywać precyzyjne dane geolokalizacyjne i identyfikację/gi,
 
     // Catalan (CA)
-    /cookies pròpies i de tercers/gi,
+    /cookies["”»]? pròpies i de tercers/gi,
     /utilitzem galetes/gi,
     /únicament utilitza galetes pròpies amb finalitat tècnica\b/gi,
     /este lloc web utilitza només cookies tècniques necessàries per al seu funcionament/gi,
