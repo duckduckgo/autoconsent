@@ -1,0 +1,20 @@
+{
+    "cmp": "ftmo",
+    "tests": [
+        {
+            "note": "Opt-in modal (EEA, UK, CA): rejected through Preferences",
+            "sites": ["https://ftmo.com/"],
+            "options": { "skipRegions": ["US", "AU", "JP"] }
+        },
+        {
+            "note": "Implied-consent bar (US, AU): opted out through the footer cookie settings",
+            "sites": ["https://ftmo.com/"],
+            "options": { "onlyRegions": ["US", "AU"] }
+        },
+        {
+            "note": "Notice-only bar without an opt-out (JP): acknowledged, consent cookies stay set so the self-test cannot pass",
+            "sites": ["https://ftmo.com/"],
+            "options": { "onlyRegions": ["JP"], "testSelfTest": false }
+        }
+    ]
+}
