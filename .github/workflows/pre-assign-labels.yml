@@ -1,0 +1,52 @@
+name: Pre-assign Labels
+
+on:
+    pull_request_target:
+        types:
+            - opened
+
+permissions:
+    contents: read
+    issues: write
+    pull-requests: write
+
+jobs:
+    # Only on 'opened', so labels the author replaces or removes later are never put back.
+    pre-assign-labels:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Check for category and version labels
+              id: labels
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PR_NUMBER: ${{ github.event.pull_request.number }}
+              run: |
+                  # Read the current labels, not the event's: authors often add them right after creating the PR.
+                  labels=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json labels --jq '.labels[].name')
+                  has_label() { grep -q "^$1" <<< "$labels" && echo true || echo false; }
+                  echo "has_category=$(has_label 'category:')" >> "$GITHUB_OUTPUT"
+                  echo "has_version=$(has_label 'version:')" >> "$GITHUB_OUTPUT"
+
+            - name: Add path-based category labels
+              if: steps.labels.outputs.has_category == 'false'
+              uses: actions/labeler@v6
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  sync-labels: false
+
+            - name: Add the needs-code-update label
+              uses: actions/labeler@v6
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  configuration-path: .github/labeler-code.yml
+                  sync-labels: false
+
+            - name: Add the default version label
+              if: steps.labels.outputs.has_version == 'false'
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PR_NUMBER: ${{ github.event.pull_request.number }}
+              run: |
+                  gh api "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels" -f 'labels[]=version: patch' > /dev/null

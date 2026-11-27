@@ -43,8 +43,7 @@
     "release": "auto shipit",
     "get-text-for-xpath": "ts-node scripts/get-text-for-xpath.ts",
     "benchmark-buttons": "ts-node scripts/benchmark-button-classification.ts",
-    "bundle-config-rules": "ts-node scripts/bundle-config-rules.ts",
-    "check-pr-release-labels": "ts-node scripts/check-pr-release-labels.ts"
+    "bundle-config-rules": "ts-node scripts/bundle-config-rules.ts"
   },
   "author": "Sam Macbeth",
   "license": "MPL-2.0",
@@ -104,7 +103,6 @@
         "name": "version: patch",
         "description": "Increment the patch version when merged",
         "releaseType": "patch",
-        "default": true,
         "color": "#870048"
       },
       {
@@ -188,6 +186,7 @@
         "changelogTitle": "Other",
         "description": "Changes that should appear in release notes but do not fit another category",
         "releaseType": "none",
+        "default": true,
         "color": "#ededed"
       },
       {

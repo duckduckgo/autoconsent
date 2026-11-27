@@ -1,0 +1,5 @@
+# Not a release-note category, so it is added even when the PR already has a category.
+'needs-code-update':
+    - changed-files:
+          - any-glob-to-any-file:
+                - 'lib/**/*.ts'
