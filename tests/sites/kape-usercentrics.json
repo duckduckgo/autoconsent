@@ -1,0 +1,17 @@
+{
+    "cmp": "kape-usercentrics",
+    "note": "Kape's Usercentrics-SDK banner in a #shadowHost shadow root. Usercentrics geolocates datacenter IPs and treats HeadlessChrome as a bot, so in some regions it shows no banner; the popup reproduces through Oxylabs",
+    "tests": [
+        {
+            "sites": ["https://www.cyberghostvpn.com/", "https://www.privateinternetaccess.com/"],
+            "note": "Vuetify variant: first layer has only Customize (More Information in the US) and Accept; opt-out saves the second layer with all optional categories off. Non-EU regions are skipped: Usercentrics shows no banner to their datacenter IPs, and in the US the US notice renders late and the TIER2 heuristic can win the detection race",
+            "options": {
+                "skipRegions": ["US", "CA", "AU", "CH"]
+            }
+        },
+        {
+            "sites": ["https://www.expressvpn.com/"],
+            "note": "ExpressVPN variant: Reject All on the first layer (v3 card), or Customize and Accept, where opt-out saves the settings card with all optional categories off"
+        }
+    ]
+}
