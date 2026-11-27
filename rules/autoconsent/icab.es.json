@@ -1,0 +1,12 @@
+{
+    "name": "icab.es",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?icab\\.es/"
+    },
+    "prehideSelectors": ["#cookies-banner-container"],
+    "detectCmp": [{ "exists": "#cookies-banner-container [data-cookies-allow=\"strict\"]" }],
+    "detectPopup": [{ "visible": "#cookies-banner-container .cookies-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookies-banner-container [data-cookies-allow=\"all\"]" }],
+    "optOut": [{ "waitForThenClick": "#cookies-banner-container [data-cookies-allow=\"strict\"]" }],
+    "test": [{ "cookieContains": "icab.cookies=[%22strict%22]" }]
+}
