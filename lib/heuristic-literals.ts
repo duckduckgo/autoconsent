@@ -28,6 +28,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["read more about"],
     ["consent to"],
     ["we and our "],
+    ["partners use "],
     ["information"],
     ["store and/or access information"],
     ["personalised ads and content, ad and content measurement"],

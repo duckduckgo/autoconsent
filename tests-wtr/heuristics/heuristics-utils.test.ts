@@ -100,6 +100,17 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
         }
     });
 
+    it('detects "its partners use cookies" notices', () => {
+        const texts = [
+            'Tax-Services.ca is an information-only site. It and its advertising partners use cookies and similar tools for ads.',
+            'This site and our partners use cookies for analytics',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+        expect(checkHeuristicPatterns('Our partners use fresh butter in their cookies').patterns).to.have.length(0);
+    });
+
     it('does not match when "cookies" is further away', () => {
         expect(
             checkHeuristicPatterns('We use the best chocolate in our cookies', undefined, {
