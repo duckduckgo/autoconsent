@@ -97,6 +97,11 @@ export const snippets = {
         Object.values(JSON.parse(localStorage.getItem('__acceptrics_settings')).purposes).every((purpose) => purpose === 'rejected'),
     EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
+    // the close icon is an SVG, which has no click() method
+    EVAL_AFTERCLASSE_CLOSE: () =>
+        document
+            .querySelector("[class*='cookies__StyledCookies'] [class*='cookies__StyledIcon']")
+            .dispatchEvent(new MouseEvent('click', { bubbles: true })) || true,
     EVAL_AYLO_COOKIE_MANAGER_READY: () => !!(window.wl_cookie_consent_manager || window._Cookie_Consent_Manager_brand),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
     // the close handler listens for mouseup, which element.click() does not dispatch

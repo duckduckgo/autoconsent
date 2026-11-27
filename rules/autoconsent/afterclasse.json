@@ -1,0 +1,113 @@
+{
+    "name": "afterclasse",
+    "vendorUrl": "https://www.afterclasse.fr/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?afterclasse\\.fr/"
+    },
+    "prehideSelectors": ["[class*='cookies__StyledCookies']"],
+    "detectCmp": [
+        {
+            "exists": "[class*='cookies__StyledCookies'] [class*='cookies__StyledIcon']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[class*='cookies__StyledCookies']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForVisible": "[class*='cookies__StyledCookies'] [class*='cookies__StyledIcon']"
+        },
+        {
+            "eval": "EVAL_AFTERCLASSE_CLOSE"
+        },
+        {
+            "waitForVisible": "[class*='cookies__StyledCookies']",
+            "check": "none",
+            "timeout": 1000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": "[class*='cookies__StyledCookies']"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_AFTERCLASSE_CLOSE"
+                },
+                {
+                    "waitForVisible": "[class*='cookies__StyledCookies']",
+                    "check": "none",
+                    "timeout": 1000,
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "if": {
+                "visible": "[class*='cookies__StyledCookies']"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_AFTERCLASSE_CLOSE"
+                },
+                {
+                    "waitForVisible": "[class*='cookies__StyledCookies']",
+                    "check": "none",
+                    "timeout": 2000
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "waitForVisible": "[class*='cookies__StyledCookies'] [class*='cookies__StyledIcon']"
+        },
+        {
+            "eval": "EVAL_AFTERCLASSE_CLOSE"
+        },
+        {
+            "waitForVisible": "[class*='cookies__StyledCookies']",
+            "check": "none",
+            "timeout": 1000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": "[class*='cookies__StyledCookies']"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_AFTERCLASSE_CLOSE"
+                },
+                {
+                    "waitForVisible": "[class*='cookies__StyledCookies']",
+                    "check": "none",
+                    "timeout": 1000,
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "if": {
+                "visible": "[class*='cookies__StyledCookies']"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_AFTERCLASSE_CLOSE"
+                },
+                {
+                    "waitForVisible": "[class*='cookies__StyledCookies']",
+                    "check": "none",
+                    "timeout": 2000
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_data_cookie=true"
+        }
+    ]
+}
