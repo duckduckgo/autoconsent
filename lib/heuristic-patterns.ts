@@ -1136,7 +1136,8 @@ export const ACKNOWLEDGE_PATTERNS = [
     'speichern schließen',
 
     // Spanish (ES)
-    /^.?( lo)?(entendido|entiendo).?$/s,
+    // e.g. "entendido", "¡entendido!", "lo entiendo"
+    /^.?(lo )?(entendido|entiendo).?$/s,
     'aceptar seleccionadas',
     'continuar',
     'guardar configuración',
