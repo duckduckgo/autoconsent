@@ -1,0 +1,12 @@
+{
+    "name": "conocevalencia.es",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?conocevalencia\\.es/" },
+    "prehideSelectors": ["dialog[aria-labelledby=\"cv-cookie-consent-title\"]"],
+    "detectCmp": [{ "exists": "dialog[aria-labelledby=\"cv-cookie-consent-title\"]" }],
+    "detectPopup": [{ "visible": "dialog[aria-labelledby=\"cv-cookie-consent-title\"]" }],
+    "optIn": [{ "waitForThenClick": "dialog[aria-labelledby=\"cv-cookie-consent-title\"] .flex-col > button:nth-child(1)" }],
+    "optOut": [
+        { "waitForThenClick": "dialog[aria-labelledby=\"cv-cookie-consent-title\"] .flex-col > button:nth-child(2)" },
+        { "waitForThenClick": "dialog[aria-labelledby=\"cv-cookie-prefs-title\"] .flex-col > button:nth-child(2)" }
+    ]
+}
