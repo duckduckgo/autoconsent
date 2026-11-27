@@ -1,0 +1,45 @@
+{
+    "name": "mepal.com",
+    "vendorUrl": "https://www.mepal.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?mepal\\.com/"
+    },
+    "prehideSelectors": ["#mepal-cb", "#pageOverlay.mepal-cb-overlay"],
+    "detectCmp": [
+        {
+            "exists": "#Cookiebot, #mepal-cb"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#mepal-cb"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#mepal-cb #AcceptAll"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#mepal-cb #DeclineAll"
+        },
+        {
+            "waitForVisible": "#pageOverlay.mepal-cb-overlay",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "wait": 500
+        },
+        {
+            "cookieContains": "statistics:false"
+        },
+        {
+            "cookieContains": "marketing:false"
+        }
+    ]
+}
