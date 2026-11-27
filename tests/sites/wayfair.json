@@ -1,0 +1,13 @@
+{
+    "cmp": "wayfair",
+    "tests": [
+        {
+            "sites": ["https://www.wayfair.ca/furniture/cat/furniture-c45974.html"],
+            "note": "Variant without a reject button (OK + Cookie Settings): opt-out unchecks the toggles in the settings modal. The homepage shows a bot wall, so a category page is used."
+        },
+        {
+            "sites": ["https://www.wayfair.co.uk/furniture/cat/furniture-c215386.html"],
+            "note": "Variant with a Reject All Cookies button."
+        }
+    ]
+}

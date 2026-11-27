@@ -1,0 +1,57 @@
+{
+    "name": "wayfair",
+    "vendorUrl": "https://www.wayfair.com/",
+    "prehideSelectors": ["[data-node-id^=\"BlockBuilderCookiePreferenceNotification\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-test-id=\"CookiePreferenceNotification\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-test-id=\"CookiePreferenceNotification\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-test-id=\"CookiePreferenceNotification\"] [data-test-id=\"AcceptAllButon\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "[data-test-id=\"CookiePreferenceNotification\"] [data-test-id=\"RejectAllButon\"]"
+            },
+            "then": [
+                {
+                    "click": "[data-test-id=\"CookiePreferenceNotification\"] [data-test-id=\"RejectAllButon\"]"
+                }
+            ],
+            "else": [
+                {
+                    "click": "[data-test-id=\"CookiePreferenceNotification\"] [data-test-id=\"OpenSelectionAllButon\"]"
+                },
+                {
+                    "waitForVisible": "[data-test-id=\"CookieSelectionModal\"] [data-test-id=\"SaveAndCloseButton\"]"
+                },
+                {
+                    "click": "[role=\"dialog\"]:has([data-test-id=\"CookieSelectionModal\"]) input[data-enzyme-id=\"BaseToggleInput\"]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "[data-test-id=\"CookieSelectionModal\"] [data-test-id=\"SaveAndCloseButton\"]"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "user_cookie_prefs=NECESSARY"
+        },
+        {
+            "cookieContains": "ADVERTISING",
+            "negated": true
+        }
+    ]
+}
