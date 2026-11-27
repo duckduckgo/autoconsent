@@ -8,6 +8,11 @@
             "note": "these sites only show the banner to EU visitors",
             "sites": ["https://afloat.ie/", "https://www.manualsdir.com/"],
             "options": { "skipRegions": ["US"] }
+        },
+        {
+            "note": "custom template: buttons are nested in a .cookie-bar-right wrapper instead of being direct children of #cookie-bar. The site reloads after saving (refreshPage=1), so the self-test does not report",
+            "sites": ["https://seuelectronica.l-h.cat/"],
+            "options": { "testSelfTest": false }
         }
     ]
 }

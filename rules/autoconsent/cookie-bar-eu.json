@@ -2,9 +2,9 @@
     "name": "cookie-bar-eu",
     "vendorUrl": "https://cookie-bar.eu/",
     "prehideSelectors": ["#cookie-bar", "#cookie-bar-prompt"],
-    "detectCmp": [{ "exists": "#cookie-bar > #cookie-bar-button" }, { "exists": "#cookie-bar-prompt #cookiebar-save-customized" }],
+    "detectCmp": [{ "exists": "#cookie-bar #cookie-bar-button" }, { "exists": "#cookie-bar-prompt #cookiebar-save-customized" }],
     "detectPopup": [{ "visible": "#cookie-bar" }],
-    "optIn": [{ "waitForThenClick": "#cookie-bar > #cookie-bar-button" }],
+    "optIn": [{ "waitForThenClick": "#cookie-bar #cookie-bar-button" }],
     "optOut": [
         {
             "if": { "visible": "#cookie-bar-button-customize" },
