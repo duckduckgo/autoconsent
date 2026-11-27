@@ -1,0 +1,15 @@
+{
+    "name": "meitu",
+    "vendorUrl": "https://www.meitu.com/",
+    "prehideSelectors": ["[style*='--banner-accept-all-text:']"],
+    "detectCmp": [{ "exists": "[style*='--banner-accept-all-text:'] p button" }],
+    "detectPopup": [{ "visible": "[style*='--banner-accept-all-text:'] p button" }],
+    "optIn": [{ "waitForThenClick": "[style*='--banner-accept-all-text:'] p + div > button:last-child" }],
+    "optOut": [
+        { "waitForThenClick": "[style*='--banner-accept-all-text:'] p button" },
+        { "waitForVisible": "[style*='--cookie-backdrop:'] button:not([role]):not([aria-label])" },
+        { "click": "[style*='--cookie-backdrop:'] button[role='switch'][aria-checked='true']", "all": true, "optional": true },
+        { "waitForThenClick": "[style*='--cookie-backdrop:'] button:not([role]):not([aria-label])" }
+    ],
+    "test": [{ "eval": "EVAL_MEITU_TEST" }]
+}

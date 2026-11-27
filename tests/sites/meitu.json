@@ -1,0 +1,9 @@
+{
+    "cmp": "meitu",
+    "note": "Meitu's in-house banner: no classes or ids, so selectors anchor on the CSS custom properties it defines inline",
+    "tests": [
+        {
+            "sites": ["https://airbrush.com/", "https://www.beautyplus.com/"]
+        }
+    ]
+}

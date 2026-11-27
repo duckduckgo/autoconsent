@@ -202,6 +202,8 @@ export const snippets = {
     },
     // the embedded preferences page saves its current toggles on this message, normally sent by the parent's Save button
     EVAL_MERCADOLIBRE_SAVE: () => window.postMessage({ eventName: 'saveCookiesPreference' }, '*') || true,
+    EVAL_MEITU_TEST: () =>
+        Object.entries(JSON.parse(localStorage.getItem('cookieSettings')).settings).every(([k, v]) => k === 'essential' || v === false),
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]
