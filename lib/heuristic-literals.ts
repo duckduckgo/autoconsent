@@ -92,6 +92,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["les cookies nous permettent","nos partenaires et nous"],
     ["accepter "],
     ["on utilise","nous utilisons"],
+    [" cookies"],
     ["naviguant","poursuivant"],
     [],
     ["confidentialité"],
