@@ -1,0 +1,34 @@
+{
+    "name": "tabii.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?tabii\\.com/"
+    },
+    "prehideSelectors": ["[data-testid=\"gdpr-popup\"]"],
+    "detectCmp": [
+        {
+            "exists": "[data-testid=\"gdpr-popup\"] [data-testid=\"gdpr-popup-reject-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-testid=\"gdpr-popup\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-testid=\"gdpr-popup\"] [data-testid=\"gdpr-popup-accept-button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-testid=\"gdpr-popup\"] [data-testid=\"gdpr-popup-reject-button\"]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "[data-testid=\"gdpr-popup\"]",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}
