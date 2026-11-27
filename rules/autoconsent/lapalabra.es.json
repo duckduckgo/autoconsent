@@ -1,0 +1,33 @@
+{
+    "name": "lapalabra.es",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?lapalabra\\.es/"
+    },
+    "prehideSelectors": ["#cookieConsent"],
+    "detectCmp": [
+        {
+            "exists": "#cookieConsent #cookieReject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieConsent"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieConsent #cookieAccept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieConsent #cookieReject"
+        }
+    ],
+    "test": [
+        {
+            "visible": "#cookieConsent",
+            "check": "none"
+        }
+    ]
+}
