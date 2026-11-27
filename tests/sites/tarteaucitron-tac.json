@@ -1,0 +1,10 @@
+{
+    "cmp": "tarteaucitron-tac",
+    "note": "tarteaucitron fork with every id and global renamed to the \"tac\" prefix (#tacRoot, window.tac). It reloads the page after any choice, so the rule has no self-test. The sites leave the CMP out of the page when the client hints say HeadlessChrome",
+    "tests": [
+        {
+            "note": "\"middle\" layout: the full #tac panel opens on load, with a deny button",
+            "sites": ["https://www.avenuedelabrique.com/", "https://www.placedespop.com/", "https://www.immodesiles.fr/"]
+        }
+    ]
+}
