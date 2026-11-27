@@ -1,0 +1,28 @@
+{
+    "name": "conseils-thermiques",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?conseils-thermiques\\.org/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": [".display_cookies:has(#allow_cookies)"],
+    "detectCmp": [
+        {
+            "exists": ".display_cookies #allow_cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".display_cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".display_cookies #allow_cookies"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".display_cookies"
+        }
+    ]
+}
