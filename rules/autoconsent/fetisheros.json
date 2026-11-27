@@ -1,0 +1,13 @@
+{
+    "name": "fetisheros",
+    "vendorUrl": "https://www.fetisheros.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?fetisheros\\.com/"
+    },
+    "prehideSelectors": ["#cookieConsentBanner"],
+    "detectCmp": [{ "exists": "#cookieConsentBanner #rejectCookies" }],
+    "detectPopup": [{ "visible": "#cookieConsentBanner" }],
+    "optIn": [{ "waitForThenClick": "#cookieConsentBanner #acceptCookies" }],
+    "optOut": [{ "waitForThenClick": "#cookieConsentBanner #rejectCookies" }],
+    "test": [{ "cookieContains": "CookieConsent=Rejected" }]
+}
