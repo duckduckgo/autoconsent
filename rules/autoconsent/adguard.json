@@ -1,0 +1,32 @@
+{
+    "name": "adguard",
+    "vendorUrl": "https://adguard.com/",
+    "prehideSelectors": ["#cookie_terms .cookie-terms__terms"],
+    "detectCmp": [
+        {
+            "exists": "#cookie_terms .cookie-terms__terms-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_terms .cookie-terms__terms"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_terms .cookie-terms__accept"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie_terms .cookie-terms__terms-close"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie_terms .cookie-terms__terms",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
