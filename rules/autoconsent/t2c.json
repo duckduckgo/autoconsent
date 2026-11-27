@@ -1,0 +1,12 @@
+{
+    "name": "t2c",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?t2c\\.fr/"
+    },
+    "prehideSelectors": ["cookie-banner .cookie-banner"],
+    "detectCmp": [{ "exists": "cookie-banner .cookie-banner .cookie-banner__close" }],
+    "detectPopup": [{ "visible": "cookie-banner .cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "cookie-banner .cookie-banner__init .cookie-banner__buttons button-primary:first-child button" }],
+    "optOut": [{ "waitForThenClick": "cookie-banner .cookie-banner__close", "retry": 3, "retryInterval": 500 }],
+    "test": [{ "cookieContains": "T2CCookiePopup_prod=disabled" }]
+}
