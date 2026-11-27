@@ -1,0 +1,18 @@
+{
+    "cmp": "trewknowledge-gdpr",
+    "tests": [
+        {
+            "note": "privacy bar with cookie category checkboxes; the site reloads after saving",
+            "sites": ["https://portal.coag.es/", "https://www.wifislax.com/"]
+        },
+        {
+            "note": "privacy bar with only \"I Agree\" and \"Privacy Preferences\", no optional cookie categories",
+            "sites": ["https://chamilo.org/"]
+        },
+        {
+            "note": "older plugin version (1.4.x) without optional cookie categories; the page reloads right after saving, before the self-test can run",
+            "sites": ["https://moejackson.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
