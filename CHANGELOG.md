@@ -1,3 +1,48 @@
+# v18.13.0 (Fri Nov 27 2026)
+
+#### Rules
+
+- Merge duplicate cookie rules [#3072](https://github.com/duckduckgo/autoconsent/pull/3072) ([@muodov](https://github.com/muodov))
+- Rule sweep: remove 2, merge 1, fix 3, update specs of 5 rules [#3064](https://github.com/duckduckgo/autoconsent/pull/3064) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule sweep: remove 8, merge 2, update specs of 3 rules [#3063](https://github.com/duckduckgo/autoconsent/pull/3063) ([@daxtheduck](https://github.com/daxtheduck) [@muodov](https://github.com/muodov))
+- Rule update: cookieconfirm [#3055](https://github.com/duckduckgo/autoconsent/pull/3055) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: orejime [#3061](https://github.com/duckduckgo/autoconsent/pull/3061) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: cookieconsent-io [#3060](https://github.com/duckduckgo/autoconsent/pull/3060) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: stumpel.nl [#3059](https://github.com/duckduckgo/autoconsent/pull/3059) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tolhuistuin.nl [#3058](https://github.com/duckduckgo/autoconsent/pull/3058) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hdk-cookiebar [#3057](https://github.com/duckduckgo/autoconsent/pull/3057) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: podiumcadeaukaart [#3056](https://github.com/duckduckgo/autoconsent/pull/3056) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: skiresort [#3054](https://github.com/duckduckgo/autoconsent/pull/3054) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: dgm-cookie-popup [#3052](https://github.com/duckduckgo/autoconsent/pull/3052) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: aspnetcore-cookie-consent [#3051](https://github.com/duckduckgo/autoconsent/pull/3051) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: wolfram [#3049](https://github.com/duckduckgo/autoconsent/pull/3049) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: veha-cookie-notice [#3048](https://github.com/duckduckgo/autoconsent/pull/3048) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: kodix-cookie-consent [#3047](https://github.com/duckduckgo/autoconsent/pull/3047) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tomtom-help [#3046](https://github.com/duckduckgo/autoconsent/pull/3046) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: prestashop-gdpr-pro [#3045](https://github.com/duckduckgo/autoconsent/pull/3045) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: deventerschouwburg [#3044](https://github.com/duckduckgo/autoconsent/pull/3044) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: handyman.nl [#3043](https://github.com/duckduckgo/autoconsent/pull/3043) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: lesanimals-tracking-consent [#3042](https://github.com/duckduckgo/autoconsent/pull/3042) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: tapeso [#3041](https://github.com/duckduckgo/autoconsent/pull/3041) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: sa-consent [#3040](https://github.com/duckduckgo/autoconsent/pull/3040) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: orion-consent [#3036](https://github.com/duckduckgo/autoconsent/pull/3036) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pseudolab-fr [#3035](https://github.com/duckduckgo/autoconsent/pull/3035) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: politie.nl [#3034](https://github.com/duckduckgo/autoconsent/pull/3034) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: alkacon-mercury [#3033](https://github.com/duckduckgo/autoconsent/pull/3033) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: genebase [#3032](https://github.com/duckduckgo/autoconsent/pull/3032) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: hyva-cookie-consent-modal [#3031](https://github.com/duckduckgo/autoconsent/pull/3031) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: CPM crawl #8271: us.com [#3027](https://github.com/duckduckgo/autoconsent/pull/3027) ([@daxtheduck](https://github.com/daxtheduck))
+- Rule update: pcbway [#2996](https://github.com/duckduckgo/autoconsent/pull/2996) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+- Remove match_origin_as_fallback and move same-origin iframe rules to the top frame [#3028](https://github.com/duckduckgo/autoconsent/pull/3028) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v18.12.0 (Thu Nov 26 2026)
 
 #### Rules
