@@ -1,0 +1,29 @@
+{
+    "name": "tag-analytics-cnil",
+    "vendorUrl": "https://www.cnil.fr/",
+    "cosmetic": false,
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "button[onclick*='tagAnalyticsCNIL.CookieConsent.gaOptout'], #analyticswarning .open-analyticsknowmore"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-banner-message a[href*='tagAnalyticsCNIL'], #analyticswarning .open-analyticsknowmore, button[onclick*='tagAnalyticsCNIL.CookieConsent.gaOptout']",
+            "check": "any"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "if": { "exists": "#analyticswarning .open-analyticsknowmore" },
+            "then": [
+                { "click": "#analyticswarning .open-analyticsknowmore" },
+                { "waitForThenClick": "button[onclick*='tagAnalyticsCNIL.CookieConsent.gaOptout']" }
+            ],
+            "else": [{ "click": "button[onclick*='tagAnalyticsCNIL.CookieConsent.gaOptout']" }]
+        }
+    ],
+    "test": [{ "cookieContains": "hasConsent=false" }]
+}
