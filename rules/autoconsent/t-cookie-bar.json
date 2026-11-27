@@ -1,6 +1,6 @@
 {
     "name": "t-cookie-bar",
-    "prehideSelectors": ["div:has(> div:has(> a[aria-label=\"learn more about cookies\"]) + div.t-cookie-bar)"],
+    "prehideSelectors": ["div:has(> div > a[aria-label=\"learn more about cookies\"]):has(> div.t-cookie-bar)"],
     "detectCmp": [{ "exists": "div:has(> a[aria-label=\"learn more about cookies\"]) + div.t-cookie-bar" }],
     "detectPopup": [{ "visible": "div:has(> a[aria-label=\"learn more about cookies\"]) + div.t-cookie-bar" }],
     "optIn": [
