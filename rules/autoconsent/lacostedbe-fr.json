@@ -1,0 +1,19 @@
+{
+    "name": "lacostedbe.fr",
+    "vendorUrl": "https://www.lacostedbe.fr/",
+    "comment": "Custom popup whose only choices load Google Analytics ('Tout autoriser', or 'Configurer' with an IP anonymisation toggle), so it is hidden instead.",
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?lacostedbe\\.fr/"
+    },
+    "prehideSelectors": ["#cookies-popup"],
+    "detectCmp": [{ "exists": "#cookies-popup #consent-autorise-btn" }],
+    "detectPopup": [{ "visible": "#cookies-popup .cookie-container" }],
+    "optIn": [{ "waitForThenClick": "#cookies-popup #consent-autorise-btn" }],
+    "optOut": [
+        { "hide": "#cookies-popup" },
+        { "removeClass": "cookie-open", "selector": "body", "optional": true },
+        { "addStyle": "padding-right: 0", "selector": "body", "optional": true }
+    ]
+}
