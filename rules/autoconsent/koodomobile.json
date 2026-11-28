@@ -1,0 +1,27 @@
+{
+    "name": "koodomobile",
+    "runContext": { "urlPattern": "^https?://(www\\.)?koodomobile\\.com/" },
+    "prehideSelectors": ["[role=\"dialog\"][aria-modal=\"true\"]:has(> button[aria-label=\"Close banner\"])"],
+    "detectCmp": [{ "exists": "[role=\"dialog\"][aria-modal=\"true\"] > button[aria-label=\"Close banner\"]" }],
+    "detectPopup": [{ "visible": "[role=\"dialog\"][aria-modal=\"true\"]:has(> button[aria-label=\"Close banner\"])" }],
+    "optIn": [
+        {
+            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"]:has(> button[aria-label=\"Close banner\"]) > div > div > div:last-child > button:last-child"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[role=\"dialog\"][aria-modal=\"true\"]:has(> button[aria-label=\"Close banner\"]) > div > div > div:last-child > button:first-child"
+        },
+        { "waitForVisible": "[role=\"dialog\"][aria-labelledby=\"modal-heading\"]:has(> button[aria-label=\"Close modal\"])" },
+        {
+            "click": "[role=\"dialog\"][aria-labelledby=\"modal-heading\"] [role=\"switch\"][aria-label=\"On\"]",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "[role=\"dialog\"][aria-labelledby=\"modal-heading\"] button[type=\"button\"][aria-label]:not([aria-label=\"Close modal\"])"
+        }
+    ],
+    "test": [{ "wait": 500 }, { "eval": "EVAL_KOODOMOBILE_TEST" }]
+}

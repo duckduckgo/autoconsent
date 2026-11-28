@@ -186,6 +186,8 @@ export const snippets = {
         const consent = window.Shopify.customerPrivacy.currentVisitorConsent();
         return consent.marketing === 'no' && consent.analytics === 'no';
     },
+    EVAL_KOODOMOBILE_TEST: () =>
+        decodeURIComponent(atob(document.cookie.match(/cookieAcknowledge2=([^;]+)/)[1])).includes('"analytics_storage":"denied"'),
     EVAL_KROWN_COOKIE_BANNER_TEST: () => localStorage.getItem('krown-cookie-banner') === 'true',
     // the decline handler listens for mouseup/touchend, which element.click() does not dispatch
     EVAL_LETHPOLYTECH_DECLINE: () =>
