@@ -1,0 +1,19 @@
+{
+    "name": "private-disclaimer",
+    "prehideSelectors": ["#disclaimer-dialog"],
+    "detectCmp": [{ "exists": "#disclaimer-dialog #reject_all_cookies" }],
+    "detectPopup": [{ "visible": "#disclaimer-dialog #reject_all_cookies" }],
+    "optIn": [
+        { "waitForThenClick": "#disclaimer-dialog #accept_all_cookies" },
+        { "waitForVisible": "#disclaimer-dialog", "check": "none", "timeout": 10000 }
+    ],
+    "optOut": [
+        { "waitForThenClick": "#disclaimer-dialog #reject_all_cookies" },
+        { "waitForVisible": "#disclaimer-dialog", "check": "none", "timeout": 10000 }
+    ],
+    "test": [
+        {
+            "any": [{ "cookieContains": "\"analyticalCookies\":false" }, { "cookieContains": "_cookie_preferences=no" }]
+        }
+    ]
+}
