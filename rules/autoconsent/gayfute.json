@@ -1,0 +1,37 @@
+{
+    "name": "gayfute",
+    "vendorUrl": "https://www.gayfute.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?gayfute\\.com/"
+    },
+    "detectCmp": [
+        {
+            "exists": "#popup_disclaimer_cookies #btn-refuser"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#popup_disclaimer_cookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#popup_disclaimer_cookies #btn-enregistrer"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#popup_disclaimer_cookies #btn-refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#popup_disclaimer_cookies",
+            "check": "none",
+            "timeout": 5000
+        },
+        {
+            "cookieContains": "cookie_tiers=0"
+        }
+    ]
+}
