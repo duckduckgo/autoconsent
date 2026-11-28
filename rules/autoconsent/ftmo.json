@@ -1,0 +1,37 @@
+{
+    "name": "ftmo",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?ftmo\\.com/"
+    },
+    "prehideSelectors": ["#ftmo-cookie-layer", "#ftmo-cookie-bar"],
+    "detectCmp": [{ "exists": "#ftmo-cookie-modal #cookie-button-accept-all, #ftmo-cookie-bar" }],
+    "detectPopup": [{ "visible": "#ftmo-cookie-modal #cookie-button-accept-all, #ftmo-cookie-bar" }],
+    "optIn": [
+        {
+            "if": { "exists": "#ftmo-cookie-modal #cookie-button-accept-all" },
+            "then": [{ "waitForThenClick": "#ftmo-cookie-modal #cookie-button-accept-all" }],
+            "else": [{ "waitForThenClick": "#ftmo-cookie-bar button" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": "#ftmo-cookie-modal #cookie-button-preferences" },
+            "then": [{ "click": "#ftmo-cookie-modal #cookie-button-preferences" }],
+            "else": [{ "click": "#ftmo-cookie-settings", "optional": true }]
+        },
+        { "waitFor": "#ftmo-cookie-modal #cookie-button-save-selected", "timeout": 2000, "optional": true },
+        {
+            "if": { "exists": "#ftmo-cookie-modal #cookie-button-save-selected" },
+            "then": [
+                { "click": "#ftmo-cookie-modal input[type='checkbox']:checked:not(:disabled)", "all": true, "optional": true },
+                { "click": "#ftmo-cookie-modal #cookie-button-save-selected" },
+                { "waitForThenClick": "#cookie-button-decline-partner", "timeout": 1000, "optional": true }
+            ]
+        },
+        {
+            "if": { "exists": "#ftmo-cookie-bar" },
+            "then": [{ "click": "#ftmo-cookie-bar button" }]
+        }
+    ],
+    "test": [{ "cookieContains": "FTMO_COOKIES_MARKETING=0" }, { "cookieContains": "FTMO_COOKIES_ANALYTICAL=0" }]
+}
