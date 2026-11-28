@@ -100,6 +100,18 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
         }
     });
 
+    it('detects popups that say what analytics cookies do', () => {
+        const text =
+            'Help us improve the guides. Analytics cookies show us which builds and pages people actually use. Ads, if you allow them, keep the site free.';
+        expect(checkHeuristicPatterns(text, 'popup').patterns.length, text).to.be.greaterThan(0);
+        expect(
+            checkHeuristicPatterns('Performance cookies help us understand how visitors use the site.', 'popup').patterns.length,
+        ).to.be.greaterThan(0);
+        // cookie policy pages describe cookie categories the same way
+        expect(checkHeuristicPatterns('Analytics cookies show us which pages are popular.', 'page').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Our analytics show us which cookies recipes are popular.', 'popup').patterns).to.have.length(0);
+    });
+
     it('does not match when "cookies" is further away', () => {
         expect(
             checkHeuristicPatterns('We use the best chocolate in our cookies', undefined, {
