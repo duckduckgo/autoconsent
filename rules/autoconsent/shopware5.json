@@ -3,16 +3,16 @@
     "_metadata": {
         "vendorUrl": "https://www.shopware.com/"
     },
-    "prehideSelectors": [".page-wrap--cookie-permission[data-cookie-permission]:not(.spx-cookie-wrapper)"],
+    "prehideSelectors": ["[data-cookie-permission]:not(.spx-cookie-wrapper)"],
     "detectCmp": [
         {
-            "comment": "the spx theme's variant is handled by shopware5-spx",
+            "comment": "the spx theme's variant is handled by shopware5-spx; some themes render the banner in a <dialog> instead of .page-wrap--cookie-permission",
             "any": [
                 {
-                    "exists": ".page-wrap--cookie-permission[data-cookie-permission]:not(.spx-cookie-wrapper) .cookie-permission--decline-button"
+                    "exists": "[data-cookie-permission]:not(.spx-cookie-wrapper) .cookie-permission--decline-button"
                 },
                 {
-                    "exists": ".page-wrap--cookie-permission[data-cookie-permission]:not(.spx-cookie-wrapper) .cookie-permission--configure-button[data-openconsentmanager]"
+                    "exists": "[data-cookie-permission]:not(.spx-cookie-wrapper) .cookie-permission--configure-button[data-openconsentmanager]"
                 }
             ]
         }
@@ -22,7 +22,7 @@
             "comment": "some themes show the banner's content in a modal instead",
             "any": [
                 {
-                    "visible": ".page-wrap--cookie-permission[data-cookie-permission]"
+                    "visible": "[data-cookie-permission]"
                 },
                 {
                     "visible": ".js--modal.cookiePermissions"
@@ -33,16 +33,16 @@
     "optIn": [
         {
             "if": {
-                "exists": ".page-wrap--cookie-permission .cookie-permission--accept-button"
+                "exists": "[data-cookie-permission] .cookie-permission--accept-button"
             },
             "then": [
                 {
-                    "waitForThenClick": ".page-wrap--cookie-permission .cookie-permission--accept-button"
+                    "waitForThenClick": "[data-cookie-permission] .cookie-permission--accept-button"
                 }
             ],
             "else": [
                 {
-                    "waitForThenClick": ".page-wrap--cookie-permission .cookie-permission--configure-button"
+                    "waitForThenClick": "[data-cookie-permission] .cookie-permission--configure-button"
                 },
                 {
                     "waitForVisible": ".cookie-consent--save-button"
@@ -61,17 +61,17 @@
     "optOut": [
         {
             "if": {
-                "visible": ".page-wrap--cookie-permission .cookie-permission--decline-button"
+                "visible": "[data-cookie-permission] .cookie-permission--decline-button"
             },
             "then": [
                 {
-                    "waitForThenClick": ".page-wrap--cookie-permission .cookie-permission--decline-button"
+                    "waitForThenClick": "[data-cookie-permission] .cookie-permission--decline-button"
                 }
             ],
             "else": [
                 {
                     "comment": "non-essential groups are unchecked by default in the consent manager",
-                    "waitForThenClick": ".js--modal.cookiePermissions .cookie-permission--configure-button, .page-wrap--cookie-permission:not(.is--hidden) .cookie-permission--configure-button"
+                    "waitForThenClick": ".js--modal.cookiePermissions .cookie-permission--configure-button, [data-cookie-permission]:not(.is--hidden) .cookie-permission--configure-button"
                 },
                 {
                     "waitForThenClick": ".cookie-consent--save-button"
@@ -92,7 +92,7 @@
     ],
     "test": [
         {
-            "waitForVisible": ".page-wrap--cookie-permission[data-cookie-permission], .js--modal.cookiePermissions",
+            "waitForVisible": "[data-cookie-permission], .js--modal.cookiePermissions",
             "timeout": 2000,
             "check": "none"
         },
