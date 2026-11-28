@@ -1,0 +1,12 @@
+{
+    "name": "laposte",
+    "runContext": {
+        "urlPattern": "^https?://([a-z0-9-]+\\.)?laposte\\.fr/"
+    },
+    "prehideSelectors": ["#tc-privacy-wrapper"],
+    "detectCmp": [{ "exists": "#tc-privacy-wrapper #footer_tc_privacy_button_2" }],
+    "detectPopup": [{ "visible": "#footer_tc_privacy" }],
+    "optIn": [{ "waitForThenClick": "#footer_tc_privacy_button_3", "comment": "Accepter et fermer" }],
+    "optOut": [{ "waitForThenClick": "#footer_tc_privacy_button_2", "comment": "Ne pas accepter et fermer" }],
+    "test": [{ "waitForVisible": "#footer_tc_privacy", "timeout": 1000, "check": "none" }, { "cookieContains": "%7C1491%40%40" }]
+}
