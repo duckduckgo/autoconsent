@@ -81,6 +81,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bresidents have (?:certain )?rights with regard to the sale\b/gi,
     /\bwe use technologies (?:on this website )?(?:that may )?(?:to )?collect\b/gi,
     /\bwe use third[- ]party tools to collect information\b/gi,
+    // notices that name the purpose but not cookies: "we use tools for analytics and marketing to measure the traffic"
+    { pattern: /\bwe use (?:\S+ )?tools for (?:\S+ )?(?:analytics|marketing)\b/gi, input: 'popup' },
     // pay-or-consent walls
     /\bcontinue reading with advertising\b|\b(?:with|mit) (?:advertising|werbung) (?:and|und) tracking\b/gi,
     /\bconsent and continue\b/gi,
@@ -384,6 +386,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+    // e.g. "vi bruker verktøy for analyse og markedsføring for å måle trafikken"
+    { pattern: /\bvi bruker (?:\S+ )?verktøy for (?:\S+ )?(?:analyse|markedsføring)/gi, input: 'popup' },
 
     // Turkish (TR): the verb comes last, hence the long gap; [ıI]/[iİ] match capitals, where the i flag pairs neither
     // e.g. "çerezler kullanıyoruz", "tanımlama bilgilerini ... için kullanıyoruz"; the verb endings skip "Kullanım Koşulları"

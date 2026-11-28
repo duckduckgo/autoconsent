@@ -416,6 +416,19 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
     it('does not detect unrelated Norwegian text', () => {
         expect(checkHeuristicPatterns('Vi bruker skattemeldingen til å beregne skatten din').patterns).to.have.length(0);
     });
+
+    it('detects popup notices that name analytics tools without cookies, in popup text only', () => {
+        const texts = [
+            'Vi bruker verktøy for analyse og markedsføring for å måle trafikken på våre nettsider.',
+            'We use tools for analytics and marketing to measure the traffic on our websites.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text, 'popup').patterns.length, text).to.be.greaterThan(0);
+            expect(checkHeuristicPatterns(text, 'page').patterns, text).to.have.length(0);
+        }
+        expect(checkHeuristicPatterns('We use tools for planning our ski lessons.', 'popup').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Vi bruker verktøy for snøproduksjon.', 'popup').patterns).to.have.length(0);
+    });
 });
 
 const detectsPopup = (text: string) => checkHeuristicPatterns(text, 'popup').patterns.length > 0;
