@@ -1,0 +1,61 @@
+{
+    "name": "loungelovers.com.au",
+    "vendorUrl": "https://c15t.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?loungelovers\\.com\\.au/"
+    },
+    "prehideSelectors": ["section[aria-label='Cookie notice']"],
+    "detectCmp": [
+        {
+            "exists": "section[aria-label='Cookie notice'] button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section[aria-label='Cookie notice']"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "section[aria-label='Cookie notice'] button:first-of-type"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "section[aria-label='Cookie notice'] button:last-of-type",
+            "retry": 10,
+            "retryInterval": 500,
+            "optional": true
+        },
+        {
+            "waitForVisible": "[data-testid='consent-manager-widget-reject-button']",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": "[data-testid='consent-manager-widget-reject-button']"
+            },
+            "then": [
+                {
+                    "click": "[data-testid='consent-manager-widget-reject-button']"
+                }
+            ],
+            "else": [
+                {
+                    "visible": "section[aria-label='Cookie notice']",
+                    "check": "none"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "c15t-consent="
+        },
+        {
+            "cookieContains": "c.marketing:1",
+            "negated": true
+        }
+    ]
+}
