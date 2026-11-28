@@ -1,0 +1,13 @@
+{
+    "name": "giusto.it",
+    "vendorUrl": "https://giusto.it/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?giusto\\.it/"
+    },
+    "prehideSelectors": [".ck[role=dialog]"],
+    "detectCmp": [{ "exists": ".ck[role=dialog] .ck-x" }],
+    "detectPopup": [{ "visible": ".ck[role=dialog]" }],
+    "optIn": [{ "waitForThenClick": ".ck[role=dialog] .ck-btn .btn:not(.btn-ghost)", "retry": 5, "retryInterval": 500 }],
+    "optOut": [{ "waitForThenClick": ".ck[role=dialog] .ck-x", "retry": 5, "retryInterval": 500 }],
+    "test": [{ "waitForVisible": ".ck[role=dialog]", "check": "none", "timeout": 1000 }]
+}
