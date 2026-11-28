@@ -240,6 +240,7 @@ export const snippets = {
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),
+    EVAL_REACT_HOOK_CONSENT_TEST: () => !!localStorage.getItem('react-hook-consent'),
     EVAL_SHOPIFY_TEST: () =>
         document.cookie.includes('gdpr_cookie_consent=0') ||
         (document.cookie.includes('_tracking_consent=') &&

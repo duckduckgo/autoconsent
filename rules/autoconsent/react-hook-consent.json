@@ -1,0 +1,19 @@
+{
+    "name": "react-hook-consent",
+    "vendorUrl": "https://github.com/lukaskupczyk/react-hook-consent",
+    "prehideSelectors": [".rhc-banner"],
+    "detectCmp": [{ "exists": ".rhc-banner .rhc-banner__content__primary" }],
+    "detectPopup": [{ "visible": ".rhc-banner" }],
+    "optIn": [{ "waitForThenClick": ".rhc-banner .rhc-banner__content__primary" }],
+    "optOut": [
+        {
+            "if": { "exists": ".rhc-banner button.rhc-banner__content__secondary:nth-of-type(2)" },
+            "then": [{ "click": ".rhc-banner button.rhc-banner__content__secondary:nth-of-type(2)" }],
+            "else": [
+                { "click": ".rhc-banner .rhc-banner__content__secondary" },
+                { "waitForThenClick": ".rhc-settings .rhc-settings__content__footer__secondary", "timeout": 1000, "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_REACT_HOOK_CONSENT_TEST" }]
+}
