@@ -352,6 +352,9 @@ describe('checkHeuristicPatterns with Danish popups', () => {
         const texts = [
             'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
             'Vi bruger cookies for at give dig den bedste oplevelse.',
+            // tandlaegelisten.dk
+            'Vi bruger nødvendige cookies for at sitet virker. Valgfrie cookies til statistik kun med dit samtykke.',
+            'Vi benytter os af cookies til statistik.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -360,6 +363,8 @@ describe('checkHeuristicPatterns with Danish popups', () => {
 
     it('does not detect unrelated Danish text', () => {
         expect(checkHeuristicPatterns('Find information om sundhed og sygdom').patterns).to.have.length(0);
+        // the gap stays on one line, so a nav "Opret bruger" next to a "Cookies" link does not match
+        expect(checkHeuristicPatterns('Log ind\nOpret bruger\nCookies', 'page').patterns).to.have.length(0);
     });
 });
 
