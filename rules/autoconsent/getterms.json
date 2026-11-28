@@ -1,0 +1,33 @@
+{
+    "name": "getterms",
+    "_metadata": {
+        "vendorUrl": "https://getterms.io/"
+    },
+    "cosmetic": false,
+    "runContext": {
+        "main": true,
+        "frame": false
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": [
+                "cookie-widget-wrapper",
+                "#gtCookieWidget button[aria-label='Reject all cookies'], #gtCookieWidget button[aria-label='Open Cookie Preferences']"
+            ]
+        }
+    ],
+    "detectPopup": [{ "visible": ["cookie-widget-wrapper", "#gtCookieWidget"] }],
+    "optIn": [{ "waitForThenClick": ["cookie-widget-wrapper", "#gtCookieWidget button[aria-label='Accept all cookies']"] }],
+    "optOut": [
+        {
+            "if": { "exists": ["cookie-widget-wrapper", "#gtCookieWidget button[aria-label='Reject all cookies']"] },
+            "then": [{ "click": ["cookie-widget-wrapper", "#gtCookieWidget button[aria-label='Reject all cookies']"] }],
+            "else": [
+                { "click": ["cookie-widget-wrapper", "#gtCookieWidget button[aria-label='Open Cookie Preferences']"] },
+                { "waitForThenClick": ["cookie-widget-wrapper", ".gt-cookie-dialog__footer > button:nth-child(2)"] }
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_GETTERMS_TEST" }]
+}

@@ -1,0 +1,15 @@
+{
+    "cmp": "getterms",
+    "tests": [
+        {
+            "note": "banner has only Preferences and Accept outside the EU/UK; the rule rejects from the preferences dialog",
+            "sites": ["https://www.apemedical.com.au/", "https://30lines.com/", "https://packard-living.com/"],
+            "options": { "onlyRegions": ["US"] }
+        },
+        {
+            "note": "EU/UK banner with a Reject All button (banner, popup and card layouts)",
+            "sites": ["https://irishlandmark.com/", "https://scottishbadgers.org.uk/", "https://klimagiel.it/"],
+            "options": { "onlyRegions": ["DE"] }
+        }
+    ]
+}
