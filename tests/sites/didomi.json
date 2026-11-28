@@ -13,6 +13,11 @@
             "options": { "testOptIn": true, "testSelfTest": false, "onlyRegions": ["US", "FR"] }
         },
         {
+            "note": "Didomi with the Gimii 'Cookies for good' prompt, which opens once Didomi consent is refused; the rule then refuses it too. FR only: in the US senscritique.com hides Didomi from automated browsers and largus.fr shows no popup.",
+            "sites": ["https://www.senscritique.com/", "https://www.bfmtv.com/", "https://fr.mappy.com/", "https://www.largus.fr/"],
+            "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["FR"] }
+        },
+        {
             "note": "US-specific Didomi sites where the CMP runs in CCPA/CPRA mode. In CCPA mode there is no explicit reject button, so the rule relies on the Didomi JS API (EVAL_DIDOMI_OPT_OUT) instead of clicking a DOM element.",
             "sites": ["https://newrepublic.com/article/162247/andreas-malm-blow-up-pipeline-climate-direct-action"],
             "options": { "testOptIn": false, "testSelfTest": true, "onlyRegions": ["US"] }

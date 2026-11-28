@@ -27,6 +27,11 @@
                     "else": [{ "eval": "EVAL_DIDOMI_OPT_OUT" }]
                 }
             ]
+        },
+        {
+            "comment": "Gimii shows its own consent prompt once Didomi consent is refused",
+            "if": { "exists": "#gimii, script[src*=\"static.gimii.fr/\"]" },
+            "then": [{ "waitForThenClick": "#gimii-root button[class*=\"gimii_secondary\"]", "timeout": 5000, "optional": true }]
         }
     ],
     "test": [{ "eval": "EVAL_DIDOMI_TEST" }]
