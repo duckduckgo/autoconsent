@@ -1,0 +1,35 @@
+{
+    "name": "dynamicweb",
+    "_metadata": {
+        "vendorUrl": "https://www.dynamicweb.com/"
+    },
+    "prehideSelectors": ["#dwCookieBanner"],
+    "detectCmp": [{ "exists": "#dwCookieModal" }],
+    "detectPopup": [{ "visible": "#dwCookieModal.show, #dwCookieBanner", "check": "any" }],
+    "optIn": [
+        {
+            "if": { "visible": "#dwCookieModal.show" },
+            "then": [{ "waitForThenClick": "#dwCookieModal.show #dwCookieAcceptAll", "retry": 10, "retryInterval": 500 }],
+            "else": [{ "waitForThenClick": "#dwCookieBanner button[onclick^='setOptInCookie(2)']" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": "#dwCookieModal.show" },
+            "then": [{ "waitForThenClick": "#dwCookieModal.show #dwCookieDeclineAll", "retry": 10, "retryInterval": 500 }],
+            "else": [
+                {
+                    "if": { "exists": "#dwCookieBanner #CookiesDeclineAll, #dwCookieBanner button[onclick^='setOptInCookie(0)']" },
+                    "then": [
+                        { "waitForThenClick": "#dwCookieBanner #CookiesDeclineAll, #dwCookieBanner button[onclick^='setOptInCookie(0)']" }
+                    ],
+                    "else": [
+                        { "click": "#dwCookieBanner [data-bs-target='#dwCookieModal']" },
+                        { "waitForThenClick": "#dwCookieModal.show #dwCookieDeclineAll", "retry": 10, "retryInterval": 500 }
+                    ]
+                }
+            ]
+        }
+    ],
+    "test": [{ "waitForVisible": "#dwCookieModal.show, #dwCookieBanner", "check": "none", "timeout": 2000 }]
+}
