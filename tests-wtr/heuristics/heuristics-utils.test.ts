@@ -498,6 +498,7 @@ describe('checkHeuristicPatterns with more French, German, Dutch, Polish and Rus
             'Cookies werden für Messungen, Werbung und Optimierung verwendet. Durch die weitere Nutzung unserer Website stimmen Sie unserer Datenschutzrichtlinie zu.',
             'Hierfür werden auf Ihrem Gerät Analyse-Cookies mit einer pseudonymen Kennung gespeichert.',
             'Wir setzen Statistik-Cookies und Marketingcookies ein.',
+            'Dafür sind Cookies für Statistik und Marketing nötig, auch von Google und Meta.',
             'Wenn du auf „Einverstanden“ klickst, verarbeiten wir deine Daten und speichern Informationen (z. B. durch Cookies oder andere Identifikatoren) auf deinem Endgerät.',
             'Cookies worden gebruikt voor metingen, advertenties en optimalisatie. Door onze site te blijven gebruiken, gaat u akkoord met ons privacybeleid.',
             'Alles accepteren Keuze opslaan Alleen standaard cookies',
@@ -514,6 +515,7 @@ describe('checkHeuristicPatterns with more French, German, Dutch, Polish and Rus
         expectNotDetected([
             'On utilise du beurre dans nos cookies',
             'Analyse der Marketing-Strategie',
+            'Rezepte für Cookies für Weihnachten',
             'Durch die Nutzung unserer Webseite finden Sie schnell die neuesten Tests.',
         ]);
     });
@@ -540,6 +542,7 @@ describe('checkHeuristicPatterns with more Swedish wording', () => {
             'Välj nedan vilka cookies du tillåter oss att använda. Acceptera alla Endast nödvändiga',
             'momondo och dess partners vill använda cookies eller liknande teknik för att lagra och/eller komma åt information på och om din enhet',
             'Lagra och/eller få åtkomst till information på en enhet',
+            'Det kräver cookies för statistik och marknadsföring, även från Google och Meta.',
         ]);
     });
 
@@ -548,6 +551,7 @@ describe('checkHeuristicPatterns with more Swedish wording', () => {
             'Vi använder förnybar energi och endast nödvändiga resurser',
             'Vi använder bara ekologiska råvaror i våra bakverk',
             'Recept på kakor och bullar till fikat',
+            'Kakor för kalaset och statistik över försäljningen',
             'Sök och jämför billiga flyg online. Vart vill du resa?',
             'Välkommen till ett roligare sparande i aktier och fonder',
         ]);
@@ -559,6 +563,7 @@ describe('checkHeuristicPatterns with more Danish, Norwegian, Italian and Japane
         expectDetected([
             'Vi anvender cookies for at forbedre din oplevelse',
             'Denne hjemmeside benytter cookies',
+            'Det kræver cookies til statistik og markedsføring, også fra Google og Meta.',
             'Her kan du administrere dine samtykker for bruk av cookies/ informasjonskapsler på nettstedet',
             "Informativa sull'utilizzo dei cookie",
             '広告を配信すること等を目的に、Cookie等の「インフォマティブデータ」を利用しています。',
@@ -568,6 +573,7 @@ describe('checkHeuristicPatterns with more Danish, Norwegian, Italian and Japane
     it('does not detect unrelated text', () => {
         expectNotDetected([
             'Du vil ansøge om at besøge, bo eller arbejde i Danmark',
+            'Find statistik og markedsføring til din virksomhed',
             'Il sito utilizza materiali riciclati per la costruzione',
         ]);
     });

@@ -181,6 +181,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     DE_THIS_SITE_COOKIES,
     /(?:durch die weitere nutzung.{0,100}cookie)|(?:cookie.{0,100}durch die weitere nutzung)/gi,
     /\b(?:analyse|statistik)-?cookies\b/gi,
+    /\bcookies für (?:statistik|marketing|analyse)/gi,
     /\b(?:marketing|tracking)-?cookies\b/gi,
     /\bcookies oder (?:andere|ähnliche)/gi,
     // "Wenn Sie auf „Alle akzeptieren“ klicken, stimmen Sie …", "Durch Klicken auf „Alle akzeptieren“ gestatten Sie …"
@@ -368,6 +369,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\blagra och\/eller (?:få åtkomst till|komma åt) information\b/gi,
     /\b(?:dess|våra) partners?\b.{0,100}\b(?:cookies|kakor)\b/gi,
     /\btekniker (?:såsom|som) (?:cookies|kakor)\b/gi,
+    /\b(?:cookies|kakor) för (?:statistik|marknadsföring|analys)/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"
@@ -378,6 +380,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // Danish (DA)
     // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
     /\b(?:bruger|anvender|benytter) cookies\b/gi,
+    // purpose-first: "det kræver cookies til statistik og markedsføring"
+    /\bcookies til (?:statistik|markedsføring|marketing|analyse)/gi,
 
     // Norwegian (NO)
     // e.g. "vi bruker informasjonskapsler", "kan vi bruke valgfrie informasjonskapsler", "nettstedet bruker cookies"
