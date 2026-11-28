@@ -1,0 +1,10 @@
+{
+    "name": "upr-fr",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?upr\\.fr/" },
+    "prehideSelectors": ["#cookie-banner.cookie-banner"],
+    "detectCmp": [{ "exists": "#cookie-banner.cookie-banner #cookie-banner-close" }],
+    "detectPopup": [{ "visible": "#cookie-banner.cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner #cookie-banner-close" }],
+    "optOut": [{ "waitForThenClick": "#cookie-banner #cookie-banner-close" }],
+    "test": [{ "waitForVisible": "#cookie-banner.cookie-banner", "timeout": 1000, "check": "none" }]
+}
