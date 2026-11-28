@@ -9,6 +9,10 @@
                 "https://www.thermador.com/us/"
             ],
             "options": { "skipRegions": ["US", "GB"] }
+        },
+        {
+            "note": "the site injects the CMP late, and the CMP API reports gppdata.cmpStatus 'loading' before the popup shows; opting out in that phase gets overwritten. Shows the GDPR popup in every region",
+            "sites": ["https://www.easeus.de/"]
         }
     ]
 }
