@@ -368,6 +368,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\blagra och\/eller (?:få åtkomst till|komma åt) information\b/gi,
     /\b(?:dess|våra) partners?\b.{0,100}\b(?:cookies|kakor)\b/gi,
     /\btekniker (?:såsom|som) (?:cookies|kakor)\b/gi,
+    // "läs mer i vår cookieinformation", "läs mer om våra kakor"
+    /\bläs mer (?:i|om) (?:vår|våra|vårt) (?:\S+ )?(?:cookie\w*|kakor\b)/gi,
 
     // Japanese (JA)
     // e.g. "当サイトはCookieを使用しています", "クッキー（Cookie）を利用しています"

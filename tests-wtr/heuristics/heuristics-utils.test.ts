@@ -540,6 +540,8 @@ describe('checkHeuristicPatterns with more Swedish wording', () => {
             'Välj nedan vilka cookies du tillåter oss att använda. Acceptera alla Endast nödvändiga',
             'momondo och dess partners vill använda cookies eller liknande teknik för att lagra och/eller komma åt information på och om din enhet',
             'Lagra och/eller få åtkomst till information på en enhet',
+            'Nödvändiga funktioner påverkas inte om du nekar. Läs mer i vår cookieinformation.',
+            'Läs mer om våra kakor',
         ]);
     });
 
@@ -550,6 +552,8 @@ describe('checkHeuristicPatterns with more Swedish wording', () => {
             'Recept på kakor och bullar till fikat',
             'Sök och jämför billiga flyg online. Vart vill du resa?',
             'Välkommen till ett roligare sparande i aktier och fonder',
+            'Läs mer i vår integritetspolicy',
+            'Läs mer om våra kakaobollar',
         ]);
     });
 });

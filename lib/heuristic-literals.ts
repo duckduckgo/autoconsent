@@ -277,6 +277,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["lagra och/eller "],
     [" partner"],
     ["tekniker "],
+    ["läs mer "],
     ["cookie","クッキー"],
     ["閲覧履歴","端末情報","利用者情報"],
     [" cookies"],
