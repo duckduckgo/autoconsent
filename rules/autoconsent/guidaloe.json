@@ -1,0 +1,9 @@
+{
+    "name": "guidaloe",
+    "prehideSelectors": ["section[data-consent-panel]"],
+    "detectCmp": [{ "exists": "#guidaloe-tracking" }, { "exists": "[data-consent-panel] [data-consent-action=\"reject\"]" }],
+    "detectPopup": [{ "visible": "[data-consent-panel]" }],
+    "optIn": [{ "waitForThenClick": "[data-consent-panel] [data-consent-action=\"accept\"]" }],
+    "optOut": [{ "waitForThenClick": "[data-consent-panel] [data-consent-action=\"reject\"]" }],
+    "test": [{ "waitForVisible": "[data-consent-panel]", "check": "none", "timeout": 2000 }]
+}
