@@ -1,7 +1,7 @@
 {
     "name": "PrimeBox CookieBar",
     "prehideSelectors": ["#cookie-bar"],
-    "detectCmp": [{ "exists": "#cookie-bar .cb-enable,#cookie-bar .cb-disable,#cookie-bar .cb-policy" }],
+    "detectCmp": [{ "visible": "#cookie-bar .cb-enable,#cookie-bar .cb-disable,#cookie-bar .cb-policy", "check": "any" }],
     "detectPopup": [
         {
             "visible": "#cookie-bar .cb-enable,#cookie-bar .cb-disable,#cookie-bar .cb-policy",
