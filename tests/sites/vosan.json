@@ -1,0 +1,15 @@
+{
+    "cmp": "vosan",
+    "tests": [
+        {
+            "note": "outside TCF regions the site shows its own banner (Customise > Reject All)",
+            "sites": ["https://vosan.co/"],
+            "options": { "onlyRegions": ["US"] }
+        },
+        {
+            "note": "in the EU and UK the site's banner flashes briefly and then defers to the NitroPay CMP, which the rule rejects as well",
+            "sites": ["https://vosan.co/"],
+            "options": { "onlyRegions": ["DE", "GB"] }
+        }
+    ]
+}

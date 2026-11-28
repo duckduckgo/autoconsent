@@ -1,0 +1,100 @@
+{
+    "name": "vosan",
+    "vendorUrl": "https://vosan.co/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?vosan\\.co/"
+    },
+    "prehideSelectors": ["#cookie-banner", "#ncmp__tool .ncmp__banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-banner [data-testid=button-cookie-settings]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "any": [
+                {
+                    "visible": "#cookie-banner.translate-y-0"
+                },
+                {
+                    "visible": "#ncmp__tool .ncmp__banner.ncmp__active",
+                    "check": "any"
+                }
+            ]
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "visible": "#cookie-banner.translate-y-0"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#cookie-banner [data-testid=button-accept-cookies]"
+                }
+            ]
+        },
+        {
+            "waitFor": "#ncmp__tool .ncmp__banner.ncmp__active",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": "#ncmp__tool .ncmp__banner.ncmp__active"
+            },
+            "then": [
+                {
+                    "eval": "EVAL_CONSENTMANAGER_NCMP_ACCEPT"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#cookie-banner.translate-y-0"
+            },
+            "then": [
+                {
+                    "click": "#cookie-banner [data-testid=button-cookie-settings]"
+                },
+                {
+                    "waitForThenClick": "#cookie-settings-modal [data-testid=button-reject-all-settings]",
+                    "timeout": 2000,
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "waitFor": "#ncmp__tool .ncmp__banner.ncmp__active",
+            "timeout": 3000,
+            "optional": true
+        },
+        {
+            "if": {
+                "exists": "#ncmp__tool .ncmp__banner.ncmp__active"
+            },
+            "then": [
+                {
+                    "wait": 500
+                },
+                {
+                    "eval": "EVAL_CONSENTMANAGER_NCMP_REJECT"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "any": [
+                {
+                    "cookieContains": "CCPAOPTOUT=1"
+                },
+                {
+                    "cookieContains": "ncmp="
+                }
+            ]
+        }
+    ]
+}
