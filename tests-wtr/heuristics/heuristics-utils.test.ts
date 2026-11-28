@@ -352,6 +352,9 @@ describe('checkHeuristicPatterns with Danish popups', () => {
         const texts = [
             'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
             'Vi bruger cookies for at give dig den bedste oplevelse.',
+            // sexnoveller.dk
+            'Vi bruger strengt nødvendige cookies for at drive siden.',
+            'Her anvender vi også valgfrie cookies til statistik.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
