@@ -1,0 +1,13 @@
+{
+    "cmp": "boutik",
+    "tests": [
+        {
+            "note": "drolet.ca: categories are pre-enabled, opt-out unticks them",
+            "sites": ["https://www.drolet.ca/ca/en/"]
+        },
+        {
+            "note": "valcourtinc.com: categories start disabled, opt-out ticks and unticks one to store the choice",
+            "sites": ["https://www.valcourtinc.com/en/"]
+        }
+    ]
+}

@@ -116,6 +116,10 @@ export const snippets = {
                     .split('=', 2)[1],
             ),
         ).consents.statistics,
+    // the close icon is an SVG, which has no click() method
+    EVAL_BOUTIK_CLOSE: () =>
+        document.querySelector('.cookie-consent-modal svg.fa-xmark.close').dispatchEvent(new MouseEvent('click', { bubbles: true })) ||
+        true,
     EVAL_CC_BANNER2_0: () => !!document.cookie.match(/sncc=[^;]+D%3Dtrue/),
     // the close icon is an SVG, which has no click() method
     EVAL_COOKIE_POPUP_CLOSE: () =>

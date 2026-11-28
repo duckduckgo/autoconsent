@@ -1,0 +1,22 @@
+{
+    "name": "boutik",
+    "prehideSelectors": [".cookie-consent-modal:has(.cookie-consent-modal-btn-wrapper)"],
+    "detectCmp": [{ "exists": ".cookie-consent-modal .cookie-consent-modal-btn-wrapper > .cookie-consent-modal-btn.all" }],
+    "detectPopup": [{ "visible": ".cookie-consent-modal .cookie-consent-modal-btn-wrapper > .cookie-consent-modal-btn.all" }],
+    "optOut": [
+        { "waitForThenClick": ".cookie-consent-modal .cookie-consent-modal-btn-wrapper > .cookie-consent-modal-btn:not(.all)" },
+        { "waitForVisible": ".cookie-consent-modal .cookie-consent-modal-list .react-toggle", "timeout": 3000 },
+        { "wait": 500 },
+        {
+            "if": { "exists": ".cookie-consent-modal .react-toggle--checked" },
+            "then": [{ "click": ".cookie-consent-modal .react-toggle--checked", "all": true }],
+            "else": [
+                { "click": ".cookie-consent-modal .cookie-consent-modal-list .react-toggle" },
+                { "waitForThenClick": ".cookie-consent-modal .react-toggle--checked", "timeout": 2000 }
+            ]
+        },
+        { "eval": "EVAL_BOUTIK_CLOSE" }
+    ],
+    "optIn": [{ "waitForThenClick": ".cookie-consent-modal .cookie-consent-modal-btn-wrapper > .cookie-consent-modal-btn.all" }],
+    "test": [{ "cookieContains": "%22analytics%22%3Afalse%2C%22advertising%22%3Afalse" }]
+}
