@@ -1,0 +1,13 @@
+{
+    "name": "hudoc",
+    "vendorUrl": "https://hudoc.echr.coe.int/",
+    "runContext": {
+        "urlPattern": "^https?://hudoc\\.\\w+\\.coe\\.int/"
+    },
+    "prehideSelectors": ["#CookieMessage"],
+    "detectCmp": [{ "exists": "#CookieMessage .closeCookieMessageButton" }],
+    "detectPopup": [{ "visible": "#CookieMessage .closeCookieMessageButton" }],
+    "optIn": [{ "waitForThenClick": "#CookieMessage .closeCookieMessageButton" }],
+    "optOut": [{ "waitForThenClick": "#CookieMessage .closeCookieMessageButton" }],
+    "test": [{ "waitForVisible": "#CookieMessage", "check": "none", "timeout": 2000 }]
+}
