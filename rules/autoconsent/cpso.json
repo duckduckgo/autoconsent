@@ -1,0 +1,10 @@
+{
+    "name": "cpso",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?cpso\\.on\\.ca/" },
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [{ "exists": "#cookie-banner #cookie-banner-form" }],
+    "detectPopup": [{ "visible": "#cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "#cookie-banner-form button[type=submit]" }],
+    "optOut": [{ "waitForThenClick": "#cookie-banner-form button[type=submit]" }],
+    "test": [{ "waitForVisible": "#cookie-banner", "timeout": 1000, "check": "none" }]
+}
