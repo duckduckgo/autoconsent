@@ -1,0 +1,43 @@
+{
+    "name": "jquery-gdpr-cookie",
+    "vendorUrl": "https://github.com/thany/gdpr-cookie",
+    "prehideSelectors": [".gdprcookie"],
+    "detectCmp": [{ "exists": ".gdprcookie .gdprcookie-buttons" }],
+    "detectPopup": [{ "visible": ".gdprcookie .gdprcookie-buttons" }],
+    "optIn": [
+        {
+            "if": { "exists": ".gdprcookie .gdprcookie-dismiss" },
+            "then": [{ "waitForThenClick": ".gdprcookie .gdprcookie-buttons button.btn-primary" }],
+            "else": [
+                { "waitForThenClick": ".gdprcookie .gdprcookie-buttons > :last-child" },
+                { "waitForVisible": ".gdprcookie .gdprcookie-types" },
+                {
+                    "click": ".gdprcookie .gdprcookie-types input[type=checkbox]:not(:checked):not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                { "click": ".gdprcookie .gdprcookie-buttons > :first-child" }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".gdprcookie .gdprcookie-dismiss" },
+            "then": [
+                {
+                    "if": { "exists": ".gdprcookie .gdprcookie-buttons button.btn-default" },
+                    "then": [{ "waitForThenClick": ".gdprcookie .gdprcookie-buttons button.btn-default" }],
+                    "else": [{ "click": ".gdprcookie .gdprcookie-dismiss" }]
+                }
+            ],
+            "else": [
+                { "waitForThenClick": ".gdprcookie .gdprcookie-buttons > :last-child" },
+                { "waitForVisible": ".gdprcookie .gdprcookie-types" },
+                { "click": ".gdprcookie .gdprcookie-types input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+                { "click": ".gdprcookie .gdprcookie-buttons > :first-child" }
+            ]
+        },
+        { "waitForVisible": ".gdprcookie", "check": "none", "timeout": 2000, "optional": true }
+    ],
+    "test": [{ "cookieContains": "=[\"essential\"]" }]
+}

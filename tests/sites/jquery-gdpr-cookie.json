@@ -1,0 +1,22 @@
+{
+    "cmp": "jquery-gdpr-cookie",
+    "tests": [
+        {
+            "note": "original plugin layout: Accept and Customize buttons only",
+            "sites": ["https://www.instantiations.com/", "https://www.rubberduckbathrooms.co.uk/"]
+        },
+        {
+            "note": "original plugin layout; the site reloads the page after the choice is saved",
+            "sites": ["https://futbolenlatele.com/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "customized layout where the Customize control is a div instead of a button",
+            "sites": ["https://www.gsecret.gr/"]
+        },
+        {
+            "note": "forked plugin with a dismiss control and a Reject button",
+            "sites": ["https://www.giant-bicycles.com/de", "https://www.liv-cycling.com/de"]
+        }
+    ]
+}
