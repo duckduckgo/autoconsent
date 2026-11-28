@@ -1,0 +1,44 @@
+{
+    "name": "frelsesarmeen.no",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?frelsesarmeen\\.no/"
+    },
+    "prehideSelectors": [".cookie-container.active"],
+    "detectCmp": [
+        {
+            "exists": ".cookie-container #save-consents"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookie-container.active"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-container #accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#consent-selection input:checked:not(:disabled)"
+            },
+            "then": [
+                {
+                    "click": "#consent-selection input:checked:not(:disabled)",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".cookie-container #save-consents"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".cookie-container",
+            "check": "none"
+        }
+    ]
+}
