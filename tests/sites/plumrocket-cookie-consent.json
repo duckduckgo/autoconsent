@@ -2,7 +2,17 @@
     "cmp": "plumrocket-cookie-consent",
     "tests": [
         {
+            "note": "Popup (modal-popup) and wall variants, shown with the _show class",
             "sites": ["https://www.partscentre.co.uk/", "https://emmenmode.nl/"]
+        },
+        {
+            "note": "Bottom bar variant (modal-custom with show-without-overlay, no _show class), with Decline in the settings panel",
+            "sites": ["https://welhof.com/"]
+        },
+        {
+            "note": "Bottom bar variant without Decline: categories are unchecked and confirmed, which reloads the page, so the self-test message is lost",
+            "sites": ["https://www.prylstaden.se/"],
+            "options": { "testSelfTest": false }
         }
     ]
 }
