@@ -1,0 +1,11 @@
+{
+    "name": "hry-cookie-set",
+    "prehideSelectors": ["section.cookie__set"],
+    "detectCmp": [{ "exists": "section.cookie__set.show .rigth-btns .hry__btn.-reject" }],
+    "detectPopup": [{ "visible": "section.cookie__set.show .hry__btn.-reject" }],
+    "optIn": [{ "waitForThenClick": "section.cookie__set .hry__btn.-accept" }],
+    "optOut": [
+        { "waitForThenClick": "section.cookie__set .hry__btn.-reject" },
+        { "waitForVisible": "section.cookie__set.show", "check": "none" }
+    ]
+}
