@@ -1,0 +1,10 @@
+{
+    "cmp": "pvh-tealium",
+    "tests": [
+        {
+            "note": "PVH North American sites: Tealium modal extension banner with a link to the Tealium preferences prompt",
+            "sites": ["https://www.calvinklein.ca/", "https://www.calvinklein.us/", "https://usa.tommy.com/"],
+            "options": { "onlyRegions": ["US", "CA"] }
+        }
+    ]
+}

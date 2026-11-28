@@ -1,0 +1,36 @@
+{
+    "name": "pvh-tealium",
+    "prehideSelectors": ["#__tealiumModalParent:has(.consent_doNotSell)", "#__tealiumGDPRcpPrefs:has(.pvhOverlayBG_prompt)"],
+    "detectCmp": [
+        { "exists": "#__tealiumModalParent .consent_doNotSell #consent_manager_button1,#__tealiumGDPRcpPrefs .pvhOverlayBG_prompt" },
+        { "eval": "EVAL_TEALIUM_0" }
+    ],
+    "detectPopup": [{ "visible": "#__tealiumModalParent .consent_doNotSell,#__tealiumGDPRcpPrefs .consent_preferences", "check": "any" }],
+    "optIn": [
+        { "eval": "EVAL_TEALIUM_2" },
+        {
+            "if": { "visible": "#__tealiumModalParent .consent_doNotSell" },
+            "then": [{ "waitForThenClick": "#__tealiumModalParent .consent_doNotSell .close_btn_thick" }],
+            "else": [{ "waitForThenClick": "#__tealiumGDPRcpPrefs .close_btn_thick" }]
+        }
+    ],
+    "optOut": [
+        { "eval": "EVAL_TEALIUM_1" },
+        { "eval": "EVAL_TEALIUM_DONOTSELL" },
+        {
+            "comment": "outside Quebec the banner links to the preferences prompt, which Quebec visitors get directly",
+            "if": { "visible": "#__tealiumModalParent .consent_doNotSell" },
+            "then": [{ "waitForThenClick": "#__tealiumModalParent .consent_doNotSell #consent_manager_button1" }]
+        },
+        { "waitForVisible": "#__tealiumGDPRcpPrefs #preferences_prompt_submit", "timeout": 3000 },
+        {
+            "if": { "exists": "#__tealiumGDPRcpPrefs input.toggle:checked" },
+            "then": [{ "click": "#__tealiumGDPRcpPrefs input.toggle:checked", "all": true }]
+        },
+        { "click": "#__tealiumGDPRcpPrefs #preferences_prompt_submit" }
+    ],
+    "test": [
+        { "eval": "EVAL_TEALIUM_3" },
+        { "visible": "#__tealiumModalParent .consent_doNotSell,#__tealiumGDPRcpPrefs .consent_preferences", "check": "none" }
+    ]
+}
