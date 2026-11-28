@@ -1,0 +1,19 @@
+{
+    "name": "wattoo",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?wattoo\\.(dk|no)/"
+    },
+    "prehideSelectors": ["#mdConsent"],
+    "detectCmp": [{ "exists": "#mdConsent" }],
+    "detectPopup": [{ "visible": "#mdConsent #mdConsent_saveChoices" }],
+    "optIn": [{ "waitForThenClick": "#mdConsent #mdConsent_acceptAll" }],
+    "optOut": [
+        {
+            "click": "#mdConsent input[name*='consentedCategories']:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": "#mdConsent #mdConsent_saveChoices" }
+    ],
+    "test": [{ "waitForVisible": "#mdConsent", "check": "none", "timeout": 3000 }]
+}
