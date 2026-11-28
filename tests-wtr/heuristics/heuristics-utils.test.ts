@@ -82,6 +82,16 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects "cookies help us" notices', () => {
+        for (const text of [
+            'Cookies help us improve your browsing experience. Learn more',
+            'Cookies help us deliver our services. By using our services, you agree to our use of cookies.',
+        ]) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+        expect(checkHeuristicPatterns('These cookies help us raise funds for the school trip.').patterns).to.have.length(0);
+    });
 });
 
 describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
@@ -167,6 +177,7 @@ describe('checkHeuristicPatterns with French popups', () => {
             // change.org
             'Vos paramètres de confidentialité. Nous utilisons nos propres cookies et ceux de tiers. Accepter les cookies Rejeter les cookies non essentiels Gérer les cookies',
             'Nous utilisons nos propres cookies et ceux de tiers',
+            'Des témoins (cookies) nous aident à améliorer votre expérience de navigation. En savoir plus Refuser Accepter et continuer',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -181,6 +192,8 @@ describe('checkHeuristicPatterns with French popups', () => {
             'Vous pouvez refuser les cookies dans les paramètres de votre navigateur.',
             // "cookies" more than two words after "nous utilisons"
             'Nous utilisons nos propres recettes pour préparer les cookies.',
+            // "témoins" also means witnesses
+            'Les témoins de la scène ont contacté la police.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);

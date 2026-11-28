@@ -87,6 +87,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // preference centres are often in the page but hidden, so popup text only
     { pattern: /\bstore or retrieve information on your browser\b|\bstockées dans votre navigateur ou récupérées\b/gi, input: 'popup' },
     /\bwe have cookies\b/gi,
+    // "Cookies help us improve your browsing experience", as "les cookies nous aident" in FR
+    /\bcookies help us (?:to )?(?:improve|deliver|provide|offer|give|understand|personali[sz]e|enhance)\b/gi,
     /\b(?:revoke|withdraw) your consent at any time\b|\beinwilligung jederzeit widerrufen\b/gi,
     /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi,
     /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi,
@@ -123,6 +125,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bvous consentez\b.{0,60}\bcookies\b/gi,
     /\baccepter ou refuser (?:\S+ ){0,3}cookies\b/gi,
     /\bles cookies nous (?:sont|permettent|aident)\b/gi,
+    // Canadian French calls cookies "témoins": "des témoins (cookies) nous aident à améliorer …"
+    /\b(?:des|les) témoins (?:\(cookies\) )?nous (?:aident|permettent)\b/gi,
     /\btraceurs (?:optionnels|publicitaires|non essentiels)\b/gi,
     /seulement nécessaires/gi,
     /je désactive les finalités non essentielles/gi,
