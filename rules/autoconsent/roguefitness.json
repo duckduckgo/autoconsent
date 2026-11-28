@@ -2,7 +2,7 @@
     "name": "roguefitness",
     "vendorUrl": "https://www.roguefitness.com/",
     "runContext": {
-        "urlPattern": "^https?://(www\\.)?roguefitness\\.com/"
+        "urlPattern": "^https?://(www\\.)?(roguefitness\\.com|roguecanada\\.ca|rogueaustralia\\.com\\.au)/"
     },
     "prehideSelectors": ["#cookie-agree"],
     "detectCmp": [{ "exists": "#cookie-agree .cookie-intro-container" }],
