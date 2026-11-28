@@ -1,0 +1,10 @@
+{
+    "cmp": "clideo",
+    "tests": [
+        {
+            "sites": ["https://clideo.com/"],
+            "options": { "onlyRegions": ["DE", "FR", "IT"] },
+            "note": "The banner is only shown to EU visitors; US and GB get no popup."
+        }
+    ]
+}
