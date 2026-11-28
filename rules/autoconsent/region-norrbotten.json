@@ -1,0 +1,16 @@
+{
+    "name": "region-norrbotten",
+    "comment": "First layer has no reject; saving the settings dialog with optional categories unchecked stores norrbtn-consent-*=false. Saving reloads the page, so the self-test cannot run.",
+    "runContext": { "urlPattern": "^https?://([\\w-]+\\.)?norrbotten\\.se/" },
+    "prehideSelectors": ["#rnConsentBanner"],
+    "detectCmp": [{ "exists": "#rnConsentBanner" }],
+    "detectPopup": [{ "visible": "#rnConsentBanner" }],
+    "optIn": [{ "waitForThenClick": "#js-acceptCookies" }],
+    "optOut": [
+        { "waitForThenClick": "#rnConsentBanner button[data-bs-target='#rnConsentWindow']" },
+        { "waitForVisible": "#rnConsentWindow" },
+        { "click": "#rnConsentWindow input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+        { "waitForThenClick": "#js-acceptCustomCookies" }
+    ],
+    "test": [{ "cookieContains": "norrbtn-consent-statistic=false" }]
+}
