@@ -1,0 +1,36 @@
+{
+    "name": "consent-card-bar",
+    "vendorUrl": "https://wowforeveraddons.com/",
+    "prehideSelectors": [".consent.consent-card[aria-labelledby=consent-title]"],
+    "detectCmp": [
+        { "exists": ".consent.consent-card[aria-labelledby=consent-title] .consent-reject,.consent.consent-notice .consent-link" }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".consent.consent-card[aria-labelledby=consent-title],.consent.consent-notice:has(.consent-link)",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": ".consent.consent-notice .consent-x" },
+            "then": [{ "click": ".consent.consent-notice .consent-x" }],
+            "else": [{ "waitForThenClick": ".consent.consent-card .consent-accept" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".consent.consent-notice .consent-link" },
+            "then": [
+                { "click": ".consent.consent-notice .consent-link" },
+                { "waitForVisible": ".consent.consent-card .consent-more", "timeout": 2000 }
+            ]
+        },
+        {
+            "if": { "exists": ".consent.consent-card .consent-more" },
+            "then": [{ "click": ".consent.consent-card .consent-more" }],
+            "else": [{ "waitForThenClick": ".consent.consent-card .consent-reject" }]
+        }
+    ],
+    "test": [{ "waitForVisible": ".consent.consent-card,.consent.consent-notice", "check": "none", "timeout": 2000 }]
+}
