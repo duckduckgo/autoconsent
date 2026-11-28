@@ -1,0 +1,10 @@
+{
+    "cmp": "loteriesdecatalunya",
+    "tests": [
+        {
+            "note": "the site is geo-blocked outside Spain",
+            "sites": ["https://www.loteriesdecatalunya.cat/"],
+            "options": { "onlyRegions": ["ES"] }
+        }
+    ]
+}

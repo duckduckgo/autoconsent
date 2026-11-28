@@ -1,0 +1,22 @@
+{
+    "name": "loteriesdecatalunya",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?loteriesdecatalunya\\.cat/" },
+    "prehideSelectors": ["#cookie-consent-dialog", "#cookie-config-dialog"],
+    "detectCmp": [{ "exists": "#cookie-consent-dialog #cookie-consent-dialog_no" }],
+    "detectPopup": [{ "visible": "#cookie-consent-dialog #cookie-consent-dialog_no" }],
+    "optIn": [{ "waitForThenClick": "#cookie-consent-dialog #cookie-consent-dialog_yes" }],
+    "optOut": [
+        { "waitForThenClick": "#cookie-consent-dialog #cookie-consent-dialog_no" },
+        { "waitForVisible": "#cookie-config-dialog #cookie-consent-phase2-dialog_no" },
+        {
+            "if": { "exists": "#cookie-consent-dialog__content-optimization:checked" },
+            "then": [{ "click": "label[for=cookie-consent-dialog__content-optimization]" }]
+        },
+        {
+            "if": { "exists": "#cookie-consent-dialog__content-marketing:checked" },
+            "then": [{ "click": "label[for=cookie-consent-dialog__content-marketing]" }]
+        },
+        { "waitForThenClick": "#cookie-config-dialog #cookie-consent-phase2-dialog_no" }
+    ],
+    "test": [{ "cookieContains": "\"optimization\":false" }, { "cookieContains": "\"marketing\":false" }]
+}
