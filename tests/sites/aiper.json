@@ -1,0 +1,10 @@
+{
+    "cmp": "aiper",
+    "tests": [
+        {
+            "note": "CookieYes banner that can render after CMP detection gives up; in the US it stays hidden",
+            "sites": ["https://aiper.com/"],
+            "options": { "skipRegions": ["US"] }
+        }
+    ]
+}
