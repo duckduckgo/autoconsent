@@ -1,0 +1,10 @@
+{
+    "name": "consentiam",
+    "vendorUrl": "https://www.consentiam.eu/",
+    "prehideSelectors": ["#consentiam"],
+    "detectCmp": [{ "exists": ["#consentiam", ".wrap[role=\"dialog\"]"] }],
+    "detectPopup": [{ "visible": ["#consentiam", ".wrap[role=\"dialog\"]"] }],
+    "optIn": [{ "waitForThenClick": ["#consentiam", "button[data-a=\"accept\"]"] }],
+    "optOut": [{ "waitForThenClick": ["#consentiam", "button[data-a=\"reject\"]"] }],
+    "test": [{ "cookieContains": "__ti_consent=" }, { "cookieContains": "%22a%22%3Afalse%2C%22m%22%3Afalse%2C%22p%22%3Afalse" }]
+}
