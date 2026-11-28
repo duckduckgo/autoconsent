@@ -1,0 +1,23 @@
+{
+    "name": "123landbruk.no",
+    "runContext": { "urlPattern": "^https?://(www\\.)?123landbruk\\.no/" },
+    "prehideSelectors": ["section.consent-banner"],
+    "detectCmp": [{ "exists": "section.consent-banner" }],
+    "detectPopup": [{ "visible": "section.consent-banner" }],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///section[contains(@class, 'consent-banner')]//button[normalize-space()='Godta alle']",
+            "retry": 10,
+            "retryInterval": 500
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///section[contains(@class, 'consent-banner')]//button[normalize-space()='Avvis']",
+            "retry": 10,
+            "retryInterval": 500
+        },
+        { "waitForVisible": "section.consent-banner", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "123landbruk_consent=" }, { "cookieContains": "~00~" }]
+}
