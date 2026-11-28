@@ -1,0 +1,18 @@
+{
+    "name": "dmstr-cookie-consent",
+    "_metadata": {
+        "vendorUrl": "https://github.com/dmstr/yii2-cookie-consent"
+    },
+    "prehideSelectors": [".cookie-consent-popup.open"],
+    "detectCmp": [
+        { "exists": ".cookie-consent-popup .cookie-consent-accept-all" },
+        { "exists": ".cookie-consent-popup [data-cc-consent]" }
+    ],
+    "detectPopup": [{ "visible": ".cookie-consent-popup.open" }],
+    "optIn": [{ "waitForThenClick": ".cookie-consent-popup .cookie-consent-accept-all" }],
+    "optOut": [
+        { "click": "input[data-cc-consent]:checked:not(:disabled)", "all": true, "optional": true },
+        { "click": ".cookie-consent-popup .cookie-consent-save" }
+    ],
+    "test": [{ "cookieContains": "cookie_consent_status=" }]
+}
