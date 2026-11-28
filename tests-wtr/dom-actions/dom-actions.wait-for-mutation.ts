@@ -16,6 +16,21 @@ describe('waitForMutation', () => {
         expect(await resultPromise).to.be.true;
     });
 
+    it('should resolve if the root element is replaced', async () => {
+        // Given
+        const domActions = instantiateDomActions();
+        const originalRoot = document.documentElement;
+        const newRoot = document.createElement('html');
+
+        // When
+        const resultPromise = domActions.waitForMutation('html', 100);
+        document.replaceChild(newRoot, originalRoot);
+        document.replaceChild(originalRoot, newRoot);
+
+        // Then
+        expect(await resultPromise).to.be.true;
+    });
+
     it('should throw if the dom does not change by timeout', async () => {
         // Given
         const domActions = instantiateDomActions();

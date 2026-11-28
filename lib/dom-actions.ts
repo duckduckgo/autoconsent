@@ -240,7 +240,8 @@ export class DomActions implements DomActionsProvider {
                 observer.disconnect();
                 resolve(true);
             });
-            observer.observe(node[0], {
+            // observe the document for the root element, since pages can replace <html> itself (e.g. on hydration errors)
+            observer.observe(node[0] === document.documentElement ? document : node[0], {
                 subtree: true,
                 childList: true,
                 attributes: true,

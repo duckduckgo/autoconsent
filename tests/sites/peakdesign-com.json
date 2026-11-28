@@ -1,0 +1,9 @@
+{
+    "cmp": "peakdesign.com",
+    "note": "OneTrust banner that can render after detection gives up on slow connections, so the rule detects the OneTrust loader and waits for the banner in optOut",
+    "tests": [
+        {
+            "sites": ["https://www.peakdesign.com/"]
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "name": "peakdesign.com",
+    "vendorUrl": "https://www.peakdesign.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https://(www\\.)?peakdesign\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "script[src*='cdn.cookielaw.org/scripttemplates/otSDKStub.js']" }],
+    "detectPopup": [
+        { "exists": "script[src*='cdn.cookielaw.org/scripttemplates/otSDKStub.js']" },
+        { "cookieContains": "OptanonAlertBoxClosed=", "negated": true }
+    ],
+    "optIn": [
+        { "waitForVisible": "#onetrust-banner-sdk", "timeout": 25000 },
+        { "waitForThenClick": "#onetrust-accept-btn-handler" },
+        { "waitForVisible": "#onetrust-banner-sdk", "timeout": 5000, "check": "none" }
+    ],
+    "optOut": [
+        { "waitForVisible": "#onetrust-banner-sdk", "timeout": 25000 },
+        {
+            "if": { "visible": "#onetrust-reject-all-handler" },
+            "then": [{ "click": "#onetrust-reject-all-handler" }],
+            "else": [
+                { "waitForThenClick": "#onetrust-pc-btn-handler" },
+                { "waitForVisible": "#onetrust-pc-sdk", "timeout": 3000 },
+                { "click": "#onetrust-pc-sdk input.category-switch-handler:checked", "all": true, "optional": true },
+                { "waitForThenClick": "#onetrust-pc-sdk .save-preference-btn-handler" }
+            ]
+        },
+        { "waitForVisible": "#onetrust-banner-sdk,#onetrust-pc-sdk", "timeout": 5000, "check": "none" }
+    ],
+    "test": [{ "eval": "EVAL_ONETRUST_1" }]
+}
