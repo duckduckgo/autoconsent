@@ -82,6 +82,16 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns.length).to.be.greaterThan(0);
         expect(snippets).to.include('website uses cookies to enhance your browsing experience');
     });
+
+    it('detects "cookies help us" notices in popup text only', () => {
+        // docs.ultralytics.com
+        const text =
+            'Cookies help us see which docs, models, and features you find useful, so we can keep improving them. Choose what you share in Cookie settings, or read our Privacy Policy.\nReject\nAccept';
+
+        expect(checkHeuristicPatterns(text, 'popup').patterns).to.include('/\\bcookies help us\\b/gi');
+        expect(checkHeuristicPatterns(text, 'page').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Volunteers help us keep the docs useful', 'popup').patterns).to.have.length(0);
+    });
 });
 
 describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {

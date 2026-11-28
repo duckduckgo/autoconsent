@@ -54,6 +54,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["consent and continue"],
     ["store or retrieve information on your browser","stockées dans votre navigateur ou récupérées"],
     ["we have cookies"],
+    ["cookies help us"],
     [" your consent at any time","einwilligung jederzeit widerrufen"],
     ["analytics ","we use google analytics"],
     [" consenso"],
