@@ -1,0 +1,46 @@
+{
+    "name": "rode",
+    "vendorUrl": "https://rode.com/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?rode\\.com/"
+    },
+    "prehideSelectors": ["#RODE-GDPRx"],
+    "detectCmp": [
+        {
+            "exists": "#RODE-GDPRx"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#RODE-GDPRx #mainDisplay"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#RODE-GDPRx #mainDisplay .action_button:not(.button_outline)"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#RODE-GDPRx #mainDisplay .action_button.button_outline"
+        },
+        {
+            "waitForVisible": "#RODE-GDPRx #customiseDisplay"
+        },
+        {
+            "click": "#RODE-GDPRx #customiseDisplay .rode-cookie-toggle.active:not(.disabled)",
+            "all": true,
+            "optional": true
+        },
+        {
+            "click": "#RODE-GDPRx #customiseDisplay .action_buttons .action_button"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#RODE-GDPRx",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
