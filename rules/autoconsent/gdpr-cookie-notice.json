@@ -1,0 +1,33 @@
+{
+    "name": "gdpr-cookie-notice",
+    "vendorUrl": "https://github.com/passatgt/gdpr-cookie-notice",
+    "prehideSelectors": [".gdpr-cookie-notice:has(.gdpr-cookie-notice-nav-item-settings)"],
+    "detectCmp": [{ "exists": ".gdpr-cookie-notice .gdpr-cookie-notice-nav-item-settings" }],
+    "detectPopup": [{ "visible": "html.gdpr-cookie-notice-loaded .gdpr-cookie-notice .gdpr-cookie-notice-nav-item-settings" }],
+    "optIn": [{ "waitForThenClick": ".gdpr-cookie-notice .gdpr-cookie-notice-nav-item-accept" }],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".gdpr-cookie-notice :is(.gdpr-cookie-notice-nav-item-reject, .gdpr-cookie-notice-nav-item-necessary, .gdpr-cookie-notice-nav-item-accept_nessesary)"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".gdpr-cookie-notice :is(.gdpr-cookie-notice-nav-item-reject, .gdpr-cookie-notice-nav-item-necessary, .gdpr-cookie-notice-nav-item-accept_nessesary)"
+                }
+            ],
+            "else": [
+                { "waitForThenClick": ".gdpr-cookie-notice .gdpr-cookie-notice-nav-item-settings" },
+                { "waitForVisible": ".gdpr-cookie-notice-modal .gdpr-cookie-notice-modal-footer-item-save" },
+                {
+                    "click": ".gdpr-cookie-notice-modal .gdpr-cookie-notice-modal-cookie-input:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                { "click": ".gdpr-cookie-notice-modal .gdpr-cookie-notice-modal-footer-item-save" }
+            ]
+        },
+        { "click": "html.gdpr-cookie-notice-show-modal .gdpr-cookie-notice-modal-close", "optional": true },
+        { "hide": ".gdpr-cookie-notice", "optional": true }
+    ],
+    "test": [{ "cookieContains": "gdprcookienotice=" }]
+}

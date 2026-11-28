@@ -1,0 +1,13 @@
+{
+    "cmp": "gdpr-cookie-notice",
+    "tests": [
+        {
+            "note": "settings and accept buttons only: opt-out unchecks the categories in the settings modal and saves",
+            "sites": ["https://fijate.com/", "https://www.vsw.de/", "https://restarters.net/"]
+        },
+        {
+            "note": "forks with a reject button on the bar (nav-item-reject, nav-item-necessary, nav-item-accept_nessesary)",
+            "sites": ["https://es.elplayazo.com/", "https://torrot.com/", "https://www.joho.de/"]
+        }
+    ]
+}
