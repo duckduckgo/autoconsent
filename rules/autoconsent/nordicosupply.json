@@ -1,0 +1,33 @@
+{
+    "name": "nordicosupply",
+    "vendorUrl": "https://nordicosupply.com/",
+    "cosmetic": false,
+    "prehideSelectors": ["[data-bind*=\"ns_cookies\"] .amgdprcookie-bar-template"],
+    "detectCmp": [
+        {
+            "exists": "[data-bind*=\"ns_cookies\"] .amgdprcookie-bar-template [data-bind*=\"declineAllCookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-bind*=\"ns_cookies\"] .amgdprcookie-bar-template"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-bind*=\"ns_cookies\"] .amgdprcookie-bar-template [data-bind*=\"acceptAllCookies\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[data-bind*=\"ns_cookies\"] .amgdprcookie-bar-template [data-bind*=\"declineAllCookies\"]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "[data-bind*=\"ns_cookies\"] .amgdprcookie-bar-template",
+            "check": "none",
+            "timeout": 10000
+        }
+    ]
+}
