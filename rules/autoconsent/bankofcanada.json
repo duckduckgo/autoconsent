@@ -1,0 +1,13 @@
+{
+    "name": "bankofcanada",
+    "vendorUrl": "https://www.bankofcanada.ca/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?(bankofcanada|banqueducanada)\\.ca/"
+    },
+    "prehideSelectors": ["#cookie_consent.bocss-banner"],
+    "detectCmp": [{ "exists": "#cookie_consent.bocss-banner .bocss-banner__dismiss" }],
+    "detectPopup": [{ "visible": "#cookie_consent.bocss-banner:not(.hidden)" }, { "eval": "EVAL_BANKOFCANADA_DETECT" }],
+    "optIn": [{ "waitForThenClick": "#cookie_consent .bocss-banner__action a.bocss-button" }],
+    "optOut": [{ "waitForThenClick": "#cookie_consent .bocss-banner__dismiss" }],
+    "test": [{ "eval": "EVAL_BANKOFCANADA_TEST" }]
+}
