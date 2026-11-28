@@ -1,0 +1,10 @@
+{
+    "cmp": "armatec",
+    "tests": [
+        {
+            "sites": ["https://www.armatec.com/", "https://www.armatec.se/"],
+            "note": "the site reloads the page after saving cookie preferences, so the self-test cannot run",
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

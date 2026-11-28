@@ -1,0 +1,60 @@
+{
+    "name": "armatec",
+    "_metadata": {
+        "vendorUrl": "https://www.armatec.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?armatec\\.(com|se|no|fi|dk)/"
+    },
+    "prehideSelectors": ["#cookie-container #cookie-banner"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-container #cookie-banner"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-container #cookie-banner"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "exists": "#btn-accept-cookies"
+            },
+            "then": [
+                {
+                    "waitForThenClick": "#btn-accept-cookies"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "#btn-accept-cookies-detailed"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": "#btn-display-advanced-cookie-settings"
+            },
+            "then": [
+                {
+                    "click": "#btn-display-advanced-cookie-settings"
+                }
+            ]
+        },
+        {
+            "comment": "category checkboxes are unchecked by default",
+            "waitForThenClick": "#cookie-banner #btn-save-cookies"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "HasSavedCookiePreferences=true"
+        }
+    ]
+}
