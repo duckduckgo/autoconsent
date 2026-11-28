@@ -1,0 +1,15 @@
+{
+    "name": "asm-cookie-consent",
+    "prehideSelectors": ["#aviso:has(#asm_state)"],
+    "detectCmp": [{ "exists": "#aviso #acepta1[onclick*=\"solo_necesarias\"]" }],
+    "detectPopup": [{ "visible": "#aviso:not(.hidden)" }],
+    "optIn": [{ "waitForThenClick": "#aviso #acepta" }],
+    "optOut": [
+        {
+            "if": { "visible": "#aviso #acepta1", "check": "none" },
+            "then": [{ "click": "#aviso #rechaza" }]
+        },
+        { "waitForThenClick": "#aviso #acepta1" }
+    ],
+    "test": [{ "waitFor": "#aviso.hidden" }]
+}

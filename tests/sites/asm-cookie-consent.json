@@ -1,0 +1,9 @@
+{
+    "cmp": "asm-cookie-consent",
+    "note": "The reject choice deletes the consent cookie, so the popup shows again on every page load",
+    "tests": [
+        {
+            "sites": ["https://www.getxo.eus/", "https://prames.com/", "https://www.ordunte.com/", "https://fieldmap.cz/"]
+        }
+    ]
+}
