@@ -352,6 +352,9 @@ describe('checkHeuristicPatterns with Danish popups', () => {
         const texts = [
             'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
             'Vi bruger cookies for at give dig den bedste oplevelse.',
+            // bottlio.dk
+            'Vi bruger få, funktionelle cookies. Bottlio sætter ikke tracking- eller annoncerings-cookies.',
+            'Vi anvender nødvendige cookies og statistik-cookies.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -360,6 +363,8 @@ describe('checkHeuristicPatterns with Danish popups', () => {
 
     it('does not detect unrelated Danish text', () => {
         expect(checkHeuristicPatterns('Find information om sundhed og sygdom').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Vi bruger ikke cookies på denne side').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Butikken bruger lokale råvarer i alle kager og cookies').patterns).to.have.length(0);
     });
 });
 
