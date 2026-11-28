@@ -1,0 +1,14 @@
+{
+    "cmp": "ally",
+    "tests": [
+        {
+            "note": "Accept/Decline banner",
+            "sites": ["https://www.ally.com/", "https://www.ally.com/bank/"]
+        },
+        {
+            "note": "with GPC the site already opts out and shows a notice with only a close button",
+            "sites": ["https://secure.ally.com/", "https://www.ally.com/auto/"],
+            "options": { "gpc": true, "testOptIn": false }
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "name": "ally",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?ally\\.com/"
+    },
+    "prehideSelectors": ["#cx_banner_container"],
+    "detectCmp": [{ "exists": "#cx_banner_container" }],
+    "detectPopup": [{ "visible": "#cx_banner_container" }],
+    "optIn": [{ "waitForThenClick": "#cx_banner_container button[aria-label='Accept Cookies']" }],
+    "optOut": [
+        {
+            "if": { "exists": "#cx_banner_container .userConsent__btn_close" },
+            "then": [{ "click": "#cx_banner_container .userConsent__btn_close" }],
+            "else": [{ "waitForThenClick": "#cx_banner_container button[aria-label='Decline Cookies']" }]
+        }
+    ],
+    "test": [{ "cookieContains": "CPRA=N" }]
+}
