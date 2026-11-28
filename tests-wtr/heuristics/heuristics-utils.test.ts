@@ -352,6 +352,9 @@ describe('checkHeuristicPatterns with Danish popups', () => {
         const texts = [
             'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
             'Vi bruger cookies for at give dig den bedste oplevelse.',
+            // kodbilen.dk
+            'Vi bruger nødvendige cookies, så sitet, kurven, dit login og chatten med kundeservice virker.',
+            'Siger du ja, bruger vi også cookies til statistik.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -360,6 +363,9 @@ describe('checkHeuristicPatterns with Danish popups', () => {
 
     it('does not detect unrelated Danish text', () => {
         expect(checkHeuristicPatterns('Find information om sundhed og sygdom').patterns).to.have.length(0);
+        expect(
+            checkHeuristicPatterns('Vi bruger kun økologisk kød fra danske gårde, og vores cookies er bagt i dag').patterns,
+        ).to.have.length(0);
     });
 });
 
