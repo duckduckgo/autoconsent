@@ -1,0 +1,10 @@
+{
+    "cmp": "goodtape",
+    "tests": [
+        {
+            "sites": ["https://goodtape.io/"],
+            "options": { "testSelfTest": false },
+            "note": "The site reloads the page right after saving consent, so the self-test never runs; the consent cookie is set correctly."
+        }
+    ]
+}
