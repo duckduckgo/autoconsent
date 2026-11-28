@@ -1,0 +1,54 @@
+{
+    "name": "correosaduanas.es",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?correosaduanas\\.es/"
+    },
+    "prehideSelectors": ["#msg_cookiePanel"],
+    "detectCmp": [
+        {
+            "exists": "#msg_cookiePanel #cookieConfig"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#msg_cookiePanel"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#msg_cookiePanel #cookieAceptar"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#msg_cookiePanel #cookieConfig"
+        },
+        {
+            "waitForVisible": "#msg_cookiePanelConfig #btnCookiesRechazarTodas"
+        },
+        {
+            "waitForThenClick": "#msg_cookiePanelConfig #btnCookiesRechazarTodas",
+            "retry": 3,
+            "retryInterval": 500
+        },
+        {
+            "waitForVisible": "#msg_cookiePanelConfig",
+            "check": "none",
+            "timeout": 2000,
+            "optional": true
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_ADT_tecnica=true"
+        },
+        {
+            "cookieContains": "cookie_ADT_analitica",
+            "negated": true
+        },
+        {
+            "cookieContains": "cookie_ADT_publicidad",
+            "negated": true
+        }
+    ]
+}
