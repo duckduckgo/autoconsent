@@ -1,0 +1,21 @@
+{
+    "cmp": "tag-analytics-cnil",
+    "note": "The rule has no optIn steps.",
+    "tests": [
+        {
+            "note": "Original CNIL template: banner link opens a hidden info box that already holds the opt-out button.",
+            "sites": ["https://www.kbis.pro/", "https://www.peche62.fr/", "https://www.alsace-des-petits.fr/"],
+            "options": { "testOptIn": false }
+        },
+        {
+            "note": "Footer bubble variant with a visible opt-out button.",
+            "sites": ["https://www.fasthotel.com/"],
+            "options": { "testOptIn": false }
+        },
+        {
+            "note": "Banner whose 'know more' button builds the opt-out modal on click.",
+            "sites": ["https://fr.bdsmsutra.com/"],
+            "options": { "testOptIn": false }
+        }
+    ]
+}
