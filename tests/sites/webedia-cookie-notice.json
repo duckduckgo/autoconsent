@@ -1,0 +1,9 @@
+{
+    "cmp": "webedia-cookie-notice",
+    "note": "Notice-only banner (\"by continuing to browse you accept cookies\") whose only control is an \"OK\" acknowledge button; the opt-out dismisses it.",
+    "tests": [
+        {
+            "sites": ["https://www.sensacine.com.mx/", "https://www.adorocinema.com/", "https://www.beyazperde.com/"]
+        }
+    ]
+}

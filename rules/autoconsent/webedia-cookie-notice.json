@@ -1,0 +1,10 @@
+{
+    "name": "webedia-cookie-notice",
+    "_metadata": { "vendorUrl": "https://www.webedia-group.com/" },
+    "prehideSelectors": ["#js-cookie-info.info-cookie"],
+    "detectCmp": [{ "exists": "#js-cookie-info.info-cookie .info-cookie-close" }],
+    "detectPopup": [{ "visible": "#js-cookie-info.info-cookie" }],
+    "optIn": [{ "waitForThenClick": "#js-cookie-info .info-cookie-close" }],
+    "optOut": [{ "waitForThenClick": "#js-cookie-info .info-cookie-close" }],
+    "test": [{ "cookieContains": "ACCOK=true" }]
+}
