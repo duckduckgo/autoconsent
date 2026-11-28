@@ -351,6 +351,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // TCF: "noi e i nostri partner archiviamo …", "… potremmo utilizzare dati di localizzazione", not "partner commerciali"
     /\bnoi e i nostri (?:\d+ )?partner (?:archivia\w*|memorizz\w*|potremmo|trattiamo)\b/gi,
     /\bcookies? (?:essenziali|necessari)\b/gi,
+    // analytics-only notices without the word "cookie": "questo sito utilizza Google Analytics"; policies say it too, so popup text only
+    { pattern: /\b(?:(?:questo|il nostro) sito (?:utilizza|usa)|utilizziamo|usiamo) google analytics\b/gi, input: 'popup' },
 
     // Swedish (SV)
     // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"

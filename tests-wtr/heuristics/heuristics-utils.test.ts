@@ -159,6 +159,13 @@ describe('checkHeuristicPatterns with Italian popups', () => {
             ).patterns,
         ).to.have.length(0);
     });
+
+    it('detects Italian analytics-only notices in popups, not pages', () => {
+        const text = 'Questo sito utilizza Google Analytics GA4 per raccogliere statistiche anonime sui visitatori. Accetta Rifiuta';
+        expect(checkHeuristicPatterns(text, 'popup').patterns.length).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns(text, 'page').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Il sito usa Google Fonts e Google Maps', 'popup').patterns).to.have.length(0);
+    });
 });
 
 describe('checkHeuristicPatterns with French popups', () => {

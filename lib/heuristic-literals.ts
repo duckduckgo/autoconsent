@@ -268,6 +268,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     [" tutti i cookie"],
     ["noi e i nostri "],
     ["essenziali","necessari"],
+    [" google analytics"],
     ["använder"],
     ["cookies","kakor"],
     ["används ","används"],
