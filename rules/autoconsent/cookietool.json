@@ -1,0 +1,32 @@
+{
+    "name": "cookietool",
+    "vendorUrl": "https://github.com/emilio/CookieTool",
+    "prehideSelectors": [".cookietool-message"],
+    "detectCmp": [
+        {
+            "exists": ".cookietool-message button[data-action=\"decline\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookietool-message"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookietool-message button[data-action=\"agree\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookietool-message button[data-action=\"decline\"]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".cookietool-message",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
