@@ -1,0 +1,10 @@
+{
+    "cmp": "como-se-escribe",
+    "tests": [
+        {
+            "note": "the page reloads after saving or accepting, so the self-test result is lost",
+            "sites": ["https://www.como-se-escribe.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

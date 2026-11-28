@@ -1,0 +1,18 @@
+{
+    "name": "como-se-escribe",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?como-se-escribe\\.com/"
+    },
+    "prehideSelectors": ["#rgpd_bg"],
+    "detectCmp": [{ "exists": "#rgpd_pp #rgpd_box1" }],
+    "detectPopup": [{ "visible": "#rgpd_box1" }],
+    "optIn": [{ "waitForThenClick": "#rgpd_box1 .rpgd_btnc2" }],
+    "optOut": [
+        { "waitForThenClick": "#rgpd_box1 .rpgd_btnc1" },
+        { "waitForVisible": "#rgpd_box2" },
+        { "click": "#nacooan" },
+        { "click": "#nacooads" },
+        { "click": "#rgpd_box2 .rpgd_btnc2" }
+    ],
+    "test": [{ "cookieContains": "rgpd_analytics=0" }, { "cookieContains": "rgpd_ads=0" }]
+}
