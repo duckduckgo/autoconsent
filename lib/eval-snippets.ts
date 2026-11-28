@@ -237,6 +237,10 @@ export const snippets = {
             ),
         ).status === 'deny',
     EVAL_POVR_GOBACK: () => window.history.back() || true,
+    EVAL_PRIVACYWIRE_TEST: () =>
+        Object.entries(JSON.parse(localStorage.getItem('privacywire')).cookieGroups).every(
+            ([group, allowed]) => group === 'necessary' || !allowed,
+        ),
     EVAL_PUBTECH_0: () =>
         document.cookie.includes('euconsent-v2') &&
         (document.cookie.match(/.YAAAAAAAAAAA/) || document.cookie.match(/.aAAAAAAAAAAA/) || document.cookie.match(/.YAAACFgAAAAA/)),

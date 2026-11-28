@@ -1,0 +1,24 @@
+{
+    "name": "privacywire",
+    "vendorUrl": "https://processwire.com/modules/privacy-wire/",
+    "prehideSelectors": [".privacywire-wrapper"],
+    "detectCmp": [{ "exists": "#privacywire-wrapper" }],
+    "detectPopup": [{ "visible": "#privacywire-wrapper.show-banner .privacywire-banner" }],
+    "optIn": [{ "waitForThenClick": "#privacywire-wrapper.show-banner .privacywire-banner .allow-all" }],
+    "optOut": [
+        {
+            "if": { "visible": "#privacywire-wrapper.show-banner .privacywire-banner .allow-necessary" },
+            "then": [{ "click": "#privacywire-wrapper.show-banner .privacywire-banner .allow-necessary" }],
+            "else": [
+                { "click": "#privacywire-wrapper.show-banner .privacywire-banner .choose" },
+                { "waitForVisible": "#privacywire-wrapper.show-options .privacywire-options .save" },
+                {
+                    "if": { "exists": "#privacywire-wrapper.show-options .privacywire-options input.optional:checked" },
+                    "then": [{ "click": "#privacywire-wrapper.show-options .privacywire-options input.optional:checked", "all": true }]
+                },
+                { "click": "#privacywire-wrapper.show-options .privacywire-options .save" }
+            ]
+        }
+    ],
+    "test": [{ "eval": "EVAL_PRIVACYWIRE_TEST" }]
+}

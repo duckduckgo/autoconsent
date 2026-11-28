@@ -1,0 +1,13 @@
+{
+    "cmp": "privacywire",
+    "tests": [
+        {
+            "note": "Decline button hidden by site CSS: opt-out goes through Manage Cookies and saves with optional groups unchecked",
+            "sites": ["https://www.revelstokemountainresort.com/", "https://www.timberlinelodge.com/", "https://www.seatoskygondola.com/"]
+        },
+        {
+            "note": "Decline (necessary only) button visible in the banner",
+            "sites": ["https://www.trinnov.com/", "https://www.ukbonn.de/", "https://www.tonhalle-orchester.ch/"]
+        }
+    ]
+}
