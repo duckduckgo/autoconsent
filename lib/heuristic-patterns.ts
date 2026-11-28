@@ -95,6 +95,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bcontinue without accepting\b/gi,
     // "choose between essential cookies that are required for the site to work or all cookies"
     /\bcookies (?:that are )?(?:strictly )?(?:required|necessary|needed) for (?:the|this|our) (?:web)?site to (?:work|function)\b/gi,
+    // the consent choice itself: "Choose what this site may store and measure"
+    { pattern: /\bchoose what (?:this|our) (?:web)?site (?:may|can) (?:store|save)\b/gi, input: 'popup' },
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
@@ -138,6 +140,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\ben (?:naviguant|poursuivant)\b.{0,100}cookies/gi,
     /(?:en continuant.{0,100}cookie)|(?:cookie.{0,100}en continuant)/gi,
     /\ben (?:naviguant|poursuivant|continuant)\b.{0,100}confidentialité/gi,
+    { pattern: /\bchoisissez ce que (?:ce|notre) site peut (?:enregistrer|stocker)\b/gi, input: 'popup' },
 
     // DE
     /wir.{0,100}verwenden.{0,100}cookies/gi,

@@ -466,6 +466,17 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects "choose what this site may store" in popups only', () => {
+        const texts = [
+            'Cookie settings\nChoose what this site may store and measure. You can change this any time from "Cookie settings" at the bottom of the page.',
+            'Paramètres des cookies\nChoisissez ce que ce site peut enregistrer et mesurer.',
+        ];
+        for (const text of texts) {
+            expect(detectsPopup(text), text).to.be.true;
+            expect(detectsPage(text), text).to.be.false;
+        }
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';
@@ -484,6 +495,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Continue without signing in',
             'Choose between chocolate or oatmeal cookies for the party.',
             'JavaScript is required for the site to work.',
+            'Choose what this site should show first on the home page.',
         ]);
     });
 });
