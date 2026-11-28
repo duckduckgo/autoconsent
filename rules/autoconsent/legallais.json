@@ -1,0 +1,17 @@
+{
+    "name": "legallais",
+    "vendorUrl": "https://www.legallais.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?legallais\\.com/"
+    },
+    "prehideSelectors": [".config-cookies-consent-popup"],
+    "detectCmp": [{ "exists": "#configCookiesPopup" }],
+    "detectPopup": [{ "visible": "#configCookiesPopup" }],
+    "optIn": [{ "waitForThenClick": "#configCookiesPopup .cookies-accept-btn" }],
+    "optOut": [
+        { "waitForThenClick": "#configCookiesPopup .cookies-setting-btn" },
+        { "waitForThenClick": "#configCookiesPopup .cookies-deny-all-btn" },
+        { "waitForThenClick": "#configCookiesPopup .cookies-save-and-close-btn" }
+    ],
+    "test": [{ "cookieContains": "CookiesConsent_ads=false" }]
+}
