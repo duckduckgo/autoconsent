@@ -448,6 +448,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'We use a cookie to remember you are 18+ and keep your preferences on this device.',
             'Continue without accepting\nProtecting your privacy is our priority',
             'Choose between essential cookies that are required for the site to work or all cookies, including non-essential ones.',
+            'We only use technically necessary cookies for login and language. No tracking, no ads. More in the privacy policy',
         ]);
     });
 
@@ -478,6 +479,8 @@ describe('checkHeuristicPatterns with more English wording', () => {
         expectNotDetected([
             'We use cookiecutter templates',
             'We use cookie-free analytics',
+            'We only use cookie-free analytics',
+            'We only use fresh butter in our cookies and cakes',
             'Please allow cookies in your browser settings',
             'We use data analytics tools in our consulting work',
             'We use the best chocolate in our cookies',

@@ -40,8 +40,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bpowered by usercentrics\b|\b(?:realisiert mit|realized with) klaro\b/gi,
     BY_CONTINUING_PRIVACY,
     // up to two qualifiers are common: "optional", "essential", "analytics", "google analytics", "third party", ...
-    // singular too, but not "cookie-free"
-    /we (?:also )?(?:use|serve)(?: \w+){0,2} cookies?\b(?!-)/gi,
+    // singular too, but not "cookie-free"; "we only use necessary cookies" notices too
+    /we (?:also |only )?(?:use|serve)(?: \w+){0,2} cookies?\b(?!-)/gi,
     /\bwe use (?:\S+ )?cookie files\b/gi,
     // consent asked as a question: "can I use cookies to …?", "allow analytics cookies?"
     /\b(?:can|may) (?:i|we) use (?:\S+ ){0,2}cookies\b/gi,
