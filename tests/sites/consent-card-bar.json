@@ -1,0 +1,10 @@
+{
+    "cmp": "consent-card-bar",
+    "note": "custom consent component shared by sites of one publisher; the variant depends on the browser time zone, not the IP",
+    "tests": [
+        {
+            "note": "non-EU time zones (as in CI) get a short-lived notice; opt-out opens its settings card and turns off ads and analytics cookies. The EU 'Reject all' bar only shows when the time zone is in the EU and Google Funding Choices does not load",
+            "sites": ["https://wowforeveraddons.com/", "https://thegta6map.com/", "https://brotator.com/", "https://wowforeverclasses.com/"]
+        }
+    ]
+}
