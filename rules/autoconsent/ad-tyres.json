@@ -1,0 +1,13 @@
+{
+    "name": "ad-tyres",
+    "prehideSelectors": ["[data-controller~='rgpd']:has([data-action*='rgpd#rejectAll'])"],
+    "detectCmp": [{ "exists": "[data-controller~='rgpd'] [data-action*='rgpd#rejectAll']" }],
+    "detectPopup": [{ "visible": "[data-controller~='rgpd'] [data-action*='rgpd#rejectAll']" }],
+    "optIn": [{ "waitForThenClick": "[data-controller~='rgpd'] [data-action*='rgpd#acceptAll']", "retry": 10, "retryInterval": 500 }],
+    "optOut": [{ "waitForThenClick": "[data-controller~='rgpd'] [data-action*='rgpd#rejectAll']", "retry": 10, "retryInterval": 500 }],
+    "test": [
+        {
+            "any": [{ "cookieContains": "\"analytics_storage\":\"denied\"" }, { "cookieContains": "\"analytics\":false" }]
+        }
+    ]
+}
