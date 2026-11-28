@@ -1,0 +1,9 @@
+{
+    "name": "funding-choices-us",
+    "prehideSelectors": [".fc-ccpa-root .fc-confirmation-dialog"],
+    "detectCmp": [{ "exists": ".fc-ccpa-root" }],
+    "detectPopup": [{ "visible": ".fc-ccpa-root .fc-dns-link" }],
+    "optOut": [{ "waitForThenClick": ".fc-ccpa-root .fc-dns-link" }, { "waitForThenClick": ".fc-ccpa-root .fc-cta-opt-out" }],
+    "optIn": [{ "hide": ".fc-ccpa-root" }],
+    "test": [{ "waitForVisible": ".fc-ccpa-root .fc-dns-link", "check": "none", "timeout": 2000 }]
+}
