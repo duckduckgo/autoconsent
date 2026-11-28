@@ -1,0 +1,9 @@
+{
+    "name": "skcc",
+    "prehideSelectors": ["#skcc-modal"],
+    "detectCmp": [{ "exists": "#skcc-modal [data-skcc-action=reject-all]" }],
+    "detectPopup": [{ "visible": "#skcc-modal .skcc-dialog" }],
+    "optIn": [{ "waitForThenClick": "#skcc-modal [data-skcc-panel=consent] [data-skcc-action=accept-all]" }],
+    "optOut": [{ "waitForThenClick": "#skcc-modal [data-skcc-action=reject-all]" }],
+    "test": [{ "cookieContains": "%22analytics%22%3Afalse%2C%22marketing%22%3Afalse" }]
+}
