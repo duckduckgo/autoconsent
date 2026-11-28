@@ -1,0 +1,19 @@
+{
+    "cmp": "cookieadmin",
+    "tests": [
+        {
+            "note": "CookieAdmin WordPress plugin, box layout with Reject All on the first layer",
+            "sites": ["https://freetradeireland.ie/", "https://menschen-leben.at/", "https://type.gr/"]
+        },
+        {
+            "note": "box layout with CookieAdmin Pro, which writes the consent cookie only after an AJAX call, so the self-test can run before the cookie exists",
+            "sites": ["https://forditthjem.com/", "https://karvymfs.com/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "popup layout (CookieAdmin Pro): centered preferences modal with an overlay and no first-layer banner; the consent cookie is written after an AJAX call",
+            "sites": ["https://grecobikes.com/", "https://previmed.pt/", "https://floorballcentret.dk/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

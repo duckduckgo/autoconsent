@@ -1,0 +1,22 @@
+{
+    "name": "cookieadmin",
+    "vendorUrl": "https://cookieadmin.net/",
+    "prehideSelectors": [".cookieadmin_law_container", ".cookieadmin_cookie_modal", ".cookieadmin_modal_overlay"],
+    "detectCmp": [{ "exists": ".cookieadmin_law_container, .cookieadmin_cookie_modal" }],
+    "detectPopup": [{ "visible": ".cookieadmin_law_container, .cookieadmin_cookie_modal", "check": "any" }],
+    "optIn": [
+        {
+            "if": { "visible": "#cookieadmin_accept_button" },
+            "then": [{ "click": "#cookieadmin_accept_button" }],
+            "else": [{ "waitForThenClick": "#cookieadmin_accept_modal_button" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": "#cookieadmin_reject_button" },
+            "then": [{ "click": "#cookieadmin_reject_button" }],
+            "else": [{ "waitForThenClick": "#cookieadmin_reject_modal_button" }]
+        }
+    ],
+    "test": [{ "cookieContains": "\"reject\":\"true\"" }]
+}
