@@ -1,0 +1,21 @@
+{
+    "name": "kimpex",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?kimpex\\.com/"
+    },
+    "prehideSelectors": [".cookie_container", ".cookie_background"],
+    "detectCmp": [{ "exists": ".cookie_container .cookie_custom" }],
+    "detectPopup": [{ "visible": ".cookie_container .cookie_flex_container" }],
+    "optIn": [{ "waitForThenClick": ".cookie_container .cookie_all" }],
+    "optOut": [
+        { "waitForThenClick": ".cookie_container .cookie_custom" },
+        { "waitForVisible": ".cookie_container .personalize_cookie" },
+        {
+            "click": ".cookie_container .cookie_checkbox_container input[type=checkbox]:checked:not([disabled])",
+            "all": true,
+            "optional": true
+        },
+        { "waitForThenClick": ".cookie_container .cookie_accept" }
+    ],
+    "test": [{ "cookieContains": "userSelectedCookie_" }]
+}
