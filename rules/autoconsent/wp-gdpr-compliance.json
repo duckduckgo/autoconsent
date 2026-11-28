@@ -1,0 +1,51 @@
+{
+    "name": "wp-gdpr-compliance",
+    "_metadata": {
+        "vendorUrl": "https://wordpress.org/plugins/wp-gdpr-compliance/"
+    },
+    "prehideSelectors": [".wpgdprc-consent-bar"],
+    "detectCmp": [
+        {
+            "exists": ".wpgdprc-consent-bar"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".wpgdprc-consent-bar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".wpgdprc-consent-bar .wpgdprc-button--accept, .wpgdprc-consent-bar .wpgdprc-consent-bar__button"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "older plugin versions store nothing (or 'accept') when saving a modal without consent checkboxes",
+            "if": {
+                "exists": ".wpgdprc-consent-bar .wpgdprc-button--settings, #wpgdprc-consent-modal input[type=checkbox]"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".wpgdprc-consent-bar [data-micromodal-trigger=wpgdprc-consent-modal]"
+                },
+                {
+                    "waitForVisible": "#wpgdprc-consent-modal .wpgdprc-button--secondary"
+                },
+                {
+                    "click": "#wpgdprc-consent-modal input[type=checkbox]:checked",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "click": "#wpgdprc-consent-modal .wpgdprc-button--secondary"
+                }
+            ],
+            "else": [
+                {
+                    "hide": ".wpgdprc-consent-bar"
+                }
+            ]
+        }
+    ]
+}

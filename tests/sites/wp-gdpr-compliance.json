@@ -1,0 +1,17 @@
+{
+    "cmp": "wp-gdpr-compliance",
+    "tests": [
+        {
+            "note": "Older plugin markup (.wpgdprc-consent-bar__settings link) with consent checkboxes: save stores a decline cookie and reloads",
+            "sites": ["https://www.fuden.es/"]
+        },
+        {
+            "note": "Newer plugin markup (.wpgdprc-button--settings button): save stores the choice via AJAX, with and without consent checkboxes",
+            "sites": ["https://crewcarwash.com/", "https://pbspolska.eu/"]
+        },
+        {
+            "note": "Older plugin markup without consent checkboxes: saving stores nothing, so the bar is hidden",
+            "sites": ["https://www.raywhelan.ie/"]
+        }
+    ]
+}
