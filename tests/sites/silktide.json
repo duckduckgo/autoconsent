@@ -9,6 +9,14 @@
                 "https://www.northumberland.gov.uk/",
                 "https://www.etsmtl.ca/"
             ]
+        },
+        {
+            "note": "no reject button: the preferences modal only has toggles and a save button",
+            "sites": ["https://www.webwinkelkeur.nl/"]
+        },
+        {
+            "note": "no reject button and no modal footer: toggles are stored on change and the modal is closed",
+            "sites": ["https://go-kids.nl/nederland"]
         }
     ]
 }
