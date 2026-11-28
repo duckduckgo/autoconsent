@@ -1,0 +1,15 @@
+{
+    "name": "identity-noticebar",
+    "prehideSelectors": ["#layer_cookie.identity-noticebar"],
+    "detectCmp": [{ "exists": "#layer_cookie.identity-noticebar #configurar" }, { "exists": "#lista-cookies" }],
+    "detectPopup": [{ "visible": "#layer_cookie.identity-noticebar" }],
+    "optIn": [{ "waitForThenClick": "#layer_cookie #cerrarnoticebar" }],
+    "optOut": [
+        { "waitForThenClick": "#layer_cookie #configurar" },
+        { "waitForVisible": "#btn-guardarcookie" },
+        { "click": "#lista-cookies input[type=checkbox]:checked:not(:disabled)", "all": true, "optional": true },
+        { "click": "#btn-guardarcookie" },
+        { "waitForVisible": "#layer_cookie", "check": "none" }
+    ],
+    "test": [{ "cookieContains": "opciones_cookies_terceros=none" }]
+}
