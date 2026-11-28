@@ -324,6 +324,7 @@ export const snippets = {
     EVAL_USERCENTRICS_API_4: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_5: () => UC_UI.areAllConsentsAccepted() === true,
     EVAL_USERCENTRICS_API_6: () => UC_UI.areAllConsentsAccepted() === false,
+    EVAL_VEGASSLOTSONLINE_TEST: () => JSON.parse(localStorage.getItem('gdpr')).status === 'rejected',
     EVAL_WBD_LTP_CLOSE: () => document.querySelector('dialog#ltp-dialog').close() || true,
     EVAL_ZOHO_TEST: () => localStorage.getItem('zglobal_Acookie_optOut') === '3',
 };

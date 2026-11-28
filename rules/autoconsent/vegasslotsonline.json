@@ -1,0 +1,49 @@
+{
+    "name": "vegasslotsonline",
+    "vendorUrl": "https://www.vegasslotsonline.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?vegasslotsonline\\.com/"
+    },
+    "prehideSelectors": ["div.fixed:has(> div > p > a[href*='/cookies/']):has(> div > button)"],
+    "detectCmp": [
+        {
+            "exists": "div.fixed:has(> div > p > a[href*='/cookies/']):has(> div > button)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "div.fixed:has(> div > p > a[href*='/cookies/']):has(> div > button)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "div.fixed:has(> div > p > a[href*='/cookies/']) > div:last-child > button:last-child"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "div.fixed:has(> div > p > a[href*='/cookies/']) > div:last-child > button:first-child"
+        },
+        {
+            "waitForVisible": "div.fixed.inset-0 [data-testid='accordion']"
+        },
+        {
+            "if": {
+                "exists": "div.fixed.inset-0 [data-testid='accordion'] [class*='SwitchToggle_toggleOn']"
+            },
+            "then": [
+                {
+                    "click": "div.fixed.inset-0 [data-testid='accordion'] [class*='SwitchToggle_toggleOn']"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": "div.fixed.inset-0:has([data-testid='accordion']) > div > button:last-child"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_VEGASSLOTSONLINE_TEST"
+        }
+    ]
+}
