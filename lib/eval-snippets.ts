@@ -215,6 +215,9 @@ export const snippets = {
         document.querySelectorAll('#moove_gdpr_cookie_modal input').forEach((i) => {
             if (!i.disabled) i.checked = i.name === 'moove_gdpr_strict_cookies' || i.id === 'moove_gdpr_strict_cookies';
         }) || true,
+    // a declined category is stored as an expiry timestamp, a granted one as 'true'
+    EVAL_NEOFINANCIAL_TEST: () =>
+        ['neoCookiesPerformanceConsent', 'neoCookiesAdvertisingConsent'].every((key) => /^\d+$/.test(localStorage.getItem(key) || '')),
     // the site reloads on banner button clicks, which can abort the SDK's deferred save
     EVAL_NFL_ONETRUST_ALLOW_ALL: () => {
         window.OneTrust.AllowAll();

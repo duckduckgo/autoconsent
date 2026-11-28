@@ -1,0 +1,45 @@
+{
+    "name": "neofinancial.com",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?neofinancial\\.com/"
+    },
+    "prehideSelectors": ["[data-cookie-banner]"],
+    "detectCmp": [
+        {
+            "exists": "[data-cookie-banner]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[data-cookie-banner]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-cookie-banner] button.bg-interactiveDefault"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "no reject button on the first layer; open the preferences panel",
+            "waitForThenClick": "[data-cookie-banner] button.bg-surfaceDefault"
+        },
+        {
+            "waitForVisible": "div.fixed.z-999 button[role=\"switch\"]"
+        },
+        {
+            "comment": "performance cookies are enabled by default",
+            "click": "div.fixed.z-999 button[role=\"switch\"][aria-checked=\"true\"]",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "div.fixed.z-999 button.bg-interactiveDefault"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_NEOFINANCIAL_TEST"
+        }
+    ]
+}
