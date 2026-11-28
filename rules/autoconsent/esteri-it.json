@@ -1,0 +1,49 @@
+{
+    "name": "esteri-it",
+    "vendorUrl": "https://www.esteri.it/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?esteri\\.it/"
+    },
+    "prehideSelectors": [".cookiebar"],
+    "detectCmp": [
+        {
+            "exists": ".cookiebar #pref-modal[data-bs-target='#modalcookie']"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cookiebar"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookiebar .cookiebar-confirm"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cookiebar #pref-modal"
+        },
+        {
+            "waitForVisible": "#modalcookie #s-pref"
+        },
+        {
+            "if": {
+                "exists": "#modalcookie #analitycs-cookie:checked"
+            },
+            "then": [
+                {
+                    "click": "#modalcookie #analitycs-cookie"
+                }
+            ]
+        },
+        {
+            "click": "#modalcookie #s-pref"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies_consent=false"
+        }
+    ]
+}
