@@ -2,12 +2,14 @@
     "cmp": "datasign",
     "tests": [
         {
-            "sites": [
-                "https://www.jfe-holdings.co.jp/en/",
-                "https://www.otafuku.co.jp/",
-                "https://www.billboard-japan.com/",
-                "https://www.dydo.co.jp/"
-            ]
+            "sites": ["https://www.jfe-holdings.co.jp/en/", "https://www.billboard-japan.com/", "https://www.dydo.co.jp/"]
+        },
+        {
+            "note": "European visitors only get the floating settings button, not the banner",
+            "sites": ["https://www.otafuku.co.jp/"],
+            "options": {
+                "onlyRegions": ["US"]
+            }
         }
     ]
 }

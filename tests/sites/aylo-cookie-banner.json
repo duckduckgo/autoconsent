@@ -2,7 +2,11 @@
     "cmp": "aylo-cookie-banner",
     "tests": [
         {
-            "sites": ["https://www.redtube.com/", "https://www.youporn.com/", "https://www.tube8.com/"]
+            "note": "UK visitors get a login and age verification wall instead of the site and its cookie banner",
+            "sites": ["https://www.redtube.com/", "https://www.youporn.com/", "https://www.tube8.com/"],
+            "options": {
+                "skipRegions": ["GB"]
+            }
         }
     ]
 }

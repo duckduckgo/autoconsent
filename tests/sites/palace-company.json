@@ -2,12 +2,16 @@
     "cmp": "palace-company",
     "tests": [
         {
+            "note": "the banner shows to US visitors only; European visitors get a Cookiebot banner instead",
             "sites": [
                 "https://www.moonpalace.com/",
                 "https://www.palaceresorts.com/",
                 "https://www.leblancsparesorts.com/",
                 "https://www.baglionihotels.com/"
-            ]
+            ],
+            "options": {
+                "onlyRegions": ["US"]
+            }
         }
     ]
 }

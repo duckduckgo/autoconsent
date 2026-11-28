@@ -2,12 +2,16 @@
     "cmp": "jpmorgan-chase",
     "tests": [
         {
+            "note": "the banner shows to US visitors only; European visitors of jpmorgan.com and jpmorganchase.com get a OneTrust banner instead",
             "sites": [
                 "https://www.chase.com/personal/events/experiences",
                 "https://www.chase.com/business",
                 "https://www.jpmorgan.com/",
                 "https://www.jpmorganchase.com/"
-            ]
+            ],
+            "options": {
+                "onlyRegions": ["US"]
+            }
         }
     ]
 }
