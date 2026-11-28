@@ -1,0 +1,25 @@
+{
+    "name": "kobo.com",
+    "vendorUrl": "https://www.kobo.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?kobo\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": "[data-testid=privacy-banner]" }],
+    "detectPopup": [{ "visible": "[data-testid=privacy-banner]" }],
+    "optIn": [
+        {
+            "if": { "visible": "[data-testid=privacy-banner-accept-all-btn-desktop]" },
+            "then": [{ "waitForThenClick": "[data-testid=privacy-banner-accept-all-btn-desktop]", "retry": 10, "retryInterval": 500 }],
+            "else": [{ "waitForThenClick": "[data-testid=privacy-banner-accept-all-btn-mobile]", "retry": 10, "retryInterval": 500 }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "visible": "[data-testid=privacy-banner-decline-all-btn-desktop]" },
+            "then": [{ "waitForThenClick": "[data-testid=privacy-banner-decline-all-btn-desktop]", "retry": 10, "retryInterval": 500 }],
+            "else": [{ "waitForThenClick": "[data-testid=privacy-banner-decline-all-btn-mobile]", "retry": 10, "retryInterval": 500 }]
+        }
+    ],
+    "test": [{ "waitForVisible": "[data-testid=privacy-banner]", "timeout": 2000, "check": "none" }]
+}
