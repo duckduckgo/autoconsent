@@ -3,14 +3,23 @@
     "vendorUrl": "https://github.com/brainsum/cookieconsent",
     "prehideSelectors": ["#cconsent-bar"],
     "detectCmp": [{ "exists": "#cconsent-bar .consent-give" }],
-    "detectPopup": [{ "visible": "#cconsent-bar:not(.ccb--hidden) .consent-give" }],
+    "detectPopup": [
+        {
+            "visible": "#cconsent-bar:not(.ccb--hidden) .consent-give, #cconsent-modal.ccm--visible #ccm__footer__consent-modal-submit",
+            "check": "any"
+        }
+    ],
     "optIn": [{ "waitForThenClick": "#cconsent-bar .consent-give" }],
     "optOut": [
         {
             "if": { "visible": "#cconsent-bar button.consent-decline" },
             "then": [{ "click": "#cconsent-bar button.consent-decline" }],
             "else": [
-                { "click": "#cconsent-bar .ccb__edit" },
+                {
+                    "comment": "some sites open the settings modal directly with the bar hidden",
+                    "if": { "visible": "#cconsent-bar .ccb__edit" },
+                    "then": [{ "click": "#cconsent-bar .ccb__edit" }]
+                },
                 { "waitForVisible": "#ccm__footer__consent-modal-submit" },
                 { "click": "#cconsent-modal .ccm__switch-group[aria-checked=\"true\"]", "all": true, "optional": true },
                 { "click": "#cconsent-modal input.category-onoff:checked:not(:disabled)", "all": true, "optional": true },
@@ -19,7 +28,10 @@
         }
     ],
     "test": [
-        { "waitForVisible": "#cconsent-bar:not(.ccb--hidden) .consent-give", "check": "none" },
+        {
+            "waitForVisible": "#cconsent-bar:not(.ccb--hidden) .consent-give, #cconsent-modal.ccm--visible",
+            "check": "none"
+        },
         { "cookieContains": "\"wanted\":false" }
     ]
 }
