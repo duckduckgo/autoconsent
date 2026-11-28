@@ -28,6 +28,10 @@
         {
             "sites": ["https://www.cewe.de/"],
             "options": { "skipRegions": ["US", "GB", "FR"] }
+        },
+        {
+            "note": "site also embeds a HubSpot cookie banner hidden with CSS, which must not win detection over Usercentrics",
+            "sites": ["https://www.simployer.com/"]
         }
     ]
 }

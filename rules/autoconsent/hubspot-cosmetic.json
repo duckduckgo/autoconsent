@@ -5,7 +5,7 @@
     },
     "cosmetic": true,
     "detectCmp": [
-        { "exists": "#hs-eu-cookie-confirmation" },
+        { "visible": "#hs-eu-cookie-confirmation" },
         { "exists": "#hs-eu-decline-button", "negated": true },
         { "visible": "#hs-eu-close-button", "check": "none" }
     ],
