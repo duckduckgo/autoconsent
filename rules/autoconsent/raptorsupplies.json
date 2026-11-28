@@ -1,0 +1,37 @@
+{
+    "name": "raptorsupplies",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?raptorsupplies\\.(com|com\\.au|co\\.uk)/"
+    },
+    "prehideSelectors": ["#cookie-prefrence"],
+    "detectCmp": [
+        {
+            "exists": "#cookie-prefrence"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie-prefrence"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-prefrence .accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookie-prefrence .accept-necessary"
+        },
+        {
+            "waitForThenClick": ".recommendations .reject-all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#cookie-prefrence, .recommendations",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
