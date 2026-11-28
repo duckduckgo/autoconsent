@@ -1,0 +1,18 @@
+{
+    "cmp": "ad-tyres",
+    "tests": [
+        {
+            "note": "Tyre shop sites (tiresleader platform); consent stored in the ac cookie as Consent Mode keys (ad_storage)",
+            "sites": [
+                "https://www.neumaticoslider.es/",
+                "https://www.centralepneus.fr/",
+                "https://www.tyreleader.co.uk/",
+                "https://www.reifenleader.de/"
+            ]
+        },
+        {
+            "note": "Distriauto car parts sites: same banner, but the ac cookie uses functional/analytics/ads booleans",
+            "sites": ["https://www.distriauto.fr/", "https://www.distriauto.de/"]
+        }
+    ]
+}
