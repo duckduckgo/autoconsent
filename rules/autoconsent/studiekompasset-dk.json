@@ -1,0 +1,16 @@
+{
+    "name": "studiekompasset-dk",
+    "_metadata": {
+        "vendorUrl": "https://studiekompasset.dk/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?studiekompasset\\.dk/"
+    },
+    "cosmetic": false,
+    "prehideSelectors": ["#sk-samtykke"],
+    "detectCmp": [{ "exists": "#sk-samtykke button[data-sk=\"nej\"]" }],
+    "detectPopup": [{ "visible": "#sk-samtykke" }],
+    "optIn": [{ "waitForThenClick": "#sk-samtykke button[data-sk=\"ja\"]" }],
+    "optOut": [{ "waitForThenClick": "#sk-samtykke button[data-sk=\"nej\"]" }],
+    "test": [{ "waitForVisible": "#sk-samtykke", "check": "none", "timeout": 1000 }]
+}
