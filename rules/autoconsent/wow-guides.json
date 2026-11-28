@@ -1,0 +1,12 @@
+{
+    "name": "wow-guides.com",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?wow-guides\\.com/"
+    },
+    "prehideSelectors": [".cookiesConsent__wrapper"],
+    "detectCmp": [{ "exists": ".cookiesConsent__wrapper .cookiesConsent__buttons" }],
+    "detectPopup": [{ "visible": ".cookiesConsent__wrapper .cookiesConsent__buttons" }],
+    "optIn": [{ "waitForThenClick": ".cookiesConsent__wrapper .cookiesConsent__button:not(.cookiesConsent__button_ghost)" }],
+    "optOut": [{ "waitForThenClick": ".cookiesConsent__wrapper .cookiesConsent__button_ghost" }],
+    "test": [{ "cookieContains": "CookiesConsent=false" }]
+}
