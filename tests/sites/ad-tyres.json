@@ -1,0 +1,13 @@
+{
+    "cmp": "ad-tyres",
+    "tests": [
+        {
+            "note": "Tyre shops: link reject button, consent cookie stores Consent Mode values",
+            "sites": ["https://www.pneumaticileader.it/", "https://www.reifenleader.de/", "https://www.centralepneus.fr/"]
+        },
+        {
+            "note": "Distriauto and Grip500: button reject on distriauto, consent cookie stores booleans",
+            "sites": ["https://www.distriauto.fr/", "https://www.grip500.co.uk/"]
+        }
+    ]
+}
