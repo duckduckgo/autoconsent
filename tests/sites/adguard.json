@@ -1,0 +1,11 @@
+{
+    "cmp": "adguard",
+    "note": "essential-cookies notice shared by AdGuard sites; closing it stores no state, so the self-test only checks the notice is hidden",
+    "tests": [
+        {
+            "sites": ["https://adguard.com/", "https://adguard-vpn.com/", "https://adguard-dns.io/", "https://adguard-mail.com/"],
+            "note": "the notice is shown in Europe only (not in US, CA, AU or JP)",
+            "options": { "onlyRegions": ["GB", "DE", "FR", "NL", "PL"] }
+        }
+    ]
+}
