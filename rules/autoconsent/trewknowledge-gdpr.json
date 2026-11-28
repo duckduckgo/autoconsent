@@ -1,0 +1,39 @@
+{
+    "name": "trewknowledge-gdpr",
+    "vendorUrl": "https://wordpress.org/plugins/gdpr/",
+    "prehideSelectors": [".gdpr.gdpr-privacy-bar"],
+    "detectCmp": [
+        { "exists": ".gdpr.gdpr-privacy-bar .gdpr-agreement" },
+        { "exists": ".gdpr-privacy-preferences-frm input[name=\"action\"][value=\"gdpr_update_privacy_preferences\"]" }
+    ],
+    "detectPopup": [{ "visible": ".gdpr.gdpr-privacy-bar" }],
+    "optIn": [
+        {
+            "if": { "exists": ".gdpr-privacy-preferences-frm .gdpr-switch input[type=\"checkbox\"]:not([disabled]):not(:checked)" },
+            "then": [
+                {
+                    "click": ".gdpr-privacy-preferences-frm .gdpr-switch input[type=\"checkbox\"]:not([disabled]):not(:checked)",
+                    "all": true
+                }
+            ]
+        },
+        { "waitForThenClick": ".gdpr.gdpr-privacy-bar .gdpr-agreement" }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".gdpr-privacy-preferences-frm .gdpr-switch input[type=\"checkbox\"]:not([disabled]):checked" },
+            "then": [
+                {
+                    "click": ".gdpr-privacy-preferences-frm .gdpr-switch input[type=\"checkbox\"]:not([disabled]):checked",
+                    "all": true
+                }
+            ]
+        },
+        {
+            "if": { "exists": ".gdpr.gdpr-privacy-bar .gdpr-cookie-category:not([disabled]):checked" },
+            "then": [{ "click": ".gdpr.gdpr-privacy-bar .gdpr-cookie-category:not([disabled]):checked", "all": true }]
+        },
+        { "waitForThenClick": ".gdpr.gdpr-privacy-bar .gdpr-agreement" }
+    ],
+    "test": [{ "wait": 1000 }, { "cookieContains": "gdpr%5Bprivacy_bar%5D=1" }]
+}
