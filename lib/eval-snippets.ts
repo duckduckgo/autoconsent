@@ -177,6 +177,8 @@ export const snippets = {
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
     // Zero while the embedding page still keeps the consent iframe collapsed.
     EVAL_IFRAME_SHOWN: () => window.innerHeight > 0,
+    // Some embedding pages only listen for the consent iframe's messages after its load event.
+    EVAL_DOCUMENT_LOADED: () => document.readyState === 'complete',
     EVAL_IUBENDA_0: () =>
         document.querySelectorAll('.purposes-item input[type=checkbox]:not([disabled])').forEach((x) => {
             if (x.checked) x.click();

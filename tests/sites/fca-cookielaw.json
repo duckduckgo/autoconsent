@@ -13,6 +13,14 @@
         {
             "sites": ["https://www.jeep.nl/?adobe_mc_ref="],
             "options": { "onlyRegions": ["NL"] }
+        },
+        {
+            "note": "CA Auto Bank serves the same banner from its own cookielaw host; shown in all regions",
+            "sites": ["https://www.ca-autobank.it/"]
+        },
+        {
+            "sites": ["https://www.ca-autobank.de/"],
+            "options": { "onlyRegions": ["DE"] }
         }
     ]
 }
