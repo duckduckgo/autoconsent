@@ -361,6 +361,14 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     it('does not detect unrelated Danish text', () => {
         expect(checkHeuristicPatterns('Find information om sundhed og sygdom').patterns).to.have.length(0);
     });
+
+    it('detects a Danish analytics consent popup, but not the same wording in page text', () => {
+        // altomjagt.dk
+        const text = 'Vi bruger kun Google Analytics til besøgsstatistik og måling af produktklik, hvis du tillader statistik.';
+        expect(checkHeuristicPatterns(text, 'popup').patterns.length).to.be.greaterThan(0);
+        expect(checkHeuristicPatterns(text, 'page').patterns).to.have.length(0);
+        expect(checkHeuristicPatterns('Vi bruger Google Maps til at vise vejen.', 'popup').patterns).to.have.length(0);
+    });
 });
 
 describe('checkHeuristicPatterns with Turkish popups', () => {

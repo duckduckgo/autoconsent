@@ -378,6 +378,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // Danish (DA)
     // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
     /\b(?:bruger|anvender|benytter) cookies\b/gi,
+    // e.g. "vi bruger kun Google Analytics til besøgsstatistik"; privacy policies say this too, so popup text only
+    { pattern: /\bvi (?:bruger|anvender|benytter) (?:\S+ ){0,2}analytics til\b/gi, input: 'popup' },
 
     // Norwegian (NO)
     // e.g. "vi bruker informasjonskapsler", "kan vi bruke valgfrie informasjonskapsler", "nettstedet bruker cookies"
