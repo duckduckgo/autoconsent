@@ -1,0 +1,12 @@
+{
+    "name": "quickpartitions",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?quickpartitions\\.com/"
+    },
+    "prehideSelectors": ["#cookieChoiceInfo"],
+    "detectCmp": [{ "exists": "#cookieChoiceInfo #cookieChoiceDeny" }],
+    "detectPopup": [{ "visible": "#cookieChoiceInfo #cookieChoiceDialog" }],
+    "optIn": [{ "waitForThenClick": "#cookieChoiceInfo #cookieChoiceGrant" }],
+    "optOut": [{ "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDeny" }],
+    "test": [{ "cookieContains": "consentGranted=n" }]
+}
