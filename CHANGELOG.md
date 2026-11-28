@@ -1,3 +1,25 @@
+# v18.14.0 (Sat Nov 28 2026)
+
+#### Rules
+
+- Rule update: kape-usercentrics [#2997](https://github.com/duckduckgo/autoconsent/pull/2997) ([@daxtheduck](https://github.com/daxtheduck) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Bug Fixes
+
+- Fix prehide: valid t-cookie-bar selector, and check rule selectors in CI [#3029](https://github.com/duckduckgo/autoconsent/pull/3029) ([@muodov](https://github.com/muodov))
+
+#### CI / Release Automation
+
+- Pre-assign PR labels when opened, instead of checking release labels [#3140](https://github.com/duckduckgo/autoconsent/pull/3140) ([@muodov](https://github.com/muodov))
+
+#### Authors: 3
+
+- Dax ([@daxtheduck](https://github.com/daxtheduck))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v18.13.0 (Fri Nov 27 2026)
 
 #### Rules
