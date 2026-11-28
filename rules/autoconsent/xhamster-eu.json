@@ -1,7 +1,7 @@
 {
     "name": "xhamster-eu",
     "runContext": {
-        "urlPattern": "^https://(\\w+\\.)?(xhamster\\d*\\.(com|desi)|xh(wide|open|access|vid|fanclub|stream|name|spot|fuck|social)\\d*\\.com|xhzone\\.live)/"
+        "urlPattern": "^https://(\\w+\\.)?(xhamster\\d*\\.(com|desi)|xh(wide|open|access|vid|fanclub|stream|name|spot|fuck|social)\\d*\\.com|xh(zone|plus)\\.live)/"
     },
     "prehideSelectors": ["[data-role=\"cookies-modal\"]"],
     "detectCmp": [{ "exists": "[data-role=\"cookies-modal\"] [data-opt-hydration=\"cookies-dialog-eu\"]" }],
