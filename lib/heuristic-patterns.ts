@@ -41,7 +41,7 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     BY_CONTINUING_PRIVACY,
     // up to two qualifiers are common: "optional", "essential", "analytics", "google analytics", "third party", ...
     // singular too, but not "cookie-free"
-    /we (?:also )?(?:use|serve)(?: \w+){0,2} cookies?\b(?!-)/gi,
+    /we (?:also |only )?(?:use|serve)(?: \w+){0,2} cookies?\b(?!-)/gi,
     /\bwe use (?:\S+ )?cookie files\b/gi,
     // consent asked as a question: "can I use cookies to …?", "allow analytics cookies?"
     /\b(?:can|may) (?:i|we) use (?:\S+ ){0,2}cookies\b/gi,
@@ -376,8 +376,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /(?:閲覧履歴|端末情報|利用者情報).{0,30}を外部(?:サービス|事業者|に|へ)/gi,
 
     // Danish (DA)
-    // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
-    /\b(?:bruger|anvender|benytter) cookies\b/gi,
+    // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ...", "vi bruger kun nødvendige cookies"
+    /\b(?:bruger|anvender|benytter) (?:\S+ ){0,3}cookies\b/gi,
 
     // Norwegian (NO)
     // e.g. "vi bruker informasjonskapsler", "kan vi bruke valgfrie informasjonskapsler", "nettstedet bruker cookies"

@@ -94,6 +94,7 @@ describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
             'We serve necessary cookies only',
             'We use Google Analytics cookies to understand which pages and tools are useful.',
             'We use third party cookies for advertising',
+            'We only use essential cookies to keep the site working.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -352,6 +353,9 @@ describe('checkHeuristicPatterns with Danish popups', () => {
         const texts = [
             'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
             'Vi bruger cookies for at give dig den bedste oplevelse.',
+            // qualifiers before "cookies"
+            'Vi bruger kun nødvendige cookies for at holde siden kørende.',
+            'Hjemmesiden anvender egne og tredjeparts cookies.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
