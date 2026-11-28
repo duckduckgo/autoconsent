@@ -6,36 +6,36 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?teacherspensions\\.co\\.uk/"
     },
-    "prehideSelectors": ["#cookieChoiceInfo"],
+    "prehideSelectors": ["#cookie-choice-info"],
     "detectCmp": [
         {
-            "exists": "#cookieChoiceInfo #cookieChoiceLearnMore"
+            "exists": "#cookie-choice-info a.cookie_button[onclick*='showPopup']"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookieChoiceInfo"
+            "visible": "#cookie-choice-info"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDismiss"
+            "waitForThenClick": "#cookie-choice-info a.cookie_button[onclick*='closePopup']"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "#cookieChoiceInfo #cookieChoiceLearnMore"
+            "waitForThenClick": "#cookie-choice-info a.cookie_button[onclick*='showPopup']"
         },
         {
-            "waitForVisible": "[id$='_ManageCookiesContent'] input[name$='BtnConfirmChoices']"
+            "waitForVisible": "#cookie-banner input[name='ctl-btn-confirm-choices']"
         },
         {
-            "click": "[id$='_ManageCookiesContent'] input[type=checkbox]:checked",
+            "click": "#cookie-banner input[type=checkbox]:checked",
             "all": true,
             "optional": true
         },
         {
-            "click": "[id$='_ManageCookiesContent'] input[name$='BtnConfirmChoices']"
+            "click": "#cookie-banner input[name='ctl-btn-confirm-choices']"
         }
     ],
     "test": [
