@@ -1,0 +1,53 @@
+{
+    "name": "xat",
+    "vendorUrl": "https://xat.com/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?xat\\.com/"
+    },
+    "prehideSelectors": ["#cookiePopup"],
+    "detectCmp": [
+        {
+            "exists": "#cookiePopup #cookieSettings"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookiePopup.show"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieAgree"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#cookieSettings"
+        },
+        {
+            "waitForVisible": "#privacyModal"
+        },
+        {
+            "click": "#privacyModal #privacyPerformance:checked, #privacyModal #privacyGroups:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "#privacyClose",
+            "retry": 5,
+            "retryInterval": 500
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "#privacyModal",
+            "check": "none",
+            "timeout": 5000
+        },
+        {
+            "exists": "#cookiePopup.show",
+            "negated": true
+        }
+    ]
+}
