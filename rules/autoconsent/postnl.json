@@ -9,7 +9,8 @@
     "minimumRuleStepVersion": 2,
     "detectCmp": [
         {
-            "exists": "pnl-cookie-wall-widget"
+            "comment": "the widget host is in the page markup long before its shadow content renders",
+            "exists": ["pnl-cookie-wall-widget", ".pnl-cookie-wall"]
         }
     ],
     "detectPopup": [
