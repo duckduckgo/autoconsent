@@ -448,6 +448,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'We use a cookie to remember you are 18+ and keep your preferences on this device.',
             'Continue without accepting\nProtecting your privacy is our priority',
             'Choose between essential cookies that are required for the site to work or all cookies, including non-essential ones.',
+            'This site uses tracking technologies. You may opt in or opt out of the use of these technologies.',
         ]);
     });
 
@@ -484,6 +485,7 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'Continue without signing in',
             'Choose between chocolate or oatmeal cookies for the party.',
             'JavaScript is required for the site to work.',
+            'You can opt in or opt out of email newsletters at any time.',
         ]);
     });
 });

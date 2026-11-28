@@ -50,6 +50,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["rights with regard to the sale"],
     ["we use technologies "],
     ["party tools to collect information"],
+    [" opt in or opt out of the use of "],
     ["continue reading with advertising"," tracking"],
     ["consent and continue"],
     ["store or retrieve information on your browser","stockées dans votre navigateur ou récupérées"],
