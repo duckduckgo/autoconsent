@@ -1,0 +1,10 @@
+{
+    "cmp": "loungelovers.com.au",
+    "tests": [
+        {
+            "note": "custom c15t notice (Accept / Manage cookies) shown only in opt-out regions and only without GPC; GDPR regions get the standard c15t banner handled by the c15t rule",
+            "sites": ["https://www.loungelovers.com.au/"],
+            "options": { "onlyRegions": ["US", "AU"] }
+        }
+    ]
+}
