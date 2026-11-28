@@ -1,0 +1,57 @@
+{
+    "name": "greatcanadian.com",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?greatcanadian\\.com/"
+    },
+    "prehideSelectors": [".sticky-banner-swal"],
+    "detectCmp": [
+        {
+            "exists": ".sticky-banner-popup #banner-accept-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".sticky-banner-popup #banner-accept-btn"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".sticky-banner-popup #banner-accept-btn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitFor": ".sticky-banner-popup #banner-accept-btn[data-welcome-accept-bound]",
+            "timeout": 5000
+        },
+        {
+            "if": {
+                "exists": "#cookie-settings-advertising:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookie-settings-advertising"
+                }
+            ]
+        },
+        {
+            "if": {
+                "exists": "#cookie-settings-social:checked"
+            },
+            "then": [
+                {
+                    "click": "#cookie-settings-social"
+                }
+            ]
+        },
+        {
+            "waitForThenClick": ".sticky-banner-popup #banner-accept-btn",
+            "comment": "the accept button saves the current toggle states"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_GREATCANADIAN_TEST"
+        }
+    ]
+}

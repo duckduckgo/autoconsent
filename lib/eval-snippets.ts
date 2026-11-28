@@ -175,6 +175,10 @@ export const snippets = {
     EVAL_ETSY_1: () => document.querySelector('.gdpr-overlay-view button[data-wt-overlay-close]').click() || true,
     EVAL_EZOIC_0: () => ezCMP.handleAcceptAllClick(),
     EVAL_FIDES_DETECT_POPUP: () => window.Fides?.initialized,
+    EVAL_GREATCANADIAN_TEST: () => {
+        const settings = JSON.parse(localStorage.getItem('gcg_settings_cookie') || '{}');
+        return settings.consent_submitted === true && settings.advertising === false && settings.social === false;
+    },
     // Zero while the embedding page still keeps the consent iframe collapsed.
     EVAL_IFRAME_SHOWN: () => window.innerHeight > 0,
     EVAL_IUBENDA_0: () =>
