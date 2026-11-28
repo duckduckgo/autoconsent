@@ -352,6 +352,8 @@ describe('checkHeuristicPatterns with Danish popups', () => {
         const texts = [
             'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
             'Vi bruger cookies for at give dig den bedste oplevelse.',
+            'Siger du ja, sætter Google Analytics og PostHog cookies på din enhed.',
+            'Vi gemmer cookies på din computer, når du besøger siden.',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -359,7 +361,13 @@ describe('checkHeuristicPatterns with Danish popups', () => {
     });
 
     it('does not detect unrelated Danish text', () => {
-        expect(checkHeuristicPatterns('Find information om sundhed og sygdom').patterns).to.have.length(0);
+        for (const text of [
+            'Find information om sundhed og sygdom',
+            'Vi sætter pris på din feedback',
+            'Vi bager cookies og kager hver dag',
+        ]) {
+            expect(checkHeuristicPatterns(text).patterns, text).to.have.length(0);
+        }
     });
 });
 

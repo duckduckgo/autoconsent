@@ -378,6 +378,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // Danish (DA)
     // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
     /\b(?:bruger|anvender|benytter) cookies\b/gi,
+    // e.g. "sætter Google Analytics og PostHog cookies", "gemmer cookies på din enhed"
+    /\b(?:sætter|gemmer|placerer) (?:\S+ ){0,4}cookies\b|\bcookies på din (?:enhed|computer|browser)\b/gi,
 
     // Norwegian (NO)
     // e.g. "vi bruker informasjonskapsler", "kan vi bruke valgfrie informasjonskapsler", "nettstedet bruker cookies"
