@@ -1,0 +1,9 @@
+{
+    "cmp": "sputnik-gdpr",
+    "note": "accept-only banner shared by the Sputnik news sites; it has no reject or close control, so the rule hides it",
+    "tests": [
+        {
+            "sites": ["https://sputnikglobe.com/", "https://sputniknews.in/", "https://sputniknews.africa/"]
+        }
+    ]
+}
