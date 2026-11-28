@@ -1,0 +1,17 @@
+{
+    "cmp": "datareporter-webcare",
+    "tests": [
+        {
+            "note": "Category banner: the reject button is 'Apply settings' with all optional categories unchecked",
+            "sites": ["https://www.eglo.com/", "https://www.nic.at/"]
+        },
+        {
+            "note": "Info, hidden-category and detailed banners with an 'Only allow required cookies' button",
+            "sites": ["https://www.colop.com/", "https://graz.at/", "https://www.ooelfv.at/"]
+        },
+        {
+            "note": "Hidden-category banner without a reject button: opens the details and applies the default (required only) settings",
+            "sites": ["https://meedia.de/"]
+        }
+    ]
+}

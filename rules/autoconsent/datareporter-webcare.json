@@ -1,0 +1,44 @@
+{
+    "name": "datareporter-webcare",
+    "prehideSelectors": ["#dr_cookie_banner_container"],
+    "detectCmp": [
+        {
+            "exists": "#dr_cookie_banner_container.cc-window"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#dr_cookie_banner_container.cc-window"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#dr_cookie_banner_container #cc-allow-01"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#dr_cookie_banner_container #cc-deny-01"
+            },
+            "then": [
+                {
+                    "click": "#dr_cookie_banner_container #cc-deny-01"
+                }
+            ],
+            "else": [
+                {
+                    "click": "#dr_cookie_banner_container #dr-hiddencat-btn-show-more-hide"
+                },
+                {
+                    "waitForThenClick": "#dr_cookie_banner_container #dr-hiddencat-btn-apply"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookieconsent_status=deny"
+        }
+    ]
+}
