@@ -1,0 +1,12 @@
+{
+    "name": "madguru.dk",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?madguru\\.dk/"
+    },
+    "prehideSelectors": ["#cookieBanner"],
+    "detectCmp": [{ "exists": "#cookieBanner #cookieBannerNecessary" }],
+    "detectPopup": [{ "exists": "#cookieBanner #cookieBannerNecessary" }, { "cookieContains": "mg_consent_marketing=", "negated": true }],
+    "optIn": [{ "click": "#cookieBannerAcceptAll" }],
+    "optOut": [{ "click": "#cookieBannerNecessary" }, { "hide": "#cookieBanner" }],
+    "test": [{ "cookieContains": "mg_consent_marketing=0" }]
+}

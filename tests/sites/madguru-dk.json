@@ -1,0 +1,9 @@
+{
+    "cmp": "madguru.dk",
+    "tests": [
+        {
+            "note": "The banner only fades in 10s after load (or after the welcome gate closes), so the rule clicks it before it shows and hides it.",
+            "sites": ["https://madguru.dk/", "https://madguru.dk/inspiration.php"]
+        }
+    ]
+}
