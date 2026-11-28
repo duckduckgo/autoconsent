@@ -60,6 +60,20 @@ export async function waitFor(predicate: () => Promise<boolean> | boolean, maxTi
     return Promise.resolve(result);
 }
 
+function matchesSafe(elem: Element, selector: string): boolean {
+    try {
+        return elem.matches(selector);
+    } catch {
+        // the engine does not support this pseudo-class
+        return false;
+    }
+}
+
+// Chromium gives top-layer elements no offsetParent; check separately, as one unsupported pseudo-class makes a list throw
+function isInTopLayer(elem: Element): boolean {
+    return matchesSafe(elem, ':modal') || matchesSafe(elem, ':popover-open') || matchesSafe(elem, ':fullscreen');
+}
+
 export function isElementVisible(elem: HTMLElement): boolean {
     if (!elem) {
         return false;
@@ -70,6 +84,9 @@ export function isElementVisible(elem: HTMLElement): boolean {
         const css = window.getComputedStyle(elem);
         if (css.position === 'fixed' && css.display !== 'none') {
             // fixed elements may be visible even if the parent is not
+            return true;
+        }
+        if (css.display !== 'none' && isInTopLayer(elem)) {
             return true;
         }
     }

@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <style>
+            /* sites can restyle top-layer elements away from the default position: fixed */
+            .absolute {
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="module">
+            import { runTests } from '@web/test-runner-mocha';
+
+            runTests(async () => {
+                await import('./dom-actions.element-visible-top-layer');
+            });
+        </script>
+        <dialog id="modal-dialog" class="absolute">
+            <button>Reject</button>
+        </dialog>
+        <dialog id="closed-dialog" class="absolute">
+            <button>Reject</button>
+        </dialog>
+        <dialog id="non-modal-dialog" class="absolute">
+            <button>Reject</button>
+        </dialog>
+        <div id="open-popover" class="absolute" popover="manual">
+            <button>Reject</button>
+        </div>
+        <div id="closed-popover" class="absolute" popover="manual">
+            <button>Reject</button>
+        </div>
+    </body>
+</html>
