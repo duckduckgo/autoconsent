@@ -10,7 +10,10 @@
             "then": [{ "visible": "#ccpa-consent-banner" }],
             "else": [
                 { "visible": "#cookie-consent-banner" },
-                { "visible": "#cookie-consent-banner .banner-gdpr, #cookie-consent-banner #gdpr-modal", "check": "any" }
+                {
+                    "visible": "#cookie-consent-banner .banner-gdpr, #cookie-consent-banner #gdpr-modal, #cookie-consent-banner [data-id=\"data-control-bnr\"]",
+                    "check": "any"
+                }
             ]
         }
     ],
