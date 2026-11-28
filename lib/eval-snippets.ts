@@ -317,6 +317,10 @@ export const snippets = {
         window.tC.privacy.clickBanner('optout');
         return true;
     },
+    EVAL_UDEM_COOKIE_CONSENT_TEST: () =>
+        ['performanceCookies', 'functionalityCookies', 'adsCookies'].every(
+            (c) => localStorage.getItem(`udem-cookie-consent-${c}`) === 'false',
+        ),
     EVAL_USERCENTRICS_API_0: () => typeof UC_UI === 'object',
     EVAL_USERCENTRICS_API_1: () => !!UC_UI.closeCMP(),
     EVAL_USERCENTRICS_API_2: () => !!UC_UI.denyAllConsents(),

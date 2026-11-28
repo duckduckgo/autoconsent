@@ -1,0 +1,31 @@
+{
+    "name": "udem-cookie-consent",
+    "vendorUrl": "https://vie-privee.umontreal.ca/",
+    "cosmetic": false,
+    "prehideSelectors": [".consent-container:has(.show-modal .btn-modal-container)"],
+    "detectCmp": [
+        {
+            "exists": ".consent-container .show-modal .btn-modal-container > .btn-consent.open-modal-parameter"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".consent-container .show-modal .btn-modal-container"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".consent-container .show-modal .btn-modal-container > button.btn-consent:last-child"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".consent-container .show-modal .btn-modal-container > button.btn-consent:not(.open-modal-parameter):not(:last-child)"
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_UDEM_COOKIE_CONSENT_TEST"
+        }
+    ]
+}
