@@ -10,6 +10,15 @@
                 "https://www.moncvparfait.fr/",
                 "https://www.hetperfectecv.nl/"
             ]
+        },
+        {
+            "note": "wp-cookies-banner variant: the initial banner is [data-id=data-control-bnr] with Manage Cookies / Allow Cookies, no reject button",
+            "sites": ["https://cvgenius.com/"]
+        },
+        {
+            "note": "wp-cookies-banner variant; resumegenius.com shows no Bold banner in US, AU, JP and PL (US gets a notice-only banner instead)",
+            "sites": ["https://resumegenius.com/"],
+            "options": { "skipRegions": ["US", "AU", "JP", "PL"] }
         }
     ]
 }
