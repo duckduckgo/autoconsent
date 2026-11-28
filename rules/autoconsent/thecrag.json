@@ -1,0 +1,31 @@
+{
+    "name": "thecrag",
+    "_metadata": {
+        "vendorUrl": "https://www.thecrag.com/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?thecrag\\.com/"
+    },
+    "cosmetic": true,
+    "prehideSelectors": [".banner-message.fn-hide-if-terms-accepted"],
+    "detectCmp": [
+        {
+            "exists": ".banner-message.fn-hide-if-terms-accepted [data-pref-key=\"site-usage-policy\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".banner-message.fn-hide-if-terms-accepted"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".banner-message.fn-hide-if-terms-accepted [data-pref-key=\"site-usage-policy\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".banner-message.fn-hide-if-terms-accepted"
+        }
+    ]
+}
