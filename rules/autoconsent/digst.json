@@ -1,0 +1,9 @@
+{
+    "name": "digst",
+    "prehideSelectors": ["#cookiesMessage"],
+    "detectCmp": [{ "exists": "#cookiesMessage #cancelCookiesBtn" }],
+    "detectPopup": [{ "visible": "#cookiesMessage" }],
+    "optIn": [{ "waitForThenClick": "#cookiesMessage #acceptCookiesBtn" }],
+    "optOut": [{ "waitForThenClick": "#cookiesMessage #cancelCookiesBtn" }],
+    "test": [{ "cookieContains": "AcceptCookie=2" }]
+}
