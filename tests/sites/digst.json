@@ -1,0 +1,10 @@
+{
+    "cmp": "digst",
+    "tests": [
+        {
+            "note": "Danish Agency for Digital Government sites; the page reloads after the click",
+            "sites": ["https://mitid-erhverv.dk/", "https://broker.nemlog-in.dk/", "https://certifikat.gov.dk/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
