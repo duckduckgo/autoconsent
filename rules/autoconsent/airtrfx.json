@@ -1,0 +1,26 @@
+{
+    "name": "airtrfx",
+    "vendorUrl": "https://pros.com/products/airtrfx/",
+    "cosmetic": true,
+    "prehideSelectors": ["#gdpr-portal-root"],
+    "detectCmp": [
+        {
+            "exists": "#gdpr-portal-root .gdpr__cta"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gdpr-portal-root .gdpr__cta"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr-portal-root .gdpr__cta"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#gdpr-portal-root"
+        }
+    ]
+}
