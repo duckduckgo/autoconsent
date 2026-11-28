@@ -1,0 +1,10 @@
+{
+    "cmp": "kimpex",
+    "tests": [
+        {
+            "sites": ["https://www.kimpex.com/en-ca/home"],
+            "options": { "testSelfTest": false },
+            "note": "The site reloads the page after saving the choice, so the self-test cannot run"
+        }
+    ]
+}
