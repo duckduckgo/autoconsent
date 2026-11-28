@@ -1,0 +1,13 @@
+{
+    "cmp": "dynamicweb",
+    "tests": [
+        {
+            "note": "modal variant (#dwCookieModal shown on load); globalknive.dk declines with setOptInCookie(0)",
+            "sites": ["https://troelstrup.com/", "https://www.dynamicweb.com/", "https://www.gamko.com/", "https://www.globalknive.dk/"]
+        },
+        {
+            "note": "bottom banner variant (#dwCookieBanner); kaffebrenneriet.no has no button IDs and declines with setOptInCookie(0)",
+            "sites": ["https://www.hustedvin.dk/", "https://www.mmt.com.au/", "https://kaffebrenneriet.no/"]
+        }
+    ]
+}
