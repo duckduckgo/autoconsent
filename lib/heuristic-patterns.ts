@@ -95,6 +95,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bcontinue without accepting\b/gi,
     // "choose between essential cookies that are required for the site to work or all cookies"
     /\bcookies (?:that are )?(?:strictly )?(?:required|necessary|needed) for (?:the|this|our) (?:web)?site to (?:work|function)\b/gi,
+    // trackers gated on the choice: "they only load if you accept", "analytics will only be loaded once you consent"
+    /\bonly (?:loads?|be loaded|be activated) (?:if|when|once|after) you (?:accept|agree|consent)\b/gi,
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,
