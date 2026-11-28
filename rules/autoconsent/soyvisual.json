@@ -1,0 +1,10 @@
+{
+    "name": "soyvisual",
+    "runContext": { "urlPattern": "^https?://(www\\.)?soyvisual\\.org/" },
+    "prehideSelectors": [],
+    "detectCmp": [{ "exists": ".sweet-alert.welcome .more-links-no" }],
+    "detectPopup": [{ "visible": ".sweet-alert.welcome .more-links-no" }],
+    "optIn": [{ "waitForThenClick": ".sweet-alert.welcome button.confirm" }],
+    "optOut": [{ "waitForThenClick": ".sweet-alert.welcome .more-links-no", "retry": 10, "retryInterval": 500 }],
+    "test": [{ "cookieContains": "cookie-agreed=-1" }]
+}
