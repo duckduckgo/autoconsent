@@ -1,0 +1,34 @@
+{
+    "name": "sputnik-gdpr",
+    "_metadata": {
+        "vendorUrl": "https://sputnikglobe.com/"
+    },
+    "cosmetic": true,
+    "minimumRuleStepVersion": 2,
+    "prehideSelectors": ["#gdpr.gdpr"],
+    "detectCmp": [
+        {
+            "exists": "#gdpr #gdprForm .gdpr__checkbox[data-cons-preference]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#gdpr.m-active #gdprForm"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr #gdprForm .gdpr__btn"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#gdpr"
+        },
+        {
+            "removeClass": "m-disabledScroll",
+            "selector": "body",
+            "optional": true
+        }
+    ]
+}
