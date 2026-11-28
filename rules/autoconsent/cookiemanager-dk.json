@@ -1,0 +1,13 @@
+{
+    "name": "cookiemanager-dk",
+    "vendorUrl": "https://cookiemanager.dk/",
+    "prehideSelectors": ["#consentUI.consent__outer-wrapper"],
+    "detectCmp": [{ "exists": "#consentUI.consent__outer-wrapper .consent__actions .btn--reject" }],
+    "detectPopup": [{ "visible": "#consentUI.consent__outer-wrapper:not(.consent__outer-wrapper--dismissed) .consent__actions" }],
+    "optIn": [{ "waitForThenClick": "#consentUI .consent__actions .btn--accept-all" }],
+    "optOut": [
+        { "waitForThenClick": "#consentUI .consent__actions .btn--reject" },
+        { "waitForVisible": "#consentUI.consent__outer-wrapper", "check": "none", "timeout": 3000, "optional": true }
+    ],
+    "test": [{ "visible": "#consentUI.consent__outer-wrapper", "check": "none" }]
+}
