@@ -2,8 +2,14 @@
     "cmp": "AppConsent legacy",
     "tests": [
         {
+            "note": "US visitors no longer get the popup on these sites",
             "sites": ["https://www.meteociel.fr/", "https://www.maxifoot.fr/", "https://www.voltex.fr/"],
-            "options": { "testOptIn": false, "testOptOut": true, "onlyRegions": ["US", "FR"] }
+            "options": { "testOptIn": false, "testOptOut": true, "onlyRegions": ["FR", "DE"] }
+        },
+        {
+            "note": "popup iframe renders several seconds after the AppConsent script loads, slowest from AU",
+            "sites": ["https://www.lachainemeteo.com/"],
+            "options": { "testOptIn": false, "testOptOut": true, "onlyRegions": ["AU", "FR"] }
         }
     ]
 }
