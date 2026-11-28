@@ -1,0 +1,33 @@
+{
+    "name": "fr9",
+    "vendorUrl": "https://www.fr9.es/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?fr9\\.es/"
+    },
+    "prehideSelectors": [".topBar"],
+    "detectCmp": [
+        {
+            "exists": ".topBar [onclick^=\"closePrivacy\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".topBar [onclick^=\"closePrivacy\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".topBar [onclick^=\"closePrivacy\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".topBar [onclick^=\"closePrivacy\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "__privacy=1"
+        }
+    ]
+}
