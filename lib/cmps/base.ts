@@ -282,28 +282,28 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
     }
 
     async optOut() {
-        const logsConfig = this.autoconsent.config.logs;
-        if (this.rule.optOut) {
-            logsConfig.lifecycle && console.log('Initiated optOut()', this.rule.optOut);
-            return this._runRulesSequentially(this.rule.optOut, this.autoconsent.config.logs.rulesteps);
+        if (!this.rule.optOut?.length) {
+            return false;
         }
-        return false;
+        const logsConfig = this.autoconsent.config.logs;
+        logsConfig.lifecycle && console.log('Initiated optOut()', this.rule.optOut);
+        return this._runRulesSequentially(this.rule.optOut, logsConfig.rulesteps);
     }
 
     async optIn() {
-        const logsConfig = this.autoconsent.config.logs;
-        if (this.rule.optIn) {
-            logsConfig.lifecycle && console.log('Initiated optIn()', this.rule.optIn);
-            return this._runRulesSequentially(this.rule.optIn, this.autoconsent.config.logs.rulesteps);
+        if (!this.rule.optIn?.length) {
+            return false;
         }
-        return false;
+        const logsConfig = this.autoconsent.config.logs;
+        logsConfig.lifecycle && console.log('Initiated optIn()', this.rule.optIn);
+        return this._runRulesSequentially(this.rule.optIn, logsConfig.rulesteps);
     }
 
     async openCmp() {
-        if (this.rule.openCmp) {
-            return this._runRulesSequentially(this.rule.openCmp, this.autoconsent.config.logs.rulesteps);
+        if (!this.rule.openCmp?.length) {
+            return false;
         }
-        return false;
+        return this._runRulesSequentially(this.rule.openCmp, this.autoconsent.config.logs.rulesteps);
     }
 
     async test() {

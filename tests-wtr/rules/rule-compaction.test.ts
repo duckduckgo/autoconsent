@@ -272,4 +272,42 @@ describe('AutoConsent', () => {
         });
         expect(autoconsent.rules).to.have.length(dynamicRuleCount + 1);
     });
+
+    it('returns false from optIn/optOut/openCmp when step arrays are empty', async () => {
+        const autoconsent = new AutoConsent(() => Promise.resolve());
+        autoconsent.parseDeclarativeRules({
+            autoconsent: [
+                {
+                    name: 'empty_declarative_steps',
+                    detectCmp: [{ exists: '#cmp' }],
+                    detectPopup: [{ visible: '#cmp' }],
+                    optOut: [],
+                    optIn: [],
+                    openCmp: [],
+                },
+            ],
+            compact: encodeRules(
+                [
+                    {
+                        name: 'compact_strips_optin',
+                        detectCmp: [{ exists: '#cmp' }],
+                        detectPopup: [{ visible: '#cmp' }],
+                        optOut: [{ click: '#opt-out' }],
+                        optIn: [{ click: '#opt-in' }],
+                    },
+                ],
+                null,
+            ),
+        });
+
+        const emptyDeclarative = autoconsent.rules.find((r) => r.name === 'empty_declarative_steps');
+        const compactDecoded = autoconsent.rules.find((r) => r.name === 'compact_strips_optin');
+        expect(emptyDeclarative).to.exist;
+        expect(compactDecoded).to.exist;
+
+        expect(await emptyDeclarative!.optOut()).to.be.false;
+        expect(await emptyDeclarative!.optIn()).to.be.false;
+        expect(await emptyDeclarative!.openCmp()).to.be.false;
+        expect(await compactDecoded!.optIn()).to.be.false;
+    });
 });
