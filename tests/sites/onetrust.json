@@ -46,6 +46,11 @@
                 "https://www.sorel.com/"
             ],
             "options": { "onlyRegions": ["US"], "testOptIn": false, "testSelfTest": false }
+        },
+        {
+            "note": "Notice-only banner variant with an icon Close button (no `ot-close-btn-link` class).",
+            "sites": ["https://www.bestbuy.ca/en-ca"],
+            "options": { "testOptIn": false, "testSelfTest": false }
         }
     ]
 }
