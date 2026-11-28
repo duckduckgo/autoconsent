@@ -1,0 +1,56 @@
+{
+    "name": "engelbert-strauss",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?strauss\\.com/",
+        "main": true,
+        "frame": false
+    },
+    "detectCmp": [
+        {
+            "exists": ".mkt-cct-modal :is(.mkt-cct-button-decline-all, .mkt-cct-button-options)"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".mkt-cct-modal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".mkt-cct-button-accept-all"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ".mkt-cct-button-decline-all"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ".mkt-cct-button-decline-all"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": ".mkt-cct-button-options"
+                },
+                {
+                    "waitFor": ".mkt-cct-button-accept-selected"
+                },
+                {
+                    "click": ".mkt-cct-cookie-selection.mkt-cct-selected .mkt-cct-sliderbutton:not(.mkt-cct-locked)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": ".mkt-cct-button-accept-selected"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22personal%22%3Afalse"
+        }
+    ]
+}

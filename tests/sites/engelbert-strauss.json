@@ -1,0 +1,13 @@
+{
+    "cmp": "engelbert-strauss",
+    "tests": [
+        {
+            "note": "EEA and most other regions show \"Reject all\" on the first layer; GB has no first-layer reject, so the rule rejects in \"Personal settings\". The US and CA get a separate store with no cookie popup, and CH shows an accept-only notice that the rule does not handle. The page reloads right after the choice is saved, so the self-test is off",
+            "sites": ["https://www.strauss.com/"],
+            "options": {
+                "skipRegions": ["US", "CA", "CH"],
+                "testSelfTest": false
+            }
+        }
+    ]
+}
