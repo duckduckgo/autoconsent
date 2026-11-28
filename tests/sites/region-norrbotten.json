@@ -1,0 +1,10 @@
+{
+    "cmp": "region-norrbotten",
+    "tests": [
+        {
+            "note": "saving the consent choice reloads the page, which interrupts the self-test",
+            "sites": ["https://www.norrbotten.se/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
