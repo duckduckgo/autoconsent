@@ -168,6 +168,14 @@ export const snippets = {
     // turn the single-button form into a decline submission, same fields as the CMP's own decline form
     EVAL_EE_CONSENT_DECLINE_0: () =>
         document.querySelectorAll('#cookieConsentFormAccept input[name^="ee:cookies_"]').forEach((i) => (i.value = 'n')) || true,
+    // an empty refuse alert makes the theme skip its native window.confirm() on reject
+    EVAL_ENFOLD_SKIP_REFUSE_CONFIRM: () => {
+        if (window.AviaPrivacyCookieAdditionalData) {
+            window.AviaPrivacyCookieAdditionalData.cookie_refuse_button_alert = '';
+        }
+        return true;
+    },
+    EVAL_ENFOLD_TEST: () => !!sessionStorage.getItem('aviaCookieRefused'),
     EVAL_ETSY_0: () =>
         document.querySelectorAll('.gdpr-overlay-body input').forEach((toggle) => {
             toggle.checked = false;

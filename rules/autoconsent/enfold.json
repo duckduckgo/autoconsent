@@ -1,0 +1,53 @@
+{
+    "name": "enfold",
+    "vendorUrl": "https://kriesi.at/documentation/enfold/privacy-cookies/",
+    "prehideSelectors": [".avia-cookie-consent"],
+    "detectCmp": [
+        {
+            "exists": ".avia-cookie-hide-notification"
+        },
+        {
+            "exists": ".avia-cookie-consent .avia-cookie-hide-notification, .avia-cookie-consent .avia-cookie-info-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".avia-cookie-consent:not(.cookiebar-hidden)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".avia-cookie-consent .avia-cookie-select-all, .avia-cookie-consent .avia-cookie-close-bar"
+        }
+    ],
+    "optOut": [
+        {
+            "eval": "EVAL_ENFOLD_SKIP_REFUSE_CONFIRM",
+            "optional": true
+        },
+        {
+            "if": {
+                "visible": ".avia-cookie-consent .avia-cookie-hide-notification",
+                "check": "any"
+            },
+            "then": [
+                {
+                    "click": ".avia-cookie-consent .avia-cookie-hide-notification"
+                }
+            ],
+            "else": [
+                {
+                    "click": ".avia-cookie-consent .avia-cookie-info-btn"
+                },
+                {
+                    "waitForThenClick": ".mfp-content .avia-cookie-hide-notification"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "eval": "EVAL_ENFOLD_TEST"
+        }
+    ]
+}

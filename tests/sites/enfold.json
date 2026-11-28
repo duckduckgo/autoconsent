@@ -1,0 +1,18 @@
+{
+    "cmp": "enfold",
+    "tests": [
+        {
+            "note": "refuse button (avia-cookie-hide-notification) on the message bar",
+            "sites": ["http://mobil-daekning.dk/", "https://www.dgh.de/"]
+        },
+        {
+            "note": "no refuse button on the bar, opt-out goes through the settings modal",
+            "sites": ["https://fredisalearns.com/"]
+        },
+        {
+            "note": "sites configured to reload the page after refusing, so the self-test cannot run",
+            "sites": ["https://justaway.com/", "https://think-beyondtheobvious.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
