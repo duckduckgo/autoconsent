@@ -1,0 +1,13 @@
+{
+    "cmp": "cookie-tech-consent",
+    "tests": [
+        {
+            "note": "no reject button: unchecks optional categories and saves the selection",
+            "sites": ["https://www.politichegiovanili.gov.it/"]
+        },
+        {
+            "note": "variant with a reject all button",
+            "sites": ["https://www.tecnostruttura.it/"]
+        }
+    ]
+}
