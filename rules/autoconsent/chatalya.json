@@ -1,0 +1,21 @@
+{
+    "name": "chatalya",
+    "runContext": { "urlPattern": "^https?://(www\\.)?chatalya\\.com/" },
+    "prehideSelectors": [".app-consent[role=dialog]"],
+    "detectCmp": [{ "exists": ".app-consent[role=dialog]" }],
+    "detectPopup": [{ "visible": ".app-consent[role=dialog]" }],
+    "optIn": [{ "waitForThenClick": ".app-consent[role=dialog] button:last-of-type" }],
+    "optOut": [
+        { "waitForThenClick": ".app-consent[role=dialog] button:first-of-type" },
+        { "waitFor": ".fc-cta-do-not-consent,.fc-cta-manage-options,.fc-li-only-placeholder", "timeout": 6000, "optional": true },
+        {
+            "if": { "exists": ".fc-cta-do-not-consent,.fc-cta-manage-options,.fc-li-only-placeholder" },
+            "then": [
+                { "click": ".fc-cta-do-not-consent,.fc-cta-manage-options", "optional": true },
+                { "click": ".fc-preference-consent:checked,.fc-preference-legitimate-interest:checked", "all": true, "optional": true },
+                { "click": ".fc-confirm-choices", "optional": true }
+            ]
+        }
+    ],
+    "test": [{ "visible": ".app-consent[role=dialog]", "check": "none" }]
+}
