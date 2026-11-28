@@ -1,0 +1,36 @@
+{
+    "name": "doctoralia",
+    "vendorUrl": "https://www.doctoralia.com.mx/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?doctoralia\\.com\\.mx/"
+    },
+    "prehideSelectors": ["[role=region][aria-labelledby=cookie-banner-title]"],
+    "detectCmp": [
+        {
+            "exists": "[role=region][aria-labelledby=cookie-banner-title] button.w-icon-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "[role=region][aria-labelledby=cookie-banner-title]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "[role=region][aria-labelledby=cookie-banner-title] button.w-icon-button"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "[role=region][aria-labelledby=cookie-banner-title] button.w-icon-button"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "[role=region][aria-labelledby=cookie-banner-title]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
