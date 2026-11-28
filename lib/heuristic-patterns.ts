@@ -95,6 +95,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bcontinue without accepting\b/gi,
     // "choose between essential cookies that are required for the site to work or all cookies"
     /\bcookies (?:that are )?(?:strictly )?(?:required|necessary|needed) for (?:the|this|our) (?:web)?site to (?:work|function)\b/gi,
+    // "we only use local storage to remember this cookie choice"; privacy policies say it too, so popup text only
+    { pattern: /\b(?:remember|save|store)s? (?:this|your) cookie choices?\b/gi, input: 'popup' },
 
     // it might be tempting to add the patterns below, but they cause too many false positives. Don't do it :)
     // /cookies? settings/i,

@@ -448,7 +448,15 @@ describe('checkHeuristicPatterns with more English wording', () => {
             'We use a cookie to remember you are 18+ and keep your preferences on this device.',
             'Continue without accepting\nProtecting your privacy is our priority',
             'Choose between essential cookies that are required for the site to work or all cookies, including non-essential ones.',
+            'We do not collect personal data except aggregated usage statistics. We only use local storage to remember this cookie choice (Accept / Decline).',
         ]);
+    });
+
+    it('detects "remember your cookie choice" in popup text only', () => {
+        const text = 'We use local storage to remember your cookie choice.';
+        expect(detectsPopup(text)).to.be.true;
+        expect(detectsPage(text)).to.be.false;
+        expectNotDetected(['Cookie choices', 'Remember me on this device']);
     });
 
     it('detects consent wording in popups and page text', () => {
