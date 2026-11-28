@@ -466,6 +466,13 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects conditional "would set cookies" wording in popups only', () => {
+        const text = 'Cookies for ads\nMeta and Google would set cookies so we can see which ads bring people to us.\nReject\nAccept';
+        expect(detectsPopup(text)).to.be.true;
+        expect(detectsPage(text)).to.be.false;
+        expect(detectsPopup('Grandma would set aside cookies for the kids.')).to.be.false;
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';

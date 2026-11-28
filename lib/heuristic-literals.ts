@@ -39,6 +39,7 @@ export const DETECT_PATTERN_LITERALS: string[][] = [
     ["technolog"],
     ["cookies"],
     ["cookies"],
+    [" cookies"],
     ["optional","additional","non-essential"],
     ["storing of cookies","placed cookies"],
     [" on your device","access and store "],
