@@ -4,6 +4,9 @@
     "detectCmp": [
         {
             "exists": "script[src*='cdn.appconsent.io/tcf2/'][src*='core.bundle.js']"
+        },
+        {
+            "exists": "iframe[srcdoc*='frame-root']"
         }
     ],
     "detectPopup": [
