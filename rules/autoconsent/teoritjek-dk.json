@@ -1,0 +1,21 @@
+{
+    "name": "teoritjek.dk",
+    "vendorUrl": "https://teoritjek.dk/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?teoritjek\\.dk/"
+    },
+    "prehideSelectors": [".consent-banner[data-consent-state]"],
+    "detectCmp": [{ "exists": ".consent-banner[data-consent-state]" }],
+    "detectPopup": [{ "visible": ".consent-banner[data-consent-state='pending']" }],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class,'consent-banner')][@data-consent-state='pending']//button[normalize-space(.)='Accepter alle']"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[contains(@class,'consent-banner')][@data-consent-state='pending']//button[normalize-space(.)='Kun nødvendige']"
+        }
+    ],
+    "test": [{ "waitForVisible": ".consent-banner[data-consent-state]", "check": "none", "timeout": 2000 }]
+}

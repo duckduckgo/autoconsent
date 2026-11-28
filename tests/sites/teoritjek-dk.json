@@ -1,0 +1,9 @@
+{
+    "cmp": "teoritjek.dk",
+    "note": "the banner is server-rendered with data-consent-state=\"unavailable\" and only reacts to clicks once hydration sets it to \"pending\"",
+    "tests": [
+        {
+            "sites": ["https://teoritjek.dk/"]
+        }
+    ]
+}
