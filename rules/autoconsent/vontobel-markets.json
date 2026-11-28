@@ -1,0 +1,12 @@
+{
+    "name": "vontobel-markets",
+    "vendorUrl": "https://markets.vontobel.com/",
+    "runContext": {
+        "urlPattern": "^https?://markets\\.vontobel\\.com/"
+    },
+    "detectCmp": [{ "exists": "[data-testid=disclaimer_modal_container] [data-testid=decline_cookie_disc_link]" }],
+    "detectPopup": [{ "visible": "[data-testid=disclaimer_modal_container] [data-testid=decline_cookie_disc_link]" }],
+    "optIn": [{ "waitForThenClick": "[data-testid=disclaimer_modal_container] [data-testid=accept_cookie_disc_link]" }],
+    "optOut": [{ "waitForThenClick": "[data-testid=disclaimer_modal_container] [data-testid=decline_cookie_disc_link]" }],
+    "test": [{ "wait": 500 }, { "cookieContains": "DNTF.CookieConsent=strict" }]
+}
