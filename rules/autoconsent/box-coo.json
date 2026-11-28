@@ -1,0 +1,9 @@
+{
+    "name": "box-coo",
+    "prehideSelectors": ["#box_coo"],
+    "detectCmp": [{ "exists": "#box_coo [onclick^='coo(0)']" }],
+    "detectPopup": [{ "visible": "#box_coo" }],
+    "optIn": [{ "waitForThenClick": "#box_coo [onclick^='coo(1)']" }],
+    "optOut": [{ "waitForThenClick": "#box_coo [onclick^='coo(0)']" }],
+    "test": [{ "cookieContains": "coo_rgpd=0" }]
+}
