@@ -466,6 +466,18 @@ describe('checkHeuristicPatterns with more English wording', () => {
         }
     });
 
+    it('detects usage statistics consent in popups only', () => {
+        const texts = [
+            'Help us keep improving the test: allow anonymous usage statistics. Privacy policy',
+            'Allow optional usage statistics? Privacy policy',
+        ];
+        for (const text of texts) {
+            expect(detectsPopup(text), text).to.be.true;
+            expect(detectsPage(text), text).to.be.false;
+        }
+        expect(detectsPopup('View usage statistics for your account')).to.be.false;
+    });
+
     it('needs a consent control near "diese/unsere Webseite ... Cookies" in page text', () => {
         const text =
             'Auf unserer Webseite werden neben den technisch erforderlichen Cookies noch Cookies zur statistischen Auswertung gesetzt.';
