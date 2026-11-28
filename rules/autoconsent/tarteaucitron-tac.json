@@ -1,0 +1,22 @@
+{
+    "name": "tarteaucitron-tac",
+    "prehideSelectors": ["#tacRoot"],
+    "detectCmp": [{ "exists": "#tacRoot #tacAllDenied" }],
+    "detectPopup": [{ "any": [{ "visible": "#tacRoot #tacAlertBig" }, { "visible": "#tacRoot #tac" }] }],
+    "optIn": [
+        { "wait": 500 },
+        {
+            "if": { "visible": "#tacPersonalize2" },
+            "then": [{ "click": "#tacPersonalize2" }],
+            "else": [{ "click": "#tacAllAllowed" }]
+        }
+    ],
+    "optOut": [
+        { "wait": 500 },
+        {
+            "if": { "visible": "#tacAllDenied2" },
+            "then": [{ "click": "#tacAllDenied2" }],
+            "else": [{ "click": "#tacAllDenied" }]
+        }
+    ]
+}
