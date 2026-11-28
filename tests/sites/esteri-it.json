@@ -1,0 +1,10 @@
+{
+    "cmp": "esteri-it",
+    "tests": [
+        {
+            "note": "saving preferences with analytics off reloads the page, so the self-test result is lost; main site and an embassy subdomain share the theme",
+            "sites": ["https://www.esteri.it/", "https://ambberna.esteri.it/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
