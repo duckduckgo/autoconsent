@@ -1,0 +1,34 @@
+{
+    "name": "proteinatlas",
+    "vendorUrl": "https://www.proteinatlas.org/",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?proteinatlas\\.org/"
+    },
+    "prehideSelectors": ["#cookie_statement"],
+    "detectCmp": [
+        {
+            "exists": "#cookie_statement a.cookie_statement"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookie_statement"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie_statement a.cookie_statement"
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "notice-only banner: the dismiss link just records that the notice was seen",
+            "waitForThenClick": "#cookie_statement a.cookie_statement"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookie_statement=1"
+        }
+    ]
+}
