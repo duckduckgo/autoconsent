@@ -1,0 +1,10 @@
+{
+    "name": "molio-cmp",
+    "vendorUrl": "https://molio.dk/",
+    "prehideSelectors": ["#mcmp-overlay"],
+    "detectCmp": [{ "exists": "#mcmp-overlay #mcmp-reject-btn" }],
+    "detectPopup": [{ "visible": "#mcmp-modal" }],
+    "optIn": [{ "waitForThenClick": "#mcmp-overlay #mcmp-accept-btn" }],
+    "optOut": [{ "waitForThenClick": "#mcmp-overlay #mcmp-reject-btn" }],
+    "test": [{ "cookieContains": "%22marketing%22%3Afalse" }]
+}
