@@ -1,0 +1,25 @@
+{
+    "name": "barraaceptacion",
+    "cosmetic": true,
+    "prehideSelectors": ["#barraaceptacion:has(a[onclick*=\"PonerCookie\"])"],
+    "detectCmp": [
+        {
+            "exists": "#barraaceptacion a[onclick*=\"PonerCookie\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#barraaceptacion"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#barraaceptacion a[onclick*=\"PonerCookie\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#barraaceptacion"
+        }
+    ]
+}
