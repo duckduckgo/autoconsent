@@ -1,0 +1,14 @@
+{
+    "name": "julesjordan",
+    "runContext": { "urlPattern": "^https?://(\\w+\\.)?julesjordan\\.com/" },
+    "prehideSelectors": ["#cookieConsent"],
+    "detectCmp": [{ "exists": "#cookieConsent #cookieOptions #denyCookies" }],
+    "detectPopup": [{ "visible": "#cookieConsent" }],
+    "optIn": [{ "waitForThenClick": "#cookieConsent #allowAllCookies" }],
+    "optOut": [
+        { "waitForThenClick": "#cookieConsent #showOptions" },
+        { "waitForVisible": "#cookieOptions #denyCookies" },
+        { "click": "#cookieOptions #denyCookies" }
+    ],
+    "test": [{ "cookieContains": "jjconsent=essential" }]
+}
