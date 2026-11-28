@@ -376,8 +376,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /(?:閲覧履歴|端末情報|利用者情報).{0,30}を外部(?:サービス|事業者|に|へ)/gi,
 
     // Danish (DA)
-    // e.g. "vi bruger cookies", "hjemmesiden bruger cookies til at ..."
-    /\b(?:bruger|anvender|benytter) cookies\b/gi,
+    // e.g. "vi bruger cookies", "vi bruger analytiske cookies", "hjemmesiden bruger cookies til at ..."; skips "ikke" (not)
+    /\b(?:bruger|anvender|benytter) (?:(?!ikke\b)\S+ ){0,3}cookies\b/gi,
 
     // Norwegian (NO)
     // e.g. "vi bruker informasjonskapsler", "kan vi bruke valgfrie informasjonskapsler", "nettstedet bruker cookies"
