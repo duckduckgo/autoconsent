@@ -1,0 +1,30 @@
+{
+    "name": "viajesparati",
+    "vendorUrl": "https://www.buscounchollo.com/",
+    "prehideSelectors": ["#acceptCookieModal"],
+    "detectCmp": [
+        {
+            "exists": "#acceptCookieModal [data-entity=\"accept-cookies\"] [data-action=\"reject-cookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#acceptCookieModal.is-open [data-entity=\"accept-cookies\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#acceptCookieModal.is-open [data-action=\"accept-cookies\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#acceptCookieModal.is-open [data-action=\"reject-cookies\"]"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "cookies-accept=necessary%3Afalse_preferences%3Afalse_statistics%3Afalse_marketing%3Afalse"
+        }
+    ]
+}
