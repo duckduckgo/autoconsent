@@ -1,7 +1,7 @@
 {
     "name": "airbnb",
     "vendorUrl": "https://www.airbnb.com/",
-    "runContext": { "urlPattern": "^https?://(www\\.)?airbnb\\.[a-z.]+/" },
+    "runContext": { "urlPattern": "^https?://([a-z-]+\\.)?airbnb\\.[a-z.]+/" },
     "prehideSelectors": ["[data-testid=\"main-cookies-banner-container\"]"],
     "detectCmp": [
         { "exists": "[data-testid=\"main-cookies-banner-container\"] section > div > div:nth-child(2) > div:nth-child(2) > button" }

@@ -3,6 +3,10 @@
     "tests": [
         {
             "sites": ["https://www.airbnb.it/", "https://www.airbnb.de/", "https://www.airbnb.co.uk/", "https://www.airbnb.fr/"]
+        },
+        {
+            "note": "Language subdomains of country domains",
+            "sites": ["https://fr.airbnb.ca/", "https://fr.airbnb.be/"]
         }
     ]
 }
