@@ -841,6 +841,11 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Do not share my data')).to.equal('reject');
     });
 
+    it('matches Italian "I do not agree" reject', () => {
+        expect(classifyButtonTextRegex("Non sono d'accordo")).to.equal('reject');
+        expect(classifyButtonTextRegex('Sono d’accordo')).to.equal('other');
+    });
+
     it('matches German continue-without-accepting variants', () => {
         expect(classifyButtonTextRegex('Ohne Akzeptieren fortfahren')).to.equal('reject');
         expect(classifyButtonTextRegex('Ohne zu akzeptieren fortfahren')).to.equal('reject');

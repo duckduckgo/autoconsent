@@ -527,6 +527,8 @@ const REJECT_PATTERNS_ITALIAN = [
     /continua(re)? senza accettare/is,
 
     'non accetto',
+    // "non sono d'accordo" (apostrophe removed by cleanButtonText)
+    'non sono daccordo',
 ];
 
 const REJECT_PATTERNS_BRAZILIAN_PORTUGUESE = [

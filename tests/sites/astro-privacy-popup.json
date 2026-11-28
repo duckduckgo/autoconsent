@@ -1,0 +1,13 @@
+{
+    "cmp": "astro-privacy-popup",
+    "tests": [
+        {
+            "note": "'standard' variant",
+            "sites": ["https://hesnet.it/", "https://dreamfilmsw.se/"]
+        },
+        {
+            "note": "'papa', 'vider' and 'modern' variants: same two buttons (reject first, accept second) in a different layout",
+            "sites": ["https://stbb01.fr/", "https://anoonse.pl/", "https://juststream.cv/"]
+        }
+    ]
+}

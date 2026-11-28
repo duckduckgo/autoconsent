@@ -1,0 +1,31 @@
+{
+    "name": "astro-privacy-popup",
+    "prehideSelectors": ["[data-cookie-banner][data-no-smartlink]"],
+    "detectCmp": [
+        {
+            "exists": "astro-island [data-cookie-banner][data-no-smartlink] button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "astro-island:not([ssr]) [data-cookie-banner][data-no-smartlink]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "astro-island:not([ssr]) [data-cookie-banner][data-no-smartlink] button:last-of-type"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "astro-island:not([ssr]) [data-cookie-banner][data-no-smartlink] button:first-of-type"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "[data-cookie-banner][data-no-smartlink]",
+            "check": "none",
+            "timeout": 2000
+        }
+    ]
+}
