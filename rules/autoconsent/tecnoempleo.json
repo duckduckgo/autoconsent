@@ -1,0 +1,17 @@
+{
+    "name": "tecnoempleo",
+    "vendorUrl": "https://www.tecnoempleo.com/",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?tecnoempleo\\.com/"
+    },
+    "prehideSelectors": ["#capa_cookie_rgpd"],
+    "detectCmp": [{ "exists": "#capa_cookie_rgpd" }],
+    "detectPopup": [{ "visible": "#capa_cookie_rgpd" }],
+    "optIn": [{ "waitForThenClick": "#capa_cookie_rgpd .btn-primary.btn-cookie-accept" }],
+    "optOut": [
+        { "waitForThenClick": "#capa_cookie_rgpd [data-target='#modal_rgpd'], #capa_cookie_rgpd [data-bs-target='#modal_rgpd']" },
+        { "waitForVisible": "#modal_rgpd .modal-footer .btn-danger" },
+        { "waitForThenClick": "#modal_rgpd .modal-footer .btn-danger", "retry": 3, "retryInterval": 500 }
+    ],
+    "test": [{ "cookieContains": "cookie_rgpd_no=1" }]
+}
