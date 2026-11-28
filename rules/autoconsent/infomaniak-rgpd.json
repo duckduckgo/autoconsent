@@ -1,8 +1,18 @@
 {
     "name": "infomaniak-rgpd",
     "prehideSelectors": ["module-rgpd-component"],
-    "detectCmp": [{ "exists": "module-rgpd-component" }],
-    "detectPopup": [{ "visible": ["module-rgpd-component", ".modal"] }],
+    "detectCmp": [
+        {
+            "any": [
+                { "exists": "module-rgpd-component" },
+                { "exists": "script#webComponents[src*=\"web-components.storage.infomaniak.com/\"]" }
+            ]
+        }
+    ],
+    "detectPopup": [
+        { "any": [{ "visible": ["module-rgpd-component", ".modal"] }, { "cookieContains": "cookieConsent=", "negated": true }] },
+        { "waitForVisible": ["module-rgpd-component", ".modal"], "timeout": 20000 }
+    ],
     "optIn": [{ "waitForThenClick": ["module-rgpd-component", ".buttons > button:nth-of-type(1)"] }],
     "optOut": [{ "waitForThenClick": ["module-rgpd-component", ".buttons > button:nth-of-type(2)"], "retry": 3 }],
     "test": [{ "cookieContains": "cookieConsent=consent_1" }]

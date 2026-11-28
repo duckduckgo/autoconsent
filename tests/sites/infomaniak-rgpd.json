@@ -3,6 +3,11 @@
     "tests": [
         {
             "sites": ["https://www.swisstransfer.com/en-us", "https://www.infomaniak.com/en"]
+        },
+        {
+            "note": "from far-away regions the popup renders 15-20s after page start, so detection relies on the early #webComponents loader script",
+            "sites": ["https://www.infomaniak.com/fr"],
+            "options": { "onlyRegions": ["AU"] }
         }
     ]
 }
