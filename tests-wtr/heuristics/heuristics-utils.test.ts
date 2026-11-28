@@ -586,6 +586,7 @@ describe('checkHeuristicPatterns with more notice phrasings', () => {
             'Nous utilisons certains cookies pour mesurer l’audience.',
             'Informativa sull’utilizzo dei cookie',
             'Usiamo Google Analytics solo con il tuo consenso.',
+            'Allow optional Google Analytics to understand which guides and tools people use.',
             'På den här webbplatsen används kakor.',
             'Genom att fortsätta godkänner du användningen av kakor.',
             'Godkänn alla\nEndast nödvändiga',
@@ -603,6 +604,7 @@ describe('checkHeuristicPatterns with more notice phrasings', () => {
             'Vi använder förnybar energi och endast nödvändiga resurser',
             'We use data analytics tools in our consulting work',
             'Le ultime notizie su fisco, tasse e dichiarazione dei redditi',
+            'Allow Google Analytics access to your property',
         ]) {
             expect(checkHeuristicPatterns(text, 'popup').patterns, text).to.have.length(0);
         }

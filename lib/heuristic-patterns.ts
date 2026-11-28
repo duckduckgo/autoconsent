@@ -89,6 +89,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\bwe have cookies\b/gi,
     /\b(?:revoke|withdraw) your consent at any time\b|\beinwilligung jederzeit widerrufen\b/gi,
     /\bwe use (?:[\w-]+ )?analytics (?:to|for)\b|\bwe use google analytics\b.{0,100}\bcookie/gi,
+    // cookieless analytics consent: "Allow optional Google Analytics to understand …"
+    { pattern: /\ballow optional (?:google )?analytics\b/gi, input: 'popup' },
     /\b(?:con|senza) il (?:tuo|vostro) consenso\b/gi,
     /\baccept or (?:reject|decline) (?:all |optional |non-essential )?cookies\b/gi,
     // the consent choice itself, as in FR/IT/ES: "continuer sans accepter"
