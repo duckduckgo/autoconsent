@@ -273,6 +273,26 @@ describe('getPotentialPopups', () => {
             expect(ids).not.to.include('page');
         });
 
+        it('does not expand into a viewport-sized app root that holds a whole popup', () => {
+            // the page scrolls inside the app, so the app root is no taller than the viewport
+            container.innerHTML = `
+                <div id="app" style="height: 100vh; overflow: hidden;">
+                    <nav id="nav" style="position: fixed; top: 0;"><a href="#">Home</a><a href="#">Guides</a></nav>
+                    <div id="banner" style="position: fixed; bottom: 0;">
+                        <p>This site uses cookies from Google to deliver its services and to analyze traffic.</p>
+                        <a href="#">More details</a>
+                        <button>Okay, got it</button>
+                    </div>
+                    <main style="height: 100%; overflow: auto;"><a href="#">X</a><a href="#">Theming your components</a></main>
+                </div>
+            `;
+            const ids = popupIds();
+            expect(ids).to.include('banner');
+            expect(ids).not.to.include('app');
+            const actionable = inContainer(getActionablePopups('tier1', 1000));
+            expect(actionable.map((p) => [p.element.id, p.regexClassification])).to.deep.equal([['banner', 'tier1']]);
+        });
+
         it('expands a fragment inside a shadow root', () => {
             shadowHost(
                 '',

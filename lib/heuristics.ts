@@ -116,15 +116,14 @@ function getFramePopups(): PopupData[] {
 // fixed, sticky and dialog-like popups found by walking the DOM, with fragments expanded to their popup root
 function collectPositionedPopups(deadline: number): PopupData[] {
     const { elements, shadowHosts } = getPopupLikeElements(deadline);
+    const candidates = elements.map((el) => toPopupData(el, shadowHosts)).filter((p): p is PopupData => p !== null);
+    // fragments do not expand into an ancestor that holds a whole popup, such as an app root around a fixed navbar and a banner
+    const wholePopups = candidates.filter(isPopupRootData);
     const potentialPopups: PopupData[] = [];
     const expanded: HTMLElement[] = [];
-    for (const el of elements) {
-        const popup = toPopupData(el, shadowHosts);
-        if (!popup) {
-            continue;
-        }
+    for (const popup of candidates) {
         // past the deadline, keep the candidates found so far as they are
-        const root = performance.now() > deadline ? popup : expandPopupFragment(popup, shadowHosts);
+        const root = performance.now() > deadline ? popup : expandPopupFragment(popup, shadowHosts, wholePopups);
         if (potentialPopups.some((p) => p.element === root.element)) {
             continue;
         }
@@ -297,13 +296,19 @@ function climbToPopup(
  * A positioned candidate is often only part of a popup, such as a sticky button bar or heading.
  * If it does not look like a consent popup on its own, use the nearest ancestor that does.
  */
-function expandPopupFragment(popup: PopupData, shadowHosts?: HTMLElement[]): PopupData {
-    // the same acceptance check as toPopupRoot, on the buttons already collected
-    if (hasFragmentPatterns(popup.text) && hasPopupButtons(popup.text, popup.buttons)) {
+function expandPopupFragment(popup: PopupData, shadowHosts?: HTMLElement[], wholePopups: PopupData[] = []): PopupData {
+    if (isPopupRootData(popup)) {
         return popup;
     }
     const parent = getComposedParent(popup.element);
-    return climbToPopup(parent, MAX_FRAGMENT_EXPANSION_DEPTH, (el) => toPopupRoot(el, shadowHosts)) ?? popup;
+    // the consent text of an ancestor that holds another whole popup belongs to that popup, not to this fragment
+    const holdsWholePopup = (el: HTMLElement) => wholePopups.some((p) => composedContains(el, p.element));
+    return climbToPopup(parent, MAX_FRAGMENT_EXPANSION_DEPTH, (el) => toPopupRoot(el, shadowHosts), holdsWholePopup) ?? popup;
+}
+
+// the same acceptance check as toPopupRoot, on the buttons already collected
+function isPopupRootData(popup: PopupData): boolean {
+    return hasFragmentPatterns(popup.text) && hasPopupButtons(popup.text, popup.buttons);
 }
 
 function getComposedParent(el: HTMLElement): HTMLElement | null {
