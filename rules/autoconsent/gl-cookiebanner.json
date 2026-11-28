@@ -1,0 +1,9 @@
+{
+    "name": "gl-cookiebanner",
+    "prehideSelectors": ["#gl-cb-modal"],
+    "detectCmp": [{ "exists": "#gl-cb-modal" }],
+    "detectPopup": [{ "visible": "#gl-cb-modal" }],
+    "optIn": [{ "waitForThenClick": "#gl-cb-button-all" }],
+    "optOut": [{ "waitForThenClick": "#gl-cb-button-none" }],
+    "test": [{ "cookieContains": "gl-cookiebanner=0" }]
+}
