@@ -1,0 +1,13 @@
+{
+    "cmp": "proconsi",
+    "tests": [
+        {
+            "sites": ["https://bonocomercioalicante.es/", "https://bonobenidormtedamas.es/", "https://bonosbenicassim.es/"]
+        },
+        {
+            "note": "variant whose buttons reload the page 3 seconds after the click",
+            "sites": ["https://leondecerca.com/", "https://taxiasturias.com/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
