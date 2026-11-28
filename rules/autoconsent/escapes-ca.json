@@ -1,0 +1,27 @@
+{
+    "name": "escapes.ca",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?escapes\\.ca/"
+    },
+    "prehideSelectors": ["#escapes-consent-root"],
+    "detectCmp": [{ "exists": ["#escapes-consent-root", "section.bar [data-act='accept']"] }],
+    "detectPopup": [{ "visible": ["#escapes-consent-root", "section.bar"] }],
+    "optIn": [{ "waitForThenClick": ["#escapes-consent-root", "section.bar [data-act='accept']"] }],
+    "optOut": [
+        {
+            "if": { "exists": ["#escapes-consent-root", "section.bar [data-act='reject']"] },
+            "then": [{ "click": ["#escapes-consent-root", "section.bar [data-act='reject']"] }],
+            "else": [
+                { "click": ["#escapes-consent-root", "section.bar [data-act='manage']"] },
+                { "waitForVisible": ["#escapes-consent-root", ".modal [data-act='confirm']"] },
+                {
+                    "click": ["#escapes-consent-root", ".modal [data-cat][aria-checked='true']"],
+                    "all": true,
+                    "optional": true
+                },
+                { "click": ["#escapes-consent-root", ".modal [data-act='confirm']"] }
+            ]
+        }
+    ],
+    "test": [{ "cookieContains": "%22performance%22%3Afalse%2C%22functional%22%3Afalse%2C%22targeting%22%3Afalse" }]
+}
