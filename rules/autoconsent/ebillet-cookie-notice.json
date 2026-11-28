@@ -1,0 +1,9 @@
+{
+    "name": "ebillet-cookie-notice",
+    "prehideSelectors": ["#cookie-notice.cookie-notice[role=status]"],
+    "detectCmp": [{ "exists": "#cookie-notice[role=status] > button.cookie-notice__btn" }],
+    "detectPopup": [{ "visible": "#cookie-notice[role=status]" }],
+    "optIn": [{ "waitForThenClick": "#cookie-notice[role=status] > button.cookie-notice__btn" }],
+    "optOut": [{ "waitForThenClick": "#cookie-notice[role=status] > button.cookie-notice__btn" }],
+    "test": [{ "waitForVisible": "#cookie-notice[role=status]", "check": "none", "timeout": 2000 }]
+}

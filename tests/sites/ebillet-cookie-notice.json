@@ -1,0 +1,9 @@
+{
+    "cmp": "ebillet-cookie-notice",
+    "note": "Notice-only banner on ebillet cinema sites: the site sets only a necessary session cookie, so opt-out acknowledges with the single OK button",
+    "tests": [
+        {
+            "sites": ["https://scala-svendborg.dk/", "https://www.vigbio.dk/", "https://www.parkteatret.dk/"]
+        }
+    ]
+}
