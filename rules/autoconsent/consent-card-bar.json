@@ -1,0 +1,9 @@
+{
+    "name": "consent-card-bar",
+    "prehideSelectors": ["div.consent.consent-card.consent-bar[role=dialog]"],
+    "detectCmp": [{ "exists": "div.consent.consent-card.consent-bar[role=dialog] button.consent-reject" }],
+    "detectPopup": [{ "visible": "div.consent.consent-card.consent-bar[role=dialog]" }],
+    "optIn": [{ "waitForThenClick": "div.consent.consent-card.consent-bar[role=dialog] button.consent-accept" }],
+    "optOut": [{ "waitForThenClick": "div.consent.consent-card.consent-bar[role=dialog] button.consent-reject" }],
+    "test": [{ "visible": "div.consent.consent-card.consent-bar[role=dialog]", "check": "none" }]
+}

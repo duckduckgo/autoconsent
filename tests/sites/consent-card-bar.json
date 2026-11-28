@@ -1,0 +1,16 @@
+{
+    "cmp": "consent-card-bar",
+    "note": "Shared consent component on sibling sites. The card only shows when the browser timezone is in Europe and Google's TCF API is unavailable (as with tracker blocking) or reports that GDPR does not apply; other visitors get an auto-dismissing notice that the rule leaves alone. Run with an EU timezone from a non-EU IP to see the card, e.g. TZ=Europe/Berlin with a US proxy",
+    "tests": [
+        {
+            "sites": [
+                "https://wowforeverclasses.com/",
+                "https://thegta6map.com/",
+                "https://gta6collectiblesmap.com/",
+                "https://wowforeveraddons.com/",
+                "https://brotator.com/",
+                "https://aicodingprices.com/"
+            ]
+        }
+    ]
+}
