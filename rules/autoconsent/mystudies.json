@@ -1,0 +1,38 @@
+{
+    "name": "mystudies",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?mystudies\\.com/"
+    },
+    "prehideSelectors": [".privacy_policy_sec"],
+    "detectCmp": [
+        {
+            "exists": ".privacy_policy_sec .cookieinfocustom"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".privacy_policy_sec .cookie_buttons"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".privacy_policy_sec .cookieinfoact"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".privacy_policy_sec .cookieinfocustom"
+        },
+        {
+            "waitForThenClick": "#cookiemodal .refuse_all_cookie"
+        },
+        {
+            "waitForThenClick": "#cookiemodal .acceptchoices"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "_cookie_ads=0"
+        }
+    ]
+}
