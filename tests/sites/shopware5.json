@@ -22,6 +22,10 @@
             "note": "Theme shows the banner without a decline button in a modal (.js--modal.cookiePermissions); saving the consent manager reloads the page before the self-test runs",
             "sites": ["https://www.autoland.de/"],
             "options": { "testSelfTest": false }
+        },
+        {
+            "note": "Theme renders the banner in a <dialog data-cookie-permission> instead of .page-wrap--cookie-permission; an age notice is shown on top",
+            "sites": ["https://www.vinello.dk/", "https://www.vinello.de/"]
         }
     ]
 }
