@@ -11,7 +11,21 @@
                 "https://www.radiotopia.fm/",
                 "https://meebook.com/"
             ],
-            "options": { "skipRegions": ["US"] }
+            "options": {
+                "skipRegions": ["US"]
+            }
+        },
+        {
+            "sites": ["https://www.planteenolijfboom.nl/"],
+            "options": {
+                "onlyRegions": ["NL"]
+            }
+        },
+        {
+            "sites": ["https://www.hotelfinse1222.no/"],
+            "options": {
+                "onlyRegions": ["NO"]
+            }
         }
     ]
 }

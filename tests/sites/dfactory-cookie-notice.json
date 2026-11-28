@@ -3,6 +3,11 @@
     "tests": [
         {
             "sites": ["https://speedtest.dk/", "https://io-tech.fi/", "https://ubuntuhandbook.org/", "https://www.business2community.com/"]
+        },
+        {
+            "note": "the plugin's redirection option reloads the page after the click, so the self-test cannot run. No banner is shown in NL.",
+            "sites": ["https://stedelijkmuseumschiedam.nl/"],
+            "options": { "testSelfTest": false, "onlyRegions": ["DE"] }
         }
     ]
 }

@@ -1,28 +1,74 @@
 {
     "name": "tarteaucitron.js",
     "prehideSelectors": ["#tarteaucitronRoot"],
-    "detectCmp": [{ "exists": "#tarteaucitronRoot" }],
-    "detectPopup": [
+    "detectCmp": [
         {
-            "visible": "#tarteaucitronCloseAlert"
-        },
-        {
-            "exists": "#tarteaucitronAllDenied2",
-            "negated": true
+            "exists": "#tarteaucitronRoot"
         }
     ],
-    "optIn": [{ "click": "#tarteaucitronPersonalize" }],
-    "optOut": [
+    "detectPopup": [
         {
-            "if": { "exists": ".dsgvoaio-checkbox" },
+            "visible": "#tarteaucitronCloseAlert, #tarteaucitronAllDenied2",
+            "check": "any"
+        }
+    ],
+    "optIn": [
+        {
+            "if": {
+                "visible": "#tarteaucitronAllDenied2"
+            },
             "then": [
-                { "click": ".dsgvoaio-checkbox > input:checked", "all": true, "optional": true },
-                { "click": "#tarteaucitronCloseAlert" }
+                {
+                    "click": "#tarteaucitronPersonalize2"
+                }
             ],
             "else": [
-                { "click": "#tarteaucitronPersonalize" },
-                { "waitForThenClick": "#tarteaucitronAllDenied" },
-                { "click": "#tarteaucitronClosePanel" }
+                {
+                    "click": "#tarteaucitronPersonalize"
+                }
+            ]
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "visible": "#tarteaucitronAllDenied2"
+            },
+            "then": [
+                {
+                    "wait": 500
+                },
+                {
+                    "click": "#tarteaucitronAllDenied2"
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": ".dsgvoaio-checkbox"
+                    },
+                    "then": [
+                        {
+                            "click": ".dsgvoaio-checkbox > input:checked",
+                            "all": true,
+                            "optional": true
+                        },
+                        {
+                            "click": "#tarteaucitronCloseAlert"
+                        }
+                    ],
+                    "else": [
+                        {
+                            "click": "#tarteaucitronPersonalize"
+                        },
+                        {
+                            "waitForThenClick": "#tarteaucitronAllDenied"
+                        },
+                        {
+                            "click": "#tarteaucitronClosePanel"
+                        }
+                    ]
+                }
             ]
         }
     ],

@@ -6,7 +6,9 @@
         },
         {
             "sites": ["https://www.labanquepostale.fr/", "https://www.laposte.fr/", "https://localiser.laposte.fr/"],
-            "options": { "onlyRegions": ["CH"] }
+            "options": {
+                "onlyRegions": ["CH"]
+            }
         },
         {
             "sites": [
@@ -16,11 +18,29 @@
                 "https://www.pfg.fr/",
                 "https://www.pointdevente.parionssport.fdj.fr/"
             ],
-            "options": { "onlyRegions": ["FR"] }
+            "options": {
+                "onlyRegions": ["FR"]
+            }
         },
         {
             "sites": ["https://www.ernstings-family.de/"],
-            "options": { "onlyRegions": ["DE"] }
+            "options": {
+                "onlyRegions": ["DE"]
+            }
+        },
+        {
+            "note": "formerly covered by generated rules",
+            "sites": ["https://www.gmf.fr/", "https://www.pointp.fr/"],
+            "options": {
+                "onlyRegions": ["FR"]
+            }
+        },
+        {
+            "note": "formerly covered by generated rules",
+            "sites": ["https://www.sephora.de/"],
+            "options": {
+                "onlyRegions": ["DE"]
+            }
         }
     ]
 }

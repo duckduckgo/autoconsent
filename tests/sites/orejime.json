@@ -24,7 +24,15 @@
         {
             "note": "page reloads after the choice is saved, so the self-test cannot run",
             "sites": ["https://www.naval-group.com/"],
-            "options": { "testSelfTest": false }
+            "options": {
+                "testSelfTest": false
+            }
+        },
+        {
+            "sites": ["https://www.lesprosdelapetiteenfance.fr/"],
+            "options": {
+                "onlyRegions": ["FR"]
+            }
         }
     ]
 }
