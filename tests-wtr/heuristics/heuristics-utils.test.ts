@@ -146,6 +146,7 @@ describe('checkHeuristicPatterns with Italian popups', () => {
             'Questo sito utilizza i cookie per migliorare la tua esperienza',
             'Noi e i nostri 150 partner archiviamo informazioni come i cookie',
             'Archiviare e/o accedere a informazioni su un dispositivo',
+            'Alcuni cookie servono per usare il servizio, altri ci aiutano a capire dove migliorarlo. Personalizza Accetta solo necessari Accetta tutto',
         ];
         for (const text of texts) {
             expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
@@ -157,6 +158,9 @@ describe('checkHeuristicPatterns with Italian popups', () => {
             checkHeuristicPatterns(
                 'Noi e i nostri partner commerciali utilizziamo materiali riciclati. Il sito usa la tecnologia più moderna.',
             ).patterns,
+        ).to.have.length(0);
+        expect(
+            checkHeuristicPatterns('Accetta solo ordini confermati. I dati necessari sono indicati nel modulo.').patterns,
         ).to.have.length(0);
     });
 });

@@ -351,6 +351,8 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     // TCF: "noi e i nostri partner archiviamo …", "… potremmo utilizzare dati di localizzazione", not "partner commerciali"
     /\bnoi e i nostri (?:\d+ )?partner (?:archivia\w*|memorizz\w*|potremmo|trattiamo)\b/gi,
     /\bcookies? (?:essenziali|necessari)\b/gi,
+    // "accetta solo necessari", "accetta solo i tecnici": the button label, when the notice text names no cookie use
+    /\baccett(?:a|o|are) (?:solo|soltanto|unicamente) (?:i |gli )?(?:necessari|essenziali|tecnici)\b/gi,
 
     // Swedish (SV)
     // e.g. "vi använder cookies", "vi använder spårningstekniker såsom cookies", "webbplatsen använder kakor"
