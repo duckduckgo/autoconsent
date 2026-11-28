@@ -1,0 +1,37 @@
+{
+    "name": "redbook.com.au",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?redbook\\.com\\.au/"
+    },
+    "prehideSelectors": ["#policy.gdpr[data-key]"],
+    "detectCmp": [
+        {
+            "exists": "#policy.gdpr[data-key] .dismiss"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#policy.gdpr.animate:not(.hide)"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#policy.gdpr .dismiss"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "#policy.gdpr .dismiss"
+        },
+        {
+            "comment": "the banner slides off-screen instead of being removed",
+            "waitFor": "#policy.gdpr.hide",
+            "timeout": 2000
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "csnGDPR=true"
+        }
+    ]
+}

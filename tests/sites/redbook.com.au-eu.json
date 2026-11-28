@@ -1,0 +1,10 @@
+{
+    "cmp": "redbook.com.au-eu",
+    "tests": [
+        {
+            "note": "accept-only banner with a full-page backdrop, shown in the EU; hidden cosmetically since there is no reject or dismiss",
+            "sites": ["https://www.redbook.com.au/"],
+            "options": { "onlyRegions": ["DE", "FR", "NL", "IT", "ES", "PL", "SE", "DK"], "testSelfTest": false }
+        }
+    ]
+}

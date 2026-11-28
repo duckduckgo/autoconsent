@@ -1,0 +1,10 @@
+{
+    "cmp": "redbook.com.au",
+    "tests": [
+        {
+            "note": "notice-only banner with a dismiss (×) control, shown outside the EU",
+            "sites": ["https://www.redbook.com.au/", "https://www.redbook.com.au/bikes/"],
+            "options": { "skipRegions": ["DE", "FR", "NL", "CH", "NO", "IT", "ES", "PL", "SE", "DK"] }
+        }
+    ]
+}
