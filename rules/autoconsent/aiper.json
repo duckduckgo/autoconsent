@@ -1,0 +1,31 @@
+{
+    "name": "aiper",
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?aiper\\.com/"
+    },
+    "prehideSelectors": [".cky-consent-container"],
+    "detectCmp": [{ "exists": "script[src*='cdn-cookieyes.com/client_data/']" }],
+    "detectPopup": [
+        { "exists": "script[src*='cdn-cookieyes.com/client_data/']" },
+        { "comment": "no consent decision stored yet", "cookieContains": "action:yes", "negated": true }
+    ],
+    "optIn": [
+        { "waitFor": ".cky-consent-container", "timeout": 30000 },
+        {
+            "if": { "visible": ".cky-consent-container" },
+            "then": [{ "waitForThenClick": ".cky-consent-container [data-cky-tag=accept-button]" }]
+        }
+    ],
+    "optOut": [
+        {
+            "comment": "CookieYes renders the banner only after window load, which can come after CMP detection gives up",
+            "waitFor": ".cky-consent-container",
+            "timeout": 30000
+        },
+        {
+            "if": { "visible": ".cky-consent-container" },
+            "then": [{ "waitForThenClick": ".cky-consent-container [data-cky-tag=reject-button]" }]
+        }
+    ],
+    "test": [{ "cookieContains": "advertisement:no" }]
+}
