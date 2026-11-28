@@ -559,6 +559,7 @@ describe('checkHeuristicPatterns with more Danish, Norwegian, Italian and Japane
         expectDetected([
             'Vi anvender cookies for at forbedre din oplevelse',
             'Denne hjemmeside benytter cookies',
+            'Hos os benytter vi cookies til at drive basale funktioner på hjemmesiden',
             'Her kan du administrere dine samtykker for bruk av cookies/ informasjonskapsler på nettstedet',
             "Informativa sull'utilizzo dei cookie",
             '広告を配信すること等を目的に、Cookie等の「インフォマティブデータ」を利用しています。',
