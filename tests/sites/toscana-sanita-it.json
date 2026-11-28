@@ -1,0 +1,13 @@
+{
+    "cmp": "toscana-sanita-it",
+    "tests": [
+        {
+            "note": "only reachable from Italian IP addresses",
+            "sites": ["https://www.uslnordovest.toscana.it/"],
+            "options": { "onlyRegions": ["IT"] }
+        },
+        {
+            "sites": ["https://www.ao-pisa.toscana.it/", "https://www.uslcentro.toscana.it/", "https://www.uslsudest.toscana.it/"]
+        }
+    ]
+}

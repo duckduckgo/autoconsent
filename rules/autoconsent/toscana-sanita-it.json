@@ -1,0 +1,15 @@
+{
+    "name": "toscana-sanita-it",
+    "vendorUrl": "https://www.uslnordovest.toscana.it/",
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?(uslnordovest|uslcentro|uslsudest|ao-pisa)\\.toscana\\.it/"
+    },
+    "prehideSelectors": ["#cookieChoiceInfo"],
+    "detectCmp": [{ "exists": "#cookieChoiceInfo #cookieChoiceDismiss" }],
+    "detectPopup": [{ "visible": "#cookieChoiceInfo" }],
+    "optIn": [{ "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDismiss" }],
+    "optOut": [{ "waitForThenClick": "#cookieChoiceInfo #cookieChoiceDismiss" }],
+    "test": [{ "cookieContains": "displayCookieConsent=y" }]
+}
