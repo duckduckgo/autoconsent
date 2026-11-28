@@ -1,0 +1,29 @@
+{
+    "name": "midni-gob-es",
+    "vendorUrl": "https://www.midni.gob.es/",
+    "cosmetic": true,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?midni\\.gob\\.es/"
+    },
+    "prehideSelectors": ["#cookieModal"],
+    "detectCmp": [
+        {
+            "exists": "#cookieModal #aceptaCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "#cookieModal"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieModal #aceptaCookies"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": "#cookieModal"
+        }
+    ]
+}
