@@ -1073,6 +1073,11 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Я согласен')).to.equal('accept');
     });
 
+    it('matches Italian accept buttons', () => {
+        expect(classifyButtonTextRegex('Accetto')).to.equal('accept');
+        expect(classifyButtonTextRegex('Non accetto')).to.equal('reject');
+    });
+
     it('does not treat revoke links as reject buttons', () => {
         expect(classifyButtonTextRegex('Widerrufen')).to.equal('other');
     });

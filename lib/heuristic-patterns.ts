@@ -1098,6 +1098,7 @@ export const ACCEPT_PATTERNS = [
     // Italian (IT)
     'accetta',
     'accetta tutti i cookie',
+    'accetto',
     'accetto tutti i cookie',
 ];
 
