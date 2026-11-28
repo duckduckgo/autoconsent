@@ -1,0 +1,15 @@
+{
+    "cmp": "hry-cookie-set",
+    "tests": [
+        {
+            "note": "Banner without role attributes on the buttons, so the heuristic misses it; heavy WebGL page that needs a longer timeout",
+            "sites": ["https://www.sigenergy.com/se"],
+            "options": { "testSelfTest": false, "timeout": 60000 }
+        },
+        {
+            "note": "Same banner with role=\"button\" on the buttons; heavy page that needs a longer timeout, and optIn is off because a second visit in the same browser stalls it",
+            "sites": ["https://deedianev.com/"],
+            "options": { "testSelfTest": false, "testOptIn": false, "timeout": 60000 }
+        }
+    ]
+}
