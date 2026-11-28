@@ -1,0 +1,10 @@
+{
+    "cmp": "portalento",
+    "tests": [
+        {
+            "sites": ["https://www.portalento.es/"],
+            "options": { "skipRegions": ["US"] },
+            "note": "The site denies access (Imperva) to US visitors"
+        }
+    ]
+}

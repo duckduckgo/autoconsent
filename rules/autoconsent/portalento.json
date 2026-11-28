@@ -1,0 +1,43 @@
+{
+    "name": "portalento",
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?portalento\\.es/"
+    },
+    "prehideSelectors": [".cpMainPanel"],
+    "detectCmp": [
+        {
+            "exists": ".cpMainPanel .cpConfigureBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".cpMainPanel .cpDefaultOptions"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".cpMainPanel .cpDefaultOptions .cpAcceptAllBtn"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": ".cpMainPanel .cpDefaultOptions .cpConfigureBtn"
+        },
+        {
+            "waitForVisible": ".cpMainPanel .cpConfigPanel"
+        },
+        {
+            "click": ".cpConfigPanel input[type=checkbox]:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": ".cpConfigPanel .cpSaveConfigBtn"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22acceptsAnalytics%22%3Afalse%2C%22acceptsOther%22%3Afalse"
+        }
+    ]
+}
