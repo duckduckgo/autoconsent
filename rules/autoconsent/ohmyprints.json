@@ -1,0 +1,10 @@
+{
+    "name": "ohmyprints",
+    "vendorUrl": "https://www.werkaandemuur.nl/",
+    "prehideSelectors": ["#cookie-consent-dialog.cookie-consent-dialog"],
+    "detectCmp": [{ "exists": "#cookie-consent-dialog.cookie-consent-dialog .consent-content .deny-consent" }],
+    "detectPopup": [{ "visible": "#cookie-consent-dialog.cookie-consent-dialog .deny-consent" }],
+    "optIn": [{ "waitForThenClick": "#cookie-consent-dialog .accept-consent" }],
+    "optOut": [{ "waitForThenClick": "#cookie-consent-dialog .deny-consent" }],
+    "test": [{ "cookieContains": "ad_storage%22%3A%22denied" }]
+}
