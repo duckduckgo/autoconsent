@@ -1,0 +1,9 @@
+{
+    "cmp": "usercentrics-button",
+    "note": "Legacy Usercentrics v1 banner (app.usercentrics.eu/latest/main.js) with a Deny button on the first layer. Banners without a Deny button are not detected",
+    "tests": [
+        {
+            "sites": ["https://esska.se/", "https://typo3.org/", "https://www.siteco.com/", "https://www.gvl.de/"]
+        }
+    ]
+}

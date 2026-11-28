@@ -1,0 +1,9 @@
+{
+    "name": "usercentrics-button",
+    "vendorUrl": "https://usercentrics.com/",
+    "detectCmp": [{ "exists": "#usercentrics-button" }],
+    "detectPopup": [{ "visible": "#usercentrics-button #uc-btn-deny-banner" }],
+    "optIn": [{ "waitForThenClick": "#usercentrics-button #uc-btn-accept-banner" }],
+    "optOut": [{ "waitForThenClick": "#usercentrics-button #uc-btn-deny-banner" }],
+    "test": [{ "wait": 1000 }, { "eval": "EVAL_USERCENTRICS_BUTTON_0" }]
+}
