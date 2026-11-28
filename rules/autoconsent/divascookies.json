@@ -1,0 +1,32 @@
+{
+    "name": "divascookies",
+    "vendorUrl": "https://github.com/CodingDivas/divascookies",
+    "cosmetic": true,
+    "prehideSelectors": [".divascookies"],
+    "detectCmp": [
+        {
+            "exists": ".divascookies .divascookies-accept-button-container"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".divascookies"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ".divascookies .divascookies-accept-button-container"
+        }
+    ],
+    "optOut": [
+        {
+            "hide": ".divascookies"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".divascookies",
+            "check": "none"
+        }
+    ]
+}
