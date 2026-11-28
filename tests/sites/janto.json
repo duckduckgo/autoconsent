@@ -1,0 +1,13 @@
+{
+    "cmp": "janto",
+    "tests": [
+        {
+            "note": "Two-button variant (accept all / accept selection): opt-out unchecks all categories and saves the selection",
+            "sites": ["http://torrevieja.bonoconsumo.es/", "https://requena.bonoconsumo.es/", "https://tickets.kutxabank.es/"]
+        },
+        {
+            "note": "Three-button variant with a reject-all button",
+            "sites": ["https://ventaentradas.mostoles.es/", "https://compraentradas.ibercaja.es/"]
+        }
+    ]
+}
