@@ -1,0 +1,41 @@
+{
+    "name": "lovense",
+    "_metadata": {
+        "vendorUrl": "https://www.lovense.com/"
+    },
+    "runContext": {
+        "urlPattern": "^https?://(\\w+\\.)?lovense\\.com/"
+    },
+    "prehideSelectors": [".u-cookie"],
+    "detectCmp": [
+        {
+            "exists": ".u-cookie ._acceptNecesssary, .u-cookie .u-cookie-accept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ".u-cookie"
+        }
+    ],
+    "optIn": [
+        {
+            "if": { "exists": ".u-cookie ._acceptAllCookies" },
+            "then": [{ "waitForThenClick": ".u-cookie ._acceptAllCookies" }],
+            "else": [{ "waitForThenClick": ".u-cookie .u-cookie-accept" }]
+        }
+    ],
+    "optOut": [
+        {
+            "if": { "exists": ".u-cookie ._acceptNecesssary" },
+            "then": [{ "waitForThenClick": ".u-cookie ._acceptNecesssary" }],
+            "else": [{ "waitForThenClick": ".u-cookie .u-cookie-accept" }]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ".u-cookie",
+            "timeout": 2000,
+            "check": "none"
+        }
+    ]
+}
