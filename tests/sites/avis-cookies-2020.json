@@ -1,0 +1,10 @@
+{
+    "cmp": "avis-cookies-2020",
+    "tests": [
+        {
+            "note": "the self-test runs before the save request sets the cookie, and manga-barcelona and comic-barcelona reload after saving",
+            "sites": ["https://www.manga-barcelona.com/", "https://www.comic-barcelona.com/", "https://faberllull.cat/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}
