@@ -413,8 +413,18 @@ describe('checkHeuristicPatterns with Norwegian popups', () => {
         }
     });
 
+    it('detects Norwegian notices that set cookies', () => {
+        expectDetected([
+            'Vi ønsker å sette informasjonskapsler for å måle trafikken.',
+            'Nettsiden lagrer cookies på enheten din.',
+            'Google, Trustpilot og Webhuset får bare sette kaker hvis du sier ja.',
+        ]);
+        expect(detectsPage('Google, Trustpilot og Webhuset får bare sette kaker hvis du sier ja.')).to.be.false;
+    });
+
     it('does not detect unrelated Norwegian text', () => {
         expect(checkHeuristicPatterns('Vi bruker skattemeldingen til å beregne skatten din').patterns).to.have.length(0);
+        expectNotDetected(['Sett kakene i ovnen og stek dem i 20 minutter', 'Du kan lagre bildene dine i skyen']);
     });
 });
 

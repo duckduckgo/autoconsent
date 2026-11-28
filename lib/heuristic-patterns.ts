@@ -384,6 +384,10 @@ export const DETECT_PATTERNS: DetectPattern[] = [
     /\b(?:vi|nettstedet|nettsiden|siden)\s+bruker?\s.{0,60}?(?:informasjonskapsler|cookies)/gi,
     /\bvi benytter(?: \S+)? (?:cookies|informasjonskapsler)\b/gi,
     /\bbruk av (?:cookies|informasjonskapsler)\b/gi,
+    // e.g. "vi ønsker å sette informasjonskapsler", "lagrer cookies på enheten din"
+    /\b(?:sette|setter|lagre|lagrer)\s(?:\S+\s){0,2}?(?:informasjonskapsler|cookies)\b/gi,
+    // "kaker" also means cakes, so popups only, e.g. "får bare sette kaker hvis du sier ja"
+    { pattern: /\b(?:sette|setter|lagre|lagrer) kaker\b/gi, input: 'popup' },
 
     // Turkish (TR): the verb comes last, hence the long gap; [ıI]/[iİ] match capitals, where the i flag pairs neither
     // e.g. "çerezler kullanıyoruz", "tanımlama bilgilerini ... için kullanıyoruz"; the verb endings skip "Kullanım Koşulları"
