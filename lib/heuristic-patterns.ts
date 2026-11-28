@@ -606,6 +606,9 @@ const REJECT_PATTERNS_NORWEGIAN = [
     // (accept/allow/use) only necessary cookies
     /^(godta\s+|tillat\s+|aksepter\s+|bruk\s+)?(kun|bare)\s+(strengt\s+)?nødvendige( (informasjonskapsler|cookies))?$/is,
 
+    // (accept/allow/use) necessary cookies, without "only"
+    /^(godta|tillat|aksepter|bruk)\s+(strengt\s+)?nødvendige( (informasjonskapsler|cookies))?$/is,
+
     // "nei" / "nei takk" (no thanks)
     /^nei(,?\s+takk)?$/is,
 ];

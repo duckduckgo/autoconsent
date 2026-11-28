@@ -954,6 +954,10 @@ describe('classifyButtonTextRegex', () => {
         expect(classifyButtonTextRegex('Avslå')).to.equal('reject');
         expect(classifyButtonTextRegex('Godta kun nødvendige')).to.equal('reject');
         expect(classifyButtonTextRegex('Bare nødvendige informasjonskapsler')).to.equal('reject');
+        expect(classifyButtonTextRegex('Godta nødvendige')).to.equal('reject');
+        expect(classifyButtonTextRegex('Tillat nødvendige informasjonskapsler')).to.equal('reject');
+        expect(classifyButtonTextRegex('Nødvendige')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Godta alle')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Ja')).not.to.equal('reject');
         expect(classifyButtonTextRegex('Les mer om hvordan vi bruker informasjonskapsler')).not.to.equal('reject');
     });
